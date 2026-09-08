@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "batch": 513,
+  "scene": 2081,
+  "path": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-meta-internal-01-original.webp",
+  "sha256": "d16164b39b56d4748a97f7fc9f2707c42ec7d7231b5bb26ebf1d5a23a77b635a",
+  "reviewedAtUtc": "2026-09-08T10:48:08.544Z",
+  "decision": "unused-archived-provider-variant",
+  "method": "Main-agent direct local visual review of all5unique originals, with exact-hash duplicate exposures retained.",
+  "hardChecks": {
+    "decodableValidMedia": true,
+    "fourDistinctFictionalAdultWomen": true,
+    "anchoredFaceContinuity": true,
+    "opaquePublicSafeCoverage": true,
+    "noGrossAnatomicalCorruption": true
+  },
+  "softRollDeviations": [
+    "The requested extreme-close face-and-shoulder crop rendered as a broader seated group portrait. Do not restage or outpaint during the one tailoring edit.",
+    "Radiance has multiple star tattoos rather than one split-star. Extra arm RAZE bands and unrolled Ellie waist exposure remain quality deviations."
+  ],
+  "additionalMetaAestheticRetries": 0,
+  "chatgptEditStatus": "Not yet invoked; exactly one per selected source after remote preflight",
+  "finalSelectionReview": {
+    "reviewedAtUtc": "2026-09-08T11:26:01.424Z",
+    "selected": false,
+    "disposition": "archived-unused",
+    "finalQa": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/final-selection-qa.json",
+    "noFurtherRenderOrEdit": true
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "batch": 497,
+  "country": "New Zealand",
+  "sceneIds": [2015, 2016, 2017, 2018],
+  "state": "four-meta-scenes-dispatched-exactly-once-four-terminal-image-results",
+  "createdAtUtc": "2026-09-06T11:54:10.2003239Z",
+  "authority": {
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-497-new-zealand-four-meta-composers-staged-checkpoint.json",
+    "stagingCommit": "b20107664568b3b6f8e9f467b39f804923f5d011",
+    "localHeadBeforeDispatch": "b20107664568b3b6f8e9f467b39f804923f5d011",
+    "originHeadBeforeDispatch": "b20107664568b3b6f8e9f467b39f804923f5d011",
+    "directPrHeadBeforeDispatch": "b20107664568b3b6f8e9f467b39f804923f5d011",
+    "githubPrHeadBeforeDispatch": "b20107664568b3b6f8e9f467b39f804923f5d011",
+    "allHeadsEqualBeforeDispatch": true,
+    "lfsPushDryRunEmptyBeforeDispatch": true
+  },
+  "actionTimeAudit": {
+    "visibleTabCount": 5,
+    "metaTabCount": 4,
+    "xComposerCount": 1,
+    "otherTabCount": 0,
+    "account": "leesha007",
+    "accountVerifiedEveryLane": true,
+    "mode": "Thinking",
+    "modeVerifiedEveryLane": true,
+    "exactPromptVerifiedEveryLane": true,
+    "orderedAnchorIds": [938, 936, 937],
+    "orderedAnchorsVerifiedEveryLane": true,
+    "sendButtonCountEveryLane": 1,
+    "sendEnabledEveryLane": true,
+    "stopButtonCountEveryLane": 0,
+    "xComposerTabId": "33",
+    "xComposerInteractionDuringDispatch": false
+  },
+  "dispatches": [
+    {
+      "scene": 2015,
+      "tabId": "40",
+      "promptSha256": "0CBEBD1BC4566E35F1A011CCC2F181DFBB295D17E6BBD358739D01969AC7DABF",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/944ac44f-845a-4ca3-b4dd-ed0e7294090c",
+      "stateImmediatelyAfterActivation": "inflight-stop-visible",
+      "stateAtCheckpoint": "terminal-image-download-visible"
+    },
+    {
+      "scene": 2016,
+      "tabId": "41",
+      "promptSha256": "56EDD3AB97DF9C1441177171D79E1E4E525192D4FC8081FA1EBEAB09982E9390",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/e083b12e-5cc6-4077-a6be-5e24e7430fc7",
+      "stateImmediatelyAfterActivation": "inflight-stop-visible",
+      "stateAtCheckpoint": "terminal-image-download-visible"
+    },
+    {
+      "scene": 2017,
+      "tabId": "42",
+      "promptSha256": "66635A88AF3A1E99B5F35F201A604904FFF1436F167F4F2EF6A3C2896BE18C57",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/e6bcf460-eec4-4702-b6a1-510307f657b8",
+      "stateImmediatelyAfterActivation": "inflight-stop-visible",
+      "stateAtCheckpoint": "terminal-image-download-visible"
+    },
+    {
+      "scene": 2018,
+      "tabId": "39",
+      "promptSha256": "723AC8DD0F07B46CD845F8C28D9CBF4846EE5211730183979C2C86028AA01E77",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/41f98a15-fdcb-4c14-9cdf-6c4d5ed8b696",
+      "stateImmediatelyAfterActivation": "inflight-stop-visible",
+      "stateAtCheckpoint": "terminal-image-download-visible"
+    }
+  ],
+  "firstOccurrenceSummary": {
+    "sendActivations": 4,
+    "canonicalProviderUrls": 4,
+    "terminalImageResults": 4,
+    "terminalProviderRefusals": 0,
+    "uncertainActivations": 0,
+    "providerRetries": 0,
+    "aestheticRetries": 0,
+    "chatgptEditInvocations": 0
+  },
+  "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/dispatch-evidence-manifest.json",
+  "duplicateGate": "All four first-occurrence provider URLs are confirmed and terminal. Never click Send again on scenes 2015, 2016, 2017 or 2018. No Meta retry is needed.",
+  "canonicalContradiction": "The old Cuba automation instruction remains superseded by Tanzania preparation and every later remote-verified checkpoint. Batch 497 New Zealand is current, and the uncertain Liberia and Central African Republic X media remain non-resendable.",
+  "nextSafeAction": "Commit and remote-verify this dispatch receipt, raw provider bytes, terminal evidence, hard QA and four sealed ChatGPT one-pass reservations. Then invoke the built-in ChatGPT image generator exactly once for each technically valid occurrence, with any block consuming the allowance and no retry."
+}

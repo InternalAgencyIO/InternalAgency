@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "batch": 514,
+  "scene": 2085,
+  "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp",
+  "sha256": "c2cb2d2548da9d17dc0efef0bc076b48fb759a09b37b15d1b3fe68d3d0b2466f",
+  "reviewedAtUtc": "2026-09-08T12:14:26.780Z",
+  "decision": "selected-usable-source",
+  "method": "Main-agent direct visual inspection of all 8 unique original byte versions, with exact-hash duplicate exposures retained.",
+  "hardChecks": {
+    "decodableValidMedia": true,
+    "fourDistinctFictionalAdultWomen": true,
+    "anchoredFaceContinuity": true,
+    "opaquePublicSafeCoverage": true,
+    "noGrossAnatomicalCorruption": true
+  },
+  "softRollDeviations": [
+    "All four identities are present, but the visible order is Alia, Ellie behind, Radiance, ECE, not the literal left-to-right order. This is a position deviation, not a missing cast member.",
+    "The gallery has a filled oblique frame and visible affection; internal01-03 are straighter comparison versions. Gallery selected for the better existing camera treatment.",
+    "Flag geometry, hosiery marks and shoe construction vary between internals. All are archived without aesthetic retries."
+  ],
+  "additionalMetaAestheticRetries": 0,
+  "chatgptEditStatus": "Not yet invoked; exactly one per selected source after remote preflight",
+  "finalSelectionReview": {
+    "reviewedAtUtc": "2026-09-08T12:31:04.300Z",
+    "selected": false,
+    "disposition": "archived-unused",
+    "finalQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/final-selection-qa.json",
+    "noFurtherRenderOrEdit": true
+  }
+}

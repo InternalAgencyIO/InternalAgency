@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "batch": 472,
+  "country": "Croatia",
+  "state": "closed-four-technically-valid-selected-meta-occurrences-four-one-pass-requests-three-outputs-one-output-block",
+  "recordedAtUtc": "2026-08-31T16:33:41.6030730Z",
+  "perScenePassLimit": 1,
+  "outcomes": [
+    {"scene": 1915, "selectedMetaOccurrence": 1, "passRequestsIssued": 1, "passesRemaining": 0, "status": "output-saved", "output": {"path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1915-chatgpt-strong-shortening-pass-1.png", "sha256": "A50B39628755EA37BE9B3314FC61CDA29FE18B202A8813BEA5A85FDA30D8F801", "bytes": 2268576}},
+    {"scene": 1916, "selectedMetaOccurrence": 0, "passRequestsIssued": 1, "passesRemaining": 0, "status": "output-saved", "output": {"path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1916-chatgpt-strong-shortening-pass-1.png", "sha256": "75CAE91814D06D51EEA00C23736C7DCD5C4B03FB3E6CFDA022BF7DF5BBE1F57D", "bytes": 2196134}},
+    {"scene": 1917, "selectedMetaOccurrence": 0, "passRequestsIssued": 1, "passesRemaining": 0, "status": "output-stage-moderation-blocked-no-output-saved", "requestId": "69a38e79-9071-429a-8ab8-7660c8c79771", "category": "sexual", "fallback": "Meta occurrence 0 remains selected under relaxed acceptance; no retry is permitted."},
+    {"scene": 1918, "selectedMetaOccurrence": 0, "passRequestsIssued": 1, "passesRemaining": 0, "status": "output-saved", "output": {"path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1918-chatgpt-strong-shortening-pass-1.png", "sha256": "C103408D14A62F015EAB82C19FA10782038D9CB3587584D4E8BBD0ED4F660D95", "bytes": 2205380}}
+  ],
+  "promptArchive": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/chatgpt-hemline-one-pass-prompts.json",
+  "nextSafeAction": "Do not issue another Meta retry or ChatGPT pass for scenes 1915-1918. Close QA, accessibility, manifests and Git/LFS; then stage the duplicate-checked Bosnia and Herzegovina-Croatia X pair in the existing @dogramaci composer."
+}

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "prompts-prepared",
+  "createdAtUtc": "2026-08-27T05:29:12.7810923Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 424,
+  "country": "Senegal",
+  "status": "prepared-not-uploaded",
+  "source": {
+    "batch": 353,
+    "scenes": [
+      1432,
+      1433,
+      1434,
+      1435
+    ],
+    "checkpoint": "assets/lore/starlight-era/batch-353-senegal-private-jet-checkpoint.json",
+    "nextSourceCountry": "Guatemala",
+    "nextSourceBatch": 354
+  },
+  "eligibleScenes": [
+    1716,
+    1717,
+    1718,
+    1719
+  ],
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraPolicy": {
+    "extremeClose": "1-20",
+    "intermediate": "21-80",
+    "extremeWide": "81-100"
+  },
+  "maleSelection": {
+    "key": "batch424-senegal-male-model-scene",
+    "fnv1a32": 2676243876,
+    "modulo4": 0,
+    "selectedScene": 1716
+  },
+  "sourceSanitization": {
+    "removed": [
+      "all weapon and inert-firearm language",
+      "ammunition and target mechanics",
+      "mascots",
+      "odd props",
+      "copied airline identity"
+    ],
+    "replacement": "one harmless polished gold navigation beacon with exactly four cyan light rings held only by AI ECE right hand",
+    "civilianAviationOnly": true
+  },
+  "prompts": [
+    {
+      "scene": 1716,
+      "sourceScene": 1432,
+      "promptFile": "tmp/world-195x4/batch-424/scene-1716-prompt.txt",
+      "promptSha256": "853BCA3CF98FCA73AB7A7742E36D60F354EBAA5785CFACFFC2F61514AC172A2D",
+      "promptLength": 4564,
+      "camera": {
+        "key": "batch424-senegal-scene1716-camera-closeness",
+        "fnv1a32": 1030788583,
+        "roll": 84,
+        "framing": "extreme-wide"
+      },
+      "raze": {
+        "key": "RAZE|batch-424|scene-1716|knee-high-wearers",
+        "fnv1a32": 2536078428,
+        "modulo6": 0,
+        "wearers": [
+          "Radiance",
+          "Ellie"
+        ]
+      },
+      "jealousy": {
+        "key": "batch424-senegal-scene1716-jealous-adult",
+        "fnv1a32": 2810204022,
+        "adult": "Alia"
+      },
+      "malePresent": true
+    },
+    {
+      "scene": 1717,
+      "sourceScene": 1433,
+      "promptFile": "tmp/world-195x4/batch-424/scene-1717-prompt.txt",
+      "promptSha256": "14449B685495BC6EE129783CB06B62A2574A2A933D8C2A3E32D64BF1147A86AB",
+      "promptLength": 4072,
+      "camera": {
+        "key": "batch424-senegal-scene1717-camera-closeness",
+        "fnv1a32": 930029142,
+        "roll": 43,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-424|scene-1717|knee-high-wearers",
+        "fnv1a32": 1687801063,
+        "modulo6": 1,
+        "wearers": [
+          "Radiance",
+          "Alia"
+        ]
+      },
+      "jealousy": {
+        "key": "batch424-senegal-scene1717-jealous-adult",
+        "fnv1a32": 3535515633,
+        "adult": "Ellie"
+      },
+      "malePresent": false
+    },
+    {
+      "scene": 1718,
+      "sourceScene": 1434,
+      "promptFile": "tmp/world-195x4/batch-424/scene-1718-prompt.txt",
+      "promptSha256": "A4A1B4E088AC893348280B8638A1A64F0D43E35589C50B5A8C322E995EB8B6C5",
+      "promptLength": 4036,
+      "camera": {
+        "key": "batch424-senegal-scene1718-camera-closeness",
+        "fnv1a32": 3367304509,
+        "roll": 10,
+        "framing": "extreme-close"
+      },
+      "raze": {
+        "key": "RAZE|batch-424|scene-1718|knee-high-wearers",
+        "fnv1a32": 1271563334,
+        "modulo6": 2,
+        "wearers": [
+          "Radiance",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch424-senegal-scene1718-jealous-adult",
+        "fnv1a32": 3404042260,
+        "adult": "Radiance"
+      },
+      "malePresent": false
+    },
+    {
+      "scene": 1719,
+      "sourceScene": 1435,
+      "promptFile": "tmp/world-195x4/batch-424/scene-1719-prompt.txt",
+      "promptSha256": "3234C918CEF0473E4BC542B082F4793FEECD38BFAD89B6B86C298874289BF6CE",
+      "promptLength": 4018,
+      "camera": {
+        "key": "batch424-senegal-scene1719-camera-closeness",
+        "fnv1a32": 3793082876,
+        "roll": 77,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-424|scene-1719|knee-high-wearers",
+        "fnv1a32": 368372401,
+        "modulo6": 1,
+        "wearers": [
+          "Radiance",
+          "Alia"
+        ]
+      },
+      "jealousy": {
+        "key": "batch424-senegal-scene1719-jealous-adult",
+        "fnv1a32": 3068424279,
+        "adult": "AI ECE"
+      },
+      "malePresent": false
+    }
+  ],
+  "providerChatCount": 0,
+  "confirmedUploadCount": 0,
+  "sendClickCount": 0,
+  "duplicateDispatchCount": 0,
+  "boundedRetryAuthorized": false,
+  "standingUploadAuthorization": {
+    "grantedAtUtc": "2026-08-27T04:05:01.0694990Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.0694990Z"
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 3,
+    "publishDue": false,
+    "threshold": 10
+  }
+}

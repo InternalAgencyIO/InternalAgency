@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batch": 513,
+  "state": "all-three-single-edit-allowances-consumed-terminal",
+  "maximumInvocationsPerScene": 1,
+  "blockOrInterruptionConsumesAllowance": true,
+  "noSecondEdit": true,
+  "invocations": [
+    {
+      "scene": 2079,
+      "occurrenceId": "batch-513-scene-2079-chatgpt-single-tailoring",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2079-meta-gallery-original.webp",
+      "sourceSha256": "bedb0553e8a05b175e52a9d1e3ad32ac636bd60194873e53994000e2bbd66fcd",
+      "promptSha256": "FA1652EA58427AF6C645220F9E3464CBE8BA89F4E77F1C7EAB09FFCA2F79687D",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "returned-pending-final-qa",
+      "additionalInvocationsAllowed": 0,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2079-chatgpt-single-tailoring-pass.png.receipt.json",
+      "completedAtUtc": "2026-09-08T11:18:17.768Z"
+    },
+    {
+      "scene": 2081,
+      "occurrenceId": "batch-513-scene-2081-chatgpt-single-tailoring",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-meta-gallery-original.webp",
+      "sourceSha256": "d16164b39b56d4748a97f7fc9f2707c42ec7d7231b5bb26ebf1d5a23a77b635a",
+      "promptSha256": "E79F5F38BB7625656D9E2BC1D08AC1F1723EE2E67B5F9991A94D3B1193DD569B",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "terminal-output-moderation-block-no-image",
+      "additionalInvocationsAllowed": 0,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-chatgpt-single-tailoring-blocked.json",
+      "completedAtUtc": "2026-09-08T11:19:32.154Z"
+    },
+    {
+      "scene": 2082,
+      "occurrenceId": "batch-513-scene-2082-chatgpt-single-tailoring",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2082-meta-gallery-original.webp",
+      "sourceSha256": "ba96fa31676000f22e41648adfcdec55a0e5d9dd5a0b7a8f8e1ed699a26e9aa6",
+      "promptSha256": "475457E475FD93A4EA6E296C7E30AF56ED07973DC2A4298A2488D787FE15A5E4",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "terminal-output-moderation-block-no-image",
+      "additionalInvocationsAllowed": 0,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2082-chatgpt-single-tailoring-blocked.json",
+      "completedAtUtc": "2026-09-08T11:21:37.719Z"
+    }
+  ],
+  "scene2080NoSource": true,
+  "reservedAtUtc": "2026-09-08T11:11:13.210Z",
+  "proofCarrierCommit": "e2a6ac763a44d8b6c07de7770a13092698c5dda4",
+  "wakePreflight": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/guardian-wake-edit-preflight-2026-09-08-1106.json",
+  "completedAtUtc": "2026-09-08T11:23:21.970Z",
+  "results": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/single-chatgpt-edit-results.json"
+}

@@ -1,0 +1,322 @@
+{
+  "schema": "world-195x4-materialization-coverage-v2",
+  "batch": 220,
+  "country": "Republic of the Congo",
+  "sceneNumber": 902,
+  "status": "passed-lossless",
+  "requiredCoveragePercent": 100,
+  "achievedCoveragePercent": 100,
+  "evidence": {
+    "canonical identity and relative height geometry": {
+      "status": "present",
+      "section": "CAST AND GEOMETRY",
+      "identityReferenceCount": 3
+    },
+    "country and exact recognizable location": {
+      "status": "present",
+      "section": "COUNTRY, LOCATION AND MISSION",
+      "location": "a broad dry private temporary overlook above the recognizable rainforest canopy and open bai geometry of Odzala-Kokoua at rose-gold dawn, safely set back from wildlife, marsh and visitors"
+    },
+    "rotated aircrew roles and harmless completed mission": {
+      "status": "present",
+      "section": "AIRCREW ROLES",
+      "roles": {
+        "Radiance": "first officer",
+        "Ellie": "cabin host",
+        "Alia": "captain",
+        "AI ECE": "signal officer"
+      },
+      "missionState": "already-complete-secondary"
+    },
+    "original stored relationship pose or exact resolved pose beat": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "tableauSha256": "03174b291bd810a5e51045dd4fa2ba9fc23d69b6f36a966c150491ce85c9bbdf"
+    },
+    "closed Radiance-Ellie-Alia triangle geometry": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "primary closed Radiance-Ellie-Alia romantic triangle"
+    },
+    "ECE reciprocal relationship connection without displacing the original trio": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "ECE reciprocal and non-displacing"
+    },
+    "four distinct bold country-derived latex-and-lace silhouettes": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "distinctSilhouetteCount": 4
+    },
+    "intentional natural midriff and navel visibility": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "specifiedVisibleNavelCount": 4
+    },
+    "all deterministic appearance rolls with triggered outcomes": {
+      "status": "present",
+      "artifact": "902-roll-audit.json",
+      "evaluatedRollCount": 356
+    },
+    "all triggered tattoo, piercing, jewelry, hair, accessory, touch, expression and pose rules": {
+      "status": "present",
+      "section": "ALL TRIGGERED DETERMINISTIC DETAILS",
+      "triggeredCount": 10,
+      "tattooCount": 0
+    },
+    "all trio-static rolls and any triggered original tableau": {
+      "status": "present",
+      "artifact": "902-roll-audit.json",
+      "evaluatedTrioRollCount": 20,
+      "triggeredTrioCount": 1
+    },
+    "PAWS presence roll, resolved action roll, growth epoch and reciprocation": {
+      "status": "present",
+      "section": "PAWS CONTRACT",
+      "presenceRoll": 0,
+      "rawActionRoll": 5,
+      "resolvedActionIndex": 5,
+      "growthEpoch": 1,
+      "effectiveTriggered": true
+    },
+    "clean-face, anatomy, hands, complete footwear and technical invariants": {
+      "status": "present",
+      "section": "COMPOSITION AND VALIDATION",
+      "cleanFace": true,
+      "hands": 8,
+      "footwear": 8,
+      "portrait": "9:16 full-length"
+    }
+  },
+  "semanticDiff": {
+    "status": "passed",
+    "positiveInstructionDeletionCount": 0,
+    "generalizedTriggeredDetailCount": 0,
+    "expectedTriggeredIds": [
+      "Radiance.elbowLacedSatinGloveSleeveAdjust",
+      "Ellie.foreheadToForeheadLook",
+      "Alia.opaqueContrastEdge",
+      "Alia.waistEncirclingSideHug",
+      "Alia.lowSideWaistTouch",
+      "Alia.subtleTacticalWebbing",
+      "Alia.velvetPendantChokerSideHug",
+      "AI ECE.pairedWristCuffPose",
+      "AI ECE.operaGloveStrapAdjustment",
+      "trio.threeWayForeheadLean"
+    ],
+    "materializedTriggeredIds": [
+      "Radiance.elbowLacedSatinGloveSleeveAdjust",
+      "Ellie.foreheadToForeheadLook",
+      "Alia.opaqueContrastEdge",
+      "Alia.waistEncirclingSideHug",
+      "Alia.lowSideWaistTouch",
+      "Alia.subtleTacticalWebbing",
+      "Alia.velvetPendantChokerSideHug",
+      "AI ECE.pairedWristCuffPose",
+      "AI ECE.operaGloveStrapAdjustment",
+      "trio.threeWayForeheadLean"
+    ],
+    "exactTriggeredSetMatch": true,
+    "originalTableauSha256": "03174b291bd810a5e51045dd4fa2ba9fc23d69b6f36a966c150491ce85c9bbdf",
+    "finalPromptSha256": "6639ad36cd6d1a0402c83705139887af907048373fb67bd52a2f35f43a54c5df",
+    "blocklistSubstitutionCount": 0,
+    "blocklistSubstitutions": []
+  },
+  "transformations": {
+    "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+    "longestPhraseFirst": true,
+    "substitutions": []
+  },
+  "triggerMaterialization": [
+    {
+      "id": "Radiance.elbowLacedSatinGloveSleeveAdjust",
+      "scope": "Radiance",
+      "trait": "elbowLacedSatinGloveSleeveAdjust",
+      "seed": "902|Radiance|elbowLacedSatinGloveSleeveAdjust|mile-high-v1",
+      "firstEightHex": "8512b23d",
+      "roll": 5,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Glossy satin gloves lace dramatically to the elbow while one woman slowly straightens her partner's sleeve, their eyes locked and the styling touch allowed to linger. The lacing is decorative fashion construction and the hands remain natural and readable.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 01",
+      "materializedInstruction": "Radiance's glossy satin gloves rise dramatically to the elbow with corded detail while she slowly straightens ECE's sleeve with locked eyes and natural visible fingers.",
+      "storedRuleSha256": "5580c705433d0741baec9ea14117ae8b2c889c8724ceb98cca824d331e4b4b6e",
+      "materializedInstructionSha256": "65dd5c1b4bae480540d3ab1c89bb94239155399ca23d0c9243decd42065c5d16",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Ellie.foreheadToForeheadLook",
+      "scope": "Ellie",
+      "trait": "foreheadToForeheadLook",
+      "seed": "902|Ellie|foreheadToForeheadLook|mile-high-v1",
+      "firstEightHex": "c9e3a73c",
+      "roll": 0,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Stage a close forehead-to-forehead mutual look between adult partners with warm eye contact, natural anatomy and the third woman still visibly connected to the triangle.",
+      "otherwise": null,
+      "rendererSafeAlias": "Ellie appearance beat 02",
+      "materializedInstruction": "Ellie and ECE share one close forehead-to-forehead mutual look with warm eye contact while the original trio remains visibly connected.",
+      "storedRuleSha256": "da9538f2db7fe548af6547eba5fe05fc879c5377aa9dbb4f17998c554605d4b0",
+      "materializedInstructionSha256": "9c83e2cdb923ec6f94373ef84f29b5cb6344dc632b449738ac8fff3827f1584b",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.opaqueContrastEdge",
+      "scope": "Alia",
+      "trait": "opaqueContrastEdge",
+      "seed": "902|Alia|opaqueContrastEdge|mile-high-v1",
+      "firstEightHex": "eb9798c3",
+      "roll": 3,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Show a deliberately visible opaque contrast edge or integrated dancewear-style lining as part of the principal garment. It is not underwear, never transparent and never adds a redundant clothing layer.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 03",
+      "materializedInstruction": "Alia's principal garment has one deliberately visible opaque contrast edge integrated into the lacquered construction.",
+      "storedRuleSha256": "3b1589f3b6ca6fc21e5d4e3d2bb51cfc85a822a942be6eedfaa942141a3188da",
+      "materializedInstructionSha256": "3d1f5ec046104480170f043d22fc2c988eccdc7c1bae9664aa3244389195165f",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.waistEncirclingSideHug",
+      "scope": "Alia",
+      "trait": "waistEncirclingSideHug",
+      "seed": "902|Alia|waistEncirclingSideHug|mile-high-v1",
+      "firstEightHex": "ed4c563a",
+      "roll": 2,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Add a consensual waist-encircling side hug between adult partners, keeping both faces, hands and the mission objective readable. Hands stay visibly at the side waist over solid opaque clothing.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 04",
+      "materializedInstruction": "Alia gives Radiance a consensual waist-encircling side-waist embrace with both faces, hands and the passive relay still clearly readable.",
+      "storedRuleSha256": "bc07bd94959ddd54bad2aeaa85a55e4dd6c78fdf846e386bee268a8565fab2cb",
+      "materializedInstructionSha256": "884f5893c3f3280d33d7bb7e6b82e8556af24fa734081a335c5dabfd0c497928",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.lowSideWaistTouch",
+      "scope": "Alia",
+      "trait": "lowSideWaistTouch",
+      "seed": "902|Alia|lowSideWaistTouch|mile-high-v1",
+      "firstEightHex": "4c1717a8",
+      "roll": 0,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Place one visible hand at a partner's low side waist or upper-hip edge over a solid opaque garment, deliberately close but clearly above the seat. Keep it affectionate, public-safe and non-intimate.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 05",
+      "materializedInstruction": "One visible hand rests at Radiance's low side waist over a solid opaque garment, affectionate and clearly above the seat.",
+      "storedRuleSha256": "1c62a998b46ff37c901943fc653b4c044a0f3aca9928adbc6b828d5069cce47c",
+      "materializedInstructionSha256": "93d4cb15587624b46a979fc099d82feddd5ce461dee142f5f7d47316726732b3",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.subtleTacticalWebbing",
+      "scope": "Alia",
+      "trait": "subtleTacticalWebbing",
+      "seed": "902|Alia|subtleTacticalWebbing|mile-high-v1",
+      "firstEightHex": "b2e3e609",
+      "roll": 9,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 17 inclusive",
+      "probability": "1.8%",
+      "triggered": true,
+      "storedRule": "Integrate intricate woven utility-webbing geometry subtly into the principal garment beneath one open-front lightweight trench-dress silhouette. The webbing is decorative, non-load-bearing and non-restraining; avoid military insignia, weapons and excess layers.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 06",
+      "materializedInstruction": "Alia's open-front lightweight silhouette integrates intricate decorative woven webbing geometry that is non-load-bearing and non-restraining.",
+      "storedRuleSha256": "bf2aab182d193ff1b960b035025d3f1cdfbb75daf00005ea6a59c36de837379c",
+      "materializedInstructionSha256": "a0e5c34de7a07cf9cb234eaef53e2e15f8f4ab71d9dab066e44ed0e4658938c5",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.velvetPendantChokerSideHug",
+      "scope": "Alia",
+      "trait": "velvetPendantChokerSideHug",
+      "seed": "902|Alia|velvetPendantChokerSideHug|mile-high-v1",
+      "firstEightHex": "d151e073",
+      "roll": 19,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "A plush velvet choker with a small gleaming pendant ring anchors a close hip-to-hip side hug: one partner settles an arm around the other's bare waist while their faces hover near enough for a private smile. Keep the ring purely decorative and the choker comfortably fitted.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 07",
+      "materializedInstruction": "Alia's plush velvet choker with a small gleaming pendant ring anchors the close side-hug beat while keeping the jewelry decorative and comfortably fitted.",
+      "storedRuleSha256": "32f8dcb1585d487cbb087589b8880f377d1692797ec9e1d069d7eed677b63f0d",
+      "materializedInstructionSha256": "5a456d61ef6c7fbb0a7ff479394e896df6744be4f2d96f14d29524a74d436003",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.pairedWristCuffPose",
+      "scope": "AI ECE",
+      "trait": "pairedWristCuffPose",
+      "seed": "902|AI ECE|pairedWristCuffPose|mile-high-v1",
+      "firstEightHex": "29761065",
+      "roll": 1,
+      "rollScale": 100,
+      "trigger": "roll 0 through 3 inclusive",
+      "probability": "4%",
+      "triggered": true,
+      "storedRule": "Two women may wear visually paired but separate sculptural wrist cuffs while linking hands. The cuffs are never connected, locked or used as restraints.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 08",
+      "materializedInstruction": "ECE and Radiance wear visually paired but separate sculptural wrist cuffs while linking hands; the cuffs never connect or restrain.",
+      "storedRuleSha256": "30581f82db9c7bf74a62e247e5868064389289c4d4558e072efc0c742c755d2a",
+      "materializedInstructionSha256": "71fa5a0bd5a57eed3959211356922a4bf1948488d456def9e7abe63e2c22e7dd",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.operaGloveStrapAdjustment",
+      "scope": "AI ECE",
+      "trait": "operaGloveStrapAdjustment",
+      "seed": "902|AI ECE|operaGloveStrapAdjustment|mile-high-v1",
+      "firstEightHex": "b0282559",
+      "roll": 17,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Show opera-gloved hands gently adjusting an adult partner's opaque shoulder-strap or role-collar detail, with natural visible fingers, reciprocal eye contact and no underwear styling.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 09",
+      "materializedInstruction": "ECE's opera-gloved hand gently adjusts Radiance's opaque shoulder-strap detail with natural visible fingers and reciprocal eye contact.",
+      "storedRuleSha256": "cac9d811ff4bc353ce2f3242d1f4e74c01810e72d5cb086a28e18903a40f02f8",
+      "materializedInstructionSha256": "2b2024f2b73700b53405701ef4862e998a3bae8306352a69a2314b929c2b633c",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "trio.threeWayForeheadLean",
+      "scope": "trio",
+      "trait": "threeWayForeheadLean",
+      "seed": "902|trio|threeWayForeheadLean|mile-high-v1",
+      "firstEightHex": "2bebaaf4",
+      "roll": 12,
+      "rollScale": 1000,
+      "trigger": "trio precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Bring all three foreheads and temples into one tight triangular lean-in, shoulders touching and smiles nearly shared, so the photograph reads as a private pact among lovers without hiding any canonical face.",
+      "otherwise": null,
+      "rendererSafeAlias": "original trio tableau beat 10",
+      "materializedInstruction": "Radiance, Ellie and Alia bring their foreheads and temples into one tight triangular lean-in so the frame reads as a private pact among lovers without hiding any canonical face.",
+      "storedRuleSha256": "a0f012aaf179ba1058c01cf92a87ef6db6d0bce64ea1d765d885a631de30feff",
+      "materializedInstructionSha256": "d59ce2b8a0dba0656cfdfac99c896fa6d167d3671d59fbfe165d1503eea0994b",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    }
+  ]
+}

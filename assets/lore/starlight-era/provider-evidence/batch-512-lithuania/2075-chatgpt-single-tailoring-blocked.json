@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "batch": 512,
+  "scene": 2075,
+  "startedAtUtc": "2026-09-08T10:06:35.340Z",
+  "completedAtUtc": "2026-09-08T10:08:37.956Z",
+  "invocationCount": 1,
+  "allowanceConsumed": true,
+  "additionalInvocationsAllowed": 0,
+  "promptSha256": "3678747CF68D4EBE22B5D8244811FDF617A2B0AE72EB2918B3A9919631D2422E",
+  "sourceSha256": "405c6e78a2c08c9b9333be6d511d624daab031e7af9aee26a39e2e9174c3e4ee",
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 5d7d4a6c-686e-4102-b429-d13184f0ab22. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "state": "terminal-output-moderation-block-no-image",
+  "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-meta-gallery-original.webp",
+  "exactPromptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2075-single-edit-exact-prompt.txt",
+  "returnedImage": null,
+  "receivedImageBytes": false,
+  "noFurtherInvocation": true
+}

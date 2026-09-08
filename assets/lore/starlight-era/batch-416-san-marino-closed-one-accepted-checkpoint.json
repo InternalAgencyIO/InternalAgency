@@ -1,0 +1,85 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T08:08:47.614Z",
+  "authoritative_parent_commit": "92bfedf57b6136107141ef847760c3ad989bc5fc",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 416,
+  "country": "San Marino",
+  "scene_range": [
+    1684,
+    1685,
+    1686,
+    1687
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-416-scene-1685-accepted-scene-1686-no-occurrence-scene-1687-held-checkpoint.json",
+  "face_anchor_manifest_verified": true,
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "completed_country_cycles_since_last_x_cycle": 6,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "closed-unresolved-target-not-met",
+  "accepted_canonical_count_for_country": 1,
+  "target_accepted_count_for_country": 4,
+  "scene_states": {
+    "1684": {
+      "status": "no-confirmed-provider-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false
+    },
+    "1685": {
+      "status": "accepted-canonical",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "sha256": "076CA6D33F830A55A0995A7C50796EA18475031FB6C4B9854365FC02EA740E15",
+      "asset_path": "assets/lore/starlight-era/1685-san-marino-cesta-second-tower-meta-raw.webp"
+    },
+    "1686": {
+      "status": "no-confirmed-provider-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false
+    },
+    "1687": {
+      "status": "no-confirmed-provider-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "evidence": "progress-reports/codex-generated-media/provider-occurrences/batch-416-scene-1687-initial-dispatch-no-confirmed-occurrence.jsonl"
+    }
+  },
+  "accepted_scenes": [
+    1685
+  ],
+  "unresolved_scenes": [
+    1684,
+    1686,
+    1687
+  ],
+  "next_country": "Palau",
+  "next_batch": 417,
+  "next_scenes": [
+    1688,
+    1689,
+    1690,
+    1691
+  ],
+  "next_action": "Use the prepared Batch 417 checkpoint and dispatch untouched Palau scene 1688 once only on the next user-confirmed wake. Never reopen Batch 416."
+}

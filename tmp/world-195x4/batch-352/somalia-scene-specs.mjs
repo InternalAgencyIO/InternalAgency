@@ -1,0 +1,83 @@
+export const somaliaPalette = "Indian Ocean azure, coral white, Hobyo orange, grassland green, lighthouse brass, mangrove jade, river teal, orbital silver, station charcoal, viewport cyan, solar amber and research magenta";
+export const somaliaProhibitions = "Use respectful secular Somalia geography through complete ocean currents, lighthouse lenses, dune waves, grassland sweeps, coastal-forest layers and river-estuary contours. No literal flag, official seal, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied official identity, logo, badge, readable text, combat, threat or weaponized station equipment.";
+const target = "one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, vehicle and camera";
+const water = "one clearly empty floating route marker in a cordoned unoccupied ocean or river lane with no person, animal, vessel, building, vehicle or camera along or beyond the line";
+
+export const somaliaSceneSpecs = [
+  {
+    scene: 1428,
+    mode: "country-led hybrid",
+    theme: "orbital research-station couture",
+    landmark: "a broad dry oceanfront platform beside Mogadishu's complete Secondo-Lido Lighthouse, white surf, coral-stone seawall and Indian Ocean horizon, fused in the foreground with a peaceful orbital research-station cupola, docking ring and solar laboratory",
+    motifs: "complete lighthouse tower and lens bands, Indian Ocean current arcs, coral-stone facets, orbital docking rings and cupola windows",
+    culture: "Mogadishu reads through its maritime lighthouse, oceanfront and coral-stone setting; every station element is fictional peaceful civilian research hardware.",
+    motifPolicy: "Radiance, Ellie and Alia carry hard large lighthouse, ocean and coral motifs; Radiance and ECE use cupola, docking-ring and solar-laboratory construction.",
+    paperTarget: target, waterTarget: water,
+    composition: "Radiance sits securely sideways across Alia's lap on a fixed low station bench while Ellie draws Radiance into a linked-hand choice and ECE interrupts with an aching forehead-to-forehead invitation.",
+    outfits: {
+      Radiance: "Indian-Ocean-azure strapless lighthouse-lens dress with dimensional wave pleats, brass orbital hoops and beacon heels",
+      Ellie: "coral-white asymmetric culotte coat with lighthouse-gallery lattice shoulders, station hatch panels and solar platforms",
+      Alia: "Hobyo-orange open-back jumpsuit with braided ocean-current beadwork, silver docking fins and coral pumps",
+      "AI ECE": "station-charcoal cupola peplum over silver shorts with cyan viewport discs, research-magenta ribs and module boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Radiance touches Alia and links Ellie", "Alia supports Radiance securely", "Ellie links Radiance while ECE completes one visible affectionate touch"],
+    mascotPlan: "Only rolled mascots appear on a padded dry station bench far from surf, ledges, target line and machinery.",
+  },
+  {
+    scene: 1429,
+    mode: "country-led hybrid",
+    theme: "orbital research-station couture",
+    landmark: "a broad dry overlook above the complete Hobyo grassland and shrubland with immense perennial grass, white and orange coastal dunes and the Indian Ocean beyond, fused with a peaceful orbital botany laboratory and rotating station ring",
+    motifs: "complete white-and-orange dune waves, perennial grassland sweeps, shrub rosettes, ecology-module ribs and rotating station rings",
+    culture: "Hobyo reads through its distinctive coastal dunes, immense grassland and endemic shrubland; wildlife stays distant and outside every target line.",
+    motifPolicy: "Radiance, Ellie and Alia carry hard large dune, grassland and shrub motifs; Ellie and ECE use rotating-ring, botany-lab and observation-module construction.",
+    paperTarget: target, waterTarget: water,
+    composition: "ECE and Ellie perform a stable controlled dance dip beneath the rotating ring while Radiance catches Ellie's linked hand and Alia closes the circle with protective shoulder and waist contact.",
+    outfits: {
+      Radiance: "Hobyo-orange dune-corsage tulip dress with white ripple inlays, amber station ribs and grass-arch heels",
+      Ellie: "orbital-silver rotating-ring culotte jumpsuit with green botany panels, dune-relief shoulders and pivot platforms",
+      Alia: "grassland-green strapless shrub coat-dress with braided azure dune lines, dimensional leaf fans and horizon pumps",
+      "AI ECE": "station-charcoal botany-module bodice over amber shorts with cyan portholes, silver lab fins and suspension boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Ellie supports ECE and links Radiance", "ECE supports Ellie at the waist", "Radiance and Alia complete visible affectionate contacts"],
+    mascotPlan: "Only rolled mascots appear on a secured padded botany platform far from dunes, wildlife, props and rotating equipment.",
+  },
+  {
+    scene: 1430,
+    mode: "theme-led original",
+    theme: "orbital research-station couture",
+    landmark: "a broad dry overlook above complete Bushbushle National Park with layered coastal forest, open woodland, pale sand clearings and the distant Lower Jubba coast, fused equally with a fictional orbital research-station truss and observation cupola",
+    motifs: "location-only coastal-forest layers, woodland arches, sand-clearings, station trusses and orbital navigation rings",
+    culture: "Bushbushle reads through its Lower Jubba coastal forest, woodland and pale clearings; all wildlife remains distant and protected.",
+    motifPolicy: "Cupola iris, laboratory truss, gyroscope sail and docking shield create four different silhouettes while Bushbushle's forest and clearings remain equally large.",
+    paperTarget: target, waterTarget: water,
+    composition: "Ellie sits and draws ECE into a face-to-face embrace; Radiance gives ECE a forehead kiss while taking Ellie's linked hand, and Alia joins from the side with a clear jealous invitation.",
+    outfits: {
+      Radiance: "solar-amber cupola-iris tulip dress with opaque silver rings, cyan aperture ribs and lens heels",
+      Ellie: "forest-charcoal laboratory-truss culotte coat with magenta conduit channels, lattice cape and valve platforms",
+      Alia: "orbital-silver gyroscope-sail jumpsuit with braided azure seams, curved side sails and prism pumps",
+      "AI ECE": "station-white docking-shield coat-dress with green field hoops, viewport peplum and mast boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Ellie supports ECE and links Radiance", "ECE touches Ellie", "Radiance links Ellie and touches ECE while Alia joins with one visible contact"],
+    mascotPlan: "Only rolled mascots appear on a secured padded platform far from wildlife, props, ledges and station machinery.",
+  },
+  {
+    scene: 1431,
+    mode: "theme-led original",
+    theme: "orbital research-station couture",
+    landmark: "a broad dry coastal overlook above the complete Jubba River estuary near Kismayo with teal river channels, mangrove edges, pale ocean beaches, coral shallows and distant Bajuni-island silhouettes, fused equally with a peaceful orbital research station, aurora laboratory and solar observation gantry",
+    motifs: "location-only river braids, mangrove fans, beach crescents, coral-shallow bands, orbital modules and solar-array geometry",
+    culture: "The Lower Jubba coast reads through the river estuary, mangroves, beaches, coral shallows and island silhouettes; every research-station element is peaceful and fictional.",
+    motifPolicy: "Observation dome, pressure module, navigation spindle and thermal radiator make four distinct outfits while the estuary and coast remain foregrounded.",
+    paperTarget: target, waterTarget: water,
+    composition: "Alia rises from a stable station bench into Radiance's full embrace while Ellie gives Alia a cheek kiss and ECE interrupts their route with a playful linked-hand invitation.",
+    outfits: {
+      Radiance: "solar-amber observation-dome column dress with silver ribs, cyan light appliques and gantry heels",
+      Ellie: "mangrove-jade pressure-module culotte jumpsuit with charcoal hex tiles, river pleats and magnetic platforms",
+      Alia: "station-white navigation-spindle coat-dress with braided azure seams, magenta side frames and optic pumps",
+      "AI ECE": "orbital-charcoal thermal-radiator bodice over coral shorts with silver conduit lattice and module boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Alia embraces Radiance", "Ellie touches Alia and Radiance", "ECE links one free hand into the group"],
+    mascotPlan: "Only rolled mascots appear on a padded dry overlook far from water edges, props and station machinery.",
+  },
+];

@@ -1,0 +1,74 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T13:54:38.3967363Z",
+  "authoritative_parent_commit": "5ffb143424e83eb45651f6169fcf3916068568af",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 417,
+  "country": "Palau",
+  "scene_range": [
+    1688,
+    1689,
+    1690,
+    1691
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-417-scene-1690-refused-scene-1691-staged-tab-3-awaiting-confirmation-checkpoint.json",
+  "completed_country_cycles_since_last_x_cycle": 6,
+  "accepted_canonical_count_for_country": 1,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "incomplete",
+  "scene_states": {
+    "1688": {
+      "status": "accepted-canonical-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "sha256": "37910EFC3D69D7DB8C2D8BF009B6AE42E95202E56AACAE7B2965B80630A143AC"
+    },
+    "1689": {
+      "status": "explicit-no-byte-refusal-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/72bf8bd6-35ff-4501-979b-59fd8b8959f9"
+    },
+    "1690": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "CAA2F311DDB0A16D45578817E64EDCCD91A699505D2B41C11FD57DD9D6D0A4F0",
+      "camera_roll": 52,
+      "provider_url": "https://www.meta.ai/prompt/2d7f156b-e8c3-44a9-ad59-72925a7b017a"
+    },
+    "1691": {
+      "status": "provider-occurrence-progressing",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F",
+      "camera_roll": 11,
+      "submitted_at_utc": "2026-08-26T13:52:57.367Z",
+      "attachment_count": 3,
+      "send_clicked_once": true,
+      "provider_url": "https://www.meta.ai/prompt/a6741e2a-9a54-43a4-a72f-4ed64640c4af",
+      "provider_terminal": false,
+      "raw_bytes_captured": false
+    }
+  },
+  "browser_state": {
+    "scene": 1691,
+    "tab_id": "3",
+    "url": "https://www.meta.ai/prompt/a6741e2a-9a54-43a4-a72f-4ed64640c4af",
+    "last_observed_state": "Finalizing the image prompt",
+    "last_observed_at_utc": "2026-08-26T13:54:38.3967363Z",
+    "provider_terminal": false,
+    "resend_forbidden": true
+  },
+  "dispatch_blocker": {
+    "active": true,
+    "reason": "Scene 1691 has a confirmed progressing provider occurrence; monitor and archive this exact chat without any resend."
+  },
+  "next_action": "Monitor https://www.meta.ai/prompt/a6741e2a-9a54-43a4-a72f-4ed64640c4af for its terminal image or explicit no-byte result, then archive and close Batch 417. Never resend scenes 1688-1691."
+}

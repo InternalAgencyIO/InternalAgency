@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "batch": 501,
+  "country": "Costa Rica",
+  "updatedAtUtc": "2026-09-07T01:54:39.649Z",
+  "state": "four-visual-selections-complete-three-internal-originals-held",
+  "sceneIds": [
+    2031,
+    2032,
+    2033,
+    2034
+  ],
+  "providerAccount": "leesha007",
+  "providerMode": "Thinking",
+  "orderedAnchors": [
+    938,
+    936,
+    937
+  ],
+  "metaInitialSends": 4,
+  "metaRetries": 0,
+  "providerVisibleVersions": 7,
+  "nativeFinalOriginalsSaved": 4,
+  "additionalNativeJpegSaved": 1,
+  "chatgptEditInvocations": 4,
+  "chatgptReturnedFiles": 4,
+  "chatgptBlockedInvocations": 0,
+  "remainingMetaAestheticRetries": 0,
+  "remainingTailoringInvocations": 0,
+  "selectedMetaScenes": [
+    2031,
+    2033
+  ],
+  "selectedChatgptScenes": [
+    2032,
+    2034
+  ],
+  "selectedMedia": [
+    {
+      "scene": 2031,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-meta-gallery-original.webp",
+      "sha256": "e95c132773caa01664e855eeab86f552434e675dd37e3de3bb635f04b6545436",
+      "provider": "Meta",
+      "canonicalAccepted": false,
+      "xEligible": false
+    },
+    {
+      "scene": 2032,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-chatgpt-single-tailoring-pass.png",
+      "sha256": "8149d5c4aa044d484d2b25408f40cbb58a63878366048c3966a8cdc0e8e95423",
+      "provider": "built-in ChatGPT image generator",
+      "canonicalAccepted": false,
+      "xEligible": false
+    },
+    {
+      "scene": 2033,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-meta-gallery-original.webp",
+      "sha256": "845a195d9ed7ba6e60b1d80e7743cea9e6e96f482bd8d24ec503b5b881688ee6",
+      "provider": "Meta",
+      "canonicalAccepted": false,
+      "xEligible": false
+    },
+    {
+      "scene": 2034,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-pass.png",
+      "sha256": "98c2cf7b7cf22d65c8eacba1b272c41db3ecf06b1e212852ecab06fddbbbcf05",
+      "provider": "built-in ChatGPT image generator",
+      "canonicalAccepted": false,
+      "xEligible": false
+    }
+  ],
+  "rawArchiveComplete": false,
+  "missingInternalOriginals": 3,
+  "missingInternalOriginalSceneIds": [
+    2031,
+    2032,
+    2034
+  ],
+  "archiveExceptionApplies": false,
+  "recoveryHold": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/internal-original-recovery-hold.json",
+  "selectionQa": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/final-selection-qa.json",
+  "accessibilitySidecars": [
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-accessibility.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-accessibility.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-accessibility.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-accessibility.json"
+  ],
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/provider-ledger.json",
+  "editProgress": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-progress.json",
+  "availableEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/available-media-evidence-manifest.json",
+  "closureValidation": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/archive-closure-validation.json",
+  "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/browser-final-handoff.json",
+  "rollConformanceReview": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/editorial-roll-conformance-review.json",
+  "canonicalCorrection": [
+    {
+      "field": "currentXBacklogDrain20260906.activeRenderArchiveException",
+      "oldValue": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "newValue": null,
+      "reason": "Active country is Costa Rica; only Mauritania has an approved exception. Preserve it separately as companionCountryArchiveException."
+    }
+  ],
+  "previousCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-finals-archived-single-edit-ready-checkpoint.json",
+  "companionCountry": "Mauritania",
+  "companionAcceptedSelection": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
+  "companionExceptionCheckpoint": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+  "omanExcluded": true,
+  "switzerlandExcluded": true,
+  "xPostActivations": 0,
+  "canonicalPostCount": 230,
+  "newStarlightGuardianCreated": false,
+  "starlightGuardianPresent": false,
+  "unattended247ExecutionEstablished": false,
+  "nextSafeAction": "Do not send another Costa Rica prompt, retry, edit or X post. Recover the three first internal Meta originals for scenes2031,2032,2034 using a supported visible-browser save/download control and import exact bytes with provenance and hashes. If that cannot be done, obtain a new explicit Costa Rica-only exception for these three originals before normal Mauritania-Costa Rica publication or next-country rendering. Keep both source and edit versions, all signed URLs and the existing Oman evidence tab. Before any later Post, reverify @dogramaci, nonduplicate scene/media hashes, exact ALT, AI disclosure, caption/hashtag rolls and local/origin/PR/LFS parity.",
+  "remoteVerification": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/remote-parity-after-selection.json"
+}

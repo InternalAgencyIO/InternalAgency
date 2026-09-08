@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "batch": 481,
+  "country": "Luxembourg",
+  "state": "closure-evidence-commit-lfs-remote-and-draft-pr-parity-verified",
+  "verifiedAtUtc": "2026-09-04T12:44:58.455Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+  "closureEvidenceCommit": "7f1e5f1aecb9daa6afb45a8e34777ebb5c01741a",
+  "localHead": "7f1e5f1aecb9daa6afb45a8e34777ebb5c01741a",
+  "remoteHead": "7f1e5f1aecb9daa6afb45a8e34777ebb5c01741a",
+  "draftPrHead": "7f1e5f1aecb9daa6afb45a8e34777ebb5c01741a",
+  "ahead": 0,
+  "behind": 0,
+  "draftPrStillDraft": true,
+  "draftPrState": "OPEN",
+  "draftPrVisibleVerification": "The public in-app Browser PR page visibly showed Draft, the exact head-branch closure commit 7f1e5f1aecb9daa6afb45a8e34777ebb5c01741a, and 2 / 2 checks OK.",
+  "targetedLfsDryRun": "empty",
+  "targetedLfsObjectsVerified": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-481-luxembourg/1952-luxembourg-vianden-castle-raze-adjacent-three-quarter-chatgpt-one-strong-shortening-pass.png",
+      "oidSha256": "2CF7B10816AAB29AF6C6C269D302B73A986BD539564398272BF30343666E510E",
+      "bytes": 2419364,
+      "localObjectPresent": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-481-luxembourg/1953-luxembourg-mullerthal-schiessentumpel-raze-adjacent-three-quarter-chatgpt-one-strong-shortening-pass.png",
+      "oidSha256": "5B84182D1F54D8CE0103080BE5974F0F9D1CFF3238CBC136D355C12793B1FC18",
+      "bytes": 2506574,
+      "localObjectPresent": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-481-luxembourg/1954-luxembourg-esch-belval-raze-tight-full-body-statement-boots-chatgpt-one-strong-shortening-pass.png",
+      "oidSha256": "2B494E42C4FC564CBE1553B5A111DB4ED5A06054122747F4AB673FE74027A10F",
+      "bytes": 2218372,
+      "localObjectPresent": true
+    }
+  ],
+  "providerRawAssetCount": 4,
+  "chatgptOutputAssetCount": 3,
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-481-luxembourg/closure-evidence-manifest.json",
+  "closureEvidenceInventorySha256": "8A93C5BF76BA3A8B8C695C75269C5FE486BC48B7A451958CC569D2D72DA8EEE8",
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "canonicalContradictions": [
+    "Meta DOM labels the completed media as WEBP, while the user-visible Download controls delivered JPEG/JFIF bytes through the in-app Browser. The exact UI-downloaded bytes remain canonical and no direct provider HTTP was used.",
+    "Scene 1951's required single ChatGPT tailoring attempt and one safer neutral rewording both ended in output moderation with no artifact. The valid Meta raw occurrence is therefore selected; no additional ChatGPT pass is authorized for that scene."
+  ],
+  "nextCountryAuthority": {
+    "country": "Moldova",
+    "reason": "Luxembourg is now complete. Malta already has a canonical live country-pair post at https://x.com/dogramaci/status/2090711986728239557, while Moldova has zero canonical posts in the current alphabetical Europe priority roster."
+  },
+  "nextSafeAction": "Commit and push this verification record, prove the new local, origin and draft PR heads match, then prepare Batch 482 Moldova with four deterministic Meta Thinking stills under the inherited roll contract. Reuse the four visible lanes, attach exact anchors 938, 936 and 937 once in that order, capture and remote-verify visible staging evidence, and dispatch each new lane exactly once under the standing authorization. Keep the visible @dogramaci X composer blank until a duplicate-safe Luxembourg-Moldova three-image country pair is selected and reserved."
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "batch": 516,
+  "scene": 2091,
+  "startedAtUtc": "2026-09-08T16:23:00.335Z",
+  "completedAtUtc": "2026-09-08T16:26:51.071Z",
+  "invocationCount": 1,
+  "allowanceConsumed": true,
+  "promptSha256": "DC8D03EE4F99F4B1F56B4B34DA8CA55AA91B09ED618DA56511195692BA59C68F",
+  "sourceSha256": "7780cb5ec5cb333032f2011fd34351e8b9972fd7ad7ef95b9ae99a0f0f1c835a",
+  "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2091-meta-gallery-1-original.webp",
+  "exactPromptPath": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/scene-2091-single-edit-exact-prompt.txt",
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 5ce15690-e4ef-4f1e-b136-628e7bcdfd96. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "requestId": "5ce15690-e4ef-4f1e-b136-628e7bcdfd96",
+  "receivedImageBytes": false,
+  "state": "output-moderation-blocked-allowance-consumed",
+  "additionalInvocationsAllowed": 0,
+  "noFurtherInvocation": true,
+  "receiptPath": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2091-chatgpt-single-tailoring-blocked.json"
+}

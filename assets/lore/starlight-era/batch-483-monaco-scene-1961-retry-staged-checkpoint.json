@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "batch": 483,
+  "country": "Monaco",
+  "scene": 1961,
+  "state": "occurrence-1-hard-failure-archived-occurrence-2-provider-safe-retry-staged-no-send",
+  "createdAtUtc": "2026-09-04T14:20:00Z",
+  "occurrence1": {
+    "providerUrl": "https://www.meta.ai/prompt/3aada520-8143-4e85-9658-67e39cb15926",
+    "promptSha256": "FFDBE75B615B0558CE3170661922BA6248936A75BC8F9BEBE6E1446BCFE1A95D",
+    "sendClicks": 1,
+    "outcome": "hard-failure-no-image",
+    "terminalSceneResent": false
+  },
+  "occurrence2": {
+    "composerUrl": "https://www.meta.ai/",
+    "tabId": "26",
+    "account": "leesha007",
+    "thinkingVisible": true,
+    "promptCharacters": 2906,
+    "promptSha256": "348BC3BC78CBF92C90167177424B0615EF6EF44EFA254AEC579C34A112C687BA",
+    "revision": "Only the distant-background smoke and damage clause was replaced by a pristine Larvotto bay and skyline clause. Quartet, order, location, camera, clothing, star hardware, hosiery, Alia stocking mark, footwear and warm beat remain unchanged.",
+    "orderedAnchors": [938, 936, 937],
+    "anchorOrderExact": true,
+    "attachmentCount": 3,
+    "sendEnabled": true,
+    "sendClicks": 0,
+    "screenshot": {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/scene-1961-meta-occurrence-2-staged-visible.jpg",
+      "sha256": "B56E625B42F6D0531324F2072AD74A6AA8491F80728ACE5C819653DE7787B4F3",
+      "bytes": 121885,
+      "dimensions": "1280x720",
+      "rawFormat": "JPEG/JFIF"
+    }
+  },
+  "retryPolicy": {"maximumMetaRetriesPerScene": 2, "retriesConsumed": 1, "retriesRemainingAfterOccurrence2": 1, "retryOnlyOnHardFailure": true},
+  "blockedPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/blocked-prompts.json",
+  "exactPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/meta-retry-prompts-and-outcomes.md",
+  "guardian": {"id": "guardian-x-assistant-mission", "status": "PAUSED", "leftUntouched": true},
+  "nextSafeAction": "Commit and remote-verify the blocked-prompt archive and exact retry staging evidence. Then recheck the visible account, Thinking, prompt hash, ordered anchors and enabled Send control, click Send once for occurrence 2, and never resend that occurrence."
+}

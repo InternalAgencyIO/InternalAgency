@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "grok_two_lane_direct_video_staged_anchor_upload_blocked",
+  "batchId": 443,
+  "country": "Czechia",
+  "sourceBatchId": 372,
+  "sourceCheckpoint": "assets/lore/starlight-era/batch-372-czechia-orbital-research-station-checkpoint.json",
+  "sourceContractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "capturedAtUtc": "2026-08-27T22:41:00.439Z",
+  "deepSeek": {
+    "mode": "DeepThink",
+    "modeConfirmed": true,
+    "requestSentAtUtc": "2026-08-27T22:33:16.043Z",
+    "conversationUrl": "https://chat.deepseek.com/a/chat/s/0af9f30f-3dc7-4984-a377-79fa052f0fd5",
+    "purpose": "Produce two original short female-only Starlight love-story prompts with Czech country motifs and jealousy-to-protection arcs."
+  },
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "sceneId": 1792,
+      "location": "Prague Vltava and Charles Bridge orbital promenade",
+      "cameraRoll": 55,
+      "framing": "INTERMEDIATE",
+      "promptPath": "assets/lore/starlight-era/batch-443-czechia-scene-1792-grok-video-prompt.txt",
+      "promptBytes": 837,
+      "promptSha256": "CEB517D33FFC8A1AFA50C903FAB052FDA60E7A64C4642A3BC73175690C92B43B",
+      "browserTabId": "90",
+      "settings": {
+        "mode": "Video",
+        "resolution": "720p",
+        "duration": "15s",
+        "aspectRatio": "9:16"
+      },
+      "uniqueAnchorPreviews": 3,
+      "anchorUploadSpinners": 3,
+      "submitEnabled": false,
+      "submitted": false
+    },
+    {
+      "sceneId": 1793,
+      "location": "Cesky Krumlov Vltava bend and castle orbital terrace",
+      "cameraRoll": 36,
+      "framing": "INTERMEDIATE",
+      "promptPath": "assets/lore/starlight-era/batch-443-czechia-scene-1793-grok-video-prompt.txt",
+      "promptBytes": 886,
+      "promptSha256": "13FD05B083A510AE7F61CBA02475B4AEC97ABDE59154224B957077E1CB0756CD",
+      "browserTabId": "91",
+      "settings": {
+        "mode": "Video",
+        "resolution": "720p",
+        "duration": "15s",
+        "aspectRatio": "9:16"
+      },
+      "uniqueAnchorPreviews": 3,
+      "anchorUploadSpinners": 3,
+      "submitEnabled": false,
+      "submitted": false
+    }
+  ],
+  "blocker": {
+    "type": "provider_anchor_upload_not_terminal",
+    "evidence": "All three ordered PNG previews are visible in each lane, but every preview retains Grok's upload spinner after the final wait window. Grok exposes no upload error and keeps both Submit controls disabled.",
+    "rawFileChooserAttempts": 0,
+    "successfulFileChooserEvents": 0,
+    "clipboardUploadsAttemptedPerLane": 3,
+    "confirmedProviderChats": 0,
+    "rendersDispatched": 0,
+    "xPostsCreated": 0
+  },
+  "accessibilityPlan": {
+    "englishDialogueIncluded": true,
+    "scene1792Line": "No one gets left behind.",
+    "scene1793Line": "Stay with me.",
+    "englishSrtRequiredAfterTerminalVideo": true,
+    "srtStatus": "not yet applicable because no video has been dispatched"
+  },
+  "nextSafeAction": "Preserve both staged lanes. Do not click Submit while anchor uploads are nonterminal. Removing stalled attachment cards requires fresh action-time confirmation; after that confirmation, retry the provider-supported upload path without duplicating any confirmed provider chat."
+}

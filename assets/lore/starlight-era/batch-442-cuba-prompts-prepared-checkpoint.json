@@ -1,0 +1,69 @@
+{
+  "checkpointType": "batch_prompts_prepared_awaiting_upload_staging",
+  "batchId": 442,
+  "country": "Cuba",
+  "sourceBatchId": 371,
+  "sourceCheckpoint": "assets/lore/starlight-era/batch-371-cuba-orbital-research-station-checkpoint.json",
+  "sourceContractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "theme": "orbital research-station couture",
+  "preparedAtUtc": "2026-08-27T19:24:14.484Z",
+  "status": "prepared_awaiting_upload_staging",
+  "orderedReferenceSceneIds": [
+    938,
+    936,
+    937
+  ],
+  "orderedReferenceSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "lanes": [
+    {
+      "sceneId": 1788,
+      "sourceSceneId": 1504,
+      "location": "Havana Malecón seawall and Centro Habana roofline",
+      "cameraRoll": 48,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-442/scene-1788-prompt.txt",
+      "promptBytes": 7627,
+      "promptSha256": "188F2322B37E9BFEF6DC702D3664A5C2CFDD5BD8743CD2F557AD09E7A0E81A6E"
+    },
+    {
+      "sceneId": 1789,
+      "sourceSceneId": 1505,
+      "location": "Trinidad Plaza Mayor and Escambray foothills",
+      "cameraRoll": 10,
+      "framing": "EXTREME CLOSE",
+      "promptPath": "tmp/world-195x4/batch-442/scene-1789-prompt.txt",
+      "promptBytes": 6627,
+      "promptSha256": "745B70B8371AD1AA493DF7A66E36347BCA116AF3CEC8B742857E2AFDF4FEC0F8"
+    },
+    {
+      "sceneId": 1790,
+      "sourceSceneId": 1506,
+      "location": "Viñales Valley mogotes and red-earth paths",
+      "cameraRoll": 72,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-442/scene-1790-prompt.txt",
+      "promptBytes": 7530,
+      "promptSha256": "D13FD97A08621A86DEA40CE46924092721C310DACDA1359560B534B928311586"
+    },
+    {
+      "sceneId": 1791,
+      "sourceSceneId": 1507,
+      "location": "Santiago de Cuba Bay and Sierra Maestra overlook",
+      "cameraRoll": 60,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-442/scene-1791-prompt.txt",
+      "promptBytes": 7589,
+      "promptSha256": "39E9AB1854FE47C815D3151BCA6EEBDA89439DD862EA89F0035695F9D01A3C17"
+    }
+  ],
+  "safetyTransform": "Exactly four fictional adult women only; legacy male, mascots, weapons, targets, odd props, hosiery, rainbow-only conversion, ribbons, and incompatible close-up hands removed.",
+  "authorization": {
+    "uploads": "covered by the user's active 24-hour all-upload authorization",
+    "sends": "requires fresh action-time confirmation after all four composers are staged and reverified"
+  },
+  "nextRequiredAction": "Close completed Batch 441 tabs, create exactly four fresh in-app Meta tabs, upload each exact prompt with ordered references 938,936,937, verify composers, and stop before Send."
+}

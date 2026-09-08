@@ -1,0 +1,114 @@
+{
+  "schema": "internalagency.starlight.browser-upload-checkpoint.v1",
+  "batchId": 436,
+  "country": "South Sudan",
+  "status": "four_lanes_uploaded_awaiting_fresh_send_confirmation",
+  "recordedAtUtc": "2026-08-27T16:22:29.973Z",
+  "provider": "Meta AI",
+  "providerAccount": "leesha007",
+  "browser": "Codex in-app browser",
+  "laneCount": 4,
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "sceneId": 1764,
+      "sourceSceneId": 1480,
+      "tabId": "23",
+      "url": "https://www.meta.ai/",
+      "promptPath": "tmp/world-195x4/batch-436/scene-1764-prompt.txt",
+      "preparedPromptSha256": "606D834919D0AA6EC163508049127E8A926FFBD60DB646632CA71DCD0AC5E3AC",
+      "browserCanonicalPromptSha256": "606D834919D0AA6EC163508049127E8A926FFBD60DB646632CA71DCD0AC5E3AC",
+      "attachmentPlaceholderPrefixLength": 5,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "sendEnabled": true,
+      "sendClicked": false,
+      "cameraRoll": 64,
+      "cameraBand": "INTERMEDIATE"
+    },
+    {
+      "sceneId": 1765,
+      "sourceSceneId": 1481,
+      "tabId": "24",
+      "url": "https://www.meta.ai/",
+      "promptPath": "tmp/world-195x4/batch-436/scene-1765-prompt.txt",
+      "preparedPromptSha256": "BBECB925B031D8E15DC1A0512B68E9D987CAAC310CAC044582D75A709A0C6488",
+      "browserCanonicalPromptSha256": "BBECB925B031D8E15DC1A0512B68E9D987CAAC310CAC044582D75A709A0C6488",
+      "attachmentPlaceholderPrefixLength": 5,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "sendEnabled": true,
+      "sendClicked": false,
+      "cameraRoll": 42,
+      "cameraBand": "INTERMEDIATE"
+    },
+    {
+      "sceneId": 1766,
+      "sourceSceneId": 1482,
+      "tabId": "25",
+      "url": "https://www.meta.ai/",
+      "promptPath": "tmp/world-195x4/batch-436/scene-1766-prompt.txt",
+      "preparedPromptSha256": "6FD9A80CCD19265E751CE5D3C99A77DC335B08E30E9E6AF0723B2F3C123A3794",
+      "browserCanonicalPromptSha256": "6FD9A80CCD19265E751CE5D3C99A77DC335B08E30E9E6AF0723B2F3C123A3794",
+      "attachmentPlaceholderPrefixLength": 5,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "sendEnabled": true,
+      "sendClicked": false,
+      "cameraRoll": 3,
+      "cameraBand": "EXTREME CLOSE"
+    },
+    {
+      "sceneId": 1767,
+      "sourceSceneId": 1483,
+      "tabId": "26",
+      "url": "https://www.meta.ai/",
+      "promptPath": "tmp/world-195x4/batch-436/scene-1767-prompt.txt",
+      "preparedPromptSha256": "CF3F16E3DBAEF72A025385BEC976B09C94E802B25F0D5CA4703EFAD3437D879C",
+      "browserCanonicalPromptSha256": "CF3F16E3DBAEF72A025385BEC976B09C94E802B25F0D5CA4703EFAD3437D879C",
+      "attachmentPlaceholderPrefixLength": 5,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "sendEnabled": true,
+      "sendClicked": false,
+      "cameraRoll": 83,
+      "cameraBand": "EXTREME WIDE"
+    }
+  ],
+  "uploadsPreauthorized": true,
+  "sendRequiresFreshImmediateConfirmation": true,
+  "sendConfirmationReceived": false,
+  "providerOccurrencesConfirmed": 0,
+  "safety": "No weapons, targets, training props, mascots, extra people, or unsafe legacy mission elements are present in the staged prompts."
+}

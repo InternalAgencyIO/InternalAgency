@@ -1,0 +1,21 @@
+{
+  "atUtc": "2026-09-06T19:12:55Z",
+  "command": "node scripts/sync-rejected-prompt-ledger.mjs --verify",
+  "exitCode": 1,
+  "entries": 139,
+  "expectedEntries": 139,
+  "exactPromptShaPasses": 139,
+  "preservedRawEntries": 130,
+  "noByteEntries": 8,
+  "zeroByteEntries": 1,
+  "errors": [
+    "checkpoint contractSha256 mismatch",
+    "ledger contractPolicySha256 mismatch"
+  ],
+  "historicalCheckpointContractSha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC",
+  "historicalLedgerContractPolicySha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC",
+  "currentContractSha256AtCheck": "5C3ED560931F0762324B5F9A97DC36595535ADD843F474B0AC81C5D99B454CEB",
+  "sourceExplanation": "The verifier is hard-wired to the historical Batch 382 checkpoint and compares its two saved hashes with the entire mutable current contract file. All 139 exact prompt hashes pass. This continuation had made no contract edits when the discrepancy was observed.",
+  "disposition": "Preserve the historical seals and report the discrepancy. No apply, historical-hash rewrite, contract weakening, new provider send or X post was performed.",
+  "notAClaim": "This is not a clean result for the full rejection-ledger gate."
+}

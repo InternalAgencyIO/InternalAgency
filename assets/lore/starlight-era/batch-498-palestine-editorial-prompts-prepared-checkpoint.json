@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "batch": 498,
+  "country": "Palestine",
+  "sceneIds": [
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "state": "four-fixed-roll-prompts-prepared-offline-zero-sends",
+  "preparedAtUtc": "2026-09-06T14:00:08.0170617Z",
+  "baseRemoteVerifiedHead": "25001401de5b2492394d86f9442947f4f6346154",
+  "brief": "assets/lore/starlight-era/batch-498-palestine-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-498-palestine-fixed-rolls.json",
+  "rollContract": "starlight-editorial-rolls-2026-09-06",
+  "seed": "starlight-editorial-rolls-2026-09-06|batch-498|palestine",
+  "seedSelection": "Fixed; no outcome search or reroll",
+  "canonicalWorldPosts": 201,
+  "countryPostCounts": {
+    "New Zealand": 0,
+    "Palestine": 0
+  },
+  "countryPair": [
+    "New Zealand",
+    "Palestine"
+  ],
+  "scenes": [
+    {
+      "scene": 2019,
+      "location": "Battir olive and vine terrace overlook",
+      "cameraRoll": 99,
+      "cameraCategory": "extreme-wide",
+      "angle": "front-quarter-low",
+      "dutchDegrees": 12,
+      "pose": "back-hug-turn",
+      "promptCharacters": 3711,
+      "promptSha256": "107AFA3057CD416BF9654612A97C8A986267090AE883E400171E85C0D0483D34",
+      "singleEditPromptSha256": "2BBB850B3932DBF21B0DCF9D848855011BF47FD62073167DF37C1B01C56EEFA6"
+    },
+    {
+      "scene": 2020,
+      "location": "Jericho Tell es-Sultan archaeological overlook",
+      "cameraRoll": 2,
+      "cameraCategory": "extreme-close",
+      "angle": "side-level",
+      "dutchDegrees": 14,
+      "pose": "side-hug-step",
+      "promptCharacters": 4275,
+      "promptSha256": "D4CFED4FC43C71DB2FD14CC12889380B6B9DFFE3D2126D5C7D9B226D99DF4684",
+      "singleEditPromptSha256": "7C1C866455191317533CF85021C8A567A4CB42B796EF89AC502EC8767DFBBDA2"
+    },
+    {
+      "scene": 2021,
+      "location": "Hisham Palace mosaic-inspired viewing pavilion",
+      "cameraRoll": 60,
+      "cameraCategory": "intermediate",
+      "angle": "high-oblique",
+      "dutchDegrees": 22,
+      "pose": "supported-seated-conversation",
+      "promptCharacters": 3896,
+      "promptSha256": "2D14050E4D83ED5F7EE8EAD3B0E0F2645C955A396C709EC42DA7F8557C0C6A69",
+      "singleEditPromptSha256": "4D0B54C11FEED4EE49E17451E5ABD61568325ED1DEB3AF78163EB932A3E11E28"
+    },
+    {
+      "scene": 2022,
+      "location": "Wadi Qelt guarded desert canyon overlook",
+      "cameraRoll": 46,
+      "cameraCategory": "intermediate",
+      "angle": "over-shoulder",
+      "dutchDegrees": 15,
+      "pose": "head-resting-on-clothed-lap",
+      "promptCharacters": 3990,
+      "promptSha256": "ECDC4B1875EFC00708937D61721BB5B9C2AF3AAA5EBD4A4D98D1FAA112E5E099",
+      "singleEditPromptSha256": "9C67B068487B6122B870DE6326A601FFF63470C64DC88897FD8CF0CAE3695167"
+    }
+  ],
+  "livePreflight": {
+    "actualTabs": [
+      "47",
+      "48",
+      "49",
+      "50",
+      "51"
+    ],
+    "metaTabs": [
+      "47",
+      "48",
+      "49",
+      "50"
+    ],
+    "metaAccountsAllVerified": "leesha007",
+    "thinkingAllVerified": true,
+    "metaComposersAllBlank": true,
+    "metaSendsAllDisabled": true,
+    "metaStopControls": 0,
+    "xTab": "51",
+    "xAccountVerified": "@dogramaci",
+    "xComposerBlank": true,
+    "xPostDisabled": true,
+    "orderedAnchorsVerified": [
+      938,
+      936,
+      937
+    ],
+    "anchorHashes": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ]
+  },
+  "validation": {
+    "rollTestsPassed": 5,
+    "rollTestsFailed": 0,
+    "promptHashesRecomputed": true,
+    "onePassPerUsableMetaOccurrence": 1,
+    "maximumMetaHardFailureRetries": 2,
+    "aestheticRetries": 0
+  },
+  "providerSends": 0,
+  "xPosts": 0,
+  "canonicalContradictions": [
+    "Old Cuba and Tanzania instructions are historical, Palestine is current.",
+    "Old tab IDs 43-46 and33 are absent from the actual inventory. Fresh47-50 Meta and51 X replace them.",
+    "Old repeated-permission wording is superseded by the user's current explicit authorization to Send and Post when ready.",
+    "No Starlight guardian exists. No replacement created."
+  ],
+  "nextSafeAction": "Commit and verify HEAD, origin and PR13 parity. Stage exact prompts and anchors938,936,937 once in that order through visible supported controls. Verify and archive staging, report the exact current state and activate Send once per passing lane under the user's authorization."
+}

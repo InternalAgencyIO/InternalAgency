@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "batch": 510,
+  "country": "Armenia",
+  "sceneIds": [
+    2067,
+    2068,
+    2069,
+    2070
+  ],
+  "state": "four-single-edit-invocations-in-flight",
+  "preparedAtUtc": "2026-09-08T05:29:36.414Z",
+  "brief": "assets/lore/starlight-era/batch-510-armenia-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-510-armenia-fixed-rolls.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/provider-ledger.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-intents.json",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-composers-staging-evidence.json",
+  "previousWorkflowClosure": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-full-workflow-closure-checkpoint.json",
+  "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/full-workflow-remote-verification.json",
+  "baseRemoteVerifiedHead": "84af01b55b808b72b41bb763482358c6001503c7",
+  "providerSendActivations": 4,
+  "chatgptEditInvocations": 4,
+  "account": "leesha007",
+  "mode": "Thinking",
+  "orderedAnchors": [
+    938,
+    936,
+    937
+  ],
+  "actualMetaTabs": [
+    "33",
+    "34",
+    "35",
+    "36"
+  ],
+  "actualXTab": "37",
+  "protectedOmanTab": "1",
+  "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0555.json",
+  "xPostCount": 240,
+  "latestXUrls": [
+    "https://x.com/dogramaci/status/2097189559310156192",
+    "https://x.com/dogramaci/status/2097191849538588895"
+  ],
+  "nextSafeAction": "Wait for the four already invoked built-in tailoring calls in execution cell 2196 and preserve their separately attributed outputs or errors. Each allowance is consumed; do not launch another edit, Meta retry or new scene. After all results are accounted for, visually compare originals and edits, record a chosen usable version, update ALT/QA/manifests and verify remote closure before advancing.",
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/source-and-edit-preflight-remote-verification.json",
+  "preflightPayloadCommit": "b300ee53c19017eecd083028fe1f505b445511fb",
+  "preflightVerifiedAtUtc": "2026-09-08T06:12:26.732Z",
+  "updatedAtUtc": "2026-09-08T06:18:10.489Z",
+  "dispatchAuthorityCommit": "2863beab8015aadb1127125e4a372f8a66d766f1",
+  "providerRetries": 0,
+  "uncertainActivations": 0,
+  "occurrences": [
+    {
+      "scene": 2067,
+      "occurrenceId": "batch-510-scene-2067-meta-initial",
+      "activationCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/7625f457-5a4f-407c-9ca9-46a003615ef5",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-initial-send-receipt.json",
+      "neverResend": true
+    },
+    {
+      "scene": 2068,
+      "occurrenceId": "batch-510-scene-2068-meta-initial",
+      "activationCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/a26f9094-bf33-4b65-ad79-41bc48fb46e7",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-initial-send-receipt.json",
+      "neverResend": true
+    },
+    {
+      "scene": 2069,
+      "occurrenceId": "batch-510-scene-2069-meta-initial",
+      "activationCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/9eacf0a7-b3ac-4efe-9267-d6cc8afe83c0",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-initial-send-receipt.json",
+      "neverResend": true
+    },
+    {
+      "scene": 2070,
+      "occurrenceId": "batch-510-scene-2070-meta-initial",
+      "activationCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/4509fe50-e166-413e-bb9d-c18defa3b199",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-initial-send-receipt.json",
+      "neverResend": true
+    }
+  ],
+  "outputObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-dispatch-observations.json",
+  "sourceArchiveComplete": true,
+  "archiveException": null,
+  "currentCheckpoint": "assets/lore/starlight-era/batch-510-armenia-single-edit-inflight-checkpoint.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/native-raw-archive-manifest.json",
+  "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-intents.json",
+  "savedMediaFiles": 16,
+  "uniqueMediaVersions": 12,
+  "sourceReadyScenes": [
+    2067,
+    2068,
+    2069,
+    2070
+  ],
+  "inFlightScenes": [],
+  "allFourOccurrencesTerminal": true,
+  "guardianNextAuditNotBeforeUtc": "2026-09-08T06:40:49.170Z",
+  "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/all-four-terminal-source-observations.json",
+  "chatgptEditResults": 0,
+  "imagegenExecutionCell": "2196",
+  "singleEditDispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-edit-dispatch-guard.json",
+  "singleEdits": [
+    {
+      "scene": 2067,
+      "occurrenceId": "batch-510-scene-2067-chatgpt-single-tailoring",
+      "state": "invoked-awaiting-result",
+      "invocationCount": 1,
+      "promptSha256": "63599EBFC9C678C917A0579A8DF4620763CE806CA4610A60D37DC15FD9A42E25",
+      "sourceSha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+      "executionCell": "2196",
+      "recordedAtUtc": "2026-09-08T06:18:10.489Z",
+      "timeNote": "Exact per-call start and completion timestamps will be reconciled from the active tool cell. Never invoke again while it is pending."
+    },
+    {
+      "scene": 2068,
+      "occurrenceId": "batch-510-scene-2068-chatgpt-single-tailoring",
+      "state": "invoked-awaiting-result",
+      "invocationCount": 1,
+      "promptSha256": "6622BC3D910C9951F28E194E9CB5A1AC481C08E8F302B5EAB3469627FA65C68A",
+      "sourceSha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+      "executionCell": "2196",
+      "recordedAtUtc": "2026-09-08T06:18:10.489Z",
+      "timeNote": "Exact per-call start and completion timestamps will be reconciled from the active tool cell. Never invoke again while it is pending."
+    },
+    {
+      "scene": 2069,
+      "occurrenceId": "batch-510-scene-2069-chatgpt-single-tailoring",
+      "state": "invoked-awaiting-result",
+      "invocationCount": 1,
+      "promptSha256": "FBDB24CF0AB15E9F03B9B7B25FC4E798CBBDAB24A3D3F8BDFB60AC338F1296D4",
+      "sourceSha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "executionCell": "2196",
+      "recordedAtUtc": "2026-09-08T06:18:10.489Z",
+      "timeNote": "Exact per-call start and completion timestamps will be reconciled from the active tool cell. Never invoke again while it is pending."
+    },
+    {
+      "scene": 2070,
+      "occurrenceId": "batch-510-scene-2070-chatgpt-single-tailoring",
+      "state": "invoked-awaiting-result",
+      "invocationCount": 1,
+      "promptSha256": "CDB775BFD844F28B8FE0663F002B3B87CA15840C90E7E5BFF489A7E73D5FCE8E",
+      "sourceSha256": "310eea7a6f26eb538f0aa37f021a10d1a1e4e935c50294adbe2d887e02f2663f",
+      "executionCell": "2196",
+      "recordedAtUtc": "2026-09-08T06:18:10.489Z",
+      "timeNote": "Exact per-call start and completion timestamps will be reconciled from the active tool cell. Never invoke again while it is pending."
+    }
+  ]
+}

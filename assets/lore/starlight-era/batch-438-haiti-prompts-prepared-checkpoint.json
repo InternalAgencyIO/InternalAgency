@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "batch_prompts_prepared",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 438,
+  "country": "Haiti",
+  "sourceBatchId": 367,
+  "status": "prepared_awaiting_upload",
+  "sceneIds": [
+    1772,
+    1773,
+    1774,
+    1775
+  ],
+  "lanes": [
+    {
+      "sceneId": 1772,
+      "sourceSceneId": 1488,
+      "location": "Port-au-Prince Bay overlook",
+      "cameraRoll": 20,
+      "framing": "EXTREME CLOSE",
+      "promptPath": "tmp/world-195x4/batch-438/scene-1772-prompt.txt",
+      "promptSha256": "0CCBB20928148D32A59C93E199657EAD0C81DA7B38C9E1B6A82939C9BAE12194",
+      "promptBytes": 6164,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1773,
+      "sourceSceneId": 1489,
+      "location": "Citadelle Laferriere mountain terrace",
+      "cameraRoll": 29,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-438/scene-1773-prompt.txt",
+      "promptSha256": "F1EDF76D1341292251CFCF78305169416AEBFCE6CD54240CFE6C959FA3327534",
+      "promptBytes": 6463,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1774,
+      "sourceSceneId": 1490,
+      "location": "Jacmel and Bassin Bleu overlook",
+      "cameraRoll": 56,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-438/scene-1774-prompt.txt",
+      "promptSha256": "39F61284555C213FA4CE3D444D39ED4E23B297BEFD7894CBB0EA3A5817D7B212",
+      "promptBytes": 6873,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1775,
+      "sourceSceneId": 1491,
+      "location": "Ile-a-Vache overlook",
+      "cameraRoll": 89,
+      "framing": "EXTREME WIDE",
+      "promptPath": "tmp/world-195x4/batch-438/scene-1775-prompt.txt",
+      "promptSha256": "F429AF2BF7FA5F53E4C3A543CB8F73D8F78CDF1C808F380F37DE15967871E328",
+      "promptBytes": 6322,
+      "uploadComplete": false,
+      "sendClicked": false
+    }
+  ],
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "sanitization": {
+    "removed": [
+      "legacy male",
+      "weapons and targeting",
+      "mascots and animals",
+      "odd props",
+      "literal flags and official symbols"
+    ],
+    "retained": [
+      "authoritative fictional quartet",
+      "Haiti geography",
+      "deep-sea submersible couture",
+      "public-safe romance, jealousy, and protection"
+    ],
+    "notes": "No retry or reopening of closed Belgium scenes 1768-1771."
+  },
+  "cameraRollMethod": "SHA-256 first uint32 over batch438-haiti-scene<id>-camera-roll, modulo 100 plus 1; stored rolls are authoritative.",
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 7,
+    "due": false
+  },
+  "xBacklog": {
+    "eligibleUnpublishedSceneIds": [
+      1753
+    ],
+    "pairReady": false
+  },
+  "preparedAtUtc": "2026-08-27T16:55:30.248Z"
+}

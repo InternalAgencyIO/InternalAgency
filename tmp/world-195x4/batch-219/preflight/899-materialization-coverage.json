@@ -1,0 +1,301 @@
+{
+  "schema": "world-195x4-materialization-coverage-v2",
+  "batch": 219,
+  "country": "El Salvador",
+  "sceneNumber": 899,
+  "status": "passed-lossless",
+  "requiredCoveragePercent": 100,
+  "achievedCoveragePercent": 100,
+  "evidence": {
+    "canonical identity and relative height geometry": {
+      "status": "present",
+      "section": "CAST AND GEOMETRY",
+      "identityReferenceCount": 3
+    },
+    "country and exact recognizable location": {
+      "status": "present",
+      "section": "COUNTRY, LOCATION AND MISSION",
+      "location": "a broad empty private temporary arrival deck above El Tunco's recognizable Pacific shoreline and sea-stack silhouette at vivid sunset, safely separated from surf, rocks, roads and visitors"
+    },
+    "rotated aircrew roles and harmless completed mission": {
+      "status": "present",
+      "section": "AIRCREW ROLES",
+      "roles": {
+        "Radiance": "first officer",
+        "Ellie": "cabin host",
+        "Alia": "captain",
+        "AI ECE": "signal officer"
+      },
+      "missionState": "already-complete-secondary"
+    },
+    "original stored relationship pose or exact resolved pose beat": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "tableauSha256": "188721a0b8ea4525f511c74c16e68485fc23a8e43f502d3d372770d78b79cdb5"
+    },
+    "closed Radiance-Ellie-Alia triangle geometry": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "primary closed Radiance-Ellie-Alia romantic triangle"
+    },
+    "ECE reciprocal relationship connection without displacing the original trio": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "ECE reciprocal and non-displacing"
+    },
+    "four distinct bold country-derived latex-and-lace silhouettes": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "distinctSilhouetteCount": 4
+    },
+    "intentional natural midriff and navel visibility": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "specifiedVisibleNavelCount": 4
+    },
+    "all deterministic appearance rolls with triggered outcomes": {
+      "status": "present",
+      "artifact": "899-roll-audit.json",
+      "evaluatedRollCount": 356
+    },
+    "all triggered tattoo, piercing, jewelry, hair, accessory, touch, expression and pose rules": {
+      "status": "present",
+      "section": "ALL TRIGGERED DETERMINISTIC DETAILS",
+      "triggeredCount": 9,
+      "tattooCount": 1
+    },
+    "all trio-static rolls and any triggered original tableau": {
+      "status": "present",
+      "artifact": "899-roll-audit.json",
+      "evaluatedTrioRollCount": 20,
+      "triggeredTrioCount": 0
+    },
+    "PAWS presence roll, resolved action roll, growth epoch and reciprocation": {
+      "status": "present",
+      "section": "PAWS CONTRACT",
+      "presenceRoll": 29,
+      "rawActionRoll": 1,
+      "resolvedActionIndex": 1,
+      "growthEpoch": 1,
+      "effectiveTriggered": true
+    },
+    "clean-face, anatomy, hands, complete footwear and technical invariants": {
+      "status": "present",
+      "section": "COMPOSITION AND VALIDATION",
+      "cleanFace": true,
+      "hands": 8,
+      "footwear": 8,
+      "portrait": "9:16 full-length"
+    }
+  },
+  "semanticDiff": {
+    "status": "passed",
+    "positiveInstructionDeletionCount": 0,
+    "generalizedTriggeredDetailCount": 0,
+    "expectedTriggeredIds": [
+      "Radiance.sculpturalCuff",
+      "Radiance.lowerBackTattoo",
+      "Ellie.opaqueContrastEdge",
+      "Ellie.waistEncirclingSideHug",
+      "Alia.collarboneJewelryChain",
+      "Alia.dossierSealingWax",
+      "Alia.bootTuckedEquestrianBaton",
+      "AI ECE.hairVariation",
+      "AI ECE.hat"
+    ],
+    "materializedTriggeredIds": [
+      "Radiance.sculpturalCuff",
+      "Radiance.lowerBackTattoo",
+      "Ellie.opaqueContrastEdge",
+      "Ellie.waistEncirclingSideHug",
+      "Alia.collarboneJewelryChain",
+      "Alia.dossierSealingWax",
+      "Alia.bootTuckedEquestrianBaton",
+      "AI ECE.hairVariation",
+      "AI ECE.hat"
+    ],
+    "exactTriggeredSetMatch": true,
+    "originalTableauSha256": "188721a0b8ea4525f511c74c16e68485fc23a8e43f502d3d372770d78b79cdb5",
+    "finalPromptSha256": "6e4c7dbe5513131dd3cd7791af324a30ddca3e0522e00d73d9e340e998e2bb9b",
+    "blocklistSubstitutionCount": 0,
+    "blocklistSubstitutions": []
+  },
+  "transformations": {
+    "blockedCorpusSha256": "7f0ced957a48adfc4186457bb14ab4313884f82c9c903521014c4532da84e6e1",
+    "longestPhraseFirst": true,
+    "substitutions": []
+  },
+  "triggerMaterialization": [
+    {
+      "id": "Radiance.sculpturalCuff",
+      "scope": "Radiance",
+      "trait": "sculpturalCuff",
+      "seed": "899|Radiance|sculpturalCuff|mile-high-v1",
+      "firstEightHex": "dfdb180a",
+      "roll": 6,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Use one removable runway cuff, collar or harness-inspired seam accessory as fashion design only. It never restrains, locks, injures or controls a person.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 01",
+      "materializedInstruction": "Radiance wears one removable pearl sculptural runway cuff that is not connected to anything.",
+      "storedRuleSha256": "549d36b30192fe8aa24bd9f6e2de9df3dfd42883a253bb1522ebd7669f485da0",
+      "materializedInstructionSha256": "bd9b55df0d08617d864b313c5ee2457425411bdc6872d78c13a82afdfb841c51",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Radiance.lowerBackTattoo",
+      "scope": "Radiance",
+      "trait": "lowerBackTattoo",
+      "seed": "899|Radiance|lowerBackTattoo|mile-high-v1",
+      "firstEightHex": "72ff1836",
+      "roll": 2,
+      "rollScale": 100,
+      "trigger": "roll 0 through 4 inclusive",
+      "probability": "5%",
+      "triggered": true,
+      "storedRule": "Add one visible tasteful lower-back line tattoo using a thorned rose, scorpion, abstract star-facet or country-craft geometry. Keep it non-explicit, non-sacred and framed as mainstream body art.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 02",
+      "materializedInstruction": "Radiance's clearly visible lower back carries one tasteful thorned-rose and abstract star-facet line tattoo, non-sacred, non-explicit and precisely framed by the open-back garment.",
+      "storedRuleSha256": "94510cf861cb95a4735a5dd670b76582499b21f7a99df23125924361fade4b2c",
+      "materializedInstructionSha256": "1ab9b14cfa6cbc6b1009c204196cf227e9717db88d86a57bcc60c81b8c7bab9d",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Ellie.opaqueContrastEdge",
+      "scope": "Ellie",
+      "trait": "opaqueContrastEdge",
+      "seed": "899|Ellie|opaqueContrastEdge|mile-high-v1",
+      "firstEightHex": "d6399748",
+      "roll": 4,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Show a deliberately visible opaque contrast edge or integrated dancewear-style lining as part of the principal garment. It is not underwear, never transparent and never adds a redundant clothing layer.",
+      "otherwise": null,
+      "rendererSafeAlias": "Ellie appearance beat 03",
+      "materializedInstruction": "Ellie's principal cobalt crop uses one unmistakable pearl opaque contrast edge integrated into the garment.",
+      "storedRuleSha256": "3b1589f3b6ca6fc21e5d4e3d2bb51cfc85a822a942be6eedfaa942141a3188da",
+      "materializedInstructionSha256": "c46f310c7043f443ece4b691c94377bb47741ae7e4b5759db4492146172c74b9",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Ellie.waistEncirclingSideHug",
+      "scope": "Ellie",
+      "trait": "waistEncirclingSideHug",
+      "seed": "899|Ellie|waistEncirclingSideHug|mile-high-v1",
+      "firstEightHex": "fce0cac2",
+      "roll": 2,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Add a consensual waist-encircling side hug between adult partners, keeping both faces, hands and the mission objective readable. Hands stay visibly at the side waist over solid opaque clothing.",
+      "otherwise": null,
+      "rendererSafeAlias": "Ellie appearance beat 04",
+      "materializedInstruction": "Ellie gives Radiance a consensual waist-encircling side hug with both visible hands resting at the side waist over solid opaque clothing; faces, tattoo and mission remain readable.",
+      "storedRuleSha256": "bc07bd94959ddd54bad2aeaa85a55e4dd6c78fdf846e386bee268a8565fab2cb",
+      "materializedInstructionSha256": "665617292fc3a88f573fbb9e4408cce4f39bae3f8aacf7ad302ae602a14fe02b",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.collarboneJewelryChain",
+      "scope": "Alia",
+      "trait": "collarboneJewelryChain",
+      "seed": "899|Alia|collarboneJewelryChain|mile-high-v1",
+      "firstEightHex": "90d8e6f2",
+      "roll": 2,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Add one delicate secular jewelry chain following the collarbone as an original country-colored couture accent, without logos, sacred symbols or copied branded design.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 05",
+      "materializedInstruction": "Alia wears one delicate secular warm-gold chain following her collarbone without logo, sacred symbol or copied design.",
+      "storedRuleSha256": "ad1a9786dd2632e86216855a7bc51642fa81a2be0f7c222acd772305aada4a6e",
+      "materializedInstructionSha256": "217f975c2a8995e5e3aeb9fb216ce90c846d6962ab794d4b4b4a6a9a0447915c",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.dossierSealingWax",
+      "scope": "Alia",
+      "trait": "dossierSealingWax",
+      "seed": "899|Alia|dossierSealingWax|mile-high-v1",
+      "firstEightHex": "0623da8c",
+      "roll": 4,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 12 inclusive",
+      "probability": "1.3%",
+      "triggered": true,
+      "storedRule": "Use a vintage sealing kit to drip warm crimson wax deliberately onto a fictional high-stakes dossier, with protected hands, a stable surface and no contact with skin or architecture.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 06",
+      "materializedInstruction": "At a small stable protected side ledge, Alia uses a vintage sealing kit with protected fingers to place warm crimson wax only on a fictional completed dossier; no wax contacts skin or architecture.",
+      "storedRuleSha256": "e5d31113a9cd20c2011ac11c0e7edca4d3c01d2f80369fcf3fe94502f2707a13",
+      "materializedInstructionSha256": "9d4c141ac70aa99e10b98e690ddb9cbc5e496c00f9e51b4c733c0dae1acf3b9d",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.bootTuckedEquestrianBaton",
+      "scope": "Alia",
+      "trait": "bootTuckedEquestrianBaton",
+      "seed": "899|Alia|bootTuckedEquestrianBaton|mile-high-v1",
+      "firstEightHex": "06c8a9fc",
+      "roll": 12,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Tuck a slender blunt equestrian-inspired fashion baton securely into the outer side of a knee-high boot as a decorative styling accent. It stays sheathed, never points toward anyone and is never treated as a weapon or fetish implement.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 07",
+      "materializedInstruction": "One slender blunt decorative fashion wand is secured low at the outside of Alia's knee-high boot, directed toward nobody and treated only as styling.",
+      "storedRuleSha256": "252741ff95cfb66a1d1eb9d4f9bd409c9031226b2c83a59370dd8a0bde161ab9",
+      "materializedInstructionSha256": "8090b1fb7349a63f801a133152d12cdd9469f6ae46a3aeb1dd59e970344f12ca",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.hairVariation",
+      "scope": "AI ECE",
+      "trait": "hairVariation",
+      "seed": "899|AI ECE|hairVariation|mile-high-v1",
+      "firstEightHex": "a5f415d9",
+      "roll": 17,
+      "rollScale": 100,
+      "trigger": "roll 0 through 33 inclusive",
+      "probability": "34%",
+      "triggered": true,
+      "storedRule": "When triggered, create one original hairstyle or fashion-color experiment for that character while preserving the canonical face, hairline, age read and identity. Rotate cuts, curls, braids, ponytails, updos, sculptural waves, wet-look styling and controlled luminous color accents; do not clone another character's hair. The user's 34/67 wording is treated as rounded guidance, with the exact deterministic roll totaling 100%.",
+      "otherwise": "66% canonical regular hair",
+      "rendererSafeAlias": "AI ECE appearance beat 08",
+      "materializedInstruction": "ECE preserves her canonical face, chestnut-brunette identity and hairline while wearing a distinct sculptural wave ponytail.",
+      "storedRuleSha256": "b5e790dd9d811a953018e341657b3c591b13567d74c7c8dc6ff833606ad2c053",
+      "materializedInstructionSha256": "f5b83cdea2013e1e2534d90d2c10d87e89ebc9ab0768f452e82fe96647a8c760",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.hat",
+      "scope": "AI ECE",
+      "trait": "hat",
+      "seed": "899|AI ECE|hat|mile-high-v1",
+      "firstEightHex": "0b88f894",
+      "roll": 8,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Add one original role-coded sculptural runway hat or headpiece. At all other rolls, communicate the aircrew role through collar arcs, shoulder geometry, gloves, jewelry, case choreography or hair styling so hats stay rare.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 09",
+      "materializedInstruction": "ECE wears one small original role-coded runway headpiece integrated above the ponytail, removable and identity-preserving.",
+      "storedRuleSha256": "5b8885e55080ced3ae1f7563f6df1db1cdafa2239e5b80bb6c46fabc3bcd2681",
+      "materializedInstructionSha256": "83adadbee4d3fc9e53353fb4ac6691b4bae52eeb0b175a938a10eea12f125977",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    }
+  ]
+}

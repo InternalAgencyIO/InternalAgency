@@ -1,0 +1,1297 @@
+{
+  "batch": 312,
+  "country": "Fiji",
+  "status": "render-preflight-stored",
+  "sourceCommit": "f29818d219e1096fd46fdfcdf3d2745e672eb194",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch312-fiji keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextThemePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextQueueCountry": "Comoros",
+  "nextQueueBatch": 313,
+  "nextQueueScenes": [
+    1272,
+    1273,
+    1274,
+    1275
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.fiji.travel/places-to-go/lau-lomaiviti/locations/best-historical-sites-to-visit-in-levuka",
+      "usedFor": "Levuka Beach Street, waterfront, heritage town, public school, verandas, and Ovalau mountain setting"
+    },
+    {
+      "url": "https://www.fiji.travel/places-to-go/outer-islandslomaiviti-lau/locations/levuka-fiji-s-first-capital",
+      "usedFor": "Levuka waterfront, weatherboard buildings, old trading stores, bay, and first-capital context"
+    },
+    {
+      "url": "https://www.fiji.travel/things-to-do/wildlife/fijis-national-parks-and-marine-sanctuaries",
+      "usedFor": "Colo-i-Suva rainforest trails, freshwater pools, birdlife, and conservation context"
+    },
+    {
+      "url": "https://www.fiji.travel/things-to-do/hikes-walks/the-best-walks-and-hikes-in-fiji",
+      "usedFor": "Colo-i-Suva trails, swimming holes, butterflies, lizards, and forest setting"
+    },
+    {
+      "url": "https://www.fiji.travel/things-to-do/family-adventures/best-public-beaches-on-viti-levu",
+      "usedFor": "Natadola white sand, turquoise water, reef, tide pools, and beach setting"
+    },
+    {
+      "url": "https://www.fiji.travel/things-to-do/surfing/get-ready-for-fiji-surfing",
+      "usedFor": "Natadola beginner surf and Pacific-wave context"
+    },
+    {
+      "url": "https://www.fiji.travel/things-to-do/thrilling/off-the-beaten-track-islands-fiji",
+      "usedFor": "Savusavu natural harbour, hot springs, markets, makers, pearl craft, cacao, rainforest, and sailing context"
+    },
+    {
+      "url": "https://www.fiji.travel/things-to-know/getting-around/water",
+      "usedFor": "Fiji harbour, sail, inter-island ferry, and island-route context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch312-fiji-male-model-scene",
+    "fullHash": 4090881457,
+    "roll": 57,
+    "selectedScenePosition": 2,
+    "selectedScene": 1269,
+    "maleEmotion": {
+      "key": "batch312-fiji-scene2-male-emotion",
+      "roll": 55,
+      "result": "aching romantic longing"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Fiji's flag includes the Union Jack and official national coat of arms, so neither is copied onto clothing. Large researched secular landscape, craft, harbour, reef, rainforest, beach, sail, and heritage-town fields replace them.",
+    "palette": "deep ocean blue, reef blue, pearl white, coral red, leaf green, hibiscus magenta, turmeric gold, masi black, and volcanic charcoal",
+    "minimumCoverage": "Every scene places multiple large complete secular Fiji motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "The four scenes foreground Savusavu harbour and makers, Colo-i-Suva conservation, Natadola beach and reef, and Levuka waterfront heritage.",
+    "prohibitions": "No literal flag, Union Jack, coat of arms, official emblem, sacred symbol, copied ceremonial dress, copied service or operative uniform, badge, weapon threat, alcohol consumption, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch312-fiji-x-heart",
+      "roll": 46,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch312-fiji-x-internalagency",
+      "roll": 88,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch312-fiji-x-worldxxxseries",
+      "roll": 39,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Fiji images plus one accepted secondary-country image when at least two Fiji images pass",
+    "captionIfEligible": "Fiji red heart Comoros #Fiji",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1268, 1270, and 1271 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1269 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch312-fiji-male-model-scene",
+        57
+      ],
+      [
+        "batch312-fiji-scene2-male-emotion",
+        55
+      ],
+      [
+        "batch312-fiji-scene1268-weather",
+        83
+      ],
+      [
+        "batch312-fiji-scene1268-paws",
+        20
+      ],
+      [
+        "batch312-fiji-scene1268-poleDanceTheme",
+        39
+      ],
+      [
+        "batch312-fiji-scene1268-rainbowOnly",
+        47
+      ],
+      [
+        "batch312-fiji-scene1268-rainbowHosiery",
+        22
+      ],
+      [
+        "batch312-fiji-scene1268-romanceBeat",
+        42
+      ],
+      [
+        "batch312-fiji-scene1268-compoundLoveBeat",
+        32
+      ],
+      [
+        "batch312-fiji-scene1268-Radiance-emotion",
+        24
+      ],
+      [
+        "batch312-fiji-scene1268-Radiance-visibleMidriff",
+        30
+      ],
+      [
+        "batch312-fiji-scene1268-Radiance-straplessDress",
+        85
+      ],
+      [
+        "batch312-fiji-scene1268-Radiance-fullyOpenBack",
+        10
+      ],
+      [
+        "batch312-fiji-scene1268-Ellie-emotion",
+        50
+      ],
+      [
+        "batch312-fiji-scene1268-Ellie-visibleMidriff",
+        28
+      ],
+      [
+        "batch312-fiji-scene1268-Ellie-straplessDress",
+        59
+      ],
+      [
+        "batch312-fiji-scene1268-Ellie-fullyOpenBack",
+        80
+      ],
+      [
+        "batch312-fiji-scene1268-Alia-emotion",
+        2
+      ],
+      [
+        "batch312-fiji-scene1268-Alia-visibleMidriff",
+        68
+      ],
+      [
+        "batch312-fiji-scene1268-Alia-straplessDress",
+        95
+      ],
+      [
+        "batch312-fiji-scene1268-Alia-fullyOpenBack",
+        44
+      ],
+      [
+        "batch312-fiji-scene1268-AI ECE-emotion",
+        60
+      ],
+      [
+        "batch312-fiji-scene1268-AI ECE-visibleMidriff",
+        90
+      ],
+      [
+        "batch312-fiji-scene1268-AI ECE-straplessDress",
+        69
+      ],
+      [
+        "batch312-fiji-scene1268-AI ECE-fullyOpenBack",
+        50
+      ],
+      [
+        "batch312-fiji-scene1269-weather",
+        40
+      ],
+      [
+        "batch312-fiji-scene1269-paws",
+        61
+      ],
+      [
+        "batch312-fiji-scene1269-poleDanceTheme",
+        94
+      ],
+      [
+        "batch312-fiji-scene1269-rainbowOnly",
+        40
+      ],
+      [
+        "batch312-fiji-scene1269-rainbowHosiery",
+        95
+      ],
+      [
+        "batch312-fiji-scene1269-romanceBeat",
+        53
+      ],
+      [
+        "batch312-fiji-scene1269-compoundLoveBeat",
+        57
+      ],
+      [
+        "batch312-fiji-scene1269-Radiance-emotion",
+        41
+      ],
+      [
+        "batch312-fiji-scene1269-Radiance-visibleMidriff",
+        97
+      ],
+      [
+        "batch312-fiji-scene1269-Radiance-straplessDress",
+        34
+      ],
+      [
+        "batch312-fiji-scene1269-Radiance-fullyOpenBack",
+        35
+      ],
+      [
+        "batch312-fiji-scene1269-Ellie-emotion",
+        21
+      ],
+      [
+        "batch312-fiji-scene1269-Ellie-visibleMidriff",
+        93
+      ],
+      [
+        "batch312-fiji-scene1269-Ellie-straplessDress",
+        22
+      ],
+      [
+        "batch312-fiji-scene1269-Ellie-fullyOpenBack",
+        3
+      ],
+      [
+        "batch312-fiji-scene1269-Alia-emotion",
+        3
+      ],
+      [
+        "batch312-fiji-scene1269-Alia-visibleMidriff",
+        63
+      ],
+      [
+        "batch312-fiji-scene1269-Alia-straplessDress",
+        44
+      ],
+      [
+        "batch312-fiji-scene1269-Alia-fullyOpenBack",
+        73
+      ],
+      [
+        "batch312-fiji-scene1269-AI ECE-emotion",
+        25
+      ],
+      [
+        "batch312-fiji-scene1269-AI ECE-visibleMidriff",
+        45
+      ],
+      [
+        "batch312-fiji-scene1269-AI ECE-straplessDress",
+        34
+      ],
+      [
+        "batch312-fiji-scene1269-AI ECE-fullyOpenBack",
+        31
+      ],
+      [
+        "batch312-fiji-scene1270-weather",
+        86
+      ],
+      [
+        "batch312-fiji-scene1270-paws",
+        59
+      ],
+      [
+        "batch312-fiji-scene1270-poleDanceTheme",
+        92
+      ],
+      [
+        "batch312-fiji-scene1270-rainbowOnly",
+        18
+      ],
+      [
+        "batch312-fiji-scene1270-rainbowHosiery",
+        41
+      ],
+      [
+        "batch312-fiji-scene1270-romanceBeat",
+        47
+      ],
+      [
+        "batch312-fiji-scene1270-compoundLoveBeat",
+        31
+      ],
+      [
+        "batch312-fiji-scene1270-Radiance-emotion",
+        23
+      ],
+      [
+        "batch312-fiji-scene1270-Radiance-visibleMidriff",
+        43
+      ],
+      [
+        "batch312-fiji-scene1270-Radiance-straplessDress",
+        68
+      ],
+      [
+        "batch312-fiji-scene1270-Radiance-fullyOpenBack",
+        33
+      ],
+      [
+        "batch312-fiji-scene1270-Ellie-emotion",
+        95
+      ],
+      [
+        "batch312-fiji-scene1270-Ellie-visibleMidriff",
+        87
+      ],
+      [
+        "batch312-fiji-scene1270-Ellie-straplessDress",
+        64
+      ],
+      [
+        "batch312-fiji-scene1270-Ellie-fullyOpenBack",
+        81
+      ],
+      [
+        "batch312-fiji-scene1270-Alia-emotion",
+        77
+      ],
+      [
+        "batch312-fiji-scene1270-Alia-visibleMidriff",
+        13
+      ],
+      [
+        "batch312-fiji-scene1270-Alia-straplessDress",
+        66
+      ],
+      [
+        "batch312-fiji-scene1270-Alia-fullyOpenBack",
+        99
+      ],
+      [
+        "batch312-fiji-scene1270-AI ECE-emotion",
+        47
+      ],
+      [
+        "batch312-fiji-scene1270-AI ECE-visibleMidriff",
+        35
+      ],
+      [
+        "batch312-fiji-scene1270-AI ECE-straplessDress",
+        40
+      ],
+      [
+        "batch312-fiji-scene1270-AI ECE-fullyOpenBack",
+        77
+      ],
+      [
+        "batch312-fiji-scene1271-weather",
+        1
+      ],
+      [
+        "batch312-fiji-scene1271-paws",
+        54
+      ],
+      [
+        "batch312-fiji-scene1271-poleDanceTheme",
+        89
+      ],
+      [
+        "batch312-fiji-scene1271-rainbowOnly",
+        17
+      ],
+      [
+        "batch312-fiji-scene1271-rainbowHosiery",
+        88
+      ],
+      [
+        "batch312-fiji-scene1271-romanceBeat",
+        4
+      ],
+      [
+        "batch312-fiji-scene1271-compoundLoveBeat",
+        26
+      ],
+      [
+        "batch312-fiji-scene1271-Radiance-emotion",
+        42
+      ],
+      [
+        "batch312-fiji-scene1271-Radiance-visibleMidriff",
+        96
+      ],
+      [
+        "batch312-fiji-scene1271-Radiance-straplessDress",
+        55
+      ],
+      [
+        "batch312-fiji-scene1271-Radiance-fullyOpenBack",
+        80
+      ],
+      [
+        "batch312-fiji-scene1271-Ellie-emotion",
+        0
+      ],
+      [
+        "batch312-fiji-scene1271-Ellie-visibleMidriff",
+        86
+      ],
+      [
+        "batch312-fiji-scene1271-Ellie-straplessDress",
+        5
+      ],
+      [
+        "batch312-fiji-scene1271-Ellie-fullyOpenBack",
+        6
+      ],
+      [
+        "batch312-fiji-scene1271-Alia-emotion",
+        24
+      ],
+      [
+        "batch312-fiji-scene1271-Alia-visibleMidriff",
+        74
+      ],
+      [
+        "batch312-fiji-scene1271-Alia-straplessDress",
+        93
+      ],
+      [
+        "batch312-fiji-scene1271-Alia-fullyOpenBack",
+        82
+      ],
+      [
+        "batch312-fiji-scene1271-AI ECE-emotion",
+        86
+      ],
+      [
+        "batch312-fiji-scene1271-AI ECE-visibleMidriff",
+        80
+      ],
+      [
+        "batch312-fiji-scene1271-AI ECE-straplessDress",
+        91
+      ],
+      [
+        "batch312-fiji-scene1271-AI ECE-fullyOpenBack",
+        40
+      ],
+      [
+        "batch312-fiji-x-heart",
+        46
+      ],
+      [
+        "batch312-fiji-x-internalagency",
+        88
+      ],
+      [
+        "batch312-fiji-x-worldxxxseries",
+        39
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch312-fiji-scene1268-rainbowHosieryWearer",
+        58
+      ],
+      [
+        "batch312-fiji-scene1268-rainbowHosieryPaletteMode",
+        14
+      ],
+      [
+        "batch312-fiji-scene1269-rainbowHosieryWearer",
+        95
+      ],
+      [
+        "batch312-fiji-scene1269-rainbowHosieryPaletteMode",
+        53
+      ],
+      [
+        "batch312-fiji-scene1270-rainbowHosieryWearer",
+        49
+      ],
+      [
+        "batch312-fiji-scene1270-rainbowHosieryPaletteMode",
+        35
+      ],
+      [
+        "batch312-fiji-scene1271-rainbowHosieryWearer",
+        76
+      ],
+      [
+        "batch312-fiji-scene1271-rainbowHosieryPaletteMode",
+        64
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "59030DF1890173E745D628EAF44913D3DB277F00C7E10AE0AB96ACE761E6471B",
+    "hosierySelectorPairsSha256": "8FBFEBFBE5F738BCC2A0F3502C537E7257BC0209834DA46A45CF146ACE839A17"
+  },
+  "scenePlans": {
+    "1268": {
+      "scene": 1268,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry covered harbour overlook in Savusavu on Vanua Levu during a tropical sunshower with sparkling droplets, with the complete natural harbour curve, anchored sailboats, green volcanic hills, distant harmless geothermal steam, waterfront market roofs, and maker studios clearly visible",
+      "motifs": [
+        "large complete Savusavu-harbour wave, white sail, geothermal-steam spiral, pearl-shell, cacao-pod, woven-pandanus, maker-basket, and hibiscus compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Fiji landscape-and-craft composition rather than tiny trim"
+      ],
+      "culture": "Treat hot-spring steam only as a distant geological signal with no bathing. Use the harbour, sails, volcanic hills, makers, pandanus weaving, pearl shell, cacao, baskets, and hibiscus as respectful secular Fiji references. Fiji's flag contains the Union Jack and official coat of arms, so neither appears on clothing. No literal flag, official emblem, sacred symbol, copied ceremonial dress, copied operative uniform, badge, readable text, brand, alcohol consumption, or political insignia.",
+      "weather": {
+        "key": "batch312-fiji-scene1268-weather",
+        "roll": 83,
+        "result": "sunshower with sparkling droplets"
+      },
+      "paws": {
+        "key": "batch312-fiji-scene1268-paws",
+        "roll": 20,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch312-fiji-scene1268-poleDanceTheme",
+        "roll": 39,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch312-fiji-scene1268-rainbowOnly",
+        "roll": 47,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch312-fiji-scene1268-rainbowHosiery",
+        "roll": 22,
+        "active": true,
+        "wearer": {
+          "key": "batch312-fiji-scene1268-rainbowHosieryWearer",
+          "roll": 58,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch312-fiji-scene1268-rainbowHosieryPaletteMode",
+          "roll": 14,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch312-fiji-scene1268-romanceBeat",
+        "roll": 42,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch312-fiji-scene1268-compoundLoveBeat",
+        "roll": 32,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch312-fiji-scene1268-Radiance-emotion",
+            "roll": 24,
+            "result": "calm contentment",
+            "performance": "calm contentment shown by a quiet protective smile toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1268-Radiance-visibleMidriff",
+            "roll": 30,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1268-Radiance-straplessDress",
+            "roll": 85,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1268-Radiance-fullyOpenBack",
+            "roll": 10,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch312-fiji-scene1268-Ellie-emotion",
+            "roll": 50,
+            "result": "startled surprise",
+            "performance": "startled surprise shown by lifted brows while she catches the moving embrace"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1268-Ellie-visibleMidriff",
+            "roll": 28,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1268-Ellie-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1268-Ellie-fullyOpenBack",
+            "roll": 80,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch312-fiji-scene1268-Alia-emotion",
+            "roll": 2,
+            "result": "tender affection",
+            "performance": "tender affection shown by softened eyes during the linked-hand pull"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1268-Alia-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1268-Alia-straplessDress",
+            "roll": 95,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1268-Alia-fullyOpenBack",
+            "roll": 44,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch312-fiji-scene1268-AI ECE-emotion",
+            "roll": 60,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a tight controlled mouth that softens only toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1268-AI ECE-visibleMidriff",
+            "roll": 90,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1268-AI ECE-straplessDress",
+            "roll": 69,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1268-AI ECE-fullyOpenBack",
+            "roll": 50,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Radiance and ECE are the unmistakable affectionate center just after ECE rises from a low beacon check. Radiance's left hand visibly supports ECE's forearm while ECE's right hand settles at Radiance's waist in a moving side hug. Alia catches Radiance's free right hand with her left and gently pulls in the opposite direction while keeping the inert prop isolated in her far right hand. Ellie completes a loose behind-hug geometry with her left hand at Radiance's far shoulder and right hand at Radiance's far waist, both arms fully visible from the side. ECE leans close enough to give Ellie a brief public-safe forehead greeting while keeping her jealous gaze emotionally centered on Radiance.",
+      "composition": "Place Alia far left with the inspection paddle against empty harbour water, Radiance left-center, ECE right-center, and Ellie offset behind-right with both forearms outside Radiance's silhouette. Keep PAWS high on ECE's far shoulder, far from Alia. Use sparkling rain gaps behind every arm and show all complete heels and all two rolled navels. Turn Radiance three-quarter-back with hair fully forward so her complete rolled open back and face are visible.",
+      "emotionNuance": {
+        "Radiance": "calm contentment shown by a quiet protective smile toward ECE",
+        "Ellie": "startled surprise shown by lifted brows while she catches the moving embrace",
+        "Alia": "tender affection shown by softened eyes during the linked-hand pull",
+        "AI ECE": "visible jealousy shown by a tight controlled mouth that softens only toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "a short-sleeve pearl-white cropped covert-fashion shell exposing her ordinary waist and belly button, with secure opaque side structure and a completely open back from shoulder blades to the separate waistline, a reef-blue folded mini skort carrying a large complete Savusavu-harbour wave and white-sail composition, and coral-red pumps",
+        "Ellie": "a lagoon-blue square-neck cropped covert-fashion vest exposing her ordinary waist and belly button with a high closed back, a separate turmeric-gold tulip mini skirt carrying a large complete geothermal-steam, pearl-shell, and cacao-pod composition, and pearl-white slingback heels",
+        "Alia": "a coral-red one-shoulder covert-fashion mini dress with covered waist and high closed back, carrying a large complete woven-pandanus and maker-basket composition, and deep-ocean platform heels",
+        "AI ECE": "a pearl-white asymmetric short-sleeve strategist mini coat-dress with covered waist and high closed back, carrying a large complete hibiscus, volcanic-hill, and harbour-sail composition, exactly one pair of opaque knee-high stockings in a harmonious Fiji-palette rainbow-like gradient through deep ocean blue, reef blue, pearl white, coral red, leaf green, hibiscus magenta, and turmeric gold, and reef-blue pumps"
+      },
+      "propPlan": "Alia alone presents the photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop on a thin flat opaque charcoal inspection paddle with no walls, lid, enclosure, or transparent material. The prop rests entirely on top of the paddle in clean side profile; no hand touches its grip, trigger, or trigger guard. The handler's open support hand stays completely underneath the solid paddle, physically separated from the prop. Every support finger is straight, separated, fully visible below the paddle, and nowhere near the complete centered empty trigger guard. The magazine is absent and the empty magazine well is visible. The horizontal muzzle points left across clearly empty Savusavu harbour water toward one unoccupied route buoy, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration, not a firing grip.",
+      "handInventory": [
+        "Alia right open hand supports the opaque inspection paddle and inert prop from beneath; Alia left hand links visibly with Radiance's right hand",
+        "Radiance right hand links visibly with Alia's left hand; Radiance left hand visibly supports ECE's near forearm",
+        "ECE left hand is open under and clearly controls the separate holographic route map; ECE right hand rests visibly at Radiance's near waist",
+        "Ellie left hand rests visibly on Radiance's far shoulder; Ellie right hand rests visibly at Radiance's far waist"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten, PAWS, perches securely on ECE's far shoulder with all four paws settled on opaque fabric and harmlessly bats a loose reef-blue route ribbon. PAWS remains far from Alia, the inspection paddle, harbour edge, and wet surfaces; no adult hand is reassigned to the kitten.",
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only, not wardrobe, pose, prop, or background. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered harbour overlook in Savusavu on Vanua Levu during a tropical sunshower with sparkling droplets, with the complete natural harbour curve, anchored sailboats, green volcanic hills, distant harmless geothermal steam, waterfront market roofs, and maker studios clearly visible. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly at least 28 years old. Preserve the anchored faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult, Ellie the dark-haired adult rival, Alia the Black adult woman who alone wears a high sculptural braided ponytail with fine face-framing braids, and AI ECE the brunette adult strategist. Preserve the male's Scene 1136 face and trimmed beard when present. No cloning, replacement, merging, or age shift. Profession theme: cinematic covert-agent crew couture, treated only as original public-safe fictional fashion. No copied uniform, badge, police impersonation, arrest, raid, assassination, threat, injury, or combat. Stored scene rolls: weather 83=sunshower with sparkling droplets; PAWS 20=active; pole theme 39=inactive; rainbow-only 47=inactive; rainbow hosiery 22=active; hosiery wearer selector 58=AI ECE; hosiery palette selector 14=country-palette rainbow-like gradient; romance 42; compound love 32. Exact individual wardrobe rolls: Radiance: midriff 30=visible, strapless 85=inactive, open back 10=active; Ellie: midriff 28=visible, strapless 59=inactive, open back 80=inactive; Alia: midriff 68=covered, strapless 95=inactive, open back 44=inactive; AI ECE: midriff 90=covered, strapless 69=inactive, open back 50=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact rolled outfits: Radiance: a short-sleeve pearl-white cropped covert-fashion shell exposing her ordinary waist and belly button, with secure opaque side structure and a completely open back from shoulder blades to the separate waistline, a reef-blue folded mini skort carrying a large complete Savusavu-harbour wave and white-sail composition, and coral-red pumps; Ellie: a lagoon-blue square-neck cropped covert-fashion vest exposing her ordinary waist and belly button with a high closed back, a separate turmeric-gold tulip mini skirt carrying a large complete geothermal-steam, pearl-shell, and cacao-pod composition, and pearl-white slingback heels; Alia: a coral-red one-shoulder covert-fashion mini dress with covered waist and high closed back, carrying a large complete woven-pandanus and maker-basket composition, and deep-ocean platform heels; AI ECE: a pearl-white asymmetric short-sleeve strategist mini coat-dress with covered waist and high closed back, carrying a large complete hibiscus, volcanic-hill, and harbour-sail composition, exactly one pair of opaque knee-high stockings in a harmonious Fiji-palette rainbow-like gradient through deep ocean blue, reef blue, pearl white, coral red, leaf green, hibiscus magenta, and turmeric gold, and reef-blue pumps. Materialize every covered or visible ordinary waist and belly button, every fully strapless cut, and every complete open back exactly as written. Large complete secular Fiji motifs must dominate at least two outfits in this image: large complete Savusavu-harbour wave, white sail, geothermal-steam spiral, pearl-shell, cacao-pod, woven-pandanus, maker-basket, and hibiscus compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Fiji landscape-and-craft composition rather than tiny trim. Treat hot-spring steam only as a distant geological signal with no bathing. Use the harbour, sails, volcanic hills, makers, pandanus weaving, pearl shell, cacao, baskets, and hibiscus as respectful secular Fiji references. Fiji's flag contains the Union Jack and official coat of arms, so neither appears on clothing. No literal flag, official emblem, sacred symbol, copied ceremonial dress, copied operative uniform, badge, readable text, brand, alcohol consumption, or political insignia. Distinct rolled emotional performances: Radiance: roll 24, calm contentment, performed as calm contentment shown by a quiet protective smile toward ECE; Ellie: roll 50, startled surprise, performed as startled surprise shown by lifted brows while she catches the moving embrace; Alia: roll 2, tender affection, performed as tender affection shown by softened eyes during the linked-hand pull; AI ECE: roll 60, visible jealousy, performed as visible jealousy shown by a tight controlled mouth that softens only toward Radiance. Selected dynamic romance roll 42: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Selected compound love roll 32: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Translate both selected beats through this exact public-safe consensual choreography: Radiance and ECE are the unmistakable affectionate center just after ECE rises from a low beacon check. Radiance's left hand visibly supports ECE's forearm while ECE's right hand settles at Radiance's waist in a moving side hug. Alia catches Radiance's free right hand with her left and gently pulls in the opposite direction while keeping the inert prop isolated in her far right hand. Ellie completes a loose behind-hug geometry with her left hand at Radiance's far shoulder and right hand at Radiance's far waist, both arms fully visible from the side. ECE leans close enough to give Ellie a brief public-safe forehead greeting while keeping her jealous gaze emotionally centered on Radiance. Place Alia far left with the inspection paddle against empty harbour water, Radiance left-center, ECE right-center, and Ellie offset behind-right with both forearms outside Radiance's silhouette. Keep PAWS high on ECE's far shoulder, far from Alia. Use sparkling rain gaps behind every arm and show all complete heels and all two rolled navels. Turn Radiance three-quarter-back with hair fully forward so her complete rolled open back and face are visible. Use exactly this owner-by-owner hand inventory and no other hands: Alia right open hand supports the opaque inspection paddle and inert prop from beneath; Alia left hand links visibly with Radiance's right hand; Radiance right hand links visibly with Alia's left hand; Radiance left hand visibly supports ECE's near forearm; ECE left hand is open under and clearly controls the separate holographic route map; ECE right hand rests visibly at Radiance's near waist; Ellie left hand rests visibly on Radiance's far shoulder; Ellie right hand rests visibly at Radiance's far waist. Alia alone presents the photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop on a thin flat opaque charcoal inspection paddle with no walls, lid, enclosure, or transparent material. The prop rests entirely on top of the paddle in clean side profile; no hand touches its grip, trigger, or trigger guard. The handler's open support hand stays completely underneath the solid paddle, physically separated from the prop. Every support finger is straight, separated, fully visible below the paddle, and nowhere near the complete centered empty trigger guard. The magazine is absent and the empty magazine well is visible. The horizontal muzzle points left across clearly empty Savusavu harbour water toward one unoccupied route buoy, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration, not a firing grip. Rainbow-hosiery roll 22 is active. Wearer selector 58 selects exactly AI ECE. Palette selector 14 selects the specified Fiji-palette rainbow-like gradient. Exactly ECE wears the opaque gradient knee-high stockings; nobody else wears stockings or knee socks. Radiance and ECE are the clear affectionate center. Alia alone handles the inert prop while ECE controls the separate holographic map. One tiny collarless golden kitten, PAWS, perches securely on ECE's far shoulder with all four paws settled on opaque fabric and harmlessly bats a loose reef-blue route ribbon. PAWS remains far from Alia, the inspection paddle, harbour edge, and wet surfaces; no adult hand is reassigned to the kitten. Pole-theme roll is inactive. No pole. Rainbow-only roll 47 is inactive. Do not convert the wardrobe to rainbow-only styling. Materialize weather exactly as sunshower with sparkling droplets, with stable dry nonslip footing and readable anatomy. Exactly four adults, eight arms, and eight hands, two per woman. Every arm remains fully visible continuously from its owner's shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. No arm or hand passes behind a torso. Keep palms and finger clusters separated from garment edges, hair, prop, kitten, paddle, map, ribbon, and other hands except for listed contacts. Use an asymmetric moving composition with clean silhouette gaps, not a static lineup. Full-length framing contains every face, elbow, wrist, hand, leg, foot, heel, boot, plinth, paddle, map, ribbon, and kitten when present. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Its complete trigger guard is visibly empty and physically separated from every hand by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, display case, transparent enclosure, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal flag, Union Jack, coat of arms, official seal, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1269": {
+      "scene": 1269,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry glass-roofed forest route pavilion at Colo-i-Suva Forest Park during a heavy rain curtain outside, with dense rainforest, a complete timber footbridge, freshwater creek, upper and lower pool ripples, giant ferns, orchids, butterflies, and native bird silhouettes clearly visible",
+      "motifs": [
+        "large complete Colo-i-Suva fern, creek-ribbon, pool-ripple, timber-footbridge, orchid, butterfly, parrot-finch, and sago-palm compositions across all four women's outfits",
+        "at least two separate outfits each carry a complete full-width secular Fiji rainforest-and-wildlife composition"
+      ],
+      "culture": "Keep every pool unoccupied and all cast on the dry nonslip pavilion. Use rainforest, creek, bridge, orchids, butterflies, birdlife, and sago palms as respectful secular conservation references. Fiji's flag contains the Union Jack and official coat of arms, so neither appears on clothing. No literal flag, official emblem, sacred symbol, copied ceremonial dress, copied operative uniform, badge, readable text, brand, alcohol consumption, or political insignia.",
+      "weather": {
+        "key": "batch312-fiji-scene1269-weather",
+        "roll": 40,
+        "result": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch312-fiji-scene1269-paws",
+        "roll": 61,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch312-fiji-scene1269-poleDanceTheme",
+        "roll": 94,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch312-fiji-scene1269-rainbowOnly",
+        "roll": 40,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch312-fiji-scene1269-rainbowHosiery",
+        "roll": 95,
+        "active": false,
+        "wearer": {
+          "key": "batch312-fiji-scene1269-rainbowHosieryWearer",
+          "roll": 95,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch312-fiji-scene1269-rainbowHosieryPaletteMode",
+          "roll": 53,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch312-fiji-scene1269-romanceBeat",
+        "roll": 53,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch312-fiji-scene1269-compoundLoveBeat",
+        "roll": 57,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch312-fiji-scene1269-Radiance-emotion",
+            "roll": 41,
+            "result": "determination",
+            "performance": "determination shown by level brows while calming the adult relationship tension"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1269-Radiance-visibleMidriff",
+            "roll": 97,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1269-Radiance-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1269-Radiance-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch312-fiji-scene1269-Ellie-emotion",
+            "roll": 21,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by a bright sideways smile during the ribbon rivalry"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1269-Ellie-visibleMidriff",
+            "roll": 93,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1269-Ellie-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1269-Ellie-fullyOpenBack",
+            "roll": 3,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch312-fiji-scene1269-Alia-emotion",
+            "roll": 3,
+            "result": "tender affection",
+            "performance": "tender affection shown by soft eye contact toward Radiance while accepting the male's waist touch"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1269-Alia-visibleMidriff",
+            "roll": 63,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1269-Alia-straplessDress",
+            "roll": 44,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1269-Alia-fullyOpenBack",
+            "roll": 73,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch312-fiji-scene1269-AI ECE-emotion",
+            "roll": 25,
+            "result": "calm contentment",
+            "performance": "calm contentment shown by composed route-leader focus toward her husband"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1269-AI ECE-visibleMidriff",
+            "roll": 45,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1269-AI ECE-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1269-AI ECE-fullyOpenBack",
+            "roll": 31,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Use a shallow five-adult arc. The married male rests his right hand on ECE's shoulder and his left hand at Alia's waist. Alia openly accepts the consensual adult infidelity beat with her right hand on his forearm while her left hand hugs Radiance's waist. Radiance cradles Alia's cheek with her left hand and openly seeks the male with her right hand on his upper arm. Ellie keeps one hand on Radiance's far shoulder and holds the loose signal ribbon in her other open hand, leaning toward Radiance for a quick public-safe cheek greeting. ECE remains inches from the group and directs her calm gaze to her husband; his strongest sustained eye line returns unmistakably to ECE. This integrates the selected ribbon pull, two calming hands, face cradle, waist hug, cheek greeting, and linked emotional tension without hiding or reusing a hand.",
+      "composition": "Place ECE far left with the inspection paddle isolated against empty creek water, male left-center, Alia center, Radiance right-center, and Ellie far right. Keep five rain-bright silhouette lanes and every forearm outside neighboring torsos. Turn Ellie three-quarter-back with hair swept completely forward so the entire rolled open back and complete face are visible. Show both rolled navels and all complete footwear.",
+      "emotionNuance": {
+        "Radiance": "determination shown by level brows while calming the adult relationship tension",
+        "Ellie": "playful mischief shown by a bright sideways smile during the ribbon rivalry",
+        "Alia": "tender affection shown by soft eye contact toward Radiance while accepting the male's waist touch",
+        "AI ECE": "calm contentment shown by composed route-leader focus toward her husband",
+        "Male": "aching romantic longing shown by softened brows while his head and pupils remain most strongly fixed on his wife ECE"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless pearl-white covert-fashion mini dress with completely bare shoulders, covered waist and opaque enclosed back, carrying a large complete Colo-i-Suva fern and creek-ribbon composition, with leaf-green pumps",
+        "Ellie": "a fully strapless lagoon-blue covert-fashion mini dress with completely bare shoulders, covered waist, secure opaque side structure, and a completely open back from shoulder blades to the secure waistline, carrying a large complete pool-ripple and timber-footbridge composition, with coral-red heeled boots",
+        "Alia": "a short-sleeve turmeric-gold tailored covert-fashion mini romper with covered waist and high closed back, carrying a large complete orchid, butterfly, and parrot-finch composition, with deep-ocean platform heels",
+        "AI ECE": "a fully strapless pearl-white cropped strategist bodice exposing her ordinary waist and belly button, with completely bare shoulders and opaque enclosed back, a reef-blue radial mini skort carrying a large complete sago-palm, rain, and freshwater-pool composition, and coral-red slingbacks",
+        "Male": "the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted leaf-green short-sleeve polo with a restrained lagoon-blue fern band, fitted black jeans, and practical black boots"
+      },
+      "propPlan": "AI ECE alone presents the photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop on a thin flat opaque charcoal inspection paddle with no walls, lid, enclosure, or transparent material. The prop rests entirely on top of the paddle in clean side profile; no hand touches its grip, trigger, or trigger guard. The handler's open support hand stays completely underneath the solid paddle, physically separated from the prop. Every support finger is straight, separated, fully visible below the paddle, and nowhere near the complete centered empty trigger guard. The magazine is absent and the empty magazine well is visible. The horizontal muzzle points left across clearly empty freshwater creek toward one unoccupied route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration, not a firing grip.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map",
+        "the male right hand rests visibly on ECE's near shoulder; the male left hand rests visibly at Alia's near waist",
+        "Alia right hand rests visibly on the male's near forearm; Alia left hand rests visibly at Radiance's near waist",
+        "Radiance left hand cups Alia's near cheek; Radiance right hand rests visibly on the male's near upper arm",
+        "Ellie left hand rests visibly on Radiance's far shoulder; Ellie right open hand holds one loose signal ribbon clear of every body"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch312-fiji-scene2-male-emotion",
+          "roll": 55,
+          "result": "aching romantic longing",
+          "performance": "aching romantic longing shown by softened brows while his head and pupils remain most strongly fixed on his wife ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed consensual public adult infidelity drama with Alia and pursuing Radiance; at least two clear male contacts; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the established adult male. References control identity only, not wardrobe, pose, prop, or background. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry glass-roofed forest route pavilion at Colo-i-Suva Forest Park during a heavy rain curtain outside, with dense rainforest, a complete timber footbridge, freshwater creek, upper and lower pool ripples, giant ferns, orchids, butterflies, and native bird silhouettes clearly visible. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male. Add him without replacing any woman. Every person is a fictional adult visibly at least 28 years old. Preserve the anchored faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult, Ellie the dark-haired adult rival, Alia the Black adult woman who alone wears a high sculptural braided ponytail with fine face-framing braids, and AI ECE the brunette adult strategist. Preserve the male's Scene 1136 face and trimmed beard when present. No cloning, replacement, merging, or age shift. Profession theme: cinematic covert-agent crew couture, treated only as original public-safe fictional fashion. No copied uniform, badge, police impersonation, arrest, raid, assassination, threat, injury, or combat. Stored scene rolls: weather 40=heavy rain curtain; PAWS 61=inactive; pole theme 94=inactive; rainbow-only 40=inactive; rainbow hosiery 95=inactive; hosiery wearer selector 95=AI ECE; hosiery palette selector 53=original independent rainbow gradient; romance 53; compound love 57. Exact individual wardrobe rolls: Radiance: midriff 97=covered, strapless 34=active, open back 35=inactive; Ellie: midriff 93=covered, strapless 22=active, open back 3=active; Alia: midriff 63=covered, strapless 44=inactive, open back 73=inactive; AI ECE: midriff 45=visible, strapless 34=active, open back 31=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact rolled outfits: Radiance: a fully strapless pearl-white covert-fashion mini dress with completely bare shoulders, covered waist and opaque enclosed back, carrying a large complete Colo-i-Suva fern and creek-ribbon composition, with leaf-green pumps; Ellie: a fully strapless lagoon-blue covert-fashion mini dress with completely bare shoulders, covered waist, secure opaque side structure, and a completely open back from shoulder blades to the secure waistline, carrying a large complete pool-ripple and timber-footbridge composition, with coral-red heeled boots; Alia: a short-sleeve turmeric-gold tailored covert-fashion mini romper with covered waist and high closed back, carrying a large complete orchid, butterfly, and parrot-finch composition, with deep-ocean platform heels; AI ECE: a fully strapless pearl-white cropped strategist bodice exposing her ordinary waist and belly button, with completely bare shoulders and opaque enclosed back, a reef-blue radial mini skort carrying a large complete sago-palm, rain, and freshwater-pool composition, and coral-red slingbacks; Male: the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted leaf-green short-sleeve polo with a restrained lagoon-blue fern band, fitted black jeans, and practical black boots. Materialize every covered or visible ordinary waist and belly button, every fully strapless cut, and every complete open back exactly as written. Large complete secular Fiji motifs must dominate at least two outfits in this image: large complete Colo-i-Suva fern, creek-ribbon, pool-ripple, timber-footbridge, orchid, butterfly, parrot-finch, and sago-palm compositions across all four women's outfits; at least two separate outfits each carry a complete full-width secular Fiji rainforest-and-wildlife composition. Keep every pool unoccupied and all cast on the dry nonslip pavilion. Use rainforest, creek, bridge, orchids, butterflies, birdlife, and sago palms as respectful secular conservation references. Fiji's flag contains the Union Jack and official coat of arms, so neither appears on clothing. No literal flag, official emblem, sacred symbol, copied ceremonial dress, copied operative uniform, badge, readable text, brand, alcohol consumption, or political insignia. Distinct rolled emotional performances: Radiance: roll 41, determination, performed as determination shown by level brows while calming the adult relationship tension; Ellie: roll 21, playful mischief, performed as playful mischief shown by a bright sideways smile during the ribbon rivalry; Alia: roll 3, tender affection, performed as tender affection shown by soft eye contact toward Radiance while accepting the male's waist touch; AI ECE: roll 25, calm contentment, performed as calm contentment shown by composed route-leader focus toward her husband; Male: roll 55, aching romantic longing, performed as aching romantic longing shown by softened brows while his head and pupils remain most strongly fixed on his wife ECE. Selected dynamic romance roll 53: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Selected compound love roll 57: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Translate both selected beats through this exact public-safe consensual choreography: Use a shallow five-adult arc. The married male rests his right hand on ECE's shoulder and his left hand at Alia's waist. Alia openly accepts the consensual adult infidelity beat with her right hand on his forearm while her left hand hugs Radiance's waist. Radiance cradles Alia's cheek with her left hand and openly seeks the male with her right hand on his upper arm. Ellie keeps one hand on Radiance's far shoulder and holds the loose signal ribbon in her other open hand, leaning toward Radiance for a quick public-safe cheek greeting. ECE remains inches from the group and directs her calm gaze to her husband; his strongest sustained eye line returns unmistakably to ECE. This integrates the selected ribbon pull, two calming hands, face cradle, waist hug, cheek greeting, and linked emotional tension without hiding or reusing a hand. Place ECE far left with the inspection paddle isolated against empty creek water, male left-center, Alia center, Radiance right-center, and Ellie far right. Keep five rain-bright silhouette lanes and every forearm outside neighboring torsos. Turn Ellie three-quarter-back with hair swept completely forward so the entire rolled open back and complete face are visible. Show both rolled navels and all complete footwear. Use exactly this owner-by-owner hand inventory and no other hands: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map; the male right hand rests visibly on ECE's near shoulder; the male left hand rests visibly at Alia's near waist; Alia right hand rests visibly on the male's near forearm; Alia left hand rests visibly at Radiance's near waist; Radiance left hand cups Alia's near cheek; Radiance right hand rests visibly on the male's near upper arm; Ellie left hand rests visibly on Radiance's far shoulder; Ellie right open hand holds one loose signal ribbon clear of every body. AI ECE alone presents the photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop on a thin flat opaque charcoal inspection paddle with no walls, lid, enclosure, or transparent material. The prop rests entirely on top of the paddle in clean side profile; no hand touches its grip, trigger, or trigger guard. The handler's open support hand stays completely underneath the solid paddle, physically separated from the prop. Every support finger is straight, separated, fully visible below the paddle, and nowhere near the complete centered empty trigger guard. The magazine is absent and the empty magazine well is visible. The horizontal muzzle points left across clearly empty freshwater creek toward one unoccupied route marker, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration, not a firing grip. Rainbow-hosiery roll 95 is inactive. No rainbow stockings or rainbow knee socks. ECE alone handles the prop and controls the separate holographic map. PAWS roll is inactive. No kitten. Pole-theme roll is inactive. No pole. Rainbow-only roll 40 is inactive. Do not convert the wardrobe to rainbow-only styling. Materialize weather exactly as heavy rain curtain, with stable dry nonslip footing and readable anatomy. Exactly five adults, ten arms, and ten hands, two per adult. Every arm remains fully visible continuously from its owner's shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. No arm or hand passes behind a torso. Keep palms and finger clusters separated from garment edges, hair, prop, kitten, paddle, map, ribbon, and other hands except for listed contacts. Use an asymmetric moving composition with clean silhouette gaps, not a static lineup. Full-length framing contains every face, elbow, wrist, hand, leg, foot, heel, boot, plinth, paddle, map, ribbon, and kitten when present. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Its complete trigger guard is visibly empty and physically separated from every hand by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, display case, transparent enclosure, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal flag, Union Jack, coat of arms, official seal, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1270": {
+      "scene": 1270,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry elevated route deck above Natadola Beach immediately after rain, with soft white sand, clear turquoise water, shallow reef, tide pools, one empty longboard rack, coconut palms, and a complete double rainbow spanning the Pacific sky",
+      "motifs": [
+        "large complete Natadola white-sand curve, turquoise swell, reef fan, tide-pool, longboard, coconut-palm, hibiscus, and drua-sail compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Fiji beach-and-reef composition"
+      ],
+      "culture": "Keep every tide pool and board empty. Use Natadola's white sand, turquoise water, reef, tide pools, beginner surf setting, palms, hibiscus, and drua sail as respectful secular Fiji references. Fiji's flag contains the Union Jack and official coat of arms, so neither appears on clothing. No literal flag, official emblem, sacred symbol, copied ceremonial dress, copied operative uniform, badge, readable text, brand, alcohol consumption, or political insignia.",
+      "weather": {
+        "key": "batch312-fiji-scene1270-weather",
+        "roll": 86,
+        "result": "double rainbow after rain"
+      },
+      "paws": {
+        "key": "batch312-fiji-scene1270-paws",
+        "roll": 59,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch312-fiji-scene1270-poleDanceTheme",
+        "roll": 92,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch312-fiji-scene1270-rainbowOnly",
+        "roll": 18,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch312-fiji-scene1270-rainbowHosiery",
+        "roll": 41,
+        "active": false,
+        "wearer": {
+          "key": "batch312-fiji-scene1270-rainbowHosieryWearer",
+          "roll": 49,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch312-fiji-scene1270-rainbowHosieryPaletteMode",
+          "roll": 35,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch312-fiji-scene1270-romanceBeat",
+        "roll": 47,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch312-fiji-scene1270-compoundLoveBeat",
+        "roll": 31,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch312-fiji-scene1270-Radiance-emotion",
+            "roll": 23,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by a teasing smile during Alia's quick cheek greeting"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1270-Radiance-visibleMidriff",
+            "roll": 43,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1270-Radiance-straplessDress",
+            "roll": 68,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1270-Radiance-fullyOpenBack",
+            "roll": 33,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch312-fiji-scene1270-Ellie-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability",
+            "performance": "shame and social vulnerability shown by lowered eyes and a guarded seated posture"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1270-Ellie-visibleMidriff",
+            "roll": 87,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1270-Ellie-straplessDress",
+            "roll": 64,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1270-Ellie-fullyOpenBack",
+            "roll": 81,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch312-fiji-scene1270-Alia-emotion",
+            "roll": 77,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a controlled jaw while maintaining a gentle waist contact"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1270-Alia-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1270-Alia-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1270-Alia-fullyOpenBack",
+            "roll": 99,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch312-fiji-scene1270-AI ECE-emotion",
+            "roll": 47,
+            "result": "awe",
+            "performance": "awe shown by widened eyes toward the double rainbow and the relationship weave"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1270-AI ECE-visibleMidriff",
+            "roll": 35,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1270-AI ECE-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1270-AI ECE-fullyOpenBack",
+            "roll": 77,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Ellie sits on one low mission plinth while Radiance stands offset between her separated knees in a close but fully visible hug. Ellie rests her right hand at Radiance's waist and her left hand on ECE's shoulder. Radiance rests her left hand on Ellie's shoulder and turns for Alia's quick public-safe cheek peck while her right hand cups Alia's cheek. Alia's left hand rests at Radiance's far waist and her right hand holds a loose route ribbon near her own shoulder. ECE stays adjacent at the left with the safe inspection paddle and route map, answering the tight walking weave with an awestruck jealous look. The linked pair energy, protective back touch, cheek pass, close plinth hug, and beacon control remain readable without crossed arms.",
+      "composition": "Place ECE far left with the prop isolated over empty Pacific water, Ellie seated left-center on the low plinth, Radiance center-right, and Alia far right. Keep a bright sea or sky lane behind each of the eight arms. Show every complete foot and heel and all three rolled navels.",
+      "emotionNuance": {
+        "Radiance": "playful mischief shown by a teasing smile during Alia's quick cheek greeting",
+        "Ellie": "shame and social vulnerability shown by lowered eyes and a guarded seated posture",
+        "Alia": "contained resentment shown by a controlled jaw while maintaining a gentle waist contact",
+        "AI ECE": "awe shown by widened eyes toward the double rainbow and the relationship weave"
+      },
+      "outfits": {
+        "Radiance": "a short-sleeve coral-red cropped investigator-fashion polo exposing her ordinary waist and belly button with a high closed back, a pearl-white folded mini skort carrying a large complete Natadola white-sand curve and turquoise-swell composition, and reef-blue pumps",
+        "Ellie": "a lagoon-blue cap-sleeve investigator-fashion mini dress with covered waist and high closed back, carrying a large complete shallow-reef, tide-pool, and longboard composition, with pearl-white heeled boots",
+        "Alia": "a sleeveless leaf-green cropped investigator-fashion vest exposing her ordinary waist and belly button with a high closed back, separate turmeric-gold tailored mini shorts carrying a large complete coconut-palm, hibiscus, and reef-fan composition, and deep-ocean platform heels",
+        "AI ECE": "a pearl-white one-shoulder cropped strategist shell exposing her ordinary waist and belly button with a high closed back, a reef-blue radial mini skirt carrying a large complete drua-sail, rain-drop, and Pacific-wave composition, and coral-red slingbacks"
+      },
+      "propPlan": "AI ECE alone presents the photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop on a thin flat opaque charcoal inspection paddle with no walls, lid, enclosure, or transparent material. The prop rests entirely on top of the paddle in clean side profile; no hand touches its grip, trigger, or trigger guard. The handler's open support hand stays completely underneath the solid paddle, physically separated from the prop. Every support finger is straight, separated, fully visible below the paddle, and nowhere near the complete centered empty trigger guard. The magazine is absent and the empty magazine well is visible. The horizontal muzzle points left across clearly empty Pacific water toward one unoccupied reef-route buoy, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration, not a firing grip.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map",
+        "Ellie left hand rests visibly on ECE's near shoulder; Ellie right hand rests visibly at Radiance's near waist",
+        "Radiance left hand rests visibly on Ellie's near shoulder; Radiance right hand cups Alia's near cheek",
+        "Alia left hand rests visibly at Radiance's far waist; Alia right open hand holds one loose route ribbon near her own shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only, not wardrobe, pose, prop, or background. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry elevated route deck above Natadola Beach immediately after rain, with soft white sand, clear turquoise water, shallow reef, tide pools, one empty longboard rack, coconut palms, and a complete double rainbow spanning the Pacific sky. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly at least 28 years old. Preserve the anchored faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult, Ellie the dark-haired adult rival, Alia the Black adult woman who alone wears a high sculptural braided ponytail with fine face-framing braids, and AI ECE the brunette adult strategist. Preserve the male's Scene 1136 face and trimmed beard when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, treated only as original public-safe fictional fashion. No copied uniform, badge, police impersonation, arrest, raid, assassination, threat, injury, or combat. Stored scene rolls: weather 86=double rainbow after rain; PAWS 59=inactive; pole theme 92=inactive; rainbow-only 18=inactive; rainbow hosiery 41=inactive; hosiery wearer selector 49=Radiance; hosiery palette selector 35=country-palette rainbow-like gradient; romance 47; compound love 31. Exact individual wardrobe rolls: Radiance: midriff 43=visible, strapless 68=inactive, open back 33=inactive; Ellie: midriff 87=covered, strapless 64=inactive, open back 81=inactive; Alia: midriff 13=visible, strapless 66=inactive, open back 99=inactive; AI ECE: midriff 35=visible, strapless 40=inactive, open back 77=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact rolled outfits: Radiance: a short-sleeve coral-red cropped investigator-fashion polo exposing her ordinary waist and belly button with a high closed back, a pearl-white folded mini skort carrying a large complete Natadola white-sand curve and turquoise-swell composition, and reef-blue pumps; Ellie: a lagoon-blue cap-sleeve investigator-fashion mini dress with covered waist and high closed back, carrying a large complete shallow-reef, tide-pool, and longboard composition, with pearl-white heeled boots; Alia: a sleeveless leaf-green cropped investigator-fashion vest exposing her ordinary waist and belly button with a high closed back, separate turmeric-gold tailored mini shorts carrying a large complete coconut-palm, hibiscus, and reef-fan composition, and deep-ocean platform heels; AI ECE: a pearl-white one-shoulder cropped strategist shell exposing her ordinary waist and belly button with a high closed back, a reef-blue radial mini skirt carrying a large complete drua-sail, rain-drop, and Pacific-wave composition, and coral-red slingbacks. Materialize every covered or visible ordinary waist and belly button, every fully strapless cut, and every complete open back exactly as written. Large complete secular Fiji motifs must dominate at least two outfits in this image: large complete Natadola white-sand curve, turquoise swell, reef fan, tide-pool, longboard, coconut-palm, hibiscus, and drua-sail compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Fiji beach-and-reef composition. Keep every tide pool and board empty. Use Natadola's white sand, turquoise water, reef, tide pools, beginner surf setting, palms, hibiscus, and drua sail as respectful secular Fiji references. Fiji's flag contains the Union Jack and official coat of arms, so neither appears on clothing. No literal flag, official emblem, sacred symbol, copied ceremonial dress, copied operative uniform, badge, readable text, brand, alcohol consumption, or political insignia. Distinct rolled emotional performances: Radiance: roll 23, playful mischief, performed as playful mischief shown by a teasing smile during Alia's quick cheek greeting; Ellie: roll 95, shame and social vulnerability, performed as shame and social vulnerability shown by lowered eyes and a guarded seated posture; Alia: roll 77, contained resentment, performed as contained resentment shown by a controlled jaw while maintaining a gentle waist contact; AI ECE: roll 47, awe, performed as awe shown by widened eyes toward the double rainbow and the relationship weave. Selected dynamic romance roll 47: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Selected compound love roll 31: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Translate both selected beats through this exact public-safe consensual choreography: Ellie sits on one low mission plinth while Radiance stands offset between her separated knees in a close but fully visible hug. Ellie rests her right hand at Radiance's waist and her left hand on ECE's shoulder. Radiance rests her left hand on Ellie's shoulder and turns for Alia's quick public-safe cheek peck while her right hand cups Alia's cheek. Alia's left hand rests at Radiance's far waist and her right hand holds a loose route ribbon near her own shoulder. ECE stays adjacent at the left with the safe inspection paddle and route map, answering the tight walking weave with an awestruck jealous look. The linked pair energy, protective back touch, cheek pass, close plinth hug, and beacon control remain readable without crossed arms. Place ECE far left with the prop isolated over empty Pacific water, Ellie seated left-center on the low plinth, Radiance center-right, and Alia far right. Keep a bright sea or sky lane behind each of the eight arms. Show every complete foot and heel and all three rolled navels. Use exactly this owner-by-owner hand inventory and no other hands: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map; Ellie left hand rests visibly on ECE's near shoulder; Ellie right hand rests visibly at Radiance's near waist; Radiance left hand rests visibly on Ellie's near shoulder; Radiance right hand cups Alia's near cheek; Alia left hand rests visibly at Radiance's far waist; Alia right open hand holds one loose route ribbon near her own shoulder. AI ECE alone presents the photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop on a thin flat opaque charcoal inspection paddle with no walls, lid, enclosure, or transparent material. The prop rests entirely on top of the paddle in clean side profile; no hand touches its grip, trigger, or trigger guard. The handler's open support hand stays completely underneath the solid paddle, physically separated from the prop. Every support finger is straight, separated, fully visible below the paddle, and nowhere near the complete centered empty trigger guard. The magazine is absent and the empty magazine well is visible. The horizontal muzzle points left across clearly empty Pacific water toward one unoccupied reef-route buoy, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration, not a firing grip. Rainbow-hosiery roll 41 is inactive. No rainbow stockings or rainbow knee socks. ECE alone handles the prop and controls the separate holographic map. PAWS roll is inactive. No kitten. Pole-theme roll is inactive. No pole. Rainbow-only roll 18 is inactive. Do not convert the wardrobe to rainbow-only styling. Materialize weather exactly as double rainbow after rain, with stable dry nonslip footing and readable anatomy. Exactly four adults, eight arms, and eight hands, two per woman. Every arm remains fully visible continuously from its owner's shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. No arm or hand passes behind a torso. Keep palms and finger clusters separated from garment edges, hair, prop, kitten, paddle, map, ribbon, and other hands except for listed contacts. Use an asymmetric moving composition with clean silhouette gaps, not a static lineup. Full-length framing contains every face, elbow, wrist, hand, leg, foot, heel, boot, plinth, paddle, map, ribbon, and kitten when present. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Its complete trigger guard is visibly empty and physically separated from every hand by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, display case, transparent enclosure, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal flag, Union Jack, coat of arms, official seal, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1271": {
+      "scene": 1271,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry waterfront route terrace in Levuka on Ovalau at clear golden hour, with the complete Beach Street weatherboard facades, old trading-store verandas, public school roofline, pier, quiet bay, heritage cutter sails, and steep green Ovalau mountain wall clearly visible",
+      "motifs": [
+        "large complete Levuka Beach-Street facade, weatherboard veranda, Ovalau mountain, bay wave, pier, heritage cutter sail, copra-leaf, and school-roof compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Fiji waterfront-and-heritage composition"
+      ],
+      "culture": "Use only Levuka's secular waterfront, Beach Street, weatherboard stores, verandas, public-school roofline, pier, bay, cutter sails, mountain, and copra leaves. Exclude churches, tombs, Masonic symbols, mission steps, ritual, and alcohol. Fiji's flag contains the Union Jack and official coat of arms, so neither appears on clothing. No literal flag, official emblem, sacred symbol, copied ceremonial dress, copied operative uniform, badge, readable text, brand, alcohol consumption, or political insignia.",
+      "weather": {
+        "key": "batch312-fiji-scene1271-weather",
+        "roll": 1,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "key": "batch312-fiji-scene1271-paws",
+        "roll": 54,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch312-fiji-scene1271-poleDanceTheme",
+        "roll": 89,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch312-fiji-scene1271-rainbowOnly",
+        "roll": 17,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch312-fiji-scene1271-rainbowHosiery",
+        "roll": 88,
+        "active": false,
+        "wearer": {
+          "key": "batch312-fiji-scene1271-rainbowHosieryWearer",
+          "roll": 76,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch312-fiji-scene1271-rainbowHosieryPaletteMode",
+          "roll": 64,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch312-fiji-scene1271-romanceBeat",
+        "roll": 4,
+        "dynamicIndex": 4,
+        "contractResult": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compoundLoveBeat": {
+        "key": "batch312-fiji-scene1271-compoundLoveBeat",
+        "roll": 26,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch312-fiji-scene1271-Radiance-emotion",
+            "roll": 42,
+            "result": "determination",
+            "performance": "determination shown by steady protective eyes during the relay handoff"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1271-Radiance-visibleMidriff",
+            "roll": 96,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1271-Radiance-straplessDress",
+            "roll": 55,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1271-Radiance-fullyOpenBack",
+            "roll": 80,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch312-fiji-scene1271-Ellie-emotion",
+            "roll": 0,
+            "result": "tender affection",
+            "performance": "tender affection shown by a soft shoulder-to-shoulder smile toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1271-Ellie-visibleMidriff",
+            "roll": 86,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1271-Ellie-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1271-Ellie-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch312-fiji-scene1271-Alia-emotion",
+            "roll": 24,
+            "result": "calm contentment",
+            "performance": "calm contentment shown by relaxed eyes during Radiance's forehead greeting"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1271-Alia-visibleMidriff",
+            "roll": 74,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1271-Alia-straplessDress",
+            "roll": 93,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1271-Alia-fullyOpenBack",
+            "roll": 82,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch312-fiji-scene1271-AI ECE-emotion",
+            "roll": 86,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing with tear-streaked face and shaking posture shown as safe emotional release while she keeps the route stable"
+          },
+          "visibleMidriff": {
+            "key": "batch312-fiji-scene1271-AI ECE-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch312-fiji-scene1271-AI ECE-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch312-fiji-scene1271-AI ECE-fullyOpenBack",
+            "roll": 40,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Ellie holds Radiance close with her left hand at Radiance's waist and right hand at Radiance's shoulder. Radiance stays shoulder-to-shoulder with Ellie while giving Alia a brief public-safe forehead greeting, her left hand on Alia's shoulder and right hand at Alia's cheek. Alia answers with her left hand at Radiance's far waist and right hand on ECE's upper arm. ECE turns partly away in tearful emotional release while remaining inches from them with the safe inspection paddle and map, visibly stepping into the relationship line to reclaim attention. The relay handoff, cheek and forehead warmth, fingertip-choice tension, waist-and-shoulder hold, and beacon leadership all read without hidden arms.",
+      "composition": "Place ECE far left with the prop isolated against empty bay water, Alia left-center, Radiance right-center, and Ellie far right. Keep all eight arms in front-edge silhouette lanes. Turn Ellie three-quarter-back with hair fully forward so her complete rolled open back and face are visible. Show all complete footwear.",
+      "emotionNuance": {
+        "Radiance": "determination shown by steady protective eyes during the relay handoff",
+        "Ellie": "tender affection shown by a soft shoulder-to-shoulder smile toward Radiance",
+        "Alia": "calm contentment shown by relaxed eyes during Radiance's forehead greeting",
+        "AI ECE": "full sobbing with tear-streaked face and shaking posture shown as safe emotional release while she keeps the route stable"
+      },
+      "outfits": {
+        "Radiance": "a pearl-white short-sleeve investigator-fashion mini shift dress with covered waist and high closed back, carrying a large complete Levuka Beach-Street facade and veranda composition, with coral-red pumps",
+        "Ellie": "a fully strapless deep-ocean investigator-fashion mini dress with completely bare shoulders, covered waist, secure opaque side structure, and a completely open back from shoulder blades to the secure waistline, carrying a large complete Ovalau mountain, bay-wave, and pier composition, with pearl-white heeled boots",
+        "Alia": "a leaf-green one-shoulder tailored investigator-fashion mini romper with covered waist and high closed back, carrying a large complete heritage-cutter sail and copra-leaf composition, with turmeric-gold platform heels",
+        "AI ECE": "a coral-red asymmetric long-sleeve strategist mini coat-dress with covered waist and high closed back, carrying a large complete weatherboard-store, public-school roofline, and quiet-bay composition, with reef-blue slingback heels"
+      },
+      "propPlan": "AI ECE alone presents the photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop on a thin flat opaque charcoal inspection paddle with no walls, lid, enclosure, or transparent material. The prop rests entirely on top of the paddle in clean side profile; no hand touches its grip, trigger, or trigger guard. The handler's open support hand stays completely underneath the solid paddle, physically separated from the prop. Every support finger is straight, separated, fully visible below the paddle, and nowhere near the complete centered empty trigger guard. The magazine is absent and the empty magazine well is visible. The horizontal muzzle points left across clearly empty Levuka bay water toward one unoccupied route buoy, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration, not a firing grip.",
+      "handInventory": [
+        "ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map",
+        "Alia left hand rests visibly at Radiance's far waist; Alia right hand rests visibly on ECE's near upper arm",
+        "Radiance left hand rests visibly on Alia's near shoulder; Radiance right hand cups Alia's near cheek",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand rests visibly on Radiance's far shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only, not wardrobe, pose, prop, or background. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry waterfront route terrace in Levuka on Ovalau at clear golden hour, with the complete Beach Street weatherboard facades, old trading-store verandas, public school roofline, pier, quiet bay, heritage cutter sails, and steep green Ovalau mountain wall clearly visible. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly at least 28 years old. Preserve the anchored faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult, Ellie the dark-haired adult rival, Alia the Black adult woman who alone wears a high sculptural braided ponytail with fine face-framing braids, and AI ECE the brunette adult strategist. Preserve the male's Scene 1136 face and trimmed beard when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, treated only as original public-safe fictional fashion. No copied uniform, badge, police impersonation, arrest, raid, assassination, threat, injury, or combat. Stored scene rolls: weather 1=clear golden-hour radiance; PAWS 54=inactive; pole theme 89=inactive; rainbow-only 17=inactive; rainbow hosiery 88=inactive; hosiery wearer selector 76=AI ECE; hosiery palette selector 64=original independent rainbow gradient; romance 4; compound love 26. Exact individual wardrobe rolls: Radiance: midriff 96=covered, strapless 55=inactive, open back 80=inactive; Ellie: midriff 86=covered, strapless 5=active, open back 6=active; Alia: midriff 74=covered, strapless 93=inactive, open back 82=inactive; AI ECE: midriff 80=covered, strapless 91=inactive, open back 40=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact rolled outfits: Radiance: a pearl-white short-sleeve investigator-fashion mini shift dress with covered waist and high closed back, carrying a large complete Levuka Beach-Street facade and veranda composition, with coral-red pumps; Ellie: a fully strapless deep-ocean investigator-fashion mini dress with completely bare shoulders, covered waist, secure opaque side structure, and a completely open back from shoulder blades to the secure waistline, carrying a large complete Ovalau mountain, bay-wave, and pier composition, with pearl-white heeled boots; Alia: a leaf-green one-shoulder tailored investigator-fashion mini romper with covered waist and high closed back, carrying a large complete heritage-cutter sail and copra-leaf composition, with turmeric-gold platform heels; AI ECE: a coral-red asymmetric long-sleeve strategist mini coat-dress with covered waist and high closed back, carrying a large complete weatherboard-store, public-school roofline, and quiet-bay composition, with reef-blue slingback heels. Materialize every covered or visible ordinary waist and belly button, every fully strapless cut, and every complete open back exactly as written. Large complete secular Fiji motifs must dominate at least two outfits in this image: large complete Levuka Beach-Street facade, weatherboard veranda, Ovalau mountain, bay wave, pier, heritage cutter sail, copra-leaf, and school-roof compositions across all four outfits; at least two separate outfits each carry one complete full-width secular Fiji waterfront-and-heritage composition. Use only Levuka's secular waterfront, Beach Street, weatherboard stores, verandas, public-school roofline, pier, bay, cutter sails, mountain, and copra leaves. Exclude churches, tombs, Masonic symbols, mission steps, ritual, and alcohol. Fiji's flag contains the Union Jack and official coat of arms, so neither appears on clothing. No literal flag, official emblem, sacred symbol, copied ceremonial dress, copied operative uniform, badge, readable text, brand, alcohol consumption, or political insignia. Distinct rolled emotional performances: Radiance: roll 42, determination, performed as determination shown by steady protective eyes during the relay handoff; Ellie: roll 0, tender affection, performed as tender affection shown by a soft shoulder-to-shoulder smile toward Radiance; Alia: roll 24, calm contentment, performed as calm contentment shown by relaxed eyes during Radiance's forehead greeting; AI ECE: roll 86, full sobbing with tear-streaked face and shaking posture, performed as full sobbing with tear-streaked face and shaking posture shown as safe emotional release while she keeps the route stable. Selected dynamic romance roll 4: Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips. Selected compound love roll 26: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Translate both selected beats through this exact public-safe consensual choreography: Ellie holds Radiance close with her left hand at Radiance's waist and right hand at Radiance's shoulder. Radiance stays shoulder-to-shoulder with Ellie while giving Alia a brief public-safe forehead greeting, her left hand on Alia's shoulder and right hand at Alia's cheek. Alia answers with her left hand at Radiance's far waist and right hand on ECE's upper arm. ECE turns partly away in tearful emotional release while remaining inches from them with the safe inspection paddle and map, visibly stepping into the relationship line to reclaim attention. The relay handoff, cheek and forehead warmth, fingertip-choice tension, waist-and-shoulder hold, and beacon leadership all read without hidden arms. Place ECE far left with the prop isolated against empty bay water, Alia left-center, Radiance right-center, and Ellie far right. Keep all eight arms in front-edge silhouette lanes. Turn Ellie three-quarter-back with hair fully forward so her complete rolled open back and face are visible. Show all complete footwear. Use exactly this owner-by-owner hand inventory and no other hands: ECE right open hand supports the opaque inspection paddle and inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map; Alia left hand rests visibly at Radiance's far waist; Alia right hand rests visibly on ECE's near upper arm; Radiance left hand rests visibly on Alia's near shoulder; Radiance right hand cups Alia's near cheek; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand rests visibly on Radiance's far shoulder. AI ECE alone presents the photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop on a thin flat opaque charcoal inspection paddle with no walls, lid, enclosure, or transparent material. The prop rests entirely on top of the paddle in clean side profile; no hand touches its grip, trigger, or trigger guard. The handler's open support hand stays completely underneath the solid paddle, physically separated from the prop. Every support finger is straight, separated, fully visible below the paddle, and nowhere near the complete centered empty trigger guard. The magazine is absent and the empty magazine well is visible. The horizontal muzzle points left across clearly empty Levuka bay water toward one unoccupied route buoy, away from every person, kitten, landmark, animal, and camera. This is a controlled unloaded handoff demonstration, not a firing grip. Rainbow-hosiery roll 88 is inactive. No rainbow stockings or rainbow knee socks. ECE alone handles the prop and controls the separate holographic map. PAWS roll is inactive. No kitten. Pole-theme roll is inactive. No pole. Rainbow-only roll 17 is inactive. Do not convert the wardrobe to rainbow-only styling. Materialize weather exactly as clear golden-hour radiance, with stable dry nonslip footing and readable anatomy. Exactly four adults, eight arms, and eight hands, two per woman. Every arm remains fully visible continuously from its owner's shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. No arm or hand passes behind a torso. Keep palms and finger clusters separated from garment edges, hair, prop, kitten, paddle, map, ribbon, and other hands except for listed contacts. Use an asymmetric moving composition with clean silhouette gaps, not a static lineup. Full-length framing contains every face, elbow, wrist, hand, leg, foot, heel, boot, plinth, paddle, map, ribbon, and kitten when present. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Its complete trigger guard is visibly empty and physically separated from every hand by the solid paddle. No ammunition, reload, firing, muzzle flash, holster, display case, transparent enclosure, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal flag, Union Jack, coat of arms, official seal, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together with all-settled result handling"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

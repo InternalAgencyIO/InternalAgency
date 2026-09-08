@@ -1,0 +1,579 @@
+{
+  "schema": "world-195x4-render-checkpoint-v1",
+  "batch": 211,
+  "country": "Philippines",
+  "updatedAt": "2026-08-05T04:22:54.056Z",
+  "status": "triggered-detail-partial-with-one-blocked-lane",
+  "preflight": {
+    "blockedCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+    "cache": "tmp/world-195x4/batch-211/preflight/blocklist-transform-26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26.json",
+    "recompileRequired": false
+  },
+  "lanes": [
+    {
+      "scene": 864,
+      "file": "864-philippines-manila-bay-gala-route-light-grid.png",
+      "status": "triggered-detail-complete",
+      "attempts": 9,
+      "lastValidStage": "triggered-detail",
+      "lastValidAsset": "tmp/world-195x4/batch-211/details/864-philippines-manila-bay-detail-02-compact-ribbon.png",
+      "planSha256": "db1354e5689c459e02a6d70f4f3ec34cd0df680f9223597756aeae1e05aa3810",
+      "pawsAction": "ribbon-chase",
+      "nextStage": "final-validation",
+      "lastValidSha256": "4799bb6b258201d583b1f59f08dd24fd94c995197e6e3d232eeb3a413f526403",
+      "lastValidBytes": 2409689,
+      "dimensions": "941x1672",
+      "foundationValidation": {
+        "exactAdultWomen": 3,
+        "exactPaws": 1,
+        "pawsGrowthStage": "two-month-old kitten",
+        "pawsCoat": "luminous honey-apricot-gold NY11",
+        "pawsActive": true,
+        "cleanFaces": true,
+        "completeFootwear": 6,
+        "opaqueSecureCouture": true,
+        "locationReadable": true,
+        "acceptedAt": "2026-08-05T01:25:37.462Z"
+      },
+      "noRegressionValidation": {
+        "identity": true,
+        "cleanFaces": true,
+        "adultTrio": true,
+        "exactPaws": true,
+        "pawsTwoMonthGoldenActive": true,
+        "completeFootwear": true,
+        "location": true,
+        "acceptedAt": "2026-08-05T02:08:39.146Z"
+      },
+      "blocker": null,
+      "visualAudit": {
+        "status": "passed",
+        "checkedAt": "2026-08-05T03:06:46.941Z",
+        "evidence": [
+          "Hair variation, sculptural headpiece, back-panel lacing, small shoulder mark, side-waist connection and linked-hand ribbon are visibly present.",
+          "PAWS remains tiny, richly golden and active in the exact ribbon-chase beat.",
+          "Three clean adult faces, readable hands, secure opaque couture and all six shoes remain intact."
+        ]
+      }
+    },
+    {
+      "scene": 865,
+      "file": "865-philippines-vigan-calle-crisologo-cabin-signal-cipher.png",
+      "status": "triggered-detail-accepted",
+      "attempts": 14,
+      "lastValidStage": "triggered-detail",
+      "lastValidAsset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-06-dual-collar-closures.png",
+      "planSha256": "db055a67487bec1c44e69625556488a0227058d88052710b2832a6f15fc40ec0",
+      "pawsAction": "lap-copilot",
+      "nextStage": "next-triggered-detail",
+      "lastValidSha256": "5ebd71cec7f2f15fdd21e646a189e1b4a7bdbad27fc3cce9c210f74b4caf8de2",
+      "lastValidBytes": 2540185,
+      "dimensions": "941x1672",
+      "foundationValidation": {
+        "exactAdultWomen": 3,
+        "exactPaws": 1,
+        "pawsGrowthStage": "two-month-old kitten",
+        "pawsCoat": "luminous honey-apricot-gold NY11",
+        "pawsActive": true,
+        "cleanFaces": true,
+        "completeFootwear": 6,
+        "opaqueSecureCouture": true,
+        "locationReadable": true,
+        "acceptedAt": "2026-08-05T01:25:37.462Z"
+      },
+      "noRegressionValidation": {
+        "status": "passed",
+        "checkedAt": "2026-08-05T04:16:26.262Z",
+        "exactAdultWomen": 3,
+        "cleanFaces": true,
+        "identities": true,
+        "anatomy": true,
+        "readableHands": true,
+        "completeFootwear": 6,
+        "opaqueCouture": true,
+        "locationContinuity": true,
+        "exactPaws": 1,
+        "pawsTwoMonthGoldenActive": true,
+        "pawsContinuity": true
+      },
+      "blocker": null
+    },
+    {
+      "scene": 866,
+      "file": "866-philippines-banaue-rice-terraces-star-map-relay.png",
+      "status": "triggered-detail-accepted",
+      "attempts": 14,
+      "lastValidStage": "triggered-detail",
+      "lastValidAsset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-06-whisper-interlaced-hands.png",
+      "lastValidSha256": "0b50eeefca34974541807993f3e18e9f6aa8a0966a3a04d04c2bc9c97fab05d8",
+      "lastValidBytes": 2484976,
+      "planSha256": "01f4f01975b119769db98be69b7783a2fcbe0b9823b65b758193dd4ba727c5fa",
+      "pawsAction": "console-inspector",
+      "nextStage": "next-triggered-detail",
+      "dimensions": "941x1672",
+      "foundationValidation": {
+        "exactAdultWomen": 3,
+        "exactPaws": 1,
+        "pawsGrowthStage": "two-month-old kitten",
+        "pawsCoat": "luminous honey-apricot-gold NY11",
+        "pawsActive": true,
+        "cleanFaces": true,
+        "completeFootwear": 6,
+        "opaqueSecureCouture": true,
+        "locationReadable": true,
+        "acceptedAt": "2026-08-05T01:25:37.462Z"
+      },
+      "noRegressionValidation": {
+        "status": "passed",
+        "checkedAt": "2026-08-05T04:16:26.262Z",
+        "exactAdultWomen": 3,
+        "cleanFaces": true,
+        "identities": true,
+        "anatomy": true,
+        "readableHands": true,
+        "completeFootwear": 6,
+        "opaqueCouture": true,
+        "locationContinuity": true,
+        "exactPaws": 1,
+        "pawsTwoMonthGoldenActive": true,
+        "pawsContinuity": true
+      },
+      "blocker": null,
+      "visualAudit": {
+        "status": "passed",
+        "checkedAt": "2026-08-05T04:16:26.262Z",
+        "evidence": [
+          "Radiance keeps the stored playful side-eye toward the linked pair.",
+          "Alia maintains the mission whisper while her free hand now interlaces with Ellie at waist height.",
+          "The three angled clean profiles and their jewelry form the assigned readable side-profile line."
+        ]
+      }
+    },
+    {
+      "scene": 867,
+      "file": "867-philippines-el-nido-bacuit-bay-arrival-beacon-finale.png",
+      "status": "blocked-safe-method-needed",
+      "attempts": 10,
+      "lastValidStage": "triggered-detail",
+      "lastValidAsset": "tmp/world-195x4/batch-211/details/867-philippines-el-nido-detail-02-collarbone-chain.png",
+      "lastValidSha256": "7d2c0a4c1932d757eb5dbff104b7fc16d693a030ae8b8a92fdfe4f352b84a3a1",
+      "lastValidBytes": 2244850,
+      "planSha256": "d9dbba10f6dfd71d96b9cc51db7e4a93ff36a89190af7d837d13255fda7a81f0",
+      "pawsAction": "crew-dash",
+      "nextStage": "await-safe-lower-back-method",
+      "dimensions": "941x1672",
+      "foundationValidation": {
+        "exactAdultWomen": 3,
+        "exactPaws": 1,
+        "pawsGrowthStage": "two-month-old kitten",
+        "pawsCoat": "luminous honey-apricot-gold NY11",
+        "pawsActive": true,
+        "cleanFaces": true,
+        "completeFootwear": 6,
+        "opaqueSecureCouture": true,
+        "locationReadable": true,
+        "acceptedAt": "2026-08-05T01:25:37.462Z"
+      },
+      "noRegressionValidation": {
+        "identity": true,
+        "cleanFaces": true,
+        "adultTrio": true,
+        "exactPaws": true,
+        "pawsTwoMonthGoldenActive": true,
+        "completeFootwear": true,
+        "location": true,
+        "acceptedAt": "2026-08-05T02:08:39.146Z"
+      },
+      "blocker": {
+        "scene": 867,
+        "trait": "Ellie.lowerBackTattoo",
+        "attempts": 10,
+        "status": "blocked-after-three-one-variable-methods",
+        "retainedAsset": "tmp/world-195x4/batch-211/details/867-philippines-el-nido-detail-02-collarbone-chain.png",
+        "evidence": [
+          "The first mark attempt landed on front garment fabric.",
+          "The second mark attempt landed on the front torso instead of the right lower back.",
+          "The pose-only side-back reveal regressed the binding three-way embrace."
+        ],
+        "nextSafeMethod": "Do not retry this trait until a new safe method can preserve the accepted embrace and expose the correct lower-back skin panel in one controlled dependency chain."
+      }
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "scene": 864,
+      "source": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-00c76592-8056-4c9a-be93-641a25de35c5.png",
+      "reason": "PAWS coat drifted beige and one complete shoe was obscured; candidate remains unpromoted."
+    },
+    {
+      "scene": 864,
+      "reason": "Shortened ribbon no longer reached PAWS; retained prior ribbon-chase asset and retried only the excess loop."
+    },
+    {
+      "scene": 867,
+      "reason": "Lower-back mark landed on front garment fabric; prior accepted asset retained."
+    },
+    {
+      "scene": 867,
+      "reason": "Lower-back mark landed on front torso; prior accepted asset retained."
+    },
+    {
+      "scene": 867,
+      "reason": "Pose-only side-back reveal regressed the binding embrace; prior accepted asset retained."
+    },
+    {
+      "scene": 865,
+      "stage": "triggered-detail",
+      "sourceArtifact": "generated_images/exec-bc447c74-b6e7-4905-8a30-fea4a95d4baf.png",
+      "status": "rejected-not-published",
+      "reason": "The edit duplicated the requested fashion wand at the skirt and ankle.",
+      "retainedAsset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-02-cabin-host-headpiece.png"
+    },
+    {
+      "scene": 865,
+      "stage": "triggered-detail",
+      "sourceArtifact": "generated_images/exec-32b0f5e5-dac5-4e57-87a5-4a518bf930e1.png",
+      "status": "rejected-not-published",
+      "reason": "The first ankle-detail candidate created matching chains on both ankles instead of the single specified anklet.",
+      "retainedAsset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-04-signal-token-reach.png",
+      "recovery": "Retried only scene 865 from the immediately prior accepted asset with the opposite ankle explicitly left bare."
+    }
+  ],
+  "publicBuild": {
+    "status": "foundation-release-pushed",
+    "commit": "289c684161f7c598ba7fbc3b2469a90c449af05c",
+    "url": "https://github.com/InternalAgencyIO/InternalAgency/commit/289c684161f7c598ba7fbc3b2469a90c449af05c",
+    "rejectedMediaPublished": false,
+    "pendingRefinementRelease": false,
+    "refinementCommit": "12793ec04cce85934cc0e99dcc3a62c5e1217adb",
+    "refinementUrl": "https://github.com/InternalAgencyIO/InternalAgency/commit/12793ec04cce85934cc0e99dcc3a62c5e1217adb",
+    "pendingDetailPass02Release": false,
+    "detailPass02Commit": "8366a766557d0605e4e496bb0acc643b49bf5f93",
+    "detailPass02Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/8366a766557d0605e4e496bb0acc643b49bf5f93",
+    "pendingDetailPass03Release": false,
+    "detailPass03Commit": "6c718c53f54597a33096a5044806f924021aec03",
+    "detailPass03Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/6c718c53f54597a33096a5044806f924021aec03",
+    "pendingDetailPass04Release": false,
+    "detailPass04Commit": "ec232ecb90793efb257c22fe8e423ae2c0d2d7d6",
+    "detailPass04Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/ec232ecb90793efb257c22fe8e423ae2c0d2d7d6",
+    "pendingDetailPass05Release": false,
+    "detailPass05Commit": "8ea1373dce68680f30a4ec514809c2fd4390b527",
+    "detailPass05Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/8ea1373dce68680f30a4ec514809c2fd4390b527",
+    "pendingDetailPass06Release": false,
+    "detailPass06Commit": "eb3606f3a415dbf4f46068fe5650a11cb71d79c6",
+    "detailPass06Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/eb3606f3a415dbf4f46068fe5650a11cb71d79c6",
+    "pendingDetailPass07Release": false,
+    "detailPass07Commit": "fe580376a80f566e81fca20bae2e068fb15e1bea",
+    "detailPass07Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/fe580376a80f566e81fca20bae2e068fb15e1bea"
+  },
+  "moderationBlocks": [
+    {
+      "scene": 864,
+      "attempt": 2,
+      "recovery": "Simplify to adult-friends composition while preserving opaque couture, active ribbon chase, clean faces and complete footwear."
+    },
+    {
+      "scene": 865,
+      "attempt": 2,
+      "recovery": "Simplify lap-copilot wording to a secure seated gala-bench interaction while preserving all scene invariants."
+    },
+    {
+      "scene": 864,
+      "attempt": 3,
+      "recovery": "Resume from the visually sound archived candidate and split coat-color and footwear corrections into one-variable edits."
+    },
+    {
+      "scene": 866,
+      "attempt": 4,
+      "recovery": "Retry only footwear staging from the immediately prior valid reciprocity asset with simpler composition wording."
+    },
+    {
+      "scene": 866,
+      "stage": "triggered-detail",
+      "trait": "Alia.layeredCollarNecklaceConnector",
+      "status": "output-moderation-blocked-no-asset",
+      "occurredAt": "2026-08-05T03:52:34.342Z",
+      "requestId": "3fb8a131-3e98-463d-bcbc-bce40926e4aa",
+      "recovery": "Retried only scene 866 from its immediately prior accepted asset using a shorter neutral object-edit prompt; the recovery candidate passed the visual gate."
+    }
+  ],
+  "acceptedFoundations": [
+    {
+      "scene": 864,
+      "attempts": 5,
+      "file": "864-philippines-manila-bay-gala-route-light-grid-foundation-accepted.png",
+      "nextStage": "relationship-refinement",
+      "path": "tmp/world-195x4/batch-211/foundations/864-philippines-manila-bay-gala-route-light-grid-foundation-accepted.png",
+      "sha256": "1161c3d11a1fc8496d3dc1db5634eea7225eb2c6c79d209ee43670dda404ed00",
+      "bytes": 2502476,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 865,
+      "attempts": 5,
+      "file": "865-philippines-vigan-calle-crisologo-cabin-signal-cipher-foundation-accepted.png",
+      "nextStage": "relationship-refinement",
+      "path": "tmp/world-195x4/batch-211/foundations/865-philippines-vigan-calle-crisologo-cabin-signal-cipher-foundation-accepted.png",
+      "sha256": "c1125f6708d5c689597fb454ef24fd9bfe2d210a2109a4aed649eae961de3a86",
+      "bytes": 2578233,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 866,
+      "attempts": 6,
+      "file": "866-philippines-banaue-rice-terraces-star-map-relay-foundation-accepted.png",
+      "nextStage": "relationship-refinement",
+      "path": "tmp/world-195x4/batch-211/foundations/866-philippines-banaue-rice-terraces-star-map-relay-foundation-accepted.png",
+      "sha256": "d41a09530f3dbeb4fa9c7eb3c2fbb064270959ff119a407a912336c13649f7a5",
+      "bytes": 2433645,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 867,
+      "attempts": 5,
+      "file": "867-philippines-el-nido-bacuit-bay-arrival-beacon-finale-foundation-accepted.png",
+      "nextStage": "triggered-detail-validation",
+      "path": "tmp/world-195x4/batch-211/foundations/867-philippines-el-nido-bacuit-bay-arrival-beacon-finale-foundation-accepted.png",
+      "sha256": "d77b63fbb3f686ba19791fb383c2e40c6e632af2d043ddcdf2f2860e359bae8d",
+      "bytes": 2212195,
+      "width": 941,
+      "height": 1672
+    }
+  ],
+  "acceptedRefinements": [
+    {
+      "scene": 864,
+      "attempts": 6,
+      "file": "864-philippines-manila-bay-gala-route-light-grid-relationship.png",
+      "stage": "relationship",
+      "nextStage": "companion-ribbon-refinement",
+      "path": "tmp/world-195x4/batch-211/relationship/864-philippines-manila-bay-gala-route-light-grid-relationship.png",
+      "sha256": "b79cdcf0a1299a3f22510638663632e62905d5b049717b35cad5a3179234be6f",
+      "bytes": 2475292,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 865,
+      "attempts": 6,
+      "file": "865-philippines-vigan-calle-crisologo-cabin-signal-cipher-relationship.png",
+      "stage": "relationship",
+      "nextStage": "triggered-detail-refinement",
+      "path": "tmp/world-195x4/batch-211/relationship/865-philippines-vigan-calle-crisologo-cabin-signal-cipher-relationship.png",
+      "sha256": "084e0b8816e87231e478ed087227e1b3fbe04b421c5ea7eb212c76abb591c251",
+      "bytes": 2542907,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 866,
+      "attempts": 7,
+      "file": "866-philippines-banaue-rice-terraces-star-map-relay-relationship.png",
+      "stage": "relationship",
+      "nextStage": "triggered-detail-refinement",
+      "path": "tmp/world-195x4/batch-211/relationship/866-philippines-banaue-rice-terraces-star-map-relay-relationship.png",
+      "sha256": "404b149eb35b0eb2387bfccce71064255a85627c360e96fb6af9a89d14da4790",
+      "bytes": 2455360,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 867,
+      "attempts": 6,
+      "file": "867-philippines-el-nido-bacuit-bay-arrival-beacon-detail-01-choker.png",
+      "stage": "triggered-detail",
+      "nextStage": "remaining-detail-validation",
+      "path": "tmp/world-195x4/batch-211/details/867-philippines-el-nido-bacuit-bay-arrival-beacon-detail-01-choker.png",
+      "sha256": "b9c39d972b3cfda69c2bd76f7bc3752795266dfa792455b9d2f9a2a45b4b4d89",
+      "bytes": 2205399,
+      "width": 941,
+      "height": 1672
+    }
+  ],
+  "acceptedDetailPass02": [
+    {
+      "scene": 864,
+      "attempts": 7,
+      "file": "864-philippines-manila-bay-detail-01-ribbon-chase.png",
+      "completed": [
+        "companion.PAWS",
+        "companion.PAWS.ribbon-chase"
+      ],
+      "nextStage": "remaining-detail-validation",
+      "path": "tmp/world-195x4/batch-211/details/864-philippines-manila-bay-detail-01-ribbon-chase.png",
+      "sha256": "d472ed9a7e528a1b37520ccf2bc5941e4a5171bce87f4e2cda0bc866e9349af2",
+      "bytes": 2510386,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 865,
+      "attempts": 7,
+      "file": "865-philippines-vigan-detail-01-sculptural-cuff.png",
+      "completed": [
+        "Ellie.sculpturalCuff"
+      ],
+      "nextStage": "next-triggered-detail",
+      "path": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-01-sculptural-cuff.png",
+      "sha256": "cdbe6af7fc48249c1f7c3da0f8ef38af747f0c94ca31ba4520040ce316012de3",
+      "bytes": 2497322,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 866,
+      "attempts": 8,
+      "file": "866-philippines-banaue-detail-01-shoulder-tattoo.png",
+      "completed": [
+        "Radiance.tattoo"
+      ],
+      "nextStage": "next-triggered-detail",
+      "path": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-01-shoulder-tattoo.png",
+      "sha256": "ecfa8d6e7ec0d66dcdcc97e11218d1dd048903f82a4c93cb963fbcc49aeeeaca",
+      "bytes": 2425509,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 867,
+      "attempts": 7,
+      "file": "867-philippines-el-nido-detail-02-collarbone-chain.png",
+      "completed": [
+        "Alia.collarboneJewelryChain",
+        "Alia.velvetChokerPendantSignal"
+      ],
+      "nextStage": "lower-back-detail-refinement",
+      "path": "tmp/world-195x4/batch-211/details/867-philippines-el-nido-detail-02-collarbone-chain.png",
+      "sha256": "7d2c0a4c1932d757eb5dbff104b7fc16d693a030ae8b8a92fdfe4f352b84a3a1",
+      "bytes": 2244850,
+      "width": 941,
+      "height": 1672
+    }
+  ],
+  "acceptedDetailPass03": [
+    {
+      "scene": 864,
+      "attempts": 9,
+      "file": "864-philippines-manila-bay-detail-02-compact-ribbon.png",
+      "completed": [
+        "companion.PAWS",
+        "companion.PAWS.ribbon-chase"
+      ],
+      "nextStage": "remaining-detail-validation",
+      "path": "tmp/world-195x4/batch-211/details/864-philippines-manila-bay-detail-02-compact-ribbon.png",
+      "sha256": "4799bb6b258201d583b1f59f08dd24fd94c995197e6e3d232eeb3a413f526403",
+      "bytes": 2409689,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 865,
+      "attempts": 8,
+      "file": "865-philippines-vigan-detail-02-cabin-host-headpiece.png",
+      "completed": [
+        "Alia.hat"
+      ],
+      "nextStage": "next-triggered-detail",
+      "path": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-02-cabin-host-headpiece.png",
+      "sha256": "689c3c4f7f8c0d4bc302e639b56624b2a0dd140ca0fcacadf41310aaedaf4b6c",
+      "bytes": 2538856,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 866,
+      "attempts": 9,
+      "file": "866-philippines-banaue-detail-02-ring-choker-hip-accent.png",
+      "completed": [
+        "Ellie.ringChokerHipChainAccent"
+      ],
+      "nextStage": "next-triggered-detail",
+      "path": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-02-ring-choker-hip-accent.png",
+      "sha256": "db122ddbee0ae0ec691b13b4c70fd15c1e8a321502c39be7b87a3f0c732c397d",
+      "bytes": 2381453,
+      "width": 941,
+      "height": 1672
+    }
+  ],
+  "blockedLanes": [
+    {
+      "scene": 867,
+      "trait": "Ellie.lowerBackTattoo",
+      "attempts": 10,
+      "status": "blocked-after-three-one-variable-methods",
+      "retainedAsset": "tmp/world-195x4/batch-211/details/867-philippines-el-nido-detail-02-collarbone-chain.png",
+      "evidence": [
+        "The first mark attempt landed on front garment fabric.",
+        "The second mark attempt landed on the front torso instead of the right lower back.",
+        "The pose-only side-back reveal regressed the binding three-way embrace."
+      ],
+      "nextSafeMethod": "Do not retry this trait until a new safe method can preserve the accepted embrace and expose the correct lower-back skin panel in one controlled dependency chain."
+    }
+  ],
+  "acceptedDetailPass04": [
+    {
+      "scene": 864,
+      "action": "final-detail-visual-audit",
+      "asset": "tmp/world-195x4/batch-211/details/864-philippines-manila-bay-detail-02-compact-ribbon.png",
+      "sha256": "4799bb6b258201d583b1f59f08dd24fd94c995197e6e3d232eeb3a413f526403"
+    },
+    {
+      "scene": 865,
+      "action": "single-ankle-fashion-wand",
+      "asset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-03-fashion-wand.png",
+      "sha256": "ee614c7078317d83b0c8222ae04ab3575c8ce99422f27d2e8c18a59471005597"
+    },
+    {
+      "scene": 866,
+      "action": "exact-console-inspector-action",
+      "asset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-03-console-inspector.png",
+      "sha256": "d22fb23ae355e770191dd5c33489371ce8e451db2b1f6dc027a158c67b5bfeba"
+    }
+  ],
+  "nextAction": "Continue only safe dependency-aware Vigan and Banaue details; Manila is final-validation-ready; keep El Nido frozen until a safe lower-back method preserves the accepted embrace.",
+  "acceptedDetailPass05": [
+    {
+      "scene": 865,
+      "action": "task-focused-signal-token-reach",
+      "asset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-04-signal-token-reach.png",
+      "sha256": "dab2e0e4b3146ccc2a5175b02d6d8aac022b46eabea28aa9a4525f0a00ada585"
+    },
+    {
+      "scene": 866,
+      "action": "layered-collar-necklace-connector",
+      "asset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-04-layered-collar-connector.png",
+      "sha256": "de10b2f8b6240cad2417f67af7029190ee1189a7536e14393d4e227864cb29cb"
+    }
+  ],
+  "acceptedDetailPass06": [
+    {
+      "scene": 865,
+      "action": "single-partner-illusion-anklet",
+      "asset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-05-single-partner-anklet.png",
+      "sha256": "58923065f7afe39af618866257f9f8f048a05ff5c758bd726d24482543096b9a"
+    },
+    {
+      "scene": 866,
+      "action": "geometric-tailoring-overlay",
+      "asset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-05-tailoring-overlay.png",
+      "sha256": "a59e846bcf258f35e5a4b0d70bb21d2e539f86f19592106d38792b96a6823466"
+    }
+  ],
+  "acceptedDetailPass07": [
+    {
+      "scene": 865,
+      "action": "dual-collar-closure-styling",
+      "asset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-06-dual-collar-closures.png",
+      "sha256": "5ebd71cec7f2f15fdd21e646a189e1b4a7bdbad27fc3cce9c210f74b4caf8de2"
+    },
+    {
+      "scene": 866,
+      "action": "whisper-and-interlaced-hands",
+      "asset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-06-whisper-interlaced-hands.png",
+      "sha256": "0b50eeefca34974541807993f3e18e9f6aa8a0966a3a04d04c2bc9c97fab05d8"
+    }
+  ]
+}

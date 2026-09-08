@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "auditedAtUtc": "2026-09-08T06:44:04.474Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0555.json",
+  "previousAuditDueUtc": "2026-09-08T06:40:49.170Z",
+  "scope": "Current existing-task continuation since the previous 45-minute audit, including terminal source collection, four attributed image edits, final selection and final remote payload checks.",
+  "findings": [
+    {
+      "kind": "terminal-source-integrity",
+      "detail": "All four original Meta occurrences completed without another Send. The final scene2069 gallery was collected after provider-internal processing. All15 exposed WebP files and a separate Download-button JPEG were retained. Provider-internal steps are not agent retries."
+    },
+    {
+      "kind": "single-edit-accounting",
+      "detail": "Exactly four built-in edit invocations, one per scene. Scenes2067 and2070 returned PNGs. Scenes2068 and2069 each returned a separately attributed output-stage moderation block. All four allowances are consumed, with exact prompt and result or error receipts preserved."
+    },
+    {
+      "kind": "selection-integrity",
+      "detail": "Selected scene2067 PNG and scenes2068-2070 Meta originals. The2070 PNG introduces lower-body detail beyond its source crop and is archived unused. Four accepted choices among18 saved image files and14 unique byte versions. No aesthetic retry."
+    },
+    {
+      "kind": "roll-and-frame-drift",
+      "detail": "The frozen rolls and exact prompts remain unchanged. Several provider outputs are broader and more upright than their rolled close/Dutch framing. Provider prose overclaims exact compliance; actual images determine QA. The single2070 edit violated the source-frame invariant and was not selected."
+    },
+    {
+      "kind": "remote-evidence",
+      "detail": "Final payload f193a0f48d6b6fcd38bb6380b004a80e06d36d74 matched origin and draft PR13. Fresh isolated LFS fetch verified20 file paths representing16 unique objects, including three exact anchors.102 ordinary files and114 sealed manifest records passed. The proof carrier is being committed separately."
+    },
+    {
+      "kind": "publication",
+      "detail": "No new X post during Armenia closure. The two Uruguay/Bosnia URLs remain terminal and the X ledger posts count is240. Armenia has no eligible companion yet and must not be posted alone.",
+      "urls": [
+        "https://x.com/dogramaci/status/2097189559310156192",
+        "https://x.com/dogramaci/status/2097191849538588895"
+      ]
+    },
+    {
+      "kind": "browser-reuse",
+      "detail": "After terminal output and remote byte reconciliation, one visible New chat activation per Meta lane navigated all four existing tabs home. Immediate snapshots briefly retained the old page, so fresh inventory and composer checks confirmed completion without repeating clicks. The four composers are empty in Thinking on leesha007. X is blank on @dogramaci. Protected Oman tab1 remains untouched."
+    },
+    {
+      "kind": "country-cursor",
+      "detail": "Current remote-verified batch510 closure and countryPriorityOrder make Namibia batch511 scenes2071-2074 next. No batch511 artifacts found. Legacy campaign nextBatch220/nextNumber900 and old Cuba/Tanzania handoff hints are not dispatch authority."
+    }
+  ],
+  "boundedFixes": [
+    "Use immutable rolled crop instructions as the leading composition constraint in future legitimate new-scene prompts. Keep designs below a close crop explicitly offscreen and do not add them during tailoring.",
+    "Keep one invocation per edit with per-scene error attribution and save successful sibling results even when another call blocks.",
+    "Keep local verification operations bounded to avoid runtime timeouts; freshly fetch LFS objects into an isolated absolute path and compare each pointer, size and SHA256.",
+    "After a navigation action, reconcile a fresh inventory and resulting page before deciding it failed. Never repeat Send or Post on an ambiguous response."
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newAutomationsOrWorkers": 0,
+  "guardianConfigSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+  "guardianStatus": "ACTIVE",
+  "nextAuditNotBeforeUtc": "2026-09-08T07:29:04.474Z",
+  "nextSafeAction": "Inspect the latest country cursor, then prepare Namibia Batch511 scenes2071-2074 in the same four visible Meta lanes with new immutable rolls, leesha007, Thinking and exact anchors 938,936,937. Never reopen accepted Armenia scenes or repeat any edit. Armenia can be posted only after an eligible companion country is accepted and all publication gates pass."
+}

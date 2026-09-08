@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "batch": 458,
+  "country": "Laos",
+  "scene": 1861,
+  "qaAtUtc": "2026-08-28T12:07:20.882Z",
+  "sourcePath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-458-laos\\1861-laos-bolaven-plateau-paksong-01.jpg",
+  "sha256": "3C0CA7F3889CEBB0BE56D4A7D44D2FB0889640A028DBEB4015DE41C0E238D77C",
+  "dimensions": {
+    "width": 1152,
+    "height": 1843
+  },
+  "orientationCheck": "fail-not-9:16; archived JPEG is 1152x1843",
+  "castCheck": "pass-exactly-four-adult-women-with-role-order-readable",
+  "locationCheck": "pass-Bolaven-coffee-estate-readable",
+  "cameraCheck": "fail-output-canvas-is-not-9:16; within that canvas the knee crop is otherwise close",
+  "choreographyCheck": "fail; ECE kisses Alia instead of the required Radiance, so the named identity-role relationship is wrong",
+  "safetyCheck": "pass-public-safe",
+  "decision": "reject-hard-unusable",
+  "accepted": false,
+  "rejectionReasons": [
+    "wrong output dimensions: 1152x1843 instead of 9:16",
+    "required cheek-peck recipient is wrong",
+    "locked identity-role choreography violated"
+  ]
+}

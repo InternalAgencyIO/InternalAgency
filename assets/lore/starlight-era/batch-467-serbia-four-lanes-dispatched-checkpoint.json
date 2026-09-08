@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "state": "four_lanes_dispatched_once_all_first_occurrences_terminal_and_archived",
+  "capturedAtUtc": "2026-08-31T06:35:14.5119082Z",
+  "actionTimeConfirmation": {
+    "received": true,
+    "userText": "send authorized go"
+  },
+  "browserRecovery": {
+    "stagedTabIdsThatExpiredBeforeClick": ["5", "6", "7", "8"],
+    "expiredTabsReceivedProviderActions": false,
+    "replacementTabIds": ["9", "10", "11", "12"],
+    "surface": "in-app Browser only",
+    "signedInAccountVisible": "leesha007",
+    "anchorsReattachedAndVerified": true,
+    "exactAnchorOrder": [938, 936, 937],
+    "exactPromptsReverified": true,
+    "hiddenInputOrDirectFetchUsed": false
+  },
+  "lanes": [
+    {
+      "scene": 1894,
+      "tabId": "9",
+      "submittedAtUtc": "2026-08-31T06:02:47.933Z",
+      "providerUrl": "https://www.meta.ai/prompt/24a04fc3-f2b5-4682-83f3-f714ab2539f3",
+      "promptSha256": "F9711D1A078726A89D02356E9DCDC7ECC7C142A98610AAC83C0F392ED110D70C",
+      "sendClicks": 1,
+      "terminalState": "explicit_no_byte_refusal"
+    },
+    {
+      "scene": 1895,
+      "tabId": "10",
+      "submittedAtUtc": "2026-08-31T06:02:48.241Z",
+      "providerUrl": "https://www.meta.ai/prompt/89807d2c-615c-4ccd-83d2-78f1b366b820",
+      "promptSha256": "3479FFDF9D3405E607C5B366EDF57F28FC79766E1BA276BB5883CC2ACD9ED26B",
+      "sendClicks": 1,
+      "terminalState": "one_image_downloaded"
+    },
+    {
+      "scene": 1896,
+      "tabId": "11",
+      "submittedAtUtc": "2026-08-31T06:02:48.552Z",
+      "providerUrl": "https://www.meta.ai/prompt/5ca1b7d7-b8ff-4014-9cb2-0f42b4115a5d",
+      "promptSha256": "F338054F2ABB006DE1B5F06090EF85F4E64AB61EA9198FAF3CF4FA1BA87CAC84",
+      "sendClicks": 1,
+      "terminalState": "one_image_downloaded"
+    },
+    {
+      "scene": 1897,
+      "tabId": "12",
+      "submittedAtUtc": "2026-08-31T06:02:48.848Z",
+      "providerUrl": "https://www.meta.ai/prompt/0e8881a3-b765-4b50-ad41-50c9e49e2cfa",
+      "promptSha256": "34D73ED25019C0424920470D8E2AC684FC29954717D46EDBE168D9FC358ECE74",
+      "sendClicks": 1,
+      "terminalState": "final_and_original_full_images_downloaded"
+    }
+  ],
+  "duplicatePrevention": {
+    "totalSendClicks": 4,
+    "repeatSendClicks": 0,
+    "oldSerbiaScenesOpened": false,
+    "oldBulgariaScenesOpened": false,
+    "terminalSceneReopenedForMessage": false
+  },
+  "archive": {
+    "providerEvidenceDirectory": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/",
+    "rawAssetCount": 4,
+    "browserEvidenceCount": 4,
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/provider-ledger.json"
+  },
+  "nextSafeAction": "Run exactly one built-in ChatGPT hemline refinement for each technically valid Meta asset and archive every result before comparative QA or any fresh-chat Meta retry."
+}

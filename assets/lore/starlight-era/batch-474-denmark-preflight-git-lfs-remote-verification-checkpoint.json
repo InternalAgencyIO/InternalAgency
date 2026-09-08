@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "batch": 474,
+  "country": "Denmark",
+  "state": "preflight-git-lfs-remote-pr-and-blank-x-composer-verified",
+  "verifiedAtUtc": "2026-08-31T19:26:07.4934305Z",
+  "preparationCommit": "3199c3c757d297b1d440b9babb4d0d1b0f4ed2e0",
+  "git": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "3199c3c757d297b1d440b9babb4d0d1b0f4ed2e0",
+    "remoteHead": "3199c3c757d297b1d440b9babb4d0d1b0f4ed2e0",
+    "draftPrHead": "3199c3c757d297b1d440b9babb4d0d1b0f4ed2e0",
+    "ahead": 0,
+    "behind": 0,
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "targetedLfsDryRunEmpty": true
+  },
+  "preparation": {
+    "checkpoint": "assets/lore/starlight-era/batch-474-denmark-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "sceneIds": [1923, 1924, 1925, 1926],
+    "promptHashesVerified": true,
+    "anchorFilesExist": true,
+    "anchorHashesVerified": true,
+    "orderedAnchors": [938, 936, 937]
+  },
+  "browser": {
+    "actualControlledTabCount": 1,
+    "xComposerTabId": "6",
+    "xComposerUrl": "https://x.com/compose/post",
+    "xComposerTitle": "Compose new post / X",
+    "postTextboxVisible": true,
+    "postButtonDisabled": true,
+    "mediaCount": 0,
+    "blankComposerVerified": true,
+    "metaTabCount": 0,
+    "unexpectedTabCount": 0
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "dispatchAuthority": {
+    "currentAuthorization": "authorized for all go, authorized for all similar commands",
+    "provider": "Meta AI only through the visible in-app Browser",
+    "requiredMode": "Thinking",
+    "visibleMetaLaneLimit": 4,
+    "visibleXComposerLimit": 1,
+    "maximumMetaRetriesPerScene": 2,
+    "chatgptOneStrongShorteningPassPerTechnicallyValidSelectedOccurrence": true,
+    "historicalCubaOrTanzaniaDispatchPermitted": false
+  },
+  "nextSafeAction": "Commit and remote-verify this preflight record, then open four fresh Meta lanes beside tab 6. In every lane visibly verify the signed-in account and Thinking, attach anchors 938, 936, 937 in that exact order, stage and hash-check the exact scene prompt, and stop before Send if any visible gate fails."
+}

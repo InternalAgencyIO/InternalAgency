@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "batch": 456,
+  "country": "Sierra Leone",
+  "scene": 1853,
+  "qaAtUtc": "2026-08-28T11:39:56.927Z",
+  "requiredCameraRoll": 10,
+  "requiredCameraCategory": "EXTREME CLOSE",
+  "accepted": false,
+  "canonicalOutput": null,
+  "outputs": [
+    {
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-456-sierra-leone\\1853-sierra-leone-dublin-bay-banana-islands-01.webp",
+      "sha256": "C107B06D1E32B2FF79C6D9AFBF234D31A58666571F8E8E6B3BD985991512E695",
+      "dimensions": {
+        "width": 1152,
+        "height": 1392
+      },
+      "decision": "rejected-hard-unusable",
+      "reasons": [
+        "Returned dimensions 1152x1392 do not satisfy the required vertical 9:16 aspect ratio.",
+        "Crop extends substantially below shoulders and violates the strict shoulders-to-crown framing.",
+        "The required protective catch is not visually readable.",
+        "The role-to-anchor identity mapping is not reliably preserved."
+      ]
+    }
+  ]
+}

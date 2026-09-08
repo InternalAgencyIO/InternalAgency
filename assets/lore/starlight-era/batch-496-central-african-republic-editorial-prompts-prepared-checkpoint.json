@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "batch": 496,
+  "country": "Central African Republic",
+  "sceneIds": [2011, 2012, 2013, 2014],
+  "state": "four-editorial-prompts-prepared-offline-not-dispatched",
+  "preparedAtUtc": "2026-09-06T09:21:08.1648947Z",
+  "authority": "assets/lore/starlight-era/batch-496-central-african-republic-editorial-brief.json",
+  "briefSha256": "C12D49399F5F8CA3661CE3F97D6E1B5471FCC83EBA592C16FF928F42FCF797A4",
+  "briefBytes": 7836,
+  "rollContract": "assets/lore/starlight-era/starlight-editorial-rolls-2026-09-06.json",
+  "fixedRollsAndExactPrompts": "assets/lore/starlight-era/batch-496-central-african-republic-fixed-rolls.json",
+  "fixedRollsSha256": "6ABEE045ACF3CCC470278D5461973B9C90FB1919B9F31AEFBB7D7CE040418158",
+  "fixedRollsBytes": 141831,
+  "generator": "scripts/starlight/editorial-rolls.cjs",
+  "seed": "starlight-editorial-rolls-2026-09-06-v1|batch-496|central african republic",
+  "seedSelection": "Fixed; no outcome search or reroll",
+  "countryPair": ["Liberia", "Central African Republic"],
+  "canonicalWorldXPostCount": 200,
+  "countryPostCounts": {"Liberia": 0, "Central African Republic": 0, "New Zealand": 0},
+  "provider": {
+    "name": "Meta AI",
+    "visibleInAppBrowserOnly": true,
+    "accountRequired": "leesha007",
+    "modeRequired": "Thinking",
+    "laneCount": 4,
+    "orderedAnchorIds": [938, 936, 937],
+    "maximumHardFailureRetriesPerScene": 2,
+    "aestheticRetries": 0,
+    "browserDispatchCount": 0
+  },
+  "scenes": [
+    {
+      "scene": 2011,
+      "location": "Bangui Oubangui River terrace and wooded hills",
+      "cameraRoll": 18,
+      "cameraCategory": "extreme-close",
+      "angle": "high-oblique",
+      "dutchDegrees": 21,
+      "pose": "side-hug-step",
+      "promptCharacters": 3979,
+      "promptSha256": "D1DD4E4D9EAC7718423EF7C605997E6D056B6C6693B186C2F572A1A1F54FBBC5",
+      "singleEditPromptSha256": "8EB855A1116280A68D8245BF0BADB8BE608EBE66001A7B5D70F7F39095FF40EA"
+    },
+    {
+      "scene": 2012,
+      "location": "Boali Falls forest gorge overlook",
+      "cameraRoll": 37,
+      "cameraCategory": "intermediate",
+      "angle": "front-quarter-low",
+      "dutchDegrees": 22,
+      "pose": "back-hug-turn",
+      "promptCharacters": 3706,
+      "promptSha256": "B114578492000C9BEAAB1EC59B9F5A67430A36B69CD515B2B105A131E792353C",
+      "singleEditPromptSha256": "EA38C4506592E39CBF1C725C2BCFF09000921D233273A3B0BDC0ADAAE2331D6F"
+    },
+    {
+      "scene": 2013,
+      "location": "Dzanga Bai rainforest clearing observation deck",
+      "cameraRoll": 67,
+      "cameraCategory": "intermediate",
+      "angle": "side-level",
+      "dutchDegrees": 15,
+      "pose": "supported-seated-conversation",
+      "promptCharacters": 4352,
+      "promptSha256": "45C1BF6EE07179532FB5255FB1739B9205736A815B2EDFD47A031EB7DF89BA74",
+      "singleEditPromptSha256": "B32312B26A2BC310D0C8510643FC42E64E67A85A68CB5D411A619C3F75CECDFD"
+    },
+    {
+      "scene": 2014,
+      "location": "Bamingui-Bangoran savanna and granite ridge terrace",
+      "cameraRoll": 21,
+      "cameraCategory": "intermediate",
+      "angle": "over-shoulder",
+      "dutchDegrees": 16,
+      "pose": "head-resting-on-clothed-lap",
+      "promptCharacters": 4015,
+      "promptSha256": "86FEF24719D309839813EDEF1A452297D00DFD425EF663D0D4850E655DBD9FA2",
+      "singleEditPromptSha256": "AA4F834753AC36AE219184936D0F2D894905B88027AE4722B438D79267100A8A"
+    }
+  ],
+  "validation": {
+    "briefJsonValid": true,
+    "fixedRollsJsonValid": true,
+    "allPromptHashesRecomputedExact": true,
+    "allSingleEditPromptHashesRecomputedExact": true,
+    "unicodeEnOrEmDashAbsent": true,
+    "editorialRollTestsPassed": 5,
+    "editorialRollTestsFailed": 0
+  },
+  "canonicalContradiction": "Older Cuba-oriented automation text remains superseded by Tanzania preparation and every later remote-verified checkpoint. Batch 496 Central African Republic is the current offline preparation. No provider prompt is dispatched by this checkpoint.",
+  "nextSafeAction": "Commit and remote-verify the brief, fixed rolls and exact prompt checkpoint. Then close only the four terminal Liberia Meta tabs, open four fresh blank Meta composers, verify leesha007 and Thinking, type one exact prompt per lane, attach anchors 938, 936 and 937 once each in that order, preserve and remote-verify a no-send staging receipt, and only then activate each Send once."
+}

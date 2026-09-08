@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-08-26T07:27:00.526Z",
+  "batch": 414,
+  "country": "Monaco",
+  "state": "provider_dispatch_blocker_persists",
+  "authority": {
+    "remote_head_before_probe": "4dfa1c300d52e58e3ee8ff4d4e99eddfabfbd2b3",
+    "prepared_checkpoint": "assets/lore/starlight-era/batch-414-monaco-prompts-prepared-provider-blocked-checkpoint.json",
+    "scenes": [
+      1676,
+      1677,
+      1678,
+      1679
+    ],
+    "prompt_hashes": [
+      "70BD5E69D830765BD00FE9CBBE5E3AF409F075C171906F51C8254726875038B6",
+      "12AFB8954CBD5715652F670B2C29F6F697867830F5D7C21BF01E0CD96626D0A7",
+      "D73EBA3A661DB5D88F6258DD6748D8CB95C6C101468B85C0B0B4793D0F2E1575",
+      "E41F61A770E70492E57AB8276A28B127B1B4F602BE8D1191823A3B80BA26D05C"
+    ],
+    "camera_rolls": [
+      19,
+      42,
+      57,
+      92
+    ]
+  },
+  "browser_probe": {
+    "browser": "Codex in-app browser",
+    "signed_in_meta_tabs": 4,
+    "before_reload": {
+      "thinking_visible_on_tabs": 4,
+      "provider_chat_urls": 0,
+      "view_media_controls": 0,
+      "returned_bytes": 0
+    },
+    "action": "Reloaded the same four persistent Meta home tabs without deleting tabs, uploading files, typing prompts, or sending requests.",
+    "after_reload": {
+      "thinking_visible_on_tabs": 4,
+      "provider_chat_urls": 0,
+      "view_media_controls": 0,
+      "returned_bytes": 0
+    }
+  },
+  "attempt_accounting": {
+    "monaco_initial_dispatches": 0,
+    "attempts_consumed": 0,
+    "retries_consumed": 0,
+    "prompts_uploaded": false,
+    "prompts_sent": false
+  },
+  "blocker": {
+    "provider": "Meta AI",
+    "evidence": "Persistent visible Thinking state survived full refresh across all four signed-in lanes; no provider occurrence can be confirmed.",
+    "effect": "Do not dispatch Batch 414 until a later safe wake shows the provider responding normally. Never switch providers, generate filler, or consume attempts into the known stall."
+  },
+  "x_cadence": {
+    "completed_cycles_since_last_x": 3,
+    "post_early": false
+  },
+  "next_action": "On the next guardian wake, fetch newest remote authority and run the same safe signed-in Meta probe. If the stall clears and browser action-time confirmation exists, dispatch scene 1676 as a single health probe before filling scenes 1677-1679."
+}

@@ -1,0 +1,25 @@
+{
+  "at": "2026-09-06T21:07:25.791Z",
+  "preexistingLedgerRowsPreserved": 221,
+  "canonicalPostCount": 226,
+  "drainPosts": 15,
+  "drainImages": 55,
+  "uniqueSceneIds": 55,
+  "uniqueSourceHashes": 55,
+  "archivalBrowserManifestRowsVerified": 548,
+  "manifestMismatches": 0,
+  "p16Published": false,
+  "p16ConfirmedPublicTransmissions": 0,
+  "pointerParity": true,
+  "rejectedPromptVerifier": {
+    "exactHashesPassed": 139,
+    "rawEntries": 130,
+    "noByteEntries": 8,
+    "zeroByteEntries": 1,
+    "errors": [
+      "checkpoint contractSha256 mismatch",
+      "ledger contractPolicySha256 mismatch"
+    ],
+    "historicalSealProof": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/historical-contract-seal-resolved-1920.json"
+  }
+}

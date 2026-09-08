@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "batch": 391,
+  "country": "Malta",
+  "status": "ready-four-tab-meta-ai-pass-1",
+  "generatedAt": "2026-08-20T07:28:00.000Z",
+  "sourceCommit": "6d6d6de494a0ee50c8a3052a61199acb49b55a74",
+  "contract": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "sha256": "7CD14D921342CB03E23F194BE87F516B4F77CD36DF8BEA66547C53779C360AE5"
+  },
+  "predecessor": {
+    "path": "assets/lore/starlight-era/batch-390-montenegro-polar-airship-checkpoint.json",
+    "sha256": "FF06220E93EFB71A2C0D305F63BDF45221E3D2877BB67CE69A3136D5F2C6EDBB",
+    "status": "complete-four-of-four-hard-safe-meta-ai-pass-1-accepted-no-more-montenegro-rendering"
+  },
+  "queueAuthorization": {
+    "nextCountry": "Malta",
+    "nextBatch": 391,
+    "sceneNumbers": [
+      1584,
+      1585,
+      1586,
+      1587
+    ],
+    "cinematicTheme": "orbital research-station couture",
+    "themePairPosition": 1,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-319-montenegro-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/165"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/9"
+    ],
+    "lockedUntilBatch390Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch390Closure": true
+  },
+  "provider": "Meta AI only",
+  "passPolicy": {
+    "passOne": 4,
+    "concurrency": 4,
+    "passTwoMaximumPerHardUnusableScene": 1,
+    "thirdPassAllowed": false
+  },
+  "closeLoveBankMinimums": {
+    "closeCameraScenes": 4,
+    "lapSittingScenes": 2,
+    "visiblePeckScenes": 3,
+    "closeEmbraceScenes": 4,
+    "staticLineupScenesAllowed": 0
+  },
+  "closeLoveBankActual": {
+    "closeCameraScenes": 4,
+    "lapSittingScenes": 2,
+    "visiblePeckScenes": 4,
+    "closeEmbraceScenes": 4,
+    "staticLineupScenes": 0
+  },
+  "suppressionPolicy": {
+    "sameRun": true,
+    "blacklistedSingleTokens": [
+      "16",
+      "9",
+      "anchors",
+      "create",
+      "editorial",
+      "fresh",
+      "full-length",
+      "identity",
+      "one",
+      "only",
+      "original",
+      "photorealistic",
+      "public-fashion",
+      "series",
+      "starlight",
+      "use",
+      "world"
+    ],
+    "promptChecksPassed": 8
+  },
+  "maleModel": {
+    "key": "batch391-malta-male-model-scene",
+    "hash": 2180511009,
+    "scene": 1585
+  },
+  "promptBank": [
+    {
+      "scene": 1584,
+      "primary": {
+        "file": "tmp/world-195x4/batch-391/scene-1584-meta-pass-1-primary.txt",
+        "sha256": "B4B3C4EF9AD4408A6905209C00C228F3EC85179B9BA011E42A0E21457A9A04A9",
+        "bytes": 5040,
+        "chars": 5040
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-391/scene-1584-meta-pass-1-fallback.txt",
+        "sha256": "EA54DCFB73028DE38534A1CC36CD2B1A40B0305B4A883B6880BC61F278C13B15",
+        "bytes": 1428,
+        "chars": 1428
+      }
+    },
+    {
+      "scene": 1585,
+      "primary": {
+        "file": "tmp/world-195x4/batch-391/scene-1585-meta-pass-1-primary.txt",
+        "sha256": "5D23790AF79468008E93515A68F207E107275241E48997628CA6526EDA610719",
+        "bytes": 5105,
+        "chars": 5105
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-391/scene-1585-meta-pass-1-fallback.txt",
+        "sha256": "382005678FA4F1900885D7CCBD018B2A9FA180C541B7C41DD0E02BFE65E89281",
+        "bytes": 1499,
+        "chars": 1499
+      }
+    },
+    {
+      "scene": 1586,
+      "primary": {
+        "file": "tmp/world-195x4/batch-391/scene-1586-meta-pass-1-primary.txt",
+        "sha256": "D2CEFF0D8FE8E1698A5FF4FF8CDF908E992C1DE0D723EFB419F5893396FAC2B4",
+        "bytes": 5025,
+        "chars": 5025
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-391/scene-1586-meta-pass-1-fallback.txt",
+        "sha256": "DF7B5388B36127CBB10E86BD1E9D4548154DFE1DBA5728D819FC959EEA0A4B24",
+        "bytes": 1417,
+        "chars": 1417
+      }
+    },
+    {
+      "scene": 1587,
+      "primary": {
+        "file": "tmp/world-195x4/batch-391/scene-1587-meta-pass-1-primary.txt",
+        "sha256": "C8B64045D59B1B95E86FC5861A6E9D9D28F0FB1F37DEB841EADFC43559EEAE90",
+        "bytes": 4854,
+        "chars": 4854
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-391/scene-1587-meta-pass-1-fallback.txt",
+        "sha256": "06DC5DE8EAEFA9F92F24D2F8236FC9D2BF810E2CD9B9A1FDD19009942648A0C8",
+        "bytes": 1431,
+        "chars": 1431
+      }
+    }
+  ]
+}

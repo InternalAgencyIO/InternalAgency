@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "starlight-country-batch-closed",
+  "batch": 457,
+  "country": "Togo",
+  "status": "closed-zero-accepted",
+  "closedAtUtc": "2026-08-28T11:54:19.727Z",
+  "acceptedSceneIds": [],
+  "acceptedCount": 0,
+  "generatedMediaManifestImageCountBefore": 880,
+  "generatedMediaManifestImageCountAfter": 880,
+  "providerOccurrenceCount": 4,
+  "rawOutputCount": 3,
+  "duplicateRelationships": [
+    {
+      "sha256": "751D2A60325A6343B293CAA559B30ADBEA7A562645653D10CB4DDE4FFEF505DB",
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-457-togo\\1854-togo-lome-atlantic-corniche-01.webp",
+      "duplicateOfExistingManifest": false,
+      "duplicateWithinBatch": false
+    },
+    {
+      "sha256": "F2360E08B8C4916CC24DF3520EDE3A41B9791182E21C12BF9EF78D701B6AA943",
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-457-togo\\1856-togo-kpalime-mount-agou-01.webp",
+      "duplicateOfExistingManifest": false,
+      "duplicateWithinBatch": false
+    },
+    {
+      "sha256": "B47A11D90F7B7F37156AABFAC651D35CCDD049D2C6249E93AA3FEACCAF9A4675",
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-457-togo\\1857-togo-aneho-lagoon-atlantic-01.webp",
+      "duplicateOfExistingManifest": false,
+      "duplicateWithinBatch": false
+    }
+  ],
+  "scenes": [
+    {
+      "scene": 1854,
+      "providerChatUrl": "https://www.meta.ai/prompt/c8c45165-ff26-4462-aa1e-c5bd8d00231e",
+      "outcome": "one-raw-output-archived-hard-unusable",
+      "accepted": false,
+      "rawOutputCount": 1,
+      "qaPath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-457-togo\\1854-togo-lome-atlantic-corniche-visual-qa.json"
+    },
+    {
+      "scene": 1855,
+      "providerChatUrl": "https://www.meta.ai/prompt/3d9c69fd-24c2-4a63-971f-03eece81fa51",
+      "outcome": "explicit-no-byte-refusal",
+      "accepted": false,
+      "rawOutputCount": 0,
+      "qaPath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-457-togo\\1855-togo-lake-togo-agbodrafo-visual-qa.json"
+    },
+    {
+      "scene": 1856,
+      "providerChatUrl": "https://www.meta.ai/prompt/8ca1c97c-4808-4d2c-9060-f93a31a852de",
+      "outcome": "one-raw-output-archived-hard-unusable",
+      "accepted": false,
+      "rawOutputCount": 1,
+      "qaPath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-457-togo\\1856-togo-kpalime-mount-agou-visual-qa.json"
+    },
+    {
+      "scene": 1857,
+      "providerChatUrl": "https://www.meta.ai/prompt/26d84189-4c79-40ec-b60a-ac20a2cb4736",
+      "outcome": "one-raw-output-archived-hard-unusable",
+      "accepted": false,
+      "rawOutputCount": 1,
+      "qaPath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-457-togo\\1857-togo-aneho-lagoon-atlantic-visual-qa.json"
+    }
+  ],
+  "xReconciliation": {
+    "destinationAccount": "@dogramaci",
+    "publishingPerformed": false,
+    "publishingAuthorizationUsed": false,
+    "preparedPostQueueCount": 5,
+    "preparedAssetCount": 15,
+    "eligibleBacklogRemaining": 19,
+    "unreservedAcceptedSceneIds": [
+      1828,
+      1832,
+      1845,
+      1849
+    ],
+    "newLegalPairPrepared": false,
+    "reason": "Batch 457 produced zero accepted images, so the existing five prepared 2+1 posts and four distinct-country unreserved leftovers are unchanged."
+  },
+  "nextCountry": "Laos",
+  "nextAction": "Fresh action-time confirmation required before the next DeepSeek request, Meta anchor uploads, or Meta Sends.",
+  "tabCleanup": "All terminal Meta tabs closed; no unused browser tabs retained."
+}

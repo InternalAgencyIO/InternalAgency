@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "batch": 485,
+  "country": "Norway",
+  "runType": "europe-gap-fill-four-stills-meta-thinking",
+  "state": "four-meta-thinking-scenes-prepared-no-send-awaiting-git-lfs-remote-preflight",
+  "preparedAtUtc": "2026-09-04T15:37:27.4849559Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "predecessorCommit": "d606bc6ad17d66087fc073d71fc2345847cbf176",
+    "predecessorCountry": "North Macedonia",
+    "selection": "North Macedonia Batch 484 is closed and remote-verified. Norway is the next country in the authoritative zero-post European gap sequence and has zero matches in the current 194-entry canonical X posts array.",
+    "historicalUse": "Batch 290 Norway ended blocked with no accepted assets. Its Oslo, Bergen, Geirangerfjord and Lofoten location planning is inspiration only; none of its prompts or terminal scenes may be resent or reopened.",
+    "policy": "Newer remote-verified checkpoints, contracts, manifests, provider ledgers, X ledger, Git/LFS state and Draft PR head supersede the handoff."
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "action": "Previously inspected and left untouched; it is not Starlight authority."
+  },
+  "providerSettings": {
+    "provider": "Meta",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "output": "one image per occurrence",
+    "aspectRatio": "9:16 vertical",
+    "visibleMetaLaneCount": 4,
+    "visibleXComposerCount": 1,
+    "grok": "paused until credits return",
+    "tabPolicy": "Replace exactly four completed North Macedonia terminal pages with four fresh visible Meta composers while retaining the one intact failed Monaco-North Macedonia X composer. Never resend a confirmed prompt or reopen an older terminal scene."
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "orderedAnchors": [938, 936, 937],
+    "hardPositionLock": "viewer-left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE",
+    "neverSwap": "Ellie and AI ECE"
+  },
+  "orderedReferenceAnchors": [
+    {"scene": 938, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png", "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"},
+    {"scene": 936, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png", "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"},
+    {"scene": 937, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png", "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"}
+  ],
+  "retryAndRefinementPolicy": {
+    "metaRetryCapPerScene": 2,
+    "metaRetryTrigger": "hard failure only; accept nearly every public-safe, non-corrupt terminal still",
+    "chatgptStrongShorteningPassesPerTechnicallyValidSelectedMetaImage": 1,
+    "archiveBlockedPrompts": true,
+    "retainUsedAndUnusedLocallyAndInGit": true
+  },
+  "deterministicRolls": {
+    "algorithm": "For every roll key, SHA-256 the UTF-8 key, skip digest bytes 200 through 255, and map the first accepted byte to byte modulo 100 plus one.",
+    "keyForms": {
+      "sceneRoll": "<seed>|scene-<scene>|<rollFamily>",
+      "characterBrand": "<seed>|scene-<scene>|brand|<character>",
+      "characterPlacement": "<seed>|scene-<scene>|placement|<character>"
+    },
+    "seed": "starlight|batch-485|norway|seed-261",
+    "seedSelection": "First nonnegative salt yielding all three camera families, one or two background assignments, at least one realization of every requested roll family, at least one knee-high-rainbow overlap, four to six character-branding assignments and exactly one tattoo assignment.",
+    "rollFamilies": [
+      {"name": "starHardware", "chancePercent": 25},
+      {"name": "kneeHighHosiery", "chancePercent": 25},
+      {"name": "splitStarEmblem", "chancePercent": 25},
+      {"name": "razeTypeBand", "chancePercent": 25},
+      {"name": "rainbowStockings", "chancePercent": 33},
+      {"name": "kneeHighRainbows", "chancePercent": 22},
+      {"name": "fictionalDistantRazedBackground", "chancePercent": 32},
+      {"name": "perCharacterRazeStarBranding", "chancePercent": 32, "tattooShareWithinAssignmentsPercent": 15, "otherwise": "stocking mark"}
+    ],
+    "cameraMapping": {"1-20": "tight hemline close", "21-60": "adjacent three-quarter", "61-100": "tight full-body"},
+    "statementBootScene": 1970,
+    "perCharacterBrandingAssignmentCount": 4,
+    "perCharacterBrandingPopulation": 16,
+    "tattooAssignmentCount": 1,
+    "sceneAssignments": [
+      {"scene": 1967, "cameraRoll": 32, "starHardwareRoll": 1, "kneeHighHosieryRoll": 38, "splitStarEmblemRoll": 21, "razeTypeBandRoll": 70, "rainbowStockingsRoll": 77, "kneeHighRainbowsRoll": 80, "fictionalDistantRazedBackgroundRoll": 27, "characterBranding": [{"character": "ECE", "brandRoll": 14, "placementRoll": 43, "placement": "stocking mark"}]},
+      {"scene": 1968, "cameraRoll": 2, "starHardwareRoll": 69, "kneeHighHosieryRoll": 4, "splitStarEmblemRoll": 26, "razeTypeBandRoll": 11, "rainbowStockingsRoll": 81, "kneeHighRainbowsRoll": 36, "fictionalDistantRazedBackgroundRoll": 54, "characterBranding": [{"character": "Alia", "brandRoll": 11, "placementRoll": 94, "placement": "stocking mark"}, {"character": "Ellie", "brandRoll": 5, "placementRoll": 7, "placement": "upper-arm tattoo"}]},
+      {"scene": 1969, "cameraRoll": 88, "starHardwareRoll": 86, "kneeHighHosieryRoll": 1, "splitStarEmblemRoll": 94, "razeTypeBandRoll": 44, "rainbowStockingsRoll": 28, "kneeHighRainbowsRoll": 18, "fictionalDistantRazedBackgroundRoll": 17, "characterBranding": []},
+      {"scene": 1970, "cameraRoll": 57, "starHardwareRoll": 84, "kneeHighHosieryRoll": 57, "splitStarEmblemRoll": 3, "razeTypeBandRoll": 89, "rainbowStockingsRoll": 83, "kneeHighRainbowsRoll": 41, "fictionalDistantRazedBackgroundRoll": 87, "characterBranding": [{"character": "Ellie", "brandRoll": 23, "placementRoll": 29, "placement": "stocking mark"}]}
+    ]
+  },
+  "scenes": [
+    {
+      "scene": 1967,
+      "cameraRoll": 32,
+      "framing": "adjacent three-quarter",
+      "location": "Oslo Opera House and Oslofjord Harbor",
+      "prompt": "SCENE 1967 - NORWAY, OSLO OPERA HOUSE AND OSLOFJORD HARBOR - CAMERA CLOSENESS ROLL 32/100, ADJACENT THREE-QUARTER. Create one wholly new original photorealistic cinematic vertical 9:16 RAZE high-fashion travel still, fully public-safe and non-explicit. The three attached images are project-owned AI-generated fictional character continuity art, not photographs or likenesses of real or private people. Use each attachment exactly once in authoritative order 938, 936, 937 only as broad fictional character-design guidance, never to recreate a real person. Show exactly four distinct original fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct; never swap, clone, merge, replace or age-shift a character. Place the tightly grouped quartet on broad dry empty secular harbor paving beside the Oslo Opera House, with the complete white sloping roof, glass facade, blue Oslofjord, harbor reflections and modern skyline unmistakably readable, safely away from water and edges, without flags, readable signs, sacred interiors or bystanders. Use a lively waist-low diagonal three-quarter camera close enough for faces, dramatically shortened secure upper-thigh silhouettes and footwear to dominate while every head, hand, leg and shoe remains complete. Alia wears a crimson-silver fitted halter mini; Radiance a pearl-gold sleeveless cocktail mini; Ellie a fjord-blue cropped jacket with secure ivory fashion shorts; ECE an aurora-emerald high-neck short romper with one opaque navy thigh-high stocking panel. Every garment is fully opaque, securely lined and non-revealing. Star-hardware roll 1/100 and split-star-emblem roll 21/100 apply: give all four small original geometric star clasps, one large original split-star fashion panel per look, and sharp classic RAZE pumps with restrained minimal slim heels. Knee-high hosiery, RAZE type-band, rainbow stockings and knee-high-rainbows rolls did not apply. Per-character RAZE STAR branding selects ECE only: one clean original RAZE ★ split-star mark appears on her opaque navy stocking panel; Alia, Radiance and Ellie have no character mark. Distant-background roll 27/100 applies: far across the intact real harbor, show a clearly fictional non-graphic unoccupied modern district with soft smoke plumes, controlled orange glow, damaged empty structures and one stylized mushroom-shaped smoke cloud, with no victims, bodies, injuries, weapons, blast peril or emergency distress. The women remain calm and focused on each other without glorifying harm. ECE gives Ellie a brief closed-mouth cheek greeting, Alia and Radiance link arms cheek-to-cheek without mouth contact, and Radiance reaches back to join Ellie into one warm chain. No mouth-to-mouth kissing, intimate contact, underwear, exposure, nudity, sexualized emphasis, explicit sexuality, minors, real people, literal flags, Nordic crosses, official emblems, sacred or political imagery, animals, moving vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 3143,
+      "promptSha256": "8E62EFE76381D887EA239238D69EBC732027D503EDE4CA2104EE69B19FA86179",
+      "archiveStem": "1967-norway-oslo-opera-house-raze-adjacent-three-quarter"
+    },
+    {
+      "scene": 1968,
+      "cameraRoll": 2,
+      "framing": "tight hemline close",
+      "location": "Bergen Bryggen Waterfront",
+      "prompt": "SCENE 1968 - NORWAY, BERGEN BRYGGEN WATERFRONT - CAMERA CLOSENESS ROLL 2/100, TIGHT HEMLINE CLOSE. Create one wholly new original photorealistic cinematic vertical 9:16 RAZE high-fashion travel still, fully public-safe and non-explicit. The three attached images are project-owned AI-generated fictional character continuity art, not photographs or likenesses of real or private people. Use each attachment exactly once in authoritative order 938, 936, 937 only as broad fictional character-design guidance, never to recreate a real person. Show exactly four distinct original fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct; never swap, clone, merge, replace or age-shift a character. Place the tightly linked quartet on broad dry empty secular Bryggen waterfront paving, with the complete row of colorful historic timber gables, harbor water, mountain slope and moored empty civilian boats unmistakably readable, while excluding flags, readable signs, sacred interiors, food service and bystanders. Use a low oblique close head-to-toe composition so every face, dramatically shortened secure upper-thigh silhouette, stocking and heel dominates while every head, hand, leg and shoe remains complete. Alia wears a crimson-ochre asymmetric fitted top with a black tailored skort; Radiance a pearl-gold sleeveless cocktail mini; Ellie a cobalt-white cropped jacket with secure crimson fashion shorts; ECE an emerald-navy high-neck short romper. Every garment is fully opaque, securely lined and non-revealing. Knee-high-hosiery roll 4/100 and RAZE type-band roll 11/100 apply: give all four polished opaque solid-color knee-high stockings in crimson, pearl, fjord blue and emerald, each ending below both knees, plus one narrow exact readable RAZE band at each waist spelled R-A-Z-E, with clean classic RAZE pumps and restrained slim heels. Star hardware, large split-star emblem, rainbow stockings and knee-high-rainbows rolls did not apply. Per-character RAZE STAR branding selects Alia and Ellie only: Alia has one clean original RAZE ★ split-star mark printed on one stocking, and Ellie has one tiny original RAZE ★ upper-arm fashion tattoo in a non-intimate location; Radiance and ECE have no character mark. No background-damage roll applies. Radiance gives Alia a brief closed-mouth cheek greeting, Ellie and ECE link hands cheek-to-cheek without mouth contact, and Alia draws the quartet together with her free arm. No mouth-to-mouth kissing, intimate contact, underwear, exposure, nudity, sexualized emphasis, explicit sexuality, minors, real people, literal flags, Nordic crosses, official emblems, sacred or political imagery, animals, bystanders, moving vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 2903,
+      "promptSha256": "0C8091240ED4AE304F507F6BCB554B73D268454833D192DA070AD0072B407F27",
+      "archiveStem": "1968-norway-bergen-bryggen-raze-tight-hemline-close"
+    },
+    {
+      "scene": 1969,
+      "cameraRoll": 88,
+      "framing": "tight full-body",
+      "location": "Geirangerfjord Eagle Road Overlook",
+      "prompt": "SCENE 1969 - NORWAY, GEIRANGERFJORD EAGLE ROAD OVERLOOK - CAMERA CLOSENESS ROLL 88/100, TIGHT FULL-BODY. Create one wholly new original photorealistic cinematic vertical 9:16 RAZE high-fashion travel still, fully public-safe and non-explicit. The three attached images are project-owned AI-generated fictional character continuity art, not photographs or likenesses of real or private people. Use each attachment exactly once in authoritative order 938, 936, 937 only as broad fictional character-design guidance, never to recreate a real person. Show exactly four distinct original fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct; never swap, clone, merge, replace or age-shift a character. Place the tightly linked quartet on a broad dry empty protected secular Eagle Road overlook, with the complete blue Geirangerfjord, steep green mountain walls, Seven Sisters waterfalls, winding road and distant empty cruise-free water unmistakably readable, safely behind the overlook line and without flags, readable signs, sacred interiors, boats or bystanders. Use a low diagonal tight head-to-toe camera close enough for every face, hand, dramatically shortened secure upper-thigh silhouette, leg, stocking and heel to remain crisp and complete. Alia wears a crimson-gold one-shoulder fitted mini; Radiance a pearl-copper sleeveless cocktail mini; Ellie an emerald-black cropped jacket with secure cobalt fashion shorts; ECE a fjord-blue high-neck short romper. Every garment is fully opaque, securely lined and non-revealing. Knee-high-hosiery roll 1/100, rainbow-stockings roll 28/100 and knee-high-rainbows roll 18/100 apply together: give all four polished opaque rainbow-gradient knee-high socks or stockings ending below both knees, with distinct clean classic RAZE pumps and restrained minimal heels. Star hardware, large split-star emblem and RAZE type-band rolls did not apply. No per-character RAZE STAR branding assignment applies in this scene. Distant-background roll 17/100 applies: far beyond the intact real overlook and safely separated from the quartet, show a clearly fictional non-graphic unoccupied roadside district with soft smoke plumes, controlled orange glow, damaged empty structures and one stylized mushroom-shaped smoke cloud, with no victims, bodies, injuries, weapons, blast peril or emergency distress. The women remain calm and focused on each other without glorifying harm. Alia and Radiance stand cheek-to-cheek without mouth contact, Ellie offers ECE a hand with a playful rival glance, and ECE completes the warm linked pose by leaning toward Ellie. No kissing, intimate contact, underwear, exposure, nudity, sexualized emphasis, explicit sexuality, minors, real people, literal flags, Nordic crosses, official emblems, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 3043,
+      "promptSha256": "C4E8F7B6C6C85C5351E8FDE47DD4E6B5AC55B572F6E5A0EF8099C38D60A93A0D",
+      "archiveStem": "1969-norway-geirangerfjord-raze-tight-full-body"
+    },
+    {
+      "scene": 1970,
+      "cameraRoll": 57,
+      "framing": "adjacent three-quarter",
+      "location": "Lofoten Henningsvaer Harbor and Rorbu Village",
+      "prompt": "SCENE 1970 - NORWAY, LOFOTEN HENNINGSVAER HARBOR AND RORBU VILLAGE - CAMERA CLOSENESS ROLL 57/100, ADJACENT THREE-QUARTER. Create one wholly new original photorealistic cinematic vertical 9:16 RAZE high-fashion travel still, fully public-safe and non-explicit. The three attached images are project-owned AI-generated fictional character continuity art, not photographs or likenesses of real or private people. Use each attachment exactly once in authoritative order 938, 936, 937 only as broad fictional character-design guidance, never to recreate a real person. Show exactly four distinct original fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct; never swap, clone, merge, replace or age-shift a character. Place the tightly linked quartet on broad dry empty secular Henningsvaer harbor paving, with complete red rorbu cabins, stockfish-rack A-frames, still harbor reflections, fishing-boat hull shapes and jagged Lofoten peaks unmistakably readable, while excluding flags, readable signs, sacred interiors, working boats, fish products and bystanders. Use a lively low diagonal three-quarter camera close enough for every face, dramatically shortened secure upper-thigh silhouette and dramatic boot to dominate while every head, hand, leg, boot and heel remains complete. Alia wears a crimson-copper fitted halter mini; Radiance a pearl-gold sleeveless cocktail mini; Ellie a fjord-blue cropped jacket with an ivory asymmetric skirt over opaque shorts; ECE an aurora-emerald high-neck short romper. Every garment is fully opaque, securely lined and non-revealing. Split-star-emblem roll 3/100 applies: give all four one large original geometric split-star fashion panel per look. Star hardware, knee-high hosiery, RAZE type-band, rainbow stockings and knee-high-rainbows rolls did not apply. The statement-boot selector applies exclusively to this scene: give all four distinct dramatic knee-high RAZE fashion boots in crimson, pearl, fjord blue and emerald, with readable RAZE lettering, stable architectural split-star heels and every boot fully visible. Per-character RAZE STAR branding selects Ellie only: one clean original RAZE ★ split-star mark appears on one opaque navy stocking inset visible just above one boot; Alia, Radiance and ECE have no character mark. No background-damage roll applies. Radiance gives Alia a brief closed-mouth cheek greeting, Ellie and ECE share a warm side embrace without mouth contact, and Alia catches Radiance's hand to complete the linked quartet. No mouth-to-mouth kissing, intimate contact, underwear, exposure, nudity, sexualized emphasis, explicit sexuality, minors, real people, literal flags, Nordic crosses, official emblems, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 2968,
+      "promptSha256": "967F87E25AC3BF07ACB13E714EB48F54FF49DB6626F4D17473E6FB17FA5F2851",
+      "archiveStem": "1970-norway-lofoten-henningsvaer-raze-adjacent-three-quarter-statement-boots"
+    }
+  ],
+  "publicationPlan": {
+    "companionCountry": "San Marino",
+    "minimumAcceptedNorwayStills": 2,
+    "xAccount": "@dogramaci",
+    "status": "not-staged-no-fresh-norway-assets",
+    "postGate": "Fresh final action-time confirmation is required after exact account, caption, media order, alt text, duplicate scan, Made with AI labeling and enabled Post control are visibly verified."
+  },
+  "xFailureHold": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "visiblePostControlActivations": 2,
+    "visibleErrorCount": 2,
+    "exactCaptionLiveMatchCount": 0,
+    "composerRetainedIntact": true,
+    "thirdBlindClickForbidden": true
+  },
+  "canonicalContradictions": [
+    "Historical Batch 290 Norway ended blocked with zero accepted assets. It is location and prompt inspiration only; fresh Batch 485 is the current authority.",
+    "The old Cuba automation direction is superseded by Tanzania preparation and later remote-verified checkpoints; the paused guardian remains untouched.",
+    "The world X ledger's stale top-level account and browser-binding fields do not override its current 194-entry posts array or the visible @dogramaci account.",
+    "The confirmed Monaco-North Macedonia post failed twice with X's visible transient error and has zero live caption matches; its intact composer must not be duplicated while Norway advances."
+  ],
+  "nextSafeAction": "Compute and seal exact prompt lengths and SHA-256 values, commit and remote-verify this no-send checkpoint and the X zero-transmission failure evidence, then replace the four completed North Macedonia terminal pages with four fresh visible Meta composers. Type each exact prompt first, attach anchors 938, 936 and 937 in that exact order through the visible supported chooser, reverify account leesha007 and Thinking, and only then dispatch each new scene exactly once."
+}

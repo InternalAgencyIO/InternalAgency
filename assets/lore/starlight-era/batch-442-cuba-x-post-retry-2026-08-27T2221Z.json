@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "recordType": "x-post-retry-outcome",
+  "batch": 442,
+  "country": "Cuba",
+  "account": "@dogramaci",
+  "authorization": {
+    "scope": "upload and publish all completed videos to X immediately, with descriptive captions and English CC where applicable",
+    "actionTimeConfirmationReceived": true,
+    "confirmationDateLocal": "2026-08-28",
+    "browserOnly": true
+  },
+  "attempts": [
+    {
+      "scene": 1788,
+      "attemptedAtUtc": "2026-08-27T22:21:36.862Z",
+      "attemptCountThisConfirmation": 1,
+      "caption": "Four 21-year-old Starlight researchers cross Havana\u2019s Malec\u00f3n orbital deck as a jealous dance turn softens into protection and reconciliation beneath a rolling Cuban storm.",
+      "video": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1788-havana-malecon-orbital-love-grok-video.mp4",
+        "sha256": "3CF55B7208B17D45F1B8F355F4ACFCC8C62EA5B78E39A6244B3B517F1C9FD82D",
+        "dimensions": "720x1280",
+        "durationSeconds": 15.041667,
+        "xMediaStateBeforeAttempt": "Ready"
+      },
+      "englishCc": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1788-havana-malecon-orbital-love-grok-video.en.srt",
+        "xCaptionLanguageBeforeAttempt": "English"
+      },
+      "outcome": "blocked-before-status-creation",
+      "xStatusUrl": null,
+      "xUiError": "Something went wrong, but don\u2019t fret \u2014 let\u2019s give it another shot.",
+      "draftPreserved": true,
+      "duplicateClickAvoided": true
+    },
+    {
+      "scene": 1791,
+      "attemptedAtUtc": "2026-08-27T22:21:54.887Z",
+      "attemptCountThisConfirmation": 1,
+      "caption": "Four 21-year-old Starlight researchers circle Santiago de Cuba Bay at blue hour as a jealous partner turn becomes protection, choice, and reconciliation on a civilian orbital deck.",
+      "video": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1791-santiago-de-cuba-bay-orbital-love-grok-video.mp4",
+        "sha256": "7827640BE68A85B7E6EA11ED2989F4F49CA9736A97221434502C2783C179DB29",
+        "dimensions": "720x1280",
+        "durationSeconds": 15.041667,
+        "xMediaStateBeforeAttempt": "Ready"
+      },
+      "englishCc": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1791-santiago-de-cuba-bay-orbital-love-grok-video.en.srt",
+        "sha256": "316285B91155D45DA0D2C287DEB5587AF893F7368E22C60786BAA8366D3A9606",
+        "xCaptionLanguageBeforeAttempt": "English"
+      },
+      "outcome": "blocked-before-status-creation",
+      "xStatusUrl": null,
+      "xUiError": "Something went wrong, but don\u2019t fret \u2014 let\u2019s give it another shot.",
+      "draftPreserved": true,
+      "duplicateClickAvoided": true
+    }
+  ],
+  "relatedPriorBrowserEvidence": {
+    "scene1791ErrorAtUtc": "2026-08-27T22:18:06.626Z",
+    "error": "SessionBindingUnavailableError: unable to sign request (no usable binding for this tab)",
+    "xRateEvidence": "HTTP 429 code 88 was observed before these retries"
+  },
+  "archive": {
+    "gitLfsMediaCommit": "c9c4486a",
+    "mediaAndAccessibilityFilesAlreadyArchived": true,
+    "providerArtifactsRemainCanonical": true
+  },
+  "nextSafeAction": "Keep both complete X drafts open. Do not click Post again without a fresh action-time confirmation and a usable X session binding."
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "world-195x4-recovery-6-final-detail-lock-v1",
+  "batch": 219,
+  "sceneNumber": 896,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/896-foundation-recovery-6.txt",
+  "promptSha256": "581bd7aed94c86922007a22c87e6256c6ccd035dda76c3d188c367a45ead9ab5",
+  "blockedCorpusSha256": "1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No new moderation block occurred in round 5; only visually rejected candidates were recorded.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "finalDetailLock": "FINAL DETAIL LOCK: Radiance's RIGHT GLOVE FINGERTIP FABRIC IS VISIBLY BETWEEN HER TEETH, the glove halfway sliding from her right hand in the stored editorial removal flourish. Her left hand remains linked with Ellie. Keep the existing left-to-right Radiance-Ellie-Alia-ECE hand chain, three leg pops, ECE looking at PAWS and PAWS's crisp scamper. Do not move the glove to Radiance's shoulder.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-5/896-recovery-5-rejected.png",
+    "bytes": 2320329,
+    "sha256": "941497d27a4d41bb25f5e52a5b75c988f73ea7324d215aa9bb4c057bf5dcacfe",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "the glove-removal roll is weakened into a shoulder-level glove flourish rather than the required glove fingertip at Radiance's teeth",
+      "all other relationship, PAWS, navel and fashion gates materially improved"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

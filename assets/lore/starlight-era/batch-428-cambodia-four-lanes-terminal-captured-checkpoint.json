@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "batch": 428,
+  "country": "Cambodia",
+  "status": "four-lanes-terminal-captured",
+  "checkpointAtUtc": "2026-08-27T07:50:39.388Z",
+  "acceptedCount": 0,
+  "terminalCount": 4,
+  "rawOutputCount": 4,
+  "explicitNoByteCount": 0,
+  "scenes": [
+    {
+      "sceneId": 1732,
+      "status": "hard-unusable",
+      "sha256": "fe83e5a1a5dff3f4b0510c6c1a2b4507302e0d3aa6987f428316b8c884b35a60",
+      "disposition": "hard-unusable-beacon-ring-count-and-hand-inventory-lock-fail"
+    },
+    {
+      "sceneId": 1733,
+      "status": "hard-unusable",
+      "sha256": "b269220ac46197ece30b104313c5461c0861c852d6f77617de87fd43fc15c78c",
+      "disposition": "hard-unusable-camera-footwear-and-hand-inventory-lock-fail"
+    },
+    {
+      "sceneId": 1734,
+      "status": "hard-unusable",
+      "sha256": "e2284bfe1dc6783804ce37fd11427d83a5116949bbd6d32e4919d71d035375fc",
+      "disposition": "hard-unusable-hand-inventory-lock-fail"
+    },
+    {
+      "sceneId": 1735,
+      "status": "hard-unusable",
+      "sha256": "08618d031bcb4eb35ae81da6b086623906ceb1496017829b6c2214ff43ff8b03",
+      "disposition": "hard-unusable-hand-inventory-and-choreography-lock-fail"
+    }
+  ],
+  "providerChatUrls": {
+    "1732": "https://www.meta.ai/prompt/95c02d10-6d50-4f2f-a904-89f9a4f2b5af",
+    "1733": "https://www.meta.ai/prompt/87d0d8de-4c60-4a1a-acc4-847819c51789",
+    "1734": "https://www.meta.ai/prompt/d93cf214-ab06-4eec-9d0e-24b6873e6d95",
+    "1735": "https://www.meta.ai/prompt/df289c35-d71d-4052-b942-cc6269e70e53"
+  },
+  "duplicateDispatchCount": 0,
+  "retryAuthorized": false
+}

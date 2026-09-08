@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "state": "two_first_retry_lanes_staged_awaiting_fresh_action_time_send_confirmation",
+  "observedAtUtc": "2026-08-31T06:52:47.3720107Z",
+  "branch": "agent/starlight-progress-archive",
+  "remoteVerifiedPreparedRetryCommit": "bed045d0304185b647269c3b4c31f176390e6705",
+  "preparedRetryCheckpoint": "assets/lore/starlight-era/batch-467-serbia-first-retries-prepared-checkpoint.json",
+  "browser": {
+    "surface": "in-app Browser only",
+    "actualTabsInspected": true,
+    "freshChatsUsed": true,
+    "tabIds": ["9", "10"],
+    "urls": ["https://www.meta.ai/", "https://www.meta.ai/"],
+    "signedInAccountVisible": "leesha007",
+    "loginControlVisible": false,
+    "providerLimitTextVisible": false,
+    "supportedVisibleChooserUsed": true,
+    "hiddenInputOrWorkaroundUsed": false
+  },
+  "faceAuthorityPreflight": {
+    "manifestPath": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "observedManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "manifestHashMatch": true,
+    "orderedIdentityAnchors": [
+      {
+        "scene": 938,
+        "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+      },
+      {
+        "scene": 936,
+        "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+      },
+      {
+        "scene": 937,
+        "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      }
+    ],
+    "attachmentOrderPerLane": [938, 936, 937]
+  },
+  "lanes": [
+    {
+      "tabId": "9",
+      "scene": 1896,
+      "retry": 1,
+      "occurrence": 2,
+      "promptSha256": "6C205E497A5F6C62D547B7E57270684A6CB3291A3B0935D4AC3FB787B3D00EE1",
+      "promptExact": true,
+      "attachmentCounts": [1, 1, 1],
+      "attachmentOrderExact": true,
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "tabId": "10",
+      "scene": 1897,
+      "retry": 1,
+      "occurrence": 2,
+      "promptSha256": "D1CA838503D195BA8E102C69A49317C1DC9F3E3D0B7D8C56E3E256AFCD36830F",
+      "promptExact": true,
+      "attachmentCounts": [1, 1, 1],
+      "attachmentOrderExact": true,
+      "sendEnabled": true,
+      "sendClicked": false
+    }
+  ],
+  "untouchedTabs": [
+    {
+      "tabId": "11",
+      "scene": 1896,
+      "role": "first-occurrence-terminal-evidence-page-no-message-sent"
+    },
+    {
+      "tabId": "12",
+      "scene": 1897,
+      "role": "first-occurrence-terminal-evidence-page-no-message-sent"
+    }
+  ],
+  "dispatchGate": {
+    "authorityVerified": true,
+    "preparedRetryCheckpointRemoteVerified": true,
+    "accountVerified": true,
+    "promptAndAnchorPreflightPassed": true,
+    "freshActionTimeConfirmationReceived": false,
+    "mayClickSend": false,
+    "exactNextSafeAction": "After fresh user confirmation, re-inspect tabs 9 and 10 once and click each visible Send button exactly once for scene 1896 retry 1 and scene 1897 retry 1; do not send any message to tabs 11 or 12."
+  }
+}

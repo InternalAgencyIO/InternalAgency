@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "batch": 474,
+  "state": "first-visible-post-click-confirmed-no-transmission-exact-draft-retained",
+  "firstPostClickedAtUtc": "2026-08-31T20:51:50.803Z",
+  "confirmedAtUtc": "2026-08-31T20:52:41.6533472Z",
+  "account": "@dogramaci",
+  "xComposerTabId": "6",
+  "postClicks": 1,
+  "keyboardSubmitAttempts": 0,
+  "publicTransmissionCount": 0,
+  "composerUrlAfterClick": "https://x.com/compose/post",
+  "exactCaptionRetained": true,
+  "mediaCountRetained": 3,
+  "altTextCountRetained": 3,
+  "madeWithAiLabelRetained": true,
+  "postControlStillEnabled": true,
+  "liveProfileVerification": {
+    "temporaryViewerOpenedAndClosed": true,
+    "candidateCaptionVisible": false,
+    "newCandidateStatusUrlObserved": false,
+    "visibleNewestStatusIds": [
+      "2094514677833150859",
+      "2094514647600701782",
+      "2094514597646500078",
+      "2094514554751357278"
+    ]
+  },
+  "duplicateTransmissionRisk": false,
+  "currentAuthorization": "authorized for all go, authorized for all similar commands",
+  "supportedRecovery": "After this no-transmission evidence is committed and remote-verified, issue exactly one visible-composer Ctrl+Enter submit attempt and verify transmission before any further action.",
+  "nextSafeAction": "Commit and push this confirmed no-transmission checkpoint, prove local/remote/PR/LFS parity, then issue one Ctrl+Enter in the unchanged visible composer under the standing authorization and verify the live URL before any further submit action."
+}

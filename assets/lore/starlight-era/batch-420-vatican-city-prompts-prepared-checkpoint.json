@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "checkpoint_type": "meta-prompts-prepared",
+  "created_at_utc": "2026-08-26T16:03:32.050Z",
+  "branch": "agent/starlight-progress-archive",
+  "parent_commit": "951524a3a4191955c99244a5572f82560852633e",
+  "batch": 420,
+  "country": "Vatican City",
+  "cycle_status": "prepared-awaiting-browser-staging-and-immediate-confirmation",
+  "completed_country_cycles_since_last_x_cycle": 9,
+  "x_cycle_due": false,
+  "accepted_country_count": 0,
+  "provider": "Meta AI",
+  "browser_surface": "in-app",
+  "source_precedent": {
+    "batch": 349,
+    "country": "Vatican City",
+    "scenes": [
+      1416,
+      1417,
+      1418,
+      1419
+    ],
+    "theme": "polar airship couture"
+  },
+  "camera_roll_method": "FNV-1a over batch420-vatican-city-sceneNNNN-camera-closeness, modulo 100 plus 1; 1-20 extreme close, 21-80 intermediate, 81-100 extreme wide.",
+  "prompts": [
+    {
+      "scene": 1700,
+      "prompt_path": "tmp/world-195x4/batch-420/scene-1700-prompt.txt",
+      "prompt_sha256": "E4E8071B3D90B321AC14BBE728009A1C008A2B8E570E8B7B7D055947D81FC462",
+      "camera_roll": 44,
+      "source_scene": 1416,
+      "sent": false
+    },
+    {
+      "scene": 1701,
+      "prompt_path": "tmp/world-195x4/batch-420/scene-1701-prompt.txt",
+      "prompt_sha256": "940C16DBB449C36BFB53A390996E2B8E9973E893E28F9C290DBBFFFF47E2D75C",
+      "camera_roll": 87,
+      "source_scene": 1417,
+      "sent": false
+    },
+    {
+      "scene": 1702,
+      "prompt_path": "tmp/world-195x4/batch-420/scene-1702-prompt.txt",
+      "prompt_sha256": "F230A8ADCF5E6D21C6AADE1E69104798EABA109F5878E8C9645901C3D2B44CCB",
+      "camera_roll": 6,
+      "source_scene": 1418,
+      "sent": false
+    },
+    {
+      "scene": 1703,
+      "prompt_path": "tmp/world-195x4/batch-420/scene-1703-prompt.txt",
+      "prompt_sha256": "2A59E223C66C8C5E48A224196BA72E72DE9D9A7D7F91D9A52A1F06AB1C0759DB",
+      "camera_roll": 13,
+      "source_scene": 1419,
+      "sent": false
+    }
+  ],
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "mission_style_lock": {
+    "photorealistic_cinematic_scifi": true,
+    "strong_location_read": true,
+    "bold_varied_party_runway_fashion": true,
+    "public_safe_adults_only": true,
+    "weapons_forbidden": true,
+    "religious_and_official_symbols_forbidden": true
+  },
+  "dispatch_guard": {
+    "uploads_performed": 0,
+    "sends_performed": 0,
+    "provider_occurrences_created": 0,
+    "immediate_browser_confirmation_required": true,
+    "resend_forbidden_before_confirmed_initial_dispatch": true
+  },
+  "next_action": "After user-confirmed cleanup of the four terminal Tuvalu tabs, create exactly four fresh visible in-app Meta tabs, stage scenes 1700-1703, then obtain fresh immediate confirmation before ordered uploads and one Send per scene."
+}

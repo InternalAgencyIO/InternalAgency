@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "observedAtUtc": "2026-09-06T00:30:49.727Z",
+  "state": "in-app-browser-controller-restored-layout-verified-dispatch-held",
+  "authorityBeforeCheckpoint": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "34dc5d3678efd1ee751aa67110892bd20e8e427b",
+    "originHead": "34dc5d3678efd1ee751aa67110892bd20e8e427b",
+    "pr13Head": "34dc5d3678efd1ee751aa67110892bd20e8e427b",
+    "localOriginPrEqual": true,
+    "lfsDryRunPendingObjects": 0
+  },
+  "browserRecovery": {
+    "surface": "supported-visible-in-app-browser",
+    "backendAvailable": true,
+    "controllerBoundToCurrentThread": true,
+    "browserVisible": true,
+    "configMutation": false,
+    "appRestart": false,
+    "before": {
+      "metaTabs": 3,
+      "xComposerTabs": 3
+    },
+    "actions": [
+      "Inspected all six actual tabs before changing the layout.",
+      "Closed two X composers only after each was visibly verified blank, with zero text, zero media, and disabled Post.",
+      "Kept the foreground blank X composer and opened one additional Meta home lane.",
+      "Marked the five resulting tabs for workflow handoff."
+    ],
+    "after": {
+      "metaTabs": 4,
+      "xComposerTabs": 1,
+      "totalTabs": 5
+    }
+  },
+  "meta": {
+    "requiredAccount": "leesha007",
+    "accountVerifiedOnAllFourLanes": true,
+    "url": "https://www.meta.ai/",
+    "thinkingVisibleOnAllFourLanes": true,
+    "composerTextBlankOnAllFourLanes": true,
+    "sendDisabledOnAllFourLanes": true,
+    "attachmentsPerLane": 0,
+    "providerSendsDuringRecovery": 0
+  },
+  "x": {
+    "requiredAccount": "@dogramaci",
+    "visibleDisplayName": "Raymond R.",
+    "renderedProfileLinksToDogramaci": 2,
+    "accountVerified": true,
+    "url": "https://x.com/compose/post",
+    "composerTextBlank": true,
+    "mediaCount": 0,
+    "postDisabled": true,
+    "publicPostsDuringRecovery": 0
+  },
+  "anchorFiles": [
+    {
+      "order": 1,
+      "anchor": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "bytes": 2575103,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "anchor": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "bytes": 2495143,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "anchor": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "bytes": 2373808,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "currentQueue": {
+    "providerBatch": 489,
+    "providerCountry": "Armenia",
+    "providerScenes": [
+      1983,
+      1984,
+      1985,
+      1986
+    ],
+    "providerSends": 0,
+    "xReadyOrder": [
+      {
+        "countries": [
+          "Norway",
+          "San Marino"
+        ],
+        "scenes": [
+          1968,
+          1972,
+          1974
+        ],
+        "state": "not-staged-not-posted"
+      },
+      {
+        "countries": [
+          "Slovakia",
+          "Slovenia"
+        ],
+        "scenes": [
+          1975,
+          1980,
+          1981
+        ],
+        "state": "not-staged-not-posted"
+      }
+    ],
+    "canonicalXPostCount": 195,
+    "latestXUrl": "https://x.com/dogramaci/status/2096357831981031573"
+  },
+  "canonicalReconciliation": [
+    "The older browser-unavailable checkpoint is superseded only for live Browser capability and tab inventory; its media, queue, and duplicate-prevention facts remain authoritative unless separately superseded.",
+    "The world X ledger top-level account value @RaymondRR777 is legacy metadata. Newer post entries, ready-post checkpoints, and the live rendered /dogramaci profile links establish @dogramaci for this workflow.",
+    "Historical Cuba instructions and Tanzania scenes 1806/1808 are not current dispatch authority. Batch 489 Armenia scenes 1983-1986 are current and have zero sends.",
+    "No prompt, anchor, media, Send, or Post action occurred during browser recovery."
+  ],
+  "automation": {
+    "starlightGuardianPresent": false,
+    "continuousUnattendedRenderingActive": false,
+    "newAutomationTaskThreadWorkerSubagentOrGuardianCreated": false,
+    "unrelatedGuardiansUntouched": [
+      {
+        "id": "guardian-x-assistant-mission",
+        "status": "ACTIVE",
+        "intervalMinutes": 45
+      },
+      {
+        "id": "iat-b3-devnet-gate-guardian",
+        "status": "ACTIVE",
+        "intervalMinutes": 35
+      }
+    ]
+  },
+  "nextSafeAction": "Before any dispatch, freshly recheck the @dogramaci profile for duplicate Norway-San Marino media and caption. Then stage scenes 1968, 1972, and 1974 once in the existing blank X composer with their exact alts and Made with AI, and stop immediately before Post for action-time confirmation. Armenia scenes 1983-1986 may then be prepared in the four verified Meta lanes by filling each exact prompt first and attaching anchors 938, 936, and 937 once each in that order; verify text, account, Thinking, and all three ordered cards before any Send."
+}

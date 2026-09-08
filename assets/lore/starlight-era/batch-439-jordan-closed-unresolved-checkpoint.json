@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "batch_closed_unresolved",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 439,
+  "country": "Jordan",
+  "sourceBatchId": 368,
+  "sceneIds": [
+    1776,
+    1777,
+    1778,
+    1779
+  ],
+  "acceptedSceneIds": [],
+  "acceptedCount": 0,
+  "requiredAcceptedCount": 4,
+  "status": "closed_unresolved",
+  "outcomes": [
+    {
+      "sceneId": 1776,
+      "status": "hard_unusable",
+      "reason": "Anatomy and beacon failure: roll 42 intermediate and the Amman Citadel read strongly, but only seven hands are clearly traceable and the beacon shows three cyan rings instead of exactly four.",
+      "providerUrl": "https://www.meta.ai/prompt/d83aa8cf-e462-4da8-b7f5-ea07bbf4bc28",
+      "sha256": "41114ad5ad354570dd732532b299f03e0e73d07912a6a0ee7346efc52b13e532",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-439-scene-1776-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-439-jordan-scene-1776-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1777,
+      "status": "hard_unusable",
+      "reason": "Anatomy and beacon failure: roll 24 intermediate and the Petra Treasury read strongly, but only seven assigned hands are clearly traceable and the beacon shows five cyan rings instead of exactly four.",
+      "providerUrl": "https://www.meta.ai/prompt/adb0fe27-3c9b-4593-8fcd-e9338e117b80",
+      "sha256": "58b2b56f93eeb282c43c12bed6d2c3b94a184778113f3de1ad7ce4951bd16a84",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-439-scene-1777-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-439-jordan-scene-1777-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1778,
+      "status": "hard_unusable",
+      "reason": "Anatomy failure: roll 80 intermediate, the Wadi Rum rock bridge, and the four-ring beacon are legible, but the rightmost woman's second hand is absent or occluded, leaving only seven of eight required hands traceable.",
+      "providerUrl": "https://www.meta.ai/prompt/0e9d567f-c9a1-487c-86e2-dd2260672a0b",
+      "sha256": "d5f13743c3195c3416031f97be09978fdc4a8a3e2cad816cc7321115112582a1",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-439-scene-1778-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-439-jordan-scene-1778-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1779,
+      "status": "hard_unusable",
+      "reason": "Camera-roll failure: roll 18 required a true shoulder-up extreme close cropped at the shoulders or uppermost chest; the render extends through full bodices and substantial torso.",
+      "providerUrl": "https://www.meta.ai/prompt/91faa113-b727-4a7c-8104-26f309f162d4",
+      "sha256": "11de17f9f814c4826876aa43474543160570e62422acdbc4f4d30f1627b21d53",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-439-scene-1779-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-439-jordan-scene-1779-terminal-captured-checkpoint.json"
+    }
+  ],
+  "duplicateRelationships": [],
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 9,
+    "due": false
+  },
+  "xBacklog": {
+    "eligibleUnpublishedSceneIds": [
+      1753
+    ],
+    "newEligibleSceneIds": [],
+    "pairReady": false,
+    "reason": "Jordan produced no accepted images; Burundi scene 1753 remains the only eligible unpublished image, so no valid 2+1 country pair exists."
+  },
+  "nextAction": "Prepare Dominican Republic from authoritative source Batch 369 as new scenes 1780-1783; do not reopen Jordan scenes 1776-1779.",
+  "closedAtUtc": "2026-08-27T17:15:30.095Z"
+}

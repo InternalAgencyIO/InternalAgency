@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "batch": 490,
+  "country": "Vatican City",
+  "scenes": [1987, 1988, 1989, 1990],
+  "state": "four-stills-closed-qa-and-archive-complete-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-06T02:57:03.2763339Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "preflightCheckpoint": "assets/lore/starlight-era/batch-490-vatican-city-meta-dispatch-preflight-checkpoint.json",
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-490-vatican-city-four-meta-composers-staged-checkpoint.json",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-490-vatican-city-four-meta-dispatches-checkpoint.json",
+    "rawArchiveCommit": "d944c38ea921a91e0a5e44cf0144d82492ebd80d"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulFinalOccurrences": 4,
+    "hardFailures": 0,
+    "retries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "orderedAnchors": [938, 936, 937],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/efd38db4-dd50-4401-8bb9-ab4a695bfe53",
+      "https://www.meta.ai/prompt/1721659e-81d9-4f08-b084-138c9a04b3ac",
+      "https://www.meta.ai/prompt/4510b7b5-859c-4f59-84b7-2b18fd958962",
+      "https://www.meta.ai/prompt/619f8453-99de-4548-9005-44ffa7383516"
+    ]
+  },
+  "selectedAssets": [
+    {
+      "scene": 1987,
+      "provider": "Meta AI",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1987-vatican-city-pinecone-courtyard-editorial-meta-occurrence-1-raw.webp",
+      "sha256": "68DE4D1B9B9CF415A40F1C78A5D4E4AD8822B6B300A74B626B68719B8565D183",
+      "bytes": 601644,
+      "width": 1152,
+      "height": 2048
+    },
+    {
+      "scene": 1988,
+      "provider": "Meta AI",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1988-vatican-city-momo-spiral-staircase-editorial-meta-occurrence-1-raw.webp",
+      "sha256": "26429768F9B92DC1DF2E687B38FDD2995B93273B5FEC8C094CFA8E321BEA5E01",
+      "bytes": 540794,
+      "width": 1152,
+      "height": 2048
+    },
+    {
+      "scene": 1989,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1989-vatican-city-gallery-of-maps-editorial-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "981C077BED38BE05B6DC0D8FB4725FB858AB4C993D9FBF71FACBFD428CC39132",
+      "bytes": 2428748,
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "scene": 1990,
+      "provider": "Meta AI fallback after consumed ChatGPT invocation",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1990-vatican-city-gardens-fountain-terrace-editorial-meta-occurrence-1-raw.webp",
+      "sha256": "3FFB20ED7F58CC3ADBF14F7BF07F5540E36844FBDF28FEF0ADC43283CD3BDE7F",
+      "bytes": 513796,
+      "width": 1152,
+      "height": 2048
+    }
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableVaticanCitySettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "selectedAssetMatchesOutsideBatch": [0, 0, 0, 0],
+    "scannedRepoImageCount": 2002
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassRequestsIssued": 4,
+    "successfulOutputs": 3,
+    "outputModerationBlocks": 1,
+    "blockedScene": 1990,
+    "blockedStage": "output",
+    "blockedCategory": "sexual",
+    "blockedRequestId": "3c31b968-987f-4f3d-aabe-2bb1c2b952ed",
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 1,
+    "selectedMetaOriginalsOrFallbacks": 3
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/provider-ledger.json",
+    "invocationLedger": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/chatgpt-one-strong-shortening-invocation-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/accessibility-sidecars.json",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/closure-evidence-manifest.json",
+    "closureManifestFileCount": 24,
+    "closureManifestTotalBytes": 10855791,
+    "closureManifestInventorySha256": "4D44D0BDE6F4FB9D341EF864D5BB33B066021A58586AC3D3392109904CBA1211"
+  },
+  "publication": {
+    "plannedCountryPair": ["Armenia", "Vatican City"],
+    "armeniaPriorPostCount": 0,
+    "vaticanCityPriorPostCount": 0,
+    "xAccount": "@dogramaci",
+    "canonicalXPostCountBeforePair": 197,
+    "composerBlank": true,
+    "composerMediaCount": 0,
+    "publicTransmissionCount": 0
+  },
+  "browserState": {
+    "verifiedAtUtc": "2026-09-06T02:57:03.2763339Z",
+    "metaTabCount": 4,
+    "xTabCount": 1,
+    "otherTabCount": 0,
+    "metaProviderUrlsMatchLedger": true,
+    "metaThinkingVisibleAllLanes": true,
+    "metaStopVisibleCount": 0,
+    "xComposerUrl": "https://x.com/compose/post",
+    "xSignedInProfileHref": "/dogramaci",
+    "xComposerText": "",
+    "xPostDisabled": true,
+    "visibleInAppBrowserOnly": true
+  },
+  "canonicalContradictions": [
+    "Historical Batch 303 and Batch 420 Vatican City scenes remain terminal and were neither resent nor reopened. Fresh Batch 490 uses unused scene numbers and is not a retry.",
+    "The older Batch 303 no-flag-device instruction is superseded prospectively by the binding 2026-09-06 editorial contract requiring selected garments to integrate the complete current national flag design; historical prompts remain immutable.",
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and the later Slovenia, Armenia and Vatican City checkpoints. No Cuba or Tanzania prompt was dispatched.",
+    "All four ChatGPT tailoring allowances were consumed exactly once. Scene 1990 ended on an output-stage sexual-category moderation block, so its valid Meta raw is selected and no second pass is permitted.",
+    "No Starlight guardian exists. The unrelated X Assistant and IAT B3 guardians remain untouched and are not Starlight authority."
+  ],
+  "automationInventory": [
+    {
+      "id": "guardian-x-assistant-mission",
+      "status": "ACTIVE",
+      "rrule": "FREQ=MINUTELY;INTERVAL=45",
+      "leftUntouched": true
+    },
+    {
+      "id": "iat-b3-devnet-gate-guardian",
+      "status": "ACTIVE",
+      "rrule": "FREQ=MINUTELY;INTERVAL=30",
+      "leftUntouched": true
+    }
+  ],
+  "starlightGuardianPresent": false,
+  "nextSafeAction": "Validate every JSON and closure inventory, commit the complete Batch 490 closure with Git LFS, push and verify local/origin/Draft PR parity, then perform action-time X account and duplicate checks before staging the Armenia-Vatican City three-image post."
+}

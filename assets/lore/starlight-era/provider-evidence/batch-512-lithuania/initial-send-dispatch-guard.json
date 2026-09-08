@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "batch": 512,
+  "createdAtUtc": "2026-09-08T09:49:53.598Z",
+  "state": "four-initial-sends-issued",
+  "preflight": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-remote-preflight.json",
+  "maximumInitialActivationsPerScene": 1,
+  "maximumHardFailureRetriesPerScene": 2,
+  "recordBeforeActivation": true,
+  "neverRepeatUncertain": true,
+  "occurrences": [
+    {
+      "scene": 2075,
+      "occurrenceId": "batch-512-scene-2075-meta-initial",
+      "activationIssued": true,
+      "activationCount": 1,
+      "state": "issued-never-repeat",
+      "reservedAtUtc": "2026-09-08T09:51:27.592Z",
+      "initiatedAtUtc": "2026-09-08T09:52:47.724Z",
+      "providerUrl": "https://www.meta.ai/prompt/fd403cb9-71d5-48c4-932d-68ecae34bf23"
+    },
+    {
+      "scene": 2076,
+      "occurrenceId": "batch-512-scene-2076-meta-initial",
+      "activationIssued": true,
+      "activationCount": 1,
+      "state": "issued-never-repeat",
+      "reservedAtUtc": "2026-09-08T09:51:27.592Z",
+      "initiatedAtUtc": "2026-09-08T09:52:50.867Z",
+      "providerUrl": "https://www.meta.ai/prompt/05e17db1-1345-4044-8663-609adc40aacb"
+    },
+    {
+      "scene": 2077,
+      "occurrenceId": "batch-512-scene-2077-meta-initial",
+      "activationIssued": true,
+      "activationCount": 1,
+      "state": "issued-never-repeat",
+      "reservedAtUtc": "2026-09-08T09:51:27.592Z",
+      "initiatedAtUtc": "2026-09-08T09:52:54.032Z",
+      "providerUrl": "https://www.meta.ai/prompt/0c679a60-9bdb-4308-bb23-4231c5c5c95a"
+    },
+    {
+      "scene": 2078,
+      "occurrenceId": "batch-512-scene-2078-meta-initial",
+      "activationIssued": true,
+      "activationCount": 1,
+      "state": "issued-never-repeat",
+      "reservedAtUtc": "2026-09-08T09:51:27.592Z",
+      "initiatedAtUtc": "2026-09-08T09:52:57.185Z",
+      "providerUrl": "https://www.meta.ai/prompt/cde6f8f5-4ab1-421e-9646-27750790d4dc"
+    }
+  ],
+  "providerSendActivations": 4,
+  "proofCarrierCommit": "1058acb66fa2b1c8fb80be9b3bb5f0437ee7d747",
+  "proofCarrierRefs": "1058acb66fa2b1c8fb80be9b3bb5f0437ee7d747\trefs/heads/agent/starlight-progress-archive\n1058acb66fa2b1c8fb80be9b3bb5f0437ee7d747\trefs/pull/13/head",
+  "reservedAtUtc": "2026-09-08T09:51:27.592Z"
+}

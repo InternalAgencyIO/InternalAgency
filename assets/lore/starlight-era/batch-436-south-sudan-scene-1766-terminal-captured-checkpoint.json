@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "batchId": 436,
+  "country": "South Sudan",
+  "sceneId": 1766,
+  "state": "terminal_output_hard_unusable",
+  "terminalObservedAtUtc": "2026-08-27T16:31:49.520Z",
+  "provider": "Meta AI",
+  "providerUrl": "https://www.meta.ai/prompt/d5a67ff8-aa12-43f3-8cd7-1dc728792e0e",
+  "sendClickedAtUtc": "2026-08-27T16:23:15.651Z",
+  "promptPath": "tmp/world-195x4/batch-436/scene-1766-prompt.txt",
+  "promptSha256": "6FD9A80CCD19265E751CE5D3C99A77DC335B08E30E9E6AF0723B2F3C123A3794",
+  "cameraRoll": 3,
+  "framing": "EXTREME CLOSE",
+  "requiredFraming": "strict vertical shoulder-up quartet portrait",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "providerResponsePath": "progress-reports/codex-generated-media/provider-responses/batch-436-scene-1766-meta-response.txt",
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-436-scene-1766-output-hard-unusable.jsonl",
+  "rawAssetPath": "assets/lore/starlight-era/1766-south-sudan-nimule-meta-raw.webp",
+  "blobPath": "progress-reports/codex-generated-media/blobs/99/994f2a3bc13aeaf3b1d0d19ac54c396e54ed67844c7e2c041aa23ae05017be43.webp",
+  "bytesPresent": true,
+  "byteLength": 644878,
+  "sha256": "994f2a3bc13aeaf3b1d0d19ac54c396e54ed67844c7e2c041aa23ae05017be43",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "accepted": false,
+  "qa": {
+    "status": "hard_unusable",
+    "accepted": false,
+    "subjectCount": 4,
+    "vertical": true,
+    "locationRead": "strong Nimule river gorge and civilian observatory read",
+    "primaryFailure": "Camera framing extends through the bodices to approximately the waist, materially looser than the roll-3 strict shoulder-up extreme-close portrait.",
+    "additionalNotes": [
+      "Four adult faces are distinct and fully legible.",
+      "Hands, footwear, and beacon remain outside the crop as required.",
+      "Provider image is public-safe."
+    ]
+  },
+  "duplicateDispatches": 0,
+  "retryAuthorized": false,
+  "nextAction": "closed_no_resend"
+}

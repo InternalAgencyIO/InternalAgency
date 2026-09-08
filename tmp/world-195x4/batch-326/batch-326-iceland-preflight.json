@@ -1,0 +1,1337 @@
+{
+  "batch": 326,
+  "country": "Iceland",
+  "status": "render-preflight-stored",
+  "sourceCommit": "fd341b4ddab38f7e8ce6aeb7104b27ac98b1486e",
+  "contractSha256": "3EDBDA128DD8F8FA733B6B761ECBFC1E9F56445D091FBBF7DA1495A485BEF210",
+  "rollMethod": "FNV-1a over the recorded batch326-iceland keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "themePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextThemePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextQueueCountry": "Vanuatu",
+  "nextQueueBatch": 327,
+  "nextQueueScenes": [
+    1328,
+    1329,
+    1330,
+    1331
+  ],
+  "researchSources": [
+    {
+      "url": "https://visitreykjavik.is/service/harpa-concert-hall-and-conference-centre",
+      "usedFor": "Harpa's secular colored-glass waterfront geometry and Reykjavik harbor setting"
+    },
+    {
+      "url": "https://www.thingvellir.is/en/",
+      "usedFor": "Thingvellir rift valley, Almannagja fault walls, lake, lava fields, and public paths"
+    },
+    {
+      "url": "https://www.vatnajokulsthjodgardur.is/en/areas/jokulsarlon",
+      "usedFor": "Jokulsarlon glacier lagoon, Breidamerkurjokull tongue, icebergs, black sand, and open water"
+    },
+    {
+      "url": "https://www.south.is/en/place/reynisfjara-black-sand-beach",
+      "usedFor": "Reynisfjara black-sand coast, basalt columns, Reynisdrangar sea stacks, and Atlantic surf"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch326-iceland-male-model-scene",
+    "fullHash": 437518354,
+    "roll": 54,
+    "selectedScenePosition": 3,
+    "selectedScene": 1326,
+    "maleEmotion": {
+      "key": "batch326-iceland-scene3-male-emotion",
+      "roll": 35,
+      "result": "magnetic confidence"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Iceland flag, coat of arms, official emblem, sacred symbol, or religious building is copied. Large researched secular glacier, rift, basalt, lava, iceberg, civic-glass, black-sand, aurora, waterfall, and route compositions replace them.",
+    "palette": "glacier blue, basalt black, geothermal turquoise, moss green, lava red, aurora violet, snow white, silver mist, midnight navy, and warm geothermal gold",
+    "minimumCoverage": "Every image carries large complete secular Iceland compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    "cultureScene": "The scenes foreground Harpa and Reykjavik harbor, Thingvellir rift geology, Jokulsarlon glacier lagoon, and Reynisfjara's basalt and black-sand coast.",
+    "prohibitions": "Use respectful secular Icelandic glacier tongues, volcanic ridges, rift lines, basalt columns, lava fields, geothermal steam, waterfall arcs, black-sand bands, iceberg facets, aurora ribbons, civic-glass geometry, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch326-iceland-x-heart",
+      "roll": 23,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch326-iceland-x-internalagency",
+      "roll": 43,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch326-iceland-x-worldxxxseries",
+      "roll": 36,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Iceland images plus one accepted Bahamas image",
+    "captionIfEligible": "Iceland ❤️ Bahamas #Iceland",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1326 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1326 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch326-iceland-male-model-scene",
+        54
+      ],
+      [
+        "batch326-iceland-scene3-male-emotion",
+        35
+      ],
+      [
+        "batch326-iceland-scene1324-weather",
+        37
+      ],
+      [
+        "batch326-iceland-scene1324-paws",
+        94
+      ],
+      [
+        "batch326-iceland-scene1324-poleDanceTheme",
+        81
+      ],
+      [
+        "batch326-iceland-scene1324-rainbowOnly",
+        37
+      ],
+      [
+        "batch326-iceland-scene1324-rainbowHosiery",
+        76
+      ],
+      [
+        "batch326-iceland-scene1324-romanceBeat",
+        64
+      ],
+      [
+        "batch326-iceland-scene1324-compoundLoveBeat",
+        10
+      ],
+      [
+        "batch326-iceland-scene1324-eceMissionProp-poseTargetRoll",
+        51
+      ],
+      [
+        "batch326-iceland-scene1324-Radiance-emotion",
+        94
+      ],
+      [
+        "batch326-iceland-scene1324-Radiance-visibleMidriff",
+        72
+      ],
+      [
+        "batch326-iceland-scene1324-Radiance-straplessDress",
+        63
+      ],
+      [
+        "batch326-iceland-scene1324-Radiance-fullyOpenBack",
+        4
+      ],
+      [
+        "batch326-iceland-scene1324-Ellie-emotion",
+        40
+      ],
+      [
+        "batch326-iceland-scene1324-Ellie-visibleMidriff",
+        30
+      ],
+      [
+        "batch326-iceland-scene1324-Ellie-straplessDress",
+        77
+      ],
+      [
+        "batch326-iceland-scene1324-Ellie-fullyOpenBack",
+        82
+      ],
+      [
+        "batch326-iceland-scene1324-Alia-emotion",
+        40
+      ],
+      [
+        "batch326-iceland-scene1324-Alia-emotion-disambiguation",
+        39
+      ],
+      [
+        "batch326-iceland-scene1324-Alia-visibleMidriff",
+        50
+      ],
+      [
+        "batch326-iceland-scene1324-Alia-straplessDress",
+        97
+      ],
+      [
+        "batch326-iceland-scene1324-Alia-fullyOpenBack",
+        62
+      ],
+      [
+        "batch326-iceland-scene1324-AI ECE-emotion",
+        18
+      ],
+      [
+        "batch326-iceland-scene1324-AI ECE-visibleMidriff",
+        28
+      ],
+      [
+        "batch326-iceland-scene1324-AI ECE-straplessDress",
+        75
+      ],
+      [
+        "batch326-iceland-scene1324-AI ECE-fullyOpenBack",
+        92
+      ],
+      [
+        "batch326-iceland-scene1325-weather",
+        98
+      ],
+      [
+        "batch326-iceland-scene1325-paws",
+        15
+      ],
+      [
+        "batch326-iceland-scene1325-poleDanceTheme",
+        60
+      ],
+      [
+        "batch326-iceland-scene1325-rainbowOnly",
+        54
+      ],
+      [
+        "batch326-iceland-scene1325-rainbowHosiery",
+        25
+      ],
+      [
+        "batch326-iceland-scene1325-romanceBeat",
+        91
+      ],
+      [
+        "batch326-iceland-scene1325-compoundLoveBeat",
+        83
+      ],
+      [
+        "batch326-iceland-scene1325-eceMissionProp-poseTargetRoll",
+        24
+      ],
+      [
+        "batch326-iceland-scene1325-Radiance-emotion",
+        11
+      ],
+      [
+        "batch326-iceland-scene1325-Radiance-visibleMidriff",
+        3
+      ],
+      [
+        "batch326-iceland-scene1325-Radiance-straplessDress",
+        84
+      ],
+      [
+        "batch326-iceland-scene1325-Radiance-fullyOpenBack",
+        49
+      ],
+      [
+        "batch326-iceland-scene1325-Ellie-emotion",
+        87
+      ],
+      [
+        "batch326-iceland-scene1325-Ellie-visibleMidriff",
+        35
+      ],
+      [
+        "batch326-iceland-scene1325-Ellie-straplessDress",
+        24
+      ],
+      [
+        "batch326-iceland-scene1325-Ellie-fullyOpenBack",
+        65
+      ],
+      [
+        "batch326-iceland-scene1325-Alia-emotion",
+        5
+      ],
+      [
+        "batch326-iceland-scene1325-Alia-visibleMidriff",
+        1
+      ],
+      [
+        "batch326-iceland-scene1325-Alia-straplessDress",
+        54
+      ],
+      [
+        "batch326-iceland-scene1325-Alia-fullyOpenBack",
+        27
+      ],
+      [
+        "batch326-iceland-scene1325-AI ECE-emotion",
+        99
+      ],
+      [
+        "batch326-iceland-scene1325-AI ECE-visibleMidriff",
+        87
+      ],
+      [
+        "batch326-iceland-scene1325-AI ECE-straplessDress",
+        8
+      ],
+      [
+        "batch326-iceland-scene1325-AI ECE-fullyOpenBack",
+        13
+      ],
+      [
+        "batch326-iceland-scene1326-weather",
+        83
+      ],
+      [
+        "batch326-iceland-scene1326-paws",
+        8
+      ],
+      [
+        "batch326-iceland-scene1326-poleDanceTheme",
+        43
+      ],
+      [
+        "batch326-iceland-scene1326-rainbowOnly",
+        79
+      ],
+      [
+        "batch326-iceland-scene1326-rainbowHosiery",
+        38
+      ],
+      [
+        "batch326-iceland-scene1326-romanceBeat",
+        70
+      ],
+      [
+        "batch326-iceland-scene1326-compoundLoveBeat",
+        68
+      ],
+      [
+        "batch326-iceland-scene1326-eceMissionProp-poseTargetRoll",
+        9
+      ],
+      [
+        "batch326-iceland-scene1326-Radiance-emotion",
+        68
+      ],
+      [
+        "batch326-iceland-scene1326-Radiance-visibleMidriff",
+        10
+      ],
+      [
+        "batch326-iceland-scene1326-Radiance-straplessDress",
+        73
+      ],
+      [
+        "batch326-iceland-scene1326-Radiance-fullyOpenBack",
+        42
+      ],
+      [
+        "batch326-iceland-scene1326-Ellie-emotion",
+        62
+      ],
+      [
+        "batch326-iceland-scene1326-Ellie-visibleMidriff",
+        32
+      ],
+      [
+        "batch326-iceland-scene1326-Ellie-straplessDress",
+        51
+      ],
+      [
+        "batch326-iceland-scene1326-Ellie-fullyOpenBack",
+        20
+      ],
+      [
+        "batch326-iceland-scene1326-Alia-emotion",
+        26
+      ],
+      [
+        "batch326-iceland-scene1326-Alia-visibleMidriff",
+        16
+      ],
+      [
+        "batch326-iceland-scene1326-Alia-straplessDress",
+        63
+      ],
+      [
+        "batch326-iceland-scene1326-Alia-fullyOpenBack",
+        0
+      ],
+      [
+        "batch326-iceland-scene1326-AI ECE-emotion",
+        16
+      ],
+      [
+        "batch326-iceland-scene1326-AI ECE-visibleMidriff",
+        74
+      ],
+      [
+        "batch326-iceland-scene1326-AI ECE-straplessDress",
+        73
+      ],
+      [
+        "batch326-iceland-scene1326-AI ECE-fullyOpenBack",
+        38
+      ],
+      [
+        "batch326-iceland-scene1327-weather",
+        68
+      ],
+      [
+        "batch326-iceland-scene1327-paws",
+        81
+      ],
+      [
+        "batch326-iceland-scene1327-poleDanceTheme",
+        62
+      ],
+      [
+        "batch326-iceland-scene1327-rainbowOnly",
+        72
+      ],
+      [
+        "batch326-iceland-scene1327-rainbowHosiery",
+        67
+      ],
+      [
+        "batch326-iceland-scene1327-romanceBeat",
+        41
+      ],
+      [
+        "batch326-iceland-scene1327-compoundLoveBeat",
+        1
+      ],
+      [
+        "batch326-iceland-scene1327-eceMissionProp-poseTargetRoll",
+        30
+      ],
+      [
+        "batch326-iceland-scene1327-Radiance-emotion",
+        85
+      ],
+      [
+        "batch326-iceland-scene1327-Radiance-visibleMidriff",
+        69
+      ],
+      [
+        "batch326-iceland-scene1327-Radiance-straplessDress",
+        66
+      ],
+      [
+        "batch326-iceland-scene1327-Radiance-fullyOpenBack",
+        55
+      ],
+      [
+        "batch326-iceland-scene1327-Ellie-emotion",
+        97
+      ],
+      [
+        "batch326-iceland-scene1327-Ellie-visibleMidriff",
+        61
+      ],
+      [
+        "batch326-iceland-scene1327-Ellie-straplessDress",
+        82
+      ],
+      [
+        "batch326-iceland-scene1327-Ellie-fullyOpenBack",
+        99
+      ],
+      [
+        "batch326-iceland-scene1327-Alia-emotion",
+        15
+      ],
+      [
+        "batch326-iceland-scene1327-Alia-visibleMidriff",
+        31
+      ],
+      [
+        "batch326-iceland-scene1327-Alia-straplessDress",
+        20
+      ],
+      [
+        "batch326-iceland-scene1327-Alia-fullyOpenBack",
+        33
+      ],
+      [
+        "batch326-iceland-scene1327-AI ECE-emotion",
+        85
+      ],
+      [
+        "batch326-iceland-scene1327-AI ECE-emotion-disambiguation",
+        12
+      ],
+      [
+        "batch326-iceland-scene1327-AI ECE-visibleMidriff",
+        61
+      ],
+      [
+        "batch326-iceland-scene1327-AI ECE-straplessDress",
+        70
+      ],
+      [
+        "batch326-iceland-scene1327-AI ECE-fullyOpenBack",
+        47
+      ],
+      [
+        "batch326-iceland-x-heart",
+        23
+      ],
+      [
+        "batch326-iceland-x-internalagency",
+        43
+      ],
+      [
+        "batch326-iceland-x-worldxxxseries",
+        36
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch326-iceland-scene1324-rainbowHosieryWearer",
+        92
+      ],
+      [
+        "batch326-iceland-scene1324-rainbowHosieryPaletteMode",
+        24
+      ],
+      [
+        "batch326-iceland-scene1325-rainbowHosieryWearer",
+        97
+      ],
+      [
+        "batch326-iceland-scene1325-rainbowHosieryPaletteMode",
+        79
+      ],
+      [
+        "batch326-iceland-scene1326-rainbowHosieryWearer",
+        98
+      ],
+      [
+        "batch326-iceland-scene1326-rainbowHosieryPaletteMode",
+        86
+      ],
+      [
+        "batch326-iceland-scene1327-rainbowHosieryWearer",
+        27
+      ],
+      [
+        "batch326-iceland-scene1327-rainbowHosieryPaletteMode",
+        77
+      ]
+    ],
+    "primaryPairCount": 103,
+    "selectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "932A0765C132B2422F81B592D3C62D4CF6D0B84C7FEF351D2814E0B8F23D7944",
+    "selectorPairsSha256": "9EE42723CDBC861A8B6E8ECCD4BA4A59C615F4499AAE77F20143812ABE50B21F"
+  },
+  "scenePlans": {
+    "1324": {
+      "scene": 1324,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry covered waterfront overlook beside Reykjavik's unmistakable Harpa concert hall, with its complete multicolored geometric glass facade, calm old-harbor water, distant Mount Esja profile, empty quay lines, silver sea mist, and hands-free route-map light reflected across the civic glass",
+      "motifs": "complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions",
+      "culture": "Reykjavik is presented through Harpa's secular contemporary glass architecture, public harbor geometry, Mount Esja, sea light, and an empty civic waterfront. Cinematic covert-agent crew couture is fictional film-editorial route styling only, with no assassination, copied uniform, badge, authority impersonation, raid, arrest, threat, combat, or unsafe spectacle.",
+      "weather": {
+        "key": "batch326-iceland-scene1324-weather",
+        "roll": 37,
+        "result": "heavy rain curtain",
+        "materialized": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch326-iceland-scene1324-paws",
+        "roll": 94,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch326-iceland-scene1324-poleDanceTheme",
+        "roll": 81,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch326-iceland-scene1324-rainbowOnly",
+        "roll": 37,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch326-iceland-scene1324-rainbowHosiery",
+        "roll": 76,
+        "active": false,
+        "wearer": {
+          "key": "batch326-iceland-scene1324-rainbowHosieryWearer",
+          "roll": 92,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch326-iceland-scene1324-rainbowHosieryPaletteMode",
+          "roll": 24,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch326-iceland-scene1324-eceMissionProp-poseTargetRoll",
+        "roll": 51
+      },
+      "materializedPropAction": "AI ECE uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in an unoccupied harbor reach, with no boat, swimmer, bird, animal, person, quay, glass facade, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one distant clearly empty floating navigation marker in an unoccupied harbor reach, with no boat, swimmer, bird, animal, person, quay, glass facade, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch326-iceland-scene1324-romanceBeat",
+        "roll": 64,
+        "dynamicIndex": 4,
+        "contractResult": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compoundLoveBeat": {
+        "key": "batch326-iceland-scene1324-compoundLoveBeat",
+        "roll": 10,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch326-iceland-scene1324-Radiance-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1324-Radiance-visibleMidriff",
+            "roll": 72,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1324-Radiance-straplessDress",
+            "roll": 63,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1324-Radiance-fullyOpenBack",
+            "roll": 4,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch326-iceland-scene1324-Ellie-emotion",
+            "roll": 40,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1324-Ellie-visibleMidriff",
+            "roll": 30,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1324-Ellie-straplessDress",
+            "roll": 77,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1324-Ellie-fullyOpenBack",
+            "roll": 82,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch326-iceland-scene1324-Alia-emotion",
+            "roll": 40,
+            "result": "determination",
+            "materializedResult": "awe",
+            "disambiguation": {
+              "key": "batch326-iceland-scene1324-Alia-emotion-disambiguation",
+              "roll": 39
+            },
+            "performance": "awe expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1324-Alia-visibleMidriff",
+            "roll": 50,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1324-Alia-straplessDress",
+            "roll": 97,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1324-Alia-fullyOpenBack",
+            "roll": 62,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch326-iceland-scene1324-AI ECE-emotion",
+            "roll": 18,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1324-AI ECE-visibleMidriff",
+            "roll": 28,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1324-AI ECE-straplessDress",
+            "roll": 75,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1324-AI ECE-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "shame and social vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "awe expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "glacier blue cinematic covert-agent crew couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions field, and secure contrasting high heels",
+        "Ellie": "aurora violet cinematic covert-agent crew couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions field, and secure contrasting high heels",
+        "Alia": "moss emerald cinematic covert-agent crew couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions field, and secure contrasting high heels",
+        "AI ECE": "basalt navy cinematic covert-agent crew couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults move through an affectionate cinematic arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, harbor, glass, mountain, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder",
+        "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered waterfront overlook beside Reykjavik's unmistakable Harpa concert hall, with its complete multicolored geometric glass facade, calm old-harbor water, distant Mount Esja profile, empty quay lines, silver sea mist, and hands-free route-map light reflected across the civic glass. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: cinematic covert-agent crew couture, only as original public-safe fictional fashion. Reykjavik is presented through Harpa's secular contemporary glass architecture, public harbor geometry, Mount Esja, sea light, and an empty civic waterfront. Cinematic covert-agent crew couture is fictional film-editorial route styling only, with no assassination, copied uniform, badge, authority impersonation, raid, arrest, threat, combat, or unsafe spectacle. Stored scene rolls: weather 37=heavy rain curtain; PAWS 94=inactive; pole 81=inactive; rainbow-only 37=inactive; rainbow hosiery 76=inactive; wearer 92=AI ECE; palette 24=country-palette rainbow-like gradient; romance 64; compound 10; mission-prop pose/target 51. Exact wardrobe rolls: Radiance: midriff 72=covered, strapless 63=inactive, open back 4=active; Ellie: midriff 30=visible, strapless 77=inactive, open back 82=inactive; Alia: midriff 50=covered, strapless 97=inactive, open back 62=inactive; AI ECE: midriff 28=visible, strapless 75=inactive, open back 92=inactive. Exact outfits: Radiance: glacier blue cinematic covert-agent crew couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions field, and secure contrasting high heels; Ellie: aurora violet cinematic covert-agent crew couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions field, and secure contrasting high heels; Alia: moss emerald cinematic covert-agent crew couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions field, and secure contrasting high heels; AI ECE: basalt navy cinematic covert-agent crew couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Iceland motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions. Use respectful secular Icelandic glacier tongues, volcanic ridges, rift lines, basalt columns, lava fields, geothermal steam, waterfall arcs, black-sand bands, iceberg facets, aurora ribbons, civic-glass geometry, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 94=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 40=determination, performed as determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 40=determination, collision resolver 39 gives distinct performance awe, performed as awe expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 18=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 64: Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips. Compound roll 10: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults move through an affectionate cinematic arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, harbor, glass, mountain, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder; Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker in an unoccupied harbor reach, with no boat, swimmer, bird, animal, person, quay, glass facade, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render heavy rain curtain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1325": {
+      "scene": 1325,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry covered geology overlook in Thingvellir National Park, with the complete Almannagja rift-wall profile, visible North American and Eurasian plate-separation corridor, dark lava fields, Thingvallavatn lake, moss bands, empty timber paths, and low silver cloud layers",
+      "motifs": "complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions",
+      "culture": "Thingvellir is presented respectfully through its secular rift-valley geology, Almannagja fault walls, lava fields, lake, moss, and public paths. Cinematic covert-agent crew couture is fictional film-editorial route styling only, with no assassination, copied uniform, badge, authority impersonation, raid, arrest, threat, combat, sacred framing, or unsafe spectacle.",
+      "weather": {
+        "key": "batch326-iceland-scene1325-weather",
+        "roll": 98,
+        "result": "silent heat lightning on the horizon",
+        "materialized": "silent heat lightning on the horizon"
+      },
+      "paws": {
+        "key": "batch326-iceland-scene1325-paws",
+        "roll": 15,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch326-iceland-scene1325-poleDanceTheme",
+        "roll": 60,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch326-iceland-scene1325-rainbowOnly",
+        "roll": 54,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch326-iceland-scene1325-rainbowHosiery",
+        "roll": 25,
+        "active": false,
+        "wearer": {
+          "key": "batch326-iceland-scene1325-rainbowHosieryWearer",
+          "roll": 97,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch326-iceland-scene1325-rainbowHosieryPaletteMode",
+          "roll": 79,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch326-iceland-scene1325-eceMissionProp-poseTargetRoll",
+        "roll": 24
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand safety backstop on a closed empty overlook lane, with no person, animal, trail user, rift wall, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand safety backstop on a closed empty overlook lane, with no person, animal, trail user, rift wall, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch326-iceland-scene1325-romanceBeat",
+        "roll": 91,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch326-iceland-scene1325-compoundLoveBeat",
+        "roll": 83,
+        "index": 11,
+        "contractResult": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch326-iceland-scene1325-Radiance-emotion",
+            "roll": 11,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1325-Radiance-visibleMidriff",
+            "roll": 3,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1325-Radiance-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1325-Radiance-fullyOpenBack",
+            "roll": 49,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch326-iceland-scene1325-Ellie-emotion",
+            "roll": 87,
+            "result": "fear and urgent vulnerability",
+            "materializedResult": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1325-Ellie-visibleMidriff",
+            "roll": 35,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1325-Ellie-straplessDress",
+            "roll": 24,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1325-Ellie-fullyOpenBack",
+            "roll": 65,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch326-iceland-scene1325-Alia-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1325-Alia-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1325-Alia-straplessDress",
+            "roll": 54,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1325-Alia-fullyOpenBack",
+            "roll": 27,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch326-iceland-scene1325-AI ECE-emotion",
+            "roll": 99,
+            "result": "emotional exhaustion",
+            "materializedResult": "emotional exhaustion",
+            "performance": "emotional exhaustion expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1325-AI ECE-visibleMidriff",
+            "roll": 87,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1325-AI ECE-straplessDress",
+            "roll": 8,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1325-AI ECE-fullyOpenBack",
+            "roll": 13,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "fear and urgent vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "emotional exhaustion expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "glacier blue cinematic covert-agent crew couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "aurora violet cinematic covert-agent crew couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions field, and secure contrasting high heels",
+        "Alia": "moss emerald cinematic covert-agent crew couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "basalt navy cinematic covert-agent crew couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning triangle to the right, every arm separated by sky, rift, lake, lava, moss, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Alia's near shoulder",
+        "Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Alia's near forearm",
+        "Alia left hand rests on Radiance's near shoulder and Alia right hand rests on Ellie's near forearm"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered geology overlook in Thingvellir National Park, with the complete Almannagja rift-wall profile, visible North American and Eurasian plate-separation corridor, dark lava fields, Thingvallavatn lake, moss bands, empty timber paths, and low silver cloud layers. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: cinematic covert-agent crew couture, only as original public-safe fictional fashion. Thingvellir is presented respectfully through its secular rift-valley geology, Almannagja fault walls, lava fields, lake, moss, and public paths. Cinematic covert-agent crew couture is fictional film-editorial route styling only, with no assassination, copied uniform, badge, authority impersonation, raid, arrest, threat, combat, sacred framing, or unsafe spectacle. Stored scene rolls: weather 98=silent heat lightning on the horizon; PAWS 15=active; pole 60=inactive; rainbow-only 54=inactive; rainbow hosiery 25=inactive; wearer 97=AI ECE; palette 79=original independent rainbow gradient; romance 91; compound 83; mission-prop pose/target 24. Exact wardrobe rolls: Radiance: midriff 3=visible, strapless 84=inactive, open back 49=inactive; Ellie: midriff 35=visible, strapless 24=active, open back 65=inactive; Alia: midriff 1=visible, strapless 54=inactive, open back 27=active; AI ECE: midriff 87=covered, strapless 8=active, open back 13=active. Exact outfits: Radiance: glacier blue cinematic covert-agent crew couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions field, and secure contrasting high heels; Ellie: aurora violet cinematic covert-agent crew couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions field, and secure contrasting high heels; Alia: moss emerald cinematic covert-agent crew couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions field, and secure contrasting high heels; AI ECE: basalt navy cinematic covert-agent crew couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Iceland motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions. Use respectful secular Icelandic glacier tongues, volcanic ridges, rift lines, basalt columns, lava fields, geothermal steam, waterfall arcs, black-sand bands, iceberg facets, aurora ribbons, civic-glass geometry, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 11=romantic joy, performed as romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 87=fear and urgent vulnerability, performed as fear and urgent vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 5=tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 99=emotional exhaustion, performed as emotional exhaustion expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 91: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Compound roll 83: ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning triangle to the right, every arm separated by sky, rift, lake, lava, moss, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Alia's near shoulder; Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Alia's near forearm; Alia left hand rests on Radiance's near shoulder and Alia right hand rests on Ellie's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand safety backstop on a closed empty overlook lane, with no person, animal, trail user, rift wall, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render silent heat lightning on the horizon cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1326": {
+      "scene": 1326,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered glacial overlook above Jokulsarlon, with the complete Breidamerkurjokull glacier tongue, luminous blue and white icebergs drifting across the lagoon, black-sand margins, open Atlantic outlet, distant moraine lines, and no wildlife anywhere in the target corridor",
+      "motifs": "complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions",
+      "culture": "Jokulsarlon is presented through glacier-lagoon science, the Breidamerkurjokull tongue, drifting icebergs, black sand, moraine geometry, and open water. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, wildlife contact, or unsafe spectacle.",
+      "weather": {
+        "key": "batch326-iceland-scene1326-weather",
+        "roll": 83,
+        "result": "sunshower with sparkling droplets",
+        "materialized": "sunshower with sparkling droplets"
+      },
+      "paws": {
+        "key": "batch326-iceland-scene1326-paws",
+        "roll": 8,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch326-iceland-scene1326-poleDanceTheme",
+        "roll": 43,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch326-iceland-scene1326-rainbowOnly",
+        "roll": 79,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch326-iceland-scene1326-rainbowHosiery",
+        "roll": 38,
+        "active": false,
+        "wearer": {
+          "key": "batch326-iceland-scene1326-rainbowHosieryWearer",
+          "roll": 98,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch326-iceland-scene1326-rainbowHosieryPaletteMode",
+          "roll": 86,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch326-iceland-scene1326-eceMissionProp-poseTargetRoll",
+        "roll": 9
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete black-sand-and-basalt safety backstop on a closed empty overlook lane, with no person, animal, glacier ice, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete black-sand-and-basalt safety backstop on a closed empty overlook lane, with no person, animal, glacier ice, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch326-iceland-scene1326-romanceBeat",
+        "roll": 70,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch326-iceland-scene1326-compoundLoveBeat",
+        "roll": 68,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch326-iceland-scene1326-Radiance-emotion",
+            "roll": 68,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1326-Radiance-visibleMidriff",
+            "roll": 10,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1326-Radiance-straplessDress",
+            "roll": 73,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1326-Radiance-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch326-iceland-scene1326-Ellie-emotion",
+            "roll": 62,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1326-Ellie-visibleMidriff",
+            "roll": 32,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1326-Ellie-straplessDress",
+            "roll": 51,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1326-Ellie-fullyOpenBack",
+            "roll": 20,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch326-iceland-scene1326-Alia-emotion",
+            "roll": 26,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1326-Alia-visibleMidriff",
+            "roll": 16,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1326-Alia-straplessDress",
+            "roll": 63,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1326-Alia-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch326-iceland-scene1326-AI ECE-emotion",
+            "roll": 16,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1326-AI ECE-visibleMidriff",
+            "roll": 74,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1326-AI ECE-straplessDress",
+            "roll": 73,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1326-AI ECE-fullyOpenBack",
+            "roll": 38,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "possessive tension expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "glacier blue undercover investigator couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "aurora violet undercover investigator couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, and secure contrasting high heels",
+        "Alia": "moss emerald undercover investigator couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "basalt navy undercover investigator couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, and secure contrasting high heels",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, fitted black jeans, and practical black boots"
+      },
+      "composition": "AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults cross through an affectionate investigative route arc to the right, never a static lineup, and every arm is isolated against sky, glacier, lagoon, iceberg gaps, black sand, or shelter openings.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on the male's near forearm",
+        "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm",
+        "Radiance left hand rests on the male's near shoulder and Radiance right hand rests on Alia's near shoulder",
+        "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch326-iceland-scene3-male-emotion",
+          "roll": 35,
+          "result": "magnetic confidence"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry covered glacial overlook above Jokulsarlon, with the complete Breidamerkurjokull glacier tongue, luminous blue and white icebergs drifting across the lagoon, black-sand margins, open Atlantic outlet, distant moraine lines, and no wildlife anywhere in the target corridor. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, only as original public-safe fictional fashion. Jokulsarlon is presented through glacier-lagoon science, the Breidamerkurjokull tongue, drifting icebergs, black sand, moraine geometry, and open water. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, wildlife contact, or unsafe spectacle. Stored scene rolls: weather 83=sunshower with sparkling droplets; PAWS 8=active; pole 43=inactive; rainbow-only 79=inactive; rainbow hosiery 38=inactive; wearer 98=AI ECE; palette 86=original independent rainbow gradient; romance 70; compound 68; mission-prop pose/target 9. Exact wardrobe rolls: Radiance: midriff 10=visible, strapless 73=inactive, open back 42=inactive; Ellie: midriff 32=visible, strapless 51=inactive, open back 20=active; Alia: midriff 16=visible, strapless 63=inactive, open back 0=active; AI ECE: midriff 74=covered, strapless 73=inactive, open back 38=inactive. Exact outfits: Radiance: glacier blue undercover investigator couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, and secure contrasting high heels; Ellie: aurora violet undercover investigator couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, and secure contrasting high heels; Alia: moss emerald undercover investigator couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, and secure contrasting high heels; AI ECE: basalt navy undercover investigator couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, and secure contrasting high heels; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions field, fitted black jeans, and practical black boots. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Iceland motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions. Use respectful secular Icelandic glacier tongues, volcanic ridges, rift lines, basalt columns, lava fields, geothermal steam, waterfall arcs, black-sand bands, iceberg facets, aurora ribbons, civic-glass geometry, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 68=possessive tension, performed as possessive tension expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 62=visible jealousy, performed as visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 26=calm contentment, performed as calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 16=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 35=magnetic confidence, performed as magnetic confidence expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 70: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Compound roll 68: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults cross through an affectionate investigative route arc to the right, never a static lineup, and every arm is isolated against sky, glacier, lagoon, iceberg gaps, black sand, or shelter openings. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on the male's near forearm; the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; Radiance left hand rests on the male's near shoulder and Radiance right hand rests on Alia's near shoulder; Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete black-sand-and-basalt safety backstop on a closed empty overlook lane, with no person, animal, glacier ice, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render sunshower with sparkling droplets cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1327": {
+      "scene": 1327,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered coastal overlook above Reynisfjara, with the complete black-sand beach sweep, geometric basalt-column wall, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, powerful empty Atlantic surf, silver spray, and a closed unoccupied observation lane",
+      "motifs": "complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions",
+      "culture": "Reynisfjara is presented through its secular volcanic geology, black-sand coast, basalt columns, sea stacks, headland, and Atlantic wave patterns from a protected public overlook. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, sacred framing, or unsafe spectacle.",
+      "weather": {
+        "key": "batch326-iceland-scene1327-weather",
+        "roll": 68,
+        "result": "coastal sea mist",
+        "materialized": "coastal sea mist"
+      },
+      "paws": {
+        "key": "batch326-iceland-scene1327-paws",
+        "roll": 81,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch326-iceland-scene1327-poleDanceTheme",
+        "roll": 62,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch326-iceland-scene1327-rainbowOnly",
+        "roll": 72,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch326-iceland-scene1327-rainbowHosiery",
+        "roll": 67,
+        "active": false,
+        "wearer": {
+          "key": "batch326-iceland-scene1327-rainbowHosieryWearer",
+          "roll": 27,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch326-iceland-scene1327-rainbowHosieryPaletteMode",
+          "roll": 77,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch326-iceland-scene1327-eceMissionProp-poseTargetRoll",
+        "roll": 30
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete black-sand-and-basalt safety backstop on a closed empty overlook lane, with no person, animal, vehicle, basalt formation, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete black-sand-and-basalt safety backstop on a closed empty overlook lane, with no person, animal, vehicle, basalt formation, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch326-iceland-scene1327-romanceBeat",
+        "roll": 41,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch326-iceland-scene1327-compoundLoveBeat",
+        "roll": 1,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch326-iceland-scene1327-Radiance-emotion",
+            "roll": 85,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "materializedResult": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing with tear-streaked face and shaking posture expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1327-Radiance-visibleMidriff",
+            "roll": 69,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1327-Radiance-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1327-Radiance-fullyOpenBack",
+            "roll": 55,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch326-iceland-scene1327-Ellie-emotion",
+            "roll": 97,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1327-Ellie-visibleMidriff",
+            "roll": 61,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1327-Ellie-straplessDress",
+            "roll": 82,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1327-Ellie-fullyOpenBack",
+            "roll": 99,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch326-iceland-scene1327-Alia-emotion",
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1327-Alia-visibleMidriff",
+            "roll": 31,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1327-Alia-straplessDress",
+            "roll": 20,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1327-Alia-fullyOpenBack",
+            "roll": 33,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch326-iceland-scene1327-AI ECE-emotion",
+            "roll": 85,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "materializedResult": "romantic joy",
+            "disambiguation": {
+              "key": "batch326-iceland-scene1327-AI ECE-emotion-disambiguation",
+              "roll": 12
+            },
+            "performance": "romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch326-iceland-scene1327-AI ECE-visibleMidriff",
+            "roll": 61,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch326-iceland-scene1327-AI ECE-straplessDress",
+            "roll": 70,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch326-iceland-scene1327-AI ECE-fullyOpenBack",
+            "roll": 47,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "full sobbing with tear-streaked face and shaking posture expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "extreme happiness, radiant laughing delight expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "glacier blue undercover investigator couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions field, and secure contrasting high heels",
+        "Ellie": "aurora violet undercover investigator couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions field, and secure contrasting high heels",
+        "Alia": "moss emerald undercover investigator couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "basalt navy undercover investigator couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate investigative crescent to the right beneath the shelter, with every arm separated by sky, sea, black sand, basalt, sea-stack, headland, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder",
+        "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered coastal overlook above Reynisfjara, with the complete black-sand beach sweep, geometric basalt-column wall, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, powerful empty Atlantic surf, silver spray, and a closed unoccupied observation lane. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, only as original public-safe fictional fashion. Reynisfjara is presented through its secular volcanic geology, black-sand coast, basalt columns, sea stacks, headland, and Atlantic wave patterns from a protected public overlook. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, sacred framing, or unsafe spectacle. Stored scene rolls: weather 68=coastal sea mist; PAWS 81=inactive; pole 62=inactive; rainbow-only 72=inactive; rainbow hosiery 67=inactive; wearer 27=Radiance; palette 77=original independent rainbow gradient; romance 41; compound 1; mission-prop pose/target 30. Exact wardrobe rolls: Radiance: midriff 69=covered, strapless 66=inactive, open back 55=inactive; Ellie: midriff 61=covered, strapless 82=inactive, open back 99=inactive; Alia: midriff 31=visible, strapless 20=active, open back 33=inactive; AI ECE: midriff 61=covered, strapless 70=inactive, open back 47=inactive. Exact outfits: Radiance: glacier blue undercover investigator couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions field, and secure contrasting high heels; Ellie: aurora violet undercover investigator couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions field, and secure contrasting high heels; Alia: moss emerald undercover investigator couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions field, and secure contrasting high heels; AI ECE: basalt navy undercover investigator couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Iceland motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions. Use respectful secular Icelandic glacier tongues, volcanic ridges, rift lines, basalt columns, lava fields, geothermal steam, waterfall arcs, black-sand bands, iceberg facets, aurora ribbons, civic-glass geometry, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 85=full sobbing with tear-streaked face and shaking posture, performed as full sobbing with tear-streaked face and shaking posture expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 97=defiance, performed as defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 15=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 85=full sobbing with tear-streaked face and shaking posture, collision resolver 12 gives distinct performance romantic joy, performed as romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 41: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Compound roll 1: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate investigative crescent to the right beneath the shelter, with every arm separated by sky, sea, black sand, basalt, sea-stack, headland, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder; Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete black-sand-and-basalt safety backstop on a closed empty overlook lane, with no person, animal, vehicle, basalt formation, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render coastal sea mist cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

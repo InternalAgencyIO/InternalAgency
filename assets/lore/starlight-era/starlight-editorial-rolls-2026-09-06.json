@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "id": "starlight-editorial-rolls-2026-09-06",
+  "status": "binding-prospective-after-batch-488",
+  "source": "Direct user instructions received after Slovenia 1979-1982 and their one-pass edits were already dispatched.",
+  "precedence": {
+    "supersedes": [
+      "Europe 1-20 tight hemline / 21-60 three-quarter / 61-100 full-body mapping",
+      "Every face, hand, leg and shoe must fit every crop",
+      "Four parallel standing lanes and identical shoe families across all characters",
+      "No literal flag garment motifs",
+      "Old 15-percent tattoo placement within 32-percent character branding"
+    ],
+    "preserves": [
+      "Exactly four original fictional women age21, identities anchored938/936/937",
+      "One ChatGPT tailoring invocation per usable Meta occurrence; no second call even if interrupted or blocked",
+      "At most two Meta hard-failure retries; no aesthetic retries",
+      "Visible in-app Meta Thinking only; no provider APIs or hidden controls",
+      "Preserve raw, unused, blocked, selected assets and all URLs",
+      "No replacement automation, task, worker, subagent or guardian"
+    ]
+  },
+  "randomness": {
+    "algorithm": "SHA256 with rejection sampling; every field has a unique recorded key. Fixed version+batch+country seed, no salt hunting or outcome rerolling.",
+    "unit": "Per scene for camera and retained image rolls; per character per scene for shoes, flags, midriff and every tattoo motif.",
+    "rollRange": [
+      1,
+      100
+    ],
+    "activeWhen": "roll <= probabilityPercent"
+  },
+  "camera": {
+    "sourceCheckpoint": "assets/lore/starlight-era/batch-431-benin-prompts-prepared-checkpoint.json:cameraRollMethod",
+    "mapping": [
+      {
+        "min": 1,
+        "max": 20,
+        "label": "extreme-close",
+        "percent": 20
+      },
+      {
+        "min": 21,
+        "max": 80,
+        "label": "intermediate",
+        "percent": 60
+      },
+      {
+        "min": 81,
+        "max": 100,
+        "label": "extreme-wide",
+        "percent": 20
+      }
+    ],
+    "cropPriority": "Rolled crop is real, not a label pasted on a head-to-toe lineup. Extreme close may omit lower legs and shoes. Intermediate may be waist/thigh-up or seated three-quarter. Extreme wide is an environmental narrative with distributed poses.",
+    "angleDeck": [
+      "high-oblique",
+      "front-quarter-low",
+      "side-level",
+      "over-shoulder"
+    ],
+    "dutchTiltDegrees": [
+      10,
+      25
+    ],
+    "noForcedFootwearInCloseCrop": true
+  },
+  "poses": {
+    "sourceContract": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json:cinematic camera and relationship policies",
+    "deck": [
+      "supported-seated-conversation",
+      "head-resting-on-clothed-lap",
+      "back-hug-turn",
+      "side-hug-step"
+    ],
+    "selection": "Seeded shuffle without replacement across four scene positions; not a probability claim.",
+    "composition": "Use different elevations, torso directions and foreground depths. Four faces retain their identity order but bodies need not stand shoulder-to-shoulder. No equal spacing or static catalogue row.",
+    "safety": "Consensual fully clothed adult affection; stable bench or daybed; supported head and neck; no straddling or intimate-area framing."
+  },
+  "shoes": {
+    "types": [
+      "classic-pump",
+      "stiletto-sandal",
+      "sculptural-platform",
+      "ankle-boot",
+      "knee-high-boot"
+    ],
+    "typeSelection": "Seeded five-type deck rotates by scene and character; four distinct families per image and changed families across consecutive scenes.",
+    "rainbowPercent": 35,
+    "visibleBrandPercent": 40,
+    "brandStyle": "When branded, an independent unbiased two-way choice: subtle exact RAZE text or original RAZE split-star. Otherwise brandless.",
+    "interpretation": "The 40-percent branded / 60-percent brandless split applies independently to every shoe design, including rainbow. Rainbow does not silently force additional branding.",
+    "regularDesign": "Distinct restrained colors, materials, hardware and silhouettes; no unrelated trademarks or Razer snake logo."
+  },
+  "garments": {
+    "completeCountryFlagMotifPercentPerCharacter": 33,
+    "flagRule": "Selected garments integrate the complete current national flag design with correct order and proportions; not a random color fragment. Clothing remains wearable and opaque. A crop may show only part of the garment, but its designed motif remains complete.",
+    "openBackAndBareArms": "Every future single tailoring pass includes open-back or side-back construction and bare arms where visible, with opaque front and secure side coverage. Do not rotate bodies to force back visibility.",
+    "shortHem": "One substantial upper-thigh tailoring pass with secure opaque lining, bare leg styling where hosiery does not cover it; no underwear exposure.",
+    "visibleNavelPercentPerCharacter": 45,
+    "midriffRule": "Apply the recorded roll in the same single tailoring invocation, not another edit; tasteful cropped or waist-cutout couture, secure opaque chest and pelvic coverage."
+  },
+  "tattoos": {
+    "chancePercentEach": 4,
+    "independent": true,
+    "motifs": [
+      "thorny-rose",
+      "country-death-motif",
+      "country-love-motif",
+      "raze-brand",
+      "raze-split-star",
+      "star",
+      "crescent",
+      "scorpion",
+      "IA",
+      "agency",
+      "silent-king",
+      "GRD"
+    ],
+    "multipleActiveAllowed": true,
+    "noForcedTattooMinimum": true,
+    "placement": "Prominent crisp visible upper arm, shoulder, upper back or outer calf; choose a visible non-intimate location for the rolled crop. Separate multiple motifs with readable spacing.",
+    "countryMotifs": "Original non-graphic designer symbols inspired by the setting; do not claim invented motifs are authentic national or religious symbols.",
+    "labels": {
+      "raze-brand": "RAZE",
+      "raze-split-star": "original split-star",
+      "IA": "IA",
+      "agency": "agency",
+      "silent-king": "silent king",
+      "GRD": "GRD"
+    }
+  },
+  "retainedImageRolls": {
+    "starHardware": 25,
+    "kneeHighHosiery": 25,
+    "splitStarEmblem": 25,
+    "razeTypeBand": 25,
+    "rainbowStockings": 33,
+    "kneeHighRainbows": 22,
+    "fictionalDistantRazedBackground": 32
+  },
+  "retainedCharacterStockingBranding": {
+    "percent": 32,
+    "placement": "stocking only, not an additional tattoo lottery; do not force socks into an extreme-close crop"
+  },
+  "editAllowance": {
+    "callsPerUsableMetaImage": 1,
+    "allChangesInOneInvocation": true,
+    "ifAlreadyInvoked": "Never revise by issuing another edit. Apply newer user directives prospectively.",
+    "archiveEveryOutput": true
+  },
+  "browserGate": {
+    "mode": "in-app-browser-only",
+    "thinking": true,
+    "anchorOrder": [
+      938,
+      936,
+      937
+    ],
+    "freshUiInspectionRequired": true,
+    "ifUnavailable": "Persist prepared prompts locally; do not dispatch through API, direct HTTP, CLI, Chrome, computer-use or hidden-state substitutes."
+  }
+}

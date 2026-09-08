@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "batch": 503,
+  "createdAtUtc": "2026-09-07T03:58:35.626Z",
+  "rule": "Exactly one built-in imagegen invocation per selected source scene. A block, timeout or interruption consumes it. No CLI/API fallback. Preserve every returned file even if not selected.",
+  "scenes": [
+    {
+      "scene": 2039,
+      "state": "single-edit-returned-terminal",
+      "invocationCount": 1,
+      "source": {
+        "scene": 2039,
+        "batch": 503,
+        "occurrence": 1,
+        "kind": "internal-2",
+        "providerUrl": "https://www.meta.ai/prompt/2c11ada4-b743-4ea6-9972-11228bcb21bf",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/703612667_1413935163997984_6922181495351401951_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=104&_nc_ohc=iwwWRAvx7VIQ7kNvwE6nT5H&sdl=0&ccb=14-4&oh=00_AQJgIM8L05rCuyNpGnMqcls-larg5j7U0U2wPD29703Lpg&oe=6AA001DE&_nc_sid=a21977",
+        "downloadPath": "C:\\Users\\A\\Downloads\\703612667_1413935163997984_6922181495351401951_n.webp",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-internal-2-original.webp",
+        "sha256": "d43c246d5bcc31c54efb93a950f009434f5bee58affea588f34a81dd4514e9ec",
+        "bytes": 499748,
+        "width": 1152,
+        "height": 2048,
+        "observedAtUtc": "2026-09-07T03:54:48.843Z",
+        "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+      },
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-internal-2-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "prompt": "Use case: identity-preserve. Edit target Image1 is the saved Meta still for scene 2039. Images2,3,4 are the ordered project-owned AI-fictional quartet continuity plates938,936,937, each contains all four women, not one face per file. They support facial continuity only; never copy their clothes, props, pose or background. Preserve Image1's exact four adult faces, framing, body geometry, gestures, contact, setting, lighting and complete opaque coverage. One identity-preserving clothing-only tailoring pass for scene 2039: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=covered, Ellie=covered, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: an ivory sculpted cocktail mini with coral doorway-arch seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient stiletto sandal without any branding. No tattoos. Radiance: a cobalt cropped architectural shell and secure pearl mini skort; secure open-back or side-back construction and bare arms, covered midriff; cobalt patent knee high boot with one subtle original RAZE split-star mark. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: a coral asymmetric fitted mini with copper bay-wave piping; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient classic pump with one subtle RAZE text mark. No tattoos. ECE: a fitted mini dress integrating the complete Panama flag design (a complete 3:2 rectangle of four equal quarters: upper-left white with one upright blue five-point star, upper-right red, lower-left blue, lower-right white with one upright red five-point star; preserve both stars and their positions without extra emblems, and place any branding outside the flag design) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; turquoise chrome ankle boot without any branding. No tattoos. No general hosiery assignment; only individual stocking marks may call for a neutral stocking. Do not add bodies, duplicates or new off-frame details. Hem changes apply only where a hem is already visible and remain securely lined for the existing pose. Keep the source camera unchanged even where Meta missed the roll; no new crop, zoom, tilt, rotation or corner fill.",
+      "promptSha256": "C836F6E47644CE796D03FEF950A0F8E01B11422274F2DDD9FC43C9D7EE40A63D",
+      "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-chatgpt-single-tailoring-pass.png",
+      "dispatchIntentLockedAtUtc": "2026-09-07T04:01:12.272Z",
+      "additionalInvocationsAllowed": 0,
+      "result": {
+        "scene": 2039,
+        "batch": 503,
+        "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-7a871081-4023-4251-8337-6c6339af98e1.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-chatgpt-single-tailoring-pass.png",
+        "bytes": 2280701,
+        "sha256": "a5d0deae83b67dc96637abd9cce05f4c312a7712958eb92eb516919195720644",
+        "width": 941,
+        "height": 1672,
+        "startedAtUtc": "2026-09-07T04:02:08.015Z",
+        "completedAtUtc": "2026-09-07T04:03:08.310Z",
+        "invocations": 1
+      },
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-results.json"
+    },
+    {
+      "scene": 2040,
+      "state": "single-edit-returned-terminal",
+      "invocationCount": 1,
+      "source": {
+        "scene": 2040,
+        "batch": 503,
+        "occurrence": 1,
+        "kind": "internal-4",
+        "providerUrl": "https://www.meta.ai/prompt/63430413-527b-4faf-b442-9c126eafa689",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/706396997_1065480172788458_8671930161202544835_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=Ab56wwCiqaUQ7kNvwHrUO3X&sdl=0&ccb=14-4&oh=00_AQLhaee4s0pW9JSLQHXTjc64yx7K_MFLMmmx229NMVZdDg&oe=6AA018E8&_nc_sid=a21977",
+        "downloadPath": "C:\\Users\\A\\Downloads\\706396997_1065480172788458_8671930161202544835_n.webp",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-4-original.webp",
+        "sha256": "984ece09c3f69a9bf91ebcb6195ccb641c602bbc369d6a7bb48d9ac92680a787",
+        "bytes": 477604,
+        "width": 1152,
+        "height": 2048,
+        "observedAtUtc": "2026-09-07T03:56:43.975Z",
+        "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+      },
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-4-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "prompt": "Use case: identity-preserve. Edit target Image1 is the saved Meta still for scene 2040. Images2,3,4 are the ordered project-owned AI-fictional quartet continuity plates938,936,937, each contains all four women, not one face per file. They support facial continuity only; never copy their clothes, props, pose or background. Preserve Image1's exact four adult faces, framing, body geometry, gestures, contact, setting, lighting and complete opaque coverage. One identity-preserving clothing-only tailoring pass for scene 2040: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=visible navel, Ellie=covered, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a teal fitted mini with silver channel-line seams; secure open-back or side-back construction and bare arms, covered midriff; teal enamel knee high boot without any branding. Prominent crisp tattoos: original split-star, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Radiance: a pearl one-shoulder cocktail mini with cobalt folded panels; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; pearl satin classic pump without any branding. Prominent crisp tattoos: agency, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Ellie: a fitted mini dress integrating the complete Panama flag design (a complete 3:2 rectangle of four equal quarters: upper-left white with one upright blue five-point star, upper-right red, lower-left blue, lower-right white with one upright red five-point star; preserve both stars and their positions without extra emblems, and place any branding outside the flag design) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; silver mirror ankle boot with one subtle original RAZE split-star mark. No tattoos. ECE: a copper asymmetric mini with teal stepped geometric piping; secure open-back or side-back construction and bare arms, covered midriff; copper lacquer sculptural platform with one subtle RAZE text mark. Prominent crisp tattoos: RAZE; original split-star, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Visible hosiery uses rainbow stockings; this is independent of shoe color. Do not add bodies, duplicates or new off-frame details. Hem changes apply only where a hem is already visible and remain securely lined for the existing pose. Keep the source camera unchanged even where Meta missed the roll; no new crop, zoom, tilt, rotation or corner fill.",
+      "promptSha256": "EF14B19738C5FD48BB0F31405AEDA090506B8ED1958C2C612A185A95A650A6E9",
+      "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-chatgpt-single-tailoring-pass.png",
+      "dispatchIntentLockedAtUtc": "2026-09-07T04:01:12.272Z",
+      "additionalInvocationsAllowed": 0,
+      "result": {
+        "scene": 2040,
+        "batch": 503,
+        "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-b9086a8b-c298-4b99-a25a-f685d33cdab2.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-chatgpt-single-tailoring-pass.png",
+        "bytes": 2300252,
+        "sha256": "fa3c4a62867d0d93239c93dd4a7bbe19298e7abe1048f8a2ac70129c4603949a",
+        "width": 941,
+        "height": 1672,
+        "startedAtUtc": "2026-09-07T04:02:08.016Z",
+        "completedAtUtc": "2026-09-07T04:04:17.350Z",
+        "invocations": 1
+      },
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-results.json"
+    },
+    {
+      "scene": 2041,
+      "state": "single-edit-returned-terminal",
+      "invocationCount": 1,
+      "source": {
+        "scene": 2041,
+        "batch": 503,
+        "occurrence": 1,
+        "kind": "gallery",
+        "providerUrl": "https://www.meta.ai/prompt/be93001e-573d-4265-981c-483bdcc293db",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799441265_1584476046501105_2487219746050949399_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=109&_nc_ohc=Fd4WdTXrq6wQ7kNvwGazIBO&sdl=0&ccb=14-4&oh=00_AQJy3mrKAGymqW2u0O2zUSCPM-vzc2iQubun9Wg4ds3rTQ&oe=6AA41059&_nc_sid=a21977",
+        "downloadPath": "C:\\Users\\A\\Downloads\\799441265_1584476046501105_2487219746050949399_n.webp",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2041-meta-gallery-original.webp",
+        "sha256": "c98f944076544045800dea5b2d85e00b6b072b3769b0355632704224def51f9c",
+        "bytes": 541332,
+        "width": 1152,
+        "height": 2048,
+        "observedAtUtc": "2026-09-07T03:54:51.112Z",
+        "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+      },
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-503-panama/2041-meta-gallery-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "prompt": "Use case: identity-preserve. Edit target Image1 is the saved Meta still for scene 2041. Images2,3,4 are the ordered project-owned AI-fictional quartet continuity plates938,936,937, each contains all four women, not one face per file. They support facial continuity only; never copy their clothes, props, pose or background. Preserve Image1's exact four adult faces, framing, body geometry, gestures, contact, setting, lighting and complete opaque coverage. One identity-preserving clothing-only tailoring pass for scene 2041: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=covered, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: an emerald sculpted mini with copper leaf-fold seams; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient classic pump without any branding. Prominent crisp tattoos: IA; GRD, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Radiance: a fitted mini dress integrating the complete Panama flag design (a complete 3:2 rectangle of four equal quarters: upper-left white with one upright blue five-point star, upper-right red, lower-left blue, lower-right white with one upright red five-point star; preserve both stars and their positions without extra emblems, and place any branding outside the flag design) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; coffee-brown polished leather ankle boot with one subtle RAZE text mark. No tattoos. Ellie: an ivory fitted cocktail mini with jade contour embroidery; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient sculptural platform without any branding. Prominent crisp tattoos: original split-star; scorpion, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. ECE: a fitted mini dress integrating the complete Panama flag design (a complete 3:2 rectangle of four equal quarters: upper-left white with one upright blue five-point star, upper-right red, lower-left blue, lower-right white with one upright red five-point star; preserve both stars and their positions without extra emblems, and place any branding outside the flag design) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; plum satin stiletto sandal without any branding. Prominent crisp tattoos: GRD, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Visible hosiery uses knee-high rainbow gradients; this image roll is independent of shoe color. Do not add bodies, duplicates or new off-frame details. Hem changes apply only where a hem is already visible and remain securely lined for the existing pose. Keep the source camera unchanged even where Meta missed the roll; no new crop, zoom, tilt, rotation or corner fill.",
+      "promptSha256": "8BA6553D76DC54938A018B153CA9BDAE8C1A4256ED61C9881B612A3BA19D1687",
+      "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2041-chatgpt-single-tailoring-pass.png",
+      "dispatchIntentLockedAtUtc": "2026-09-07T04:01:12.272Z",
+      "additionalInvocationsAllowed": 0,
+      "result": {
+        "scene": 2041,
+        "batch": 503,
+        "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-1f3cf1d8-65e6-465c-ab02-d420c8fc5b20.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2041-chatgpt-single-tailoring-pass.png",
+        "bytes": 2444329,
+        "sha256": "af8d301597351aa39c4718ed2a36f9bec0f310b967fcaaccfe9eb1dad4237054",
+        "width": 941,
+        "height": 1672,
+        "startedAtUtc": "2026-09-07T04:02:08.016Z",
+        "completedAtUtc": "2026-09-07T04:05:22.311Z",
+        "invocations": 1
+      },
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-results.json"
+    },
+    {
+      "scene": 2042,
+      "state": "single-edit-returned-terminal",
+      "invocationCount": 1,
+      "source": {
+        "scene": 2042,
+        "batch": 503,
+        "occurrence": 1,
+        "kind": "gallery",
+        "providerUrl": "https://www.meta.ai/prompt/09abf862-8e18-457b-9c96-37b9992360e7",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799224745_2828243424223771_3006968648554056806_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=107&_nc_ohc=-5sT4JvPOdEQ7kNvwHIBuzA&sdl=0&ccb=14-4&oh=00_AQLH48e4qW5tOr02Lt8sHzIS-_Nk90cc0vBmHKtoznBIAQ&oe=6AA3F25C&_nc_sid=a21977",
+        "downloadPath": "C:\\Users\\A\\Downloads\\799224745_2828243424223771_3006968648554056806_n.webp",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2042-meta-gallery-original.webp",
+        "sha256": "30aee98c43cbb56e649093dd8991078839a54f43f46536073cf47a13a20a8e39",
+        "bytes": 608502,
+        "width": 1152,
+        "height": 2048,
+        "observedAtUtc": "2026-09-07T03:54:52.101Z",
+        "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+      },
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-503-panama/2042-meta-gallery-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "prompt": "Use case: identity-preserve. Edit target Image1 is the saved Meta still for scene 2042. Images2,3,4 are the ordered project-owned AI-fictional quartet continuity plates938,936,937, each contains all four women, not one face per file. They support facial continuity only; never copy their clothes, props, pose or background. Preserve Image1's exact four adult faces, framing, body geometry, gestures, contact, setting, lighting and complete opaque coverage. One identity-preserving clothing-only tailoring pass for scene 2042: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=visible navel, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a turquoise asymmetric mini with pearl wave ribs; secure open-back or side-back construction and bare arms, covered midriff; turquoise ceramic ankle boot with one subtle RAZE text mark. No tattoos. Radiance: a fitted mini dress integrating the complete Panama flag design (a complete 3:2 rectangle of four equal quarters: upper-left white with one upright blue five-point star, upper-right red, lower-left blue, lower-right white with one upright red five-point star; preserve both stars and their positions without extra emblems, and place any branding outside the flag design) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; coral patent sculptural platform without any branding. Prominent crisp tattoos: RAZE, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: a pearl cropped shell and secure cobalt mini skort; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient stiletto sandal without any branding. Prominent crisp tattoos: an original non-graphic empty shell outline fading into a water ripple, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. ECE: a fitted mini dress integrating the complete Panama flag design (a complete 3:2 rectangle of four equal quarters: upper-left white with one upright blue five-point star, upper-right red, lower-left blue, lower-right white with one upright red five-point star; preserve both stars and their positions without extra emblems, and place any branding outside the flag design) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; jade enamel knee high boot without any branding. Prominent crisp tattoos: an original pair of lagoon waves enclosing a small heart; silent king, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Visible hosiery uses rainbow stockings; this is independent of shoe color. Do not add bodies, duplicates or new off-frame details. Hem changes apply only where a hem is already visible and remain securely lined for the existing pose. Keep the source camera unchanged even where Meta missed the roll; no new crop, zoom, tilt, rotation or corner fill.",
+      "promptSha256": "9AF7E75B3C30142B05CA4BD78207E01BBD6DB5F035AF2F51764FE55C55CA9E65",
+      "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2042-chatgpt-single-tailoring-pass.png",
+      "dispatchIntentLockedAtUtc": "2026-09-07T04:01:12.272Z",
+      "additionalInvocationsAllowed": 0,
+      "result": {
+        "scene": 2042,
+        "batch": 503,
+        "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-6b49288b-233b-499a-bc6e-5e50daafd08b.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2042-chatgpt-single-tailoring-pass.png",
+        "bytes": 2449628,
+        "sha256": "d81a4093deff7ebafb6eb3c9737ed6b406da64219671ea3b435eb635371648e6",
+        "width": 941,
+        "height": 1672,
+        "startedAtUtc": "2026-09-07T04:02:08.016Z",
+        "completedAtUtc": "2026-09-07T04:06:35.306Z",
+        "invocations": 1
+      },
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-results.json"
+    }
+  ],
+  "state": "four-single-edits-completed-terminal"
+}

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "batch": 509,
+  "reviewedAtUtc": "2026-09-08T04:31:40.657Z",
+  "reviewMethod": "Main agent directly inspected both unique recovery originals through view_image; matching gallery/internal hashes are byte duplicates.",
+  "filesSaved": 4,
+  "uniqueVersions": 2,
+  "allSourcesUsable": true,
+  "selectedSources": [
+    {
+      "scene": 2064,
+      "occurrence": "recovery-1",
+      "label": "gallery/mostar_lounge_editorial.webp",
+      "labelIndex": 0,
+      "kind": "gallery",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800259595_1720245905939205_4247209087540064276_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=109&_nc_ohc=2siWl9MCey8Q7kNvwFt1NU0&sdl=0&ccb=14-4&oh=00_AQKBPuhAIrkJQgSnuaBwVB2iOtAFMu5dpvYooVbEfFoAEQ&oe=6AA56F54&_nc_sid=a21977",
+      "providerUrl": "https://www.meta.ai/prompt/c353df84-a487-421c-899e-9d14f45358cc",
+      "observedAtUtc": "2026-09-08T04:29:19.488Z",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-recovery-1-gallery-original.webp",
+      "downloadPath": "C:\\Users\\A\\Downloads\\800259595_1720245905939205_4247209087540064276_n.webp",
+      "bytes": 450248,
+      "sha256": "3a7a44615fb1c2a04897fbc484132d82c469e2ea6f113a2b0402f5b3d7b7807f",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "archiveMethod": "Visible in-app Browser downloadMedia and pre-armed download event",
+      "status": "archived-original-pending-source-qa"
+    },
+    {
+      "scene": 2066,
+      "occurrence": "recovery-1",
+      "label": "gallery/forest_lounge_portrait.webp",
+      "labelIndex": 0,
+      "kind": "gallery",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799675927_1096122936089809_7412940559352066555_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=101&_nc_ohc=NFe7257SxLYQ7kNvwFp4795&sdl=0&ccb=14-4&oh=00_AQKn01Mga1QnRvGFpg8VV30P1zhufzpR70sVFN3i6aCJLQ&oe=6AA56089&_nc_sid=a21977",
+      "providerUrl": "https://www.meta.ai/prompt/25252d65-d70d-460c-b517-2809a763c819",
+      "observedAtUtc": "2026-09-08T04:29:20.376Z",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-recovery-1-gallery-original.webp",
+      "downloadPath": "C:\\Users\\A\\Downloads\\799675927_1096122936089809_7412940559352066555_n.webp",
+      "bytes": 451424,
+      "sha256": "ea938180ab94a9dc77e8bbe3937b5a6a9cd55196129f39aa0ce0e3fa5d62fe99",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "archiveMethod": "Visible in-app Browser downloadMedia and pre-armed download event",
+      "status": "archived-original-pending-source-qa"
+    }
+  ],
+  "scenes": [
+    {
+      "scene": 2064,
+      "hardGate": "pass-four-distinct-fictional-adults",
+      "reason": "The fifth-person defect is resolved. Four women on supported furniture, opaque coverage, recognizable faces and plausible anatomy.",
+      "softDeviations": [
+        "Head rests at shoulder/chest rather than fully on clothed lap.",
+        "Camera is wider and less tilted than the fixed roll; preserve actual crop.",
+        "Flag-star count and trim vary; no aesthetic recovery."
+      ],
+      "additionalMetaSendsAllowed": 0
+    },
+    {
+      "scene": 2066,
+      "hardGate": "pass-four-distinct-fictional-adults-public-safe-covered-portrait",
+      "reason": "Four distinguishable anchored adults in covered blue-yellow, pine-green and ivory garments. Lower-body hemlines, shoes and navels are offscreen.",
+      "softDeviations": [
+        "Alia and Radiance cheeks touch in a relaxed nonsexual side hug; provider narrative says fully separate. Do not claim exact pose compliance.",
+        "Tilt is weaker than22degrees and sleeves differ; record rather than regenerate."
+      ],
+      "saferExclusions": [
+        "Fully opaque lined garments and covered midriffs; no cutouts or new exposure.",
+        "Country-palette color blocks, no exact flag print.",
+        "Keep actual close source frame; no lower-body reveals, hems or shoes.",
+        "No new temple greeting or intensified contact."
+      ],
+      "singleEditPrompt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2066-single-edit-safer-prompt.txt",
+      "retiredUninvokedEditPrompt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2066-single-edit-prompt.txt",
+      "additionalMetaSendsAllowed": 0
+    }
+  ],
+  "allRawCountryFiles": 22,
+  "uniqueCountryImages": 18,
+  "generatedSceneFiles": 16,
+  "uniqueGeneratedSceneVersions": 12,
+  "providerContextReferenceFiles": 6
+}

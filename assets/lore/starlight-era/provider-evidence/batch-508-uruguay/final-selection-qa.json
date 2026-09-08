@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "batch": 508,
+  "reviewedAtUtc": "2026-09-08T03:31:42.202Z",
+  "policy": "Direct visual review of all six unique Meta originals and all three returned edits. Use strongest public-safe usable result after exactly one edit; no aesthetic retries.",
+  "perScene": [
+    {
+      "scene": 2059,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-meta-gallery-original.webp",
+      "technical": "pass",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selectionReason": "Retain closer Meta original. The one returned edit widened the source to display lower legs and boots, contrary to the preserved-source-crop instruction. Returned PNG saved unused; no retry.",
+      "sourceDeviations": [
+        "Actual source is a knee-inclusive group portrait, not the frozen extreme-close/high-oblique21-degree request.",
+        "Fine flag stripe/sun details and garment type band differ from exact rolls; shoes are subordinate to the retained crop."
+      ],
+      "remainingSoftDeviations": [
+        "Actual source is a knee-inclusive group portrait, not the frozen extreme-close/high-oblique21-degree request.",
+        "Fine flag stripe/sun details and garment type band differ from exact rolls; shoes are subordinate to the retained crop."
+      ],
+      "framing": "Closer original retained after edit widened crop",
+      "fictionalDisasterDisclosureRequired": false
+    },
+    {
+      "scene": 2060,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-internal-1-original.webp",
+      "technical": "pass",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selectionReason": "Retain Meta internal1 source. The returned edit removes the visible sun from Alia flag garment, closes the rolled waist opening and loses rainbow hosiery detail. Source better preserves the visible styling and warm side hug. Returned PNG saved unused; no retry.",
+      "sourceDeviations": [
+        "Actual source is full-body, not the frozen environmental extreme-wide19-degree request.",
+        "Some tattoo shapes, sun location, shoe heights and navel/hosiery ownership deviate from rolls; source is stronger than the edited variant."
+      ],
+      "remainingSoftDeviations": [
+        "Actual source is full-body, not the frozen environmental extreme-wide19-degree request.",
+        "Some tattoo shapes, sun location, shoe heights and navel/hosiery ownership deviate from rolls; source is stronger than the edited variant."
+      ],
+      "framing": "Source arrangement and opaque coverage remain usable",
+      "fictionalDisasterDisclosureRequired": false
+    },
+    {
+      "scene": 2061,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2061-chatgpt-single-tailoring-pass.png",
+      "technical": "pass",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selectionReason": "Select the returned single edit. It retains the source group layout, affectionate shoulder rest, hand gesture, opaque garments and distant fictional background, with a shorter polished mini silhouette. Minor composition and fine-print drift is soft.",
+      "sourceDeviations": [
+        "Supported head rests on a shoulder rather than a lap. Exact18-degree viewpoint and shoe lengths are approximate.",
+        "Extra star tattoos and flag sun/stripe placement remain soft. Distant fire/smoke is fictional and must be disclosed, never represented as a real event."
+      ],
+      "remainingSoftDeviations": [
+        "Supported head rests on a shoulder rather than a lap. Exact18-degree viewpoint and shoe lengths are approximate.",
+        "Extra star tattoos and flag sun/stripe placement remain soft. Distant fire/smoke is fictional and must be disclosed, never represented as a real event."
+      ],
+      "framing": "Source arrangement and opaque coverage remain usable",
+      "fictionalDisasterDisclosureRequired": true
+    },
+    {
+      "scene": 2062,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2062-meta-gallery-original.webp",
+      "technical": "pass",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selectionReason": "The only edit was blocked at output moderation. Independently reviewed opaque adult Meta original remains selected; exact block and prompt archived, no replacement edit.",
+      "sourceDeviations": [
+        "Actual source is a seated full-body group, not the frozen close over-shoulder17-degree request.",
+        "Extra tattoo marks, shoe/hosiery ownership and flagless garment colors differ from some assignments. All figures remain clothed and fictional adults."
+      ],
+      "remainingSoftDeviations": [
+        "Actual source is a seated full-body group, not the frozen close over-shoulder17-degree request.",
+        "Extra tattoo marks, shoe/hosiery ownership and flagless garment colors differ from some assignments. All figures remain clothed and fictional adults."
+      ],
+      "framing": "Source arrangement and opaque coverage remain usable",
+      "fictionalDisasterDisclosureRequired": false
+    }
+  ],
+  "returnedEditQa": [
+    {
+      "scene": 2059,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-chatgpt-single-tailoring-pass.png",
+      "publicSafe": true,
+      "selected": false,
+      "reason": "Retain closer Meta original. The one returned edit widened the source to display lower legs and boots, contrary to the preserved-source-crop instruction. Returned PNG saved unused; no retry."
+    },
+    {
+      "scene": 2060,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-chatgpt-single-tailoring-pass.png",
+      "publicSafe": true,
+      "selected": false,
+      "reason": "Retain Meta internal1 source. The returned edit removes the visible sun from Alia flag garment, closes the rolled waist opening and loses rainbow hosiery detail. Source better preserves the visible styling and warm side hug. Returned PNG saved unused; no retry."
+    },
+    {
+      "scene": 2061,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2061-chatgpt-single-tailoring-pass.png",
+      "publicSafe": true,
+      "selected": true,
+      "reason": "Select the returned single edit. It retains the source group layout, affectionate shoulder rest, hand gesture, opaque garments and distant fictional background, with a shorter polished mini silhouette. Minor composition and fine-print drift is soft."
+    }
+  ],
+  "rawFilesSaved": 10,
+  "returnedEditFiles": 3,
+  "allSavedFiles": 13,
+  "uniqueSavedByteVersions": 9,
+  "missingObservedOriginals": [],
+  "blockedInvocations": [
+    2062
+  ],
+  "archiveException": null,
+  "duplicateCheck": {
+    "checkedAtUtc": "2026-09-08T03:31:42.202Z",
+    "postedCount": 238,
+    "filesChecked": 13,
+    "uniqueByteVersionsChecked": 9,
+    "sceneIdsChecked": [
+      2059,
+      2060,
+      2061,
+      2062
+    ],
+    "matches": [],
+    "method": "Exact recursive primitive equality against published post entries, no substring matching"
+  },
+  "allFourScenesTerminal": true
+}

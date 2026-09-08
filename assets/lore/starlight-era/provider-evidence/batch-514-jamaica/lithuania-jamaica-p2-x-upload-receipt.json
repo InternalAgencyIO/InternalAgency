@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "batch": 514,
+  "part": 2,
+  "state": "single-supported-file-upload-issued",
+  "startedAtUtc": "2026-09-08T13:26:02.676Z",
+  "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p2-x-reservation.json",
+  "priorPublicationProof": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-remote-verification.json",
+  "preUploadParityCommit": "0517ecd934370965734d2a97027c8ccd2c18f489",
+  "uploadCount": 1,
+  "additionalUploadsAllowed": 0,
+  "sceneIds": [
+    2077,
+    2078,
+    2085,
+    2086
+  ],
+  "assets": [
+    {
+      "scene": 2077,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png",
+      "sha256": "3659464357f289d81792daaecfb1ae6db48414a49905da78942c3def12b6b9f9",
+      "bytes": 2066421
+    },
+    {
+      "scene": 2078,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png",
+      "sha256": "95a0d9ce31dce0c545cfff76021fa2607e2174004a41bd3c1e1a26af034c47ba",
+      "bytes": 2126204
+    },
+    {
+      "scene": 2085,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-chatgpt-single-tailoring-pass.png",
+      "sha256": "8181fe3e38206058776271f7b648e0a873ffb07cc21eb6cb6bcb70610ac3f57c",
+      "bytes": 2261475
+    },
+    {
+      "scene": 2086,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp",
+      "sha256": "3288c448b7ed847504852695fcf00bfddcf7b017bb2f2f0bdd550e157dba05cc",
+      "bytes": 545888
+    }
+  ],
+  "chooserMethod": "Pre-armed filechooser event, visible Add photos or video button press(Enter), chooser.setFiles in frozen order.",
+  "priorControlAttempt": {
+    "method": "visible Add photos or video click",
+    "result": "No chooser event within supported tool timeout; fresh UI showed zero media. No setFiles call or upload occurred."
+  },
+  "postActivations": 0
+}

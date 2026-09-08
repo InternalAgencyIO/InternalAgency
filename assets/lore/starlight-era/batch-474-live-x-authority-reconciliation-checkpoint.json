@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "batch": 474,
+  "state": "live-x-activity-newer-than-world-ledger-inspected-and-reconciled-before-cyprus-denmark-reservation",
+  "verifiedAtUtc": "2026-08-31T20:32:56.7287046Z",
+  "verificationSurface": "Visible signed-in in-app Browser only",
+  "account": {
+    "url": "https://x.com/dogramaci",
+    "displayName": "Raymond R.",
+    "handle": "@dogramaci",
+    "editProfileControlVisible": true,
+    "signedInProfileVerified": true
+  },
+  "canonicalWorldLedger": {
+    "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+    "topLevelWorldPostCount": 189,
+    "latestLedgeredWorldPostUrl": "https://x.com/dogramaci/status/2094500984567279733",
+    "contradiction": "The visible profile contained seven newer posts that were absent from the repository's World Series posts array. They are not country-pair World Series posts and must not be misclassified as country coverage, but every discovered URL is preserved here."
+  },
+  "newerVisiblePosts": [
+    {
+      "url": "https://x.com/dogramaci/status/2094502672443363558",
+      "photoUrls": ["https://x.com/dogramaci/status/2094502672443363558/photo/1"],
+      "visibleTime": "10:08 PM · Aug 31, 2026",
+      "classification": "captioned RAZE TikTok and YouTube outpost promotion with one AI image",
+      "madeWithAiVisible": true
+    },
+    {
+      "url": "https://x.com/dogramaci/status/2094512274035613996",
+      "photoUrls": [],
+      "visibleTime": "10:46 PM · Aug 31, 2026",
+      "classification": "Spotify link post",
+      "madeWithAiVisible": false
+    },
+    {
+      "url": "https://x.com/dogramaci/status/2094514298101854676",
+      "photoUrls": ["https://x.com/dogramaci/status/2094514298101854676/photo/1"],
+      "visibleTime": "10:54 PM · Aug 31, 2026",
+      "classification": "Codex usage-card screenshot",
+      "madeWithAiVisible": false
+    },
+    {
+      "url": "https://x.com/dogramaci/status/2094514554751357278",
+      "photoUrls": ["https://x.com/dogramaci/status/2094514554751357278/photo/1"],
+      "visibleTime": "10:55 PM · Aug 31, 2026",
+      "classification": "uncaptioned single AI-fashion image, one woman in a rainbow look on a fictional space walkway",
+      "madeWithAiVisible": false
+    },
+    {
+      "url": "https://x.com/dogramaci/status/2094514597646500078",
+      "photoUrls": ["https://x.com/dogramaci/status/2094514597646500078/photo/1"],
+      "visibleTime": "10:56 PM · Aug 31, 2026",
+      "classification": "uncaptioned single AI-fashion image, two women in rainbow looks in a fictional observatory",
+      "madeWithAiVisible": false
+    },
+    {
+      "url": "https://x.com/dogramaci/status/2094514647600701782",
+      "photoUrls": ["https://x.com/dogramaci/status/2094514647600701782/photo/1"],
+      "visibleTime": "10:56 PM · Aug 31, 2026",
+      "classification": "uncaptioned single AI-fashion image, one woman in a rainbow look on a wet night deck",
+      "madeWithAiVisible": false
+    },
+    {
+      "url": "https://x.com/dogramaci/status/2094514677833150859",
+      "photoUrls": ["https://x.com/dogramaci/status/2094514677833150859/photo/1"],
+      "visibleTime": "10:56 PM · Aug 31, 2026",
+      "classification": "uncaptioned single AI-fashion image, two women in rainbow looks at a fictional sunset spaceport",
+      "madeWithAiVisible": false
+    }
+  ],
+  "cyprusDenmarkDuplicateReconciliation": {
+    "candidateSceneOrder": [1920, 1924, 1926],
+    "candidateMediaVisuallyDistinctFromAllNewerVisibleImagePosts": true,
+    "candidateAssetsAreFour-woman Cyprus-and-Denmark location editorials": true,
+    "newerVisiblePostsClaimCountryPairCoverage": false,
+    "canonicalPriorXHashMatches": 0,
+    "safeToReserve": true
+  },
+  "browserStateAfterReconciliation": {
+    "tabCount": 1,
+    "xComposerTabId": "6",
+    "xComposerUrl": "https://x.com/compose/post",
+    "composerBlank": true,
+    "postButtonDisabled": true
+  },
+  "nextSafeAction": "Reserve scenes 1920, 1924 and 1926 with the pixel-identical PNG derivative for scene 1920, commit and remote-verify the reservation and all media through Git/LFS, then stage caption, three exact alt texts and Made with AI in the single visible X composer."
+}

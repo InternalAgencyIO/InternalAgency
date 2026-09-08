@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "batch": 479,
+  "country": "Liechtenstein",
+  "state": "four-terminal-media-selected-four-chatgpt-one-passes-complete-no-x-transmission",
+  "closedAtUtc": "2026-09-04T10:53:00Z",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "account": "leesha007",
+  "outcomes": [
+    {"scene": 1943, "initialOutcome": "explicit-no-image-refusal", "metaRetryUsed": 1, "retryOutcome": "terminal-media-accepted", "selectedSha256": "A393756B63028F7ED2916438BA75ADCAABD103639D344874B8150D23BA014CB9"},
+    {"scene": 1944, "initialOutcome": "terminal-media-accepted", "metaRetryUsed": 0, "selectedSha256": "E61FCBD163BE870C268EEE0A3D78ECBA5AC3914C6D63E5B4438605322AB36A42"},
+    {"scene": 1945, "initialOutcome": "terminal-media-accepted", "metaRetryUsed": 0, "selectedSha256": "64321B7DE22F7F51981A6A3A94F3F74128F84DA216E3DC3BF49F7310190F9054"},
+    {"scene": 1946, "initialOutcome": "explicit-no-image-refusal", "metaRetryUsed": 1, "retryOutcome": "terminal-media-accepted", "selectedSha256": "4C33A828F72A08AC66877A5B94E5E0D293CE578B7EDD7F14DF8C51DC7F451BB6"}
+  ],
+  "selectedAssets": [
+    "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/1943-liechtenstein-vaduz-kunstmuseum-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/1944-liechtenstein-malbun-sareis-raze-adjacent-three-quarter-chatgpt-one-strong-shortening-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/1945-liechtenstein-balzers-gutenberg-raze-tight-full-body-statement-boots-chatgpt-one-strong-shortening-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/1946-liechtenstein-vaduz-old-rhine-bridge-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png"
+  ],
+  "duplicateGate": {"imagesScanned": 1841, "matchesOutsideOwnCanonicalPaths": 0, "priorXTransmissionMatches": false, "passed": true},
+  "chatgpt": {"requestsIssued": 4, "outputsSaved": 4, "passesPerSelectedOccurrence": 1, "additionalPassesPermitted": 0},
+  "meta": {"initialSendClicks": 4, "retrySendClicks": 2, "repeatSendClicks": 0, "unusedRetryCapacity": 6},
+  "x": {"account": "@dogramaci", "composerBlank": true, "postClicks": 0, "publicTransmissionCount": 0},
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/provider-ledger.json",
+  "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/accessibility-sidecars.json",
+  "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/closure-evidence-manifest.json",
+  "canonicalContradiction": "Meta DOM labels the completed media as WEBP, while the user-visible Download controls delivered JPEG/JFIF bytes through the in-app Browser. The exact downloaded bytes are canonical for this batch and no direct provider HTTP was used.",
+  "nextSafeAction": "Commit and push all closure artifacts with Git LFS, verify local, origin and draft PR parity, then reuse the four existing Meta tabs for the next zero-post European country. Preserve Liechtenstein for a two-country X post after the next country's selected assets are closed; stage X on @dogramaci with exact alts and Made with AI labels, then stop immediately before Post for fresh action-time confirmation."
+}

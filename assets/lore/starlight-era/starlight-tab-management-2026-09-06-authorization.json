@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "authorizedAtUtc": "2026-09-05T23:48:28Z",
+  "effectiveLocalDate": "2026-09-06",
+  "state": "binding-current-and-future-tab-management",
+  "source": {
+    "previousUserMessage": "foreground now close reopen if needed",
+    "currentUserMessage": "you are authorized to do this in the future as many tabs as needed to keep renders going remember this"
+  },
+  "scope": "InternalAgency Starlight in-app Browser workflow only",
+  "authorizedActions": [
+    "Open new tabs as needed for rendering and X preparation",
+    "Close and reopen tabs when recovery is needed",
+    "Reuse existing suitable tabs without repeated permission questions"
+  ],
+  "tabCount": {
+    "hardMaximum": null,
+    "preferredStartingLayout": {
+      "metaLanes": 4,
+      "xComposers": 1
+    },
+    "rule": "Use as many tabs as needed for verified pipeline work; the preferred layout is not a hard cap. Do not add unnecessary blank tabs or repeated unverified opening requests."
+  },
+  "supersedes": "Older strict four-render-lane-plus-one-X-tab limits, including authorizedLayout in the 2026-09-06 resume checkpoint.",
+  "preserves": [
+    "Actual live tab inspection before interaction or closure; ambient tab counts and old IDs are not evidence",
+    "Preserve active drafts, in-flight renders, unarchived outputs and provider/X URLs before replacing tabs",
+    "Never resend a confirmed prompt, duplicate a published media hash or reopen a terminal scene",
+    "Meta Thinking, leesha007 and exact anchor order938,936,937 before Send; verify @dogramaci before Post",
+    "In-app Browser only; no provider APIs, direct HTTP, provider CLI, Chrome, computer-use or hidden-state substitutions",
+    "Existing QA, one-pass edit, archival, ledger, Git/LFS and PR parity rules",
+    "No new automation, guardian, worker, task, thread or subagent; this authorization concerns browser tabs only"
+  ],
+  "currentExecutionObservation": {
+    "state": "live-browser-controls-still-unavailable",
+    "reopenRequest": "One fresh X composer opening request returned queued for the current thread; actual browser tabs were not inspected.",
+    "newPromptSubmissions": 0,
+    "newXPosts": 0
+  },
+  "nextSafeAction": "After this authorization is committed and remote-verified, use the newly authorized flexible tab layout when supported live in-app Browser controls are available. Inspect actual tabs before deciding which to retain, close or reopen. No further tab-management approval is needed."
+}

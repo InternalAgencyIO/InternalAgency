@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "batch": 485,
+  "country": "Norway",
+  "scenes": [1967, 1968, 1969, 1970],
+  "state": "remote-verified-preflight-ready-for-four-visible-meta-composers-no-send-yet",
+  "verifiedAtUtc": "2026-09-04T15:41:15.3053665Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "promptCheckpoint": "assets/lore/starlight-era/batch-485-norway-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "promptCheckpointCommit": "ee9724c6de15a4ae2bde01d683a4bbeab996ced8",
+    "localHead": "ee9724c6de15a4ae2bde01d683a4bbeab996ced8",
+    "originHead": "ee9724c6de15a4ae2bde01d683a4bbeab996ced8",
+    "draftPrHead": "ee9724c6de15a4ae2bde01d683a4bbeab996ced8",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "lfsPushDryRunEmpty": true
+  },
+  "countryAuthority": {
+    "canonicalXPostsChecked": 194,
+    "norwayPostMatches": 0,
+    "historicalBatch290Status": "blocked-no-accepted-assets",
+    "historicalBatch290Use": "location and prompt inspiration only",
+    "freshBatch485SupersedesHistoricalBlockedRun": true
+  },
+  "promptVerification": [
+    {"scene": 1967, "characters": 3143, "sha256": "8E62EFE76381D887EA239238D69EBC732027D503EDE4CA2104EE69B19FA86179", "verified": true},
+    {"scene": 1968, "characters": 2903, "sha256": "0C8091240ED4AE304F507F6BCB554B73D268454833D192DA070AD0072B407F27", "verified": true},
+    {"scene": 1969, "characters": 3043, "sha256": "C4E8F7B6C6C85C5351E8FDE47DD4E6B5AC55B572F6E5A0EF8099C38D60A93A0D", "verified": true},
+    {"scene": 1970, "characters": 2968, "sha256": "967F87E25AC3BF07ACB13E714EB48F54FF49DB6626F4D17473E6FB17FA5F2851", "verified": true}
+  ],
+  "faceAndAnchorVerification": {
+    "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "orderedScenes": [938, 936, 937],
+    "sha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "filesExist": true,
+    "hashesMatch": true,
+    "requiredVisibleOrder": "938, 936, 937"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "thinkingRequired": true,
+    "visibleInAppBrowserOnly": true,
+    "initialDispatchesAuthorized": 4,
+    "maxHardFailureRetriesPerScene": 2,
+    "confirmedPromptsMayNotBeResent": true,
+    "terminalScenesMayNotBeReopened": true,
+    "composerSequence": "Type exact prompt first; attach exact anchors through the visible supported chooser in order 938, 936, 937; verify three visible attachments, exact prompt, account and Thinking; then Send once."
+  },
+  "browserPlan": {
+    "expectedTotalTabs": 5,
+    "xComposerTabs": 1,
+    "metaLanes": 4,
+    "grokTabs": 0,
+    "replaceCompletedNorthMacedoniaTerminalTabs": true,
+    "preserveFailedMonacoNorthMacedoniaXComposer": true
+  },
+  "xState": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "visiblePostControlActivations": 2,
+    "visibleExplicitFailures": 2,
+    "exactCaptionLiveMatches": 0,
+    "publicTransmissionCount": 0,
+    "composerRetainedIntact": true,
+    "thirdBlindClickForbidden": true
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "mayStageMetaComposers": true,
+  "maySendAfterAllVisibleChecksPass": true,
+  "mayRetryXNow": false,
+  "nextSafeAction": "Use only the in-app Browser. Replace the four completed North Macedonia Meta terminal pages with four fresh Meta composers, type the exact sealed scene prompts, attach 938 then 936 then 937 through the visible chooser, visibly verify leesha007 and Thinking in every lane, record a no-send staging checkpoint, and only then Send each scene exactly once."
+}

@@ -1,0 +1,12 @@
+import { createHash } from "node:crypto";
+import { readFileSync, writeFileSync } from "node:fs";
+const ledgerPath="assets/lore/starlight-era/world-rejected-prompt-ledger.json";
+const checkpointPath="assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json";
+const bytes=readFileSync(checkpointPath);
+const hash=createHash("sha256").update(bytes).digest("hex").toUpperCase();
+const ledger=JSON.parse(readFileSync(ledgerPath,"utf8"));
+const binding=ledger.recentCheckpointRejectedEvidence.bindings.find(x=>x.path===checkpointPath);
+if(!binding) throw new Error("missing Batch 392 binding");
+binding.checkpointSha256=hash;
+writeFileSync(ledgerPath,JSON.stringify(ledger,null,2)+"\n");
+console.log(JSON.stringify({checkpointPath,hash},null,2));

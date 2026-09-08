@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "state": "second-and-final-authorized-post-click-confirmed-no-transmission-draft-preserved",
+  "recordedAtUtc": "2026-08-31T12:13:49.4291821Z",
+  "account": "@dogramaci",
+  "authorityBase": {
+    "branch": "agent/starlight-progress-archive",
+    "localHeadBeforeRetry": "91bae478a1341d5bfef043f2e19573435be3fff1",
+    "remoteHeadBeforeRetry": "91bae478a1341d5bfef043f2e19573435be3fff1",
+    "draftPrHeadBeforeRetry": "91bae478a1341d5bfef043f2e19573435be3fff1",
+    "targetedLfsDryRunEmptyBeforeRetry": true
+  },
+  "authorization": {
+    "userText": "send authorized go",
+    "freshAfterFirstNoTransmissionReport": true,
+    "scope": "One retry click for the exact preserved Andorra-Albania composer only.",
+    "consumedByRetryClick": true,
+    "additionalAgentRetryPermitted": false,
+    "laterExplicitUserOverrideCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json"
+  },
+  "browserRecovery": {
+    "actualTabCountAtRetryStart": 0,
+    "oldTabIdsTrusted": false,
+    "newCurrentXTabId": "34",
+    "reopenedTerminalMetaScenes": false,
+    "savedDraftFoundExactlyOnce": true,
+    "exactDraftRestoredThroughVisibleXControls": true
+  },
+  "retryClick": {
+    "clickedAtUtc": "2026-08-31T12:08:49.086Z",
+    "visibleFinalGuards": {
+      "signedInAccount": true,
+      "exactCaption": true,
+      "mediaCount": 3,
+      "altTextCount": 3,
+      "madeWithAiLabel": true,
+      "dialogPostEnabled": true,
+      "matchingPostButtonCount": 1
+    },
+    "postClicksThisAuthorization": 1,
+    "cumulativePostClickAttempts": 2,
+    "immediateOutcome": "After 2.4 seconds the complete composer remained visible with no sent alert, View post link, status URL, or composer closure.",
+    "publicTransmissionCount": 0,
+    "transmissionUncertainDuringObservation": false,
+    "finalClassification": "confirmed-no-transmission"
+  },
+  "liveProfileVerification": {
+    "profile": "https://x.com/dogramaci",
+    "visibleAccount": "@dogramaci",
+    "matchingExactCaption": false,
+    "matchingCountryPair": false,
+    "observedStatusIds": ["2094305918104023336", "2094372520635863436", "2094372290192454008"],
+    "newXPostUrl": null
+  },
+  "draftPreservation": {
+    "savePromptUsed": true,
+    "savedDraftVerified": true,
+    "draftReopened": true,
+    "currentActualTabIds": ["34"],
+    "currentComposerCaption": true,
+    "currentMediaCount": 3,
+    "currentAltTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "currentPostEnabled": true
+  },
+  "evidence": [
+    {
+      "role": "composer-after-authorized-retry-no-transmission",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-after-authorized-retry-no-transmission.png",
+      "sha256": "622A2AF3CAC54B13CBC8A7FE3EA8BA7C10E7040A9039E22CF23A64C1D01C9461",
+      "bytes": 116401,
+      "dimensions": "1280x720",
+      "rawFormat": "JPEG/JFIF"
+    }
+  ],
+  "previousClickCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
+  "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json",
+  "remoteVerificationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-retry-git-lfs-remote-verification-checkpoint.json",
+  "xPostUrls": [],
+  "canonicalContradictionResolved": "The prior recorded five-tab browser layout and tab 33 were stale after app tab cleanup; actual visible state now consists of the single restored X composer in tab 34, and terminal Meta scenes were not reopened.",
+  "nextSafeAction": "Do not click Post again as the agent. Leave the exact composer visible for one manual user click; after the user reports that click, verify the live @dogramaci status and record the resulting X URL without resending media."
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "batch": 412,
+  "country": "Saint Kitts and Nevis",
+  "closed_utc": "2026-08-26T06:55:42.898Z",
+  "status": "closed_unresolved",
+  "formal_country_cycle_completed": true,
+  "completed_cycle_count_since_last_x_cycle": 2,
+  "accepted_canonical_count": 1,
+  "accepted_scenes": [
+    {
+      "scene": 1668,
+      "asset": "assets/lore/starlight-era/1668-saint-kitts-and-nevis-brimstone-hill-meta-raw.webp",
+      "sha256": "B29EFE4A3889558B621E219620348880443E68C746A911840B741AC0127C7719",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "disposition": "accepted_with_soft_camera_and_sigil_count_deviations"
+    }
+  ],
+  "closed_unresolved_scenes": [
+    {
+      "scene": 1669,
+      "reason": "provider_thinking_no_bytes",
+      "provider_chat_url": null
+    },
+    {
+      "scene": 1670,
+      "reason": "provider_thinking_no_bytes",
+      "provider_chat_url": "https://www.meta.ai/prompt/de9b5308-2ac5-4e77-9d18-5c602748cc7a"
+    },
+    {
+      "scene": 1671,
+      "reason": "provider_thinking_no_bytes",
+      "provider_chat_url": "https://www.meta.ai/prompt/d7a0e08c-6553-461e-8295-9ceb694acc6c"
+    }
+  ],
+  "attempt_policy": "All eligible bounded attempts are consumed. Never resend scenes 1668-1671 or reopen Batch 412 without explicit newer checkpoint authority.",
+  "next_action": "Advance immediately to Batch 413 in authoritative campaign order. Do not run X early; cadence is 2 completed country cycles since the last recorded X cycle."
+}

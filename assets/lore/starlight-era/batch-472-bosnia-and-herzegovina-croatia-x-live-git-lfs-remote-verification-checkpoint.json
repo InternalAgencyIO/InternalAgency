@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "state": "live-publication-evidence-commit-lfs-remote-and-pr-parity-verified",
+  "verifiedAtUtc": "2026-08-31T17:22:29.9531818Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+  "verifiedPublicationCommit": "150b16f2ed556956528c1af91b279aa6272d884d",
+  "gitParity": {
+    "localHead": "150b16f2ed556956528c1af91b279aa6272d884d",
+    "remoteBranchHead": "150b16f2ed556956528c1af91b279aa6272d884d",
+    "draftPrHead": "150b16f2ed556956528c1af91b279aa6272d884d",
+    "ahead": 0,
+    "behind": 0,
+    "draftPrStillDraft": true,
+    "draftPrState": "OPEN"
+  },
+  "lfs": {
+    "targetedPushDryRunEmpty": true,
+    "newObjectCount": 3,
+    "totalRawBytes": 301002,
+    "objects": [
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-bosnia-croatia-first-post-click-no-transmission-composer.png",
+        "pointerOidSha256": "4fe5deec0599d8f83463863f1957a2bd1faf7b0817256228e54e04233d6ce8ad",
+        "rawBytes": 48007
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-bosnia-croatia-first-post-click-profile-no-target.png",
+        "pointerOidSha256": "e7d010626359b3a6cfdf430a5d84d74003b93cbbe3b52d5eb5d6401ec8d3fcb6",
+        "rawBytes": 114977
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-bosnia-croatia-post-live-verified.png",
+        "pointerOidSha256": "781ba009de5e80e406bd11022049cdb6332c369b92fd3dfeb4a10f6caabf3df9",
+        "rawBytes": 138018
+      }
+    ]
+  },
+  "browserFinalAudit": {
+    "actualTabIds": ["6"],
+    "actualTabCount": 1,
+    "url": "https://x.com/compose/post",
+    "account": "@dogramaci",
+    "composerBlank": true,
+    "captionPresent": false,
+    "mediaPreviewCount": 0,
+    "postDisabled": true,
+    "metaTabCount": 0,
+    "liveStatusTemporaryTabClosed": true,
+    "terminalMetaScenesReopened": false,
+    "duplicateMediaTransmission": false
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "firstClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-first-post-click-no-transmission-checkpoint.json",
+  "livePublicationCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-post-live-verified-checkpoint.json",
+  "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-publication-attempt-evidence-manifest.json",
+  "postUrl": "https://x.com/dogramaci/status/2094473140004929917",
+  "nextSafeAction": "Never resend the published media. Resolve the next country only after rereading the newest guardian and repository authority; any new Meta occurrence must visibly use Thinking and ordered anchors 938, 936, 937 before Send."
+}

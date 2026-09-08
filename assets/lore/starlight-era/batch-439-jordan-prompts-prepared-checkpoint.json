@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "batch_prompts_prepared",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 439,
+  "country": "Jordan",
+  "sourceBatchId": 368,
+  "status": "prepared_awaiting_upload",
+  "sceneIds": [
+    1776,
+    1777,
+    1778,
+    1779
+  ],
+  "lanes": [
+    {
+      "sceneId": 1776,
+      "sourceSceneId": 1492,
+      "location": "Amman Citadel overlook",
+      "cameraRoll": 42,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-439/scene-1776-prompt.txt",
+      "promptSha256": "B13779A2CF427062E962786DB3F2D58629667C11E84C09E31A7DBCDECC1EA27D",
+      "promptBytes": 6707,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1777,
+      "sourceSceneId": 1493,
+      "location": "Petra Treasury and Siq",
+      "cameraRoll": 24,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-439/scene-1777-prompt.txt",
+      "promptSha256": "35185B398F12172911968409883E651F86FAE5C67A2A2BC0B377E60AB89A6A1D",
+      "promptBytes": 6658,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1778,
+      "sourceSceneId": 1494,
+      "location": "Wadi Rum overlook",
+      "cameraRoll": 80,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-439/scene-1778-prompt.txt",
+      "promptSha256": "7328A87559DAE1E2DEF3FDC6C879173015A41D966D2620D66E3E64819B30BB71",
+      "promptBytes": 6656,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1779,
+      "sourceSceneId": 1495,
+      "location": "Aqaba Red Sea overlook",
+      "cameraRoll": 18,
+      "framing": "EXTREME CLOSE",
+      "promptPath": "tmp/world-195x4/batch-439/scene-1779-prompt.txt",
+      "promptSha256": "B8F04754FF0240DB194F8CE66F0BCDC2D8A4263A15A97EE1F552686576B5A659",
+      "promptBytes": 5809,
+      "uploadComplete": false,
+      "sendClicked": false
+    }
+  ],
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "sanitization": {
+    "removed": [
+      "legacy male",
+      "weapons and targeting",
+      "mascots and animals",
+      "odd props",
+      "literal flags and official symbols"
+    ],
+    "retained": [
+      "authoritative fictional quartet",
+      "Jordan geography",
+      "deep-sea submersible couture",
+      "public-safe romance, jealousy, and protection"
+    ],
+    "notes": "No retry or reopening of closed Haiti scenes 1772-1775."
+  },
+  "cameraRollMethod": "SHA-256 first uint32 over batch439-jordan-scene<id>-camera-roll, modulo 100 plus 1; stored rolls are authoritative.",
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 8,
+    "due": false
+  },
+  "xBacklog": {
+    "eligibleUnpublishedSceneIds": [
+      1753
+    ],
+    "pairReady": false
+  },
+  "preparedAtUtc": "2026-08-27T17:06:47.385Z"
+}

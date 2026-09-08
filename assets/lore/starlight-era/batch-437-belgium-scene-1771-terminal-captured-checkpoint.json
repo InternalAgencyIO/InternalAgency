@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "scene_terminal_capture",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 437,
+  "country": "Belgium",
+  "sceneId": 1771,
+  "status": "closed_hard_unusable",
+  "accepted": false,
+  "providerUrl": "https://www.meta.ai/prompt/35abd1bc-968d-4836-8fa9-58b675bfa4b9",
+  "promptSha256": "F2067404710C97DF562852EDCEE3F3BC3FB910379A97F21DE61AA26DD2DAFBE5",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraRoll": 1,
+  "requiredFraming": "EXTREME CLOSE",
+  "mediaSha256": "3cd343780f13391ebb62e37e0b3bbebd350911a6e8249eb255d552eb8c3ab454",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-437-scene-1771-output-hard-unusable.jsonl",
+  "rawPath": "assets/lore/starlight-era/1771-belgium-dinant-meta-raw.webp",
+  "blobPath": "progress-reports/codex-generated-media/blobs/3c/3cd343780f13391ebb62e37e0b3bbebd350911a6e8249eb255d552eb8c3ab454.webp",
+  "responsePath": "progress-reports/codex-generated-media/provider-responses/batch-437-scene-1771-meta-response.txt",
+  "visualQa": {
+    "status": "hard_unusable",
+    "accepted": false,
+    "reason": "Camera-roll failure: roll 1 required a strict shoulder-up extreme close; the render extends through substantial torso toward the waist/lower torso.",
+    "passes": [
+      "vertical 9:16",
+      "exactly four distinct adult women",
+      "Dinant Meuse/Citadel setting is legible",
+      "public-safe opaque couture",
+      "no hands, beacon, or footwear visible"
+    ],
+    "fails": [
+      "strict shoulder-up extreme-close framing"
+    ]
+  },
+  "terminalObservedAtUtc": "2026-08-27T16:46:52.633Z",
+  "checkpointedAtUtc": "2026-08-27T16:52:22.090Z",
+  "noRetryAuthorized": true
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "batch": 471,
+  "country": "Bosnia and Herzegovina",
+  "createdAtUtc": "2026-08-31T14:13:19.2142754Z",
+  "root": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina",
+  "fileCount": 9,
+  "totalBytes": 17463831,
+  "inventoryDigestAlgorithm": "SHA-256 over UTF-8 lines filename|sha256|bytes sorted by filename with LF separators and no terminal LF",
+  "inventorySha256": "54A08403F766F6AE24B9A5BCD2D81C20954B48F8C403C2FDD46CEB259DF9D7AD",
+  "files": [
+    {"name": "1911-bosnia-sarajevo-meta-viewer-clean-crop.png", "role": "selected-clean-publication-candidate-meta-viewer-derived", "sha256": "F8A945EFB90D8062E8895940A02B24578A751BB66D9FF5086181718BFCD61653", "bytes": 4175789, "dimensions": "988x1748"},
+    {"name": "1912-bosnia-mostar-meta-viewer-clean-crop.png", "role": "selected-clean-publication-candidate-meta-viewer-derived", "sha256": "78AE68270D45EBDC670E570931534C1578A04A49E284A2EBC41B8FCB88DF0A25", "bytes": 4286848, "dimensions": "988x1748"},
+    {"name": "1913-bosnia-kravica-meta-viewer-clean-crop.png", "role": "selected-clean-publication-candidate-meta-viewer-derived", "sha256": "5DE4E0F2BE54EED32409368C3BA37DBCE801DE8863960AFE0EDD78E02C487CFA", "bytes": 4587293, "dimensions": "988x1748"},
+    {"name": "1914-bosnia-blidinje-meta-viewer-clean-crop.png", "role": "selected-clean-publication-candidate-meta-viewer-derived", "sha256": "F7454E14418E0C86AF8FAF91542AB0C0EAA45BBB4993E372B5BBA501AAF6A4CF", "bytes": 4094405, "dimensions": "988x1748"},
+    {"name": "scene-1911-meta-thinking-occurrence-0-media-viewer.png", "role": "provider-terminal-viewer-evidence", "sha256": "E6ED6FEF52B1FE02B0242431F9972317667D13001793D079D0AD7E2D30544295", "bytes": 59236, "dimensions": "1280x720"},
+    {"name": "scene-1912-meta-thinking-retry-1-media-viewer.png", "role": "provider-terminal-viewer-evidence-retry-1", "sha256": "B8019BCFA46B06CF25BE4A403BF3AB62EE28F0F6FB33299A32BF9C47369F86E9", "bytes": 60543, "dimensions": "1280x720"},
+    {"name": "scene-1912-meta-thinking-retry-1-terminal-media.png", "role": "provider-terminal-page-evidence-retry-1", "sha256": "120C36249877722B93AEBC0519E5D5E70599F72316C40ACAA4A0C5795CE4FF62", "bytes": 80880, "dimensions": "1280x720"},
+    {"name": "scene-1913-meta-thinking-occurrence-0-media-viewer.png", "role": "provider-terminal-viewer-evidence", "sha256": "44A2F301F3DB4B2AC36C77D6BF157CBA4A8646B71B7CB4E42F627EF519F12F49", "bytes": 61121, "dimensions": "1280x720"},
+    {"name": "scene-1914-meta-thinking-occurrence-0-media-viewer.png", "role": "provider-terminal-viewer-evidence", "sha256": "7F48551EFEF22345CE2CD74FDA79E7A9C1D97FDD8DE58B0E6749C314AE54CA25", "bytes": 57716, "dimensions": "1280x720"}
+  ],
+  "providerRawBytes": {
+    "available": false,
+    "reason": "The visible Meta Download control did not yield a supported in-app Browser download event. No unsupported extraction method was used."
+  },
+  "derivedCandidateDisclosure": "The four clean candidates are deterministic content-preserving crops and 4x bicubic upscales of the central portraits visible in the provider media-viewer screenshots; they are not claimed as provider raw files or ChatGPT-generated edits.",
+  "nextSafeAction": "Commit these exact evidence files and manifest, push the branch, verify targeted Git LFS dry-run, and require local, remote branch, and draft PR head parity before preparing Croatia."
+}

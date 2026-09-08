@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "batch": 492,
+  "country": "Republic of the Congo",
+  "state": "four-visible-meta-composers-staged-no-send-awaiting-remote-parity",
+  "stagedAtUtc": "2026-09-06T04:50:09.9113912Z",
+  "sceneIds": [1995, 1996, 1997, 1998],
+  "provider": "Meta AI",
+  "accountVerifiedEveryLane": "leesha007",
+  "modeVerifiedEveryLane": "Thinking",
+  "promptHashesVerified": [
+    "60A61EEC8EE274C0D0C90BFC7A8E276C4F11241B4BC0924A79E85CA1382CA1E9",
+    "9A8DF7AD3C32818C675BDE5629A6E8F198B0DB3F6020FF6E33ED7339CA1D3A4D",
+    "16DEC0497E0573A837C8BECBE697FB904387DA0F2A9934644922C414234F5FFA",
+    "7474B68CBACBF6887B5EC1DE24A34188339F16F46CB1F55CB42FE68ADF33F554"
+  ],
+  "promptCharactersVerified": [3289, 3552, 3185, 4219],
+  "anchorOrderVerifiedEveryLane": [938, 936, 937],
+  "anchorCountPerLane": 3,
+  "sendControlCountPerLane": 1,
+  "sendControlsEnabled": true,
+  "sendActivations": 0,
+  "providerUrls": [null, null, null, null],
+  "visibleReceipt": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/staging-visible-receipt.json",
+    "sha256": "EF51FC95D80822455733233228589943867E2CBB4C61090E450FD0CCBE6561A5",
+    "bytes": 4520
+  },
+  "stagedScreenshotSha256": [
+    "7269D41B93D7B803B6A25C612B69E1F08AF23044C5AA72A3A7B33A8BB3F48FCD",
+    "F763D2A88A8C2DC6500E0EA11EBF5C43195073404897EE801313C4913857B434",
+    "6F66B45F5A4C142740C7438E1874CCA3E24BB9F568CE51DEDE7D9E3B95B15326",
+    "0237BC9AA1115706C5D7F0A09FBCC665421BA9E0B0AED53843A9E31CFDFE921D"
+  ],
+  "remoteVerifiedPreparationHead": "1fab53b3d8c7c4694906c885ed6ae06dde0ef237",
+  "stagingRemoteParityPending": true,
+  "terminalProtection": {
+    "batch466ScenesNeverReopened": [1890, 1891, 1892, 1893],
+    "batch491ScenesNeverResent": [1991, 1992, 1993, 1994],
+    "batch491TerminalTabsClosedAfterEvidence": true,
+    "confirmedPromptResends": 0,
+    "terminalSceneReopens": 0
+  },
+  "xState": {"account": "@dogramaci", "url": "https://x.com/compose/post", "blank": true, "mediaCount": 0, "postDisabled": true},
+  "tabInventory": {"metaCount": 4, "xCount": 1, "otherCount": 0, "metaTabIds": ["11", "12", "13", "14"], "xTabId": "6"},
+  "nextSafeAction": "Commit and verify this exact no-send staging record against local, origin and PR #13. Re-inspect all four live composers for exact prompt prefix, leesha007, Thinking, anchors 938, 936, 937 in order and one enabled Send. If unchanged, activate Send exactly once in each lane under the current standing authorization; archive every provider URL and occurrence before any retry or tab reuse."
+}

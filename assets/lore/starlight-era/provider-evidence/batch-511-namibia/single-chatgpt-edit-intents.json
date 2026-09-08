@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 1,
+  "batch": 511,
+  "country": "Namibia",
+  "createdAtUtc": "2026-09-08T07:33:34.445Z",
+  "policy": "Exactly one built-in image_gen invocation per selected usable scene. A block, failure or interruption consumes it. No retry, API or CLI fallback. Preserve raw source and every result with independent attribution.",
+  "state": "all-four-single-edit-allowances-terminal",
+  "invocations": 4,
+  "deferredScenes": [],
+  "intents": [
+    {
+      "scene": 2072,
+      "occurrenceId": "batch-511-scene-2072-chatgpt-single-tailoring",
+      "state": "tool-returned",
+      "invocationCount": 1,
+      "maximumInvocations": 1,
+      "source": {
+        "scene": 2072,
+        "label": "gallery/close_portrait_hug.webp",
+        "labelIndex": 0,
+        "kind": "gallery",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799983652_1776718060414272_3431086564072019290_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=U5dMWENqEk8Q7kNvwGR-oVA&sdl=0&ccb=14-4&oh=00_AQKYdzrmO7Z0ucikB8f2YCEPz-OOaFMRKD0QP73fB1MKbg&oe=6AA57DF8&_nc_sid=a21977",
+        "providerUrl": "https://www.meta.ai/prompt/14f3e5bd-6a93-4818-b7dc-bcdc5db95fe0",
+        "downloadPath": "C:/Users/A/Downloads/799983652_1776718060414272_3431086564072019290_n.webp",
+        "observedAtUtc": "2026-09-08T07:23:31.982Z",
+        "bytes": 409304,
+        "sha256": "e4916f10f90d7179a74a1e6a409f90496a7413b6fe2002c01c6e98266b64f669",
+        "dimensions": {
+          "width": 1152,
+          "height": 2048
+        },
+        "archiveMethod": "Supported visible in-app Browser downloadMedia with pre-armed event; actual local file resolved and exact bytes preserved",
+        "status": "archived-original-source-qa-complete",
+        "contentRole": "generated-scene-image",
+        "altPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp.alt.txt",
+        "qaPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp.qa.json",
+        "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json",
+        "sourceQaDecision": "selected-usable-source",
+        "sourceQaReviewedAtUtc": "2026-09-08T07:33:34.445Z"
+      },
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json",
+      "basePromptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2072-single-edit-base-prompt.txt",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2072-single-edit-exact-prompt.txt",
+      "prompt": "Use case: identity-preserve. Asset type: non-explicit adult couture editorial. All four characters are original fictional adult women, each age21.\nSource-specific invariant: Image1 is the sole editing target. Keep its actual 1152x2048 close portrait rectangle, exact camera position, all four faces, expressions, hand ownership, embrace, background and existing edges. Do not outpaint or widen to expose shoes, hidden legs, backs or offscreen navels. Refine only clothing already visible; shorten a visible mini hem only within secure opaque wearable construction. Do not move any face or crop the image to chase the original extreme-close roll. Images2-4 are quartet face plates only, in order938,936,937, and each contains all four identities.\n\nOne identity-preserving clothing-only tailoring pass for scene 2072: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=visible navel, Ellie=visible navel, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a slate-blue fitted mini with coral folded ribs; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient stiletto sandal without any branding. Prominent crisp tattoos: original split-star, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Radiance: a pearl one-shoulder cocktail mini with aqua contour seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient sculptural platform with one subtle original RAZE split-star mark. Prominent crisp tattoos: crescent, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: a coral cropped shell and secure white mini skort; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; coral satin knee high boot without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. ECE: a fitted mini dress integrating the complete Namibia flag design (the complete Namibia flag in a 3:2 rectangle: blue upper-left field containing a gold twelve-ray sun, green lower-right field, and a white-edged red diagonal running from the lower-left to the upper-right corner) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient ankle boot without any branding. No tattoos. No general hosiery assignment; only individual stocking marks may call for a neutral stocking.\n\nFinal priority: source-specific framing, identity, anatomy and opaque coverage invariants override any base styling detail that is offscreen or would require restaging. Change visible garment construction only, with existing tattoo and brand styling assignments as recorded. Output one image and preserve the actual source composition.",
+      "promptSha256": "6C287C6CBEB00B42463A9F4D81572C560CBAC4535D3D9D286CB791B3098E371F",
+      "referencePaths": [
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sourceSpecificLimits": "Source-specific invariant: Image1 is the sole editing target. Keep its actual 1152x2048 close portrait rectangle, exact camera position, all four faces, expressions, hand ownership, embrace, background and existing edges. Do not outpaint or widen to expose shoes, hidden legs, backs or offscreen navels. Refine only clothing already visible; shorten a visible mini hem only within secure opaque wearable construction. Do not move any face or crop the image to chase the original extreme-close roll. Images2-4 are quartet face plates only, in order938,936,937, and each contains all four identities.",
+      "neverRetry": true,
+      "maximumOutputImages": 1,
+      "allowanceConsumed": true,
+      "historicalLexiconSnapshot": {
+        "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+        "sha256": "3d4ec36c57c8da6434bda58cab21387ee2628340d1b96ad156473cac7c8d8f17",
+        "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
+      },
+      "reservedAtUtc": "2026-09-08T07:42:07.563Z",
+      "additionalInvocationsAllowed": 0,
+      "startedAtUtc": "2026-09-08T07:42:30.320Z",
+      "completedAtUtc": "2026-09-08T07:43:30.852Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "scene": 2073,
+      "occurrenceId": "batch-511-scene-2073-chatgpt-single-tailoring",
+      "state": "tool-returned",
+      "invocationCount": 1,
+      "maximumInvocations": 1,
+      "source": {
+        "scene": 2073,
+        "label": "gallery/fashion_editorial_studio.webp",
+        "labelIndex": 0,
+        "kind": "gallery",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-meta-gallery-original.webp",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800781044_4639507489625552_5822716766153961749_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=108&_nc_ohc=Xp3Ww_3sQ7sQ7kNvwF0ocJ9&sdl=0&ccb=14-4&oh=00_AQIJJC-_WU4oLekwhhkKUpaGWZhc2YHimYwnNwqPEfQc6w&oe=6AA597EB&_nc_sid=a21977",
+        "providerUrl": "https://www.meta.ai/prompt/35bd6f4f-0210-4478-b230-cb7a60939445",
+        "downloadPath": "C:/Users/A/Downloads/800781044_4639507489625552_5822716766153961749_n.webp",
+        "observedAtUtc": "2026-09-08T07:23:32.468Z",
+        "bytes": 436226,
+        "sha256": "222bd87524b91fec5aa3ddbaa9ff0b4a02c3bd0ff58e94707e7d4c7e684dd170",
+        "dimensions": {
+          "width": 1152,
+          "height": 2048
+        },
+        "archiveMethod": "Supported visible in-app Browser downloadMedia with pre-armed event; actual local file resolved and exact bytes preserved",
+        "status": "archived-original-source-qa-complete",
+        "contentRole": "generated-scene-image",
+        "altPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-meta-gallery-original.webp.alt.txt",
+        "qaPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-meta-gallery-original.webp.qa.json",
+        "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json",
+        "sourceQaDecision": "selected-usable-source",
+        "sourceQaReviewedAtUtc": "2026-09-08T07:33:34.445Z"
+      },
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json",
+      "basePromptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2073-single-edit-base-prompt.txt",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2073-single-edit-exact-prompt.txt",
+      "prompt": "Use case: identity-preserve. Asset type: non-explicit adult couture editorial. All four characters are original fictional adult women, each age21.\nSource-specific invariant: Image1 is the sole editing target. Preserve the actual 1152x2048 full rectangle, exact quartet faces, sculptural braids, body proportions, supported back hug, handclasp, foot positions, daybed, windows and dune scene. Do not rotate, restage or widen the image. Substantially tailor visible mini hems into shorter secure opaque wearable silhouettes with lined coverage. All four midriffs stay covered; close the unrolled waist gap on dark-haired Ellie in the foreground ochre skort. Preserve the existing distant imaginary smoke, not a real disaster. Images2-4 are quartet face plates only, in order938,936,937.\n\nOne identity-preserving clothing-only tailoring pass for scene 2073: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=covered, Ellie=covered, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a burnt-orange sculpted mini with graphite dune-fold seams; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient sculptural platform without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Radiance: an ivory fitted cocktail mini with copper pleated contours; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient knee high boot with one subtle RAZE text mark. Prominent crisp tattoos: RAZE; IA, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Ellie: a graphite cropped shell and secure ochre mini skort; secure open-back or side-back construction and bare arms, covered midriff; graphite mirror ankle boot without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. ECE: a deep-teal side-back mini with sand-colored curved piping; secure open-back or side-back construction and bare arms, covered midriff; deep-teal enamel classic pump without any branding. Prominent crisp tattoos: an original pair of dune curves sheltering a tiny heart, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Visible hosiery uses rainbow stockings; this is independent of shoe color.\n\nFinal priority: source-specific framing, identity, anatomy and opaque coverage invariants override any base styling detail that is offscreen or would require restaging. Change visible garment construction only, with existing tattoo and brand styling assignments as recorded. Output one image and preserve the actual source composition.",
+      "promptSha256": "CF9CB2A1DEFBFDB35033EB6A56EB74A4DEDA2AF45E43C199044472F343FBDE0E",
+      "referencePaths": [
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-meta-gallery-original.webp",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sourceSpecificLimits": "Source-specific invariant: Image1 is the sole editing target. Preserve the actual 1152x2048 full rectangle, exact quartet faces, sculptural braids, body proportions, supported back hug, handclasp, foot positions, daybed, windows and dune scene. Do not rotate, restage or widen the image. Substantially tailor visible mini hems into shorter secure opaque wearable silhouettes with lined coverage. All four midriffs stay covered; close the unrolled waist gap on dark-haired Ellie in the foreground ochre skort. Preserve the existing distant imaginary smoke, not a real disaster. Images2-4 are quartet face plates only, in order938,936,937.",
+      "neverRetry": true,
+      "maximumOutputImages": 1,
+      "allowanceConsumed": true,
+      "historicalLexiconSnapshot": {
+        "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+        "sha256": "3d4ec36c57c8da6434bda58cab21387ee2628340d1b96ad156473cac7c8d8f17",
+        "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
+      },
+      "reservedAtUtc": "2026-09-08T07:42:07.563Z",
+      "additionalInvocationsAllowed": 0,
+      "startedAtUtc": "2026-09-08T07:42:30.320Z",
+      "completedAtUtc": "2026-09-08T07:44:33.004Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "scene": 2074,
+      "occurrenceId": "batch-511-scene-2074-chatgpt-single-tailoring",
+      "state": "tool-returned",
+      "invocationCount": 1,
+      "maximumInvocations": 1,
+      "source": {
+        "scene": 2074,
+        "label": "gallery/walvis_bay_lounge.webp",
+        "labelIndex": 0,
+        "kind": "gallery",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-meta-gallery-original.webp",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799829644_4661711954105388_8018899431639452411_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=Ficy7zkFNv0Q7kNvwEsOBFt&sdl=0&ccb=14-4&oh=00_AQIQoOmVakubECD9XUlLaDdYvBWhTDfs2ZnImUuKCymhDA&oe=6AA59DC4&_nc_sid=a21977",
+        "providerUrl": "https://www.meta.ai/prompt/ad139e3d-5190-4648-8591-1e246683e321",
+        "downloadPath": "C:/Users/A/Downloads/799829644_4661711954105388_8018899431639452411_n.webp",
+        "observedAtUtc": "2026-09-08T07:23:32.964Z",
+        "bytes": 410782,
+        "sha256": "2a3e1cf2f8c5593962235975c474ef50de1577f4b3f3d05ed9a26985dcd34b76",
+        "dimensions": {
+          "width": 1152,
+          "height": 2048
+        },
+        "archiveMethod": "Supported visible in-app Browser downloadMedia with pre-armed event; actual local file resolved and exact bytes preserved",
+        "status": "archived-original-source-qa-complete",
+        "contentRole": "generated-scene-image",
+        "altPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-meta-gallery-original.webp.alt.txt",
+        "qaPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-meta-gallery-original.webp.qa.json",
+        "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json",
+        "sourceQaDecision": "selected-usable-source",
+        "sourceQaReviewedAtUtc": "2026-09-08T07:33:34.445Z"
+      },
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json",
+      "basePromptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2074-single-edit-base-prompt.txt",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2074-single-edit-exact-prompt.txt",
+      "prompt": "Use case: identity-preserve. Asset type: non-explicit adult couture editorial. All four characters are original fictional adult women, each age21.\nSource-specific invariant: Image1 is the sole editing target. Preserve the actual 1152x2048 couch composition, all four faces, head and hand positions, shoulder-rest interaction, seated legs, footwear, furniture and lagoon window. Do not manufacture a lap pose, change camera angle, rotate, widen or outpaint. Shorten visible mini hems only with fully opaque lined wearable coverage. Alia, blonde Radiance and foreground Ellie keep covered midriffs; close Ellie unrolled waist gap. ECE alone retains her rolled tasteful waist-cutout. Keep her agency upper-arm tattoo and the two flag garments. Images2-4 are quartet face plates only, in order938,936,937.\n\nOne identity-preserving clothing-only tailoring pass for scene 2074: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=covered, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a sea-green sculpted mini with pearl wave ribs; secure open-back or side-back construction and bare arms, covered midriff; sea-green enamel knee high boot without any branding. No tattoos. Radiance: a fitted mini dress integrating the complete Namibia flag design (the complete Namibia flag in a 3:2 rectangle: blue upper-left field containing a gold twelve-ray sun, green lower-right field, and a white-edged red diagonal running from the lower-left to the upper-right corner) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; pale-pink patent ankle boot with one subtle original RAZE split-star mark. No tattoos. Ellie: an ivory cropped shell and secure aqua mini skort; secure open-back or side-back construction and bare arms, covered midriff; ivory satin classic pump with one subtle original RAZE split-star mark. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. ECE: a fitted mini dress integrating the complete Namibia flag design (the complete Namibia flag in a 3:2 rectangle: blue upper-left field containing a gold twelve-ray sun, green lower-right field, and a white-edged red diagonal running from the lower-left to the upper-right corner) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; silver mirror stiletto sandal without any branding. Prominent crisp tattoos: agency, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Visible hosiery uses knee-high rainbow gradients; this image roll is independent of shoe color.\n\nFinal priority: source-specific framing, identity, anatomy and opaque coverage invariants override any base styling detail that is offscreen or would require restaging. Change visible garment construction only, with existing tattoo and brand styling assignments as recorded. Output one image and preserve the actual source composition.",
+      "promptSha256": "EE73B2AD27C48AA0DC3B6C718EF8A4E628A0CD6210ECC625A1D4BCEE4E4B3B62",
+      "referencePaths": [
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-meta-gallery-original.webp",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sourceSpecificLimits": "Source-specific invariant: Image1 is the sole editing target. Preserve the actual 1152x2048 couch composition, all four faces, head and hand positions, shoulder-rest interaction, seated legs, footwear, furniture and lagoon window. Do not manufacture a lap pose, change camera angle, rotate, widen or outpaint. Shorten visible mini hems only with fully opaque lined wearable coverage. Alia, blonde Radiance and foreground Ellie keep covered midriffs; close Ellie unrolled waist gap. ECE alone retains her rolled tasteful waist-cutout. Keep her agency upper-arm tattoo and the two flag garments. Images2-4 are quartet face plates only, in order938,936,937.",
+      "neverRetry": true,
+      "maximumOutputImages": 1,
+      "allowanceConsumed": true,
+      "historicalLexiconSnapshot": {
+        "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+        "sha256": "3d4ec36c57c8da6434bda58cab21387ee2628340d1b96ad156473cac7c8d8f17",
+        "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
+      },
+      "reservedAtUtc": "2026-09-08T07:42:07.563Z",
+      "additionalInvocationsAllowed": 0,
+      "startedAtUtc": "2026-09-08T07:42:30.320Z",
+      "completedAtUtc": "2026-09-08T07:46:33.394Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "scene": 2071,
+      "occurrenceId": "batch-511-scene-2071-chatgpt-single-tailoring",
+      "state": "blocked-or-failed-allowance-consumed",
+      "invocationCount": 1,
+      "maximumInvocations": 1,
+      "source": {
+        "scene": 2071,
+        "label": "gallery/windhoek_atelier_scene.webp",
+        "labelIndex": 0,
+        "kind": "gallery",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799948478_935668989035632_6396988860307164439_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=104&_nc_ohc=V9evq85nMSoQ7kNvwGQUxmg&sdl=0&ccb=14-4&oh=00_AQJK77WQu1svOAEBCw-c-9SBwZG8kUPfZutgWbAPvDQQaA&oe=6AA58250&_nc_sid=a21977",
+        "providerUrl": "https://www.meta.ai/prompt/64682848-7d28-411a-9ef7-3d066abf7591",
+        "occurrenceId": "batch-511-scene-2071-meta-hard-failure-recovery-1",
+        "recoveryNumber": 1,
+        "downloadPath": "C:/Users/A/Downloads/799948478_935668989035632_6396988860307164439_n.webp",
+        "downloadStartedAtUtc": "2026-09-08T08:04:52.708Z",
+        "observedAtUtc": "2026-09-08T08:04:53.218Z",
+        "reconciledAtUtc": "2026-09-08T08:06:28.051Z",
+        "bytes": 497592,
+        "sha256": "d20f970a1dc2e1f277f2ffedb6adca10e14a1c69e418bcafe00b26363b86d2f6",
+        "dimensions": {
+          "width": 1152,
+          "height": 2048
+        },
+        "archiveMethod": "Supported visible in-app Browser downloadMedia with pre-armed event; exact archived bytes reconciled against saved successful download receipt",
+        "status": "archived-original-source-qa-complete",
+        "contentRole": "generated-scene-image",
+        "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-source-qa.json",
+        "sourceQaDecision": "selected-usable-source",
+        "sourceQaReviewedAtUtc": "2026-09-08T08:09:02.115Z",
+        "qaPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp.qa.json",
+        "altPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp.alt.txt"
+      },
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-source-qa.json",
+      "basePromptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2071-single-edit-base-prompt.txt",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2071-single-edit-exact-prompt.txt",
+      "prompt": "Use case: identity-preserve. Asset type: non-explicit adult couture editorial. All four original fictional women are adults, each age21.\nSource-specific invariant: Image1 is the sole edit target. Preserve its actual 1152x2048 filled rectangle, oblique camera, four exact adult faces, sculptural braids, body proportions, seated arrangement, handclasp and shoulder-contact ownership, shoe positions, cobalt seating, brass windows and scenery. Do not restage, rotate, widen, outpaint or reveal offscreen anatomy. Make visible mini hems substantially more concise using stable lined opaque wearable tailoring; keep all four midriffs covered, including closing the small gap on Ellie in the cobalt top. Preserve existing rainbow legwear and the crescent upper-arm tattoo. The distant smoke is fictional, not an actual disaster. Images2-4 are face-identity-only quartet plates in order938,936,937, and every plate contains all four characters.\n\nOne identity-preserving clothing-only tailoring pass for scene 2071: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=covered, Ellie=covered, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a fitted mini dress integrating the complete Namibia flag design (the complete Namibia flag in a 3:2 rectangle: blue upper-left field containing a gold twelve-ray sun, green lower-right field, and a white-edged red diagonal running from the lower-left to the upper-right corner) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; copper patent classic pump without any branding. No tattoos. Radiance: an ivory asymmetric cocktail mini with garnet seam lines; secure open-back or side-back construction and bare arms, covered midriff; ivory lacquer stiletto sandal without any branding. No tattoos. Ellie: a cobalt cropped shell and secure sand-colored mini skort; secure open-back or side-back construction and bare arms, covered midriff; cobalt satin sculptural platform without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. ECE: an emerald side-back mini with bronze geometric piping; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient knee high boot without any branding. Prominent crisp tattoos: crescent, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Visible hosiery uses knee-high rainbow gradients; this image roll is independent of shoe color.\n\nFinal priority: preserve the actual source frame, four identities, anatomy, expressions and opaque coverage. Apply only visible garment construction and recorded styling in this single pass. Keep offscreen details offscreen. Output one image.",
+      "promptSha256": "C1D3C9B5EB8FCDB4D4F4BB8D11B30D070FE88D61C2E84EBAF3BED603580D503F",
+      "referencePaths": [
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sourceSpecificLimits": "Source-specific invariant: Image1 is the sole edit target. Preserve its actual 1152x2048 filled rectangle, oblique camera, four exact adult faces, sculptural braids, body proportions, seated arrangement, handclasp and shoulder-contact ownership, shoe positions, cobalt seating, brass windows and scenery. Do not restage, rotate, widen, outpaint or reveal offscreen anatomy. Make visible mini hems substantially more concise using stable lined opaque wearable tailoring; keep all four midriffs covered, including closing the small gap on Ellie in the cobalt top. Preserve existing rainbow legwear and the crescent upper-arm tattoo. The distant smoke is fictional, not an actual disaster. Images2-4 are face-identity-only quartet plates in order938,936,937, and every plate contains all four characters.",
+      "neverRetry": true,
+      "maximumOutputImages": 1,
+      "allowanceConsumed": true,
+      "historicalLexiconSnapshot": {
+        "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+        "sha256": "3d4ec36c57c8da6434bda58cab21387ee2628340d1b96ad156473cac7c8d8f17",
+        "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
+      },
+      "sourceRecoveryOccurrence": "batch-511-scene-2071-meta-hard-failure-recovery-1",
+      "reservedAtUtc": "2026-09-08T08:15:29.680Z",
+      "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-single-edit-dispatch-guard.json",
+      "additionalInvocationsAllowed": 0,
+      "startedAtUtc": "2026-09-08T08:15:57.054Z",
+      "completedAtUtc": "2026-09-08T08:16:58.468Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-single-edit-output-block.json"
+    }
+  ],
+  "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/source-and-edit-preflight-remote-verification.json",
+  "sourcePayloadCommit": "e69013b2a04bc17d1937ecb058841a007e1b8b66",
+  "sourceVerifiedAtUtc": "2026-09-08T07:40:08.992Z",
+  "nextSafeAction": "Seal and remotely verify complete Namibia closure with all sources, edits, output block, QA and accessibility. Then prepare two nonduplicate Armenia/Namibia four-photo country-pair posts, with fresh @dogramaci, media, exact captions, ALT, Made with AI and Git/LFS/PR gates before one Post each.",
+  "reservedAtUtc": "2026-09-08T07:42:07.563Z",
+  "actionTimeCheck": {
+    "observedAtUtc": "2026-09-08T07:41:22.210Z",
+    "head": "194137b85ea2474bfaa774be3946cc2210665c3c",
+    "origin": "194137b85ea2474bfaa774be3946cc2210665c3c",
+    "refs": "194137b85ea2474bfaa774be3946cc2210665c3c\trefs/heads/agent/starlight-progress-archive\n194137b85ea2474bfaa774be3946cc2210665c3c\trefs/pull/13/head",
+    "trackedChanges": "",
+    "carrierFiles": [
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/source-and-edit-preflight-remote-verification.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-chatgpt-edit-intents.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/provider-ledger.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/batch-511-namibia-prepared-checkpoint.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+        "pass": true
+      }
+    ],
+    "intents": [
+      {
+        "scene": 2072,
+        "invocations": 0,
+        "allowanceConsumed": false,
+        "promptPass": true,
+        "sourcePass": true,
+        "anchorOrder": [
+          938,
+          936,
+          937
+        ],
+        "referenceCount": 4
+      },
+      {
+        "scene": 2073,
+        "invocations": 0,
+        "allowanceConsumed": false,
+        "promptPass": true,
+        "sourcePass": true,
+        "anchorOrder": [
+          938,
+          936,
+          937
+        ],
+        "referenceCount": 4
+      },
+      {
+        "scene": 2074,
+        "invocations": 0,
+        "allowanceConsumed": false,
+        "promptPass": true,
+        "sourcePass": true,
+        "anchorOrder": [
+          938,
+          936,
+          937
+        ],
+        "referenceCount": 4
+      }
+    ]
+  },
+  "executionCell": "2324",
+  "executionCellComplete": true,
+  "results": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-chatgpt-edit-results.json",
+  "recoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-hard-failure-recovery-1-intent.json",
+  "scene2071EditRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-single-edit-remote-preflight.json",
+  "scene2071SourcePayloadCommit": "eeadd0de497bd0f10aa36ed72219d4eeea313b06",
+  "executionCells": [
+    {
+      "cell": "2283",
+      "scenes": [
+        2072,
+        2073,
+        2074
+      ],
+      "complete": true
+    },
+    {
+      "cell": "2324",
+      "scenes": [
+        2071
+      ],
+      "complete": true
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "checkpointType": "batch_four_lanes_dispatched_monitoring",
+  "batchId": 441,
+  "country": "United Arab Emirates",
+  "sceneIds": [
+    1784,
+    1785,
+    1786,
+    1787
+  ],
+  "createdAtUtc": "2026-08-27T19:13:42.670Z",
+  "userActionTimeSendConfirmation": "granted",
+  "dispatchRule": "Each uniquely enabled Send was clicked exactly once after immediate prompt-hash and ordered-anchor reverification.",
+  "orderedReferenceSceneIds": [
+    938,
+    936,
+    937
+  ],
+  "dispatchEvidence": [
+    {
+      "sceneId": 1784,
+      "tabId": "48",
+      "clickUtc": "2026-08-27T19:10:16.813Z",
+      "promptSha256": "28C3E9556A9B2D7E20EA1E20C82E024B5110141D46ED54917B3879D0202EAE9A",
+      "orderedReferences": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "urlAfterClick": "https://www.meta.ai/prompt/5c6a9c15-415a-4925-a05f-908f44468914",
+      "sendCountAfter": 0,
+      "stopCountAfter": 1
+    },
+    {
+      "sceneId": 1785,
+      "tabId": "49",
+      "clickUtc": "2026-08-27T19:10:21.641Z",
+      "promptSha256": "86BAEC8D9973FE6FEDB2363BC68AD49475DEDE5A8F084FE21AE5F3D6A6ACC3D2",
+      "orderedReferences": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "urlAfterClick": "https://www.meta.ai/prompt/9718cb1a-501a-489e-8131-71f60b7d9a5a",
+      "sendCountAfter": 0,
+      "stopCountAfter": 1
+    },
+    {
+      "sceneId": 1786,
+      "tabId": "50",
+      "clickUtc": "2026-08-27T19:10:26.489Z",
+      "promptSha256": "8718D5A3F3B32D5407F6DABD249F6B084D500F8629BD7F8956BE306EFF814EA4",
+      "orderedReferences": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "urlAfterClick": "https://www.meta.ai/prompt/1334bde1-cccf-452c-b19a-66b3c7a10b3d",
+      "sendCountAfter": 0,
+      "stopCountAfter": 1
+    },
+    {
+      "sceneId": 1787,
+      "tabId": "51",
+      "clickUtc": "2026-08-27T19:10:31.275Z",
+      "promptSha256": "4AE8F1277EBAAFB3E4670F430656DBAA581E889547C31770EC6C8113CBD231EB",
+      "orderedReferences": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "urlAfterClick": "https://www.meta.ai/prompt/19440ad6-e197-47ee-8ec9-be4375fac14e",
+      "sendCountAfter": 0,
+      "stopCountAfter": 1
+    }
+  ],
+  "currentProviderState": [
+    {
+      "sceneId": 1784,
+      "url": "https://www.meta.ai/prompt/5c6a9c15-415a-4925-a05f-908f44468914",
+      "terminal": false,
+      "stopCount": 1,
+      "inlineImageCount": 0,
+      "downloadCount": 0,
+      "retryCount": 0,
+      "latestProviderText": "I'm rechecking the hand placement to make sure the pose looks natural and consistent across the four identities, adjusting any overlaps or awkward angles before I finalize the image request."
+    },
+    {
+      "sceneId": 1785,
+      "url": "https://www.meta.ai/prompt/9718cb1a-501a-489e-8131-71f60b7d9a5a",
+      "terminal": false,
+      "stopCount": 1,
+      "inlineImageCount": 0,
+      "downloadCount": 0,
+      "retryCount": 0,
+      "latestProviderText": "I'm generating the final 9:16 photoreal image using the prior base, placing Alia, Radiance, Ellie, and AI ECE left to right on the Louvre Abu Dhabi promenade with the dome, airship, and skyline in the background."
+    },
+    {
+      "sceneId": 1786,
+      "url": "https://www.meta.ai/prompt/1334bde1-cccf-452c-b19a-66b3c7a10b3d",
+      "terminal": false,
+      "stopCount": 1,
+      "inlineImageCount": 1,
+      "downloadCount": 0,
+      "retryCount": 0,
+      "latestProviderText": "I'm building a head-and-shoulders group portrait of four women with distinct looks and outfits, placing them in the UAE Al Ain Oasis setting with soft fog and blurred palm canopy, and arranging their gazes to form a calm, intimate reconciliation circle."
+    },
+    {
+      "sceneId": 1787,
+      "url": "https://www.meta.ai/prompt/19440ad6-e197-47ee-8ec9-be4375fac14e",
+      "terminal": false,
+      "stopCount": 1,
+      "inlineImageCount": 0,
+      "downloadCount": 0,
+      "retryCount": 0,
+      "latestProviderText": "I'm checking the second image's crop against the mid-shin and ankle rules to make sure no footwear shows while keeping each outfit's silhouette intact."
+    }
+  ],
+  "duplicateDispatches": 0,
+  "nextRequiredAction": "Monitor these exact provider chats to terminal. Preserve bytes or explicit no-bytes evidence. Never click Send again for scenes 1784-1787."
+}

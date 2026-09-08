@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "batch": 469,
+  "country": "Albania",
+  "state": "staged-evidence-lfs-valid-and-remote-pr-parity-verified",
+  "verifiedAtUtc": "2026-08-31T09:21:49.3709757Z",
+  "git": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "8da04c7071c7ee120d22f851ad94caff3d09cf24",
+    "remoteHead": "8da04c7071c7ee120d22f851ad94caff3d09cf24",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrHead": "8da04c7071c7ee120d22f851ad94caff3d09cf24",
+    "aheadBehind": [0, 0],
+    "intendedChangesCommitted": true,
+    "preservedUserOwnedUntrackedPaths": [
+      "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+      "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+      "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+      "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+      "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+    ]
+  },
+  "lfs": {
+    "status": "no objects pending push, commit, or working-tree update",
+    "dryRunPush": "no Batch 469 objects pending after successful upload of five LFS objects",
+    "batchObjects": [
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1902-meta-composer-staged-awaiting-send.png",
+        "oidSha256": "0f52a2e9ed79157f9ef5a29f5b2b6dda74e205eec48fe728ae2a5e2c583d2d80",
+        "localObjectPresent": true,
+        "localObjectHashMatchesOid": true,
+        "workingFileHashMatchesOid": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1903-meta-composer-staged-awaiting-send.png",
+        "oidSha256": "8504d6b789f8e4f1791dda670acae7a35e5d09a0c79830029b79ce2bf083eba0",
+        "localObjectPresent": true,
+        "localObjectHashMatchesOid": true,
+        "workingFileHashMatchesOid": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1904-meta-composer-staged-awaiting-send.png",
+        "oidSha256": "4ccc6bb6b69e2164448e22522fd12475b41bd22494f5faff101d44e080ab6ce8",
+        "localObjectPresent": true,
+        "localObjectHashMatchesOid": true,
+        "workingFileHashMatchesOid": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1905-meta-composer-staged-awaiting-send.png",
+        "oidSha256": "a89cffd4d08c13110f85571af2f69f0e83890c351401269d2c7f63897d2ed796",
+        "localObjectPresent": true,
+        "localObjectHashMatchesOid": true,
+        "workingFileHashMatchesOid": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/x-blank-composer-preserved-during-albania-staging.png",
+        "oidSha256": "fd170c350ac624758b5f689d6fc706504b7adf97833131965eaf409e5d98b192",
+        "localObjectPresent": true,
+        "localObjectHashMatchesOid": true,
+        "workingFileHashMatchesOid": true
+      }
+    ],
+    "repositoryWideFsckObservation": {
+      "clean": false,
+      "scope": "historical repository-wide LFS inventory, not the five Batch 469 objects",
+      "result": "The scan emitted openError entries for many historical tracked image paths absent from this local sparse working tree.",
+      "badCacheFileCountAfterScan": 0,
+      "batch469Impact": "none; all five current objects are present and hash-valid",
+      "safeHandling": "Do not delete, reset, or bulk-repair historical LFS state. Continue with targeted object checks for current batches."
+    }
+  },
+  "browserDispatchState": {
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-469-albania-four-lanes-staged-awaiting-send-confirmation-checkpoint.json",
+    "sendClicks": 0,
+    "freshActionTimeConfirmationReceived": false,
+    "mayClickSend": false
+  },
+  "nextSafeAction": "After this verification checkpoint itself is pushed and remote/PR parity is rechecked, obtain fresh explicit action-time confirmation, reverify the five actual in-app Browser tabs, and click each enabled Albania Meta Send exactly once."
+}

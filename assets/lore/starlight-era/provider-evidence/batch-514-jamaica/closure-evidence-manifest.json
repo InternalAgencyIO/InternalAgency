@@ -1,0 +1,930 @@
+{
+  "schemaVersion": 1,
+  "batch": 514,
+  "country": "Jamaica",
+  "sealedAtUtc": "2026-09-08T12:31:46.750Z",
+  "state": "complete-final-payload-snapshot",
+  "snapshotSemantics": "Hashes describe archived local bytes in this final payload. Later remote-proof carriers and publication state changes do not rewrite this snapshot. Resolve snapshot files at the recorded final payload commit.",
+  "providerFiles": 12,
+  "returnedEditFiles": 3,
+  "totalSavedImageFiles": 15,
+  "generatedSceneFiles": 15,
+  "providerContextReferenceFiles": 0,
+  "uniqueSavedByteVersions": 11,
+  "acceptedFiles": 4,
+  "attributedOutputBlocks": [
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-chatgpt-single-tailoring-blocked.json"
+  ],
+  "missingObservedOriginals": [],
+  "files": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-accessibility.json",
+      "bytes": 935,
+      "sha256": "5c8404670e722e1add68c8d0d32e3757c0c40dde2b9f4cea7bc41a927a751b3b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-anchors-at-top-visible.jpg",
+      "bytes": 114775,
+      "sha256": "de2b7f16b886c07813fd3e244a0749744bbbe04cc6ef3e4c189c1e2c3e2f485e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-anchors-visible.jpg",
+      "bytes": 133021,
+      "sha256": "fcc13d13990f156de16cd39acdb33e9e9a70d5fc805c0ce1b7b056b7da6ed75d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-chatgpt-single-tailoring-pass.png",
+      "bytes": 2332852,
+      "sha256": "af15e907dcbb86f68aa5002e3313755d8b14c37eeaa6654766cdf559ab0249bf",
+      "selected": true,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-chatgpt-single-tailoring-pass.png.alt.txt",
+      "bytes": 383,
+      "sha256": "6e4dbc79fc8924bf7d251b9a982e9955d5576a435f31ec1dbe44c206f2df00a1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-chatgpt-single-tailoring-pass.png.qa.json",
+      "bytes": 1844,
+      "sha256": "a385e0a8af5a47128081b130da62e88bdb2ee2d0b0b4239bca19bcbbf42760ec",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-chatgpt-single-tailoring-pass.png.receipt.json",
+      "bytes": 2255,
+      "sha256": "feb014633e44571c093b6fd5180f457eedcdee0246b7316fa97d0a93c3c3cdfa",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-initial-send-receipt.json",
+      "bytes": 12511,
+      "sha256": "c2cfadb54f1aae8b2f4d29f2f4c1b26afd966b81ec6062e75d740c3c8e9dd841",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp",
+      "bytes": 652224,
+      "sha256": "3ba7b80bc4e04b3bf2be02032fb7f6048b96ac237e34a27041f2b45d596a0a33",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp.alt.txt",
+      "bytes": 394,
+      "sha256": "4aeda593762f4bb85a63475b59f6d166a66a557fab74d4c1e24b8d91aa0437f1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp.qa.json",
+      "bytes": 1756,
+      "sha256": "9f5191bcfad09f8be7e085e5351063174bfc9b93d083dce1e5a9a308cb1cf2ef",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp.receipt.json",
+      "bytes": 2825,
+      "sha256": "facd84a852f6e6d4e074de4ce83db32e058c485059878d842698795aff5b6cbe",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-pre-send-visible.jpg",
+      "bytes": 126808,
+      "sha256": "97705cf9ef7c96829c6a2180f91463f3395c28d99a267d9d7ce07dd790ddba34",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-terminal-provider-response.txt",
+      "bytes": 3224,
+      "sha256": "7f749bc77de99ecba1f7add10f9ada37cc174cec7e30aa18e093c38a2700f141",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-terminal-visible-ui.txt",
+      "bytes": 23386,
+      "sha256": "32466d2565de4197b7cd70ffd06ccff4151dbc11901e3d6c129012d235e41bfb",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-accessibility.json",
+      "bytes": 931,
+      "sha256": "26a909e53117e3508e12f1b783d459681ad9bae8468d4d218f5bf5c6f4c93e5e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-anchors-at-top-visible.jpg",
+      "bytes": 114763,
+      "sha256": "c79f05ad873f70c1e31e678e898b559e956b72f4e9b390dba92ff7986abc33e6",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-anchors-visible.jpg",
+      "bytes": 129328,
+      "sha256": "16a48dc85a2de74c6d73ea40fb777a99793900b8c9234c817c8ffa6d78fb0de0",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-chatgpt-single-tailoring-pass.png",
+      "bytes": 2097219,
+      "sha256": "1dc4329cc84b18bbc15ad327ad21c1ec69b1f2ab59564773b06a88d454093431",
+      "selected": true,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-chatgpt-single-tailoring-pass.png.alt.txt",
+      "bytes": 379,
+      "sha256": "83cbb9c82cdaa890d552ed0ba7472506ab5f91d73ff324d8b473da143f039486",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-chatgpt-single-tailoring-pass.png.qa.json",
+      "bytes": 1454,
+      "sha256": "e65dfa8db9d84ecc7792e6b8945e6e717c6a4f7d01fb25e5fbf262bbb439bd8d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-chatgpt-single-tailoring-pass.png.receipt.json",
+      "bytes": 2255,
+      "sha256": "672e075095f924df5c0d87e9a0bea8073d0e9cca7dee30577345f66a8ceadf67",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-initial-send-receipt.json",
+      "bytes": 12421,
+      "sha256": "c1b98cd934728c7641e060c7f7514e7ff3d21202cbf2331bc0444d154f79bf8b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp",
+      "bytes": 436676,
+      "sha256": "4d127d8e8fc9429fa38aee4a2025a1546c5b56bc843029dfc83f78f49ea19ed6",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp.alt.txt",
+      "bytes": 362,
+      "sha256": "de7991f64d352adaf07ed635b3e04e394c0b57bb93edb78d1cfb4e7cee83965f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp.qa.json",
+      "bytes": 1396,
+      "sha256": "0de3f52876ff4c325ad37f080a6eb29b3e91ce9a93be0553a84222c18340c47d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp.receipt.json",
+      "bytes": 2816,
+      "sha256": "478ecc871abe701d480eb096c82fc821fd9aca52dfc21dc0d4a2d25eeadb86ab",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-internal-01-original.webp",
+      "bytes": 436676,
+      "sha256": "4d127d8e8fc9429fa38aee4a2025a1546c5b56bc843029dfc83f78f49ea19ed6",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-internal-01-original.webp.alt.txt",
+      "bytes": 362,
+      "sha256": "de7991f64d352adaf07ed635b3e04e394c0b57bb93edb78d1cfb4e7cee83965f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-internal-01-original.webp.qa.json",
+      "bytes": 1404,
+      "sha256": "c49b7ba2e6e8ad2e2ff92fb8eaf5d16f7bc25a0b06baf251614cdefa4cd44d53",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-internal-01-original.webp.receipt.json",
+      "bytes": 2802,
+      "sha256": "f5ec19f82d0a8b2e20478c28e252a5cdc35129edabb6514595a2a7d4365f130a",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-pre-send-visible.jpg",
+      "bytes": 127535,
+      "sha256": "46327881697b5cc0de72f4c342b88d1b4383a8a6be5e1a0d5444ae29e8a92a0f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-terminal-provider-response.txt",
+      "bytes": 2472,
+      "sha256": "273c03f853d44464f2534a5751d15328faed34257f0554004edb962abbf9e2ee",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-terminal-visible-ui.txt",
+      "bytes": 20667,
+      "sha256": "eabcf3c5e4517b9e110352b12d67333bf56a4106663a6e2bea516ba862ba0925",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-accessibility.json",
+      "bytes": 953,
+      "sha256": "65d98d941ef312c98cb98cab4443894660b25bc300ba4c2969dd160792287f04",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-anchors-at-top-visible.jpg",
+      "bytes": 115097,
+      "sha256": "8cc9bc449a17085a201cfeab7dbf5e4e8d5e007cded7da90adf003afe660ed26",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-anchors-visible.jpg",
+      "bytes": 132297,
+      "sha256": "349abe80d5625ac91c10658f84d0fde7a57c7cb158c09bcf59334df68086e5ec",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-chatgpt-single-tailoring-pass.png",
+      "bytes": 2261475,
+      "sha256": "8181fe3e38206058776271f7b648e0a873ffb07cc21eb6cb6bcb70610ac3f57c",
+      "selected": true,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-chatgpt-single-tailoring-pass.png.alt.txt",
+      "bytes": 401,
+      "sha256": "59f7a4fe2ea1b977ad22f239fd5b65a41fcdaf8a2e45ced31f84d86f07eb0967",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-chatgpt-single-tailoring-pass.png.qa.json",
+      "bytes": 1733,
+      "sha256": "e1b6e9c68852be91c25f90dca66674390d093d9ff6cf21e55dec0e60af325f45",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-chatgpt-single-tailoring-pass.png.receipt.json",
+      "bytes": 2255,
+      "sha256": "1b19c6973b18287ebcc1bbccedc9b7aa94e7161d762c57aa78a7d4b19603981c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-initial-send-receipt.json",
+      "bytes": 12613,
+      "sha256": "1a29c1e8f24251ff01d87db796c48c8825d440189a26a4f17cbb7c0175004520",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp",
+      "bytes": 510670,
+      "sha256": "c2cb2d2548da9d17dc0efef0bc076b48fb759a09b37b15d1b3fe68d3d0b2466f",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp.alt.txt",
+      "bytes": 414,
+      "sha256": "c57bceb9f692c936c0c277d09fbed23a990e806a618697af73c6b90cb64a763c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp.qa.json",
+      "bytes": 1630,
+      "sha256": "59e4181e6c91874c2a380bbdb770e376d2b5ff4b149ec3a74653220722c00164",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp.receipt.json",
+      "bytes": 2813,
+      "sha256": "ad1f6cff098b5c18bc841e417e4002cb939334499396d91b3c20352b3beff86d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-01-original.webp",
+      "bytes": 502704,
+      "sha256": "21ad2c097bd20847468cf286709913f71af56afec04f0e341f83a3e87b5c65d2",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-01-original.webp.alt.txt",
+      "bytes": 453,
+      "sha256": "2dff9ebffc782902afccd71ff8591d7f0e1fccf288254f16758435b400b0379b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-01-original.webp.qa.json",
+      "bytes": 1638,
+      "sha256": "fbe3eddf2fe38c26615b03260dcdb7d1338eecacffefa780e8e179051b953817",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-01-original.webp.receipt.json",
+      "bytes": 2802,
+      "sha256": "3bf1be8bb34322ec471fc5b1a487255b7adf73413d19d5482888348e80243681",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-02-original.webp",
+      "bytes": 513182,
+      "sha256": "f3015c0ddcc7382b21118393dc66718cf5fcf04ae6e85ad5a0c2665b5229bb65",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-02-original.webp.alt.txt",
+      "bytes": 453,
+      "sha256": "2dff9ebffc782902afccd71ff8591d7f0e1fccf288254f16758435b400b0379b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-02-original.webp.qa.json",
+      "bytes": 1638,
+      "sha256": "fafdc58af93e1363a8e4f4958bd8ac47a052647e94832e5bedda0acde55e6317",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-02-original.webp.receipt.json",
+      "bytes": 2802,
+      "sha256": "9bb819c556814dcd21388f1dbadbc1f429d7bdac24eeb8d2361ede7d661510b5",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-03-original.webp",
+      "bytes": 526542,
+      "sha256": "2c3dee5477b4aba3b705350b42fff8ae665c42581e815e2660215c5b1489b80a",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-03-original.webp.alt.txt",
+      "bytes": 453,
+      "sha256": "2dff9ebffc782902afccd71ff8591d7f0e1fccf288254f16758435b400b0379b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-03-original.webp.qa.json",
+      "bytes": 1638,
+      "sha256": "1ae586b3a6780910be02d7f011066ad9d2c3912582eb10d1fa3a8eeea1db6f52",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-03-original.webp.receipt.json",
+      "bytes": 2802,
+      "sha256": "2df5b80762b1b9fd2cad70730fe78f5e4bced7da9e9af33980c9cdd160ea056e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-04-original.webp",
+      "bytes": 510670,
+      "sha256": "c2cb2d2548da9d17dc0efef0bc076b48fb759a09b37b15d1b3fe68d3d0b2466f",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-04-original.webp.alt.txt",
+      "bytes": 414,
+      "sha256": "c57bceb9f692c936c0c277d09fbed23a990e806a618697af73c6b90cb64a763c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-04-original.webp.qa.json",
+      "bytes": 1638,
+      "sha256": "73fad26794068bb17accb3e753995af7d076251574f2081914e835173149351f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-04-original.webp.receipt.json",
+      "bytes": 2802,
+      "sha256": "9babd3e3b02abea0e313895c88a5a85785aece042b096a65276f5f5a27731714",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-pre-send-visible.jpg",
+      "bytes": 128578,
+      "sha256": "1c445020bc01ce3c4eed8f79c5afb92f6c4a4d4a31f896a2d385333593dd08bb",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-terminal-provider-response.txt",
+      "bytes": 2994,
+      "sha256": "4674ecfc36e6e815ac63253143907a6c91ec169525ade9c0e760c488db16e54f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-terminal-visible-ui.txt",
+      "bytes": 22838,
+      "sha256": "12603d76b6623b1ee7516f0956ff3fc26779c1510a1edab159ff7af17e02e2c8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-accessibility.json",
+      "bytes": 899,
+      "sha256": "dc095a66678374632e207a4e0ece6a1059244e3877d3108b9252ac0c764538d4",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-anchors-at-top-visible.jpg",
+      "bytes": 117918,
+      "sha256": "a0f5f955295332f3f022894b066aa0735b22ffad2a7b92d0a1836c72161369ef",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-anchors-visible.jpg",
+      "bytes": 129955,
+      "sha256": "4c947f36b06a3c5de88be48f431d239e6fa35bdd6a9cd80079319737283fd9a8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-chatgpt-single-tailoring-blocked.json",
+      "bytes": 1571,
+      "sha256": "d9a413d8fb3a9ce3ed5431feac213c49053d5e4c3a03aee02311dfce5ec76dfa",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-initial-send-receipt.json",
+      "bytes": 11915,
+      "sha256": "2d0468846da4aa42509ff0d54d84d5052e5e89b38fe06789317ae08feafc1e91",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-02-original.webp",
+      "bytes": 565428,
+      "sha256": "5034388553cd64822fd961b4e9ad43f3da572b86991d6c1d6942cc1848a5c4e8",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-02-original.webp.alt.txt",
+      "bytes": 358,
+      "sha256": "b2e5ee23a24e06337bd0e1356af02e8949d0837796d6b867381a1a00e4cac524",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-02-original.webp.qa.json",
+      "bytes": 1526,
+      "sha256": "8cdcbaf27c29afa7c9e1b797fc51ceb575bbfb55d361da8c0797ea2730f75c68",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-02-original.webp.receipt.json",
+      "bytes": 2829,
+      "sha256": "d7a70a0b1d603e0fef6561c5f4a2551df8237c9528c1afba83da0038ff4f37ac",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp",
+      "bytes": 545888,
+      "sha256": "3288c448b7ed847504852695fcf00bfddcf7b017bb2f2f0bdd550e157dba05cc",
+      "selected": true,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp.alt.txt",
+      "bytes": 353,
+      "sha256": "6f66a6af1ba90cd68678661fcc970598c9aac503fb285c0763fb7defbaa6ae2f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp.qa.json",
+      "bytes": 1546,
+      "sha256": "a3599fee711bbd6eeb456f5ee959d294ac4d21b7d04f4b2924af6f493be0ee78",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp.receipt.json",
+      "bytes": 2825,
+      "sha256": "13ceb8ec7c96cee61bd0e62a84c7869e107b5fb928dea75bcf3cfbe281b9b969",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-01-original.webp",
+      "bytes": 565428,
+      "sha256": "5034388553cd64822fd961b4e9ad43f3da572b86991d6c1d6942cc1848a5c4e8",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-01-original.webp.alt.txt",
+      "bytes": 358,
+      "sha256": "b2e5ee23a24e06337bd0e1356af02e8949d0837796d6b867381a1a00e4cac524",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-01-original.webp.qa.json",
+      "bytes": 1527,
+      "sha256": "2b4f390a64b13dbd7f34156a0555e19dcc3183c87bccf9255b1a7debe1257a3f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-01-original.webp.receipt.json",
+      "bytes": 2804,
+      "sha256": "9e69adc0062af3913038496bc39e391712bef7597da7993798b7f421553d3047",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-02-original.webp",
+      "bytes": 545888,
+      "sha256": "3288c448b7ed847504852695fcf00bfddcf7b017bb2f2f0bdd550e157dba05cc",
+      "selected": false,
+      "recordType": "generated-scene-image"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-02-original.webp.alt.txt",
+      "bytes": 353,
+      "sha256": "6f66a6af1ba90cd68678661fcc970598c9aac503fb285c0763fb7defbaa6ae2f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-02-original.webp.qa.json",
+      "bytes": 1527,
+      "sha256": "e5b2ff7cd987a56ad5964be5b7222b997f160bd468088abdaa0862a67102f94a",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-02-original.webp.receipt.json",
+      "bytes": 2800,
+      "sha256": "95b1f4a8d26745cedfc435d43987e8c7b0ce4bf3cad82e5088012e486465ef8a",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-pre-send-visible.jpg",
+      "bytes": 127178,
+      "sha256": "50d1873909d96f951c4a8a1e0889ece0a3f6aa6bb98293ad1033142d43c91224",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-terminal-provider-response.txt",
+      "bytes": 2559,
+      "sha256": "7fda1af23a66ad4774cbffca8185d621fa298e3ac9a60f6bfe7d4c943ea921af",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-terminal-visible-ui.txt",
+      "bytes": 21329,
+      "sha256": "5c7cfe425972b36c41fe9148e43f385e2c8987b4a47c7b9ece2c0a7b0215027c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/accepted-selections.json",
+      "bytes": 35597,
+      "sha256": "bb42ab2a72d4eda911ca3ccbb98804ea5f5e4d0b854c9f57cbad866954592e9b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/all-four-terminal-source-observations.json",
+      "bytes": 108295,
+      "sha256": "cdb93ae3617ecba8712ebf0701ac459662f8718ffc6d0f2de076e3d11a43a6c8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1223.json",
+      "bytes": 9629,
+      "sha256": "baccbaa94976bc5c48f2247ce2d4dabbbc20a4bc8e764f8ddd4e69fc6338297a",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/final-selection-qa.json",
+      "bytes": 17569,
+      "sha256": "45134c583a773d40161f644165c06699809c2be61388f6c8b3a1d81cbbf958d0",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/four-composers-staging-evidence.json",
+      "bytes": 22483,
+      "sha256": "dbe591fb062afaccb4b9dc07b882760d94e959261821e77016620a57be7107af",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-dispatch-guard.json",
+      "bytes": 4235,
+      "sha256": "d2380a35fb580b0c55776e19a75398599a588b97c0630724f3ba97b53160b4f3",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-intents.json",
+      "bytes": 27004,
+      "sha256": "4c071206ebf75e8308b350369315dbaf562b07471780ddd941730818e6c45f85",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-remote-preflight.json",
+      "bytes": 14985,
+      "sha256": "211bb414fed204e2db29113bd985d69ffaa8356d2b185803b79c905cf509f4a5",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+      "bytes": 13718,
+      "sha256": "238ac2686f2b0a2cbf56bede03376155bc626b08a71b5dbb438978568ff9f8f8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/native-raw-archive-manifest.json",
+      "bytes": 36512,
+      "sha256": "3a4658fc839fe1ee67ee7cd8d4cb2d4c065637d1375eb5cc946777a9142f8050",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/provider-ledger.json",
+      "bytes": 8339,
+      "sha256": "fbfecbbe3ce826cf9891e61c1b6aa97e024e05b402890f32ef9bcd2d0762d14d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2083-initial-builder-prompt.txt",
+      "bytes": 4861,
+      "sha256": "87e912b977ca2752de8837b8facb4c6b02b98bd9e8b601c6c1c8fe0bd9aa25b6",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2083-initial-exact-prompt.txt",
+      "bytes": 5297,
+      "sha256": "7da0635641828502193af162aaa67cd6ea7d9ba0087caea8984939010d7691a7",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2083-single-edit-base-prompt.txt",
+      "bytes": 2785,
+      "sha256": "ff09f4c4388c94ec03f13567e0deec9b8206407bf460753f0fc2e26c90ff1258",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2083-single-edit-exact-prompt.txt",
+      "bytes": 3872,
+      "sha256": "211ba325f7d87661bd573aedb8581ea573ae1fdda23164a0be4a68277bc6f866",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2084-initial-builder-prompt.txt",
+      "bytes": 4809,
+      "sha256": "87f2411389496df9e20ebbecbef5d31b746df10bfbcde24ab65f0174ed5a2eae",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2084-initial-exact-prompt.txt",
+      "bytes": 5252,
+      "sha256": "b4e6cc5b028cbae523563a78051514b7141a6ae7434309dcf8963d4154bb1f0c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2084-single-edit-base-prompt.txt",
+      "bytes": 2755,
+      "sha256": "63c502e25327aeac7a57f0b8a9c1826fa032a963eb4b33ac07b16b3e2f265e0b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2084-single-edit-exact-prompt.txt",
+      "bytes": 3842,
+      "sha256": "db3637ed688b4f77dd08500d29d69104a7cf55a74fb206dce4e8bff3cf637849",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2085-initial-builder-prompt.txt",
+      "bytes": 4903,
+      "sha256": "95bac6807f478c5473c459bb2c8354e471295c783632b683626761909ef35132",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2085-initial-exact-prompt.txt",
+      "bytes": 5348,
+      "sha256": "1fd2de5ae6e30e56fc6ab861815c42e6028edbc6421f270d520ee54ab67b4cde",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2085-single-edit-base-prompt.txt",
+      "bytes": 2735,
+      "sha256": "388051f48e43d2752ee87eeeb952ba995ff7d2caa4a6b40d6f3e3c78763585b1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2085-single-edit-exact-prompt.txt",
+      "bytes": 4003,
+      "sha256": "49bcaa84983650c8dbaaa4e2c42cef9be17e58c18a31d20665f97696371ab2ae",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2086-initial-builder-prompt.txt",
+      "bytes": 4549,
+      "sha256": "5be7fcce5972e98abe2cba20fa7afeb0cb2d031e274d0d287e6b7e009f1bacd1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2086-initial-exact-prompt.txt",
+      "bytes": 4999,
+      "sha256": "5464b66fac707b7cd133a76740fceb0a9eaf3d8dd2d34dc20fdf53b4f708698b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2086-single-edit-base-prompt.txt",
+      "bytes": 2546,
+      "sha256": "1403f11bd072619310d04408d07b08eb6a4ec25e8eb862f5a152a863b9ef944d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2086-single-edit-exact-prompt.txt",
+      "bytes": 3591,
+      "sha256": "471b0ad9819432569beca137974a82b40cfdd5812224ec06b61a31b19b4201d7",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/single-chatgpt-edit-intents.json",
+      "bytes": 32396,
+      "sha256": "ef442066fe6778485b5663ee1cc5578832f201aa84315f6ee541ea2ec980ef45",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/single-chatgpt-edit-results.json",
+      "bytes": 9063,
+      "sha256": "a8b55bac0d34ce447677233b982d74f1616dd2b6cf2b21075a4d586f8a36b554",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/single-edit-dispatch-guard.json",
+      "bytes": 5977,
+      "sha256": "3539af6deb0c31efd121dc7a047e55a6ed3db832d64eed3cf423c7c8306a2c32",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/source-and-edit-preflight-remote-verification.json",
+      "bytes": 39082,
+      "sha256": "bfb8bb537f3daf575b3742253af0ad8c365628e0496b38fee94a3f5da0a64e5c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-514-jamaica-editorial-brief.json",
+      "bytes": 13094,
+      "sha256": "4c146efcff547dd545dcaac99379f54e42a5c1bc59c825f2fa961ed74d877a04",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-514-jamaica-fixed-rolls.json",
+      "bytes": 159501,
+      "sha256": "4b05fabfc824c8f8a7a754f1dd24d7eb82c484fe63528489d87154382c9cbb29",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-514-jamaica-prepared-checkpoint.json",
+      "bytes": 4351,
+      "sha256": "37d3f56430b4fac0bc34b1cf104f52e5b5c972fab5cc5f9e4cbe8c687daa12e7",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-514-jamaica-four-stills-closure-checkpoint.json",
+      "bytes": 5274,
+      "sha256": "b0d4a7b1ddaff494bc106528a050b53cdb49237ef678ca2c2ffdd620510e64fc",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+      "bytes": 252324,
+      "sha256": "5a7c7004b73f95557417a9ef623d7acca77d47300fb4b0216f7ac6b70727bdf0",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "bytes": 1006377,
+      "sha256": "1cf91f8364f8d08cbc07753c4da3986c51affea7dcc5d876fb175c46ab1255b0",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
+      "bytes": 9478981,
+      "sha256": "a627e5d26ee1b7f45f9ad787355130ed56efd34b78830c1a4ed1118146a89ebf",
+      "selected": false,
+      "recordType": "evidence"
+    }
+  ],
+  "selectedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-chatgpt-single-tailoring-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-chatgpt-single-tailoring-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-chatgpt-single-tailoring-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp"
+  ],
+  "unusedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-internal-01-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-01-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-02-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-03-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-internal-04-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-02-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-01-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-02-original.webp"
+  ],
+  "allSceneRenderAndEditAllowancesTerminal": true
+}

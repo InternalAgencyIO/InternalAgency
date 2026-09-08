@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "batch_closed_unresolved",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 438,
+  "country": "Haiti",
+  "sourceBatchId": 367,
+  "sceneIds": [
+    1772,
+    1773,
+    1774,
+    1775
+  ],
+  "acceptedSceneIds": [],
+  "acceptedCount": 0,
+  "requiredAcceptedCount": 4,
+  "status": "closed_unresolved",
+  "outcomes": [
+    {
+      "sceneId": 1772,
+      "status": "hard_unusable",
+      "reason": "Camera-roll failure: roll 20 required a true shoulder-up extreme close cropped at shoulders or uppermost chest; the render extends through substantial bodice and mid-torso.",
+      "providerUrl": "https://www.meta.ai/prompt/a91be848-7077-48cd-b507-ce6be4eea685",
+      "sha256": "0bf07361b75349a1aff2604624b432f458ad664c398813a7214774b3758a3b7d",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-438-scene-1772-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-438-haiti-scene-1772-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1773,
+      "status": "hard_unusable",
+      "reason": "Anatomy and location failure: the roll-29 crop and four-ring beacon are present, but one of the eight required hands is absent or occluded and the Citadelle Laferriere landmark does not read as the complete fortress architecture required.",
+      "providerUrl": "https://www.meta.ai/prompt/0bc02961-c83b-4090-9598-7fde3b06d491",
+      "sha256": "fb14b0ffbb4b14d96971530c8efe2c50c9ec2b0d8e38ef1bbcbcb6bda6dc44f8",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-438-scene-1773-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-438-haiti-scene-1773-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1774,
+      "status": "hard_unusable",
+      "reason": "Camera-roll failure: roll 56 required head-to-mid-shin with no footwear visible; the render uses inconsistent lower-body crops and exposes footwear on AI ECE.",
+      "providerUrl": "https://www.meta.ai/prompt/797705a1-6131-4c11-9756-fa767578f313",
+      "sha256": "466f578a28d05495cbc7da990dbf3e3fdf4041e8ac87d2c45bb0b9f8b3346667",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-438-scene-1774-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-438-haiti-scene-1774-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1775,
+      "status": "hard_unusable",
+      "reason": "Camera and beacon failure: roll 89 required all four small figures entirely in the lower quarter with the environment dominating at least the upper three quarters; the quartet occupies roughly the lower third, and the legible beacon shows only three cyan rings instead of exactly four.",
+      "providerUrl": "https://www.meta.ai/prompt/8c75b06c-2df9-481c-a51f-59f2a6233a17",
+      "sha256": "5a5dc295b9fa631708fcb7f03496958990885799aa5150aac42e77e12785cbbd",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-438-scene-1775-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-438-haiti-scene-1775-terminal-captured-checkpoint.json"
+    }
+  ],
+  "duplicateRelationships": [],
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 8,
+    "due": false
+  },
+  "xBacklog": {
+    "eligibleUnpublishedSceneIds": [
+      1753
+    ],
+    "newEligibleSceneIds": [],
+    "pairReady": false,
+    "reason": "Haiti produced no accepted images; Burundi scene 1753 remains the only eligible unpublished image, so no valid 2+1 country pair exists."
+  },
+  "nextAction": "Prepare Jordan from authoritative source Batch 368 as new scenes 1776-1779; do not reopen Haiti scenes 1772-1775.",
+  "closedAtUtc": "2026-08-27T17:05:33.961Z"
+}

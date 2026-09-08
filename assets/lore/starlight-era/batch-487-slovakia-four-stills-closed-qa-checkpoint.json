@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "batch": 487,
+  "country": "Slovakia",
+  "scenes": [1975, 1976, 1977, 1978],
+  "state": "four-stills-closed-qa-and-archive-complete-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-04T18:02:29.9271211Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-four-meta-dispatches-checkpoint.json",
+    "scene1976GuardReconciliation": "assets/lore/starlight-era/batch-487-slovakia-scene-1976-meta-retry-1-dispatch-guard-reconciliation-checkpoint.json",
+    "scene1976GuardReconciliationCommit": "a18f132a11917e5f0f7e0bc8e53764c0099b8fc7",
+    "guardReconciliationRemoteAndDraftPrParityVerified": true
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulFinalOccurrences": 4,
+    "initialHardFailures": 1,
+    "retries": 1,
+    "retrySuccesses": 1,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "providerUrls": [
+      "https://www.meta.ai/prompt/c28afc8b-012b-4e5e-b2a9-199fb3f21e58",
+      "https://www.meta.ai/prompt/38bb3e58-02cd-46ab-acc2-b7c5fb3216f5",
+      "https://www.meta.ai/prompt/0daf1876-bea9-464d-9f37-0b51337156db",
+      "https://www.meta.ai/prompt/f0fb60ce-13c3-4f1e-a81b-a66ba58721bb"
+    ]
+  },
+  "selectedAssets": [
+    {
+      "scene": 1975,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1975-slovakia-bratislava-castle-danube-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "AA9B0A681C86835F53CC98D732B4481BF078C287E885BED8CC317C96ECC168CA",
+      "bytes": 2247431
+    },
+    {
+      "scene": 1976,
+      "provider": "Meta AI fallback after consumed ChatGPT invocation",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1976-slovakia-spis-castle-raze-adjacent-three-quarter-meta-retry-1-occurrence-1-raw.jpg",
+      "sha256": "FE7A7F6FC5E9D73F7AF12E033C57C26588EFFCE85FAA00E639771924CD65EE0F",
+      "bytes": 282218
+    },
+    {
+      "scene": 1977,
+      "provider": "Meta AI fallback after consumed ChatGPT invocation",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1977-slovakia-strbske-pleso-high-tatras-raze-tight-hemline-close-meta-occurrence-1-raw.jpg",
+      "sha256": "29C396E2FD777190ED34EB156DF4FBCFF1AB918B75739B33E2A61E5078201F0C",
+      "bytes": 282708
+    },
+    {
+      "scene": 1978,
+      "provider": "Meta AI fallback after consumed ChatGPT invocation",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1978-slovakia-orava-castle-raze-tight-full-body-statement-boots-meta-occurrence-1-raw.jpg",
+      "sha256": "0C1AB53D92977FC456CC3D25A52A53335E9ECE4BCDCD12FF8DF3C3E316750E67",
+      "bytes": 336211
+    }
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableSlovakiaSettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "scannedRepoImageCount": 4979
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassRequestsIssued": 4,
+    "successfulAttributedOutputs": 1,
+    "attributionUncertainNoByteOutcomes": 3,
+    "aggregateFailureStage": "output",
+    "aggregateFailureCategory": "sexual",
+    "aggregateFailureRequestId": "386ec773-72ae-4e43-b83d-aaf7695ef329",
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 1,
+    "selectedMetaFallbacks": 3
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/provider-ledger.json",
+    "metaOutcomeArchive": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/meta-retry-prompts-and-outcomes.md",
+    "chatgptPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/chatgpt-one-strong-shortening-prompts.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/accessibility-sidecars.json",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/closure-evidence-manifest.json",
+    "closureManifestFileCount": 9,
+    "closureManifestTotalBytes": 3446515,
+    "closureManifestInventorySha256": "4F25E4C867E50CE07D0E0FEDD0673914182EC6620831B897203902ED6E2D6BD3"
+  },
+  "publication": {
+    "plannedCountryPair": ["Slovakia", "Slovenia"],
+    "slovakiaSelectedAssetPublicationCounts": [0, 0, 0, 0],
+    "xAccount": "@dogramaci",
+    "currentComposerCountryPair": ["Monaco", "North Macedonia"],
+    "currentComposerRetainedIntact": true,
+    "currentComposerVisiblePostControlFailures": 2,
+    "currentComposerPublicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true,
+    "freshActionTimeConfirmationRequiredAfterXRecovery": true
+  },
+  "browserState": {
+    "metaTabCount": 4,
+    "xTabCount": 1,
+    "scene1976ResidualComposer": "Exact retry text remains at Meta home with only anchor 938 attached after the supported chooser recovery; it is duplicate residue and must never be submitted.",
+    "scene1976ResidualComposerDeletionNotAuthorizedAtActionTime": true
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "canonicalContradictions": [
+    "Historical Batch 296 is blocked with zero accepted Slovakia assets; its terminal scene was neither resent nor reopened, and fresh Batch 487 is the current four-scene authority.",
+    "Scene 1976 initially failed on the distant fictional damage element, but its intact-castle Retry 1 succeeded after one visible Send activation. Provider history proves the 38bb URL is canonical despite the post-send Discard prompt guard and residual home composer.",
+    "Meta labeled terminal images as WEBP in the visible DOM while visible Download controls delivered JPEG/JFIF bytes; the archived visible-control bytes are canonical.",
+    "All four required ChatGPT edit requests were issued once. Scene 1975 returned a selected edit; the concurrent wave then ended on an output-stage sexual-category block, leaving Scenes 1976-1978 without attributable bytes. Their valid Meta raws are selected and no second edit pass is permitted.",
+    "The intact Monaco-North Macedonia X composer has two explicit Post errors and zero live transmission; a third blind click is forbidden, so completed later country assets cannot replace that draft.",
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later remote-verified checkpoints; the unrelated active X Assistant guardian remains untouched and is not Starlight authority."
+  ],
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "ACTIVE",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "nextSafeAction": "Validate the closure manifest and selected-asset uniqueness, commit and push the complete Batch 487 evidence set, verify Git LFS and Draft PR parity, and keep the four existing Meta lanes and the failed Monaco-North Macedonia X composer intact. Do not submit or discard the Scene 1976 duplicate residual composer without a new action-time instruction."
+}

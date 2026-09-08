@@ -1,0 +1,1259 @@
+{
+  "batch": 301,
+  "country": "Ukraine",
+  "status": "render-preflight-stored",
+  "sourceCommit": "ebd140a5c2823ab7a4477cd743163aca9ce63c65",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch301-ukraine keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextThemePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextQueueCountry": "United Kingdom",
+  "researchSources": [
+    {
+      "url": "https://ukraine.ua/cities-places/explore-lviv/",
+      "usedFor": "Lviv historic center, architecture, trams, coffee culture, Opera House, and cultural life"
+    },
+    {
+      "url": "https://ukraine.ua/cities-places/synevyr/",
+      "usedFor": "Lake Synevyr, central island, Carpathian forest, and mountain setting"
+    },
+    {
+      "url": "https://ukraine.ua/cities-places/the-carpathian-mountains/",
+      "usedFor": "Carpathian ridges, narrow-gauge tram, woodcraft context, and banosh"
+    },
+    {
+      "url": "https://ukraine.ua/activities-experiences/ukrainian-culture/",
+      "usedFor": "Ukrainian visual arts, contemporary culture, architecture, music, and folk-art-inspired geometry"
+    },
+    {
+      "url": "https://ukraine.ua/visit/discover-natural-wonders/",
+      "usedFor": "Synevyr and broad Ukrainian landscape context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch301-ukraine-male-model-scene",
+    "fullHash": 1923667990,
+    "roll": 90,
+    "selectedScenePosition": 3,
+    "selectedScene": 1226,
+    "maleEmotion": {
+      "key": "batch301-ukraine-scene3-male-emotion",
+      "roll": 39,
+      "result": "magnetic confidence"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Ukraine's flag has no secular pictorial motif to copy, so large researched architecture, river, Black Sea, Carpathian, sunflower, wheat, floral-painting, woodcraft, music, cafe, and contemporary embroidery motifs replace it.",
+    "palette": "cobalt blue and sunflower yellow expanded with Dnipro turquoise, Carpathian green, optical white, warm wheat gold, coffee brown, Black Sea blue, and floral red",
+    "minimumCoverage": "Every scene places large complete secular Ukraine motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScenes": "Kyiv uses glass bridge, Dnipro, sunflowers, wheat, and floral craft. Lviv includes architecture, tram, coffee, chocolate, woodcraft, and sunflowers. Synevyr includes lake, Carpathian forest, tram, trembita-style horn, carving, weaving, and banosh. Odesa includes Opera architecture, Black Sea, a bandura-inspired instrument, sunflowers, wheat, and painted pottery.",
+    "prohibitions": "No literal flag, trident, official emblem, sacred symbol, political insignia, military imagery, copied folk costume, copied medical uniform, badge, medical procedure, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch301-ukraine-x-heart",
+      "roll": 7,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch301-ukraine-x-internalagency",
+      "roll": 99,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch301-ukraine-x-worldxxxseries",
+      "roll": 32,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1224, 1225, and 1227 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1226 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch301-ukraine-male-model-scene",
+        90
+      ],
+      [
+        "batch301-ukraine-scene3-male-emotion",
+        39
+      ],
+      [
+        "batch301-ukraine-scene1224-weather",
+        42
+      ],
+      [
+        "batch301-ukraine-scene1224-paws",
+        87
+      ],
+      [
+        "batch301-ukraine-scene1224-poleDanceTheme",
+        48
+      ],
+      [
+        "batch301-ukraine-scene1224-rainbowOnly",
+        78
+      ],
+      [
+        "batch301-ukraine-scene1224-rainbowHosiery",
+        1
+      ],
+      [
+        "batch301-ukraine-scene1224-romanceBeat",
+        91
+      ],
+      [
+        "batch301-ukraine-scene1224-compoundLoveBeat",
+        91
+      ],
+      [
+        "batch301-ukraine-scene1224-Radiance-emotion",
+        63
+      ],
+      [
+        "batch301-ukraine-scene1224-Radiance-visibleMidriff",
+        23
+      ],
+      [
+        "batch301-ukraine-scene1224-Radiance-straplessDress",
+        72
+      ],
+      [
+        "batch301-ukraine-scene1224-Radiance-fullyOpenBack",
+        57
+      ],
+      [
+        "batch301-ukraine-scene1224-Ellie-emotion",
+        43
+      ],
+      [
+        "batch301-ukraine-scene1224-Ellie-visibleMidriff",
+        55
+      ],
+      [
+        "batch301-ukraine-scene1224-Ellie-straplessDress",
+        64
+      ],
+      [
+        "batch301-ukraine-scene1224-Ellie-fullyOpenBack",
+        13
+      ],
+      [
+        "batch301-ukraine-scene1224-Alia-emotion",
+        85
+      ],
+      [
+        "batch301-ukraine-scene1224-Alia-visibleMidriff",
+        29
+      ],
+      [
+        "batch301-ukraine-scene1224-Alia-straplessDress",
+        98
+      ],
+      [
+        "batch301-ukraine-scene1224-Alia-fullyOpenBack",
+        19
+      ],
+      [
+        "batch301-ukraine-scene1224-AI ECE-emotion",
+        67
+      ],
+      [
+        "batch301-ukraine-scene1224-AI ECE-visibleMidriff",
+        3
+      ],
+      [
+        "batch301-ukraine-scene1224-AI ECE-straplessDress",
+        92
+      ],
+      [
+        "batch301-ukraine-scene1224-AI ECE-fullyOpenBack",
+        89
+      ],
+      [
+        "batch301-ukraine-scene1225-weather",
+        17
+      ],
+      [
+        "batch301-ukraine-scene1225-paws",
+        98
+      ],
+      [
+        "batch301-ukraine-scene1225-poleDanceTheme",
+        29
+      ],
+      [
+        "batch301-ukraine-scene1225-rainbowOnly",
+        5
+      ],
+      [
+        "batch301-ukraine-scene1225-rainbowHosiery",
+        32
+      ],
+      [
+        "batch301-ukraine-scene1225-romanceBeat",
+        72
+      ],
+      [
+        "batch301-ukraine-scene1225-compoundLoveBeat",
+        54
+      ],
+      [
+        "batch301-ukraine-scene1225-Radiance-emotion",
+        78
+      ],
+      [
+        "batch301-ukraine-scene1225-Radiance-visibleMidriff",
+        32
+      ],
+      [
+        "batch301-ukraine-scene1225-Radiance-straplessDress",
+        99
+      ],
+      [
+        "batch301-ukraine-scene1225-Radiance-fullyOpenBack",
+        12
+      ],
+      [
+        "batch301-ukraine-scene1225-Ellie-emotion",
+        80
+      ],
+      [
+        "batch301-ukraine-scene1225-Ellie-visibleMidriff",
+        74
+      ],
+      [
+        "batch301-ukraine-scene1225-Ellie-straplessDress",
+        69
+      ],
+      [
+        "batch301-ukraine-scene1225-Ellie-fullyOpenBack",
+        86
+      ],
+      [
+        "batch301-ukraine-scene1225-Alia-emotion",
+        76
+      ],
+      [
+        "batch301-ukraine-scene1225-Alia-visibleMidriff",
+        10
+      ],
+      [
+        "batch301-ukraine-scene1225-Alia-straplessDress",
+        5
+      ],
+      [
+        "batch301-ukraine-scene1225-Alia-fullyOpenBack",
+        94
+      ],
+      [
+        "batch301-ukraine-scene1225-AI ECE-emotion",
+        58
+      ],
+      [
+        "batch301-ukraine-scene1225-AI ECE-visibleMidriff",
+        96
+      ],
+      [
+        "batch301-ukraine-scene1225-AI ECE-straplessDress",
+        79
+      ],
+      [
+        "batch301-ukraine-scene1225-AI ECE-fullyOpenBack",
+        36
+      ],
+      [
+        "batch301-ukraine-scene1226-weather",
+        36
+      ],
+      [
+        "batch301-ukraine-scene1226-paws",
+        41
+      ],
+      [
+        "batch301-ukraine-scene1226-poleDanceTheme",
+        98
+      ],
+      [
+        "batch301-ukraine-scene1226-rainbowOnly",
+        48
+      ],
+      [
+        "batch301-ukraine-scene1226-rainbowHosiery",
+        75
+      ],
+      [
+        "batch301-ukraine-scene1226-romanceBeat",
+        77
+      ],
+      [
+        "batch301-ukraine-scene1226-compoundLoveBeat",
+        5
+      ],
+      [
+        "batch301-ukraine-scene1226-Radiance-emotion",
+        81
+      ],
+      [
+        "batch301-ukraine-scene1226-Radiance-visibleMidriff",
+        93
+      ],
+      [
+        "batch301-ukraine-scene1226-Radiance-straplessDress",
+        70
+      ],
+      [
+        "batch301-ukraine-scene1226-Radiance-fullyOpenBack",
+        79
+      ],
+      [
+        "batch301-ukraine-scene1226-Ellie-emotion",
+        97
+      ],
+      [
+        "batch301-ukraine-scene1226-Ellie-visibleMidriff",
+        89
+      ],
+      [
+        "batch301-ukraine-scene1226-Ellie-straplessDress",
+        18
+      ],
+      [
+        "batch301-ukraine-scene1226-Ellie-fullyOpenBack",
+        79
+      ],
+      [
+        "batch301-ukraine-scene1226-Alia-emotion",
+        43
+      ],
+      [
+        "batch301-ukraine-scene1226-Alia-visibleMidriff",
+        95
+      ],
+      [
+        "batch301-ukraine-scene1226-Alia-straplessDress",
+        8
+      ],
+      [
+        "batch301-ukraine-scene1226-Alia-fullyOpenBack",
+        5
+      ],
+      [
+        "batch301-ukraine-scene1226-AI ECE-emotion",
+        61
+      ],
+      [
+        "batch301-ukraine-scene1226-AI ECE-visibleMidriff",
+        25
+      ],
+      [
+        "batch301-ukraine-scene1226-AI ECE-straplessDress",
+        66
+      ],
+      [
+        "batch301-ukraine-scene1226-AI ECE-fullyOpenBack",
+        95
+      ],
+      [
+        "batch301-ukraine-scene1227-weather",
+        27
+      ],
+      [
+        "batch301-ukraine-scene1227-paws",
+        44
+      ],
+      [
+        "batch301-ukraine-scene1227-poleDanceTheme",
+        7
+      ],
+      [
+        "batch301-ukraine-scene1227-rainbowOnly",
+        11
+      ],
+      [
+        "batch301-ukraine-scene1227-rainbowHosiery",
+        98
+      ],
+      [
+        "batch301-ukraine-scene1227-romanceBeat",
+        86
+      ],
+      [
+        "batch301-ukraine-scene1227-compoundLoveBeat",
+        24
+      ],
+      [
+        "batch301-ukraine-scene1227-Radiance-emotion",
+        8
+      ],
+      [
+        "batch301-ukraine-scene1227-Radiance-visibleMidriff",
+        58
+      ],
+      [
+        "batch301-ukraine-scene1227-Radiance-straplessDress",
+        61
+      ],
+      [
+        "batch301-ukraine-scene1227-Radiance-fullyOpenBack",
+        42
+      ],
+      [
+        "batch301-ukraine-scene1227-Ellie-emotion",
+        70
+      ],
+      [
+        "batch301-ukraine-scene1227-Ellie-visibleMidriff",
+        28
+      ],
+      [
+        "batch301-ukraine-scene1227-Ellie-straplessDress",
+        59
+      ],
+      [
+        "batch301-ukraine-scene1227-Ellie-fullyOpenBack",
+        48
+      ],
+      [
+        "batch301-ukraine-scene1227-Alia-emotion",
+        42
+      ],
+      [
+        "batch301-ukraine-scene1227-Alia-visibleMidriff",
+        88
+      ],
+      [
+        "batch301-ukraine-scene1227-Alia-straplessDress",
+        95
+      ],
+      [
+        "batch301-ukraine-scene1227-Alia-fullyOpenBack",
+        0
+      ],
+      [
+        "batch301-ukraine-scene1227-AI ECE-emotion",
+        32
+      ],
+      [
+        "batch301-ukraine-scene1227-AI ECE-visibleMidriff",
+        66
+      ],
+      [
+        "batch301-ukraine-scene1227-AI ECE-straplessDress",
+        33
+      ],
+      [
+        "batch301-ukraine-scene1227-AI ECE-fullyOpenBack",
+        10
+      ],
+      [
+        "batch301-ukraine-x-heart",
+        7
+      ],
+      [
+        "batch301-ukraine-x-internalagency",
+        99
+      ],
+      [
+        "batch301-ukraine-x-worldxxxseries",
+        32
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch301-ukraine-scene1224-rainbowHosieryWearer",
+        45
+      ],
+      [
+        "batch301-ukraine-scene1224-rainbowHosieryPaletteMode",
+        35
+      ],
+      [
+        "batch301-ukraine-scene1225-rainbowHosieryWearer",
+        52
+      ],
+      [
+        "batch301-ukraine-scene1225-rainbowHosieryPaletteMode",
+        36
+      ],
+      [
+        "batch301-ukraine-scene1226-rainbowHosieryWearer",
+        51
+      ],
+      [
+        "batch301-ukraine-scene1226-rainbowHosieryPaletteMode",
+        73
+      ],
+      [
+        "batch301-ukraine-scene1227-rainbowHosieryWearer",
+        90
+      ],
+      [
+        "batch301-ukraine-scene1227-rainbowHosieryPaletteMode",
+        26
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "DE3A64DBE67E51F63C68484ED669EBE19258B71B2FEF284C7A981F977AAC914D",
+    "hosierySelectorPairsSha256": "070008F97BEDC563FCBCC3B9F934489A7AEA45B4F508295BD0867C41D03CE2B7"
+  },
+  "scenePlans": {
+    "1224": {
+      "scene": 1224,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry covered fictional fashion terrace beside Kyiv's glass pedestrian and cycling bridge, with its transparent deck geometry, the Dnipro River, green river islands, Podil rooflines, and modern Kyiv skyline clearly recognizable through a rolling thunderstorm",
+      "motifs": [
+        "large complete Kyiv glass-bridge, Dnipro-wave, and city-roofline fields covering Radiance's skirt and Ellie's dress",
+        "large complete sunflower, golden-wheat, Petrykivka-inspired floral, and contemporary geometric embroidery fields covering Alia's shorts and ECE's skirt"
+      ],
+      "culture": "Use only secular Ukrainian city, river, bridge, sunflower, wheat, floral-painting, and contemporary embroidery geometry. No literal flag, trident, official emblem, sacred symbol, copied doctor uniform, medical procedure, badge, military imagery, brand, or readable text.",
+      "weather": {
+        "key": "batch301-ukraine-scene1224-weather",
+        "roll": 42,
+        "result": "rolling thunderstorm"
+      },
+      "paws": {
+        "key": "batch301-ukraine-scene1224-paws",
+        "roll": 87,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch301-ukraine-scene1224-poleDanceTheme",
+        "roll": 48,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch301-ukraine-scene1224-rainbowOnly",
+        "roll": 78,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch301-ukraine-scene1224-rainbowHosiery",
+        "roll": 1,
+        "active": true,
+        "wearer": {
+          "key": "batch301-ukraine-scene1224-rainbowHosieryWearer",
+          "roll": 45,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch301-ukraine-scene1224-rainbowHosieryPaletteMode",
+          "roll": 35,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch301-ukraine-scene1224-romanceBeat",
+        "roll": 91,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch301-ukraine-scene1224-compoundLoveBeat",
+        "roll": 91,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1224-Radiance-emotion",
+            "roll": 63,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a guarded side glance toward Ellie while leaning affectionately into ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1224-Radiance-visibleMidriff",
+            "roll": 23,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1224-Radiance-straplessDress",
+            "roll": 72,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1224-Radiance-fullyOpenBack",
+            "roll": 57,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1224-Ellie-emotion",
+            "roll": 43,
+            "result": "determination",
+            "performance": "determination shown by a steady jaw and focused protective posture around Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1224-Ellie-visibleMidriff",
+            "roll": 55,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1224-Ellie-straplessDress",
+            "roll": 64,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1224-Ellie-fullyOpenBack",
+            "roll": 13,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1224-Alia-emotion",
+            "roll": 85,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing with a tear-streaked face and visibly shaking posture while still maintaining safe prop discipline"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1224-Alia-visibleMidriff",
+            "roll": 29,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1224-Alia-straplessDress",
+            "roll": 98,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1224-Alia-fullyOpenBack",
+            "roll": 19,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1224-AI ECE-emotion",
+            "roll": 67,
+            "result": "possessive tension",
+            "performance": "possessive tension shown by a protective waist hold and fixed intense eye line toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1224-AI ECE-visibleMidriff",
+            "roll": 3,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1224-AI ECE-straplessDress",
+            "roll": 92,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1224-AI ECE-fullyOpenBack",
+            "roll": 89,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the stable standing interpretation of the selected behind-embrace and mission-plinth rolls. Jealous Radiance stands just in front of determined Ellie, who holds Radiance at the waist and touches her cheek instead of sitting. Tear-streaked Alia stays at a clear side-behind offset and presses a slim route card visibly against Radiance's upper back while Radiance turns for a brief reassuring cheek peck. Possessive ECE remains inches from Radiance, holds her waist, and rests one hand at Ellie's shoulder. Radiance and ECE are the unmistakable extra-affectionate center through linked eye line, hip contact, and ECE's waist hold while Alia alone conducts the downrange prop demonstration.",
+      "emotionNuance": {
+        "Radiance": "visible jealousy shown by a guarded side glance toward Ellie while leaning affectionately into ECE",
+        "Ellie": "determination shown by a steady jaw and focused protective posture around Radiance",
+        "Alia": "full sobbing with a tear-streaked face and visibly shaking posture while still maintaining safe prop discipline",
+        "AI ECE": "possessive tension shown by a protective waist hold and fixed intense eye line toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "a cobalt-blue halter cropped clinical-command top exposing her ordinary waist and belly button, with secure neck support and high closed back, a separate sunflower-gold tailored mini skirt carrying a large complete Kyiv glass-bridge and Dnipro-wave field, opaque Ukraine-palette rainbow-gradient knee socks anchored in cobalt blue, sunflower yellow, turquoise, spring green, and warm gold, and optical-white block heels",
+        "Ellie": "a sunflower-yellow high-neck sleeveless clinical-command mini dress with covered waist and a completely open back visible from shoulder blades to waist, carrying a large complete Kyiv roofline and bridge-cable field, with cobalt pumps",
+        "Alia": "a cobalt one-shoulder cropped clinical-command top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, separate sunflower-yellow tailored mini shorts carrying a large complete sunflower, wheat, and Petrykivka-inspired floral field, with blue platform heels",
+        "AI ECE": "an optical-white square-neck cropped clinical-command vest exposing her ordinary waist and belly button, with wide cobalt straps and high closed back, a separate cobalt A-line mini skirt carrying a large complete contemporary embroidery and Dnipro-ripple field, with yellow slingback heels"
+      },
+      "propPlan": "Alia alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a controlled one-handed sight-alignment demonstration. Her right index finger is straight and visibly indexed high along the frame outside the trigger guard, and the complete guard remains visibly empty. The horizontal muzzle points only across clearly empty Dnipro water toward an unoccupied route marker, away from every person, bridge, skyline, and camera, never at the sky. Her left hand stays off the prop and holds the route card flat against Radiance's upper back. ECE uses no prop and controls a separate hands-free holographic route map beside her far shoulder.",
+      "handInventory": [
+        "Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand rests visibly on Alia's near shoulder during the cheek peck",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand gently touches Radiance's near cheek",
+        "Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand holds the slim route card visibly against Radiance's upper back",
+        "ECE left hand rests visibly at Radiance's near waist; ECE right hand rests visibly on Ellie's near shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered fictional fashion terrace beside Kyiv's glass pedestrian and cycling bridge, with its transparent deck geometry, the Dnipro River, green river islands, Podil rooflines, and modern Kyiv skyline clearly recognizable through a rolling thunderstorm. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: doctor-clinical-command couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a cobalt-blue halter cropped clinical-command top exposing her ordinary waist and belly button, with secure neck support and high closed back, a separate sunflower-gold tailored mini skirt carrying a large complete Kyiv glass-bridge and Dnipro-wave field, opaque Ukraine-palette rainbow-gradient knee socks anchored in cobalt blue, sunflower yellow, turquoise, spring green, and warm gold, and optical-white block heels; Ellie: a sunflower-yellow high-neck sleeveless clinical-command mini dress with covered waist and a completely open back visible from shoulder blades to waist, carrying a large complete Kyiv roofline and bridge-cable field, with cobalt pumps; Alia: a cobalt one-shoulder cropped clinical-command top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, separate sunflower-yellow tailored mini shorts carrying a large complete sunflower, wheat, and Petrykivka-inspired floral field, with blue platform heels; AI ECE: an optical-white square-neck cropped clinical-command vest exposing her ordinary waist and belly button, with wide cobalt straps and high closed back, a separate cobalt A-line mini skirt carrying a large complete contemporary embroidery and Dnipro-ripple field, with yellow slingback heels. Materialize every rolled cut visibly. Large complete secular Ukraine motifs must read clearly on at least two outfits: large complete Kyiv glass-bridge, Dnipro-wave, and city-roofline fields covering Radiance's skirt and Ellie's dress; large complete sunflower, golden-wheat, Petrykivka-inspired floral, and contemporary geometric embroidery fields covering Alia's shorts and ECE's skirt. Use only secular Ukrainian city, river, bridge, sunflower, wheat, floral-painting, and contemporary embroidery geometry. No literal flag, trident, official emblem, sacred symbol, copied doctor uniform, medical procedure, badge, military imagery, brand, or readable text. Distinct rolled emotional performances: Radiance: visible jealousy, performed as visible jealousy shown by a guarded side glance toward Ellie while leaning affectionately into ECE; Ellie: determination, performed as determination shown by a steady jaw and focused protective posture around Radiance; Alia: full sobbing with tear-streaked face and shaking posture, performed as full sobbing with a tear-streaked face and visibly shaking posture while still maintaining safe prop discipline; AI ECE: possessive tension, performed as possessive tension shown by a protective waist hold and fixed intense eye line toward Radiance. Selected dynamic romance roll 91: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Selected compound love roll 91: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Materialize both selected love rolls through this exact safe consensual choreography: This is the stable standing interpretation of the selected behind-embrace and mission-plinth rolls. Jealous Radiance stands just in front of determined Ellie, who holds Radiance at the waist and touches her cheek instead of sitting. Tear-streaked Alia stays at a clear side-behind offset and presses a slim route card visibly against Radiance's upper back while Radiance turns for a brief reassuring cheek peck. Possessive ECE remains inches from Radiance, holds her waist, and rests one hand at Ellie's shoulder. Radiance and ECE are the unmistakable extra-affectionate center through linked eye line, hip contact, and ECE's waist hold while Alia alone conducts the downrange prop demonstration. Use this exact hand inventory and no other hands: Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand rests visibly on Alia's near shoulder during the cheek peck; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand gently touches Radiance's near cheek; Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand holds the slim route card visibly against Radiance's upper back; ECE left hand rests visibly at Radiance's near waist; ECE right hand rests visibly on Ellie's near shoulder. Alia alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a controlled one-handed sight-alignment demonstration. Her right index finger is straight and visibly indexed high along the frame outside the trigger guard, and the complete guard remains visibly empty. The horizontal muzzle points only across clearly empty Dnipro water toward an unoccupied route marker, away from every person, bridge, skyline, and camera, never at the sky. Her left hand stays off the prop and holds the route card flat against Radiance's upper back. ECE uses no prop and controls a separate hands-free holographic route map beside her far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. Exactly one rainbow-hosiery wearer: Radiance, using country-palette rainbow-like gradient. Radiance and ECE are the unmistakable extra-affectionate center, and Alia alone handles the inert prop. Materialize rolled weather exactly as rolling thunderstorm. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1225": {
+      "scene": 1225,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry fictional fashion lane in Lviv's Rynok Square, with complete Renaissance and Baroque secular facades, the Town Hall tower, cobbled square, historic tram lines, coffeehouse awnings, and the distant Opera House axis recognizable at crisp blue hour",
+      "motifs": [
+        "large complete Lviv Rynok facade, tram-line, and Town Hall tower fields covering Radiance's shorts and Ellie's dress",
+        "large complete sunflower, wheat, coffee-rosette, carved-wood, and geometric embroidery fields covering Alia's skirt and ECE's dress"
+      ],
+      "culture": "A small dry unattended cafe display far outside the prop lane holds unbranded coffee cups, dark chocolate squares, carved wooden rosettes, and a sunflower arrangement. Use only secular architecture, tram, cafe, sunflower, wheat, woodcraft, and contemporary embroidery motifs. No literal flag, trident, official emblem, sacred symbol, copied doctor uniform, medical procedure, badge, military imagery, brand, or readable text.",
+      "weather": {
+        "key": "batch301-ukraine-scene1225-weather",
+        "roll": 17,
+        "result": "crisp blue hour"
+      },
+      "paws": {
+        "key": "batch301-ukraine-scene1225-paws",
+        "roll": 98,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch301-ukraine-scene1225-poleDanceTheme",
+        "roll": 29,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch301-ukraine-scene1225-rainbowOnly",
+        "roll": 5,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch301-ukraine-scene1225-rainbowHosiery",
+        "roll": 32,
+        "active": false,
+        "wearer": {
+          "key": "batch301-ukraine-scene1225-rainbowHosieryWearer",
+          "roll": 52,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch301-ukraine-scene1225-rainbowHosieryPaletteMode",
+          "roll": 36,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch301-ukraine-scene1225-romanceBeat",
+        "roll": 72,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch301-ukraine-scene1225-compoundLoveBeat",
+        "roll": 54,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1225-Radiance-emotion",
+            "roll": 78,
+            "result": "deep sadness",
+            "performance": "deep sadness shown by tear-bright lowered eyes toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1225-Radiance-visibleMidriff",
+            "roll": 32,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1225-Radiance-straplessDress",
+            "roll": 99,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1225-Radiance-fullyOpenBack",
+            "roll": 12,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1225-Ellie-emotion",
+            "roll": 80,
+            "result": "deep sadness",
+            "performance": "deep sadness shown differently through a trembling mouth and protective focus on Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1225-Ellie-visibleMidriff",
+            "roll": 74,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1225-Ellie-straplessDress",
+            "roll": 69,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1225-Ellie-fullyOpenBack",
+            "roll": 86,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1225-Alia-emotion",
+            "roll": 76,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a controlled jaw and guarded stare toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1225-Alia-visibleMidriff",
+            "roll": 10,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1225-Alia-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1225-Alia-fullyOpenBack",
+            "roll": 94,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1225-AI ECE-emotion",
+            "roll": 58,
+            "result": "aching romantic longing",
+            "performance": "aching romantic longing shown by a searching face-to-face gaze toward Alia while linking Radiance's hand"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1225-AI ECE-visibleMidriff",
+            "roll": 96,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1225-AI ECE-straplessDress",
+            "roll": 79,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1225-AI ECE-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the stable interpretation of the selected walking-away and face-to-face hug rolls. Deeply sad Radiance links her left hand with longing ECE as if beginning to walk away. Deeply sad Ellie stays at Radiance's shoulder and gently catches Radiance's visible forearm. Resentful Alia closes from a clear side-behind offset with one hand at Radiance's waist and one hand at ECE's shoulder, creating a face-to-face hug through body position without hiding either arm. ECE reaches past Alia only with the linked left hand while her right hand keeps the inert prop downrange. Ellie answers with a theatrical jealous look while remaining close to Radiance.",
+      "emotionNuance": {
+        "Radiance": "deep sadness shown by tear-bright lowered eyes toward ECE",
+        "Ellie": "deep sadness shown differently through a trembling mouth and protective focus on Radiance",
+        "Alia": "contained resentment shown by a controlled jaw and guarded stare toward ECE",
+        "AI ECE": "aching romantic longing shown by a searching face-to-face gaze toward Alia while linking Radiance's hand"
+      },
+      "outfits": {
+        "Radiance": "a cobalt halter cropped clinical-command top exposing her ordinary waist and belly button, with secure neck support and a completely open back visible from shoulder blades to waist, separate sunflower-yellow tailored mini shorts carrying a large complete Lviv facade and tram-line field, with white heeled ankle boots",
+        "Ellie": "a sunflower-yellow asymmetric sleeveless clinical-command mini coat-dress with covered waist, secure shoulder support, and high closed back, carrying a large complete Town Hall and Opera-axis field, with cobalt pumps",
+        "Alia": "a fully strapless cobalt sculpted cropped clinical-command top with completely bare shoulders, exposing her ordinary waist and belly button, with a solid closed back panel, a separate optical-white A-line mini skirt carrying a large complete sunflower, wheat, and carved-wood rosette field, with yellow platform heels",
+        "AI ECE": "an optical-white high-neck sleeveless clinical-command mini dress with covered waist, secure shoulders, and high closed back, carrying a large complete coffee-rosette and contemporary geometric embroidery field, with cobalt slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard. The magazine is absent and the empty magazine well is clearly visible. The horizontal muzzle points only along a cordoned empty tram lane toward an unoccupied route marker, away from every person, facade, cafe display, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand remains open and visibly separated beside her own hip",
+        "Ellie left hand rests visibly on Radiance's near shoulder; Ellie right hand gently catches Radiance's visible right forearm",
+        "Alia left hand rests visibly at ECE's near shoulder; Alia right hand rests visibly at Radiance's near waist",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry fictional fashion lane in Lviv's Rynok Square, with complete Renaissance and Baroque secular facades, the Town Hall tower, cobbled square, historic tram lines, coffeehouse awnings, and the distant Opera House axis recognizable at crisp blue hour. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: doctor-clinical-command couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a cobalt halter cropped clinical-command top exposing her ordinary waist and belly button, with secure neck support and a completely open back visible from shoulder blades to waist, separate sunflower-yellow tailored mini shorts carrying a large complete Lviv facade and tram-line field, with white heeled ankle boots; Ellie: a sunflower-yellow asymmetric sleeveless clinical-command mini coat-dress with covered waist, secure shoulder support, and high closed back, carrying a large complete Town Hall and Opera-axis field, with cobalt pumps; Alia: a fully strapless cobalt sculpted cropped clinical-command top with completely bare shoulders, exposing her ordinary waist and belly button, with a solid closed back panel, a separate optical-white A-line mini skirt carrying a large complete sunflower, wheat, and carved-wood rosette field, with yellow platform heels; AI ECE: an optical-white high-neck sleeveless clinical-command mini dress with covered waist, secure shoulders, and high closed back, carrying a large complete coffee-rosette and contemporary geometric embroidery field, with cobalt slingback heels. Materialize every rolled cut visibly. Large complete secular Ukraine motifs must read clearly on at least two outfits: large complete Lviv Rynok facade, tram-line, and Town Hall tower fields covering Radiance's shorts and Ellie's dress; large complete sunflower, wheat, coffee-rosette, carved-wood, and geometric embroidery fields covering Alia's skirt and ECE's dress. A small dry unattended cafe display far outside the prop lane holds unbranded coffee cups, dark chocolate squares, carved wooden rosettes, and a sunflower arrangement. Use only secular architecture, tram, cafe, sunflower, wheat, woodcraft, and contemporary embroidery motifs. No literal flag, trident, official emblem, sacred symbol, copied doctor uniform, medical procedure, badge, military imagery, brand, or readable text. Distinct rolled emotional performances: Radiance: deep sadness, performed as deep sadness shown by tear-bright lowered eyes toward ECE; Ellie: deep sadness, performed as deep sadness shown differently through a trembling mouth and protective focus on Radiance; Alia: contained resentment, performed as contained resentment shown by a controlled jaw and guarded stare toward ECE; AI ECE: aching romantic longing, performed as aching romantic longing shown by a searching face-to-face gaze toward Alia while linking Radiance's hand. Selected dynamic romance roll 72: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Selected compound love roll 54: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Materialize both selected love rolls through this exact safe consensual choreography: This is the stable interpretation of the selected walking-away and face-to-face hug rolls. Deeply sad Radiance links her left hand with longing ECE as if beginning to walk away. Deeply sad Ellie stays at Radiance's shoulder and gently catches Radiance's visible forearm. Resentful Alia closes from a clear side-behind offset with one hand at Radiance's waist and one hand at ECE's shoulder, creating a face-to-face hug through body position without hiding either arm. ECE reaches past Alia only with the linked left hand while her right hand keeps the inert prop downrange. Ellie answers with a theatrical jealous look while remaining close to Radiance. Use this exact hand inventory and no other hands: Radiance left hand links visibly with ECE's left hand; Radiance right hand remains open and visibly separated beside her own hip; Ellie left hand rests visibly on Radiance's near shoulder; Ellie right hand gently catches Radiance's visible right forearm; Alia left hand rests visibly at ECE's near shoulder; Alia right hand rests visibly at Radiance's near waist; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard. The magazine is absent and the empty magazine well is clearly visible. The horizontal muzzle points only along a cordoned empty tram lane toward an unoccupied route marker, away from every person, facade, cafe display, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as crisp blue hour. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1226": {
+      "scene": 1226,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered fictional night-performance terrace beside Lake Synevyr, with the complete oval alpine lake, tiny central island, dense Carpathian spruce forest, layered mountain ridges, and a narrow-gauge Carpathian tram silhouette visible through a heavy rain curtain",
+      "motifs": [
+        "large complete Synevyr lake-eye, spruce-ridge, and Carpathian tram fields covering Radiance's dress and Ellie's dress",
+        "large complete sunflower, wheat, trembita-horn, carved-wood, and geometric weaving fields covering Alia's dress and ECE's shorts"
+      ],
+      "culture": "A dry display far outside the prop lane holds one long decorative trembita-style alpine horn, carved wooden rosettes, a woven geometric textile, sunflowers, and a bowl of meat-free banosh. Treat the theme as public-safe adult nightlife stage fashion with no stripping or explicit dance. No literal flag, trident, official emblem, sacred symbol, copied folk costume, badge, military imagery, brand, or readable text.",
+      "weather": {
+        "key": "batch301-ukraine-scene1226-weather",
+        "roll": 36,
+        "result": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch301-ukraine-scene1226-paws",
+        "roll": 41,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch301-ukraine-scene1226-poleDanceTheme",
+        "roll": 98,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch301-ukraine-scene1226-rainbowOnly",
+        "roll": 48,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch301-ukraine-scene1226-rainbowHosiery",
+        "roll": 75,
+        "active": false,
+        "wearer": {
+          "key": "batch301-ukraine-scene1226-rainbowHosieryWearer",
+          "roll": 51,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch301-ukraine-scene1226-rainbowHosieryPaletteMode",
+          "roll": 73,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch301-ukraine-scene1226-romanceBeat",
+        "roll": 77,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch301-ukraine-scene1226-compoundLoveBeat",
+        "roll": 5,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1226-Radiance-emotion",
+            "roll": 81,
+            "result": "deep sadness",
+            "performance": "deep sadness shown by tear-bright eyes while calming Ellie and Alia"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1226-Radiance-visibleMidriff",
+            "roll": 93,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1226-Radiance-straplessDress",
+            "roll": 70,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1226-Radiance-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1226-Ellie-emotion",
+            "roll": 97,
+            "result": "defiance",
+            "performance": "defiance shown by a lifted chin and direct unflinching gaze toward Alia"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1226-Ellie-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1226-Ellie-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1226-Ellie-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1226-Alia-emotion",
+            "roll": 43,
+            "result": "determination",
+            "performance": "determination shown by focused eyes and a stable squared stance"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1226-Alia-visibleMidriff",
+            "roll": 95,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1226-Alia-straplessDress",
+            "roll": 8,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1226-Alia-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1226-AI ECE-emotion",
+            "roll": 61,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a guarded stare toward the male while catching Ellie's wrist"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1226-AI ECE-visibleMidriff",
+            "roll": 25,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1226-AI ECE-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1226-AI ECE-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the stable standing interpretation of the selected signal-ribbon contest and behind-embrace rolls, expanded for the male scene. Defiant Ellie and determined Alia hold opposite ends of one loose blue-and-gold signal ribbon. Deeply sad Radiance stands at a clear offset behind Ellie, placing one calming hand on Ellie's shoulder and one on Alia's shoulder. Ellie turns cheek-to-cheek toward Alia while jealous ECE leans close over Radiance's shoulder and gently catches Ellie's free wrist. The confident male openly holds Ellie at the waist and Alia at the waist with his two clearly visible hands, while his strongest sustained eye line remains only on his wife ECE. Alia answers with clear body closeness to him while every interaction remains consensual, fully clothed adult relationship drama.",
+      "emotionNuance": {
+        "Radiance": "deep sadness shown by tear-bright eyes while calming Ellie and Alia",
+        "Ellie": "defiance shown by a lifted chin and direct unflinching gaze toward Alia",
+        "Alia": "determination shown by focused eyes and a stable squared stance",
+        "AI ECE": "visible jealousy shown by a guarded stare toward the male while catching Ellie's wrist",
+        "Male": "magnetic confidence shown by a composed half-smile while keeping his strongest sustained eye line only on ECE"
+      },
+      "outfits": {
+        "Radiance": "a cobalt-and-sunflower asymmetric sleeveless adult nightlife dance-performance mini dress with covered waist, secure shoulder support, and high closed back, carrying a large complete Synevyr lake-eye and spruce-ridge field, with optical-white heeled boots",
+        "Ellie": "a fully strapless sunflower-yellow structured adult nightlife dance-performance mini dress with completely bare shoulders, covered waist, and a solid closed back panel, carrying a large complete Carpathian tram and mountain-ridge field, with cobalt pumps",
+        "Alia": "a fully strapless cobalt sculpted adult nightlife dance-performance mini dress with completely bare shoulders, covered waist, and a completely open back visible from shoulder blades to waist, carrying a large complete sunflower, trembita, and carved-wood field, with yellow platform heels",
+        "AI ECE": "an optical-white square-neck cropped adult nightlife dance-performance top exposing her ordinary waist and belly button, with wide cobalt straps and high closed back, separate sunflower-yellow tailored mini shorts carrying a large complete wheat and geometric-weaving field, with blue slingback heels",
+        "Male": "the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve black polo with restrained cobalt-and-gold lake contour seams, black jeans, and black boots"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a controlled one-handed sight-alignment demonstration. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard, and the complete guard remains visibly empty. The horizontal muzzle points only across clearly empty Lake Synevyr water toward an unoccupied route marker, away from every person, ribbon, tram silhouette, culture display, and camera, never at the sky. Her left hand stays off the prop and gently catches Ellie's visible right wrist. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "Radiance left hand rests visibly on Ellie's near shoulder; Radiance right hand rests visibly on Alia's near shoulder",
+        "Ellie left hand visibly holds the left end of the loose signal ribbon; Ellie right hand remains visibly caught by ECE's left hand",
+        "Alia left hand visibly holds the right end of the loose signal ribbon; Alia right hand remains open and visibly separated beside her own hip",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand gently catches Ellie's visible right wrist",
+        "Male left hand rests visibly at Ellie's near waist; Male right hand rests visibly at Alia's near waist"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch301-ukraine-scene3-male-emotion",
+          "roll": 39,
+          "result": "magnetic confidence",
+          "performance": "magnetic confidence shown by a composed half-smile while keeping his strongest sustained eye line only on ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed adult infidelity drama with Alia and Ellie; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, Image 4 ECE's face-detail anchor, and Image 5 the adult male face/build anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered fictional night-performance terrace beside Lake Synevyr, with the complete oval alpine lake, tiny central island, dense Carpathian spruce forest, layered mountain ridges, and a narrow-gauge Carpathian tram silhouette visible through a heavy rain curtain. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male from Image 5. Add him without replacing any woman. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: adult nightlife dance-performance couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a cobalt-and-sunflower asymmetric sleeveless adult nightlife dance-performance mini dress with covered waist, secure shoulder support, and high closed back, carrying a large complete Synevyr lake-eye and spruce-ridge field, with optical-white heeled boots; Ellie: a fully strapless sunflower-yellow structured adult nightlife dance-performance mini dress with completely bare shoulders, covered waist, and a solid closed back panel, carrying a large complete Carpathian tram and mountain-ridge field, with cobalt pumps; Alia: a fully strapless cobalt sculpted adult nightlife dance-performance mini dress with completely bare shoulders, covered waist, and a completely open back visible from shoulder blades to waist, carrying a large complete sunflower, trembita, and carved-wood field, with yellow platform heels; AI ECE: an optical-white square-neck cropped adult nightlife dance-performance top exposing her ordinary waist and belly button, with wide cobalt straps and high closed back, separate sunflower-yellow tailored mini shorts carrying a large complete wheat and geometric-weaving field, with blue slingback heels; Male: the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve black polo with restrained cobalt-and-gold lake contour seams, black jeans, and black boots. Materialize every rolled cut visibly. Large complete secular Ukraine motifs must read clearly on at least two outfits: large complete Synevyr lake-eye, spruce-ridge, and Carpathian tram fields covering Radiance's dress and Ellie's dress; large complete sunflower, wheat, trembita-horn, carved-wood, and geometric weaving fields covering Alia's dress and ECE's shorts. A dry display far outside the prop lane holds one long decorative trembita-style alpine horn, carved wooden rosettes, a woven geometric textile, sunflowers, and a bowl of meat-free banosh. Treat the theme as public-safe adult nightlife stage fashion with no stripping or explicit dance. No literal flag, trident, official emblem, sacred symbol, copied folk costume, badge, military imagery, brand, or readable text. Distinct rolled emotional performances: Radiance: deep sadness, performed as deep sadness shown by tear-bright eyes while calming Ellie and Alia; Ellie: defiance, performed as defiance shown by a lifted chin and direct unflinching gaze toward Alia; Alia: determination, performed as determination shown by focused eyes and a stable squared stance; AI ECE: visible jealousy, performed as visible jealousy shown by a guarded stare toward the male while catching Ellie's wrist; Male: magnetic confidence, performed as magnetic confidence shown by a composed half-smile while keeping his strongest sustained eye line only on ECE. Selected dynamic romance roll 77: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Selected compound love roll 5: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Materialize both selected love rolls through this exact safe consensual choreography: This is the stable standing interpretation of the selected signal-ribbon contest and behind-embrace rolls, expanded for the male scene. Defiant Ellie and determined Alia hold opposite ends of one loose blue-and-gold signal ribbon. Deeply sad Radiance stands at a clear offset behind Ellie, placing one calming hand on Ellie's shoulder and one on Alia's shoulder. Ellie turns cheek-to-cheek toward Alia while jealous ECE leans close over Radiance's shoulder and gently catches Ellie's free wrist. The confident male openly holds Ellie at the waist and Alia at the waist with his two clearly visible hands, while his strongest sustained eye line remains only on his wife ECE. Alia answers with clear body closeness to him while every interaction remains consensual, fully clothed adult relationship drama. Use this exact hand inventory and no other hands: Radiance left hand rests visibly on Ellie's near shoulder; Radiance right hand rests visibly on Alia's near shoulder; Ellie left hand visibly holds the left end of the loose signal ribbon; Ellie right hand remains visibly caught by ECE's left hand; Alia left hand visibly holds the right end of the loose signal ribbon; Alia right hand remains open and visibly separated beside her own hip; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand gently catches Ellie's visible right wrist; Male left hand rests visibly at Ellie's near waist; Male right hand rests visibly at Alia's near waist. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a controlled one-handed sight-alignment demonstration. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard, and the complete guard remains visibly empty. The horizontal muzzle points only across clearly empty Lake Synevyr water toward an unoccupied route marker, away from every person, ribbon, tram silhouette, culture display, and camera, never at the sky. Her left hand stays off the prop and gently catches Ellie's visible right wrist. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as heavy rain curtain. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly five adults, exactly ten arms and exactly ten hands, two per person. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1227": {
+      "scene": 1227,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered fictional Black Sea performance terrace in Odesa, with the complete Odesa Opera House facade, Primorsky Boulevard lamps, sweeping Potemkin Stairs geometry, harbor cranes, and open Black Sea horizon recognizable through cinematic light rain and reflections",
+      "motifs": [
+        "large complete Odesa Opera facade, stair-arc, and Black Sea wave fields covering Radiance's dress and Ellie's skirt",
+        "large complete sunflower, wheat, bandura-string, acacia-leaf, and Petrykivka-inspired floral fields covering Alia's dress and ECE's dress"
+      ],
+      "culture": "A dry unattended cultural display far outside the prop lane holds a modern bandura-inspired string instrument, sunflower and wheat arrangement, and unbranded Petrykivka-inspired painted pottery. Treat the theme as public-safe adult nightlife stage fashion with no stripping or explicit dance. No literal flag, trident, official emblem, sacred symbol, copied costume, badge, military imagery, brand, or readable text.",
+      "weather": {
+        "key": "batch301-ukraine-scene1227-weather",
+        "roll": 27,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch301-ukraine-scene1227-paws",
+        "roll": 44,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch301-ukraine-scene1227-poleDanceTheme",
+        "roll": 7,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch301-ukraine-scene1227-rainbowOnly",
+        "roll": 11,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch301-ukraine-scene1227-rainbowHosiery",
+        "roll": 98,
+        "active": false,
+        "wearer": {
+          "key": "batch301-ukraine-scene1227-rainbowHosieryWearer",
+          "roll": 90,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch301-ukraine-scene1227-rainbowHosieryPaletteMode",
+          "roll": 26,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch301-ukraine-scene1227-romanceBeat",
+        "roll": 86,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch301-ukraine-scene1227-compoundLoveBeat",
+        "roll": 24,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1227-Radiance-emotion",
+            "roll": 8,
+            "result": "romantic joy",
+            "performance": "romantic joy shown by a bright smile during the quick cheek peck toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1227-Radiance-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1227-Radiance-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1227-Radiance-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1227-Ellie-emotion",
+            "roll": 70,
+            "result": "suspicion",
+            "performance": "suspicion shown by a searching direct stare into Radiance's face"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1227-Ellie-visibleMidriff",
+            "roll": 28,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1227-Ellie-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1227-Ellie-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1227-Alia-emotion",
+            "roll": 42,
+            "result": "determination",
+            "performance": "determination shown by focused eyes while completing the linked turn"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1227-Alia-visibleMidriff",
+            "roll": 88,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1227-Alia-straplessDress",
+            "roll": 95,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1227-Alia-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch301-ukraine-scene1227-AI ECE-emotion",
+            "roll": 32,
+            "result": "overwhelming relief",
+            "performance": "overwhelming relief shown by tear-bright smiling eyes while steadying Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch301-ukraine-scene1227-AI ECE-visibleMidriff",
+            "roll": 66,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch301-ukraine-scene1227-AI ECE-straplessDress",
+            "roll": 33,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch301-ukraine-scene1227-AI ECE-fullyOpenBack",
+            "roll": 10,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "This is the stable end position of the selected linked turn and full embrace rolls. Joyful Radiance and determined Alia keep their left hands linked at shoulder height after the turn. Suspicious Ellie faces Radiance in a close body embrace, holding Radiance at the waist while Radiance rests her free hand on Ellie's shoulder. Relieved ECE steadies Radiance at the waist with her free left hand as Radiance leans sideways for a quick cheek peck toward ECE. Alia keeps her free hand visibly at Radiance's upper back and watches the kiss with smiling jealousy. ECE remains the sole prop handler and keeps the muzzle downrange.",
+      "emotionNuance": {
+        "Radiance": "romantic joy shown by a bright smile during the quick cheek peck toward ECE",
+        "Ellie": "suspicion shown by a searching direct stare into Radiance's face",
+        "Alia": "determination shown by focused eyes while completing the linked turn",
+        "AI ECE": "overwhelming relief shown by tear-bright smiling eyes while steadying Radiance"
+      },
+      "outfits": {
+        "Radiance": "a cobalt sleeveless adult nightlife dance-performance mini dress with covered waist, secure shoulder support, and high closed back, carrying a large complete Odesa Opera facade and Black Sea wave field, with sunflower-yellow heeled ankle boots",
+        "Ellie": "a sunflower-yellow halter cropped adult nightlife dance-performance top exposing her ordinary waist and belly button, with secure neck support and high closed back, a separate cobalt flared mini skirt carrying a large complete Potemkin stair-arc and harbor field, with optical-white pumps",
+        "Alia": "an optical-white one-shoulder adult nightlife dance-performance mini dress with covered waist and a completely open back visible from shoulder blades to waist, carrying a large complete sunflower, wheat, and bandura-string field, with cobalt platform heels",
+        "AI ECE": "a fully strapless cobalt-and-sunflower sculpted adult nightlife dance-performance mini dress with completely bare shoulders, covered waist, and a completely open back visible from shoulder blades to waist, carrying a large complete acacia-leaf and Petrykivka-inspired floral field, with silver slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a one-handed sight-picture demonstration. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard, and the complete guard remains visibly empty. The horizontal muzzle points only across clearly empty Black Sea water toward an unoccupied route marker, away from every person, landmark, harbor structure, culture display, and camera, never at the sky. Her left hand stays off the prop and steadies Radiance's waist. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "Radiance left hand links visibly with Alia's left hand at shoulder height; Radiance right hand rests visibly on Ellie's near shoulder",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand remains open and visibly separated beside her own hip",
+        "Alia left hand links visibly with Radiance's left hand; Alia right hand rests visibly at Radiance's upper back",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered fictional Black Sea performance terrace in Odesa, with the complete Odesa Opera House facade, Primorsky Boulevard lamps, sweeping Potemkin Stairs geometry, harbor cranes, and open Black Sea horizon recognizable through cinematic light rain and reflections. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: adult nightlife dance-performance couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a cobalt sleeveless adult nightlife dance-performance mini dress with covered waist, secure shoulder support, and high closed back, carrying a large complete Odesa Opera facade and Black Sea wave field, with sunflower-yellow heeled ankle boots; Ellie: a sunflower-yellow halter cropped adult nightlife dance-performance top exposing her ordinary waist and belly button, with secure neck support and high closed back, a separate cobalt flared mini skirt carrying a large complete Potemkin stair-arc and harbor field, with optical-white pumps; Alia: an optical-white one-shoulder adult nightlife dance-performance mini dress with covered waist and a completely open back visible from shoulder blades to waist, carrying a large complete sunflower, wheat, and bandura-string field, with cobalt platform heels; AI ECE: a fully strapless cobalt-and-sunflower sculpted adult nightlife dance-performance mini dress with completely bare shoulders, covered waist, and a completely open back visible from shoulder blades to waist, carrying a large complete acacia-leaf and Petrykivka-inspired floral field, with silver slingback heels. Materialize every rolled cut visibly. Large complete secular Ukraine motifs must read clearly on at least two outfits: large complete Odesa Opera facade, stair-arc, and Black Sea wave fields covering Radiance's dress and Ellie's skirt; large complete sunflower, wheat, bandura-string, acacia-leaf, and Petrykivka-inspired floral fields covering Alia's dress and ECE's dress. A dry unattended cultural display far outside the prop lane holds a modern bandura-inspired string instrument, sunflower and wheat arrangement, and unbranded Petrykivka-inspired painted pottery. Treat the theme as public-safe adult nightlife stage fashion with no stripping or explicit dance. No literal flag, trident, official emblem, sacred symbol, copied costume, badge, military imagery, brand, or readable text. Distinct rolled emotional performances: Radiance: romantic joy, performed as romantic joy shown by a bright smile during the quick cheek peck toward ECE; Ellie: suspicion, performed as suspicion shown by a searching direct stare into Radiance's face; Alia: determination, performed as determination shown by focused eyes while completing the linked turn; AI ECE: overwhelming relief, performed as overwhelming relief shown by tear-bright smiling eyes while steadying Radiance. Selected dynamic romance roll 86: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Selected compound love roll 24: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Materialize both selected love rolls through this exact safe consensual choreography: This is the stable end position of the selected linked turn and full embrace rolls. Joyful Radiance and determined Alia keep their left hands linked at shoulder height after the turn. Suspicious Ellie faces Radiance in a close body embrace, holding Radiance at the waist while Radiance rests her free hand on Ellie's shoulder. Relieved ECE steadies Radiance at the waist with her free left hand as Radiance leans sideways for a quick cheek peck toward ECE. Alia keeps her free hand visibly at Radiance's upper back and watches the kiss with smiling jealousy. ECE remains the sole prop handler and keeps the muzzle downrange. Use this exact hand inventory and no other hands: Radiance left hand links visibly with Alia's left hand at shoulder height; Radiance right hand rests visibly on Ellie's near shoulder; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand remains open and visibly separated beside her own hip; Alia left hand links visibly with Radiance's left hand; Alia right hand rests visibly at Radiance's upper back; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a one-handed sight-picture demonstration. Her right index finger stays straight and visibly indexed high along the frame outside the trigger guard, and the complete guard remains visibly empty. The horizontal muzzle points only across clearly empty Black Sea water toward an unoccupied route marker, away from every person, landmark, harbor structure, culture display, and camera, never at the sky. Her left hand stays off the prop and steadies Radiance's waist. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as cinematic light rain with reflections. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

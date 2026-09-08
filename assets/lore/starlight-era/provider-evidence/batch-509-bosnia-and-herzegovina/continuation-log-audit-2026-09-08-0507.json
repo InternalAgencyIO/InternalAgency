@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "auditedAtUtc": "2026-09-08T05:07:22.885Z",
+  "nextAuditAfterUtc": "2026-09-08T05:52:22.885Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0418.json",
+  "guardian": {
+    "id": "starlight-pipeline-guardian",
+    "state": "ACTIVE",
+    "schedule": "Existing ten-minute heartbeat unchanged",
+    "configSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+    "newAutomationCreated": false
+  },
+  "verifiedStagingHead": "d930c0462cbd531d28eee257bb20929b8e24f055",
+  "xPostsBeforeClosure": 238,
+  "newVerifiedXUrl": "https://x.com/dogramaci/status/2097189559310156192",
+  "uruguay": {
+    "closed": true,
+    "files": 13,
+    "uniqueVersions": 9,
+    "editInvocations": 4
+  },
+  "bosnia": {
+    "closed": true,
+    "initialSends": 4,
+    "hardFailureRecoveries": 2,
+    "perSceneRecoveries": {
+      "2064": 1,
+      "2066": 1
+    },
+    "generatedMediaFiles": 18,
+    "contextReferenceFiles": 6,
+    "allArchivedImages": 24,
+    "uniqueVersions": 20,
+    "editInvocations": 4,
+    "returnedPngs": 2,
+    "unattributedOutputBlockOrInterruptedInvocations": [
+      2063,
+      2065
+    ],
+    "remainingAllowances": 0
+  },
+  "findings": [
+    "All exposed Bosnia originals and both returned PNGs are archived; six provider context images are separately classified and never selected for upload.",
+    "The five-person initial 2064 source was repaired once; safer recovered 2066 remains covered and close-framed through its one edit.",
+    "One concurrent image-edit group reported an output block without scene attribution and interrupted the other result. Both allowances remain consumed, with no repeat.",
+    "First pair post is verified live after one activation. Part two remains reserved, not uploaded.",
+    "No newer writer observed. Four Meta lanes and one X tab coexist with the protected Oman exception."
+  ],
+  "boundedImprovements": [
+    "For future independent image-tool calls, use per-call try/catch and await all settled results so one failure cannot discard another result. This does not authorize repeating consumed edits.",
+    "Keep provider context references separate from generated scene counts.",
+    "Preserve exact image order using sequential ALT editor boundaries and actual public photo endpoints, not column-major composer DOM order."
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false
+}

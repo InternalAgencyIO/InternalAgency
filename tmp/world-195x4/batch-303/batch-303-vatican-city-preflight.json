@@ -1,0 +1,1271 @@
+{
+  "batch": 303,
+  "country": "Vatican City",
+  "status": "render-preflight-stored",
+  "sourceCommit": "f17fd7f3bcefc6f74a8a2d75b739572d6eef59e7",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch303-vatican-city keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextThemePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "nextQueueCountry": "Djibouti Scene 1027 recovery",
+  "researchSources": [
+    {
+      "url": "https://www.vaticanstate.va/en/state-and-government/history/vatican-city-through-time.html",
+      "usedFor": "Bernini's oval square, four-row colonnade, Belvedere courtyard, museum citadel, and Vatican architectural history"
+    },
+    {
+      "url": "https://shop.museivaticani.va/kkshop/AddToCartFromProdId.do?prodId=1558",
+      "usedFor": "Giuseppe Momo's celebrated helical staircase and monumental Vatican Museums entrance"
+    },
+    {
+      "url": "https://www.vaticanstate.va/en/news/535-capture-nature-in-the-vatican-gardens.html",
+      "usedFor": "Vatican Gardens, English Garden, fountains, forest, and Casina Pio IV"
+    },
+    {
+      "url": "https://www.museivaticani.va/content/museivaticani-mobile/en/collezioni/musei/galleria-carte-geografiche.html",
+      "usedFor": "the 120-metre Gallery of the Geographical Maps, forty cartographic representations, and long gallery perspective"
+    },
+    {
+      "url": "https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/museo-gregoriano-egizio/terrazza-del-nicchione/terrazza-del-nicchione.html",
+      "usedFor": "the Pinecone Courtyard, monumental Roman pinecone fountain, niche, and terrace geometry"
+    },
+    {
+      "url": "https://vaticanstate.va/en/services/post-and-philately/tag-manager/philately.html",
+      "usedFor": "Vatican postal history, stamps, postcards, aerograms, perforation, and cancellation design"
+    },
+    {
+      "url": "https://www.museivaticani.va/content/museivaticani/en/eventi-e-novita/iniziative/Eventi/2025/inaugurazione-allestimento-mosaici-minuti.html",
+      "usedFor": "Vatican micromosaic craft, eighteenth-century cabinets, and art-of-detail context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch303-vatican-city-male-model-scene",
+    "fullHash": 2363187223,
+    "roll": 23,
+    "selectedScenePosition": 4,
+    "selectedScene": 1235,
+    "maleEmotion": {
+      "key": "batch303-vatican-city-scene4-male-emotion",
+      "roll": 35,
+      "result": "magnetic confidence"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Vatican City's flag motif is an official sacred state emblem built from crossed keys and a papal tiara, so it is prohibited from clothing. Large researched secular architecture, museum, garden, cartography, conservation, micromosaic, and philatelic motifs replace it.",
+    "palette": "museum gold and parchment ivory expanded with travertine blush, bronze, map blue, garden green, archive red, micromosaic turquoise, and polished black",
+    "minimumCoverage": "Every scene places large complete secular Vatican City motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScenes": "St. Peter's Square uses Bernini colonnade ellipses, travertine columns, fountain ripples, Momo helix, postage perforation, maps, and micromosaic. The museum entrance uses the Momo double helix, portal arches, Pinecone scales, archive cards, maps, and philately. The gardens use English Garden leaves, fountain ellipses, pavilion arches, conservation tools, and micromosaic. The Gallery of Maps uses cartographic coastlines, compass geometry, gallery perspective, archive drawers, restoration brushes, micromosaic, and postage perforation.",
+    "prohibitions": "No literal flag, crossed keys, tiara, papal or official emblem, crest, crown, sacred symbol, cross, altar, religious artwork, clergy, Swiss Guard, copied ceremonial dress, copied service uniform, military imagery, badge, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch303-vatican-city-x-heart",
+      "roll": 52,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch303-vatican-city-x-internalagency",
+      "roll": 94,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch303-vatican-city-x-worldxxxseries",
+      "roll": 85,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1232, 1233, and 1234 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1235 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch303-vatican-city-male-model-scene",
+        23
+      ],
+      [
+        "batch303-vatican-city-scene4-male-emotion",
+        35
+      ],
+      [
+        "batch303-vatican-city-scene1232-weather",
+        58
+      ],
+      [
+        "batch303-vatican-city-scene1232-paws",
+        23
+      ],
+      [
+        "batch303-vatican-city-scene1232-poleDanceTheme",
+        12
+      ],
+      [
+        "batch303-vatican-city-scene1232-rainbowOnly",
+        18
+      ],
+      [
+        "batch303-vatican-city-scene1232-rainbowHosiery",
+        13
+      ],
+      [
+        "batch303-vatican-city-scene1232-romanceBeat",
+        43
+      ],
+      [
+        "batch303-vatican-city-scene1232-compoundLoveBeat",
+        87
+      ],
+      [
+        "batch303-vatican-city-scene1232-Radiance-emotion",
+        91
+      ],
+      [
+        "batch303-vatican-city-scene1232-Radiance-visibleMidriff",
+        27
+      ],
+      [
+        "batch303-vatican-city-scene1232-Radiance-straplessDress",
+        52
+      ],
+      [
+        "batch303-vatican-city-scene1232-Radiance-fullyOpenBack",
+        17
+      ],
+      [
+        "batch303-vatican-city-scene1232-Ellie-emotion",
+        19
+      ],
+      [
+        "batch303-vatican-city-scene1232-Ellie-visibleMidriff",
+        91
+      ],
+      [
+        "batch303-vatican-city-scene1232-Ellie-straplessDress",
+        96
+      ],
+      [
+        "batch303-vatican-city-scene1232-Ellie-fullyOpenBack",
+        61
+      ],
+      [
+        "batch303-vatican-city-scene1232-Alia-emotion",
+        73
+      ],
+      [
+        "batch303-vatican-city-scene1232-Alia-visibleMidriff",
+        85
+      ],
+      [
+        "batch303-vatican-city-scene1232-Alia-straplessDress",
+        46
+      ],
+      [
+        "batch303-vatican-city-scene1232-Alia-fullyOpenBack",
+        7
+      ],
+      [
+        "batch303-vatican-city-scene1232-AI ECE-emotion",
+        43
+      ],
+      [
+        "batch303-vatican-city-scene1232-AI ECE-visibleMidriff",
+        31
+      ],
+      [
+        "batch303-vatican-city-scene1232-AI ECE-straplessDress",
+        80
+      ],
+      [
+        "batch303-vatican-city-scene1232-AI ECE-fullyOpenBack",
+        85
+      ],
+      [
+        "batch303-vatican-city-scene1233-weather",
+        49
+      ],
+      [
+        "batch303-vatican-city-scene1233-paws",
+        2
+      ],
+      [
+        "batch303-vatican-city-scene1233-poleDanceTheme",
+        21
+      ],
+      [
+        "batch303-vatican-city-scene1233-rainbowOnly",
+        21
+      ],
+      [
+        "batch303-vatican-city-scene1233-rainbowHosiery",
+        16
+      ],
+      [
+        "batch303-vatican-city-scene1233-romanceBeat",
+        72
+      ],
+      [
+        "batch303-vatican-city-scene1233-compoundLoveBeat",
+        34
+      ],
+      [
+        "batch303-vatican-city-scene1233-Radiance-emotion",
+        18
+      ],
+      [
+        "batch303-vatican-city-scene1233-Radiance-visibleMidriff",
+        52
+      ],
+      [
+        "batch303-vatican-city-scene1233-Radiance-straplessDress",
+        3
+      ],
+      [
+        "batch303-vatican-city-scene1233-Radiance-fullyOpenBack",
+        52
+      ],
+      [
+        "batch303-vatican-city-scene1233-Ellie-emotion",
+        40
+      ],
+      [
+        "batch303-vatican-city-scene1233-Ellie-visibleMidriff",
+        66
+      ],
+      [
+        "batch303-vatican-city-scene1233-Ellie-straplessDress",
+        49
+      ],
+      [
+        "batch303-vatican-city-scene1233-Ellie-fullyOpenBack",
+        18
+      ],
+      [
+        "batch303-vatican-city-scene1233-Alia-emotion",
+        36
+      ],
+      [
+        "batch303-vatican-city-scene1233-Alia-visibleMidriff",
+        38
+      ],
+      [
+        "batch303-vatican-city-scene1233-Alia-straplessDress",
+        25
+      ],
+      [
+        "batch303-vatican-city-scene1233-Alia-fullyOpenBack",
+        22
+      ],
+      [
+        "batch303-vatican-city-scene1233-AI ECE-emotion",
+        6
+      ],
+      [
+        "batch303-vatican-city-scene1233-AI ECE-visibleMidriff",
+        56
+      ],
+      [
+        "batch303-vatican-city-scene1233-AI ECE-straplessDress",
+        87
+      ],
+      [
+        "batch303-vatican-city-scene1233-AI ECE-fullyOpenBack",
+        12
+      ],
+      [
+        "batch303-vatican-city-scene1234-weather",
+        76
+      ],
+      [
+        "batch303-vatican-city-scene1234-paws",
+        25
+      ],
+      [
+        "batch303-vatican-city-scene1234-poleDanceTheme",
+        66
+      ],
+      [
+        "batch303-vatican-city-scene1234-rainbowOnly",
+        44
+      ],
+      [
+        "batch303-vatican-city-scene1234-rainbowHosiery",
+        79
+      ],
+      [
+        "batch303-vatican-city-scene1234-romanceBeat",
+        33
+      ],
+      [
+        "batch303-vatican-city-scene1234-compoundLoveBeat",
+        69
+      ],
+      [
+        "batch303-vatican-city-scene1234-Radiance-emotion",
+        61
+      ],
+      [
+        "batch303-vatican-city-scene1234-Radiance-visibleMidriff",
+        57
+      ],
+      [
+        "batch303-vatican-city-scene1234-Radiance-straplessDress",
+        90
+      ],
+      [
+        "batch303-vatican-city-scene1234-Radiance-fullyOpenBack",
+        83
+      ],
+      [
+        "batch303-vatican-city-scene1234-Ellie-emotion",
+        45
+      ],
+      [
+        "batch303-vatican-city-scene1234-Ellie-visibleMidriff",
+        93
+      ],
+      [
+        "batch303-vatican-city-scene1234-Ellie-straplessDress",
+        2
+      ],
+      [
+        "batch303-vatican-city-scene1234-Ellie-fullyOpenBack",
+        39
+      ],
+      [
+        "batch303-vatican-city-scene1234-Alia-emotion",
+        11
+      ],
+      [
+        "batch303-vatican-city-scene1234-Alia-visibleMidriff",
+        75
+      ],
+      [
+        "batch303-vatican-city-scene1234-Alia-straplessDress",
+        60
+      ],
+      [
+        "batch303-vatican-city-scene1234-Alia-fullyOpenBack",
+        53
+      ],
+      [
+        "batch303-vatican-city-scene1234-AI ECE-emotion",
+        49
+      ],
+      [
+        "batch303-vatican-city-scene1234-AI ECE-visibleMidriff",
+        1
+      ],
+      [
+        "batch303-vatican-city-scene1234-AI ECE-straplessDress",
+        38
+      ],
+      [
+        "batch303-vatican-city-scene1234-AI ECE-fullyOpenBack",
+        23
+      ],
+      [
+        "batch303-vatican-city-scene1235-weather",
+        91
+      ],
+      [
+        "batch303-vatican-city-scene1235-paws",
+        96
+      ],
+      [
+        "batch303-vatican-city-scene1235-poleDanceTheme",
+        23
+      ],
+      [
+        "batch303-vatican-city-scene1235-rainbowOnly",
+        51
+      ],
+      [
+        "batch303-vatican-city-scene1235-rainbowHosiery",
+        90
+      ],
+      [
+        "batch303-vatican-city-scene1235-romanceBeat",
+        82
+      ],
+      [
+        "batch303-vatican-city-scene1235-compoundLoveBeat",
+        0
+      ],
+      [
+        "batch303-vatican-city-scene1235-Radiance-emotion",
+        44
+      ],
+      [
+        "batch303-vatican-city-scene1235-Radiance-visibleMidriff",
+        70
+      ],
+      [
+        "batch303-vatican-city-scene1235-Radiance-straplessDress",
+        57
+      ],
+      [
+        "batch303-vatican-city-scene1235-Radiance-fullyOpenBack",
+        98
+      ],
+      [
+        "batch303-vatican-city-scene1235-Ellie-emotion",
+        6
+      ],
+      [
+        "batch303-vatican-city-scene1235-Ellie-visibleMidriff",
+        52
+      ],
+      [
+        "batch303-vatican-city-scene1235-Ellie-straplessDress",
+        91
+      ],
+      [
+        "batch303-vatican-city-scene1235-Ellie-fullyOpenBack",
+        40
+      ],
+      [
+        "batch303-vatican-city-scene1235-Alia-emotion",
+        94
+      ],
+      [
+        "batch303-vatican-city-scene1235-Alia-visibleMidriff",
+        24
+      ],
+      [
+        "batch303-vatican-city-scene1235-Alia-straplessDress",
+        23
+      ],
+      [
+        "batch303-vatican-city-scene1235-Alia-fullyOpenBack",
+        96
+      ],
+      [
+        "batch303-vatican-city-scene1235-AI ECE-emotion",
+        36
+      ],
+      [
+        "batch303-vatican-city-scene1235-AI ECE-visibleMidriff",
+        26
+      ],
+      [
+        "batch303-vatican-city-scene1235-AI ECE-straplessDress",
+        53
+      ],
+      [
+        "batch303-vatican-city-scene1235-AI ECE-fullyOpenBack",
+        26
+      ],
+      [
+        "batch303-vatican-city-x-heart",
+        52
+      ],
+      [
+        "batch303-vatican-city-x-internalagency",
+        94
+      ],
+      [
+        "batch303-vatican-city-x-worldxxxseries",
+        85
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch303-vatican-city-scene1232-rainbowHosieryWearer",
+        1
+      ],
+      [
+        "batch303-vatican-city-scene1232-rainbowHosieryPaletteMode",
+        27
+      ],
+      [
+        "batch303-vatican-city-scene1233-rainbowHosieryWearer",
+        52
+      ],
+      [
+        "batch303-vatican-city-scene1233-rainbowHosieryPaletteMode",
+        88
+      ],
+      [
+        "batch303-vatican-city-scene1234-rainbowHosieryWearer",
+        79
+      ],
+      [
+        "batch303-vatican-city-scene1234-rainbowHosieryPaletteMode",
+        13
+      ],
+      [
+        "batch303-vatican-city-scene1235-rainbowHosieryWearer",
+        86
+      ],
+      [
+        "batch303-vatican-city-scene1235-rainbowHosieryPaletteMode",
+        66
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "09EFC93D33FF02AA0668907B04A8A40939DDB56F7DCA8C03A948E9D0F09329C4",
+    "hosierySelectorPairsSha256": "7A906CC3D962E84D89516D36592288B5A0CD514EA1E751CF7A8C27943DB72796"
+  },
+  "scenePlans": {
+    "1232": {
+      "scene": 1232,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry covered editorial platform beneath the outer edge of Bernini's oval colonnade in St. Peter's Square, with the complete four-row colonnade geometry, central obelisk silhouette, two fountain basins, travertine paving, and the distant basilica facade and cupola recognizable while all crosses and sacred details remain outside the composition",
+      "motifs": [
+        "large complete colonnade-ellipse, travertine-column, and fountain-ripple fields covering Radiance's skort and Ellie's dress",
+        "large complete Momo-stair helix, postage-perforation, micromosaic-tessera, and museum-map fields covering Alia's dress and ECE's shorts"
+      ],
+      "culture": "Use only secular Vatican architecture, museum design, philately, cartography, micromosaic craft, fountain, and travertine geometry. No literal flag, crossed keys, tiara, papal or official emblem, crest, crown, sacred symbol, cross, altar, clergy, Swiss Guard, copied ceremonial dress, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch303-vatican-city-scene1232-weather",
+        "roll": 58,
+        "result": "snow flurries"
+      },
+      "paws": {
+        "key": "batch303-vatican-city-scene1232-paws",
+        "roll": 23,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch303-vatican-city-scene1232-poleDanceTheme",
+        "roll": 12,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch303-vatican-city-scene1232-rainbowOnly",
+        "roll": 18,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch303-vatican-city-scene1232-rainbowHosiery",
+        "roll": 13,
+        "active": true,
+        "wearer": {
+          "key": "batch303-vatican-city-scene1232-rainbowHosieryWearer",
+          "roll": 1,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch303-vatican-city-scene1232-rainbowHosieryPaletteMode",
+          "roll": 27,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch303-vatican-city-scene1232-romanceBeat",
+        "roll": 43,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch303-vatican-city-scene1232-compoundLoveBeat",
+        "roll": 87,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1232-Radiance-emotion",
+            "roll": 91,
+            "result": "anger",
+            "performance": "anger shown as a fierce protective glare toward the disrupted route while remaining tender with ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1232-Radiance-visibleMidriff",
+            "roll": 27,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1232-Radiance-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1232-Radiance-fullyOpenBack",
+            "roll": 17,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1232-Ellie-emotion",
+            "roll": 19,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by a bright conspiratorial grin during the cheek touch"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1232-Ellie-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1232-Ellie-straplessDress",
+            "roll": 96,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1232-Ellie-fullyOpenBack",
+            "roll": 61,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1232-Alia-emotion",
+            "roll": 73,
+            "result": "betrayal shock",
+            "performance": "betrayal shock shown by widened tear-bright eyes while maintaining the consensual protective embrace"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1232-Alia-visibleMidriff",
+            "roll": 85,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1232-Alia-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1232-Alia-fullyOpenBack",
+            "roll": 7,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1232-AI ECE-emotion",
+            "roll": 43,
+            "result": "determination",
+            "performance": "determination shown by a steady jaw and reassuring eye contact with Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1232-AI ECE-visibleMidriff",
+            "roll": 31,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1232-AI ECE-straplessDress",
+            "roll": 80,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1232-AI ECE-fullyOpenBack",
+            "roll": 85,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "PAWS is safely cradled at the far left by Ellie. Angry but protective Radiance and determined ECE form the unmistakable affectionate center, linking hands and holding each other at the waist while Radiance sends ECE the selected blown kiss. Playful Ellie touches ECE's cheek with her free hand. Shocked Alia stands behind Radiance at a clear offset, pressing the route card gently to Radiance's upper back in a one-arm embrace while her other hand alone controls the inert prop. The beat combines the selected behind embrace, cheek touch, shoulder-close embrace, and kiss without jealousy becoming hostility.",
+      "composition": "Place the adults left to right as Ellie holding PAWS, ECE, Radiance, and Alia. Angle Radiance and Alia three-quarters away with hair moved clear so both rolled complete open backs and complete faces are visible. Keep Alia's prop arm isolated at the far right against an empty fountain-water lane and leave visible background gaps between all lower bodies.",
+      "emotionNuance": {
+        "Radiance": "anger shown as a fierce protective glare toward the disrupted route while remaining tender with ECE",
+        "Ellie": "playful mischief shown by a bright conspiratorial grin during the cheek touch",
+        "Alia": "betrayal shock shown by widened tear-bright eyes while maintaining the consensual protective embrace",
+        "AI ECE": "determination shown by a steady jaw and reassuring eye contact with Radiance"
+      },
+      "outfits": {
+        "Radiance": "a museum-gold asymmetric wide-strap cropped runway top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate parchment-ivory architectural skort carrying a large complete colonnade ellipse and fountain-ripple field, opaque knee socks in a harmonious Vatican-palette rainbow-like gradient of museum gold, parchment ivory, travertine blush, bronze, garden green, and map blue, and bronze heels",
+        "Ellie": "a cap-sleeve map-blue structured column mini dress with covered waist and high closed back, carrying a large complete travertine-column and micromosaic-tessera field, with ivory slingback heels",
+        "Alia": "a bronze halter cape-panel mini dress with covered waist and a completely open back visible from shoulder blades to waist, carrying a large complete Momo-stair helix and postage-perforation field, with museum-gold platform heels",
+        "AI ECE": "a parchment-ivory square-neck cropped vest exposing her ordinary waist and belly button, with wide secure straps and high closed back, separate map-green lantern mini shorts carrying a large complete museum-map and fountain-arc field, with map-blue pumps"
+      },
+      "propPlan": "Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for a controlled route sight-alignment demonstration. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only right across clearly empty fountain water toward an unoccupied route marker, away from every person, kitten, colonnade, obelisk, building, and camera, never at the sky. Her left hand and route card remain off the prop. ECE remains route strategist through a separate hands-free holographic map beside her far shoulder.",
+      "handInventory": [
+        "Ellie right hand supports PAWS's hindquarters; Ellie left hand gently touches ECE's near cheek",
+        "ECE left hand rests visibly at Radiance's near waist; ECE right hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with ECE's right hand; Radiance right open hand stays visibly near her own lips in the selected blown-kiss gesture toward ECE",
+        "Alia left hand presses the route card gently and visibly against Radiance's upper back during the behind embrace; Alia right hand alone holds the inert prop with index finger straight outside the empty guard"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered editorial platform beneath the outer edge of Bernini's oval colonnade in St. Peter's Square, with the complete four-row colonnade geometry, central obelisk silhouette, two fountain basins, travertine paving, and the distant basilica facade and cupola recognizable while all crosses and sacred details remain outside the composition. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: Paris runway model couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a museum-gold asymmetric wide-strap cropped runway top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate parchment-ivory architectural skort carrying a large complete colonnade ellipse and fountain-ripple field, opaque knee socks in a harmonious Vatican-palette rainbow-like gradient of museum gold, parchment ivory, travertine blush, bronze, garden green, and map blue, and bronze heels; Ellie: a cap-sleeve map-blue structured column mini dress with covered waist and high closed back, carrying a large complete travertine-column and micromosaic-tessera field, with ivory slingback heels; Alia: a bronze halter cape-panel mini dress with covered waist and a completely open back visible from shoulder blades to waist, carrying a large complete Momo-stair helix and postage-perforation field, with museum-gold platform heels; AI ECE: a parchment-ivory square-neck cropped vest exposing her ordinary waist and belly button, with wide secure straps and high closed back, separate map-green lantern mini shorts carrying a large complete museum-map and fountain-arc field, with map-blue pumps. Materialize every rolled waist, belly button, strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Vatican City motifs must read clearly on at least two outfits: large complete colonnade-ellipse, travertine-column, and fountain-ripple fields covering Radiance's skort and Ellie's dress; large complete Momo-stair helix, postage-perforation, micromosaic-tessera, and museum-map fields covering Alia's dress and ECE's shorts. Use only secular Vatican architecture, museum design, philately, cartography, micromosaic craft, fountain, and travertine geometry. No literal flag, crossed keys, tiara, papal or official emblem, crest, crown, sacred symbol, cross, altar, clergy, Swiss Guard, copied ceremonial dress, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: anger, performed as anger shown as a fierce protective glare toward the disrupted route while remaining tender with ECE; Ellie: playful mischief, performed as playful mischief shown by a bright conspiratorial grin during the cheek touch; Alia: betrayal shock, performed as betrayal shock shown by widened tear-bright eyes while maintaining the consensual protective embrace; AI ECE: determination, performed as determination shown by a steady jaw and reassuring eye contact with Radiance. Selected dynamic romance roll 43: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Selected compound love roll 87: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance. Materialize both selected rolls through this exact safe consensual choreography: PAWS is safely cradled at the far left by Ellie. Angry but protective Radiance and determined ECE form the unmistakable affectionate center, linking hands and holding each other at the waist while Radiance sends ECE the selected blown kiss. Playful Ellie touches ECE's cheek with her free hand. Shocked Alia stands behind Radiance at a clear offset, pressing the route card gently to Radiance's upper back in a one-arm embrace while her other hand alone controls the inert prop. The beat combines the selected behind embrace, cheek touch, shoulder-close embrace, and kiss without jealousy becoming hostility. Place the adults left to right as Ellie holding PAWS, ECE, Radiance, and Alia. Angle Radiance and Alia three-quarters away with hair moved clear so both rolled complete open backs and complete faces are visible. Keep Alia's prop arm isolated at the far right against an empty fountain-water lane and leave visible background gaps between all lower bodies. Use this exact hand inventory and no other hands: Ellie right hand supports PAWS's hindquarters; Ellie left hand gently touches ECE's near cheek; ECE left hand rests visibly at Radiance's near waist; ECE right hand links visibly with Radiance's left hand; Radiance left hand links visibly with ECE's right hand; Radiance right open hand stays visibly near her own lips in the selected blown-kiss gesture toward ECE; Alia left hand presses the route card gently and visibly against Radiance's upper back during the behind embrace; Alia right hand alone holds the inert prop with index finger straight outside the empty guard. Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for a controlled route sight-alignment demonstration. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only right across clearly empty fountain water toward an unoccupied route marker, away from every person, kitten, colonnade, obelisk, building, and camera, never at the sky. Her left hand and route card remain off the prop. ECE remains route strategist through a separate hands-free holographic map beside her far shoulder. PAWS is active as one tiny collarless golden kitten securely cradled in Ellie's right forearm at the far left. Ellie's right hand supports the kitten's hindquarters while PAWS gently paws at one loose route ribbon, adding a harmless affectionate joke. The kitten remains far from the prop, fountain edge, and unsafe footing. No pole. Do not convert the full wardrobe to rainbow-only styling. Exactly one rainbow-hosiery wearer: Radiance, using country-palette rainbow-like gradient. Radiance and ECE are the unmistakable extra-affectionate center, and Alia alone handles the inert prop. Materialize rolled weather exactly as snow flurries. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine except the explicitly absent-magazine demonstration, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, crossed keys, tiara, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1233": {
+      "scene": 1233,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry protected museum landing beside Giuseppe Momo's famous double-ramp helical staircase at the Vatican Museums entrance, with the complete sweeping spiral, bronze balustrade, central void, monumental portal geometry, and distant storm-lit glazing clearly recognizable",
+      "motifs": [
+        "large complete double-helix staircase, bronze-balustrade, and portal-arch fields covering Radiance's dress and Ellie's dress",
+        "large complete Pinecone-scale, micromosaic-tessera, map-grid, and postage-perforation fields covering Alia's skirt and ECE's dress"
+      ],
+      "culture": "Use only secular museum architecture, Momo helix, Pinecone scale, micromosaic, cartography, archive, and philatelic geometry. No literal flag, crossed keys, tiara, official emblem, sacred symbol, cross, religious artwork, clergy, Swiss Guard, copied ceremonial dress, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch303-vatican-city-scene1233-weather",
+        "roll": 49,
+        "result": "active lightning storm with distant bolts"
+      },
+      "paws": {
+        "key": "batch303-vatican-city-scene1233-paws",
+        "roll": 2,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch303-vatican-city-scene1233-poleDanceTheme",
+        "roll": 21,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch303-vatican-city-scene1233-rainbowOnly",
+        "roll": 21,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch303-vatican-city-scene1233-rainbowHosiery",
+        "roll": 16,
+        "active": true,
+        "wearer": {
+          "key": "batch303-vatican-city-scene1233-rainbowHosieryWearer",
+          "roll": 52,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch303-vatican-city-scene1233-rainbowHosieryPaletteMode",
+          "roll": 88,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch303-vatican-city-scene1233-romanceBeat",
+        "roll": 72,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch303-vatican-city-scene1233-compoundLoveBeat",
+        "roll": 34,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1233-Radiance-emotion",
+            "roll": 18,
+            "result": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness shown by open radiant laughter directed toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1233-Radiance-visibleMidriff",
+            "roll": 52,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1233-Radiance-straplessDress",
+            "roll": 3,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1233-Radiance-fullyOpenBack",
+            "roll": 52,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1233-Ellie-emotion",
+            "roll": 40,
+            "result": "determination",
+            "performance": "determination shown by a steady jaw while safely catching Radiance's forearm"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1233-Ellie-visibleMidriff",
+            "roll": 66,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1233-Ellie-straplessDress",
+            "roll": 49,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1233-Ellie-fullyOpenBack",
+            "roll": 18,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1233-Alia-emotion",
+            "roll": 36,
+            "result": "magnetic confidence",
+            "performance": "magnetic confidence shown by poised direct focus along the empty route lane"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1233-Alia-visibleMidriff",
+            "roll": 38,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1233-Alia-straplessDress",
+            "roll": 25,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1233-Alia-fullyOpenBack",
+            "roll": 22,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1233-AI ECE-emotion",
+            "roll": 6,
+            "result": "tender affection",
+            "performance": "tender affection shown by a soft protective smile and sustained eye contact with Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1233-AI ECE-visibleMidriff",
+            "roll": 56,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1233-AI ECE-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1233-AI ECE-fullyOpenBack",
+            "roll": 12,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Confident Alia closes behind Radiance with a protective waist hold while her other hand alone controls the inert prop at the outer edge. Laughing Radiance begins the selected walking-away turn while linking hands with tender ECE and sending ECE the selected playful blown kiss. ECE holds Radiance at the waist, making them the unmistakable extra-affectionate center. Determined Ellie catches Radiance gently at the visible forearm while steadying PAWS on her shoulder, completing the turning embrace chain without obstructing any limb.",
+      "composition": "Place Alia at the far left with the prop arm isolated against an empty museum side passage, then Radiance and ECE as the adjacent center pair, with Ellie and PAWS offset at the far right. Angle Ellie, Alia, and ECE three-quarters away with hair moved clear so all three rolled complete open backs and complete faces are visible. Keep a clean silhouette gap around every elbow and lower body.",
+      "emotionNuance": {
+        "Radiance": "extreme happiness shown by open radiant laughter directed toward ECE",
+        "Ellie": "determination shown by a steady jaw while safely catching Radiance's forearm",
+        "Alia": "magnetic confidence shown by poised direct focus along the empty route lane",
+        "AI ECE": "tender affection shown by a soft protective smile and sustained eye contact with Radiance"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless museum-gold sculpted tulip mini dress with completely bare shoulders, covered waist, and solid closed back, carrying a large complete Momo double-helix and bronze-balustrade field, with map-blue heels",
+        "Ellie": "a parchment-ivory one-shoulder draped mini dress with covered waist and a completely open back visible from shoulder blades to waist, carrying a large complete monumental portal and archive-card field, with bronze pumps",
+        "Alia": "a fully strapless map-green sculpted cropped top with completely bare shoulders, exposing her ordinary waist and belly button and a completely open back visible from shoulder blades to waist, a separate museum-gold pleated mini skirt carrying a large complete Pinecone-scale and micromosaic-tessera field, with parchment platform heels",
+        "AI ECE": "a map-blue asymmetric long-sleeve mini coat-dress with covered waist, one secure shoulder and a completely open back visible from shoulder blades to waist, carrying a large complete map-grid and postage-perforation field, opaque knee socks in an original red-orange-yellow-green-blue-indigo-violet rainbow gradient unrelated to the Vatican palette, and bronze slingback heels"
+      },
+      "propPlan": "Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. The magazine is absent and the empty magazine well is clearly visible. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only left along a clearly empty museum side passage toward an unoccupied route marker, away from every person, kitten, staircase, portal, display, and camera, never at the sky. ECE remains route strategist through a separate hands-free holographic map.",
+      "handInventory": [
+        "Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand rests visibly at Radiance's near waist from behind",
+        "Radiance left hand links visibly with ECE's left hand; Radiance right open hand stays visibly near her own lips in the selected blown-kiss gesture toward ECE",
+        "ECE left hand links visibly with Radiance's left hand; ECE right hand rests visibly at Radiance's near waist",
+        "Ellie left hand catches Radiance's visible right forearm gently below the elbow; Ellie right hand steadies PAWS on her far shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry protected museum landing beside Giuseppe Momo's famous double-ramp helical staircase at the Vatican Museums entrance, with the complete sweeping spiral, bronze balustrade, central void, monumental portal geometry, and distant storm-lit glazing clearly recognizable. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: Paris runway model couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a fully strapless museum-gold sculpted tulip mini dress with completely bare shoulders, covered waist, and solid closed back, carrying a large complete Momo double-helix and bronze-balustrade field, with map-blue heels; Ellie: a parchment-ivory one-shoulder draped mini dress with covered waist and a completely open back visible from shoulder blades to waist, carrying a large complete monumental portal and archive-card field, with bronze pumps; Alia: a fully strapless map-green sculpted cropped top with completely bare shoulders, exposing her ordinary waist and belly button and a completely open back visible from shoulder blades to waist, a separate museum-gold pleated mini skirt carrying a large complete Pinecone-scale and micromosaic-tessera field, with parchment platform heels; AI ECE: a map-blue asymmetric long-sleeve mini coat-dress with covered waist, one secure shoulder and a completely open back visible from shoulder blades to waist, carrying a large complete map-grid and postage-perforation field, opaque knee socks in an original red-orange-yellow-green-blue-indigo-violet rainbow gradient unrelated to the Vatican palette, and bronze slingback heels. Materialize every rolled waist, belly button, strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Vatican City motifs must read clearly on at least two outfits: large complete double-helix staircase, bronze-balustrade, and portal-arch fields covering Radiance's dress and Ellie's dress; large complete Pinecone-scale, micromosaic-tessera, map-grid, and postage-perforation fields covering Alia's skirt and ECE's dress. Use only secular museum architecture, Momo helix, Pinecone scale, micromosaic, cartography, archive, and philatelic geometry. No literal flag, crossed keys, tiara, official emblem, sacred symbol, cross, religious artwork, clergy, Swiss Guard, copied ceremonial dress, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: extreme happiness, radiant laughing delight, performed as extreme happiness shown by open radiant laughter directed toward ECE; Ellie: determination, performed as determination shown by a steady jaw while safely catching Radiance's forearm; Alia: magnetic confidence, performed as magnetic confidence shown by poised direct focus along the empty route lane; AI ECE: tender affection, performed as tender affection shown by a soft protective smile and sustained eye contact with Radiance. Selected dynamic romance roll 72: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Selected compound love roll 34: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Materialize both selected rolls through this exact safe consensual choreography: Confident Alia closes behind Radiance with a protective waist hold while her other hand alone controls the inert prop at the outer edge. Laughing Radiance begins the selected walking-away turn while linking hands with tender ECE and sending ECE the selected playful blown kiss. ECE holds Radiance at the waist, making them the unmistakable extra-affectionate center. Determined Ellie catches Radiance gently at the visible forearm while steadying PAWS on her shoulder, completing the turning embrace chain without obstructing any limb. Place Alia at the far left with the prop arm isolated against an empty museum side passage, then Radiance and ECE as the adjacent center pair, with Ellie and PAWS offset at the far right. Angle Ellie, Alia, and ECE three-quarters away with hair moved clear so all three rolled complete open backs and complete faces are visible. Keep a clean silhouette gap around every elbow and lower body. Use this exact hand inventory and no other hands: Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand rests visibly at Radiance's near waist from behind; Radiance left hand links visibly with ECE's left hand; Radiance right open hand stays visibly near her own lips in the selected blown-kiss gesture toward ECE; ECE left hand links visibly with Radiance's left hand; ECE right hand rests visibly at Radiance's near waist; Ellie left hand catches Radiance's visible right forearm gently below the elbow; Ellie right hand steadies PAWS on her far shoulder. Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. The magazine is absent and the empty magazine well is clearly visible. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only left along a clearly empty museum side passage toward an unoccupied route marker, away from every person, kitten, staircase, portal, display, and camera, never at the sky. ECE remains route strategist through a separate hands-free holographic map. PAWS is active as one tiny collarless golden kitten securely perched on Ellie's far shoulder with all four paws settled against the opaque shoulder panel. Ellie's right hand steadies the kitten gently at its back. PAWS bats one loose ribbon end and makes Ellie suppress a laugh. The kitten remains far from the prop and staircase edge. No pole. Do not convert the full wardrobe to rainbow-only styling. Exactly one rainbow-hosiery wearer: AI ECE, using original independent rainbow gradient. Radiance and ECE are the unmistakable extra-affectionate center, and Alia alone handles the inert prop. Materialize rolled weather exactly as active lightning storm with distant bolts. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine except the explicitly absent-magazine demonstration, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, crossed keys, tiara, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1234": {
+      "scene": 1234,
+      "theme": "cleaner and service couture",
+      "landmark": "a broad dry covered garden-service terrace in the Vatican Gardens, with the English Garden canopy, layered lawns, a complete elliptical fountain basin, stone pavilions, the restrained facade of Casina Pio IV, and the Governorate roofline clearly recognizable through the trees",
+      "motifs": [
+        "large complete garden-fountain ellipse, English-Garden leaf, and pavilion-arch fields covering Radiance's dress and Ellie's dress",
+        "large complete Pinecone-scale, restoration-brush, micromosaic-tessera, and philatelic-postmark fields covering Alia's romper and ECE's skirt"
+      ],
+      "culture": "A dry unattended conservation table far outside the prop lane holds unbranded soft brushes, folded microfiber cloths, a brass hand sprayer, and micromosaic sample tiles. Use only secular garden, fountain, pavilion, conservation craft, micromosaic, and philatelic geometry. No literal flag, crossed keys, tiara, official emblem, sacred symbol, cross, religious statue, clergy, Swiss Guard, copied service uniform, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch303-vatican-city-scene1234-weather",
+        "roll": 76,
+        "result": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch303-vatican-city-scene1234-paws",
+        "roll": 25,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch303-vatican-city-scene1234-poleDanceTheme",
+        "roll": 66,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch303-vatican-city-scene1234-rainbowOnly",
+        "roll": 44,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch303-vatican-city-scene1234-rainbowHosiery",
+        "roll": 79,
+        "active": false,
+        "wearer": {
+          "key": "batch303-vatican-city-scene1234-rainbowHosieryWearer",
+          "roll": 79,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch303-vatican-city-scene1234-rainbowHosieryPaletteMode",
+          "roll": 13,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch303-vatican-city-scene1234-romanceBeat",
+        "roll": 33,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch303-vatican-city-scene1234-compoundLoveBeat",
+        "roll": 69,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1234-Radiance-emotion",
+            "roll": 61,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a guarded side glance toward Ellie while still protecting ECE and Alia"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1234-Radiance-visibleMidriff",
+            "roll": 57,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1234-Radiance-straplessDress",
+            "roll": 90,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1234-Radiance-fullyOpenBack",
+            "roll": 83,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1234-Ellie-emotion",
+            "roll": 45,
+            "result": "awe",
+            "performance": "awe shown by widened eyes at the wind-driven garden and route beacon"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1234-Ellie-visibleMidriff",
+            "roll": 93,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1234-Ellie-straplessDress",
+            "roll": 2,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1234-Ellie-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1234-Alia-emotion",
+            "roll": 11,
+            "result": "romantic joy",
+            "performance": "romantic joy shown by a bright unguarded smile during the blown kiss"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1234-Alia-visibleMidriff",
+            "roll": 75,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1234-Alia-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1234-Alia-fullyOpenBack",
+            "roll": 53,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1234-AI ECE-emotion",
+            "roll": 49,
+            "result": "startled surprise",
+            "performance": "startled surprise shown by lifted brows while maintaining safe route control"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1234-AI ECE-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1234-AI ECE-straplessDress",
+            "roll": 38,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1234-AI ECE-fullyOpenBack",
+            "roll": 23,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Startled ECE keeps the route sight line isolated while linking her free hand with jealous Radiance. Radiance circles into ECE's waist line through that hand link and cradles joyful Alia's face with her other hand. Alia hugs Radiance at the waist and answers with the selected blown kiss. Awestruck Ellie reaches across at a clear offset to touch ECE's shoulder, then gives Radiance the selected quick opposite-cheek kiss while resting her free hand on Radiance's shoulder. A separate hands-free beacon floats overhead. The result is a moving five-contact affection beat, not a lineup.",
+      "composition": "Place ECE at the far left with her prop arm isolated against empty fountain water, Ellie offset behind the center, Radiance at center, and Alia at the far right. Angle ECE three-quarters away with hair moved clear so her rolled complete open back and complete face are visible. Keep every hand in a separate depth plane and every lower body separated by visible garden background.",
+      "emotionNuance": {
+        "Radiance": "visible jealousy shown by a guarded side glance toward Ellie while still protecting ECE and Alia",
+        "Ellie": "awe shown by widened eyes at the wind-driven garden and route beacon",
+        "Alia": "romantic joy shown by a bright unguarded smile during the blown kiss",
+        "AI ECE": "startled surprise shown by lifted brows while maintaining safe route control"
+      },
+      "outfits": {
+        "Radiance": "a parchment-ivory sleeveless belted cleaner-service mini coat-dress with covered waist and high closed back, carrying a large complete garden-fountain ellipse and English-Garden leaf field, with map-green heeled boots",
+        "Ellie": "a fully strapless museum-gold fit-and-flare cleaner-service mini dress with completely bare shoulders, covered waist, and solid closed back, carrying a large complete pavilion-arch and folded-cloth geometry field, with bronze pumps",
+        "Alia": "a map-green one-shoulder tailored cleaner-service mini romper with covered waist and high closed back, carrying a large complete Pinecone-scale, restoration-brush, and micromosaic-tessera field, with museum-gold platform heels",
+        "AI ECE": "a map-blue wide-strap cropped cleaner-service vest exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate parchment-ivory knife-pleat mini skirt carrying a large complete philatelic-postmark and fountain-ripple field, with bronze slingback heels"
+      },
+      "propPlan": "ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for controlled sight alignment toward an unoccupied maintenance-route marker. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only left across clearly empty fountain water, away from every person, building, table, tree, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand gently cradles Alia's near cheek",
+        "Alia left hand rests visibly at Radiance's near waist; Alia right open hand stays visibly near her own lips in the selected blown-kiss gesture",
+        "Ellie left hand rests visibly on ECE's near shoulder; Ellie right hand rests visibly on Radiance's far shoulder during the cheek kiss"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered garden-service terrace in the Vatican Gardens, with the English Garden canopy, layered lawns, a complete elliptical fountain basin, stone pavilions, the restrained facade of Casina Pio IV, and the Governorate roofline clearly recognizable through the trees. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: cleaner and service couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a parchment-ivory sleeveless belted cleaner-service mini coat-dress with covered waist and high closed back, carrying a large complete garden-fountain ellipse and English-Garden leaf field, with map-green heeled boots; Ellie: a fully strapless museum-gold fit-and-flare cleaner-service mini dress with completely bare shoulders, covered waist, and solid closed back, carrying a large complete pavilion-arch and folded-cloth geometry field, with bronze pumps; Alia: a map-green one-shoulder tailored cleaner-service mini romper with covered waist and high closed back, carrying a large complete Pinecone-scale, restoration-brush, and micromosaic-tessera field, with museum-gold platform heels; AI ECE: a map-blue wide-strap cropped cleaner-service vest exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate parchment-ivory knife-pleat mini skirt carrying a large complete philatelic-postmark and fountain-ripple field, with bronze slingback heels. Materialize every rolled waist, belly button, strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Vatican City motifs must read clearly on at least two outfits: large complete garden-fountain ellipse, English-Garden leaf, and pavilion-arch fields covering Radiance's dress and Ellie's dress; large complete Pinecone-scale, restoration-brush, micromosaic-tessera, and philatelic-postmark fields covering Alia's romper and ECE's skirt. A dry unattended conservation table far outside the prop lane holds unbranded soft brushes, folded microfiber cloths, a brass hand sprayer, and micromosaic sample tiles. Use only secular garden, fountain, pavilion, conservation craft, micromosaic, and philatelic geometry. No literal flag, crossed keys, tiara, official emblem, sacred symbol, cross, religious statue, clergy, Swiss Guard, copied service uniform, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: visible jealousy, performed as visible jealousy shown by a guarded side glance toward Ellie while still protecting ECE and Alia; Ellie: awe, performed as awe shown by widened eyes at the wind-driven garden and route beacon; Alia: romantic joy, performed as romantic joy shown by a bright unguarded smile during the blown kiss; AI ECE: startled surprise, performed as startled surprise shown by lifted brows while maintaining safe route control. Selected dynamic romance roll 33: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Selected compound love roll 69: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Materialize both selected rolls through this exact safe consensual choreography: Startled ECE keeps the route sight line isolated while linking her free hand with jealous Radiance. Radiance circles into ECE's waist line through that hand link and cradles joyful Alia's face with her other hand. Alia hugs Radiance at the waist and answers with the selected blown kiss. Awestruck Ellie reaches across at a clear offset to touch ECE's shoulder, then gives Radiance the selected quick opposite-cheek kiss while resting her free hand on Radiance's shoulder. A separate hands-free beacon floats overhead. The result is a moving five-contact affection beat, not a lineup. Place ECE at the far left with her prop arm isolated against empty fountain water, Ellie offset behind the center, Radiance at center, and Alia at the far right. Angle ECE three-quarters away with hair moved clear so her rolled complete open back and complete face are visible. Keep every hand in a separate depth plane and every lower body separated by visible garden background. Use this exact hand inventory and no other hands: ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand; Radiance left hand links visibly with ECE's left hand; Radiance right hand gently cradles Alia's near cheek; Alia left hand rests visibly at Radiance's near waist; Alia right open hand stays visibly near her own lips in the selected blown-kiss gesture; Ellie left hand rests visibly on ECE's near shoulder; Ellie right hand rests visibly on Radiance's far shoulder during the cheek kiss. ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for controlled sight alignment toward an unoccupied maintenance-route marker. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only left across clearly empty fountain water, away from every person, building, table, tree, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as powerful windstorm with controlled fabric motion. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine except the explicitly absent-magazine demonstration, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, crossed keys, tiara, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1235": {
+      "scene": 1235,
+      "theme": "cleaner and service couture",
+      "landmark": "a broad dry protected conservation landing at one end of the Vatican Museums' 120-metre Gallery of the Geographical Maps, with the long perspective, repeated map panels, cartographic coastlines, gold frames, polished floor reflections, and a high end window showing a solar-eclipse atmosphere while sacred ceiling scenes remain outside the frame",
+      "motifs": [
+        "large complete map-coastline, compass-rose, gallery-perspective, and gold-frame fields covering Radiance's dress and Ellie's dress",
+        "large complete archive-drawer, restoration-brush, micromosaic-tessera, and postage-perforation fields covering Alia's skort and ECE's skirt"
+      ],
+      "culture": "A dry unattended conservation cart far outside the prop lane holds unbranded soft brushes, folded cloths, archive sleeves, and blank perforated stamp sheets. Use only secular cartography, archive, conservation, micromosaic, and philatelic geometry. No literal flag, crossed keys, tiara, official emblem, sacred symbol, cross, religious artwork, clergy, Swiss Guard, copied service uniform, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch303-vatican-city-scene1235-weather",
+        "roll": 91,
+        "result": "solar eclipse atmosphere"
+      },
+      "paws": {
+        "key": "batch303-vatican-city-scene1235-paws",
+        "roll": 96,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch303-vatican-city-scene1235-poleDanceTheme",
+        "roll": 23,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch303-vatican-city-scene1235-rainbowOnly",
+        "roll": 51,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch303-vatican-city-scene1235-rainbowHosiery",
+        "roll": 90,
+        "active": false,
+        "wearer": {
+          "key": "batch303-vatican-city-scene1235-rainbowHosieryWearer",
+          "roll": 86,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch303-vatican-city-scene1235-rainbowHosieryPaletteMode",
+          "roll": 66,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch303-vatican-city-scene1235-romanceBeat",
+        "roll": 82,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch303-vatican-city-scene1235-compoundLoveBeat",
+        "roll": 0,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1235-Radiance-emotion",
+            "roll": 44,
+            "result": "awe",
+            "performance": "awe shown by widened luminous eyes toward the eclipse-lit gallery and ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1235-Radiance-visibleMidriff",
+            "roll": 70,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1235-Radiance-straplessDress",
+            "roll": 57,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1235-Radiance-fullyOpenBack",
+            "roll": 98,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1235-Ellie-emotion",
+            "roll": 6,
+            "result": "tender affection",
+            "performance": "tender affection shown by a soft protective smile during the face-to-face embrace"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1235-Ellie-visibleMidriff",
+            "roll": 52,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1235-Ellie-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1235-Ellie-fullyOpenBack",
+            "roll": 40,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1235-Alia-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability",
+            "performance": "shame and social vulnerability shown by lowered tear-bright eyes while accepting the consensual group affection"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1235-Alia-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1235-Alia-straplessDress",
+            "roll": 23,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1235-Alia-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch303-vatican-city-scene1235-AI ECE-emotion",
+            "roll": 36,
+            "result": "magnetic confidence",
+            "performance": "magnetic confidence shown by steady route focus and direct eye contact with the male"
+          },
+          "visibleMidriff": {
+            "key": "batch303-vatican-city-scene1235-AI ECE-visibleMidriff",
+            "roll": 26,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch303-vatican-city-scene1235-AI ECE-straplessDress",
+            "roll": 53,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch303-vatican-city-scene1235-AI ECE-fullyOpenBack",
+            "roll": 26,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Ellie and the established male sit close on a low conservation plinth. Awestruck Radiance stands between their knees in Ellie's full face-to-face embrace while leaning sideways for the selected brief cheek kiss toward confident ECE. Vulnerable Alia closes from behind with one hand at Radiance's back and one hand on the male's shoulder. The male openly holds Ellie's hand and Alia's waist, giving both clear separate affectionate contacts, while his strongest sustained eye line remains only on his wife ECE. ECE steadies Radiance at the waist with her free hand while keeping the empty route lane controlled. Every interaction is fully clothed, consensual adult relationship drama.",
+      "composition": "Place ECE at the far left with her prop arm isolated against an empty side corridor, Radiance standing center-left, Ellie seated center, the male seated center-right, and Alia offset behind at the far right. Angle ECE three-quarters away with hair moved clear so her rolled complete open back and complete face are visible. Keep all five faces, all ten hands, and every lower-body silhouette separately readable.",
+      "emotionNuance": {
+        "Radiance": "awe shown by widened luminous eyes toward the eclipse-lit gallery and ECE",
+        "Ellie": "tender affection shown by a soft protective smile during the face-to-face embrace",
+        "Alia": "shame and social vulnerability shown by lowered tear-bright eyes while accepting the consensual group affection",
+        "AI ECE": "magnetic confidence shown by steady route focus and direct eye contact with the male",
+        "Male": "magnetic confidence shown by calm posture and a strongest sustained eye line only toward ECE"
+      },
+      "outfits": {
+        "Radiance": "a parchment-ivory funnel-neck short-sleeve cleaner-service mini dress with covered waist and high closed back, carrying a large complete gallery-perspective and map-coastline field, with museum-gold heeled boots",
+        "Ellie": "a map-blue square-neck sleeveless cleaner-service pinafore mini dress over an opaque fitted ivory cap-sleeve underlayer, with covered waist and high closed back, carrying a large complete compass-rose and gold-frame field, with bronze pumps",
+        "Alia": "a fully strapless museum-gold sculpted cropped cleaner-service top with completely bare shoulders, exposing her ordinary waist and belly button, with a solid closed back panel, a separate map-green tailored mini skort carrying a large complete archive-drawer and restoration-brush field, with parchment platform heels",
+        "AI ECE": "a bronze wide-strap cropped cleaner-service top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate parchment-ivory A-line mini skirt carrying a large complete micromosaic-tessera and postage-perforation field, with map-blue slingback heels",
+        "Male": "the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve graphite polo with a restrained map-grid seam, black jeans, and black boots"
+      },
+      "propPlan": "ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for an unloaded magazine-free route check. The magazine is absent and the empty magazine well is clearly visible. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only left along a clearly empty museum side corridor toward an unoccupied floor-level route marker, away from every person, artwork, map panel, cart, window, and camera, never at the eclipse or sky. Her left hand stays off the prop at Radiance's waist. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist",
+        "Radiance left hand rests visibly around Ellie's near shoulder; Radiance right hand rests visibly on ECE's near shoulder during the cheek kiss",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand links visibly with the male's left hand",
+        "the male left hand links visibly with Ellie's right hand; the male right hand rests visibly at Alia's near waist",
+        "Alia left hand rests visibly at Radiance's upper back; Alia right hand rests visibly on the male's near shoulder"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch303-vatican-city-scene4-male-emotion",
+          "roll": 35,
+          "result": "magnetic confidence",
+          "performance": "magnetic confidence shown by calm posture and a strongest sustained eye line only toward ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed consensual adult infidelity drama with Alia and Ellie; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, Image 4 ECE's face-detail anchor, and Image 5 the adult male face/build anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry protected conservation landing at one end of the Vatican Museums' 120-metre Gallery of the Geographical Maps, with the long perspective, repeated map panels, cartographic coastlines, gold frames, polished floor reflections, and a high end window showing a solar-eclipse atmosphere while sacred ceiling scenes remain outside the frame. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male from Image 5. Add him without replacing any woman. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: cleaner and service couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a parchment-ivory funnel-neck short-sleeve cleaner-service mini dress with covered waist and high closed back, carrying a large complete gallery-perspective and map-coastline field, with museum-gold heeled boots; Ellie: a map-blue square-neck sleeveless cleaner-service pinafore mini dress over an opaque fitted ivory cap-sleeve underlayer, with covered waist and high closed back, carrying a large complete compass-rose and gold-frame field, with bronze pumps; Alia: a fully strapless museum-gold sculpted cropped cleaner-service top with completely bare shoulders, exposing her ordinary waist and belly button, with a solid closed back panel, a separate map-green tailored mini skort carrying a large complete archive-drawer and restoration-brush field, with parchment platform heels; AI ECE: a bronze wide-strap cropped cleaner-service top exposing her ordinary waist and belly button, with a completely open back visible from shoulder blades to waist, a separate parchment-ivory A-line mini skirt carrying a large complete micromosaic-tessera and postage-perforation field, with map-blue slingback heels; Male: the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve graphite polo with a restrained map-grid seam, black jeans, and black boots. Materialize every rolled waist, belly button, strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Vatican City motifs must read clearly on at least two outfits: large complete map-coastline, compass-rose, gallery-perspective, and gold-frame fields covering Radiance's dress and Ellie's dress; large complete archive-drawer, restoration-brush, micromosaic-tessera, and postage-perforation fields covering Alia's skort and ECE's skirt. A dry unattended conservation cart far outside the prop lane holds unbranded soft brushes, folded cloths, archive sleeves, and blank perforated stamp sheets. Use only secular cartography, archive, conservation, micromosaic, and philatelic geometry. No literal flag, crossed keys, tiara, official emblem, sacred symbol, cross, religious artwork, clergy, Swiss Guard, copied service uniform, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: awe, performed as awe shown by widened luminous eyes toward the eclipse-lit gallery and ECE; Ellie: tender affection, performed as tender affection shown by a soft protective smile during the face-to-face embrace; Alia: shame and social vulnerability, performed as shame and social vulnerability shown by lowered tear-bright eyes while accepting the consensual group affection; AI ECE: magnetic confidence, performed as magnetic confidence shown by steady route focus and direct eye contact with the male; Male: magnetic confidence, performed as magnetic confidence shown by calm posture and a strongest sustained eye line only toward ECE. Selected dynamic romance roll 82: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Selected compound love roll 0: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Materialize both selected rolls through this exact safe consensual choreography: Ellie and the established male sit close on a low conservation plinth. Awestruck Radiance stands between their knees in Ellie's full face-to-face embrace while leaning sideways for the selected brief cheek kiss toward confident ECE. Vulnerable Alia closes from behind with one hand at Radiance's back and one hand on the male's shoulder. The male openly holds Ellie's hand and Alia's waist, giving both clear separate affectionate contacts, while his strongest sustained eye line remains only on his wife ECE. ECE steadies Radiance at the waist with her free hand while keeping the empty route lane controlled. Every interaction is fully clothed, consensual adult relationship drama. Place ECE at the far left with her prop arm isolated against an empty side corridor, Radiance standing center-left, Ellie seated center, the male seated center-right, and Alia offset behind at the far right. Angle ECE three-quarters away with hair moved clear so her rolled complete open back and complete face are visible. Keep all five faces, all ten hands, and every lower-body silhouette separately readable. Use this exact hand inventory and no other hands: ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist; Radiance left hand rests visibly around Ellie's near shoulder; Radiance right hand rests visibly on ECE's near shoulder during the cheek kiss; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand links visibly with the male's left hand; the male left hand links visibly with Ellie's right hand; the male right hand rests visibly at Alia's near waist; Alia left hand rests visibly at Radiance's upper back; Alia right hand rests visibly on the male's near shoulder. ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for an unloaded magazine-free route check. The magazine is absent and the empty magazine well is clearly visible. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only left along a clearly empty museum side corridor toward an unoccupied floor-level route marker, away from every person, artwork, map panel, cart, window, and camera, never at the eclipse or sky. Her left hand stays off the prop at Radiance's waist. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as solar eclipse atmosphere. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly five adults, exactly ten arms and exactly ten hands, two per person. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine except the explicitly absent-magazine demonstration, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, crossed keys, tiara, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

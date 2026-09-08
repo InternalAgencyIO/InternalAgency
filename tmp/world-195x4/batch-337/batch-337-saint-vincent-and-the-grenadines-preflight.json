@@ -1,0 +1,1547 @@
+{
+  "batch": 337,
+  "country": "Saint Vincent and the Grenadines",
+  "status": "render-preflight-stored",
+  "sourceCommit": "100b2ad00d53f4e9b674d76084cba1c841e52b0d",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch337-saint-vincent-and-the-grenadines keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 337 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "fictional coast-guard rescue-vessel couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Antigua and Barbuda",
+  "nextQueueBatch": 338,
+  "nextQueueScenes": [
+    1372,
+    1373,
+    1374,
+    1375
+  ],
+  "nextCinematicTheme": {
+    "active": "fictional coast-guard rescue-vessel couture",
+    "batchOrdinalWithinTheme": 2
+  },
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/5751/",
+      "usedFor": "La Soufriere and Saint Vincent's volcanic Lesser Antilles landscape"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/5750/",
+      "usedFor": "The Grenadines island group, Tobago Cays reef and island-chain setting"
+    },
+    {
+      "url": "https://discoversvg.com/what-to-do/eco-adventures/",
+      "usedFor": "Dark View Falls and its two cascades on Saint Vincent's northwest coast"
+    },
+    {
+      "url": "https://discoversvg.com/island/bequia/",
+      "usedFor": "Bequia, Port Elizabeth, Admiralty Bay and the sheltered anchorage"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch337-saint-vincent-and-the-grenadines-male-model-scene",
+    "fullHash": 788714468,
+    "roll": 68,
+    "selectedScenePosition": 1,
+    "selectedScene": 1368,
+    "maleEmotion": {
+      "key": "batch337-saint-vincent-and-the-grenadines-scene1-male-emotion",
+      "roll": 55,
+      "result": "aching romantic longing"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Saint Vincent and the Grenadines flag, coat of arms, official emblem, sacred symbol, religious building, ceremonial pattern, ceremonial attire, or official service identity is copied. Country-led scenes use large dimensional secular island-chain, Kingstown-harbor, Fort Charlotte stone, waterfall, volcanic-ridge, reef-ring and Caribbean-current compositions instead.",
+    "palette": "emerald green, Caribbean cobalt, volcanic charcoal, coral red, sunlit gold, seafoam, pearl white, brushed silver, and rescue orange",
+    "minimumCoverage": "Scenes 1368 and 1369 each carry hard large Saint Vincent and the Grenadines motifs on three women and fictional-rescue-vessel construction language on at least two. Scenes 1370 and 1371 use four different theme-led fictional-rescue-vessel outfits without country map prints while Saint Vincent and the Grenadines landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Kingstown harbor and Fort Charlotte, Dark View Falls, Tobago Cays Marine Park, and Bequia's Port Elizabeth and Admiralty Bay.",
+    "prohibitions": "Use respectful secular Saint Vincent and the Grenadines geography through complete island-chain silhouettes, Kingstown harbor arcs, Fort Charlotte stone geometry, Dark View waterfall ribbons, Tobago Cays reef rings, Bequia hills, Admiralty Bay curves, sail forms, volcanic ridges, and Caribbean-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, official badge, agency logo, emergency-service insignia, readable text, alcohol, military imagery, political messaging, or threat framing."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch337-saint-vincent-and-the-grenadines-x-heart",
+      "roll": 17,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch337-saint-vincent-and-the-grenadines-x-internalagency",
+      "roll": 13,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch337-saint-vincent-and-the-grenadines-x-worldxxxseries",
+      "roll": 98,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Saint Vincent and the Grenadines images plus one accepted Tonga image",
+    "captionIfEligible": "Saint Vincent and the Grenadines ❤️ Tonga #SaintVincentAndTheGrenadines #InternalAgency",
+    "internalAgencyHashtagActive": true,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1368 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1368 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch337-saint-vincent-and-the-grenadines-male-model-scene",
+        68
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1-male-emotion",
+        55
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-weather",
+        95
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-mascotState",
+        7
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-poleDanceTheme",
+        59
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-rainbowOnly",
+        71
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-rainbowHosiery",
+        78
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-romanceBeat",
+        10
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-compoundLoveBeat",
+        60
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-hardLoveBeat",
+        56
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-interestingProp",
+        16
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-eceMissionProp-poseTargetRoll",
+        29
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Radiance-emotion",
+        44
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Radiance-visibleMidriff",
+        6
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Radiance-straplessDress",
+        61
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Radiance-fullyOpenBack",
+        6
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Ellie-emotion",
+        22
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Ellie-visibleMidriff",
+        40
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Ellie-straplessDress",
+        23
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Ellie-fullyOpenBack",
+        80
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Alia-emotion",
+        98
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Alia-visibleMidriff",
+        60
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Alia-straplessDress",
+        91
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-Alia-fullyOpenBack",
+        76
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-AI ECE-emotion",
+        48
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-AI ECE-visibleMidriff",
+        54
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-AI ECE-straplessDress",
+        9
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-AI ECE-fullyOpenBack",
+        90
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-weather",
+        64
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-mascotState",
+        52
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-poleDanceTheme",
+        22
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-rainbowOnly",
+        28
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-rainbowHosiery",
+        91
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-romanceBeat",
+        21
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-compoundLoveBeat",
+        21
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-hardLoveBeat",
+        65
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-interestingProp",
+        11
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-eceMissionProp-poseTargetRoll",
+        74
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Radiance-emotion",
+        57
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Radiance-visibleMidriff",
+        97
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Radiance-straplessDress",
+        34
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Radiance-fullyOpenBack",
+        87
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Ellie-emotion",
+        73
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Ellie-visibleMidriff",
+        21
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Ellie-straplessDress",
+        10
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Ellie-fullyOpenBack",
+        91
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-emotion",
+        59
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-emotion-disambiguation",
+        94
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-visibleMidriff",
+        87
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-straplessDress",
+        28
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-fullyOpenBack",
+        49
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-AI ECE-emotion",
+        41
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-AI ECE-visibleMidriff",
+        89
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-AI ECE-straplessDress",
+        18
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-AI ECE-fullyOpenBack",
+        59
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-weather",
+        58
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-mascotState",
+        62
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-poleDanceTheme",
+        84
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-rainbowOnly",
+        94
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-rainbowHosiery",
+        33
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-romanceBeat",
+        63
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-compoundLoveBeat",
+        31
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-hardLoveBeat",
+        11
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-interestingProp",
+        37
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-eceMissionProp-poseTargetRoll",
+        60
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Radiance-emotion",
+        91
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Radiance-visibleMidriff",
+        67
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Radiance-straplessDress",
+        56
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Radiance-fullyOpenBack",
+        73
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Ellie-emotion",
+        75
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Ellie-visibleMidriff",
+        23
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Ellie-straplessDress",
+        12
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Ellie-fullyOpenBack",
+        45
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Alia-emotion",
+        5
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Alia-visibleMidriff",
+        17
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Alia-straplessDress",
+        82
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-Alia-fullyOpenBack",
+        95
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-AI ECE-emotion",
+        43
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-AI ECE-visibleMidriff",
+        99
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-AI ECE-straplessDress",
+        84
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-AI ECE-fullyOpenBack",
+        5
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-weather",
+        65
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-mascotState",
+        57
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-poleDanceTheme",
+        65
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-rainbowOnly",
+        1
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-rainbowHosiery",
+        44
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-romanceBeat",
+        60
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-compoundLoveBeat",
+        38
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-hardLoveBeat",
+        2
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-interestingProp",
+        42
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-eceMissionProp-poseTargetRoll",
+        19
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Radiance-emotion",
+        98
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Radiance-visibleMidriff",
+        84
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Radiance-straplessDress",
+        31
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Radiance-fullyOpenBack",
+        96
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Ellie-emotion",
+        24
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Ellie-visibleMidriff",
+        82
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Ellie-straplessDress",
+        17
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Ellie-fullyOpenBack",
+        18
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Alia-emotion",
+        56
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Alia-visibleMidriff",
+        82
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Alia-straplessDress",
+        69
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-Alia-fullyOpenBack",
+        34
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-AI ECE-emotion",
+        78
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-AI ECE-visibleMidriff",
+        52
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-AI ECE-straplessDress",
+        87
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-AI ECE-fullyOpenBack",
+        60
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-x-heart",
+        17
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-x-internalagency",
+        13
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-x-worldxxxseries",
+        98
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-rainbowHosieryWearer",
+        78
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-rainbowHosieryPaletteMode",
+        46
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-mascotHolder",
+        80
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-interestingPropHolder",
+        38
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1368-interestingPropFamily",
+        84
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-rainbowHosieryWearer",
+        47
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-rainbowHosieryPaletteMode",
+        89
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-mascotHolder",
+        33
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-interestingPropHolder",
+        45
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1369-interestingPropFamily",
+        67
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-rainbowHosieryWearer",
+        81
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-rainbowHosieryPaletteMode",
+        83
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-mascotHolder",
+        83
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-interestingPropHolder",
+        39
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1370-interestingPropFamily",
+        73
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-rainbowHosieryWearer",
+        76
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-rainbowHosieryPaletteMode",
+        48
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-mascotHolder",
+        98
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-interestingPropHolder",
+        32
+      ],
+      [
+        "batch337-saint-vincent-and-the-grenadines-scene1371-interestingPropFamily",
+        42
+      ]
+    ],
+    "primaryPairCount": 110,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "F704BCBB162E4A8B3E712A39B3B41DBCA6A6D124B2676150EAABD7A8490016A3",
+    "selectorPairsSha256": "50AE7A1A80A8BB72DF698A830FE50FFC8C0E20E1914F1CAA5E2479749AF2C059"
+  },
+  "scenePlans": {
+    "1368": {
+      "scene": 1368,
+      "mode": "country-led hybrid",
+      "theme": "fictional coast-guard rescue-vessel couture",
+      "landmark": "a broad dry public overlook above Kingstown harbor with the complete stone Fort Charlotte profile on the ridge, the capital's waterfront arc, green volcanic hills, blue Caribbean water, and a large unbranded fictional civilian rescue vessel secured prominently at the quay under crisp tropical sunlight",
+      "motifs": "complete Saint Vincent island profile, Kingstown harbor crescent, Fort Charlotte stone-bastion geometry, volcanic-ridge pleats, sail arcs, and Caribbean-current bands",
+      "culture": "Kingstown, its harbor and Fort Charlotte remain large country anchors. The vessel is fictional civilian maritime-rescue design with no copied coast-guard uniform, logo, badge or insignia.",
+      "weather": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-weather",
+        "roll": 95,
+        "result": "stacked lenticular clouds",
+        "materialized": "stacked lenticular clouds"
+      },
+      "mascotState": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-mascotState",
+        "roll": 7,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-mascotHolder",
+        "roll": 80,
+        "result": "Alia"
+      },
+      "mascotPlan": "Render only the stored mascot state and stored holder. Keep PAWS and/or MAX on a broad dry padded bench far from ECE, the mission prop, vessel edge and water, with one harmless supervised play beat when both appear.",
+      "interestingProp": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-interestingProp",
+        "roll": 16,
+        "active": true,
+        "holder": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1368-interestingPropHolder",
+          "roll": 38,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1368-interestingPropFamily",
+          "roll": 84,
+          "result": "giant tuning fork instrument"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-poleDanceTheme",
+        "roll": 59,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-rainbowOnly",
+        "roll": 71,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-rainbowHosiery",
+        "roll": 78,
+        "active": false,
+        "wearer": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1368-rainbowHosieryWearer",
+          "roll": 78,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1368-rainbowHosieryPaletteMode",
+          "roll": 46,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-eceMissionProp-poseTargetRoll",
+        "roll": 29
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty geometric paper route target fixed to a complete thick sand-filled backstop on a closed quay lane far left of every person, vessel, building, animal and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty geometric paper route target fixed to a complete thick sand-filled backstop on a closed quay lane far left of every person, vessel, building, animal and camera",
+      "romanceBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-romanceBeat",
+        "roll": 10,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-compoundLoveBeat",
+        "roll": 60,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "hardLoveBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1368-hardLoveBeat",
+        "roll": 56,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Radiance-emotion",
+            "roll": 44,
+            "result": "awe",
+            "materializedResult": "awe",
+            "performance": "awe expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Radiance-visibleMidriff",
+            "roll": 6,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Radiance-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Radiance-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Ellie-emotion",
+            "roll": 22,
+            "result": "playful mischief",
+            "materializedResult": "playful mischief",
+            "performance": "playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Ellie-visibleMidriff",
+            "roll": 40,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Ellie-straplessDress",
+            "roll": 23,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Ellie-fullyOpenBack",
+            "roll": 80,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Alia-emotion",
+            "roll": 98,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Alia-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Alia-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-Alia-fullyOpenBack",
+            "roll": 76,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-AI ECE-emotion",
+            "roll": 48,
+            "result": "startled surprise",
+            "materializedResult": "startled surprise",
+            "performance": "startled surprise expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-AI ECE-visibleMidriff",
+            "roll": 54,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-AI ECE-straplessDress",
+            "roll": 9,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1368-AI ECE-fullyOpenBack",
+            "roll": 90,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "awe expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "startled surprise expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-theme hybrid emerald strapless island-chain corsage dress with raised complete archipelago forms, a silver hull-rib waist frame, asymmetrical wave-petal hem, and keel-fin heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led cobalt culotte coat with dimensional Kingstown-harbor pleats, gold Fort Charlotte masonry beadwork, split jetty hem, and bastion-block platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led volcanic-charcoal braided-panel jumpsuit with a deliberate narrow midriff, coral-red volcanic-ridge appliques, open sculpted back, sail-shaped hip drape, and current-curve pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led pearl-white rescue-davit peplum over fitted rescue-orange shorts, with articulated silver lifting arms, flotation-ring side architecture, offset deck hem, and polished hull-keel boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Saint Vincent and the Grenadines Pacific-current embroidery and subtle fictional-rescue-vessel swashplate-seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-theme hybrid emerald strapless island-chain corsage dress with raised complete archipelago forms, a silver hull-rib waist frame, asymmetrical wave-petal hem, and keel-fin heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led cobalt culotte coat with dimensional Kingstown-harbor pleats, gold Fort Charlotte masonry beadwork, split jetty hem, and bastion-block platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led volcanic-charcoal braided-panel jumpsuit with a deliberate narrow midriff, coral-red volcanic-ridge appliques, open sculpted back, sail-shaped hip drape, and current-curve pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led pearl-white rescue-davit peplum over fitted rescue-orange shorts, with articulated silver lifting arms, flotation-ring side architecture, offset deck hem, and polished hull-keel boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Saint Vincent and the Grenadines Pacific-current embroidery and subtle fictional-rescue-vessel swashplate-seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "ECE anchors the isolated route lane. Radiance sits securely sideways on Ellie's lap on a broad fixed harbor bench while Alia draws Radiance into a laughing shoulder turn. The male leans into the triangle with one hand at Ellie's shoulder and one at Alia's forearm, but his strongest sustained eye line remains on ECE. The vessel, Fort Charlotte and harbor fill separate foreground planes.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Radiance left hand holds Ellie's near shoulder and Radiance right hand links with Alia's left hand",
+        "Ellie left hand supports Radiance at the near waist and Ellie right hand rests on the male's near forearm",
+        "Alia left hand links with Radiance and Alia right hand rests on the male's near forearm",
+        "the male left hand rests on Ellie's shoulder and his right hand rests on Alia's forearm while his strongest eye line stays on ECE"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1-male-emotion",
+          "roll": 55,
+          "result": "aching romantic longing"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry public overlook above Kingstown harbor with the complete stone Fort Charlotte profile on the ridge, the capital's waterfront arc, green volcanic hills, blue Caribbean water, and a large unbranded fictional civilian rescue vessel secured prominently at the quay under crisp tropical sunlight. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: fictional coast-guard rescue-vessel couture. The theme and Saint Vincent and the Grenadines location must both be immediate foreground reads. Kingstown, its harbor and Fort Charlotte remain large country anchors. The vessel is fictional civilian maritime-rescue design with no copied coast-guard uniform, logo, badge or insignia. Stored scene rolls: weather 95=stacked lenticular clouds; mascot state 7=PAWS and MAX together; mascot holder selector 80=Alia; odd prop 16=active; odd holder 38=Alia; odd family 84=giant tuning fork instrument; pole 59=inactive; rainbow-only 71=inactive; rainbow hosiery 78=inactive; wearer 78=AI ECE; palette 46=country-palette rainbow-like gradient; romance 10; compound 60; hard love 56; mission-prop pose/target 29. Exact wardrobe rolls: Radiance: midriff 6=visible, strapless 61=inactive, open back 6=active; Ellie: midriff 40=visible, strapless 23=active, open back 80=inactive; Alia: midriff 60=covered, strapless 91=inactive, open back 76=inactive; AI ECE: midriff 54=covered, strapless 9=active, open back 90=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-theme hybrid emerald strapless island-chain corsage dress with raised complete archipelago forms, a silver hull-rib waist frame, asymmetrical wave-petal hem, and keel-fin heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-led cobalt culotte coat with dimensional Kingstown-harbor pleats, gold Fort Charlotte masonry beadwork, split jetty hem, and bastion-block platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led volcanic-charcoal braided-panel jumpsuit with a deliberate narrow midriff, coral-red volcanic-ridge appliques, open sculpted back, sail-shaped hip drape, and current-curve pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led pearl-white rescue-davit peplum over fitted rescue-orange shorts, with articulated silver lifting arms, flotation-ring side architecture, offset deck hem, and polished hull-keel boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve shell-white top with restrained Saint Vincent and the Grenadines Pacific-current embroidery and subtle fictional-rescue-vessel swashplate-seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry large hard country motifs. Radiance and ECE also carry unmistakable rescue-vessel hull, davit and flotation construction language. Every silhouette differs. Location design vocabulary: complete Saint Vincent island profile, Kingstown harbor crescent, Fort Charlotte stone-bastion geometry, volcanic-ridge pleats, sail arcs, and Caribbean-current bands. Use respectful secular Saint Vincent and the Grenadines geography through complete island-chain silhouettes, Kingstown harbor arcs, Fort Charlotte stone geometry, Dark View waterfall ribbons, Tobago Cays reef rings, Bequia hills, Admiralty Bay curves, sail forms, volcanic ridges, and Caribbean-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, official badge, agency logo, emergency-service insignia, readable text, alcohol, military imagery, political messaging, or threat framing. Four visibly distinct coherent emotions: Radiance: roll 44=awe, performed as awe expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 22=playful mischief, performed as playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 98=defiance, performed as defiance expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 48=startled surprise, performed as startled surprise expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 55=aching romantic longing, performed as aching romantic longing expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 10: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Compound roll 60: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Mandatory hard-love roll 56: a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the isolated route lane. Radiance sits securely sideways on Ellie's lap on a broad fixed harbor bench while Alia draws Radiance into a laughing shoulder turn. The male leans into the triangle with one hand at Ellie's shoulder and one at Alia's forearm, but his strongest sustained eye line remains on ECE. The vessel, Fort Charlotte and harbor fill separate foreground planes. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Radiance left hand holds Ellie's near shoulder and Radiance right hand links with Alia's left hand; Ellie left hand supports Radiance at the near waist and Ellie right hand rests on the male's near forearm; Alia left hand links with Radiance and Alia right hand rests on the male's near forearm; the male left hand rests on Ellie's shoulder and his right hand rests on Alia's forearm while his strongest eye line stays on ECE. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty geometric paper route target fixed to a complete thick sand-filled backstop on a closed quay lane far left of every person, vessel, building, animal and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 7=PAWS and MAX together. Mascot holder selector 80=Alia. Render only the stored mascot state and stored holder. Keep PAWS and/or MAX on a broad dry padded bench far from ECE, the mission prop, vessel edge and water, with one harmless supervised play beat when both appear. Odd-prop roll is active. Exactly Alia owns and creatively integrates one giant tuning fork instrument into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render stacked lenticular clouds cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1369": {
+      "scene": 1369,
+      "mode": "country-led hybrid",
+      "theme": "fictional coast-guard rescue-vessel couture",
+      "landmark": "a broad dry covered viewing deck facing both tiers of Dark View Falls on Saint Vincent's northwest coast, with tall black volcanic cliffs, complete silver waterfall ribbons, dense rainforest, a black-sand coastal glimpse, and a large unbranded fictional civilian rescue vessel visible offshore through the open valley",
+      "motifs": "complete twin-fall ribbons, Dark View volcanic-cliff strata, rainforest fans, Saint Vincent outline, black-sand arcs, rope-bridge geometry, and Caribbean-current curves",
+      "culture": "Dark View Falls reads immediately through its two cascades, volcanic cliffs, rainforest and northwest-coast setting. The vessel is a fictional civilian design without copied service markings.",
+      "weather": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-weather",
+        "roll": 64,
+        "result": "dense rolling fog",
+        "materialized": "dense rolling fog"
+      },
+      "mascotState": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-mascotState",
+        "roll": 52,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-mascotHolder",
+        "roll": 33,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Render only the stored mascot state and stored holder on a dry padded viewing platform far from the falls, odd prop and mission-prop lane. When both appear, show one supervised nose-to-nose ribbon game.",
+      "interestingProp": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-interestingProp",
+        "roll": 11,
+        "active": true,
+        "holder": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1369-interestingPropHolder",
+          "roll": 45,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1369-interestingPropFamily",
+          "roll": 67,
+          "result": "kinetic umbrella with rotating mirrored petals"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-poleDanceTheme",
+        "roll": 22,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-rainbowOnly",
+        "roll": 28,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-rainbowHosiery",
+        "roll": 91,
+        "active": false,
+        "wearer": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1369-rainbowHosieryWearer",
+          "roll": 47,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1369-rainbowHosieryPaletteMode",
+          "roll": 89,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-eceMissionProp-poseTargetRoll",
+        "roll": 74
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one empty paper route target on a complete sand backstop inside a separate dry closed training lane, isolated from every waterfall, path, tree, person, animal, vessel and camera; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one empty paper route target on a complete sand backstop inside a separate dry closed training lane, isolated from every waterfall, path, tree, person, animal, vessel and camera",
+      "romanceBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-romanceBeat",
+        "roll": 21,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-compoundLoveBeat",
+        "roll": 21,
+        "index": 9,
+        "contractResult": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "hardLoveBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1369-hardLoveBeat",
+        "roll": 65,
+        "result": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Radiance-emotion",
+            "roll": 57,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Radiance-visibleMidriff",
+            "roll": 97,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Radiance-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Radiance-fullyOpenBack",
+            "roll": 87,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Ellie-emotion",
+            "roll": 73,
+            "result": "betrayal shock",
+            "materializedResult": "betrayal shock",
+            "performance": "betrayal shock expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Ellie-visibleMidriff",
+            "roll": 21,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Ellie-straplessDress",
+            "roll": 10,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Ellie-fullyOpenBack",
+            "roll": 91,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-emotion",
+            "roll": 59,
+            "result": "aching romantic longing",
+            "materializedResult": "shame and social vulnerability",
+            "disambiguation": {
+              "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-emotion-disambiguation",
+              "roll": 94
+            },
+            "performance": "shame and social vulnerability expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-visibleMidriff",
+            "roll": 87,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-straplessDress",
+            "roll": 28,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-Alia-fullyOpenBack",
+            "roll": 49,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-AI ECE-emotion",
+            "roll": 41,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-AI ECE-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-AI ECE-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1369-AI ECE-fullyOpenBack",
+            "roll": 59,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "aching romantic longing expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "betrayal shock expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "shame and social vulnerability expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-led seafoam waterfall-ribbon column dress with layered silver cascade fins, a one-sided rainforest corsage, jagged black-cliff hem, and waterfall-drop heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-theme hybrid rescue-orange strapless deck-rail bustier over cobalt asymmetric culottes, with emerald island relief, foldout flotation ribs, stern-step hem, and deck-cleat platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led gold open-back rainforest lattice coat-dress with braided canopy ribs, black volcanic-slab apron, waterfall-bead fringe, and cliff-arch pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led pearl-white lifeboat-cradle sculpted top over charcoal tailored shorts, with silver davit hinges, circular buoy architecture, split wake hem, and launch-rail boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-led seafoam waterfall-ribbon column dress with layered silver cascade fins, a one-sided rainforest corsage, jagged black-cliff hem, and waterfall-drop heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-theme hybrid rescue-orange strapless deck-rail bustier over cobalt asymmetric culottes, with emerald island relief, foldout flotation ribs, stern-step hem, and deck-cleat platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led gold open-back rainforest lattice coat-dress with braided canopy ribs, black volcanic-slab apron, waterfall-bead fringe, and cliff-arch pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led pearl-white lifeboat-cradle sculpted top over charcoal tailored shorts, with silver davit hinges, circular buoy architecture, split wake hem, and launch-rail boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE holds the isolated route lane. Ellie leads Radiance through a fast partner-dance turn while Alia catches Radiance at the waist and turns the duet into a three-person invitation. The falls and rescue vessel remain equally large and readable.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Radiance left hand links overhead with Ellie right hand and Radiance right hand rests on Alia's shoulder",
+        "Ellie right hand stays linked with Radiance and Ellie left hand supports Radiance's forearm",
+        "Alia left hand supports Radiance at the waist and Alia right hand rests on Ellie's shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered viewing deck facing both tiers of Dark View Falls on Saint Vincent's northwest coast, with tall black volcanic cliffs, complete silver waterfall ribbons, dense rainforest, a black-sand coastal glimpse, and a large unbranded fictional civilian rescue vessel visible offshore through the open valley. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: fictional coast-guard rescue-vessel couture. The theme and Saint Vincent and the Grenadines location must both be immediate foreground reads. Dark View Falls reads immediately through its two cascades, volcanic cliffs, rainforest and northwest-coast setting. The vessel is a fictional civilian design without copied service markings. Stored scene rolls: weather 64=dense rolling fog; mascot state 52=MAX only; mascot holder selector 33=Radiance; odd prop 11=active; odd holder 45=Radiance; odd family 67=kinetic umbrella with rotating mirrored petals; pole 22=inactive; rainbow-only 28=inactive; rainbow hosiery 91=inactive; wearer 47=Radiance; palette 89=original independent rainbow gradient; romance 21; compound 21; hard love 65; mission-prop pose/target 74. Exact wardrobe rolls: Radiance: midriff 97=covered, strapless 34=active, open back 87=inactive; Ellie: midriff 21=visible, strapless 10=active, open back 91=inactive; Alia: midriff 87=covered, strapless 28=active, open back 49=inactive; AI ECE: midriff 89=covered, strapless 18=active, open back 59=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-led seafoam waterfall-ribbon column dress with layered silver cascade fins, a one-sided rainforest corsage, jagged black-cliff hem, and waterfall-drop heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-theme hybrid rescue-orange strapless deck-rail bustier over cobalt asymmetric culottes, with emerald island relief, foldout flotation ribs, stern-step hem, and deck-cleat platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led gold open-back rainforest lattice coat-dress with braided canopy ribs, black volcanic-slab apron, waterfall-bead fringe, and cliff-arch pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led pearl-white lifeboat-cradle sculpted top over charcoal tailored shorts, with silver davit hinges, circular buoy architecture, split wake hem, and launch-rail boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia use hard large waterfall, island, cliff and rainforest motifs. Ellie and ECE visibly use rescue-vessel deck and flotation construction language. Location design vocabulary: complete twin-fall ribbons, Dark View volcanic-cliff strata, rainforest fans, Saint Vincent outline, black-sand arcs, rope-bridge geometry, and Caribbean-current curves. Use respectful secular Saint Vincent and the Grenadines geography through complete island-chain silhouettes, Kingstown harbor arcs, Fort Charlotte stone geometry, Dark View waterfall ribbons, Tobago Cays reef rings, Bequia hills, Admiralty Bay curves, sail forms, volcanic ridges, and Caribbean-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, official badge, agency logo, emergency-service insignia, readable text, alcohol, military imagery, political messaging, or threat framing. Four visibly distinct coherent emotions: Radiance: roll 57=aching romantic longing, performed as aching romantic longing expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 73=betrayal shock, performed as betrayal shock expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 59=aching romantic longing, collision resolver 94 gives distinct performance shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 41=determination, performed as determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 21: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Compound roll 21: Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance. Mandatory hard-love roll 65: a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE holds the isolated route lane. Ellie leads Radiance through a fast partner-dance turn while Alia catches Radiance at the waist and turns the duet into a three-person invitation. The falls and rescue vessel remain equally large and readable. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Radiance left hand links overhead with Ellie right hand and Radiance right hand rests on Alia's shoulder; Ellie right hand stays linked with Radiance and Ellie left hand supports Radiance's forearm; Alia left hand supports Radiance at the waist and Alia right hand rests on Ellie's shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one empty paper route target on a complete sand backstop inside a separate dry closed training lane, isolated from every waterfall, path, tree, person, animal, vessel and camera; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 52=MAX only. Mascot holder selector 33=Radiance. Render only the stored mascot state and stored holder on a dry padded viewing platform far from the falls, odd prop and mission-prop lane. When both appear, show one supervised nose-to-nose ribbon game. Odd-prop roll is active. Exactly Radiance owns and creatively integrates one kinetic umbrella with rotating mirrored petals into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render dense rolling fog cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1370": {
+      "scene": 1370,
+      "mode": "theme-led original",
+      "theme": "fictional coast-guard rescue-vessel couture",
+      "landmark": "a broad dry floating observation deck in Tobago Cays Marine Park with the complete horseshoe reef, brilliant turquoise lagoon, Petit Tabac and the uninhabited cays large behind the group, distant sea turtles outside every prop line, and a full unbranded fictional civilian rescue vessel integrated beside the deck",
+      "motifs": "location-only Tobago Cays reef ring, turquoise lagoon bands, uninhabited-cay silhouettes, sea-current arcs, coral fans, and sail geometry",
+      "culture": "Tobago Cays and the Grenadines island group dominate the country read through reef, lagoon and cays. All outfits are unrelated fictional vessel-engineering originals.",
+      "weather": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-weather",
+        "roll": 58,
+        "result": "snow flurries",
+        "materialized": "the stored snow-flurries weather roll appears as harmless windblown white water-mist flecks in tropical air, never snow accumulation"
+      },
+      "mascotState": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-mascotState",
+        "roll": 62,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-mascotHolder",
+        "roll": 83,
+        "result": "Alia"
+      },
+      "mascotPlan": "Render only the stored mascot state and holder on a secured broad padded deck island far from water edges, wildlife, odd prop and mission-prop lane.",
+      "interestingProp": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-interestingProp",
+        "roll": 37,
+        "active": false,
+        "holder": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1370-interestingPropHolder",
+          "roll": 39,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1370-interestingPropFamily",
+          "roll": 73,
+          "result": "clockwork flower bouquet with slow safe petals"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-poleDanceTheme",
+        "roll": 84,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-rainbowOnly",
+        "roll": 94,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-rainbowHosiery",
+        "roll": 33,
+        "active": false,
+        "wearer": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1370-rainbowHosieryWearer",
+          "roll": 81,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1370-rainbowHosieryPaletteMode",
+          "roll": 83,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-eceMissionProp-poseTargetRoll",
+        "roll": 60
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one empty geometric paper target fixed to a complete thick sand-filled backstop on a separate closed dry deck lane facing away from people, mascots, wildlife, vessel and camera; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one empty geometric paper target fixed to a complete thick sand-filled backstop on a separate closed dry deck lane facing away from people, mascots, wildlife, vessel and camera",
+      "romanceBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-romanceBeat",
+        "roll": 63,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-compoundLoveBeat",
+        "roll": 31,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLoveBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1370-hardLoveBeat",
+        "roll": 11,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Radiance-emotion",
+            "roll": 91,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Radiance-visibleMidriff",
+            "roll": 67,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Radiance-straplessDress",
+            "roll": 56,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Radiance-fullyOpenBack",
+            "roll": 73,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Ellie-emotion",
+            "roll": 75,
+            "result": "contained resentment",
+            "materializedResult": "contained resentment",
+            "performance": "contained resentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Ellie-visibleMidriff",
+            "roll": 23,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Ellie-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Ellie-fullyOpenBack",
+            "roll": 45,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Alia-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Alia-visibleMidriff",
+            "roll": 17,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Alia-straplessDress",
+            "roll": 82,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-Alia-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-AI ECE-emotion",
+            "roll": 43,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-AI ECE-visibleMidriff",
+            "roll": 99,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-AI ECE-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1370-AI ECE-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "contained resentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "brushed-silver hull-plating tulip dress with overlapping opaque riveted petals, rounded bow hem, coral-red chine rails, and propeller-hub heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "cobalt sonar-dome cropped jacket over emerald high-waist sail culottes, with a deliberate narrow midriff, spherical shoulder architecture, sonar-wave hem, and hydrophone platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "pearl-white open-back rescue-cradle coat-dress with orange articulated support ribs, braided suspension seams, split cradle hem, and gimbal pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "charcoal navigation-boom asymmetric jumpsuit with gold telescoping side framework, strapless sculpted upper body, signal-panel peplum, crane-tip hem, and mast-column boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "brushed-silver hull-plating tulip dress with overlapping opaque riveted petals, rounded bow hem, coral-red chine rails, and propeller-hub heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "cobalt sonar-dome cropped jacket over emerald high-waist sail culottes, with a deliberate narrow midriff, spherical shoulder architecture, sonar-wave hem, and hydrophone platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "pearl-white open-back rescue-cradle coat-dress with orange articulated support ribs, braided suspension seams, split cradle hem, and gimbal pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "charcoal navigation-boom asymmetric jumpsuit with gold telescoping side framework, strapless sculpted upper body, signal-panel peplum, crane-tip hem, and mast-column boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE isolates the route lane. Radiance performs a controlled dance dip with Alia while Ellie steps behind Alia and wraps a protective side embrace around both, turning the dip into an unmistakable three-person reconciliation. The vessel and reef ring remain complete foreground structures.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Radiance left hand supports Alia's upper back and Radiance right hand holds Alia's near hand",
+        "Alia left hand stays linked with Radiance and Alia right arm supports Radiance at the waist",
+        "Ellie left hand rests on Alia's shoulder and Ellie right hand closes around Radiance's far waist"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry floating observation deck in Tobago Cays Marine Park with the complete horseshoe reef, brilliant turquoise lagoon, Petit Tabac and the uninhabited cays large behind the group, distant sea turtles outside every prop line, and a full unbranded fictional civilian rescue vessel integrated beside the deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: fictional coast-guard rescue-vessel couture. The theme and Saint Vincent and the Grenadines location must both be immediate foreground reads. Tobago Cays and the Grenadines island group dominate the country read through reef, lagoon and cays. All outfits are unrelated fictional vessel-engineering originals. Stored scene rolls: weather 58=snow flurries; mascot state 62=neither mascot; mascot holder selector 83=Alia; odd prop 37=inactive; odd holder 39=Radiance; odd family 73=clockwork flower bouquet with slow safe petals; pole 84=inactive; rainbow-only 94=inactive; rainbow hosiery 33=inactive; wearer 81=AI ECE; palette 83=original independent rainbow gradient; romance 63; compound 31; hard love 11; mission-prop pose/target 60. Exact wardrobe rolls: Radiance: midriff 67=covered, strapless 56=inactive, open back 73=inactive; Ellie: midriff 23=visible, strapless 12=active, open back 45=inactive; Alia: midriff 17=visible, strapless 82=inactive, open back 95=inactive; AI ECE: midriff 99=covered, strapless 84=inactive, open back 5=active. Exact outfit fingerprints, no substitutions: Radiance: brushed-silver hull-plating tulip dress with overlapping opaque riveted petals, rounded bow hem, coral-red chine rails, and propeller-hub heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: cobalt sonar-dome cropped jacket over emerald high-waist sail culottes, with a deliberate narrow midriff, spherical shoulder architecture, sonar-wave hem, and hydrophone platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: pearl-white open-back rescue-cradle coat-dress with orange articulated support ribs, braided suspension seams, split cradle hem, and gimbal pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: charcoal navigation-boom asymmetric jumpsuit with gold telescoping side framework, strapless sculpted upper body, signal-panel peplum, crane-tip hem, and mast-column boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene: hull plating, sonar domes, rescue cradles and navigation booms produce four unrelated silhouettes while Tobago Cays remains equally foregrounded. Location design vocabulary: location-only Tobago Cays reef ring, turquoise lagoon bands, uninhabited-cay silhouettes, sea-current arcs, coral fans, and sail geometry. Use respectful secular Saint Vincent and the Grenadines geography through complete island-chain silhouettes, Kingstown harbor arcs, Fort Charlotte stone geometry, Dark View waterfall ribbons, Tobago Cays reef rings, Bequia hills, Admiralty Bay curves, sail forms, volcanic ridges, and Caribbean-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, official badge, agency logo, emergency-service insignia, readable text, alcohol, military imagery, political messaging, or threat framing. Four visibly distinct coherent emotions: Radiance: roll 91=anger, performed as anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 75=contained resentment, performed as contained resentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 5=tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 43=determination, performed as determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 63: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Compound roll 31: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Mandatory hard-love roll 11: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE isolates the route lane. Radiance performs a controlled dance dip with Alia while Ellie steps behind Alia and wraps a protective side embrace around both, turning the dip into an unmistakable three-person reconciliation. The vessel and reef ring remain complete foreground structures. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Radiance left hand supports Alia's upper back and Radiance right hand holds Alia's near hand; Alia left hand stays linked with Radiance and Alia right arm supports Radiance at the waist; Ellie left hand rests on Alia's shoulder and Ellie right hand closes around Radiance's far waist. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one empty geometric paper target fixed to a complete thick sand-filled backstop on a separate closed dry deck lane facing away from people, mascots, wildlife, vessel and camera; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 62=neither mascot. Mascot holder selector 83=Alia. Render only the stored mascot state and holder on a secured broad padded deck island far from water edges, wildlife, odd prop and mission-prop lane. Odd-prop roll 37 is inactive. Do not add any bizarre secondary prop; stored inactive holder 39=Radiance and family 73=clockwork flower bouquet with slow safe petals remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render the stored snow-flurries weather roll appears as harmless windblown white water-mist flecks in tropical air, never snow accumulation cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1371": {
+      "scene": 1371,
+      "mode": "theme-led original",
+      "theme": "fictional coast-guard rescue-vessel couture",
+      "landmark": "a broad dry harbor terrace above Port Elizabeth on Bequia with complete Admiralty Bay, steep green hills, protected anchorage, colorful waterfront roofs kept distant, sailboats outside every prop line, Princess Margaret shoreline, and a large unbranded fictional civilian rescue vessel moored prominently below",
+      "motifs": "location-only Bequia hill contours, Admiralty Bay horseshoe, protected-anchorage arcs, sail triangles, coastal-woodland fans, and Grenadines current lines",
+      "culture": "Bequia reads through Port Elizabeth, Admiralty Bay, green hills, protected coves and maritime setting. Four structurally unrelated rescue-vessel concepts carry the theme.",
+      "weather": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-weather",
+        "roll": 65,
+        "result": "dense rolling fog",
+        "materialized": "dense rolling fog"
+      },
+      "mascotState": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-mascotState",
+        "roll": 57,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-mascotHolder",
+        "roll": 98,
+        "result": "Alia"
+      },
+      "mascotPlan": "Render only the stored mascot state and stored holder on a dry padded bench far from the mission prop, odd prop, harbor edge and water. When both appear, show PAWS and MAX playing gently together.",
+      "interestingProp": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-interestingProp",
+        "roll": 42,
+        "active": false,
+        "holder": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1371-interestingPropHolder",
+          "roll": 32,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1371-interestingPropFamily",
+          "roll": 42,
+          "result": "antique-style diving helmet display shell"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-poleDanceTheme",
+        "roll": 65,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-rainbowOnly",
+        "roll": 1,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-rainbowHosiery",
+        "roll": 44,
+        "active": false,
+        "wearer": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1371-rainbowHosieryWearer",
+          "roll": 76,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch337-saint-vincent-and-the-grenadines-scene1371-rainbowHosieryPaletteMode",
+          "roll": 48,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-eceMissionProp-poseTargetRoll",
+        "roll": 19
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one empty paper route target fixed to a complete sand backstop on a separate closed terrace lane away from people, animals, boats, roofs, trees and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one empty paper route target fixed to a complete sand backstop on a separate closed terrace lane away from people, animals, boats, roofs, trees and camera",
+      "romanceBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-romanceBeat",
+        "roll": 60,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-compoundLoveBeat",
+        "roll": 38,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "hardLoveBeat": {
+        "key": "batch337-saint-vincent-and-the-grenadines-scene1371-hardLoveBeat",
+        "roll": 2,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Radiance-emotion",
+            "roll": 98,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Radiance-visibleMidriff",
+            "roll": 84,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Radiance-straplessDress",
+            "roll": 31,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Radiance-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Ellie-emotion",
+            "roll": 24,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Ellie-visibleMidriff",
+            "roll": 82,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Ellie-straplessDress",
+            "roll": 17,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Ellie-fullyOpenBack",
+            "roll": 18,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Alia-emotion",
+            "roll": 56,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Alia-visibleMidriff",
+            "roll": 82,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Alia-straplessDress",
+            "roll": 69,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-Alia-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-AI ECE-emotion",
+            "roll": 78,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-AI ECE-visibleMidriff",
+            "roll": 52,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-AI ECE-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch337-saint-vincent-and-the-grenadines-scene1371-AI ECE-fullyOpenBack",
+            "roll": 60,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "defiance expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "calm contentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "deep sadness expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "rescue-orange wave-piercer cape-dress with a silver split-bow framework, emerald wake pleats, forked hull hem, and bow-foil heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "volcanic-charcoal engine-room lattice culotte jumpsuit with gold gear ribs, cobalt vent panels, squared machinery hem, and turbine-cage boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "seafoam inflatable-sponson sculpted dress with opaque tubular side folds, open braided back, coral-red pressure-valve corsage, buoyant arc hem, and valve-cap pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "pearl-white chart-table apron coat over fitted cobalt shorts with a deliberate narrow midriff, articulated map-plane panels, asymmetric compass hem, and telescoping table-leg platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "rescue-orange wave-piercer cape-dress with a silver split-bow framework, emerald wake pleats, forked hull hem, and bow-foil heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "volcanic-charcoal engine-room lattice culotte jumpsuit with gold gear ribs, cobalt vent panels, squared machinery hem, and turbine-cage boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "seafoam inflatable-sponson sculpted dress with opaque tubular side folds, open braided back, coral-red pressure-valve corsage, buoyant arc hem, and valve-cap pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "pearl-white chart-table apron coat over fitted cobalt shorts with a deliberate narrow midriff, articulated map-plane panels, asymmetric compass hem, and telescoping table-leg platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE anchors the isolated route lane. Ellie sits on a broad stable bench and pulls Alia into a close seated embrace while Radiance approaches from behind, takes Ellie's free hand, and invites both women up into a moving dance. Admiralty Bay and the rescue vessel dominate separate foreground layers.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Ellie left hand supports Alia at the waist and Ellie right hand links with Radiance",
+        "Alia left hand rests on Ellie's shoulder and Alia right hand supports Ellie at the forearm",
+        "Radiance left hand links with Ellie and Radiance right hand rests on Alia's shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry harbor terrace above Port Elizabeth on Bequia with complete Admiralty Bay, steep green hills, protected anchorage, colorful waterfront roofs kept distant, sailboats outside every prop line, Princess Margaret shoreline, and a large unbranded fictional civilian rescue vessel moored prominently below. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: fictional coast-guard rescue-vessel couture. The theme and Saint Vincent and the Grenadines location must both be immediate foreground reads. Bequia reads through Port Elizabeth, Admiralty Bay, green hills, protected coves and maritime setting. Four structurally unrelated rescue-vessel concepts carry the theme. Stored scene rolls: weather 65=dense rolling fog; mascot state 57=neither mascot; mascot holder selector 98=Alia; odd prop 42=inactive; odd holder 32=Alia; odd family 42=antique-style diving helmet display shell; pole 65=inactive; rainbow-only 1=active; rainbow hosiery 44=inactive; wearer 76=AI ECE; palette 48=country-palette rainbow-like gradient; romance 60; compound 38; hard love 2; mission-prop pose/target 19. Exact wardrobe rolls: Radiance: midriff 84=covered, strapless 31=active, open back 96=inactive; Ellie: midriff 82=covered, strapless 17=active, open back 18=active; Alia: midriff 82=covered, strapless 69=inactive, open back 34=inactive; AI ECE: midriff 52=covered, strapless 87=inactive, open back 60=inactive. Exact outfit fingerprints, no substitutions: Radiance: rescue-orange wave-piercer cape-dress with a silver split-bow framework, emerald wake pleats, forked hull hem, and bow-foil heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: volcanic-charcoal engine-room lattice culotte jumpsuit with gold gear ribs, cobalt vent panels, squared machinery hem, and turbine-cage boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: seafoam inflatable-sponson sculpted dress with opaque tubular side folds, open braided back, coral-red pressure-valve corsage, buoyant arc hem, and valve-cap pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: pearl-white chart-table apron coat over fitted cobalt shorts with a deliberate narrow midriff, articulated map-plane panels, asymmetric compass hem, and telescoping table-leg platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene: wave-piercer hull, engine-room lattice, inflatable-sponson folds and chart-table geometry create four distinct outfits. Admiralty Bay stays equally large. Location design vocabulary: location-only Bequia hill contours, Admiralty Bay horseshoe, protected-anchorage arcs, sail triangles, coastal-woodland fans, and Grenadines current lines. Use respectful secular Saint Vincent and the Grenadines geography through complete island-chain silhouettes, Kingstown harbor arcs, Fort Charlotte stone geometry, Dark View waterfall ribbons, Tobago Cays reef rings, Bequia hills, Admiralty Bay curves, sail forms, volcanic ridges, and Caribbean-current bands. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, official badge, agency logo, emergency-service insignia, readable text, alcohol, military imagery, political messaging, or threat framing. Four visibly distinct coherent emotions: Radiance: roll 98=defiance, performed as defiance expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 24=calm contentment, performed as calm contentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 56=aching romantic longing, performed as aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 78=deep sadness, performed as deep sadness expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 60: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Compound roll 38: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Mandatory hard-love roll 2: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the isolated route lane. Ellie sits on a broad stable bench and pulls Alia into a close seated embrace while Radiance approaches from behind, takes Ellie's free hand, and invites both women up into a moving dance. Admiralty Bay and the rescue vessel dominate separate foreground layers. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Ellie left hand supports Alia at the waist and Ellie right hand links with Radiance; Alia left hand rests on Ellie's shoulder and Alia right hand supports Ellie at the forearm; Radiance left hand links with Ellie and Radiance right hand rests on Alia's shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one empty paper route target fixed to a complete sand backstop on a separate closed terrace lane away from people, animals, boats, roofs, trees and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 57=neither mascot. Mascot holder selector 98=Alia. Render only the stored mascot state and stored holder on a dry padded bench far from the mission prop, odd prop, harbor edge and water. When both appear, show PAWS and MAX playing gently together. Odd-prop roll 42 is inactive. Do not add any bizarre secondary prop; stored inactive holder 32=Alia and family 42=antique-style diving helmet display shell remain audit-only. Pole theme is inactive. No pole. Rainbow-only is active across all four structurally distinct outfits while preserving the scene's country-led or theme-led balance. Render dense rolling fog cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "batch": 493,
+  "country": "Singapore",
+  "verifiedAtUtc": "2026-09-06T06:42:21.3987458Z",
+  "state": "closure-content-remote-verified-ready-for-lebanon-preparation",
+  "contentCommit": "f05e3688f43351e65bc4c352f138e1236aff3b59",
+  "branch": "agent/starlight-progress-archive",
+  "remoteUrl": "https://github.com/InternalAgencyIO/InternalAgency.git",
+  "originHead": "f05e3688f43351e65bc4c352f138e1236aff3b59",
+  "prHead": "f05e3688f43351e65bc4c352f138e1236aff3b59",
+  "pr": {"number": 13, "url": "https://github.com/InternalAgencyIO/InternalAgency/pull/13", "state": "open", "draft": true},
+  "localOriginPrEqual": true,
+  "lfs": {
+    "closureCommitNewObjectsUploaded": 3,
+    "closureCommitUploadBytesDisplay": "7.5 MB",
+    "newCommitObjectsFsck": "OK",
+    "dryRunPendingObjects": 0,
+    "wholeRepositoryFsck": "historical sparse working-copy pointer targets are absent locally and the broad check reported openError entries",
+    "wholeRepositoryConditionAffectsBatch493": false,
+    "batch493ClosurePointersPresentAndScopedFsckOk": true
+  },
+  "verification": {
+    "closureJsonParsed": true,
+    "editorialTestsPassed": 5,
+    "editorialTestsFailed": 0,
+    "providerManifestExact": true,
+    "providerManifestFileCount": 19,
+    "providerManifestTotalBytes": 3128731,
+    "providerManifestInventorySha256": "524031E71709C1EE97519CF992B76202FC1A972AAFC40DE177E1F300FF280FAB",
+    "closureManifestExact": true,
+    "closureManifestFileCount": 26,
+    "closureManifestTotalBytes": 10691470,
+    "closureManifestInventorySha256": "AAA4CCFBD924F1D112B9FD32F2B80A28023560B1D770FC47BBA8728C3E95292F",
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "selectedAssetMatchesOutsideBatch": [0, 0, 0, 0],
+    "selectedAssetCanonicalXLedgerMatches": [0, 0, 0, 0],
+    "scannedRepoImageCount": 5079,
+    "canonicalXPostCount": 199,
+    "singaporePriorPostCount": 0,
+    "lebanonPriorPostCount": 0,
+    "scopedPathsOnly": true,
+    "noNewAbsoluteMachinePathsOrSecretLikeStrings": true
+  },
+  "selectedSha256": [
+    "6B087C8CFC3761B01AD38E0A5E82EA3C9F326CDCCB76F81DCC07F4CA4B4D0CD9",
+    "8217607086B37ED3F7DD34DA5E41977AA3431C6FD66982C77339B1F92C8954AC",
+    "A4879662AD3E134B843D39B7FAE7F4217A39E4E990A462ED1C207C492F41EF0C",
+    "7DB693A9BFC553AB2333C6B0D6D26ED74C5B60F522CE477DAA87EE59C0A05754"
+  ],
+  "browserState": {
+    "metaRelatedTabCount": 4,
+    "metaTerminalPromptUrlCount": 4,
+    "xComposerCount": 1,
+    "xComposerBlank": true,
+    "xSignedInAccount": "@dogramaci",
+    "otherTabCount": 0,
+    "visibleInAppBrowserOnly": true
+  },
+  "canonicalContradiction": "The old Cuba automation instruction remains superseded by Tanzania preparation and all later remote-verified checkpoints. Singapore is closed; Lebanon is next. The whole-repository LFS fsck warning reflects old sparse local pointer targets, while the Batch 493 closure commit passes its scoped fsck and has zero pending uploads.",
+  "preservedUntrackedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "nextSafeAction": "Commit and remotely verify this checkpoint, then prepare fresh Lebanon scenes with unused scene numbers, deterministic fixed rolls and exact prompt hashes before closing or replacing any terminal Singapore Meta tab. Keep the blank @dogramaci X composer open."
+}

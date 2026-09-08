@@ -1,0 +1,47 @@
+{
+  "schema": "world-195x4-scene-897-spatial-disambiguation-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-spatial-11.txt",
+  "promptSha256": "911513ffe77add1b86f37cb52e269519e6f4f1d7fbb23f8962f059f4d0e652d3",
+  "blockedCorpusSha256": "a2bb0aa7c1f09d22e4c1aa8cf1a9ba675aad929c19d45e0442a68c923ee980bf",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-a2bb0aa7c1f09d22e4c1aa8cf1a9ba675aad929c19d45e0442a68c923ee980bf.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No moderation block; visual disambiguation only.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "spatialDisambiguation": {
+    "RadianceCapeClosures": "waist-level only, no shoulder clasp",
+    "AliaClasp": "one large gold clasp only on near red shoulder",
+    "forehead": "Ellie-ECE gentle contact",
+    "EllieHand": "right glove to Radiance left waist-level cape edge",
+    "AliaHand": "left hand to Radiance right waist-level cape edge"
+  },
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-10/897-concise-10-rejected.png",
+    "bytes": 2575540,
+    "sha256": "b151230314dc7cc4a2a89c566dffe408fb1a3b13935ad17d1e59f74d166127cb",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Radiance raises her glove but adjusts the clasp on her own cape instead of Alia's shoulder clasp",
+      "Ellie and ECE remain close but their foreheads do not meet",
+      "Ellie's styling hand does not visibly reach Radiance's left edge"
+    ]
+  },
+  "preserved": {
+    "allFourteenTriggeredRolls": true,
+    "originalTriangle": true,
+    "navelJewel": true,
+    "exactlyTwoVisibleNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalECEConnection": true,
+    "pawsLapCopilot": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

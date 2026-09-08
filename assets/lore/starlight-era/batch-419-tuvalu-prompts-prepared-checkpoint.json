@@ -1,0 +1,61 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T14:51:27.0477318Z",
+  "authoritative_parent_commit": "45abc2c74994ebb0b14a08dfb151db452732fd86",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 419,
+  "country": "Tuvalu",
+  "scene_range": [
+    1696,
+    1697,
+    1698,
+    1699
+  ],
+  "source_precedent": {
+    "batch": 348,
+    "country": "Tuvalu",
+    "scenes": [
+      1412,
+      1413,
+      1414,
+      1415
+    ]
+  },
+  "completed_country_cycles_since_last_x_cycle": 8,
+  "accepted_canonical_count_for_country": 0,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "prompts-prepared-awaiting-browser-staging",
+  "camera_roll_method": "FNV-1a over batch419-tuvalu-sceneNNNN-camera-closeness, modulo 100 plus 1",
+  "camera_roll_values": {
+    "1696": 53,
+    "1697": 54,
+    "1698": 71,
+    "1699": 96
+  },
+  "prompt_sha256": {
+    "1696": "C6AFA501C84C37568E9B642BEB5C50456563C1D37299129C9695660490A7863C",
+    "1697": "505BF2DCC8652E565FB58D9A033F2BAD18AC89538F855BB94701FF001C99FCBE",
+    "1698": "758DD6A05EA4EFE4A82751401F04C383A5DED6EC9BCABE6976A2352D8415964C",
+    "1699": "7BA982D008449818AEF7DEFB99D8888F228105F39A5DD87FAFB1A92EF10382EF"
+  },
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "asset": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "asset": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "asset": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "next_action": "Stage scenes 1696-1699 in four fresh visible in-app Meta tabs. Upload and Send require fresh immediate user confirmation for this exact batch."
+}

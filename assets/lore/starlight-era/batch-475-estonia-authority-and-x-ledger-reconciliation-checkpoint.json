@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "batch": 475,
+  "country": "Estonia",
+  "state": "pre-dispatch-authority-reconciled-next-europe-gap-verified",
+  "observedAtUtc": "2026-08-31T21:13:01.0864145Z",
+  "authorityBaseHead": "e7ee67acc3ecbc69f6539fd0944a58f09fbff7de",
+  "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+  "canonicalReconciliation": {
+    "canonicalWorldPosts": 190,
+    "latestWorldPostUrl": "https://x.com/dogramaci/status/2094530060388536630",
+    "latestWorldPostUrlOccurrences": 1,
+    "batch474LiveRemoteVerified": true,
+    "remainingContradiction": false,
+    "note": "Seven newer non-World X URLs discovered before Batch 474 publication remain preserved in the Batch 474 live-X authority reconciliation checkpoint and do not claim country coverage."
+  },
+  "coverage": {
+    "Cyprus": 2,
+    "Czechia": 5,
+    "Denmark": 1,
+    "Estonia": 0,
+    "Finland": 0
+  },
+  "nextCountryResolution": {
+    "priority": "current canonical alphabetical Europe zero-post gap fill",
+    "afterDenmark": "Estonia is the first remaining zero-post European country; Finland follows and also remains uncovered.",
+    "nextCountry": "Estonia",
+    "nextBatch": 475,
+    "nextSceneRange": [1927, 1930],
+    "priorEstoniaRenderHistory": "Older Estonia render batches exist, but no Estonia URL exists in the canonical top-level X posts array. Fresh RAZE stills remain required for the current postable-country-pair run."
+  },
+  "providerAndSafetyAuthority": {
+    "provider": "Meta AI only through the visible in-app Browser until Grok credits return",
+    "metaMode": "Thinking",
+    "visibleMetaLanes": 4,
+    "visibleXComposers": 1,
+    "orderedIdentityAnchors": [938, 936, 937],
+    "maximumMetaRetriesPerScene": 2,
+    "chatgptStrongShorteningPassesPerTechnicallyValidSelectedOccurrence": 1,
+    "relaxedAcceptance": "After the one strong shortening request, accept nearly every public-safe non-corrupt result; retry Meta only for corrupt, duplicate, unsafe or explicit, no-image, or materially wrong-cast output.",
+    "currentAuthorization": "authorized for all go, authorized for all similar commands"
+  },
+  "guardian": {
+    "automationId": "starlight-internalagency-24-7-guardian",
+    "existingGuardianPreserved": true,
+    "viewResult": "The Codex automation surface rendered the existing guardian card but did not expose its full editable schedule to the model.",
+    "scheduleMutation": false,
+    "pauseResumeMutation": false,
+    "promptMutation": false,
+    "newAutomationTaskThreadWorkerSubagentOrGuardianCreated": false,
+    "historicalCubaOrTanzaniaDispatchPermitted": false
+  },
+  "browser": {
+    "currentTabCount": 1,
+    "currentVisibleTab": "https://x.com/compose/post",
+    "blankXComposerPreserved": true,
+    "postButtonDisabled": true
+  },
+  "nextSafeAction": "Prepare and validate the exact four Estonia prompts and deterministic rolls, commit and prove remote/PR/LFS parity, then open four fresh Meta lanes beside the one blank X composer. Verify leesha007, Thinking, exact prompts and anchors 938, 936, 937 in that order before any Send."
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "batch": 503,
+  "auditedAtUtc": "2026-09-07T04:39:43.324Z",
+  "requestedCadenceMinutes": 45,
+  "scope": "This continuation from guardian creation through Kuwait-Panama publication; audit became due during the bounded publication work and is completed before handoff.",
+  "metrics": {
+    "metaInitialSends": 4,
+    "metaAssistantRetries": 0,
+    "observedMetaRawFiles": 19,
+    "uniqueMetaRawBytes": 15,
+    "missingObservedOriginals": 0,
+    "chatgptInvocations": 4,
+    "chatgptReturnedFiles": 4,
+    "chatgptBlockedInvocations": 0,
+    "xUploads": 2,
+    "xPostActivations": 2,
+    "xConfirmedPosts": 2,
+    "duplicateTransmissions": 0,
+    "allPairMediaFilesFreshRemoteVerified": 40
+  },
+  "findings": [
+    {
+      "kind": "camera-drift",
+      "severity": "soft",
+      "evidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-selection-qa.json",
+      "observation": "All4 outputs were wider than their fixed camera crop targets. Two extreme-close rolls19 and9 were not realized precisely. Pose2039/2040 also differs from exact plan.",
+      "action": "Keep the fixed rolls and accepted technically usable outputs. For future unsubmitted prompts, prioritize the exact frozen crop and contact wording; never redraw rolls or regenerate these completed scenes."
+    },
+    {
+      "kind": "x-accessibility-control",
+      "severity": "bounded-recovery",
+      "observation": "Add descriptions click did not open the panel on first activation; visible link Enter worked. Next image Enter advanced but introduced a newline into the new empty ALT field; this was overwritten before saving.",
+      "action": "Use the visible Add descriptions link with Enter if the first click does not open it; use Next image click and verify each new editor state. Never repeat Post based on delayed navigation."
+    },
+    {
+      "kind": "x-media-assertion",
+      "severity": "fixed-local-check",
+      "observation": "Media groups acquire the actual ALT as their accessible name after descriptions are saved. A generic Media-group count therefore falsely failed.",
+      "action": "Validate four Remove media buttons, four ALT badges, and four exact ALT-named groups, plus screenshot and published photo1-4 mapping."
+    },
+    {
+      "kind": "archive-throughput",
+      "severity": "pass",
+      "observation": "All exposed internal originals were captured with supported visible image downloadMedia and prearmed download events. No provider direct HTTP or hidden input used.",
+      "action": "Retain this supported download method and avoid full-repository LFS scans."
+    },
+    {
+      "kind": "publication-throughput",
+      "severity": "pass",
+      "observation": "Each ready post succeeded with one Post Enter activation; URLs and exact ALT endpoint order were recorded immediately.",
+      "action": "Keep bounded2+2 reservations, preflight parity and one-shot intent locks."
+    }
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newWorkersCreated": false,
+  "nextAuditAfterUtc": "2026-09-07T05:24:43.324Z"
+}

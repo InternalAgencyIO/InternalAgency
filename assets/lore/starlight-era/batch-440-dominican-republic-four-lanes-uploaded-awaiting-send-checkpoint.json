@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four_lanes_uploaded_awaiting_send",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 440,
+  "country": "Dominican Republic",
+  "sourceBatchId": 369,
+  "status": "uploaded_awaiting_action_time_send_confirmation",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "sceneId": 1780,
+      "sourceSceneId": 1496,
+      "location": "Santo Domingo Colonial City and Ozama River overlook",
+      "cameraRoll": 58,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-440/scene-1780-prompt.txt",
+      "promptSha256": "4F066D1193196A660D45B5116EDC8FF861F0D9E645667EF8C32026AFB66C3023",
+      "promptBytes": 7130,
+      "uploadComplete": true,
+      "sendClicked": false,
+      "tabId": "39",
+      "promptHashVerifiedBeforeSend": true,
+      "orderedUploadSceneIds": [
+        938,
+        936,
+        937
+      ]
+    },
+    {
+      "sceneId": 1781,
+      "sourceSceneId": 1497,
+      "location": "Puerto Plata and Mount Isabel de Torres overlook",
+      "cameraRoll": 62,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-440/scene-1781-prompt.txt",
+      "promptSha256": "8B1DC35D845D89F7A76F321E4401FD08B369CC2B584EF617C76E39004CE2C7B7",
+      "promptBytes": 6991,
+      "uploadComplete": true,
+      "sendClicked": false,
+      "tabId": "40",
+      "promptHashVerifiedBeforeSend": true,
+      "orderedUploadSceneIds": [
+        938,
+        936,
+        937
+      ]
+    },
+    {
+      "sceneId": 1782,
+      "sourceSceneId": 1498,
+      "location": "Samana Bay and Los Haitises overlook",
+      "cameraRoll": 59,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-440/scene-1782-prompt.txt",
+      "promptSha256": "A71F4DEDB3B31AC716CC75570055C3E6E817DCA25749BE76A35A072F6B7BFF55",
+      "promptBytes": 6970,
+      "uploadComplete": true,
+      "sendClicked": false,
+      "tabId": "41",
+      "promptHashVerifiedBeforeSend": true,
+      "orderedUploadSceneIds": [
+        938,
+        936,
+        937
+      ]
+    },
+    {
+      "sceneId": 1783,
+      "sourceSceneId": 1499,
+      "location": "Punta Cana and Bavaro Caribbean overlook",
+      "cameraRoll": 64,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-440/scene-1783-prompt.txt",
+      "promptSha256": "4F17A0D3BBB6A89BE6D8F2905CFB3CEF3307B7B4A5C5165FD94C1AA6434CAC8F",
+      "promptBytes": 6905,
+      "uploadComplete": true,
+      "sendClicked": false,
+      "tabId": "42",
+      "promptHashVerifiedBeforeSend": true,
+      "orderedUploadSceneIds": [
+        938,
+        936,
+        937
+      ]
+    }
+  ],
+  "uploadAuthorization": {
+    "userAuthorizedAllUploadsFor24Hours": true,
+    "authorizationScope": "authoritative fictional face anchors to Meta AI staging only"
+  },
+  "confirmationRequired": {
+    "action": "Click four Meta AI Send buttons exactly once",
+    "sceneIds": [
+      1780,
+      1781,
+      1782,
+      1783
+    ],
+    "freshActionTimeConfirmation": true
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 9,
+    "due": false
+  },
+  "xBacklog": {
+    "eligibleUnpublishedSceneIds": [
+      1753
+    ],
+    "pairReady": false
+  },
+  "checkpointedAtUtc": "2026-08-27T17:22:47.270Z"
+}

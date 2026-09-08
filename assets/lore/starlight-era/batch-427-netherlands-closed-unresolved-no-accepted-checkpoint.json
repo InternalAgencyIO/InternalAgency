@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "country-closed-unresolved-no-accepted",
+  "createdAtUtc": "2026-08-27T07:24:17.198Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 427,
+  "country": "Netherlands",
+  "status": "closed-unresolved-no-accepted-images",
+  "terminalCheckpoint": "assets/lore/starlight-era/batch-427-netherlands-four-lanes-terminal-captured-checkpoint.json",
+  "sceneOutcomes": [
+    {
+      "scene": 1728,
+      "outcome": "output-hard-unusable",
+      "qaDisposition": "hard-unusable-camera-beacon-and-hand-inventory-lock-fail",
+      "providerUrl": "https://www.meta.ai/prompt/2014d326-6d31-4b65-acaf-03cea97d4ae3"
+    },
+    {
+      "scene": 1729,
+      "outcome": "output-hard-unusable",
+      "qaDisposition": "hard-unusable-hand-inventory-and-choreography-lock-fail",
+      "providerUrl": "https://www.meta.ai/prompt/d7ef93e1-0c6c-49ca-8d88-45830bae09f4"
+    },
+    {
+      "scene": 1730,
+      "outcome": "explicit-no-bytes-refusal",
+      "qaDisposition": "explicit-no-byte-refusal",
+      "providerUrl": "https://www.meta.ai/prompt/151d8fe8-c71c-446d-94cf-5475e49cbe60"
+    },
+    {
+      "scene": 1731,
+      "outcome": "output-hard-unusable",
+      "qaDisposition": "hard-unusable-hand-inventory-lock-fail",
+      "providerUrl": "https://www.meta.ai/prompt/41819757-4a40-421c-8af4-9c02bd4bf018"
+    }
+  ],
+  "acceptedCount": 0,
+  "requiredAcceptedCount": 4,
+  "reopenAuthorized": false,
+  "boundedRetryAuthorized": false,
+  "noRepetition": true,
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 7,
+    "publishDue": false,
+    "threshold": 10
+  },
+  "nextQueue": {
+    "country": "Cambodia",
+    "batch": 428,
+    "scenes": [
+      1732,
+      1733,
+      1734,
+      1735
+    ],
+    "sourceBatch": 357,
+    "sourceCheckpoint": "assets/lore/starlight-era/batch-357-cambodia-coast-guard-rescue-vessel-checkpoint.json"
+  }
+}

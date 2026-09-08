@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four-lanes-dispatched",
+  "createdAtUtc": "2026-08-27T07:13:03.507Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "sourceCommit": "18f43d6fc3b76cd0bf402df6b108b7598a8ff3ce",
+  "batch": 427,
+  "country": "Netherlands",
+  "status": "four-provider-occurrences-confirmed-monitoring",
+  "source": {
+    "batch": 356,
+    "scenes": [
+      1444,
+      1445,
+      1446,
+      1447
+    ],
+    "checkpoint": "assets/lore/starlight-era/batch-356-netherlands-helicopter-checkpoint.json"
+  },
+  "scenes": [
+    1728,
+    1729,
+    1730,
+    1731
+  ],
+  "confirmation": {
+    "userText": "good authorized go",
+    "observedAtUtc": "2026-08-27T07:05:36.9411577Z",
+    "standingUploadAuthorization": {
+      "grantedAtUtc": "2026-08-27T04:05:01.069499Z",
+      "expiresAtUtc": "2026-08-28T04:05:01.069499Z"
+    },
+    "consumedAtUtc": "2026-08-27T07:11:42.547Z",
+    "appliesTo": "Batch 427 Netherlands ordered anchor uploads and one initial Send for each of scenes 1728-1731"
+  },
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "preDispatchVerification": {
+    "signedInMetaAccount": "leesha007",
+    "laneCount": 4,
+    "allPromptHashesMatched": true,
+    "allPromptLengthsMatched": true,
+    "everyLaneHadExactlyThreeAttachments": true,
+    "everyLaneAttachmentOrderMatched": true,
+    "everySendEnabled": true,
+    "verifiedImmediatelyBeforeSend": true
+  },
+  "recoveryEnvelope": {
+    "firstReceiptWatcherFailedBeforeAnySendClick": "playwright_wait_for_url rejected an unsupported RegExp argument",
+    "duplicatePreventionAction": "treated every lane as potentially sent and rebound all four tab ids before any further click",
+    "reboundEvidence": "all four tabs remained at https://www.meta.ai/ with complete prompt, all three attachments, and enabled Send",
+    "recoveredSendPolicy": "one click per rebound tab, no retry"
+  },
+  "dispatch": {
+    "startedAtUtc": "2026-08-27T07:11:42.547Z",
+    "sendClicksCompletedAtUtc": "2026-08-27T07:11:45.659Z",
+    "uploadCount": 12,
+    "sendClickCount": 4,
+    "providerChatCount": 4,
+    "duplicateDispatchCount": 0,
+    "boundedRetryAuthorized": false,
+    "prompts": [
+      {
+        "scene": 1728,
+        "promptFile": "tmp/world-195x4/batch-427/scene-1728-prompt.txt",
+        "promptSha256": "B24869B2B02F110499B3E852B6989D98C3AB2FED78F88ED3D4B94CC086B59A53",
+        "promptLength": 8176,
+        "cameraRoll": 83,
+        "framing": "extreme-wide",
+        "razeWearers": [
+          "Ellie",
+          "AI ECE"
+        ],
+        "jealousAdult": "Ellie",
+        "malePresent": false,
+        "tabId": "7",
+        "providerUrl": "https://www.meta.ai/prompt/2014d326-6d31-4b65-acaf-03cea97d4ae3"
+      },
+      {
+        "scene": 1729,
+        "promptFile": "tmp/world-195x4/batch-427/scene-1729-prompt.txt",
+        "promptSha256": "26B8DECE836832E2FFB9F9DD98E077240F2CD270A414D2B5D20BBF5B0F6E230B",
+        "promptLength": 8234,
+        "cameraRoll": 52,
+        "framing": "intermediate",
+        "razeWearers": [
+          "Alia",
+          "AI ECE"
+        ],
+        "jealousAdult": "Alia",
+        "malePresent": false,
+        "tabId": "8",
+        "providerUrl": "https://www.meta.ai/prompt/d7ef93e1-0c6c-49ca-8d88-45830bae09f4"
+      },
+      {
+        "scene": 1730,
+        "promptFile": "tmp/world-195x4/batch-427/scene-1730-prompt.txt",
+        "promptSha256": "35F6D0A8512821683C54931DC9B8D616850F50EEAEC81020E79A5EDCD4AC8B71",
+        "promptLength": 8651,
+        "cameraRoll": 66,
+        "framing": "intermediate",
+        "razeWearers": [
+          "Ellie",
+          "Alia"
+        ],
+        "jealousAdult": "Radiance",
+        "malePresent": true,
+        "tabId": "9",
+        "providerUrl": "https://www.meta.ai/prompt/151d8fe8-c71c-446d-94cf-5475e49cbe60"
+      },
+      {
+        "scene": 1731,
+        "promptFile": "tmp/world-195x4/batch-427/scene-1731-prompt.txt",
+        "promptSha256": "AECADC3F2B087A3ED630F1F85CF40DE823DB2BED1EB83190C2FF3061189235B8",
+        "promptLength": 8188,
+        "cameraRoll": 21,
+        "framing": "intermediate",
+        "razeWearers": [
+          "Radiance",
+          "Ellie"
+        ],
+        "jealousAdult": "AI ECE",
+        "malePresent": false,
+        "tabId": "10",
+        "providerUrl": "https://www.meta.ai/prompt/41819757-4a40-421c-8af4-9c02bd4bf018"
+      }
+    ]
+  },
+  "providerState": {
+    "scene1728": "monitoring",
+    "scene1729": "monitoring",
+    "scene1730": "monitoring",
+    "scene1731": "monitoring"
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 6,
+    "publishDue": false,
+    "threshold": 10
+  }
+}

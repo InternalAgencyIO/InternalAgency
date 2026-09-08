@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "batch": 506,
+  "auditedAtUtc": "2026-09-07T07:00:51.671Z",
+  "requestedCadenceMinutes": 45,
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/continuation-log-audit-2026-09-07.json",
+  "scope": "Prior Croatia/Georgia second-post closure through Eritrea four confirmed initial sends, complete raw archive and four issued single-edit calls.",
+  "metrics": {
+    "metaInitialSends": 4,
+    "metaHardFailureRetries": 0,
+    "metaConfirmedSessions": 4,
+    "rawFilesSaved": 8,
+    "uniqueRawByteVersions": 4,
+    "missingObservedOriginals": 0,
+    "chatgptInvocations": 4,
+    "chatgptOutcomes": "pending-at-audit",
+    "newXPostsThisBatch": 0,
+    "totalLedgerPosts": 236
+  },
+  "evidence": [
+    "assets/lore/starlight-era/batch-505-croatia-georgia-full-workflow-closure-checkpoint.json",
+    "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-receipt.json",
+    "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/native-raw-archive-manifest.json",
+    "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-source-qa.json",
+    "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-chatgpt-edit-intents.json",
+    "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-edit-preflight-remote-proof.json"
+  ],
+  "findings": [
+    {
+      "kind": "camera-and-roll-drift",
+      "severity": "soft",
+      "observation": "All four Eritrea outputs have more body coverage than their frozen crop descriptions.2054 is closest but still includes thighs. Exact Dutch angles are not realized. Country garment emblems and hosiery-to-footwear separation remain approximate.",
+      "action": "Record actual deviations and preserve exact fixed rolls. Existing one-pass edits keep the source rectangle, perspective and face placement. No seed redraw or aesthetic resend."
+    },
+    {
+      "kind": "throughput-and-archive",
+      "severity": "verified",
+      "observation": "Four supported browser downloads per pair of gallery/inline outputs completed quickly; all eight files are preserved and fresh remote LFS verification matches eleven source/anchor paths.",
+      "action": "Retain proven visible downloadMedia workflow; gallery and inline are independently archived even when byte-identical."
+    },
+    {
+      "kind": "single-edit-boundary",
+      "severity": "in-progress",
+      "observation": "Exactly four built-in edit invocations issued with source plus anchors938,936,937. No outcomes assumed yet.",
+      "action": "Collect and archive every returned image or block receipt; no second invocation for any scene."
+    },
+    {
+      "kind": "local-git-bookkeeping",
+      "severity": "handled",
+      "observation": "A missing var declaration stopped the local command after commit and before push. Read-only HEAD reconciliation identified the successful commit, then one push completed.",
+      "action": "Declare new persistent bindings explicitly. No commit repeat, provider retry or data loss occurred."
+    },
+    {
+      "kind": "guardian-authority-and-holds",
+      "severity": "verified",
+      "observation": "Existing guardian inspected, with no schedule mutation. Newest506 authority supersedes historical Cuba/Tanzania and Kuwait/Panama hints. Protected files all retain their expected hashes.",
+      "action": "Preserve protected Oman tab and Oman/Switzerland holds. Do not create another automation or worker."
+    }
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newWorkersCreated": false,
+  "nextAuditAfterUtc": "2026-09-07T07:45:51.671Z"
+}

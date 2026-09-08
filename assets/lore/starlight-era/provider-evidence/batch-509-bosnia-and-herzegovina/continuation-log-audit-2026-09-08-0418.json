@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "auditedAtUtc": "2026-09-08T04:18:14.201Z",
+  "nextAuditAfterUtc": "2026-09-08T05:03:14.201Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/continuation-log-audit-2026-09-08-0315.json",
+  "guardian": {
+    "id": "starlight-pipeline-guardian",
+    "state": "ACTIVE",
+    "schedule": "Existing ten-minute heartbeat unchanged",
+    "newAutomationCreated": false
+  },
+  "headVerified": "ce6498d083e59b95e2c031c096895c350e20bd39",
+  "xPostCount": 238,
+  "latestXUrls": [
+    "https://x.com/dogramaci/status/2097150739436933540",
+    "https://x.com/dogramaci/status/2097153131444318437"
+  ],
+  "uruguay": {
+    "closed": true,
+    "mediaFiles": 13,
+    "uniqueVersions": 9,
+    "singleEditInvocations": 4,
+    "pngReturns": 3,
+    "blocks": 1
+  },
+  "bosnia": {
+    "confirmedInitialSends": 4,
+    "assistantRetries": 0,
+    "savedFiles": 18,
+    "uniqueImages": 16,
+    "generatedFiles": 12,
+    "uniqueGeneratedVersions": 10,
+    "providerContextReferenceFiles": 6,
+    "sourceQaComplete": true,
+    "hardFailureFiveWomen": [
+      2064
+    ],
+    "saferAlternativePending": [
+      2066
+    ]
+  },
+  "findings": [
+    "2064 final gallery contains five women and fails the four-character hard gate.",
+    "2066 initial archive contains six generated quartet images and six provider context references, not twelve generated variants.",
+    "2066 has no final gallery; terminal safer-alternative response remains authoritative.",
+    "Only protected Oman tab was present at fresh inventory; restored four empty Meta lanes and one empty X composer.",
+    "Four fresh Meta lanes show leesha007 and Thinking. X empty composer shows @dogramaci.",
+    "Provider narration and gallery availability do not substitute for direct cast-count or image-role QA."
+  ],
+  "boundedImprovements": [
+    "Classify visible context references separately from generated variants.",
+    "Count visible bodies and faces before selecting an edit source.",
+    "For2064 spell out four nonduplicated pose roles without changing rolls.",
+    "For2066 use only the explicit offered safer alternative and preserve those exclusions through editing."
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false
+}

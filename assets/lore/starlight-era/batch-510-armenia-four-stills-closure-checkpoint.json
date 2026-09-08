@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "batch": 510,
+  "country": "Armenia",
+  "sceneIds": [
+    2067,
+    2068,
+    2069,
+    2070
+  ],
+  "state": "four-stills-remote-verified-accepted-unpublished",
+  "recordedAtUtc": "2026-09-08T06:29:45.925Z",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-selection-qa.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/native-raw-archive-manifest.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/provider-ledger.json",
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-results.json",
+  "providerSendActivations": 4,
+  "initialSends": 4,
+  "hardFailureRecoveries": 0,
+  "chatgptInvocations": 4,
+  "returnedPngFiles": 2,
+  "attributedEditOutputBlocks": 2,
+  "additionalMetaSendsAllowed": 0,
+  "additionalChatgptInvocationsAllowed": 0,
+  "rawImageFiles": 16,
+  "allArchivedImageFiles": 18,
+  "uniqueArchivedImageVersions": 14,
+  "generatedSceneFiles": 18,
+  "contextReferenceFiles": 0,
+  "allFourAccepted": true,
+  "allRawBytesSaved": true,
+  "allKnownReturnedPngsSaved": true,
+  "archiveException": null,
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0642.json",
+  "guardian": "starlight-pipeline-guardian",
+  "guardianStatus": "ACTIVE",
+  "guardianNextAuditNotBeforeUtc": "2026-09-08T07:29:04.474Z",
+  "providerUrls": [
+    "https://www.meta.ai/prompt/7625f457-5a4f-407c-9ca9-46a003615ef5",
+    "https://www.meta.ai/prompt/a26f9094-bf33-4b65-ad79-41bc48fb46e7",
+    "https://www.meta.ai/prompt/9eacf0a7-b3ac-4efe-9267-d6cc8afe83c0",
+    "https://www.meta.ai/prompt/4509fe50-e166-413e-bb9d-c18defa3b199"
+  ],
+  "newXPostUrls": [],
+  "previousPairXUrls": [
+    "https://x.com/dogramaci/status/2097189559310156192",
+    "https://x.com/dogramaci/status/2097191849538588895"
+  ],
+  "xPostCount": 240,
+  "canonicalContradictions": [
+    "2068 and 2069 single edits were individually blocked at output stage. Each allowance is consumed; original usable sources are retained.",
+    "2070 returned edit expands beyond the close source crop and introduces offscreen lower-body details. It is saved unused; the closer Meta source is selected.",
+    "The provider described exact Dutch/close crops that the actual images do not fully implement. Visual QA, not provider prose, determines the recorded soft deviations."
+  ],
+  "nextCountry": "Namibia",
+  "nextBatchHint": 511,
+  "nextSceneHint": [
+    2071,
+    2072,
+    2073,
+    2074
+  ],
+  "nextSafeAction": "Inspect the latest country cursor, then prepare Namibia Batch511 scenes2071-2074 in the same four visible Meta lanes with new immutable rolls, leesha007, Thinking and exact anchors 938,936,937. Never reopen accepted Armenia scenes or repeat any edit. Armenia can be posted only after an eligible companion country is accepted and all publication gates pass.",
+  "finalPayloadCommit": "f193a0f48d6b6fcd38bb6380b004a80e06d36d74",
+  "finalRemoteVerifiedAtUtc": "2026-09-08T06:39:41.255Z",
+  "allFinalPayloadByteChecksPassed": true,
+  "eligibleForNormalCountryPairing": true,
+  "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-meta-lanes-and-x-ready-handoff.json",
+  "currentActualMetaTabs": [
+    "33",
+    "34",
+    "35",
+    "36"
+  ],
+  "currentActualXTab": "37",
+  "renderInFlight": false
+}

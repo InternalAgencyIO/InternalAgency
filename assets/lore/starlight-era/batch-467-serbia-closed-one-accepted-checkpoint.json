@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "status": "closed-one-accepted-no-x-pair",
+  "sceneRange": [1894, 1897],
+  "acceptedSceneIds": [1895],
+  "selectedAssets": [
+    {
+      "scene": 1895,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1895-serbia-djerdap-gorge-chatgpt-hemline-one-pass.png",
+      "sha256": "D9A43F780EECC2617A2B18E545AAECAE1F796F7795029827AAFA1E94F1A1E2B4",
+      "provider": "ChatGPT image generator one-pass edit"
+    }
+  ],
+  "terminalScenes": [
+    {
+      "scene": 1894,
+      "occurrences": 1,
+      "classification": "explicit-no-byte-refusal"
+    },
+    {
+      "scene": 1896,
+      "occurrences": 3,
+      "classification": "initial-wrong-aspect; retry1-face-mapping-and-choreography-failure; retry2-explicit-no-byte-refusal"
+    },
+    {
+      "scene": 1897,
+      "occurrences": 2,
+      "classification": "initial-Ellie-ECE-face-swap; retry1-explicit-no-byte-refusal"
+    }
+  ],
+  "providerUrls": [
+    "https://www.meta.ai/prompt/24a04fc3-f2b5-4682-83f3-f714ab2539f3",
+    "https://www.meta.ai/prompt/89807d2c-615c-4ccd-83d2-78f1b366b820",
+    "https://www.meta.ai/prompt/5ca1b7d7-b8ff-4014-9cb2-0f42b4115a5d",
+    "https://www.meta.ai/prompt/0e8881a3-b765-4b50-ad41-50c9e49e2cfa",
+    "https://www.meta.ai/prompt/facdb210-6b59-4fee-9932-775e24e2bf32",
+    "https://www.meta.ai/prompt/04f962c0-c92a-4a38-9933-9a31a57831b3",
+    "https://www.meta.ai/prompt/e4e17039-8dc9-4b9e-bd44-b26fe1235c41"
+  ],
+  "providerOccurrenceCount": 7,
+  "rawMetaAssetCount": 5,
+  "chatgptRefinementCount": 5,
+  "browserEvidenceCount": 7,
+  "retryContractSatisfied": true,
+  "xPairEligible": false,
+  "xPairReason": "Only one accepted non-duplicate Serbia asset exists; the required two-image country pair cannot be assembled.",
+  "xPostUrls": [],
+  "nextBatch": 468,
+  "nextCountry": "Bulgaria",
+  "nextSceneRange": [1898, 1901],
+  "nextBatchRule": "Create wholly new scenes and prompt hashes; never reopen or resend Bulgaria scenes 1886-1889."
+}

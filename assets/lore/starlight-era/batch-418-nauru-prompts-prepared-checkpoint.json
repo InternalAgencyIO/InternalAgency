@@ -1,0 +1,97 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T14:13:52.8997026Z",
+  "authoritative_parent_commit": "3ad3b9714fe86f464fc9e22eb6d4ff3af436e3d5",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 418,
+  "country": "Nauru",
+  "scene_range": [
+    1692,
+    1693,
+    1694,
+    1695
+  ],
+  "status": "prompts-prepared-provider-eligible",
+  "campaign_parent_checkpoint": "assets/lore/starlight-era/batch-417-palau-closed-one-accepted-checkpoint.json",
+  "source_precedent": {
+    "batch": 347,
+    "country": "Nauru",
+    "preflight": "tmp/world-195x4/batch-347/batch-347-nauru-preflight.json"
+  },
+  "next_campaign_country": "Tuvalu",
+  "face_anchor_manifest_verified": true,
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "camera_roll_policy": {
+    "1-20": "extreme close",
+    "21-80": "intermediate framing",
+    "81-100": "extreme wide"
+  },
+  "camera_rolls": {
+    "1692": 7,
+    "1693": 52,
+    "1694": 83,
+    "1695": 9
+  },
+  "prompt_sha256": {
+    "1692": "2432E17EE4D4F15EE5B950233ECACFF3153ECBE910C89BE78D041780619516B7",
+    "1693": "EF15F108A08A43EC9BDCE9600F1DD435F85317EFDF14EB58BFA06D6351B3FE86",
+    "1694": "074FDB62D641A16B4A683E572B9D0D3060C494CCB61D20EFE32446DC934A4D68",
+    "1695": "9B3E2D515E84A3B51F206409BBD73E2F84EBB79575AB8F8068B75A897C185E48"
+  },
+  "scene_states": {
+    "1692": {
+      "status": "untouched-prepared",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "prompt_path": "tmp/world-195x4/batch-418/scene-1692-prompt.txt",
+      "prompt_sha256": "2432E17EE4D4F15EE5B950233ECACFF3153ECBE910C89BE78D041780619516B7",
+      "camera_roll": 7
+    },
+    "1693": {
+      "status": "untouched-prepared",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "prompt_path": "tmp/world-195x4/batch-418/scene-1693-prompt.txt",
+      "prompt_sha256": "EF15F108A08A43EC9BDCE9600F1DD435F85317EFDF14EB58BFA06D6351B3FE86",
+      "camera_roll": 52
+    },
+    "1694": {
+      "status": "untouched-prepared",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "prompt_path": "tmp/world-195x4/batch-418/scene-1694-prompt.txt",
+      "prompt_sha256": "074FDB62D641A16B4A683E572B9D0D3060C494CCB61D20EFE32446DC934A4D68",
+      "camera_roll": 83
+    },
+    "1695": {
+      "status": "untouched-prepared",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "prompt_path": "tmp/world-195x4/batch-418/scene-1695-prompt.txt",
+      "prompt_sha256": "9B3E2D515E84A3B51F206409BBD73E2F84EBB79575AB8F8068B75A897C185E48",
+      "camera_roll": 9
+    }
+  },
+  "completed_country_cycles_since_last_x_cycle": 7,
+  "x_backlog_cycle_due": false,
+  "accepted_canonical_count_for_country": 0,
+  "target_accepted_count_for_country": 4,
+  "next_action": "Stage scenes 1692-1695 in four signed-in Meta tabs. Upload ordered face references and Send only after fresh immediate user confirmation."
+}

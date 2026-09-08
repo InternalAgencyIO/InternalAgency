@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "batch": 429,
+  "country": "Zimbabwe",
+  "status": "prepared-not-uploaded",
+  "preparedAtUtc": "2026-08-27T07:53:24.3745194Z",
+  "mission": "Starlight World Series formal new-country cycle toward 60 accepted canonical images",
+  "source": {
+    "batch": 358,
+    "country": "Zimbabwe",
+    "checkpointPath": "assets/lore/starlight-era/batch-358-zimbabwe-rescue-vessel-checkpoint.json",
+    "sourceSceneIds": [
+      1452,
+      1453,
+      1454,
+      1455
+    ],
+    "nextSourceCountry": "Guinea",
+    "nextSourceBatch": 359,
+    "nextSourceSceneIds": [
+      1456,
+      1457,
+      1458,
+      1459
+    ]
+  },
+  "priorCycle": {
+    "batch": 428,
+    "country": "Cambodia",
+    "status": "closed-unresolved-no-accepted",
+    "acceptedCount": 0,
+    "previousConfirmationConsumedByBatch": 428
+  },
+  "orderedFaceAnchors": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "deterministicLocks": {
+    "hashAlgorithm": "FNV-1a-32",
+    "cameraBuckets": {
+      "1-20": "extreme-close",
+      "21-80": "intermediate",
+      "81-100": "extreme-wide"
+    },
+    "maleModelSelectionKey": "batch429-zimbabwe-male-model-scene",
+    "maleModelScenePositionZeroBased": 1,
+    "maleModelSceneId": 1737,
+    "razePairKeyFormat": "RAZE|batch-429|scene-{sceneId}|knee-high-wearers",
+    "jealousyKeyFormat": "batch429-zimbabwe-scene{sceneId}-jealous-adult"
+  },
+  "scenes": [
+    {
+      "sceneId": 1736,
+      "sourceSceneId": 1452,
+      "promptPath": "tmp/world-195x4/batch-429/scene-1736-prompt.txt",
+      "promptSha256": "66F71EDE6E0CBACB1C73F6484C54BC682185E3F6DBBDD2698858FA520B232F3B",
+      "promptLength": 7359,
+      "cameraRoll": 37,
+      "cameraClass": "intermediate",
+      "razeKneeHighWearers": [
+        "Radiance",
+        "Alia"
+      ],
+      "jealousAdult": "AI ECE",
+      "romancePair": [
+        "Radiance",
+        "Ellie"
+      ],
+      "protectiveAdult": "Alia",
+      "maleModelIncluded": false,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "providerChatUrl": null,
+      "status": "prepared-not-uploaded"
+    },
+    {
+      "sceneId": 1737,
+      "sourceSceneId": 1453,
+      "promptPath": "tmp/world-195x4/batch-429/scene-1737-prompt.txt",
+      "promptSha256": "EA95043E9753BA178256B8F1471BAE92B444E46F885C0E8C1B3943F4F49C7568",
+      "promptLength": 7853,
+      "cameraRoll": 42,
+      "cameraClass": "intermediate",
+      "razeKneeHighWearers": [
+        "Ellie",
+        "AI ECE"
+      ],
+      "jealousAdult": "Radiance",
+      "romancePair": [
+        "Ellie",
+        "Alia"
+      ],
+      "protectiveAdult": "AI ECE",
+      "maleModelIncluded": true,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "providerChatUrl": null,
+      "status": "prepared-not-uploaded"
+    },
+    {
+      "sceneId": 1738,
+      "sourceSceneId": 1454,
+      "promptPath": "tmp/world-195x4/batch-429/scene-1738-prompt.txt",
+      "promptSha256": "7272F990D1023524A8A5A33B80E7B83279F42913823B999DF058871E8D8E6B67",
+      "promptLength": 7279,
+      "cameraRoll": 55,
+      "cameraClass": "intermediate",
+      "razeKneeHighWearers": [
+        "Ellie",
+        "Alia"
+      ],
+      "jealousAdult": "Ellie",
+      "romancePair": [
+        "Radiance",
+        "Alia"
+      ],
+      "protectiveAdult": "AI ECE",
+      "maleModelIncluded": false,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "providerChatUrl": null,
+      "status": "prepared-not-uploaded"
+    },
+    {
+      "sceneId": 1739,
+      "sourceSceneId": 1455,
+      "promptPath": "tmp/world-195x4/batch-429/scene-1739-prompt.txt",
+      "promptSha256": "BCBB3F8090B137617D363E9D50A7558AE5A4D0FE685027699489AEA3E719CE25",
+      "promptLength": 7310,
+      "cameraRoll": 84,
+      "cameraClass": "extreme-wide",
+      "razeKneeHighWearers": [
+        "Radiance",
+        "AI ECE"
+      ],
+      "jealousAdult": "Alia",
+      "romancePair": [
+        "Radiance",
+        "Ellie"
+      ],
+      "protectiveAdult": "AI ECE",
+      "maleModelIncluded": false,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "providerChatUrl": null,
+      "status": "prepared-not-uploaded"
+    }
+  ],
+  "actionCounts": {
+    "providerChatCount": 0,
+    "uploadCount": 0,
+    "sendClickCount": 0,
+    "duplicateDispatchCount": 0
+  },
+  "standingUploadAuthorization": {
+    "grantedAtUtc": "2026-08-27T04:05:01.069499Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.069499Z",
+    "activeAtPreparation": true
+  },
+  "actionGate": {
+    "freshActionTimeConfirmationRequired": true,
+    "uploadAndSendAuthorizedForThisBatch": false,
+    "previousConfirmationConsumedByBatch": 428,
+    "requiredUserConfirmation": "good authorized go"
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastX": 8,
+    "threshold": 10,
+    "publishDue": false,
+    "counterReset": false
+  },
+  "blockedBy": "Zimbabwe not yet rendered; Cambodia closed at zero accepted assets.",
+  "nextSafeAction": "After a fresh action-time user confirmation, open exactly four persistent signed-in Meta tabs, upload anchors 938, 936, 937 in order to each, verify exact prompt hashes, and Send each scene exactly once."
+}

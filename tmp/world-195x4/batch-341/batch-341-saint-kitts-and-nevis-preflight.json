@@ -1,0 +1,1562 @@
+{
+  "batch": 341,
+  "country": "Saint Kitts and Nevis",
+  "status": "render-preflight-stored",
+  "sourceCommit": "107a090c386be08ece8e9fb48fb8f16d2b18d14d",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch341-saint-kitts-and-nevis keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 341 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "Mars-surface expedition couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Liechtenstein",
+  "nextQueueBatch": 342,
+  "nextQueueScenes": [
+    1388,
+    1389,
+    1390,
+    1391
+  ],
+  "nextCinematicTheme": {
+    "active": "Mars-surface expedition couture",
+    "batchOrdinalWithinTheme": 2
+  },
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/list/910",
+      "usedFor": "Brimstone Hill Fortress basalt construction, twin volcanic peaks and Caribbean coastline"
+    },
+    {
+      "url": "https://whc.unesco.org/en/statesparties/kn/",
+      "usedFor": "Basseterre and Charlestown historic-zone context"
+    },
+    {
+      "url": "https://www.visitstkitts.com/",
+      "usedFor": "Basseterre waterfront and Timothy Hill island panorama"
+    },
+    {
+      "url": "https://www.visitnevisisland.com/",
+      "usedFor": "Pinney's Beach and Nevis Peak setting"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch341-saint-kitts-and-nevis-male-model-scene",
+    "fullHash": 300585982,
+    "roll": 82,
+    "selectedScenePosition": 3,
+    "selectedScene": 1386,
+    "maleEmotion": {
+      "key": "batch341-saint-kitts-and-nevis-scene3-male-emotion",
+      "roll": 23,
+      "result": "playful mischief"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Saint Kitts and Nevis flag, coat of arms, official emblem, sacred symbol, religious building, ceremonial pattern, ceremonial attire, copied military identity, or official service identity is used. Country-led scenes use large dimensional secular twin-island contours, Basseterre waterfront arcs, Brimstone basalt geometry, Timothy ridge lines, dual-ocean currents, Pinney beach ribbons and Nevis Peak fans instead.",
+    "palette": "volcanic black, rainforest emerald, Caribbean turquoise, Atlantic cobalt, fortress limestone, cloud white, sunset coral, Mars rust, rover silver, and habitat gold",
+    "minimumCoverage": "Scenes 1384 and 1385 each carry hard large Saint Kitts and Nevis motifs on three women and Mars-expedition construction language on at least two. Scenes 1386 and 1387 use four different theme-led Mars-expedition outfits without country map prints while Saint Kitts and Nevis landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Basseterre waterfront, Brimstone Hill Fortress, Timothy Hill's Atlantic-Caribbean panorama, and Pinney's Beach beneath Nevis Peak.",
+    "prohibitions": "Use respectful secular Saint Kitts and Nevis geography through complete twin-island contours, Basseterre waterfront arcs, Brimstone basalt geometry, Timothy Hill ridge lines, dual-ocean currents, Pinney's Beach ribbons and Nevis Peak fans. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial or Indigenous pattern, political messaging, copied agency or military identity, logo, badge, readable text, combat, threat, or weaponized Mars equipment."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch341-saint-kitts-and-nevis-x-heart",
+      "roll": 51,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch341-saint-kitts-and-nevis-x-internalagency",
+      "roll": 15,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch341-saint-kitts-and-nevis-x-worldxxxseries",
+      "roll": 80,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Saint Kitts and Nevis images plus one accepted Andorra image",
+    "captionIfEligible": "Saint Kitts and Nevis ❤️ Andorra #SaintKittsAndNevis #InternalAgency",
+    "internalAgencyHashtagActive": true,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1386 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1386 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch341-saint-kitts-and-nevis-male-model-scene",
+        82
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene3-male-emotion",
+        23
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-weather",
+        91
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-mascotState",
+        43
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-poleDanceTheme",
+        3
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-rainbowOnly",
+        3
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-rainbowHosiery",
+        78
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-romanceBeat",
+        38
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-compoundLoveBeat",
+        40
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-hardLoveBeat",
+        12
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-interestingProp",
+        12
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-eceMissionProp-poseTargetRoll",
+        97
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Radiance-emotion",
+        84
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Radiance-visibleMidriff",
+        18
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Radiance-straplessDress",
+        81
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Radiance-fullyOpenBack",
+        42
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Ellie-emotion",
+        94
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Ellie-visibleMidriff",
+        68
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Ellie-straplessDress",
+        63
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Ellie-fullyOpenBack",
+        0
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Alia-emotion",
+        82
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Alia-emotion-disambiguation",
+        53
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Alia-visibleMidriff",
+        0
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Alia-straplessDress",
+        63
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-Alia-fullyOpenBack",
+        92
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-AI ECE-emotion",
+        64
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-AI ECE-visibleMidriff",
+        46
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-AI ECE-straplessDress",
+        65
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-AI ECE-fullyOpenBack",
+        94
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-weather",
+        40
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-mascotState",
+        80
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-poleDanceTheme",
+        42
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-rainbowOnly",
+        92
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-rainbowHosiery",
+        39
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-romanceBeat",
+        25
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-compoundLoveBeat",
+        17
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-hardLoveBeat",
+        9
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-interestingProp",
+        11
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-eceMissionProp-poseTargetRoll",
+        94
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Radiance-emotion",
+        13
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Radiance-visibleMidriff",
+        93
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Radiance-straplessDress",
+        2
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Radiance-fullyOpenBack",
+        79
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Ellie-emotion",
+        33
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Ellie-visibleMidriff",
+        41
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Ellie-straplessDress",
+        78
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Ellie-fullyOpenBack",
+        39
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Alia-emotion",
+        11
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Alia-emotion-disambiguation",
+        82
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Alia-visibleMidriff",
+        75
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Alia-straplessDress",
+        80
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-Alia-fullyOpenBack",
+        61
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-AI ECE-emotion",
+        5
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-AI ECE-visibleMidriff",
+        57
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-AI ECE-straplessDress",
+        22
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-AI ECE-fullyOpenBack",
+        59
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-weather",
+        93
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-mascotState",
+        1
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-poleDanceTheme",
+        69
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-rainbowOnly",
+        73
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-rainbowHosiery",
+        64
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-romanceBeat",
+        76
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-compoundLoveBeat",
+        30
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-hardLoveBeat",
+        38
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-interestingProp",
+        90
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-eceMissionProp-poseTargetRoll",
+        51
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Radiance-emotion",
+        82
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Radiance-visibleMidriff",
+        60
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Radiance-straplessDress",
+        19
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Radiance-fullyOpenBack",
+        8
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Ellie-emotion",
+        96
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Ellie-visibleMidriff",
+        46
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Ellie-straplessDress",
+        5
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Ellie-fullyOpenBack",
+        42
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Alia-emotion",
+        84
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Alia-emotion-disambiguation",
+        47
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Alia-visibleMidriff",
+        46
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Alia-straplessDress",
+        5
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-Alia-fullyOpenBack",
+        46
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-AI ECE-emotion",
+        38
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-AI ECE-visibleMidriff",
+        72
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-AI ECE-straplessDress",
+        43
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-AI ECE-fullyOpenBack",
+        68
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-weather",
+        78
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-mascotState",
+        10
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-poleDanceTheme",
+        96
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-rainbowOnly",
+        18
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-rainbowHosiery",
+        41
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-romanceBeat",
+        27
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-compoundLoveBeat",
+        23
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-hardLoveBeat",
+        23
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-interestingProp",
+        57
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-eceMissionProp-poseTargetRoll",
+        0
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Radiance-emotion",
+        87
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Radiance-visibleMidriff",
+        39
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Radiance-straplessDress",
+        80
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Radiance-fullyOpenBack",
+        81
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Ellie-emotion",
+        83
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Ellie-visibleMidriff",
+        91
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Ellie-straplessDress",
+        32
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Ellie-fullyOpenBack",
+        25
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Alia-emotion",
+        9
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Alia-visibleMidriff",
+        69
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Alia-straplessDress",
+        90
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-Alia-fullyOpenBack",
+        39
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-AI ECE-emotion",
+        7
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-AI ECE-visibleMidriff",
+        75
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-AI ECE-straplessDress",
+        88
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-AI ECE-fullyOpenBack",
+        57
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-x-heart",
+        51
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-x-internalagency",
+        15
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-x-worldxxxseries",
+        80
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-rainbowHosieryWearer",
+        34
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-rainbowHosieryPaletteMode",
+        22
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-mascotHolder",
+        12
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-interestingPropHolder",
+        30
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1384-interestingPropFamily",
+        80
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-rainbowHosieryWearer",
+        63
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-rainbowHosieryPaletteMode",
+        97
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-mascotHolder",
+        69
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-interestingPropHolder",
+        97
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1385-interestingPropFamily",
+        35
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-rainbowHosieryWearer",
+        80
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-rainbowHosieryPaletteMode",
+        4
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-mascotHolder",
+        42
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-interestingPropHolder",
+        72
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1386-interestingPropFamily",
+        10
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-rainbowHosieryWearer",
+        73
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-rainbowHosieryPaletteMode",
+        43
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-mascotHolder",
+        83
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-interestingPropHolder",
+        35
+      ],
+      [
+        "batch341-saint-kitts-and-nevis-scene1387-interestingPropFamily",
+        29
+      ]
+    ],
+    "primaryPairCount": 112,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "5EF7D0ADC329E4D91CBA5AC0A97744AC284E79ABDCED2FA05A9877694CF702C5",
+    "selectorPairsSha256": "CF530DEF0263B7E231A1CD404856C4C3D6EDD3B8DCF02BF40810D7AF163F45AB"
+  },
+  "scenePlans": {
+    "1384": {
+      "scene": 1384,
+      "mode": "country-led hybrid",
+      "theme": "Mars-surface expedition couture",
+      "landmark": "a broad dry reversible terrace on Basseterre's waterfront with the complete colorful city frontage, Port Zante harbor, green hills and Caribbean water, plus a large fictional civilian Mars lander and six-wheel rover prominently parked on a separate temporary science platform",
+      "motifs": "complete twin-island contour, Basseterre harbor arc, green hill fans, Caribbean current ribbons and Mars route lines",
+      "culture": "Basseterre reads through its waterfront, compact colorful city and harbor. Mars hardware is fictional civilian exploration equipment.",
+      "weather": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-weather",
+        "roll": 91,
+        "result": "solar eclipse atmosphere",
+        "materialized": "solar eclipse atmosphere"
+      },
+      "mascotState": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-mascotState",
+        "roll": 43,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-mascotHolder",
+        "roll": 12,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Render only the rolled mascot state on a padded dry bench far from the mission prop, harbor edge and Mars machinery.",
+      "interestingProp": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-interestingProp",
+        "roll": 12,
+        "active": true,
+        "holder": {
+          "key": "batch341-saint-kitts-and-nevis-scene1384-interestingPropHolder",
+          "roll": 30,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch341-saint-kitts-and-nevis-scene1384-interestingPropFamily",
+          "roll": 80,
+          "result": "deactivated chainless cinema chainsaw sculpture with a locked blade cover"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-poleDanceTheme",
+        "roll": 3,
+        "active": true
+      },
+      "rainbowOnly": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-rainbowOnly",
+        "roll": 3,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-rainbowHosiery",
+        "roll": 78,
+        "active": false,
+        "wearer": {
+          "key": "batch341-saint-kitts-and-nevis-scene1384-rainbowHosieryWearer",
+          "roll": 34,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch341-saint-kitts-and-nevis-scene1384-rainbowHosieryPaletteMode",
+          "roll": 22,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-eceMissionProp-poseTargetRoll",
+        "roll": 97
+      },
+      "materializedPropAction": "AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera",
+      "romanceBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-romanceBeat",
+        "roll": 38,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-compoundLoveBeat",
+        "roll": 40,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "hardLoveBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1384-hardLoveBeat",
+        "roll": 12,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Radiance-emotion",
+            "roll": 84,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Radiance-visibleMidriff",
+            "roll": 18,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Radiance-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Radiance-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Ellie-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Ellie-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Ellie-straplessDress",
+            "roll": 63,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Ellie-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Alia-emotion",
+            "roll": 82,
+            "result": "crying with visible tears",
+            "materializedResult": "aching romantic longing",
+            "disambiguation": {
+              "key": "batch341-saint-kitts-and-nevis-scene1384-Alia-emotion-disambiguation",
+              "roll": 53
+            },
+            "performance": "aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Alia-visibleMidriff",
+            "roll": 0,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Alia-straplessDress",
+            "roll": 63,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-Alia-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-AI ECE-emotion",
+            "roll": 64,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-AI ECE-visibleMidriff",
+            "roll": 46,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-AI ECE-straplessDress",
+            "roll": 65,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1384-AI ECE-fullyOpenBack",
+            "roll": 94,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-theme hybrid cloud-white strapless twin-island relief dress with rover-silver pressure ribs, coral harbor hem and wheel-hub heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led rainforest-emerald culotte coat with dimensional Basseterre blocks, habitat-gold beadwork, turquoise current hem and volcanic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led volcanic-black open-back jumpsuit with braided hill fans, cobalt water channels, narrow midriff, island-contour apron and ridge pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led Mars-rust docking peplum over silver tailored shorts with habitat-ring hoops, rover suspension fins and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-theme hybrid cloud-white strapless twin-island relief dress with rover-silver pressure ribs, coral harbor hem and wheel-hub heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-led rainforest-emerald culotte coat with dimensional Basseterre blocks, habitat-gold beadwork, turquoise current hem and volcanic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led volcanic-black open-back jumpsuit with braided hill fans, cobalt water channels, narrow midriff, island-contour apron and ridge pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led Mars-rust docking peplum over silver tailored shorts with habitat-ring hoops, rover suspension fins and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Alia anchors the isolated route lane. Radiance sits securely sideways across Ellie's lap on a fixed bench while ECE takes Radiance's linked hand into a dance invitation and Ellie catches her waist; the male closes behind ECE with two gentle contacts and his strongest eye line fixed on ECE.",
+      "handInventory": [
+        "Alia uses both hands on the inert mission prop and touches nobody else",
+        "Radiance left hand rests on Ellie's shoulder and right hand links with ECE",
+        "Ellie supports Radiance at waist and forearm",
+        "ECE links Radiance with one hand while male contacts ECE at shoulder and forearm"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry reversible terrace on Basseterre's waterfront with the complete colorful city frontage, Port Zante harbor, green hills and Caribbean water, plus a large fictional civilian Mars lander and six-wheel rover prominently parked on a separate temporary science platform. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: Mars-surface expedition couture. The theme and Saint Kitts and Nevis location must both be immediate foreground reads. Basseterre reads through its waterfront, compact colorful city and harbor. Mars hardware is fictional civilian exploration equipment. Stored scene rolls: weather 91=solar eclipse atmosphere; mascot state 43=MAX only; mascot holder selector 12=Radiance; odd prop 12=active; odd holder 30=Radiance; odd family 80=deactivated chainless cinema chainsaw sculpture with a locked blade cover; pole 3=active; rainbow-only 3=active; rainbow hosiery 78=inactive; wearer 34=Radiance; palette 22=country-palette rainbow-like gradient; romance 38; compound 40; hard love 12; mission-prop pose/target 97. Exact wardrobe rolls: Radiance: midriff 18=visible, strapless 81=inactive, open back 42=inactive; Ellie: midriff 68=covered, strapless 63=inactive, open back 0=active; Alia: midriff 0=visible, strapless 63=inactive, open back 92=inactive; AI ECE: midriff 46=visible, strapless 65=inactive, open back 94=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-theme hybrid cloud-white strapless twin-island relief dress with rover-silver pressure ribs, coral harbor hem and wheel-hub heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-led rainforest-emerald culotte coat with dimensional Basseterre blocks, habitat-gold beadwork, turquoise current hem and volcanic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led volcanic-black open-back jumpsuit with braided hill fans, cobalt water channels, narrow midriff, island-contour apron and ridge pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led Mars-rust docking peplum over silver tailored shorts with habitat-ring hoops, rover suspension fins and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large twin-island and Basseterre motifs; Radiance and ECE visibly use Mars pressure-shell, rover-wheel and habitat construction. Location design vocabulary: complete twin-island contour, Basseterre harbor arc, green hill fans, Caribbean current ribbons and Mars route lines. Use respectful secular Saint Kitts and Nevis geography through complete twin-island contours, Basseterre waterfront arcs, Brimstone basalt geometry, Timothy Hill ridge lines, dual-ocean currents, Pinney's Beach ribbons and Nevis Peak fans. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial or Indigenous pattern, political messaging, copied agency or military identity, logo, badge, readable text, combat, threat, or weaponized Mars equipment. Four visibly distinct coherent emotions: Radiance: roll 84=crying with visible tears, performed as crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 94=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 82=crying with visible tears, collision resolver 53 gives distinct performance aching romantic longing, performed as aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 64=visible jealousy, performed as visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 38: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Compound roll 40: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Mandatory hard-love roll 12: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia anchors the isolated route lane. Radiance sits securely sideways across Ellie's lap on a fixed bench while ECE takes Radiance's linked hand into a dance invitation and Ellie catches her waist; the male closes behind ECE with two gentle contacts and his strongest eye line fixed on ECE. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: Alia uses both hands on the inert mission prop and touches nobody else; Radiance left hand rests on Ellie's shoulder and right hand links with ECE; Ellie supports Radiance at waist and forearm; ECE links Radiance with one hand while male contacts ECE at shoulder and forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 43=MAX only. Mascot holder selector 12=Radiance. Render only the rolled mascot state on a padded dry bench far from the mission prop, harbor edge and Mars machinery. Odd-prop roll is active. Exactly Radiance owns and creatively integrates one deactivated chainless cinema chainsaw sculpture with a locked blade cover into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is active only as a stationary public-safe fashion motif, with no dance, stripping, or suggestive performance. Rainbow-only is active across all four structurally distinct outfits while preserving the scene's country-led or theme-led balance. Render solar eclipse atmosphere cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1385": {
+      "scene": 1385,
+      "mode": "country-led hybrid",
+      "theme": "Mars-surface expedition couture",
+      "landmark": "a broad dry protected observation terrace below the complete Brimstone Hill Fortress citadel, basalt walls, limestone arches, steep volcanic hill and Caribbean coast, with a large civilian Mars habitat module and rover prominent on a separate reversible platform outside the heritage boundary",
+      "motifs": "complete twin-island outline, Brimstone twin-peak profile, basalt block facets, limestone arch bands, coast ribbons and Mars traverse arcs",
+      "culture": "Brimstone Hill reads as a preserved hilltop fortress and historic landscape; no combat action or copied uniform appears.",
+      "weather": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-weather",
+        "roll": 40,
+        "result": "heavy rain curtain",
+        "materialized": "heavy rain curtain"
+      },
+      "mascotState": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-mascotState",
+        "roll": 80,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-mascotHolder",
+        "roll": 69,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Render only the rolled mascot state on a secured padded terrace far from walls, slopes, mission prop, odd prop and rover.",
+      "interestingProp": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-interestingProp",
+        "roll": 11,
+        "active": true,
+        "holder": {
+          "key": "batch341-saint-kitts-and-nevis-scene1385-interestingPropHolder",
+          "roll": 97,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch341-saint-kitts-and-nevis-scene1385-interestingPropFamily",
+          "roll": 35,
+          "result": "kinetic umbrella with rotating mirrored petals"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-poleDanceTheme",
+        "roll": 42,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-rainbowOnly",
+        "roll": 92,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-rainbowHosiery",
+        "roll": 39,
+        "active": false,
+        "wearer": {
+          "key": "batch341-saint-kitts-and-nevis-scene1385-rainbowHosieryWearer",
+          "roll": 63,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch341-saint-kitts-and-nevis-scene1385-rainbowHosieryPaletteMode",
+          "roll": 97,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-eceMissionProp-poseTargetRoll",
+        "roll": 94
+      },
+      "materializedPropAction": "AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera",
+      "romanceBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-romanceBeat",
+        "roll": 25,
+        "dynamicIndex": 1,
+        "contractResult": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compoundLoveBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-compoundLoveBeat",
+        "roll": 17,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "hardLoveBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1385-hardLoveBeat",
+        "roll": 9,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Radiance-emotion",
+            "roll": 13,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Radiance-visibleMidriff",
+            "roll": 93,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Radiance-straplessDress",
+            "roll": 2,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Radiance-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Ellie-emotion",
+            "roll": 33,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Ellie-visibleMidriff",
+            "roll": 41,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Ellie-straplessDress",
+            "roll": 78,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Ellie-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Alia-emotion",
+            "roll": 11,
+            "result": "romantic joy",
+            "materializedResult": "crying with visible tears",
+            "disambiguation": {
+              "key": "batch341-saint-kitts-and-nevis-scene1385-Alia-emotion-disambiguation",
+              "roll": 82
+            },
+            "performance": "crying with visible tears expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Alia-visibleMidriff",
+            "roll": 75,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Alia-straplessDress",
+            "roll": 80,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-Alia-fullyOpenBack",
+            "roll": 61,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-AI ECE-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-AI ECE-visibleMidriff",
+            "roll": 57,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-AI ECE-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1385-AI ECE-fullyOpenBack",
+            "roll": 59,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "crying with visible tears expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "country-led sunset-coral Brimstone dress with suspended basalt slabs, limestone corsage, crenellated asymmetric hem and arch heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-theme hybrid cobalt solar-wing culotte jumpsuit with rigid silver panels, complete twin-island relief, sculpted open back and pivot platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led emerald strapless volcanic-ridge coat-dress with braided basalt ribs, narrow midriff, gold coast apron and ridge pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led Mars-rust heat-shield bodice over cloud-white shorts with copper ablative tiles, rover telemetry discs and suspension boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "country-led sunset-coral Brimstone dress with suspended basalt slabs, limestone corsage, crenellated asymmetric hem and arch heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "country-theme hybrid cobalt solar-wing culotte jumpsuit with rigid silver panels, complete twin-island relief, sculpted open back and pivot platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "country-led emerald strapless volcanic-ridge coat-dress with braided basalt ribs, narrow midriff, gold coast apron and ridge pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "theme-led Mars-rust heat-shield bodice over cloud-white shorts with copper ablative tiles, rover telemetry discs and suspension boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE anchors the isolated lane. Radiance and Alia perform a controlled dance dip while Ellie joins through one linked hand and protective shoulder contact, producing a readable three-person reconciliation.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Radiance supports Alia's upper back and links her hand",
+        "Alia links Radiance and supports her waist",
+        "Ellie touches Alia's shoulder and links Radiance's forearm"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry protected observation terrace below the complete Brimstone Hill Fortress citadel, basalt walls, limestone arches, steep volcanic hill and Caribbean coast, with a large civilian Mars habitat module and rover prominent on a separate reversible platform outside the heritage boundary. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: Mars-surface expedition couture. The theme and Saint Kitts and Nevis location must both be immediate foreground reads. Brimstone Hill reads as a preserved hilltop fortress and historic landscape; no combat action or copied uniform appears. Stored scene rolls: weather 40=heavy rain curtain; mascot state 80=neither mascot; mascot holder selector 69=Radiance; odd prop 11=active; odd holder 97=Ellie; odd family 35=kinetic umbrella with rotating mirrored petals; pole 42=inactive; rainbow-only 92=inactive; rainbow hosiery 39=inactive; wearer 63=AI ECE; palette 97=original independent rainbow gradient; romance 25; compound 17; hard love 9; mission-prop pose/target 94. Exact wardrobe rolls: Radiance: midriff 93=covered, strapless 2=active, open back 79=inactive; Ellie: midriff 41=visible, strapless 78=inactive, open back 39=inactive; Alia: midriff 75=covered, strapless 80=inactive, open back 61=inactive; AI ECE: midriff 57=covered, strapless 22=active, open back 59=inactive. Exact outfit fingerprints, no substitutions: Radiance: country-led sunset-coral Brimstone dress with suspended basalt slabs, limestone corsage, crenellated asymmetric hem and arch heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: country-theme hybrid cobalt solar-wing culotte jumpsuit with rigid silver panels, complete twin-island relief, sculpted open back and pivot platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: country-led emerald strapless volcanic-ridge coat-dress with braided basalt ribs, narrow midriff, gold coast apron and ridge pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: theme-led Mars-rust heat-shield bodice over cloud-white shorts with copper ablative tiles, rover telemetry discs and suspension boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard fortress and island motifs; Ellie and ECE visibly use heat-shield, solar-wing and rover-frame construction. Location design vocabulary: complete twin-island outline, Brimstone twin-peak profile, basalt block facets, limestone arch bands, coast ribbons and Mars traverse arcs. Use respectful secular Saint Kitts and Nevis geography through complete twin-island contours, Basseterre waterfront arcs, Brimstone basalt geometry, Timothy Hill ridge lines, dual-ocean currents, Pinney's Beach ribbons and Nevis Peak fans. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial or Indigenous pattern, political messaging, copied agency or military identity, logo, badge, readable text, combat, threat, or weaponized Mars equipment. Four visibly distinct coherent emotions: Radiance: roll 13=romantic joy, performed as romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 33=overwhelming relief, performed as overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 11=romantic joy, collision resolver 82 gives distinct performance crying with visible tears, performed as crying with visible tears expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 5=tender affection, performed as tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 25: Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance. Compound roll 17: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Mandatory hard-love roll 9: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the isolated lane. Radiance and Alia perform a controlled dance dip while Ellie joins through one linked hand and protective shoulder contact, producing a readable three-person reconciliation. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Radiance supports Alia's upper back and links her hand; Alia links Radiance and supports her waist; Ellie touches Alia's shoulder and links Radiance's forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 80=neither mascot. Mascot holder selector 69=Radiance. Render only the rolled mascot state on a secured padded terrace far from walls, slopes, mission prop, odd prop and rover. Odd-prop roll is active. Exactly Ellie owns and creatively integrates one kinetic umbrella with rotating mirrored petals into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render heavy rain curtain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1386": {
+      "scene": 1386,
+      "mode": "theme-led original",
+      "theme": "Mars-surface expedition couture",
+      "landmark": "a broad dry secured deck at Timothy Hill Overlook with the complete narrow southeast peninsula, Atlantic Ocean on one side, Caribbean Sea on the other, Nevis across The Narrows, and a large fictional Mars sample laboratory and rover equally foregrounded on a separate science pad",
+      "motifs": "location-only Timothy ridge, dual-ocean bands, peninsula spine, Nevis silhouette, Narrows channel and Mars traverse rings",
+      "culture": "Timothy Hill reads through its famous simultaneous Atlantic and Caribbean panorama. Four unrelated Mars engineering systems drive the couture.",
+      "weather": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-weather",
+        "roll": 93,
+        "result": "distant waterspout over open water",
+        "materialized": "distant waterspout over open water"
+      },
+      "mascotState": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-mascotState",
+        "roll": 1,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-mascotHolder",
+        "roll": 42,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Render only the rolled mascot state on a secured padded bench far from overlook edges, water, mission prop, odd prop and Mars machinery.",
+      "interestingProp": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-interestingProp",
+        "roll": 90,
+        "active": false,
+        "holder": {
+          "key": "batch341-saint-kitts-and-nevis-scene1386-interestingPropHolder",
+          "roll": 72,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch341-saint-kitts-and-nevis-scene1386-interestingPropFamily",
+          "roll": 10,
+          "result": "antique-style diving helmet display shell"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-poleDanceTheme",
+        "roll": 69,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-rainbowOnly",
+        "roll": 73,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-rainbowHosiery",
+        "roll": 64,
+        "active": false,
+        "wearer": {
+          "key": "batch341-saint-kitts-and-nevis-scene1386-rainbowHosieryWearer",
+          "roll": 80,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch341-saint-kitts-and-nevis-scene1386-rainbowHosieryPaletteMode",
+          "roll": 4,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-eceMissionProp-poseTargetRoll",
+        "roll": 51
+      },
+      "materializedPropAction": "AI ECE uses a realistic two-hand sight picture toward one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, vehicle or camera along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, vehicle or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-romanceBeat",
+        "roll": 76,
+        "dynamicIndex": 4,
+        "contractResult": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compoundLoveBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-compoundLoveBeat",
+        "roll": 30,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "hardLoveBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1386-hardLoveBeat",
+        "roll": 38,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Radiance-emotion",
+            "roll": 82,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Radiance-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Radiance-straplessDress",
+            "roll": 19,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Radiance-fullyOpenBack",
+            "roll": 8,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Ellie-emotion",
+            "roll": 96,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Ellie-visibleMidriff",
+            "roll": 46,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Ellie-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Ellie-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Alia-emotion",
+            "roll": 84,
+            "result": "crying with visible tears",
+            "materializedResult": "startled surprise",
+            "disambiguation": {
+              "key": "batch341-saint-kitts-and-nevis-scene1386-Alia-emotion-disambiguation",
+              "roll": 47
+            },
+            "performance": "startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Alia-visibleMidriff",
+            "roll": 46,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Alia-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-Alia-fullyOpenBack",
+            "roll": 46,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-AI ECE-emotion",
+            "roll": 38,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-AI ECE-visibleMidriff",
+            "roll": 72,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-AI ECE-straplessDress",
+            "roll": 43,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1386-AI ECE-fullyOpenBack",
+            "roll": 68,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "magnetic confidence expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "rover-silver gyroscope tulip dress with three opaque suspension rings, coral axle ribs, rounded kinetic hem and wheel heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "volcanic-black habitat-airlock culotte coat with gold pressure seals, asymmetric hatch cape and valve platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Mars-rust open-back sample-canister jumpsuit with braided cobalt seams, spherical side pods, narrow midriff and capsule pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "cloud-white solar-array coat-dress with turquoise radiator panels, silver tracking peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained twin-island contour embroidery and subtle Mars-expedition pressure-seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "rover-silver gyroscope tulip dress with three opaque suspension rings, coral axle ribs, rounded kinetic hem and wheel heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "volcanic-black habitat-airlock culotte coat with gold pressure seals, asymmetric hatch cape and valve platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Mars-rust open-back sample-canister jumpsuit with braided cobalt seams, spherical side pods, narrow midriff and capsule pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "cloud-white solar-array coat-dress with turquoise radiator panels, silver tracking peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained twin-island contour embroidery and subtle Mars-expedition pressure-seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "ECE isolates the route lane. Ellie sits on a fixed bench and draws Alia into a seated embrace; Radiance gives Alia a forehead kiss while taking Ellie's linked hand, creating a clear three-person choice.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Ellie supports Alia at waist and links Radiance",
+        "Alia touches Ellie's shoulder and forearm",
+        "Radiance links Ellie and rests a hand at Alia's upper back during the kiss"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch341-saint-kitts-and-nevis-scene3-male-emotion",
+          "roll": 23,
+          "result": "playful mischief"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry secured deck at Timothy Hill Overlook with the complete narrow southeast peninsula, Atlantic Ocean on one side, Caribbean Sea on the other, Nevis across The Narrows, and a large fictional Mars sample laboratory and rover equally foregrounded on a separate science pad. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: Mars-surface expedition couture. The theme and Saint Kitts and Nevis location must both be immediate foreground reads. Timothy Hill reads through its famous simultaneous Atlantic and Caribbean panorama. Four unrelated Mars engineering systems drive the couture. Stored scene rolls: weather 93=distant waterspout over open water; mascot state 1=PAWS and MAX together; mascot holder selector 42=Radiance; odd prop 90=inactive; odd holder 72=Radiance; odd family 10=antique-style diving helmet display shell; pole 69=inactive; rainbow-only 73=inactive; rainbow hosiery 64=inactive; wearer 80=AI ECE; palette 4=country-palette rainbow-like gradient; romance 76; compound 30; hard love 38; mission-prop pose/target 51. Exact wardrobe rolls: Radiance: midriff 60=covered, strapless 19=active, open back 8=active; Ellie: midriff 46=visible, strapless 5=active, open back 42=inactive; Alia: midriff 46=visible, strapless 5=active, open back 46=inactive; AI ECE: midriff 72=covered, strapless 43=inactive, open back 68=inactive. Exact outfit fingerprints, no substitutions: Radiance: rover-silver gyroscope tulip dress with three opaque suspension rings, coral axle ribs, rounded kinetic hem and wheel heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: volcanic-black habitat-airlock culotte coat with gold pressure seals, asymmetric hatch cape and valve platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: Mars-rust open-back sample-canister jumpsuit with braided cobalt seams, spherical side pods, narrow midriff and capsule pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: cloud-white solar-array coat-dress with turquoise radiator panels, silver tracking peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained twin-island contour embroidery and subtle Mars-expedition pressure-seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene: rover suspension, habitat airlock, sample canister and solar array create four different silhouettes while the overlook remains equally large. Location design vocabulary: location-only Timothy ridge, dual-ocean bands, peninsula spine, Nevis silhouette, Narrows channel and Mars traverse rings. Use respectful secular Saint Kitts and Nevis geography through complete twin-island contours, Basseterre waterfront arcs, Brimstone basalt geometry, Timothy Hill ridge lines, dual-ocean currents, Pinney's Beach ribbons and Nevis Peak fans. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial or Indigenous pattern, political messaging, copied agency or military identity, logo, badge, readable text, combat, threat, or weaponized Mars equipment. Four visibly distinct coherent emotions: Radiance: roll 82=crying with visible tears, performed as crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 96=defiance, performed as defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 84=crying with visible tears, collision resolver 47 gives distinct performance startled surprise, performed as startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 38=magnetic confidence, performed as magnetic confidence expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 23=playful mischief, performed as playful mischief expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 76: Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips. Compound roll 30: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Mandatory hard-love roll 38: a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE isolates the route lane. Ellie sits on a fixed bench and draws Alia into a seated embrace; Radiance gives Alia a forehead kiss while taking Ellie's linked hand, creating a clear three-person choice. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Ellie supports Alia at waist and links Radiance; Alia touches Ellie's shoulder and forearm; Radiance links Ellie and rests a hand at Alia's upper back during the kiss. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic two-hand sight picture toward one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, building, vehicle or camera along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 1=PAWS and MAX together. Mascot holder selector 42=Radiance. Render only the rolled mascot state on a secured padded bench far from overlook edges, water, mission prop, odd prop and Mars machinery. Odd-prop roll 90 is inactive. Do not add any bizarre secondary prop; stored inactive holder 72=Radiance and family 10=antique-style diving helmet display shell remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render distant waterspout over open water cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1387": {
+      "scene": 1387,
+      "mode": "theme-led original",
+      "theme": "Mars-surface expedition couture",
+      "landmark": "a broad dry beachside observation deck at Pinney's Beach with the complete long pale-sand curve, turquoise Caribbean water, palms and towering cloud-capped Nevis Peak, while a large peaceful civilian Mars ascent vehicle and habitat stand prominently on a separate offshore reversible platform",
+      "motifs": "location-only Pinney beach ribbon, Nevis Peak fan, palm arcs, Caribbean bands and Mars ascent geometry",
+      "culture": "Nevis reads through Pinney's Beach and the dominant volcanic cone of Nevis Peak. Fictional Mars equipment stays separate from the natural shore.",
+      "weather": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-weather",
+        "roll": 78,
+        "result": "powerful windstorm with controlled fabric motion",
+        "materialized": "powerful windstorm with controlled fabric motion"
+      },
+      "mascotState": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-mascotState",
+        "roll": 10,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-mascotHolder",
+        "roll": 83,
+        "result": "Alia"
+      },
+      "mascotPlan": "Render only the rolled mascot state on a padded deck bench far from surf, mission prop, odd prop and Mars hardware.",
+      "interestingProp": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-interestingProp",
+        "roll": 57,
+        "active": false,
+        "holder": {
+          "key": "batch341-saint-kitts-and-nevis-scene1387-interestingPropHolder",
+          "roll": 35,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch341-saint-kitts-and-nevis-scene1387-interestingPropFamily",
+          "roll": 29,
+          "result": "mirrored megaphone sculpture"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-poleDanceTheme",
+        "roll": 96,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-rainbowOnly",
+        "roll": 18,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-rainbowHosiery",
+        "roll": 41,
+        "active": false,
+        "wearer": {
+          "key": "batch341-saint-kitts-and-nevis-scene1387-rainbowHosieryWearer",
+          "roll": 73,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch341-saint-kitts-and-nevis-scene1387-rainbowHosieryPaletteMode",
+          "roll": 43,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-eceMissionProp-poseTargetRoll",
+        "roll": 0
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera",
+      "romanceBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-romanceBeat",
+        "roll": 27,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-compoundLoveBeat",
+        "roll": 23,
+        "index": 11,
+        "contractResult": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+      },
+      "hardLoveBeat": {
+        "key": "batch341-saint-kitts-and-nevis-scene1387-hardLoveBeat",
+        "roll": 23,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Radiance-emotion",
+            "roll": 87,
+            "result": "fear and urgent vulnerability",
+            "materializedResult": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Radiance-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Radiance-straplessDress",
+            "roll": 80,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Radiance-fullyOpenBack",
+            "roll": 81,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Ellie-emotion",
+            "roll": 83,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Ellie-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Ellie-straplessDress",
+            "roll": 32,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Ellie-fullyOpenBack",
+            "roll": 25,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Alia-emotion",
+            "roll": 9,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Alia-visibleMidriff",
+            "roll": 69,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Alia-straplessDress",
+            "roll": 90,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-Alia-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-AI ECE-emotion",
+            "roll": 7,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-AI ECE-visibleMidriff",
+            "roll": 75,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-AI ECE-straplessDress",
+            "roll": 88,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch341-saint-kitts-and-nevis-scene1387-AI ECE-fullyOpenBack",
+            "roll": 57,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "habitat-gold ascent-frame column dress with silver launch ribs, coral fuel-pod appliques, concentric flare hem and gantry heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Mars-rust regolith-shield culotte jumpsuit with opaque black hex tiles, sculpted open back, offset dust hem and magnetic platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "cloud-white habitat-ring coat-dress with braided cobalt pressure seams, turquoise circular side frames, split docking hem and ring pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "volcanic-black life-support bodice over coral tailored shorts with narrow midriff, silver conduit lattice, asymmetric radiator hem and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "habitat-gold ascent-frame column dress with silver launch ribs, coral fuel-pod appliques, concentric flare hem and gantry heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Mars-rust regolith-shield culotte jumpsuit with opaque black hex tiles, sculpted open back, offset dust hem and magnetic platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "cloud-white habitat-ring coat-dress with braided cobalt pressure seams, turquoise circular side frames, split docking hem and ring pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "volcanic-black life-support bodice over coral tailored shorts with narrow midriff, silver conduit lattice, asymmetric radiator hem and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE anchors the isolated lane. Radiance steps away while Ellie catches one forearm and Alia catches the other hand; a fourth partner closes behind Alia into a protective embrace, creating a readable pulled-away choice.",
+      "handInventory": [
+        "ECE uses both hands on the inert mission prop and touches nobody else",
+        "Radiance's forearm is caught by Ellie and her other hand links Alia",
+        "Ellie catches Radiance and rests a hand on Alia's shoulder",
+        "Alia links Radiance while the fourth partner contacts Alia at shoulder and forearm"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry beachside observation deck at Pinney's Beach with the complete long pale-sand curve, turquoise Caribbean water, palms and towering cloud-capped Nevis Peak, while a large peaceful civilian Mars ascent vehicle and habitat stand prominently on a separate offshore reversible platform. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: Mars-surface expedition couture. The theme and Saint Kitts and Nevis location must both be immediate foreground reads. Nevis reads through Pinney's Beach and the dominant volcanic cone of Nevis Peak. Fictional Mars equipment stays separate from the natural shore. Stored scene rolls: weather 78=powerful windstorm with controlled fabric motion; mascot state 10=PAWS and MAX together; mascot holder selector 83=Alia; odd prop 57=inactive; odd holder 35=Alia; odd family 29=mirrored megaphone sculpture; pole 96=inactive; rainbow-only 18=inactive; rainbow hosiery 41=inactive; wearer 73=AI ECE; palette 43=country-palette rainbow-like gradient; romance 27; compound 23; hard love 23; mission-prop pose/target 0. Exact wardrobe rolls: Radiance: midriff 39=visible, strapless 80=inactive, open back 81=inactive; Ellie: midriff 91=covered, strapless 32=active, open back 25=active; Alia: midriff 69=covered, strapless 90=inactive, open back 39=inactive; AI ECE: midriff 75=covered, strapless 88=inactive, open back 57=inactive. Exact outfit fingerprints, no substitutions: Radiance: habitat-gold ascent-frame column dress with silver launch ribs, coral fuel-pod appliques, concentric flare hem and gantry heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: Mars-rust regolith-shield culotte jumpsuit with opaque black hex tiles, sculpted open back, offset dust hem and magnetic platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: cloud-white habitat-ring coat-dress with braided cobalt pressure seams, turquoise circular side frames, split docking hem and ring pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: volcanic-black life-support bodice over coral tailored shorts with narrow midriff, silver conduit lattice, asymmetric radiator hem and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Theme-led scene: ascent frame, regolith shield, habitat ring and life-support lattice make four distinct outfits while beach and peak remain foregrounded. Location design vocabulary: location-only Pinney beach ribbon, Nevis Peak fan, palm arcs, Caribbean bands and Mars ascent geometry. Use respectful secular Saint Kitts and Nevis geography through complete twin-island contours, Basseterre waterfront arcs, Brimstone basalt geometry, Timothy Hill ridge lines, dual-ocean currents, Pinney's Beach ribbons and Nevis Peak fans. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial or Indigenous pattern, political messaging, copied agency or military identity, logo, badge, readable text, combat, threat, or weaponized Mars equipment. Four visibly distinct coherent emotions: Radiance: roll 87=fear and urgent vulnerability, performed as fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 83=crying with visible tears, performed as crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 9=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 7=tender affection, performed as tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 27: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Compound roll 23: ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace. Mandatory hard-love roll 23: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE anchors the isolated lane. Radiance steps away while Ellie catches one forearm and Alia catches the other hand; a fourth partner closes behind Alia into a protective embrace, creating a readable pulled-away choice. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: ECE uses both hands on the inert mission prop and touches nobody else; Radiance's forearm is caught by Ellie and her other hand links Alia; Ellie catches Radiance and rests a hand on Alia's shoulder; Alia links Radiance while the fourth partner contacts Alia at shoulder and forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty geometric paper route target fixed to a complete thick sand backstop on a separate closed dry training lane away from every person, mascot, landmark, vehicle and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 10=PAWS and MAX together. Mascot holder selector 83=Alia. Render only the rolled mascot state on a padded deck bench far from surf, mission prop, odd prop and Mars hardware. Odd-prop roll 57 is inactive. Do not add any bizarre secondary prop; stored inactive holder 35=Alia and family 29=mirrored megaphone sculpture remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

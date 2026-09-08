@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "batch": 415,
+  "country": "Marshall Islands",
+  "status": "prompts_prepared_provider_dispatch_blocked",
+  "prepared_utc": "2026-08-26T07:38:07.863Z",
+  "authority": {
+    "campaign": "assets/lore/starlight-era/world-195x4-campaign.json",
+    "prior_country_checkpoint": "assets/lore/starlight-era/batch-414-monaco-closed-unresolved-no-provider-occurrences-checkpoint.json",
+    "prior_country_reference": "assets/lore/starlight-era/batch-344-marshall-islands-moon-expedition-checkpoint.json",
+    "next_country_after_completion": "San Marino",
+    "scenes": [
+      1680,
+      1681,
+      1682,
+      1683
+    ]
+  },
+  "camera_policy": {
+    "roll_range": "1-100 independently per image",
+    "thresholds": {
+      "1-20": "extreme close",
+      "21-50": "medium close",
+      "51-80": "medium wide",
+      "81-100": "extreme wide"
+    },
+    "rolls": [
+      {
+        "scene": 1680,
+        "roll": 23,
+        "mode": "intimate medium-close from knees upward, preserving all four faces, relationship action, outfit construction and a readable lagoon setting"
+      },
+      {
+        "scene": 1681,
+        "roll": 62,
+        "mode": "dynamic medium-wide full-body frame, all four shoes visible with mission action and island setting balanced"
+      },
+      {
+        "scene": 1682,
+        "roll": 76,
+        "mode": "dynamic medium-wide full-body frame, all four shoes visible with mission action and island setting balanced"
+      },
+      {
+        "scene": 1683,
+        "roll": 94,
+        "mode": "extreme-wide environmental frame, all four full bodies and shoes visible while the atoll and Pacific landscape dominate"
+      }
+    ]
+  },
+  "face_anchors": {
+    "order": [
+      "938",
+      "936",
+      "937"
+    ],
+    "references": [
+      {
+        "id": "938",
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+      },
+      {
+        "id": "936",
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+      },
+      {
+        "id": "937",
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+        "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      }
+    ]
+  },
+  "prompt_files": [
+    {
+      "scene": 1680,
+      "path": "tmp/world-195x4/batch-415/scene-1680-prompt.txt",
+      "sha256": "0E504ACB588436249CB749641625DAC790ECAB60CE49A48C5F6441031BCAA2E1"
+    },
+    {
+      "scene": 1681,
+      "path": "tmp/world-195x4/batch-415/scene-1681-prompt.txt",
+      "sha256": "18182DAFDD0D9FFE3AE01AF20E4CC341DCE7A036F1F0BA895D41EB266BDEE004"
+    },
+    {
+      "scene": 1682,
+      "path": "tmp/world-195x4/batch-415/scene-1682-prompt.txt",
+      "sha256": "901AA4B0245700586FA6E68E6BE6D42863EABD50B22780C0A2E002A817F81290"
+    },
+    {
+      "scene": 1683,
+      "path": "tmp/world-195x4/batch-415/scene-1683-prompt.txt",
+      "sha256": "53F820242E85B6727CC809845F98AAEE6539FD45328A9FDBBFEBCC037618C5CA"
+    }
+  ],
+  "production_rules": {
+    "provider": "Meta AI exclusive",
+    "formal_cycle": "one initial dispatch per scene; no same-chat correction loops and no retry without newer checkpoint authority",
+    "fashion": "exactly two two-piece looks per image with varied lace, satin, velvet, metallic and liquid-latex-look materials; secure opaque public-safe coverage",
+    "mission": "peaceful lunar-ocean technology separated from Marshall Islands landmarks; romance, protection and AI ECE jealousy remain visible"
+  },
+  "dispatch_blocker": {
+    "provider": "Meta AI",
+    "evidence_checkpoint": "assets/lore/starlight-era/batch-414-monaco-closed-unresolved-no-provider-occurrences-checkpoint.json",
+    "reason": "All four Batch 414 submissions cleared exact prompts and anchors but returned no provider occurrences or bytes.",
+    "clear_condition": "A later safe wake demonstrates a real Meta provider chat URL, response, media control, or bytes before consuming the full bank."
+  },
+  "x_cadence": {
+    "completed_cycles_since_last_x": 4,
+    "post_early": false
+  }
+}

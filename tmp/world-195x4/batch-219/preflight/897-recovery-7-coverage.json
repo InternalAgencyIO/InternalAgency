@@ -1,0 +1,35 @@
+{
+  "schema": "world-195x4-recovery-7-single-missing-action-lock-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-recovery-7.txt",
+  "promptSha256": "23a6b28fc19d912ebcc1354f764f92284a891c82ee81766e393e90ba0fd6c38e",
+  "blockedCorpusSha256": "1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No new moderation block; three accepted images are frozen and only scene 897's missing positive action is retried.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "singleMissingActionLock": "SINGLE MISSING-ACTION LOCK — ALL OTHER POSE ELEMENTS STAY: arrange left-to-right ECE seated, Ellie leaning, Radiance center, Alia right. CAMERA MUST CLEARLY SHOW RADIANCE'S RIGHT WHITE OPERA-GLOVED HAND PHYSICALLY TOUCHING AND STRAIGHTENING ALIA'S LEFT RED SHOULDER SEAM. Radiance's left hand alone holds the slim decorative wand low beside her own boot. Alia's left hand alone adjusts Radiance's right combined shoulder-strap-and-cape closure. Ellie's right hand alone adjusts Radiance's left combined shoulder-strap-and-cape closure while Ellie's forehead stays touching ECE's forehead. PAWS remains secure on ECE's lap. Do not put both of Alia's hands on Radiance; do not leave Radiance's right hand down.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-6/897-recovery-6-rejected.png",
+    "bytes": 2478118,
+    "sha256": "42953c6e5330f769fef2f73425812b10761627b99e03e00e6773aec75e9d9ed9",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Radiance's right opera-gloved hand remains down instead of visibly straightening Alia's shoulder detail",
+      "all other scene-897 gates—including forehead contact, PAWS lap-copilot, navel jewel, second navel, cape styling, identities, anatomy and complete footwear—pass"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "navelJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsLapCopilotAndReciprocation": true
+  }
+}

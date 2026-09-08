@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "checkpoint_type": "meta-four-lane-staged",
+  "created_at_utc": "2026-08-26T14:21:11.5763202Z",
+  "branch": "agent/starlight-progress-archive",
+  "parent_commit": "ffc14851da00c7206fa35c0e7d8a5b033d7b579b",
+  "batch": 418,
+  "country": "Nauru",
+  "cycle_status": "prepared-awaiting-immediate-browser-confirmation",
+  "completed_country_cycles_since_last_x_cycle": 7,
+  "x_cycle_due": false,
+  "accepted_country_count": 0,
+  "provider": "Meta AI",
+  "browser_surface": "in-app",
+  "browser_visible": true,
+  "tabs": [
+    {
+      "scene": 1692,
+      "tab_id": "4",
+      "url": "https://www.meta.ai/",
+      "prompt_sha256": "2432E17EE4D4F15EE5B950233ECACFF3153ECBE910C89BE78D041780619516B7",
+      "prompt_exact": true,
+      "prompt_length": 2349,
+      "attachment_count": 0,
+      "sent": false
+    },
+    {
+      "scene": 1693,
+      "tab_id": "5",
+      "url": "https://www.meta.ai/",
+      "prompt_sha256": "EF15F108A08A43EC9BDCE9600F1DD435F85317EFDF14EB58BFA06D6351B3FE86",
+      "prompt_exact": true,
+      "prompt_length": 2374,
+      "attachment_count": 0,
+      "sent": false
+    },
+    {
+      "scene": 1694,
+      "tab_id": "6",
+      "url": "https://www.meta.ai/",
+      "prompt_sha256": "074FDB62D641A16B4A683E572B9D0D3060C494CCB61D20EFE32446DC934A4D68",
+      "prompt_exact": true,
+      "prompt_length": 2474,
+      "attachment_count": 0,
+      "sent": false
+    },
+    {
+      "scene": 1695,
+      "tab_id": "7",
+      "url": "https://www.meta.ai/",
+      "prompt_sha256": "9B3E2D515E84A3B51F206409BBD73E2F84EBB79575AB8F8068B75A897C185E48",
+      "prompt_exact": true,
+      "prompt_length": 2393,
+      "attachment_count": 0,
+      "sent": false
+    }
+  ],
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "asset": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "asset": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "asset": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "dispatch_guard": {
+    "uploads_performed": 0,
+    "sends_performed": 0,
+    "provider_occurrences_created": 0,
+    "immediate_browser_confirmation_required": true,
+    "resend_forbidden_before_confirmed_initial_dispatch": true
+  },
+  "next_action": "After fresh immediate user confirmation, reverify all three face-reference hashes, upload the ordered anchors to scenes 1692-1695, and Send each exact staged prompt once."
+}

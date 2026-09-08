@@ -1,0 +1,402 @@
+{
+  "schema": "world-195x4-render-checkpoint-v1",
+  "batch": 215,
+  "country": "Germany",
+  "updatedAt": "2026-08-05T18:22:03.332Z",
+  "status": "complete-four-member-germany-pushed",
+  "preflight": {
+    "blockedCorpusSha256": "0f818e540d8dab5e665b751dff33f7e1a44933e93429b9435a962740756aca72",
+    "cache": "tmp/world-195x4/batch-215/preflight/blocklist-transform-0f818e540d8dab5e665b751dff33f7e1a44933e93429b9435a962740756aca72.json",
+    "reusedFrom": "tmp/world-195x4/batch-214/preflight/blocklist-transform-0f818e540d8dab5e665b751dff33f7e1a44933e93429b9435a962740756aca72.json",
+    "order": "longest-phrase-first",
+    "recompileRequired": false
+  },
+  "passPolicy": "Batch 215 Germany is complete, validated, narrowly committed and pushed. All four lanes are frozen; Batch 216 begins on a later wake.",
+  "lanes": [
+    {
+      "scene": 880,
+      "file": "880-germany-berlin-brandenburg-reichstag-route-light-grid.png",
+      "status": "accepted-four-member-final",
+      "attempts": 2,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/880-germany-berlin-brandenburg-reichstag-route-light-grid.png",
+      "planSha256": "0de3768426f6601367d0963ad585d918d1e20263307550d51b6fb586ce83ba19",
+      "promptSha256": "88594dc15632f34d6ba5e1f11fc9b24decb537dfede2464baa44061a7ec277f5",
+      "pawsTriggered": false,
+      "pawsAction": null,
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 880,
+        "source": "exec-2bc0fd32-8545-4aca-9bc1-16a270340420.png",
+        "file": "880-germany-berlin-brandenburg-reichstag-route-light-grid.png",
+        "bytes": 2318982,
+        "sha256": "72d377fd779d27ed8c15524034772855ecdea32c432eb95e016d3bd2361b6d8a",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "canonicalIdentityAndHeightOrder": true,
+          "eceRadiancePrimaryLinkedAction": true,
+          "ellieAndAliaRelationshipSideBeats": true,
+          "exclusiveCoatedTextileAndOpaqueGuipureOnAllFour": true,
+          "shortSecureOpaqueHemlines": true,
+          "cleanFacesAndNaturalHands": true,
+          "allEightCompleteShoes": true,
+          "berlinLandmarksAndRouteMissionReadable": true,
+          "pawsCorrectlyAbsent": true,
+          "noExtraPersonAnimalTextOrLogo": true
+        },
+        "destination": "assets/lore/starlight-era/880-germany-berlin-brandenburg-reichstag-route-light-grid.png",
+        "acceptedAt": "2026-08-05T18:15:26.915Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 881,
+      "file": "881-germany-hamburg-speicherstadt-elbphilharmonie-cabin-signal-cipher.png",
+      "status": "accepted-four-member-final",
+      "attempts": 3,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/881-germany-hamburg-speicherstadt-elbphilharmonie-cabin-signal-cipher.png",
+      "planSha256": "4336dfe0f574f97e7c5af86326245553186df89402ce3c1b7c51db62188cc2cf",
+      "promptSha256": "4632b4f5c13908da9a13b773ceff9cddc169fc0879e6ddde2f594b6d4e802958",
+      "pawsTriggered": true,
+      "pawsAction": "crystal-pounce",
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 881,
+        "source": "exec-fa243219-1394-4d86-91c1-1435848551c2.png",
+        "file": "881-germany-hamburg-speicherstadt-elbphilharmonie-cabin-signal-cipher.png",
+        "bytes": 2573691,
+        "sha256": "275e505330090328ed44290d60f5e202152d018d16bfe1b7c61f5fa37bd3b1c6",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "canonicalIdentityAndHeightOrder": true,
+          "eceRadiancePrimaryHandclaspAndDirectGaze": true,
+          "elliePlayfulJealousyAndAliaFamiliarity": true,
+          "exclusiveCoatedTextileAndOpaqueGuipureOnAllFour": true,
+          "shortSecureOpaqueHemlines": true,
+          "cleanFacesAndNaturalHands": true,
+          "allEightCompleteShoes": true,
+          "hamburgLandmarksAndCipherMissionReadable": true,
+          "pawsBabyScaleGoldenCoatAndAnatomyReadable": true,
+          "pawsCrystalPounceActive": true,
+          "noExtraPersonAnimalTextOrLogo": true
+        },
+        "destination": "assets/lore/starlight-era/881-germany-hamburg-speicherstadt-elbphilharmonie-cabin-signal-cipher.png",
+        "acceptedAt": "2026-08-05T18:15:26.915Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 882,
+      "file": "882-germany-dresden-zwinger-elbe-star-map-relay.png",
+      "status": "accepted-four-member-final",
+      "attempts": 3,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/882-germany-dresden-zwinger-elbe-star-map-relay.png",
+      "planSha256": "e54d72e15704505e984b5d9388366ed8680f4d5caa7377aafb0c098db2c380be",
+      "promptSha256": "46d741b57a9ef34c9540ae15d69e28e9a310b151aba49e290d7a5c2858048b03",
+      "pawsTriggered": false,
+      "pawsAction": null,
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 882,
+        "source": "exec-6c7a6e4f-f0eb-4007-8669-c0480c196783.png",
+        "file": "882-germany-dresden-zwinger-elbe-star-map-relay.png",
+        "bytes": 2355734,
+        "sha256": "ce70a35a63bb7ee88c4fca8af44652a06d1765e60fdb8d92c9fbd23855374b82",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "canonicalIdentityAndHeightOrder": true,
+          "eceRadianceCuffAdjustmentAndDirectGaze": true,
+          "elliePlayfulJealousyAndAliaFamiliarity": true,
+          "exclusiveCoatedTextileAndOpaqueGuipureOnAllFour": true,
+          "shortSecureOpaqueHemlines": true,
+          "cleanFacesAndNaturalHands": true,
+          "allEightCompleteShoes": true,
+          "dresdenLandmarksAndRelayMissionReadable": true,
+          "missionHardwareBehindCrew": true,
+          "pawsCorrectlyAbsent": true,
+          "noExtraPersonAnimalTextOrLogo": true
+        },
+        "destination": "assets/lore/starlight-era/882-germany-dresden-zwinger-elbe-star-map-relay.png",
+        "acceptedAt": "2026-08-05T18:15:26.915Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 883,
+      "file": "883-germany-munich-olympiapark-alps-arrival-beacon-finale.png",
+      "status": "accepted-four-member-final",
+      "attempts": 3,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/883-germany-munich-olympiapark-alps-arrival-beacon-finale.png",
+      "planSha256": "e275bca92cd6cb50870c4ac582bbc7cfd999b5ad5eb0469f01e3a99181a28f93",
+      "promptSha256": "6bfcc64167ec7c950bb0e0ddd49ecd8d02babf350aca60de6418fb9808541a9c",
+      "pawsTriggered": true,
+      "pawsAction": "crew-dash",
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 883,
+        "source": "exec-201f567f-35d1-4096-9dad-358ccb3771cc.png",
+        "file": "883-germany-munich-olympiapark-alps-arrival-beacon-finale.png",
+        "bytes": 2415717,
+        "sha256": "2ef42c8dcc058b60e7ffee197742cdbd90f0af172cc0774447b1df687efc33dd",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "canonicalIdentityAndHeightOrder": true,
+          "eceRadianceLinkedCenterPairAndDirectGaze": true,
+          "elliePlayfulJealousyAndAliaFamiliarity": true,
+          "exclusiveCoatedTextileAndOpaqueGuipureOnAllFour": true,
+          "shortSecureOpaqueHemlines": true,
+          "cleanFacesAndNaturalHands": true,
+          "allEightCompleteShoes": true,
+          "munichOlympiaparkAlpsAndBeaconReadable": true,
+          "pawsBabyScaleGoldenCoatAndAnatomyReadable": true,
+          "pawsCrewDashActive": true,
+          "noExtraPersonAnimalTextOrLogo": true
+        },
+        "destination": "assets/lore/starlight-era/883-germany-munich-olympiapark-alps-arrival-beacon-finale.png",
+        "acceptedAt": "2026-08-05T18:15:26.915Z",
+        "status": "accepted-four-member-final"
+      }
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "number": 880,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-9d74c243-f609-4fc1-b038-118b6bbe98ec.png",
+      "bytes": 2515428,
+      "sha256": "cf8723aaa20167b1485dc0d4a41eecaeeabc8bc46fbeb77c1c072f77129ee58b",
+      "width": 941,
+      "height": 1672,
+      "status": "rejected-contract-breaking-foundation",
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "cleanFaces": true,
+        "allEightCompleteShoes": true,
+        "berlinLandmarksReadable": true,
+        "pawsCorrectlyAbsent": true,
+        "prominentOpaqueGuipureOnAllFourOutfits": false,
+        "requiredRelationshipConstellation": false
+      },
+      "reasons": [
+        "opaque guipure is absent or visually unreadable on the four outfits",
+        "ECE and Radiance do not carry the required primary mutual relationship action",
+        "mission gestures are weaker than the stored completed-route objective"
+      ],
+      "rejectedAt": "2026-08-05T17:50:36.128Z"
+    },
+    {
+      "number": 881,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-c9ed548d-b5ad-4ac6-b5c8-5cd69d6ec733.png",
+      "bytes": 2433200,
+      "sha256": "b9bd5178557a6ce815b7fafd514647f8f504dcf649ead6d66b94e7ec91eed168",
+      "width": 941,
+      "height": 1672,
+      "status": "rejected-contract-breaking-foundation",
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "cleanFaces": true,
+        "allEightCompleteShoes": true,
+        "hamburgLandmarksReadable": true,
+        "exclusiveWardrobeMaterials": true,
+        "pawsBabyScaleGoldenCoat": true,
+        "pawsCrystalPounceContract": false,
+        "eceRadiancePrimaryDirectGaze": false
+      },
+      "reasons": [
+        "Radiance and ECE look toward PAWS instead of carrying the required primary mutual gaze",
+        "PAWS performs an upright reach rather than the stored very short ground-level hop, and all four legs are not simultaneously readable"
+      ],
+      "rejectedAt": "2026-08-05T18:05:44.451Z"
+    },
+    {
+      "number": 882,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-28f8c044-fe36-4f2f-be9c-65c0cd69b8f9.png",
+      "bytes": 2634281,
+      "sha256": "a196f7fa3f56b71ed8a45bcd03329fe15612a9dfaf5e26f4f13c0cfa8549a74f",
+      "width": 941,
+      "height": 1672,
+      "status": "rejected-contract-breaking-foundation",
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "cleanFaces": true,
+        "dresdenLocationReadable": true,
+        "exclusiveWardrobeMaterials": true,
+        "pawsCorrectlyAbsent": true,
+        "eceRadiancePrimaryDirectGaze": false,
+        "allEightCompleteShoes": false,
+        "missionHardwareBehindCrew": false
+      },
+      "reasons": [
+        "Radiance and ECE do not exchange the required primary direct gaze",
+        "the foreground pedestal obscures central footwear and dominates the mission read"
+      ],
+      "rejectedAt": "2026-08-05T18:05:44.451Z"
+    },
+    {
+      "number": 883,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-2cb89545-7cf7-40a4-b81b-c7cfddb8fbc3.png",
+      "bytes": 2512909,
+      "sha256": "cba4279a5074a5a2d4b443077cfaf1b39362976b4859d896b302970da6d740c9",
+      "width": 941,
+      "height": 1672,
+      "status": "rejected-contract-breaking-foundation",
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "cleanFaces": true,
+        "allEightCompleteShoes": true,
+        "munichOlympiaparkAndAlpsReadable": true,
+        "exclusiveWardrobeMaterials": true,
+        "pawsBabyScaleGoldenCoatAndCrewDash": true,
+        "eceRadiancePrimaryDirectGaze": false,
+        "requiredCenterPairGeometry": false
+      },
+      "reasons": [
+        "Ellie separates Radiance and ECE, so the permanent primary romantic current is absent",
+        "Radiance and ECE look toward Ellie rather than unmistakably at each other"
+      ],
+      "rejectedAt": "2026-08-05T18:05:44.451Z"
+    }
+  ],
+  "publicBuild": {
+    "status": "pushed",
+    "commit": "59954a0a53ab10ee3aa76028bdc39b265bb9c285",
+    "commitUrl": "https://github.com/InternalAgencyIO/InternalAgency/commit/59954a0a53ab10ee3aa76028bdc39b265bb9c285",
+    "buildUrl": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/assets/lore/starlight-era/world-195x4-live-build/batch-215-germany",
+    "pushedAt": "2026-08-05T18:22:03.332Z",
+    "rejectedMediaPublished": false
+  },
+  "moderationBlocks": [],
+  "ambiguousAttempts": [
+    {
+      "number": 881,
+      "attempt": 1,
+      "status": "ambiguous-no-durable-render-result",
+      "evidence": "The coordinator call ended without a durable image file or result object for this lane; no candidate was accepted or published.",
+      "resolvedBy": "fresh-preflighted-direct-foundation-attempt-2",
+      "recordedAt": "2026-08-05T17:50:36.128Z"
+    },
+    {
+      "number": 882,
+      "attempt": 1,
+      "status": "ambiguous-no-durable-render-result",
+      "evidence": "The coordinator call ended without a durable image file or result object for this lane; no candidate was accepted or published.",
+      "resolvedBy": "fresh-preflighted-direct-foundation-attempt-2",
+      "recordedAt": "2026-08-05T17:50:36.128Z"
+    },
+    {
+      "number": 883,
+      "attempt": 1,
+      "status": "ambiguous-no-durable-render-result",
+      "evidence": "The coordinator call ended without a durable image file or result object for this lane; no candidate was accepted or published.",
+      "resolvedBy": "fresh-preflighted-direct-foundation-attempt-2",
+      "recordedAt": "2026-08-05T17:50:36.128Z"
+    }
+  ],
+  "acceptedCandidates": [
+    {
+      "number": 880,
+      "source": "exec-2bc0fd32-8545-4aca-9bc1-16a270340420.png",
+      "file": "880-germany-berlin-brandenburg-reichstag-route-light-grid.png",
+      "bytes": 2318982,
+      "sha256": "72d377fd779d27ed8c15524034772855ecdea32c432eb95e016d3bd2361b6d8a",
+      "width": 941,
+      "height": 1672,
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "canonicalIdentityAndHeightOrder": true,
+        "eceRadiancePrimaryLinkedAction": true,
+        "ellieAndAliaRelationshipSideBeats": true,
+        "exclusiveCoatedTextileAndOpaqueGuipureOnAllFour": true,
+        "shortSecureOpaqueHemlines": true,
+        "cleanFacesAndNaturalHands": true,
+        "allEightCompleteShoes": true,
+        "berlinLandmarksAndRouteMissionReadable": true,
+        "pawsCorrectlyAbsent": true,
+        "noExtraPersonAnimalTextOrLogo": true
+      },
+      "destination": "assets/lore/starlight-era/880-germany-berlin-brandenburg-reichstag-route-light-grid.png",
+      "acceptedAt": "2026-08-05T18:05:44.451Z",
+      "status": "accepted-four-member-final"
+    }
+  ],
+  "completedAt": "2026-08-05T18:15:26.915Z",
+  "activeRenderCallCount": 0,
+  "acceptedLanes": [
+    {
+      "number": 880,
+      "file": "880-germany-berlin-brandenburg-reichstag-route-light-grid.png",
+      "bytes": 2318982,
+      "sha256": "72d377fd779d27ed8c15524034772855ecdea32c432eb95e016d3bd2361b6d8a",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 881,
+      "file": "881-germany-hamburg-speicherstadt-elbphilharmonie-cabin-signal-cipher.png",
+      "bytes": 2573691,
+      "sha256": "275e505330090328ed44290d60f5e202152d018d16bfe1b7c61f5fa37bd3b1c6",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 882,
+      "file": "882-germany-dresden-zwinger-elbe-star-map-relay.png",
+      "bytes": 2355734,
+      "sha256": "ce70a35a63bb7ee88c4fca8af44652a06d1765e60fdb8d92c9fbd23855374b82",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 883,
+      "file": "883-germany-munich-olympiapark-alps-arrival-beacon-finale.png",
+      "bytes": 2415717,
+      "sha256": "2ef42c8dcc058b60e7ffee197742cdbd90f0af172cc0774447b1df687efc33dd",
+      "width": 941,
+      "height": 1672
+    }
+  ],
+  "finalAssets": [
+    {
+      "number": 880,
+      "file": "880-germany-berlin-brandenburg-reichstag-route-light-grid.png",
+      "bytes": 2318982,
+      "sha256": "72d377fd779d27ed8c15524034772855ecdea32c432eb95e016d3bd2361b6d8a",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 881,
+      "file": "881-germany-hamburg-speicherstadt-elbphilharmonie-cabin-signal-cipher.png",
+      "bytes": 2573691,
+      "sha256": "275e505330090328ed44290d60f5e202152d018d16bfe1b7c61f5fa37bd3b1c6",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 882,
+      "file": "882-germany-dresden-zwinger-elbe-star-map-relay.png",
+      "bytes": 2355734,
+      "sha256": "ce70a35a63bb7ee88c4fca8af44652a06d1765e60fdb8d92c9fbd23855374b82",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 883,
+      "file": "883-germany-munich-olympiapark-alps-arrival-beacon-finale.png",
+      "bytes": 2415717,
+      "sha256": "2ef42c8dcc058b60e7ffee197742cdbd90f0af172cc0774447b1df687efc33dd",
+      "width": 941,
+      "height": 1672
+    }
+  ]
+}

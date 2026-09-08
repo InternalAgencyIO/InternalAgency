@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "batch": 501,
+  "country": "Costa Rica",
+  "createdAtUtc": "2026-09-07T01:20:56.576Z",
+  "state": "four-confirmed-meta-occurrences-in-progress-do-not-resend",
+  "baseRemoteVerifiedHead": "2c0af56b5bf5a33fbb6968dfa43291d34ab53dde",
+  "sceneIds": [
+    2031,
+    2032,
+    2033,
+    2034
+  ],
+  "providerUrls": [
+    "https://www.meta.ai/prompt/691f401f-c7f5-4a52-8d50-5271ec6a9045",
+    "https://www.meta.ai/prompt/d7c8a644-3b28-4b3f-be24-bf859dd1f3ef",
+    "https://www.meta.ai/prompt/d52784e6-f57a-447e-bcb3-5c7a10c47494",
+    "https://www.meta.ai/prompt/07d358b3-c4cc-4b5e-8539-a9bd6f6c3946"
+  ],
+  "providerSendActivations": 4,
+  "confirmedSubmissions": 4,
+  "metaRetries": 0,
+  "uncertainActivations": 0,
+  "chatgptEditInvocations": 0,
+  "stagingCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-meta-composers-staged-checkpoint.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/provider-ledger.json",
+  "preSendGitLfsVerification": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/pre-send-git-lfs-verification.json",
+  "initialSendReceipts": [
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-initial-send-receipt.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-initial-send-receipt.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-initial-send-receipt.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-initial-send-receipt.json"
+  ],
+  "noResend": true,
+  "archiveExceptionApplies": false,
+  "previousMauritaniaException": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+  "canonicalXPostCount": 230,
+  "xPostActivations": 0,
+  "nextSafeAction": "Observe only the four confirmed Costa Rica occurrences. Never resend them or reuse their lanes until every visible output version and raw final is archived or its explicit recovery hold recorded. Perform technical and identity QA, then reserve exactly one built-in ChatGPT tailoring invocation per usable occurrence. Preserve unused and blocked results, accessibility, manifests, Git/LFS and PR parity before normal Costa Rica-Mauritania country-pair publication."
+}

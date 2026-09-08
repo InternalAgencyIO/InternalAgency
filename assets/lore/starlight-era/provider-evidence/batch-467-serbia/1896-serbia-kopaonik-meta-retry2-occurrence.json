@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "scene": 1896,
+  "country": "Serbia",
+  "provider": "Meta AI",
+  "occurrence": 3,
+  "retryNumber": 2,
+  "status": "explicit_no_byte_refusal_terminal_retries_exhausted",
+  "submittedAtUtc": "2026-08-31T07:11:49.548Z",
+  "providerChatUrl": "https://www.meta.ai/prompt/e4e17039-8dc9-4b9e-bd44-b26fe1235c41",
+  "promptSource": "assets/lore/starlight-era/batch-467-serbia-second-retry-prepared-checkpoint.json",
+  "promptSha256": "D77D2496940908353A8AEA505FEC41BBE101C69DA7ACD64BCA00400E3922B4B1",
+  "orderedReferenceAnchors": [938, 936, 937],
+  "primaryIdentityOrder": ["Alia", "Radiance", "Ellie", "AI ECE"],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+  "providerResponse": "I wasn't able to create that exact image as described for this scene. Meta offered a materially different version with modest mountain attire, no cheek contact, and no short silhouettes, then asked whether to proceed.",
+  "rawAsset": null,
+  "byteEvidence": {
+    "present": false,
+    "reason": "The visible terminal response contains no generated-media image and no Download control."
+  },
+  "browserEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/scene-1896-meta-retry2-terminal-refusal-page.jpg",
+    "sha256": "06C192732A5ACC3D9224F28EE895495EAA18BC768793A8A683A24A0D17DBF662",
+    "byteLength": 101200,
+    "dimensions": "1280x720",
+    "contentType": "image/jpeg"
+  },
+  "retry": {
+    "permitted": false,
+    "reason": "The occurrence is a refusal with no bytes and both allowed Meta retries are exhausted."
+  },
+  "chatgptHemlineRefinement": {
+    "required": false,
+    "reason": "No technically valid Meta image exists in this occurrence."
+  }
+}

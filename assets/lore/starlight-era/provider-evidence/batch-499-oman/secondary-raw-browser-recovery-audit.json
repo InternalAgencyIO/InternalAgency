@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "batch": 499,
+  "atUtc": "2026-09-06 17:04:23 UTC",
+  "state": "secondary-raw-archive-gap-remains",
+  "observations": [
+    "Creations gallery exposed final images only in the current four Oman tiles.",
+    "The final desert gallery Download returned 212561 bytes, identical in size to the already saved scene 2026 original; not a missing secondary variant.",
+    "Visible More options offered only Good result and Bad result, no version history.",
+    "The documented inline downloadMedia control navigated the existing retry tab to its already visible native image URL instead of producing a local download.",
+    "That native image is visually preserved in a screenshot; its pageAssets inventory returned zero assets, so no bundle or direct HTTP retrieval was attempted."
+  ],
+  "screenshots": [
+    "assets/lore/starlight-era/provider-evidence/batch-499-oman/meta-creations-gallery-recovery-visible.jpg",
+    "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-1-internal-1-native-visible.jpg"
+  ],
+  "gaps": [
+    {
+      "scene": 2023,
+      "occurrence": 1,
+      "observedInternalImageCount": 3,
+      "mainRawCount": 1,
+      "missingSecondaryRawCount": 2
+    },
+    {
+      "scene": 2026,
+      "occurrence": 1,
+      "observedInternalImageCount": 4,
+      "mainRawCount": 1,
+      "missingSecondaryRawCount": 3
+    },
+    {
+      "scene": 2024,
+      "occurrence": 2,
+      "observedInternalImageCount": 2,
+      "mainRawCount": 1,
+      "missingSecondaryRawCount": 1
+    }
+  ],
+  "terminalPromptUrlsReopened": 0,
+  "providerPromptsResent": 0,
+  "nextSafeAction": "Preserve the native-image evidence and obtain missing secondary files through user-supported manual download. Do not bypass with HTTP, API, hidden inputs or terminal scene reopening."
+}

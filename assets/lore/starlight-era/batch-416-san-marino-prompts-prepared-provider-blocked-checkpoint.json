@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "batch": 416,
+  "country": "San Marino",
+  "status": "prompts_prepared_provider_dispatch_blocked",
+  "prepared_utc": "2026-08-26T07:47:00.606Z",
+  "authority": {
+    "campaign": "assets/lore/starlight-era/world-195x4-campaign.json",
+    "prior_country_checkpoint": "assets/lore/starlight-era/batch-415-marshall-islands-closed-unresolved-no-provider-occurrences-checkpoint.json",
+    "prior_country_reference": "assets/lore/starlight-era/batch-345-san-marino-solar-observation-checkpoint.json",
+    "next_country_after_completion": "Palau",
+    "scenes": [
+      1684,
+      1685,
+      1686,
+      1687
+    ]
+  },
+  "camera_policy": {
+    "roll_range": "1-100 independently per image",
+    "thresholds": {
+      "1-20": "extreme close",
+      "21-50": "medium close",
+      "51-80": "medium wide",
+      "81-100": "extreme wide"
+    },
+    "rolls": [
+      {
+        "scene": 1684,
+        "roll": 10,
+        "mode": "extreme-close intimate low angle, with all four anchored faces and upper-body fashion dominating while the Titano landmark remains readable; shoes may fall outside the crop"
+      },
+      {
+        "scene": 1685,
+        "roll": 58,
+        "mode": "dynamic medium-wide full-body frame, all four shoes visible with mission action and landmark balanced"
+      },
+      {
+        "scene": 1686,
+        "roll": 49,
+        "mode": "intimate medium-close from knees upward, preserving all four faces, relationship action, outfit construction and a readable landmark"
+      },
+      {
+        "scene": 1687,
+        "roll": 70,
+        "mode": "dynamic medium-wide full-body frame, all four shoes visible with mission action and landmark balanced"
+      }
+    ]
+  },
+  "face_anchors": {
+    "order": [
+      "938",
+      "936",
+      "937"
+    ],
+    "references": [
+      {
+        "id": "938",
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+      },
+      {
+        "id": "936",
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+      },
+      {
+        "id": "937",
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+        "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      }
+    ]
+  },
+  "prompt_files": [
+    {
+      "scene": 1684,
+      "path": "tmp/world-195x4/batch-416/scene-1684-prompt.txt",
+      "sha256": "31D75F0532F578D4175CE504DE32EA6DEE95EC923F039EBEA766A8110328AFC5"
+    },
+    {
+      "scene": 1685,
+      "path": "tmp/world-195x4/batch-416/scene-1685-prompt.txt",
+      "sha256": "E451BB015ADC63CB0459127AE452FD7F025713E9912ECB357F4DF01104FB26EB"
+    },
+    {
+      "scene": 1686,
+      "path": "tmp/world-195x4/batch-416/scene-1686-prompt.txt",
+      "sha256": "9EB683AA8AF32825DA541662DEF32DDA8C2E6745240A3F85215744C2F4C8B8A8"
+    },
+    {
+      "scene": 1687,
+      "path": "tmp/world-195x4/batch-416/scene-1687-prompt.txt",
+      "sha256": "C13FFB76ECABF24861C1F6F4A104A830E19D11317E845FCEFF729FDC11461E90"
+    }
+  ],
+  "production_rules": {
+    "provider": "Meta AI exclusive",
+    "formal_cycle": "one initial dispatch per scene; no same-chat correction loops and no retry without newer checkpoint authority",
+    "fashion": "exactly two two-piece looks per image with varied lace, satin, velvet, metallic and liquid-latex-look materials; secure opaque public-safe coverage",
+    "mission": "peaceful solar-observation technology separated from San Marino landmarks; romance, protection and AI ECE jealousy remain visible"
+  },
+  "dispatch_blocker": {
+    "provider": "Meta AI",
+    "evidence_checkpoint": "assets/lore/starlight-era/batch-415-marshall-islands-closed-unresolved-no-provider-occurrences-checkpoint.json",
+    "reason": "All four Batch 415 submissions cleared exact prompts and anchors but returned no provider occurrences or bytes.",
+    "clear_condition": "A later safe wake demonstrates a real Meta provider chat URL, response, media control, or bytes before consuming the full bank."
+  },
+  "x_cadence": {
+    "completed_cycles_since_last_x": 5,
+    "post_early": false
+  }
+}

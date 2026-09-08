@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "batch": 391,
+  "country": "Malta",
+  "status": "complete-four-of-four-hard-safe-meta-ai-bounded-pass-2-accepted-no-more-malta-rendering",
+  "sourceCommit": "6d6d6de494a0ee50c8a3052a61199acb49b55a74",
+  "contractSha256": "7CD14D921342CB03E23F194BE87F516B4F77CD36DF8BEA66547C53779C360AE5",
+  "providerRestriction": "Meta AI only",
+  "queueAuthorization": {
+    "nextCountry": "Malta",
+    "nextBatch": 391,
+    "sceneNumbers": [
+      1584,
+      1585,
+      1586,
+      1587
+    ],
+    "cinematicTheme": "orbital research-station couture",
+    "themePairPosition": 1,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-319-montenegro-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/165"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/9"
+    ],
+    "lockedUntilBatch390Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch390Closure": true
+  },
+  "cinematicTheme": {
+    "name": "orbital research-station couture",
+    "ordinal": 1,
+    "pairSize": 2
+  },
+  "sceneNumbers": [
+    1584,
+    1585,
+    1586,
+    1587
+  ],
+  "policy": {
+    "passOneCandidatesAuthorized": 4,
+    "passOneCandidatesConsumed": 4,
+    "promptDispatchesConsumed": 5,
+    "passTwoCandidatesConsumed": 1,
+    "thirdPassAllowed": false,
+    "concurrentTabsRequired": 4,
+    "closeLoveMissionRestoration": true,
+    "passTwoAuthorizedScenes": [],
+    "passTwoLaunchCondition": "All pass-one events, rejected raw provenance, checkpoint, ledgers and archive must be committed, explicitly pushed and remote-verified before the single fresh scene-1587 correction.",
+    "passTwoClosed": true
+  },
+  "closeLoveBankMinimums": {
+    "closeCameraScenes": 4,
+    "lapSittingScenes": 2,
+    "visiblePeckScenes": 3,
+    "closeEmbraceScenes": 4,
+    "staticLineupScenesAllowed": 0
+  },
+  "scenePlans": {
+    "1584": {
+      "scene": 1584,
+      "historicalSceneEvidence": "tmp/world-195x4/batch-320/batch-320-malta-preflight.json#/scenePlans/1300",
+      "location": {
+        "name": "Valletta Grand Harbour",
+        "landmark": "a near-camera orbital research lounge above Valletta Grand Harbour, with honey-limestone bastions, the fortified peninsula, stepped quays and cobalt harbor water clearly recognizable behind the group",
+        "motifs": "Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs",
+        "target": "a complete thick lunar-soil backstop behind a transparent safety screen in an empty calibration lane at far right"
+      },
+      "theme": "orbital research-station couture",
+      "closeLoveMission": {
+        "signatureActionIndex": 0,
+        "action": "Radiance sits securely sideways across Ellie's lap on a low orbital banquette; Alia leans in for a quick cheek peck, while ECE closes from the outer edge with her free hand at Ellie's shoulder and a playful rival gaze.",
+        "closeCamera": true,
+        "lapSitting": true,
+        "visiblePeck": true,
+        "closeEmbrace": true,
+        "staticLineup": false
+      },
+      "raze": {
+        "key": "RAZE|batch-391|scene-1584|knee-high-wearers",
+        "hash": 4014485878,
+        "pairIndex": 4,
+        "sockWearers": [
+          "Ellie",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Radiance",
+          "Alia"
+        ]
+      },
+      "maleModel": {
+        "key": "batch391-malta-male-model-scene",
+        "hash": 2180511009,
+        "present": false
+      },
+      "outfits": {
+        "Radiance": "Radiance: Malta red with warm gold strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs, visibly bare lower legs without hosiery, low-vamp gold pumps",
+        "Ellie": "Ellie: harbor turquoise with honey limestone cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, open-front salt-white slingbacks",
+        "Alia": "Alia: Mediterranean cobalt with salt white sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs, visibly bare lower legs without hosiery, low-vamp cobalt pumps",
+        "AI ECE": "AI ECE: prickly-pear green with rain silver folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, open-front turquoise heels"
+      },
+      "propHandler": "AI ECE",
+      "prompt": {
+        "scene": 1584,
+        "primary": {
+          "file": "tmp/world-195x4/batch-391/scene-1584-meta-pass-1-primary.txt",
+          "sha256": "B4B3C4EF9AD4408A6905209C00C228F3EC85179B9BA011E42A0E21457A9A04A9",
+          "bytes": 5040,
+          "chars": 5040
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-391/scene-1584-meta-pass-1-fallback.txt",
+          "sha256": "EA54DCFB73028DE38534A1CC36CD2B1A40B0305B4A883B6880BC61F278C13B15",
+          "bytes": 1428,
+          "chars": 1428
+        }
+      }
+    },
+    "1585": {
+      "scene": 1585,
+      "historicalSceneEvidence": "tmp/world-195x4/batch-320/batch-320-malta-preflight.json#/scenePlans/1301",
+      "location": {
+        "name": "Mdina fortified hilltop",
+        "landmark": "a near-camera orbital observation banquette beside Mdina's honey-limestone fortified hilltop, with the secular gate, bastion wall, dry ditch and terraced fields clearly readable beyond the window",
+        "motifs": "Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings",
+        "target": "a complete thick inert composite backstop behind a transparent safety screen in an empty calibration lane at far right"
+      },
+      "theme": "orbital research-station couture",
+      "closeLoveMission": {
+        "signatureActionIndex": 1,
+        "action": "Ellie sits face-to-face with Radiance in a close embrace; Alia gives Radiance a quick forehead peck, while ECE links her free hand with Ellie's and the established adult man stays behind ECE with his strongest gaze returning to her.",
+        "closeCamera": true,
+        "lapSitting": false,
+        "visiblePeck": true,
+        "closeEmbrace": true,
+        "staticLineup": false
+      },
+      "raze": {
+        "key": "RAZE|batch-391|scene-1585|knee-high-wearers",
+        "hash": 832763489,
+        "pairIndex": 5,
+        "sockWearers": [
+          "Alia",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Radiance",
+          "Ellie"
+        ]
+      },
+      "maleModel": {
+        "key": "batch391-malta-male-model-scene",
+        "hash": 2180511009,
+        "present": true
+      },
+      "outfits": {
+        "Radiance": "Radiance: honey limestone with Malta red cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings, visibly bare lower legs without hosiery, low-vamp gold pumps",
+        "Ellie": "Ellie: night charcoal with harbor turquoise sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings, visibly bare lower legs without hosiery, open-front salt-white slingbacks",
+        "Alia": "Alia: warm gold with Mediterranean cobalt folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp cobalt pumps",
+        "AI ECE": "AI ECE: salt white with prickly-pear green strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, open-front turquoise heels"
+      },
+      "propHandler": "AI ECE",
+      "prompt": {
+        "scene": 1585,
+        "primary": {
+          "file": "tmp/world-195x4/batch-391/scene-1585-meta-pass-1-primary.txt",
+          "sha256": "5D23790AF79468008E93515A68F207E107275241E48997628CA6526EDA610719",
+          "bytes": 5105,
+          "chars": 5105
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-391/scene-1585-meta-pass-1-fallback.txt",
+          "sha256": "382005678FA4F1900885D7CCBD018B2A9FA180C541B7C41DD0E02BFE65E89281",
+          "bytes": 1499,
+          "chars": 1499
+        }
+      }
+    },
+    "1586": {
+      "scene": 1586,
+      "historicalSceneEvidence": "tmp/world-195x4/batch-320/batch-320-malta-preflight.json#/scenePlans/1302",
+      "location": {
+        "name": "Blue Grotto and Wied iz-Zurrieq",
+        "landmark": "a near-camera orbital glass lounge above the Blue Grotto, with the massive honey-limestone sea arch, cobalt cave water, white foam and distant Filfla silhouette clearly visible",
+        "motifs": "Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets",
+        "target": "a clearly empty marked water-calibration lane beyond the glass at far right, with no boat, swimmer, animal or occupied structure"
+      },
+      "theme": "orbital research-station couture",
+      "closeLoveMission": {
+        "signatureActionIndex": 2,
+        "action": "Alia settles sideways across Radiance's lap during a playful turn; ECE gives Ellie a quick temple peck with her free side, and Ellie catches Alia's hand to interrupt the pair.",
+        "closeCamera": true,
+        "lapSitting": true,
+        "visiblePeck": true,
+        "closeEmbrace": true,
+        "staticLineup": false
+      },
+      "raze": {
+        "key": "RAZE|batch-391|scene-1586|knee-high-wearers",
+        "hash": 875182904,
+        "pairIndex": 2,
+        "sockWearers": [
+          "Radiance",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Ellie",
+          "Alia"
+        ]
+      },
+      "maleModel": {
+        "key": "batch391-malta-male-model-scene",
+        "hash": 2180511009,
+        "present": false
+      },
+      "outfits": {
+        "Radiance": "Radiance: Mediterranean cobalt with white foam sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp gold pumps",
+        "Ellie": "Ellie: Malta red with honey limestone folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets, visibly bare lower legs without hosiery, open-front salt-white slingbacks",
+        "Alia": "Alia: harbor turquoise with warm gold strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets, visibly bare lower legs without hosiery, low-vamp cobalt pumps",
+        "AI ECE": "AI ECE: night charcoal with rain silver cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, open-front turquoise heels"
+      },
+      "propHandler": "AI ECE",
+      "prompt": {
+        "scene": 1586,
+        "primary": {
+          "file": "tmp/world-195x4/batch-391/scene-1586-meta-pass-1-primary.txt",
+          "sha256": "D2CEFF0D8FE8E1698A5FF4FF8CDF908E992C1DE0D723EFB419F5893396FAC2B4",
+          "bytes": 5025,
+          "chars": 5025
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-391/scene-1586-meta-pass-1-fallback.txt",
+          "sha256": "DF7B5388B36127CBB10E86BD1E9D4548154DFE1DBA5728D819FC959EEA0A4B24",
+          "bytes": 1417,
+          "chars": 1417
+        }
+      }
+    },
+    "1587": {
+      "scene": 1587,
+      "historicalSceneEvidence": "tmp/world-195x4/batch-320/batch-320-malta-preflight.json#/scenePlans/1303",
+      "location": {
+        "name": "Dwejra inland sea",
+        "landmark": "a near-camera orbital research banquette above Gozo's Dwejra inland sea, with the circular basin, narrow sea tunnel, honey-limestone cliffs and Fungus Rock silhouette clearly readable",
+        "motifs": "Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs",
+        "target": "a clearly empty marked water-calibration lane beyond the glass at far right, away from cliffs, reefs, animals and people"
+      },
+      "theme": "orbital research-station couture",
+      "closeLoveMission": {
+        "signatureActionIndex": 3,
+        "action": "Radiance and Alia move through a near-camera side embrace; Ellie catches Radiance's free hand and gives her a quick cheek peck, while ECE answers from inches away with a close inviting gaze and her free hand at Alia's shoulder.",
+        "closeCamera": true,
+        "lapSitting": false,
+        "visiblePeck": true,
+        "closeEmbrace": true,
+        "staticLineup": false
+      },
+      "raze": {
+        "key": "RAZE|batch-391|scene-1587|knee-high-wearers",
+        "hash": 4042688131,
+        "pairIndex": 1,
+        "sockWearers": [
+          "Radiance",
+          "Alia"
+        ],
+        "bareLegCharacters": [
+          "Ellie",
+          "AI ECE"
+        ]
+      },
+      "maleModel": {
+        "key": "batch391-malta-male-model-scene",
+        "hash": 2180511009,
+        "present": false
+      },
+      "outfits": {
+        "Radiance": "Radiance: prickly-pear green with honey limestone folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp gold pumps",
+        "Ellie": "Ellie: Mediterranean cobalt with Malta red strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, visibly bare lower legs without hosiery, open-front salt-white slingbacks",
+        "Alia": "Alia: warm gold with salt white cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp cobalt pumps",
+        "AI ECE": "AI ECE: harbor turquoise with rain silver sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, visibly bare lower legs without hosiery, open-front turquoise heels"
+      },
+      "propHandler": "AI ECE",
+      "prompt": {
+        "scene": 1587,
+        "primary": {
+          "file": "tmp/world-195x4/batch-391/scene-1587-meta-pass-1-primary.txt",
+          "sha256": "C8B64045D59B1B95E86FC5861A6E9D9D28F0FB1F37DEB841EADFC43559EEAE90",
+          "bytes": 4854,
+          "chars": 4854
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-391/scene-1587-meta-pass-1-fallback.txt",
+          "sha256": "06DC5DE8EAEFA9F92F24D2F8236FC9D2BF810E2CD9B9A1FDD19009942648A0C8",
+          "bytes": 1431,
+          "chars": 1431
+        }
+      }
+    }
+  },
+  "preflight": {
+    "file": "tmp/world-195x4/batch-391/batch-391-malta-preflight.json",
+    "sha256": "18D627FEE1E0952C58ECD162883D740D16D051E3094E1B9DF2B2230428C97253",
+    "bytes": 4544,
+    "chars": 4544
+  },
+  "promptBank": [
+    {
+      "scene": 1584,
+      "primary": {
+        "file": "tmp/world-195x4/batch-391/scene-1584-meta-pass-1-primary.txt",
+        "sha256": "B4B3C4EF9AD4408A6905209C00C228F3EC85179B9BA011E42A0E21457A9A04A9",
+        "bytes": 5040,
+        "chars": 5040
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-391/scene-1584-meta-pass-1-fallback.txt",
+        "sha256": "EA54DCFB73028DE38534A1CC36CD2B1A40B0305B4A883B6880BC61F278C13B15",
+        "bytes": 1428,
+        "chars": 1428
+      }
+    },
+    {
+      "scene": 1585,
+      "primary": {
+        "file": "tmp/world-195x4/batch-391/scene-1585-meta-pass-1-primary.txt",
+        "sha256": "5D23790AF79468008E93515A68F207E107275241E48997628CA6526EDA610719",
+        "bytes": 5105,
+        "chars": 5105
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-391/scene-1585-meta-pass-1-fallback.txt",
+        "sha256": "382005678FA4F1900885D7CCBD018B2A9FA180C541B7C41DD0E02BFE65E89281",
+        "bytes": 1499,
+        "chars": 1499
+      }
+    },
+    {
+      "scene": 1586,
+      "primary": {
+        "file": "tmp/world-195x4/batch-391/scene-1586-meta-pass-1-primary.txt",
+        "sha256": "D2CEFF0D8FE8E1698A5FF4FF8CDF908E992C1DE0D723EFB419F5893396FAC2B4",
+        "bytes": 5025,
+        "chars": 5025
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-391/scene-1586-meta-pass-1-fallback.txt",
+        "sha256": "DF7B5388B36127CBB10E86BD1E9D4548154DFE1DBA5728D819FC959EEA0A4B24",
+        "bytes": 1417,
+        "chars": 1417
+      }
+    },
+    {
+      "scene": 1587,
+      "primary": {
+        "file": "tmp/world-195x4/batch-391/scene-1587-meta-pass-1-primary.txt",
+        "sha256": "C8B64045D59B1B95E86FC5861A6E9D9D28F0FB1F37DEB841EADFC43559EEAE90",
+        "bytes": 4854,
+        "chars": 4854
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-391/scene-1587-meta-pass-1-fallback.txt",
+        "sha256": "06DC5DE8EAEFA9F92F24D2F8236FC9D2BF810E2CD9B9A1FDD19009942648A0C8",
+        "bytes": 1431,
+        "chars": 1431
+      }
+    }
+  ],
+  "events": [
+    {
+      "eventId": "batch-391-scene-1584-meta-ai-pass-1-primary",
+      "scene": 1584,
+      "pass": 1,
+      "attempt": "primary",
+      "provider": "Meta AI",
+      "launchedAt": "2026-08-20T07:20:28.399Z",
+      "auditedAt": "2026-08-20T07:26:05.197Z",
+      "status": "emitted-hard-safe-accepted",
+      "prompt": {
+        "path": "tmp/world-195x4/batch-391/scene-1584-meta-pass-1-primary.txt",
+        "sha256": "B4B3C4EF9AD4408A6905209C00C228F3EC85179B9BA011E42A0E21457A9A04A9",
+        "bytes": 5040,
+        "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph. Malta Scene 1584 places the camera inside a close adult relationship moment, with large faces and the cast filling about eighty-five percent of the frame.\n\nExactly four fictional women visibly over age twenty-eight appear: blonde Radiance, dark-haired Ellie, Black Alia with the sole high sculptural braided ponytail, and brunette AI ECE. Preserve their established distinct faces, skin tones and adult ages. No male figure appears.\n\nLocation and theme: a near-camera orbital research lounge above Valletta Grand Harbour, with honey-limestone bastions, the fortified peninsula, stepped quays and cobalt harbor water clearly recognizable behind the group. Orbital research-station couture adds curved glass, docking rings, solar facets, navigation light and silver structural ribs while Malta stays unmistakable through Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs. No flag, Maltese cross, coat of arms, crown, sacred symbol, religious building, uniform, badge, copied logo or unrelated brand.\n\nLove mission foreground: Radiance sits securely sideways across Ellie's lap on a low orbital banquette; Alia leans in for a quick cheek peck, while ECE closes from the outer edge with her free hand at Ellie's shoulder and a playful rival gaze. The event reads immediately as willing adult pursuit, choice and playful rivalry. Show reciprocal lean, relaxed expressions and accepted touch. A quick peck stays closed-mouth, affectionate and public-safe. The low banquette gives stable support; lap seating is sideways with opaque seat and pelvic coverage, planted supporting feet, no straddling and no intimate-angle framing. Zero static lineup, zero equal spacing, zero parallel standing poses. Keep faces close, torso directions varied and the relationship event more prominent than the background, socks or calibration prop.\n\nRAZE nonprofit 1/1 capsule: exactly Ellie and AI ECE wear paired opaque rainbow-gradient knee-high socks with readable RAZE upper-band wordmarks. Exactly Radiance and Alia show bare lower legs without socks, stockings or leggings. Bring the four complete leg paths and shoes forward through seated, lap and staggered depth; never separate the cast into hosiery display lanes. Every print layout differs.\n\nSecure opaque upper-thigh wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: Malta red with warm gold strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs, visibly bare lower legs without hosiery, low-vamp gold pumps\nEllie: harbor turquoise with honey limestone cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, open-front salt-white slingbacks\nAlia: Mediterranean cobalt with salt white sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs, visibly bare lower legs without hosiery, low-vamp cobalt pumps\nAI ECE: prickly-pear green with rain silver folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Valletta bastion angles, Grand Harbour inlets, stepped quays, balcony rhythms and orbital window arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, open-front turquoise heels\n\nAI ECE is the sole handler of a polished rainbow-gradient large-frame inert cinema-training replica. Her outer hand keeps it low and directed strictly toward a complete thick lunar-soil backstop behind a transparent safety screen in an empty calibration lane at far right; her index stays straight outside the empty guard, the mechanism is visibly open, and no ammunition appears. Her free hand alone may join the stated love beat. The replica never crosses a person, mascot, occupied object or camera. No firing, flash, threat, injury or combat. PAWS the tiny collarless golden kitten and MAX the golden-retriever pup rest together inside a protected padded nook behind the love group, far from the calibration lane.\n\nNear-camera seated head-to-shoe composition, natural perspective, crisp fashion lighting. Show every adult face, each complete arm path, every hand owner, both legs and complete footwear. Natural overlap is welcome, but no gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, coercion or explicit sexuality. Visible text is restricted to exact RAZE sock bands; no watermark.\n"
+      },
+      "rawOutput": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-391/raw/pass-1/scene-1584-meta-ai-primary.webp",
+        "sha256": "4089B44C9D2884C72C91B99D08C8A81306D85FC3B8140B8380A1D158B4BEBD18",
+        "bytes": 557144,
+        "width": 1152,
+        "height": 2048
+      },
+      "conversationRefSha256": "8C99A880F8B2981E1A968B45D25C7908193FC397A2015FD265059947828C4C7B",
+      "responseClassification": "media-emitted-no-refusal",
+      "responseSummary": "Meta reported Radiance sideways on Ellie's lap, Alia's cheek peck, ECE close at the shoulder, RAZE bands, and Valletta harbor.",
+      "audit": "Hard-safe and materially restores the mission: near-camera seated group, visible cheek peck, intimate overlap, correct Ellie/ECE RAZE pair, Radiance/Alia bare legs, adult opaque coverage, plausible anatomy, complete footwear and safe mascots. The inert object became a harmless rainbow calibration cart rather than exact replica geometry; quality deviation only.",
+      "canonicalPath": "assets/lore/starlight-era/1584-malta-valletta-grand-harbour-orbital-raze-close-love-meta-ai-bounded-pass-1.webp"
+    },
+    {
+      "eventId": "batch-391-scene-1585-meta-ai-pass-1-primary",
+      "scene": 1585,
+      "pass": 1,
+      "attempt": "primary",
+      "provider": "Meta AI",
+      "launchedAt": "2026-08-20T07:20:28.399Z",
+      "auditedAt": "2026-08-20T07:26:05.197Z",
+      "status": "emitted-hard-safe-accepted",
+      "prompt": {
+        "path": "tmp/world-195x4/batch-391/scene-1585-meta-pass-1-primary.txt",
+        "sha256": "5D23790AF79468008E93515A68F207E107275241E48997628CA6526EDA610719",
+        "bytes": 5105,
+        "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph. Malta Scene 1585 places the camera inside a close adult relationship moment, with large faces and the cast filling about eighty-five percent of the frame.\n\nExactly four fictional women visibly over age twenty-eight appear: blonde Radiance, dark-haired Ellie, Black Alia with the sole high sculptural braided ponytail, and brunette AI ECE. Preserve their established distinct faces, skin tones and adult ages. Add the established clearly adult athletic bearded man as a fifth figure behind ECE. His opaque Malta-limestone orbital shirt, tailored dark shorts and complete shoes remain distinct; he never enters the four-woman sock count.\n\nLocation and theme: a near-camera orbital observation banquette beside Mdina's honey-limestone fortified hilltop, with the secular gate, bastion wall, dry ditch and terraced fields clearly readable beyond the window. Orbital research-station couture adds curved glass, docking rings, solar facets, navigation light and silver structural ribs while Malta stays unmistakable through Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings. No flag, Maltese cross, coat of arms, crown, sacred symbol, religious building, uniform, badge, copied logo or unrelated brand.\n\nLove mission foreground: Ellie sits face-to-face with Radiance in a close embrace; Alia gives Radiance a quick forehead peck, while ECE links her free hand with Ellie's and the established adult man stays behind ECE with his strongest gaze returning to her. The event reads immediately as willing adult pursuit, choice and playful rivalry. Show reciprocal lean, relaxed expressions and accepted touch. A quick peck stays closed-mouth, affectionate and public-safe. The low banquette gives stable support; lap seating is sideways with opaque seat and pelvic coverage, planted supporting feet, no straddling and no intimate-angle framing. Zero static lineup, zero equal spacing, zero parallel standing poses. Keep faces close, torso directions varied and the relationship event more prominent than the background, socks or calibration prop.\n\nRAZE nonprofit 1/1 capsule: exactly Alia and AI ECE wear paired opaque rainbow-gradient knee-high socks with readable RAZE upper-band wordmarks. Exactly Radiance and Ellie show bare lower legs without socks, stockings or leggings. Bring the four complete leg paths and shoes forward through seated, lap and staggered depth; never separate the cast into hosiery display lanes. Every print layout differs.\n\nSecure opaque upper-thigh wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: honey limestone with Malta red cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings, visibly bare lower legs without hosiery, low-vamp gold pumps\nEllie: night charcoal with harbor turquoise sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings, visibly bare lower legs without hosiery, open-front salt-white slingbacks\nAlia: warm gold with Mediterranean cobalt folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp cobalt pumps\nAI ECE: salt white with prickly-pear green strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Mdina gate arches, bastion walls, winding lanes, terraced fields and research-station docking rings, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, open-front turquoise heels\n\nAI ECE is the sole handler of a polished rainbow-gradient large-frame inert cinema-training replica. Her outer hand keeps it low and directed strictly toward a complete thick inert composite backstop behind a transparent safety screen in an empty calibration lane at far right; her index stays straight outside the empty guard, the mechanism is visibly open, and no ammunition appears. Her free hand alone may join the stated love beat. The replica never crosses a person, mascot, occupied object or camera. No firing, flash, threat, injury or combat. PAWS and MAX are absent.\n\nNear-camera seated head-to-shoe composition, natural perspective, crisp fashion lighting. Show every adult face, each complete arm path, every hand owner, both legs and complete footwear. Natural overlap is welcome, but no gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, coercion or explicit sexuality. Visible text is restricted to exact RAZE sock bands; no watermark.\n"
+      },
+      "rawOutput": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-391/raw/pass-1/scene-1585-meta-ai-primary.webp",
+        "sha256": "C24B2102BC24D6593EB21FB7049B5B2A657E168AC4DED0B73F2452E5A89E9921",
+        "bytes": 535516,
+        "width": 1152,
+        "height": 2048
+      },
+      "conversationRefSha256": "98C756CD0EEBC15EBC55F404AF3464B95B691EA3C2951606D9D9C77C1DBDC0FA",
+      "responseClassification": "media-emitted-no-refusal",
+      "responseSummary": "Meta reported a close face-to-face embrace, forehead peck, linked hands, adult male behind ECE, Mdina, and RAZE socks.",
+      "audit": "Hard-safe: five clearly adult figures, close reciprocal peck and embrace, readable relationship choice, correct Alia/ECE RAZE pair, Radiance/Ellie bare legs, complete shoes, Mdina identity and harmless isolated rainbow calibration object. Central joined-hand detail is busy but ownership remains plausible; quality deviation only.",
+      "canonicalPath": "assets/lore/starlight-era/1585-malta-mdina-orbital-raze-close-love-male-meta-ai-bounded-pass-1.webp"
+    },
+    {
+      "eventId": "batch-391-scene-1586-meta-ai-pass-1-primary",
+      "scene": 1586,
+      "pass": 1,
+      "attempt": "primary",
+      "provider": "Meta AI",
+      "launchedAt": "2026-08-20T07:20:28.399Z",
+      "auditedAt": "2026-08-20T07:26:05.197Z",
+      "status": "emitted-hard-safe-accepted",
+      "prompt": {
+        "path": "tmp/world-195x4/batch-391/scene-1586-meta-pass-1-primary.txt",
+        "sha256": "D2CEFF0D8FE8E1698A5FF4FF8CDF908E992C1DE0D723EFB419F5893396FAC2B4",
+        "bytes": 5025,
+        "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph. Malta Scene 1586 places the camera inside a close adult relationship moment, with large faces and the cast filling about eighty-five percent of the frame.\n\nExactly four fictional women visibly over age twenty-eight appear: blonde Radiance, dark-haired Ellie, Black Alia with the sole high sculptural braided ponytail, and brunette AI ECE. Preserve their established distinct faces, skin tones and adult ages. No male figure appears.\n\nLocation and theme: a near-camera orbital glass lounge above the Blue Grotto, with the massive honey-limestone sea arch, cobalt cave water, white foam and distant Filfla silhouette clearly visible. Orbital research-station couture adds curved glass, docking rings, solar facets, navigation light and silver structural ribs while Malta stays unmistakable through Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets. No flag, Maltese cross, coat of arms, crown, sacred symbol, religious building, uniform, badge, copied logo or unrelated brand.\n\nLove mission foreground: Alia settles sideways across Radiance's lap during a playful turn; ECE gives Ellie a quick temple peck with her free side, and Ellie catches Alia's hand to interrupt the pair. The event reads immediately as willing adult pursuit, choice and playful rivalry. Show reciprocal lean, relaxed expressions and accepted touch. A quick peck stays closed-mouth, affectionate and public-safe. The low banquette gives stable support; lap seating is sideways with opaque seat and pelvic coverage, planted supporting feet, no straddling and no intimate-angle framing. Zero static lineup, zero equal spacing, zero parallel standing poses. Keep faces close, torso directions varied and the relationship event more prominent than the background, socks or calibration prop.\n\nRAZE nonprofit 1/1 capsule: exactly Radiance and AI ECE wear paired opaque rainbow-gradient knee-high socks with readable RAZE upper-band wordmarks. Exactly Ellie and Alia show bare lower legs without socks, stockings or leggings. Bring the four complete leg paths and shoes forward through seated, lap and staggered depth; never separate the cast into hosiery display lanes. Every print layout differs.\n\nSecure opaque upper-thigh wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: Mediterranean cobalt with white foam sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp gold pumps\nEllie: Malta red with honey limestone folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets, visibly bare lower legs without hosiery, open-front salt-white slingbacks\nAlia: harbor turquoise with warm gold strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets, visibly bare lower legs without hosiery, low-vamp cobalt pumps\nAI ECE: night charcoal with rain silver cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Blue Grotto arches, sea-cave chains, cobalt reflection bands, limestone layers and orbital solar-panel facets, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, open-front turquoise heels\n\nAI ECE is the sole handler of a polished rainbow-gradient large-frame inert cinema-training replica. Her outer hand keeps it low and directed strictly toward a clearly empty marked water-calibration lane beyond the glass at far right, with no boat, swimmer, animal or occupied structure; her index stays straight outside the empty guard, the mechanism is visibly open, and no ammunition appears. Her free hand alone may join the stated love beat. The replica never crosses a person, mascot, occupied object or camera. No firing, flash, threat, injury or combat. PAWS the tiny collarless golden kitten and MAX the golden-retriever pup rest together inside a protected padded nook behind the love group, far from the calibration lane.\n\nNear-camera seated head-to-shoe composition, natural perspective, crisp fashion lighting. Show every adult face, each complete arm path, every hand owner, both legs and complete footwear. Natural overlap is welcome, but no gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, coercion or explicit sexuality. Visible text is restricted to exact RAZE sock bands; no watermark.\n"
+      },
+      "rawOutput": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-391/raw/pass-1/scene-1586-meta-ai-primary.webp",
+        "sha256": "F374E3B54DFF00D8EA58C8FAD79475A0D5613B04A6721F35FAA9AD2530DEF5A9",
+        "bytes": 561418,
+        "width": 1152,
+        "height": 2048
+      },
+      "conversationRefSha256": "8FE81AB73C8D95878FC02DB4257F53B91A8C8BA9286B3D7814A73C39E15EE91B",
+      "responseClassification": "media-emitted-no-refusal",
+      "responseSummary": "Meta reported the quartet close on the banquette above Blue Grotto, Radiance/ECE RAZE socks, Ellie/Alia bare legs, PAWS and MAX.",
+      "audit": "Hard-safe and strongly on-mission: Alia sits across Radiance's lap, ECE gives Ellie a temple peck, all four form a close relationship graph, correct Radiance/ECE RAZE pair, Ellie/Alia bare legs, complete shoes, safe mascots, recognizable Blue Grotto and harmless outer-edge rainbow cylinder aimed toward the empty lane.",
+      "canonicalPath": "assets/lore/starlight-era/1586-malta-blue-grotto-orbital-raze-close-love-meta-ai-bounded-pass-1.webp"
+    },
+    {
+      "eventId": "batch-391-scene-1587-meta-ai-pass-1-primary",
+      "scene": 1587,
+      "pass": 1,
+      "attempt": "primary",
+      "provider": "Meta AI",
+      "launchedAt": "2026-08-20T07:20:28.399Z",
+      "auditedAt": "2026-08-20T07:26:05.197Z",
+      "status": "emitted-visually-rejected-hard-unusable",
+      "prompt": {
+        "path": "tmp/world-195x4/batch-391/scene-1587-meta-pass-1-primary.txt",
+        "sha256": "C8B64045D59B1B95E86FC5861A6E9D9D28F0FB1F37DEB841EADFC43559EEAE90",
+        "bytes": 4854,
+        "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph. Malta Scene 1587 places the camera inside a close adult relationship moment, with large faces and the cast filling about eighty-five percent of the frame.\n\nExactly four fictional women visibly over age twenty-eight appear: blonde Radiance, dark-haired Ellie, Black Alia with the sole high sculptural braided ponytail, and brunette AI ECE. Preserve their established distinct faces, skin tones and adult ages. No male figure appears.\n\nLocation and theme: a near-camera orbital research banquette above Gozo's Dwejra inland sea, with the circular basin, narrow sea tunnel, honey-limestone cliffs and Fungus Rock silhouette clearly readable. Orbital research-station couture adds curved glass, docking rings, solar facets, navigation light and silver structural ribs while Malta stays unmistakable through Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs. No flag, Maltese cross, coat of arms, crown, sacred symbol, religious building, uniform, badge, copied logo or unrelated brand.\n\nLove mission foreground: Radiance and Alia move through a near-camera side embrace; Ellie catches Radiance's free hand and gives her a quick cheek peck, while ECE answers from inches away with a close inviting gaze and her free hand at Alia's shoulder. The event reads immediately as willing adult pursuit, choice and playful rivalry. Show reciprocal lean, relaxed expressions and accepted touch. A quick peck stays closed-mouth, affectionate and public-safe. The low banquette gives stable support; lap seating is sideways with opaque seat and pelvic coverage, planted supporting feet, no straddling and no intimate-angle framing. Zero static lineup, zero equal spacing, zero parallel standing poses. Keep faces close, torso directions varied and the relationship event more prominent than the background, socks or calibration prop.\n\nRAZE nonprofit 1/1 capsule: exactly Radiance and Alia wear paired opaque rainbow-gradient knee-high socks with readable RAZE upper-band wordmarks. Exactly Ellie and AI ECE show bare lower legs without socks, stockings or leggings. Bring the four complete leg paths and shoes forward through seated, lap and staggered depth; never separate the cast into hosiery display lanes. Every print layout differs.\n\nSecure opaque upper-thigh wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: prickly-pear green with honey limestone folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp gold pumps\nEllie: Mediterranean cobalt with Malta red strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, visibly bare lower legs without hosiery, open-front salt-white slingbacks\nAlia: warm gold with salt white cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp cobalt pumps\nAI ECE: harbor turquoise with rain silver sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, visibly bare lower legs without hosiery, open-front turquoise heels\n\nAI ECE is the sole handler of a polished rainbow-gradient large-frame inert cinema-training replica. Her outer hand keeps it low and directed strictly toward a clearly empty marked water-calibration lane beyond the glass at far right, away from cliffs, reefs, animals and people; her index stays straight outside the empty guard, the mechanism is visibly open, and no ammunition appears. Her free hand alone may join the stated love beat. The replica never crosses a person, mascot, occupied object or camera. No firing, flash, threat, injury or combat. PAWS and MAX are absent.\n\nNear-camera seated head-to-shoe composition, natural perspective, crisp fashion lighting. Show every adult face, each complete arm path, every hand owner, both legs and complete footwear. Natural overlap is welcome, but no gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, coercion or explicit sexuality. Visible text is restricted to exact RAZE sock bands; no watermark.\n"
+      },
+      "rawOutput": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-391/raw/pass-1/scene-1587-meta-ai-primary.webp",
+        "sha256": "899F03B455DFA3D359145F77DECEA71FA019BDA23572E4944927847DEBBAD21B",
+        "bytes": 559216,
+        "width": 1120,
+        "height": 2240
+      },
+      "conversationRefSha256": "E83AB6583BA922C071EBC8D78D9F02748824EB0BBF75DA9B57AA4DA1EBB1FF54",
+      "responseClassification": "media-emitted-no-refusal",
+      "responseSummary": "Meta reported close Dwejra banquette seating, Radiance/Alia RAZE socks, Ellie cheek peck, and a low rainbow calibration object.",
+      "audit": "Visually strong close-love result with cheek peck, intimate seating, correct Radiance/Alia RAZE pair, Ellie/ECE bare legs, adult opaque coverage and recognizable Dwejra. Hard-unusable because Alia and ECE appear to share the rainbow prop, making sole-handler ownership ambiguous; preserve raw and authorize exactly one fresh corrected candidate.",
+      "canonicalPath": null
+    },
+    {
+      "eventId": "batch-391-scene-1587-meta-ai-pass-2-correction",
+      "scene": 1587,
+      "pass": 2,
+      "attempt": "single-fresh-holistic-correction",
+      "provider": "Meta AI",
+      "authorizationCommit": "d67020ac1c61b93c58d087c94d69a4dcaf3de06c",
+      "launchedAt": "2026-08-20T07:47:45.975Z",
+      "auditedAt": "2026-08-20T07:49:16.754Z",
+      "status": "emitted-hard-safe-accepted",
+      "prompt": {
+        "path": "tmp/world-195x4/batch-391/scene-1587-meta-pass-2-correction.txt",
+        "text": "Render a vertical 1120 by 2240 realistic cinematic Malta fashion photograph. Scene 1587 returns to the Dwejra orbital research banquette with a physically close camera, large adult faces and affectionate action filling most of the frame.\n\nExactly four fictional women visibly over age twenty-eight appear: blonde Radiance, dark-haired Ellie, Black Alia with the sole high sculptural braided ponytail, and brunette AI ECE. Preserve their established distinct faces, skin tones and adult ages. No male, kitten, pup or extra figure appears.\n\nLove mission foreground: Radiance sits close against Ellie on the low banquette as Ellie gives Radiance a brief closed-mouth cheek peck. Alia wraps her left arm securely around Radiance's waist and links her right hand with Ellie's far hand, forming a warm three-person choice. ECE sits inches away at far right with a playful inviting gaze toward Alia. The four women overlap naturally in staggered depth; no standing lineup, equal spacing or parallel pose. Participation is willing and relaxed, clothing stays opaque, and the camera never frames intimate body areas.\n\nExact hand separation: Alia's left hand stays visibly around Radiance's waist and Alia's right stays visibly linked with Ellie's far hand. Both Alia hands remain well left of ECE and never approach the calibration replica. Radiance keeps a visible hand at Ellie's shoulder and another at Alia's forearm. Ellie keeps her near hand supporting Radiance at the waist and her far hand linked with Alia. ECE's left hand rests open on her own bare thigh. ECE's right hand is the sole hand touching the replica. Keep a clean visible air gap around ECE's entire right forearm, grip and replica so ownership is unmistakable.\n\nRAZE nonprofit 1/1 capsule: Radiance and Alia wear paired opaque rainbow-gradient knee-high socks ending below both knees, with exact readable RAZE wordmarks at every outer upper band. Ellie and ECE show bare lower legs without socks, stockings or leggings. Bring complete leg paths and shoes toward the camera through close seated depth. Never split the cast into hosiery display lanes.\n\nSecure opaque upper-thigh Malta orbital couture: Radiance wears prickly-pear green and honey-limestone folded skort couture with Dwejra basin rings; Ellie wears Mediterranean-cobalt and Malta-red sculpted mini couture with inland-sea tunnel motifs; Alia wears warm-gold and salt-white cropped orbital tailoring with upper-thigh shorts and fossil-layer motifs; ECE wears harbor-turquoise and rain-silver asymmetric romper couture with reef lines and navigation arcs. Complete bust, seat, pelvic and intimate coverage. Distinct low-vamp or open-front heels remain fully visible.\n\nBackground: Gozo's Dwejra circular inland-sea basin, narrow tunnel, honey-limestone cliffs and Fungus Rock silhouette remain unmistakable through curved orbital glass at golden hour. Malta motifs dominate every unique print. No flag, Maltese cross, coat of arms, crown, sacred symbol, religious building, uniform, badge, copied logo or unrelated brand.\n\nECE alone handles the polished rainbow-gradient large-frame inert cinema calibration replica with her right hand at the extreme outer-right edge. The open mechanism and empty guard face the camera in safe side profile while the barrel axis points farther right toward a clearly empty marked water-calibration lane beyond the glass, away from every body, landmark, animal, occupied object and camera. No other hand, arm or clothing touches or crosses the replica. No ammunition, firing, flash, threat, injury or combat.\n\nNear-camera seated head-to-shoe composition with crisp warm fashion lighting. Show every adult face, shoulder, elbow, wrist, hand owner, both legs and complete footwear. Natural body overlap is welcome, but no gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, coercion or explicit sexuality. Visible text is restricted to exact RAZE sock bands; no watermark.\n",
+        "sha256": "71386F0637CB71B0F024C5B2388B1FFDC5E460B13DC1141C5A3684A350960F18",
+        "bytes": 3989,
+        "fidelity": "runtime-launch-byte-exact"
+      },
+      "rawOutput": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-391/raw/pass-2/scene-1587-meta-ai-correction.webp",
+        "sha256": "A92FFBF6747031FD2A72DC523043345295C8684BDB2B692316AB085F1D462CCD",
+        "bytes": 526784,
+        "width": 1120,
+        "height": 2240
+      },
+      "conversationRefSha256": "E4414CFFA81226577AE3B770EE066DE969DF3295597EE3B85F8235F7152AF0F6",
+      "responseClassification": "media-emitted-no-refusal",
+      "responseSummary": "Meta reported the Dwejra banquette, Radiance/Ellie cheek peck, Alia and Radiance in RAZE socks, Ellie/ECE bare legs, and ECE alone on the outer-edge calibration replica.",
+      "audit": "Hard-safe accepted. Four clearly adult women remain close and emotionally active; Ellie's cheek peck to Radiance is unmistakable, Alia joins the affectionate hand chain, and ECE stays inches away with an inviting gaze. Radiance/Alia wear the RAZE knee-highs; Ellie/ECE are bare-legged. Complete footwear, opaque coverage and Dwejra identity are readable. The harmless rainbow calibration panel is isolated at ECE's outer edge with no Alia contact or unsafe line. Minor hidden-grip geometry is a quality deviation, not a hard defect.",
+      "canonicalPath": "assets/lore/starlight-era/1587-malta-dwejra-orbital-raze-close-love-meta-ai-bounded-pass-2.webp"
+    }
+  ],
+  "rejectedPromptLedger": {
+    "appendOnly": true,
+    "entries": [
+      {
+        "entryId": "batch-391-scene-1587-meta-ai-pass-1-primary-visually-rejected",
+        "batch": 391,
+        "scene": 1587,
+        "phase": "pass-1-primary",
+        "status": "completed-output-visually-rejected-hard-unusable",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T07:26:05.197Z",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-391/scene-1587-meta-pass-1-primary.txt",
+          "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph. Malta Scene 1587 places the camera inside a close adult relationship moment, with large faces and the cast filling about eighty-five percent of the frame.\n\nExactly four fictional women visibly over age twenty-eight appear: blonde Radiance, dark-haired Ellie, Black Alia with the sole high sculptural braided ponytail, and brunette AI ECE. Preserve their established distinct faces, skin tones and adult ages. No male figure appears.\n\nLocation and theme: a near-camera orbital research banquette above Gozo's Dwejra inland sea, with the circular basin, narrow sea tunnel, honey-limestone cliffs and Fungus Rock silhouette clearly readable. Orbital research-station couture adds curved glass, docking rings, solar facets, navigation light and silver structural ribs while Malta stays unmistakable through Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs. No flag, Maltese cross, coat of arms, crown, sacred symbol, religious building, uniform, badge, copied logo or unrelated brand.\n\nLove mission foreground: Radiance and Alia move through a near-camera side embrace; Ellie catches Radiance's free hand and gives her a quick cheek peck, while ECE answers from inches away with a close inviting gaze and her free hand at Alia's shoulder. The event reads immediately as willing adult pursuit, choice and playful rivalry. Show reciprocal lean, relaxed expressions and accepted touch. A quick peck stays closed-mouth, affectionate and public-safe. The low banquette gives stable support; lap seating is sideways with opaque seat and pelvic coverage, planted supporting feet, no straddling and no intimate-angle framing. Zero static lineup, zero equal spacing, zero parallel standing poses. Keep faces close, torso directions varied and the relationship event more prominent than the background, socks or calibration prop.\n\nRAZE nonprofit 1/1 capsule: exactly Radiance and Alia wear paired opaque rainbow-gradient knee-high socks with readable RAZE upper-band wordmarks. Exactly Ellie and AI ECE show bare lower legs without socks, stockings or leggings. Bring the four complete leg paths and shoes forward through seated, lap and staggered depth; never separate the cast into hosiery display lanes. Every print layout differs.\n\nSecure opaque upper-thigh wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: prickly-pear green with honey limestone folded one-shoulder upper-thigh romper with an open upper back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp gold pumps\nEllie: Mediterranean cobalt with Malta red strapless upper-thigh skort dress with an open shoulder-blade back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, visibly bare lower legs without hosiery, open-front salt-white slingbacks\nAlia: warm gold with salt white cropped asymmetric orbital jacket with tailored upper-thigh shorts and a secure low back, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, paired opaque rainbow-gradient knee-high socks ending below both knees, exact readable RAZE wordmarks at the outer bands, low-vamp cobalt pumps\nAI ECE: harbor turquoise with rain silver sculpted sleeveless upper-thigh mini with a narrow ordinary waist opening, unique Malta 1/1 print built from Dwejra basin rings, inland-sea tunnels, fossil layers, reef lines and orbital navigation arcs, visibly bare lower legs without hosiery, open-front turquoise heels\n\nAI ECE is the sole handler of a polished rainbow-gradient large-frame inert cinema-training replica. Her outer hand keeps it low and directed strictly toward a clearly empty marked water-calibration lane beyond the glass at far right, away from cliffs, reefs, animals and people; her index stays straight outside the empty guard, the mechanism is visibly open, and no ammunition appears. Her free hand alone may join the stated love beat. The replica never crosses a person, mascot, occupied object or camera. No firing, flash, threat, injury or combat. PAWS and MAX are absent.\n\nNear-camera seated head-to-shoe composition, natural perspective, crisp fashion lighting. Show every adult face, each complete arm path, every hand owner, both legs and complete footwear. Natural overlap is welcome, but no gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, coercion or explicit sexuality. Visible text is restricted to exact RAZE sock bands; no watermark.\n",
+          "sha256": "C8B64045D59B1B95E86FC5861A6E9D9D28F0FB1F37DEB841EADFC43559EEAE90",
+          "encoding": "utf8",
+          "bytes": 4854,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "refusalText": null,
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-391/raw/pass-1/scene-1587-meta-ai-primary.webp",
+          "sha256": "899F03B455DFA3D359145F77DECEA71FA019BDA23572E4944927847DEBBAD21B",
+          "bytes": 559216,
+          "width": 1120,
+          "height": 2240
+        },
+        "rejectionReason": "Alia and AI ECE visually share the inert rainbow prop, violating sole-handler ownership clarity.",
+        "conversationRefSha256": "E83AB6583BA922C071EBC8D78D9F02748824EB0BBF75DA9B57AA4DA1EBB1FF54",
+        "immutable": true
+      }
+    ]
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1584,
+      "path": "assets/lore/starlight-era/1584-malta-valletta-grand-harbour-orbital-raze-close-love-meta-ai-bounded-pass-1.webp",
+      "sha256": "4089B44C9D2884C72C91B99D08C8A81306D85FC3B8140B8380A1D158B4BEBD18",
+      "bytes": 557144,
+      "provider": "Meta AI",
+      "pass": 1,
+      "acceptedAt": "2026-08-20T07:26:05.197Z",
+      "hardSafe": true
+    },
+    {
+      "scene": 1585,
+      "path": "assets/lore/starlight-era/1585-malta-mdina-orbital-raze-close-love-male-meta-ai-bounded-pass-1.webp",
+      "sha256": "C24B2102BC24D6593EB21FB7049B5B2A657E168AC4DED0B73F2452E5A89E9921",
+      "bytes": 535516,
+      "provider": "Meta AI",
+      "pass": 1,
+      "acceptedAt": "2026-08-20T07:26:05.197Z",
+      "hardSafe": true
+    },
+    {
+      "scene": 1586,
+      "path": "assets/lore/starlight-era/1586-malta-blue-grotto-orbital-raze-close-love-meta-ai-bounded-pass-1.webp",
+      "sha256": "F374E3B54DFF00D8EA58C8FAD79475A0D5613B04A6721F35FAA9AD2530DEF5A9",
+      "bytes": 561418,
+      "provider": "Meta AI",
+      "pass": 1,
+      "acceptedAt": "2026-08-20T07:26:05.197Z",
+      "hardSafe": true
+    },
+    {
+      "scene": 1587,
+      "path": "assets/lore/starlight-era/1587-malta-dwejra-orbital-raze-close-love-meta-ai-bounded-pass-2.webp",
+      "sha256": "A92FFBF6747031FD2A72DC523043345295C8684BDB2B692316AB085F1D462CCD",
+      "bytes": 526784,
+      "provider": "Meta AI",
+      "pass": 2,
+      "acceptedAt": "2026-08-20T07:49:16.754Z",
+      "hardSafe": true
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1587,
+      "path": "tmp/world-195x4/batch-391/raw/pass-1/scene-1587-meta-ai-primary.webp",
+      "sha256": "899F03B455DFA3D359145F77DECEA71FA019BDA23572E4944927847DEBBAD21B",
+      "bytes": 559216,
+      "provider": "Meta AI",
+      "pass": 1,
+      "rejectedAt": "2026-08-20T07:26:05.197Z",
+      "reason": "ambiguous shared prop ownership",
+      "accepted": false
+    }
+  ],
+  "xPost": {
+    "status": "eligible-pending-live-reconciliation-no-publication-attempted",
+    "caption": "Malta ❤️ Montenegro #Malta #WorldXXXSeries",
+    "url": null,
+    "minimumAcceptedAssets": 4,
+    "acceptedAssets": 4
+  },
+  "nextQueue": {
+    "nextCountry": "Maldives",
+    "nextBatch": 392,
+    "sceneNumbers": [
+      1588,
+      1589,
+      1590,
+      1591
+    ],
+    "cinematicTheme": "orbital research-station couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/166"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/9"
+    ],
+    "lockedUntilBatch391Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch391Closure": true
+  },
+  "launchAuthorizationCommit": "2a75fab4dbab7e3c8fd8d90c7a25db1878e130eb",
+  "passOneAudit": {
+    "auditedAt": "2026-08-20T07:26:05.197Z",
+    "result": "three-hard-safe-accepted-one-hard-unusable-prop-ownership-defect",
+    "closeLoveMission": "restored-across-all-four-pass-one-images",
+    "closeCameraScenes": 4,
+    "visiblePeckScenes": 4,
+    "lapOrAcrossLapScenesObserved": [
+      1584,
+      1586
+    ],
+    "staticLineupScenes": 0,
+    "acceptedScenes": [
+      1584,
+      1585,
+      1586
+    ],
+    "hardUnusableScenes": [
+      1587
+    ],
+    "allKnownScene1587DefectsFoldIntoSingleCorrection": [
+      "AI ECE must be the visibly sole prop handler",
+      "Alia's hands must stay fully off the prop",
+      "the safe downrange lane must remain outside every body and camera",
+      "retain the cheek peck, close seating and exact RAZE split"
+    ]
+  },
+  "passTwoCorrectionPlan": {
+    "scene": 1587,
+    "authorizationCommit": "d67020ac1c61b93c58d087c94d69a4dcaf3de06c",
+    "remoteVerifiedBeforeLaunch": true,
+    "sourceMode": "single fresh candidate from established adult faces; not an edit of the rejected raw",
+    "prompt": {
+      "path": "tmp/world-195x4/batch-391/scene-1587-meta-pass-2-correction.txt",
+      "sha256": "71386F0637CB71B0F024C5B2388B1FFDC5E460B13DC1141C5A3684A350960F18",
+      "bytes": 3989,
+      "chars": 3989,
+      "suppressedTokenCheck": "passed-current-run-blacklist"
+    },
+    "hardDefectsAddressed": [
+      "ECE visually sole at the prop edge",
+      "Alia fully separated from the prop",
+      "safe outer-edge downrange lane",
+      "close peck and exact RAZE split retained"
+    ],
+    "result": "hard-safe-accepted",
+    "noFurtherPass": true
+  },
+  "countryClosure": {
+    "closedAt": "2026-08-20T07:49:16.754Z",
+    "acceptedSceneCount": 4,
+    "acceptedScenes": [
+      1584,
+      1585,
+      1586,
+      1587
+    ],
+    "passOneCandidatesConsumed": 4,
+    "passTwoCandidatesConsumed": 1,
+    "totalProviderDispatches": 5,
+    "refusals": 0,
+    "preservedVisualRejects": [
+      1587
+    ],
+    "closeLoveMission": "restored",
+    "noThirdPass": true
+  }
+}

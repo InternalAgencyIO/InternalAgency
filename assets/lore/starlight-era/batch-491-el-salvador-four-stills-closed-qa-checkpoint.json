@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "batch": 491,
+  "country": "El Salvador",
+  "scenes": [1991, 1992, 1993, 1994],
+  "state": "four-stills-closed-qa-and-archive-complete-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-06T04:29:29.8283313Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "preflightCheckpoint": "assets/lore/starlight-era/batch-491-el-salvador-meta-dispatch-preflight-checkpoint.json",
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-491-el-salvador-four-meta-composers-staged-checkpoint.json",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-491-el-salvador-four-lanes-dispatched-checkpoint.json",
+    "dispatchCommit": "f678ba5324e6bf2700ae02c3f3ed59d6998cedfc"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulFinalOccurrences": 4,
+    "hardFailures": 0,
+    "retries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "orderedAnchors": [938, 936, 937],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/83dfd5fa-ae0f-45cf-9c04-c01b67dccdfd",
+      "https://www.meta.ai/prompt/2deab197-f563-4de4-83e7-92246a9b0406",
+      "https://www.meta.ai/prompt/42387cae-3e7c-4cbd-a41e-2772195760c4",
+      "https://www.meta.ai/prompt/9500d49d-7c2c-4401-8725-a31aed84014e"
+    ]
+  },
+  "selectedAssets": [
+    {"scene": 1991, "provider": "Meta AI fallback after consumed ChatGPT invocation", "path": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1991-el-salvador-suchitoto-lake-suchitlan-editorial-meta-occurrence-1-raw.webp", "sha256": "55FF95CAF45D8C12147A713947B64B1A28F0AA9F4E001863254866A533E170D9", "bytes": 522158, "width": 1152, "height": 2048},
+    {"scene": 1992, "provider": "Meta AI fallback after consumed ChatGPT invocation", "path": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1992-el-salvador-cerro-verde-izalco-editorial-meta-occurrence-1-raw.webp", "sha256": "B534EF6A9D65276269FBDCCDFE3A0276634038CFA834AC0E8F44C41412B5F926", "bytes": 518022, "width": 1152, "height": 2048},
+    {"scene": 1993, "provider": "Meta AI", "path": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1993-el-salvador-joya-de-ceren-editorial-meta-occurrence-1-raw.webp", "sha256": "585EDA467116BB4795A54D292E02D90F0C619DEEC0A841E2BF36C6030B9B7681", "bytes": 736094, "width": 1152, "height": 2048},
+    {"scene": 1994, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1994-el-salvador-conchagua-gulf-fonseca-editorial-chatgpt-one-strong-shortening-pass.png", "sha256": "C5FEACD9AA369F37C265D986D83EFAD5D384397934B085E5A4CFC91C26C24A77", "bytes": 2474791, "width": 941, "height": 1672}
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableElSalvadorSettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "selectedAssetMatchesOutsideBatch": [0, 0, 0, 0],
+    "scannedRepoImageCount": 5041,
+    "editorialRollTestsPassed": 5,
+    "editorialRollTestsFailed": 0
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassRequestsIssued": 4,
+    "successfulOutputs": 2,
+    "outputModerationBlocks": 2,
+    "blockedScenes": [1991, 1992],
+    "blockedStage": "output",
+    "blockedCategory": "sexual",
+    "blockedRequestIds": ["f670d706-80fd-49b8-8f0b-39ea0541c178", "51f89f85-fe3a-485e-9ab8-8d0efff6df3c"],
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 1,
+    "selectedMetaOriginalsOrFallbacks": 3
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/provider-ledger.json",
+    "invocationLedger": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/chatgpt-one-strong-shortening-invocation-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/accessibility-sidecars.json",
+    "providerManifest": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/provider-evidence-manifest.json",
+    "providerManifestExact": true,
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/closure-evidence-manifest.json",
+    "closureManifestFileCount": 16,
+    "closureManifestTotalBytes": 7938476,
+    "closureManifestInventorySha256": "D88CD17E73569BE73F56443A160008DFD6C18D9C38886653A81262CFE34C10BA"
+  },
+  "publication": {
+    "plannedCountryPair": ["El Salvador", "Republic of the Congo"],
+    "elSalvadorPriorPostCount": 0,
+    "republicOfTheCongoPriorPostCount": 0,
+    "xAccount": "@dogramaci",
+    "canonicalXPostCountBeforePair": 198,
+    "composerBlank": true,
+    "composerMediaCount": 0,
+    "publicTransmissionCount": 0
+  },
+  "browserState": {
+    "verifiedAtUtc": "2026-09-06T04:29:29.8283313Z",
+    "metaRelatedTabCount": 4,
+    "metaTerminalPromptUrlCount": 3,
+    "metaDirectMediaUrlCount": 1,
+    "xTabCount": 1,
+    "otherTabCount": 0,
+    "terminalMetaThinkingVisible": true,
+    "terminalMetaStopVisibleCount": 0,
+    "terminalMetaViewMediaVisible": true,
+    "xComposerUrl": "https://x.com/compose/post",
+    "xSignedInProfileHref": "/dogramaci",
+    "xComposerText": "",
+    "xPostDisabled": true,
+    "visibleInAppBrowserOnly": true
+  },
+  "canonicalContradictions": [
+    "Historical Batch 466 El Salvador scenes 1890-1893 are terminal provider-limit no-byte occurrences and were neither resent nor reopened. Fresh Batch 491 uses unused scene numbers 1991-1994 and is not a retry.",
+    "Batch 466 named Republic of the Congo as the next country, but Batch 467 explicitly superseded it with the Europe gap-fill. After Vatican City closed every Europe gap, the binding priority order resumes at the first zero-post country: El Salvador, then Republic of the Congo.",
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later checkpoints. No Cuba or Tanzania prompt was dispatched.",
+    "All four ChatGPT tailoring allowances were consumed exactly once. Scenes 1991 and 1992 ended on output-stage sexual-category moderation blocks; their valid Meta raws are selected with no second pass.",
+    "No Starlight guardian exists. The unrelated X Assistant and IAT B3 guardians remain untouched and are not Starlight authority."
+  ],
+  "automationInventory": [
+    {"id": "guardian-x-assistant-mission", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true},
+    {"id": "iat-b3-devnet-gate-guardian", "status": "ACTIVE", "leftUntouched": true}
+  ],
+  "starlightGuardianPresent": false,
+  "nextSafeAction": "Commit the complete Batch 491 closure with Git LFS, push and verify local/origin/Draft PR parity, then prepare fresh Republic of the Congo Batch 492 scenes 1995-1998 before any new provider dispatch."
+}

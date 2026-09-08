@@ -1,0 +1,2 @@
+Script error:
+image generation failed: http 400 Bad Request: Some("{\n  \"error\": {\n    \"message\": \"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID e5b7f380-56d9-4709-91ba-86b0c4fb93f9. safety_violations=[sexual].\",\n    \"type\": \"image_generation_user_error\",\n    \"param\": null,\n    \"code\": \"moderation_blocked\",\n    \"moderation_details\": {\n      \"moderation_stage\": \"output\",\n      \"categories\": [\n        \"sexual\"\n      ]\n    }\n  }\n}")

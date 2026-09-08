@@ -1,0 +1,80 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T08:14:46.386Z",
+  "authoritative_parent_commit": "2f580f2de5349b184350668bb710c2d15e8698a0",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 417,
+  "country": "Palau",
+  "scene_range": [
+    1688,
+    1689,
+    1690,
+    1691
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-417-scene-1688-no-occurrence-scenes-1689-1691-held-checkpoint.json",
+  "face_anchor_manifest_verified": true,
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "completed_country_cycles_since_last_x_cycle": 6,
+  "accepted_canonical_count_for_country": 1,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "incomplete",
+  "scene_states": {
+    "1688": {
+      "status": "accepted-canonical-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "provider_url": "https://www.meta.ai/prompt/cf1893a6-a49f-45fc-b4fb-bbd7ee1cfeee",
+      "sha256": "37910EFC3D69D7DB8C2D8BF009B6AE42E95202E56AACAE7B2965B80630A143AC",
+      "width": 1152,
+      "height": 2048,
+      "asset_path": "assets/lore/starlight-era/1688-palau-rock-islands-southern-lagoon-meta-raw.webp",
+      "canonical_blob_path": "progress-reports/codex-generated-media/blobs/37/37910efc3d69d7db8c2d8bf009b6ae42e95202e56aacae7b2965b80630a143ac.webp",
+      "evidence": "progress-reports/codex-generated-media/provider-occurrences/batch-417-scene-1688-late-occurrence-accepted-canonical.jsonl"
+    },
+    "1689": {
+      "status": "no-current-provider-occurrence-late-audit-required",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "89429EC9A1A42F1F6A5A5A442E151C7F951CFAAED5496C03A3E17D6689F2906E",
+      "camera_roll": 80,
+      "evidence": "progress-reports/codex-generated-media/provider-occurrences/batch-417-scene-1689-initial-dispatch-no-confirmed-occurrence.jsonl"
+    },
+    "1690": {
+      "status": "untouched-held",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "CAA2F311DDB0A16D45578817E64EDCCD91A699505D2B41C11FD57DD9D6D0A4F0",
+      "camera_roll": 52
+    },
+    "1691": {
+      "status": "untouched-held",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F",
+      "camera_roll": 11
+    }
+  },
+  "next_action": "On the next user-confirmed wake, audit Meta history for a late scene 1689 occurrence before dispatching untouched scene 1690. Never resend scenes 1688 or 1689."
+}

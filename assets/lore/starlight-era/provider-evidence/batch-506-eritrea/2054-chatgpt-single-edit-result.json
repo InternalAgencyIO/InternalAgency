@@ -1,0 +1,41 @@
+{
+  "scene": 2054,
+  "completedAtUtc": "2026-09-07T07:05:49.625Z",
+  "outcome": "output-blocked",
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 71c08752-d10b-4914-a6cc-1eca5f014878. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "output_hint": null,
+  "prompt": "One identity-preserving clothing-only tailoring pass for scene 2054: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=visible navel, Ellie=visible navel, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a sea-blue sculpted mini with pearl wave ribs; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient sculptural platform with one subtle original RAZE split-star mark. Prominent crisp tattoos: agency, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Radiance: an ivory fitted cocktail mini with copper contour seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient knee high boot without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: a jade cropped shell and secure pearl mini skort; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; jade ceramic ankle boot without any branding. Prominent crisp tattoos: scorpion, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. ECE: a fitted mini dress integrating the complete Eritrea flag design (a complete Eritrean national flag motif, with a red triangle based at the left hoist and pointing to the right fly, a green triangle above and blue triangle below, and a yellow olive wreath surrounding an upright olive branch near the hoist within the red triangle; keep unrelated branding outside the emblem) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; copper polished leather classic pump without any branding. Prominent crisp tattoos: original split-star; silent king, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Visible hosiery uses rainbow stockings; this is independent of shoe color. Preserve the actual input rectangle, crop, camera position and all face locations exactly, even if the source differs from the requested camera roll. No zoom, recrop, outpainting, body repositioning, image rotation or extra feet. Keep any documented safer source exclusions. Image1 is the edit target; anchors938,936,937 are identity-only references, not replacement compositions.",
+  "promptSha256": "84B79C9BABE3C9EB35CD11A07A8FC124E7772E6C5F24AE8F919D0F770F17F9A4",
+  "source": {
+    "scene": 2054,
+    "label": "gallery/island_lounge_editorial.webp",
+    "labelIndex": 0,
+    "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799441268_28101121016176592_2055828367973926226_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=108&_nc_ohc=6VrlOK--qVkQ7kNvwEv5wep&sdl=0&ccb=14-4&oh=00_AQJESDF3rpnBHz4j-hMktWbs6EwqDEJJLpo1LU_B1OncEg&oe=6AA41AD2&_nc_sid=a21977",
+    "providerUrl": "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc",
+    "observedAtUtc": "2026-09-07T06:54:12.632Z",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-meta-gallery-original.webp",
+    "downloadPath": "C:\\Users\\A\\Downloads\\799441268_28101121016176592_2055828367973926226_n.webp",
+    "bytes": 515756,
+    "sha256": "650efe8c9ddd96c3f6158f035d024e3b1d39092477046966c4138a4f5369ac25",
+    "dimensions": {
+      "width": 1152,
+      "height": 2048
+    },
+    "kind": "gallery",
+    "archiveMethod": "visible browser downloadMedia and download event",
+    "status": "archived-original-pending-qa-unused-until-selected"
+  },
+  "referencePaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-meta-gallery-original.webp",
+    "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "invocationCount": 1,
+  "maximumInvocations": 1,
+  "additionalInvocationsAllowed": 0,
+  "blockStage": "output",
+  "blockCategory": "sexual",
+  "retryAllowed": false,
+  "sourceDisposition": "Independently reviewed non-explicit Meta source retained; no provider retry or substitute edit."
+}

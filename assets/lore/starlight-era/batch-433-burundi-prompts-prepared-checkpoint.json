@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "batch": 433,
+  "country": "Burundi",
+  "status": "prompts-prepared-awaiting-fresh-immediate-browser-confirmation",
+  "preparedAtUtc": "2026-08-27T09:24:58.467Z",
+  "sourceBatch": 362,
+  "sourceCheckpointPath": "assets/lore/starlight-era/batch-362-burundi-mars-expedition-checkpoint.json",
+  "sourceCheckpointSha256": "800A57BC4CD6C98D98DEF0ADBD01ABDA6EBFAC0EDF729627BBF5A2CB2C71D4AC",
+  "sourceScenePromptSha256": {
+    "1468": "C678951104029AC6CC4E150C98436D31847D8BD5FFCFF5649FA91F5763709BF4",
+    "1469": "6982064BFA3520894137D53A1DFCED06C842E17DEB32EA6CB303CCAEE27B4B29",
+    "1470": "ABA72341500903E4F8580F9B7066878B08D4A0B9324BBE55417BEDB35211D794",
+    "1471": "A91B10B11279094DB53D548F55BE77FF742DC424BDA14A92270BAB46F98D111E"
+  },
+  "safetyAdaptation": "Legacy source mission-prop, mascot, and weapon-like language removed. Prepared scenes use one harmless civilian navigation beacon only.",
+  "cameraRollMethod": "FNV-1a over each stored batch433-burundi-scene####-camera-roll key, reduced modulo 100 plus one",
+  "cameraRolls": [
+    {
+      "scene": 1752,
+      "key": "batch433-burundi-scene1752-camera-roll",
+      "fullHash": 764073133,
+      "roll": 34,
+      "framing": "INTERMEDIATE"
+    },
+    {
+      "scene": 1753,
+      "key": "batch433-burundi-scene1753-camera-roll",
+      "fullHash": 1270578558,
+      "roll": 59,
+      "framing": "INTERMEDIATE"
+    },
+    {
+      "scene": 1754,
+      "key": "batch433-burundi-scene1754-camera-roll",
+      "fullHash": 3969179555,
+      "roll": 56,
+      "framing": "INTERMEDIATE"
+    },
+    {
+      "scene": 1755,
+      "key": "batch433-burundi-scene1755-camera-roll",
+      "fullHash": 1518153140,
+      "roll": 41,
+      "framing": "INTERMEDIATE"
+    }
+  ],
+  "orderedReferenceSceneIds": [
+    938,
+    936,
+    937
+  ],
+  "orderedReferencePaths": [
+    "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "orderedReferenceSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "scenes": [
+    {
+      "sceneId": 1752,
+      "sourceSceneId": 1468,
+      "promptPath": "tmp/world-195x4/batch-433/scene-1752-prompt.txt",
+      "promptSha256": "6B36FCB1B96214DE89550626829F4A72D3355911A7267D50E18936E11E3D9C33",
+      "bytes": 7193,
+      "characters": 7193,
+      "cameraRoll": 34,
+      "cameraFraming": "intermediate"
+    },
+    {
+      "sceneId": 1753,
+      "sourceSceneId": 1469,
+      "promptPath": "tmp/world-195x4/batch-433/scene-1753-prompt.txt",
+      "promptSha256": "1A53817CAFB7A1E4626BAE5D4E2B9DAA9B485394FEE7B84AFB9FC5452B46142D",
+      "bytes": 7169,
+      "characters": 7169,
+      "cameraRoll": 59,
+      "cameraFraming": "intermediate"
+    },
+    {
+      "sceneId": 1754,
+      "sourceSceneId": 1470,
+      "promptPath": "tmp/world-195x4/batch-433/scene-1754-prompt.txt",
+      "promptSha256": "13801B8AE7B0B780F1A79B2DFEBD2F44BA391341E6E2295B3FB7396DA2267299",
+      "bytes": 7192,
+      "characters": 7192,
+      "cameraRoll": 56,
+      "cameraFraming": "intermediate"
+    },
+    {
+      "sceneId": 1755,
+      "sourceSceneId": 1471,
+      "promptPath": "tmp/world-195x4/batch-433/scene-1755-prompt.txt",
+      "promptSha256": "AEC918261C87141865F93ABDE7030ED79D8D33E7929CCBE88B968CB6BF7FC60E",
+      "bytes": 7543,
+      "characters": 7543,
+      "cameraRoll": 41,
+      "cameraFraming": "intermediate"
+    }
+  ],
+  "uploadCount": 0,
+  "sendClickCount": 0,
+  "providerChatUrls": {},
+  "freshImmediateConfirmationRequired": true,
+  "retryAuthorized": false,
+  "duplicateDispatchCount": 0,
+  "completedCountryCycleCountSinceLastXCadence": 2,
+  "xCadenceDue": false,
+  "nextAllowedAction": "After fresh immediate user confirmation, create exactly four signed-in in-app Meta tabs, upload the three ordered anchors to each lane, stage each exact prompt once, verify the payload, and click Send once per lane."
+}

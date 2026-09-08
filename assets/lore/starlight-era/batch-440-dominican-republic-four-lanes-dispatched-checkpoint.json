@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four_lanes_dispatched",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 440,
+  "country": "Dominican Republic",
+  "sourceBatchId": 369,
+  "status": "closed_no_retry_zero_accepted",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "sceneId": 1780,
+      "sourceSceneId": 1496,
+      "location": "Santo Domingo Colonial City and Ozama River overlook",
+      "cameraRoll": 58,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-440/scene-1780-prompt.txt",
+      "promptSha256": "4F066D1193196A660D45B5116EDC8FF861F0D9E645667EF8C32026AFB66C3023",
+      "promptBytes": 7130,
+      "uploadComplete": true,
+      "sendClicked": true,
+      "tabId": "39",
+      "recoveryTabId": "43",
+      "sendClickedAtUtc": "2026-08-27T17:23:47.963Z",
+      "providerUrl": "https://www.meta.ai/prompt/027b7203-e161-4c55-9ce0-5f1e68a77abc",
+      "occurrenceConfirmed": true,
+      "terminalStatus": "missing_bytes_browser_policy",
+      "promptHashVerifiedBeforeSend": true,
+      "orderedReferencesVerifiedBeforeSend": true,
+      "attempt": "initial",
+      "singleDispatchExhausted": true
+    },
+    {
+      "sceneId": 1781,
+      "sourceSceneId": 1497,
+      "location": "Puerto Plata and Mount Isabel de Torres overlook",
+      "cameraRoll": 62,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-440/scene-1781-prompt.txt",
+      "promptSha256": "8B1DC35D845D89F7A76F321E4401FD08B369CC2B584EF617C76E39004CE2C7B7",
+      "promptBytes": 6991,
+      "uploadComplete": true,
+      "sendClicked": true,
+      "tabId": "40",
+      "recoveryTabId": "44",
+      "sendClickedAtUtc": "2026-08-27T17:29:54.201Z",
+      "providerUrl": null,
+      "occurrenceConfirmed": false,
+      "terminalStatus": "no_confirmed_occurrence",
+      "promptHashVerifiedBeforeSend": true,
+      "orderedReferencesVerifiedBeforeSend": true,
+      "attempt": "initial",
+      "singleDispatchExhausted": true
+    },
+    {
+      "sceneId": 1782,
+      "sourceSceneId": 1498,
+      "location": "Samana Bay and Los Haitises overlook",
+      "cameraRoll": 59,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-440/scene-1782-prompt.txt",
+      "promptSha256": "A71F4DEDB3B31AC716CC75570055C3E6E817DCA25749BE76A35A072F6B7BFF55",
+      "promptBytes": 6970,
+      "uploadComplete": true,
+      "sendClicked": true,
+      "tabId": "41",
+      "recoveryTabId": "45",
+      "sendClickedAtUtc": "2026-08-27T17:30:26.247Z",
+      "providerUrl": null,
+      "occurrenceConfirmed": false,
+      "terminalStatus": "no_confirmed_occurrence",
+      "promptHashVerifiedBeforeSend": true,
+      "orderedReferencesVerifiedBeforeSend": true,
+      "attempt": "initial",
+      "singleDispatchExhausted": true
+    },
+    {
+      "sceneId": 1783,
+      "sourceSceneId": 1499,
+      "location": "Punta Cana and Bavaro Caribbean overlook",
+      "cameraRoll": 64,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-440/scene-1783-prompt.txt",
+      "promptSha256": "4F17A0D3BBB6A89BE6D8F2905CFB3CEF3307B7B4A5C5165FD94C1AA6434CAC8F",
+      "promptBytes": 6905,
+      "uploadComplete": true,
+      "sendClicked": true,
+      "tabId": "42",
+      "recoveryTabId": "46",
+      "sendClickedAtUtc": "2026-08-27T17:23:47.963Z",
+      "providerUrl": "https://www.meta.ai/prompt/9639464d-c88a-4984-aee7-00e4bdebcfbf",
+      "occurrenceConfirmed": true,
+      "terminalStatus": "terminal_response_missing_bytes_browser_policy",
+      "promptHashVerifiedBeforeSend": true,
+      "orderedReferencesVerifiedBeforeSend": true,
+      "attempt": "initial",
+      "singleDispatchExhausted": true
+    }
+  ],
+  "confirmation": {
+    "userConfirmedAtActionTime": true,
+    "userMessage": "confirmed go"
+  },
+  "fullTabResetRecovery": {
+    "performed": true,
+    "reason": "Original home composers became uncontrollable after click-time transport timeouts.",
+    "closedControlledTabIds": [
+      "39",
+      "40",
+      "41",
+      "42"
+    ],
+    "closedReleasedUserTabIds": [
+      "18"
+    ],
+    "freshTabIds": [
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "restoredOnlyEligibleScenes": [
+      1781,
+      1782
+    ],
+    "noDuplicateDispatch": true,
+    "strandedErrorTab": {
+      "tabId": "43",
+      "title": "This site can't be reached",
+      "cause": "session-bound Meta CDN ERR_NAME_NOT_RESOLVED after blocked media access",
+      "closeBlockedByBrowserUrlPolicy": true
+    }
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 10,
+    "due": true
+  },
+  "checkpointedAtUtc": "2026-08-27T17:41:14.349Z"
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "scene_terminal_capture",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 439,
+  "country": "Jordan",
+  "sceneId": 1777,
+  "status": "closed_hard_unusable",
+  "accepted": false,
+  "providerUrl": "https://www.meta.ai/prompt/adb0fe27-3c9b-4593-8fcd-e9338e117b80",
+  "promptSha256": "35185B398F12172911968409883E651F86FAE5C67A2A2BC0B377E60AB89A6A1D",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraRoll": 24,
+  "requiredFraming": "INTERMEDIATE",
+  "mediaSha256": "58b2b56f93eeb282c43c12bed6d2c3b94a184778113f3de1ad7ce4951bd16a84",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-439-scene-1777-output-hard-unusable.jsonl",
+  "rawPath": "assets/lore/starlight-era/1777-jordan-petra-meta-raw.webp",
+  "blobPath": "progress-reports/codex-generated-media/blobs/58/58b2b56f93eeb282c43c12bed6d2c3b94a184778113f3de1ad7ce4951bd16a84.webp",
+  "responsePath": "progress-reports/codex-generated-media/provider-responses/batch-439-scene-1777-meta-response.txt",
+  "visualQa": {
+    "status": "hard_unusable",
+    "accepted": false,
+    "reason": "Anatomy and beacon failure: roll 24 intermediate and the Petra Treasury read strongly, but only seven assigned hands are clearly traceable and the beacon shows five cyan rings instead of exactly four.",
+    "passes": [
+      "vertical 9:16",
+      "exactly four distinct adult women",
+      "intermediate head-to-mid-shin composition with no footwear visible",
+      "Petra Treasury and Siq read strongly",
+      "public-safe opaque couture"
+    ],
+    "fails": [
+      "exactly eight traceable assigned hands",
+      "exactly four cyan beacon rings"
+    ]
+  },
+  "terminalObservedAtUtc": "2026-08-27T17:11:38.237Z",
+  "checkpointedAtUtc": "2026-08-27T17:15:30.095Z",
+  "noRetryAuthorized": true
+}

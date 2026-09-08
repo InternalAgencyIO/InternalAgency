@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "batch": 430,
+  "country": "Guinea",
+  "status": "prompts-prepared-awaiting-fresh-browser-confirmation",
+  "preparedAtUtc": "2026-08-27T08:08:49.991Z",
+  "sourceBatch": 359,
+  "sourceCheckpoint": "assets/lore/starlight-era/batch-359-guinea-orbital-spaceship-checkpoint.json",
+  "sourceSceneIds": [
+    1456,
+    1457,
+    1458,
+    1459
+  ],
+  "newSceneIds": [
+    1740,
+    1741,
+    1742,
+    1743
+  ],
+  "cameraRollMethod": "FNV-1a over the recorded batch430-guinea scene camera-roll key, reduced modulo 100 and stored as 1-100; 1-20 extreme close, 21-80 intermediate, 81-100 extreme wide.",
+  "orderedIdentityReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "scenes": [
+    {
+      "sceneId": 1740,
+      "sourceSceneId": 1456,
+      "promptPath": "tmp/world-195x4/batch-430/scene-1740-prompt.txt",
+      "promptSha256": "79BC3A74947919C759D75AE5AAFC23DDF820B1EFCF6E63632DFBEABE47E5F733",
+      "promptCharacterLength": 7094,
+      "cameraRollKey": "batch430-guinea-scene1740-camera-roll",
+      "cameraRoll": 34,
+      "cameraClass": "INTERMEDIATE",
+      "landmark": "Conakry Kaloum peninsula skyline, palm-lined Atlantic coast, and the Loos Islands",
+      "razeKneeHighPair": [
+        "Radiance",
+        "Alia"
+      ],
+      "maleModelIncluded": false
+    },
+    {
+      "sceneId": 1741,
+      "sourceSceneId": 1457,
+      "promptPath": "tmp/world-195x4/batch-430/scene-1741-prompt.txt",
+      "promptSha256": "4B29C61072FDCE1EFDD9DE78B60DA23E43F31D725A5AC87ABFEA3A6B9B45DDB3",
+      "promptCharacterLength": 7054,
+      "cameraRollKey": "batch430-guinea-scene1741-camera-roll",
+      "cameraRoll": 47,
+      "cameraClass": "INTERMEDIATE",
+      "landmark": "Fouta Djallon highland escarpments, tall waterfall, forested valleys, and layered plateaus",
+      "razeKneeHighPair": [
+        "Ellie",
+        "AI ECE"
+      ],
+      "maleModelIncluded": false
+    },
+    {
+      "sceneId": 1742,
+      "sourceSceneId": 1458,
+      "promptPath": "tmp/world-195x4/batch-430/scene-1742-prompt.txt",
+      "promptSha256": "B6347BD87C683998F8AD978C812CF15C1CF9EC4C81F5632C81AE9796B97C3723",
+      "promptCharacterLength": 7038,
+      "cameraRollKey": "batch430-guinea-scene1742-camera-roll",
+      "cameraRoll": 40,
+      "cameraClass": "INTERMEDIATE",
+      "landmark": "Mount Nimba ridge, forested slopes, grassland summit, and layered cloud line",
+      "razeKneeHighPair": [
+        "Radiance",
+        "AI ECE"
+      ],
+      "maleModelIncluded": false
+    },
+    {
+      "sceneId": 1743,
+      "sourceSceneId": 1459,
+      "promptPath": "tmp/world-195x4/batch-430/scene-1743-prompt.txt",
+      "promptSha256": "59CFA750BB70582ABF73B1F8940A7689E04A1A972C730DA0D97268F36CEF687B",
+      "promptCharacterLength": 7454,
+      "cameraRollKey": "batch430-guinea-scene1743-camera-roll",
+      "cameraRoll": 41,
+      "cameraClass": "INTERMEDIATE",
+      "landmark": "Upper Guinea Niger headwaters, braided river channels, floodplain terraces, gallery forest, and highland horizon",
+      "razeKneeHighPair": [
+        "Ellie",
+        "Alia"
+      ],
+      "maleModelIncluded": true
+    }
+  ],
+  "eligibleLaneCount": 4,
+  "provider": "Meta AI exclusive",
+  "dispatchGate": {
+    "standingUploadAuthorizationGrantedAtUtc": "2026-08-27T04:05:01.069499Z",
+    "standingUploadAuthorizationExpiresAtUtc": "2026-08-28T04:05:01.069499Z",
+    "freshImmediateBrowserConfirmationRequired": true,
+    "previousImmediateConfirmationConsumedByBatch429Zimbabwe": true,
+    "uploadsAuthorizedNow": false,
+    "sendsAuthorizedNow": false,
+    "dispatchAuthorized": false
+  },
+  "noRetryAuthorized": true,
+  "duplicateDispatchCount": 0,
+  "nextCampaignPreparation": {
+    "batch": 431,
+    "country": "Benin",
+    "sourceBatch": 360,
+    "sourceSceneIds": [
+      1460,
+      1461,
+      1462,
+      1463
+    ],
+    "newSceneIds": [
+      1744,
+      1745,
+      1746,
+      1747
+    ]
+  }
+}

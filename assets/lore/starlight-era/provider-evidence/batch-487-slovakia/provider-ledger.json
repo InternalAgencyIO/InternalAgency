@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "batch": 487,
+  "country": "Slovakia",
+  "state": "four-selected-assets-closed-one-meta-hard-failure-one-meta-retry-one-chatgpt-success-three-meta-fallbacks-no-x-transmission",
+  "provider": "Meta AI",
+  "providerAccount": "leesha007",
+  "providerMode": "Thinking",
+  "browser": "Codex in-app Browser",
+  "anchors": [938, 936, 937],
+  "metaRetryCapPerScene": 2,
+  "metaRetriesUsed": 1,
+  "chatgptPassCapPerSuccessfulMetaOccurrence": 1,
+  "chatgptAdditionalPasses": 0,
+  "scenes": [
+    {
+      "scene": 1975,
+      "promptSha256": "70B0E42E61503F58346CEF58B08D0847E54C81EFD64D01BBE97946AA52C5BAB5",
+      "providerUrl": "https://www.meta.ai/prompt/c28afc8b-012b-4e5e-b2a9-199fb3f21e58",
+      "providerDispatchCount": 1,
+      "providerOutcome": "success",
+      "providerDomMediaLabel": "gallery/bratislava_castle_chain.webp",
+      "visibleDownloadFilename": "bratislava_castle_chain.jpg",
+      "providerRaw": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1975-slovakia-bratislava-castle-danube-raze-tight-hemline-close-meta-occurrence-1-raw.jpg",
+        "sha256": "EC9873518FC55080EE1E6921A02C14F2D2AACFFEA0F721A66EB4A00D3FA1AD2E",
+        "bytes": 274453,
+        "width": 1152,
+        "height": 2048,
+        "format": "JPEG/JFIF RGB"
+      },
+      "chatgptStrongShorteningPass": {
+        "promptSha256": "BEF458EB190F46AF362A4E46B30A79EEAD0AC6982A881134DDED2ABC08431449",
+        "requestsIssued": 1,
+        "status": "success",
+        "additionalPasses": 0
+      },
+      "selectedOutput": {
+        "provider": "ChatGPT Image Generator",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1975-slovakia-bratislava-castle-danube-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png",
+        "sha256": "AA9B0A681C86835F53CC98D732B4481BF078C287E885BED8CC317C96ECC168CA",
+        "bytes": 2247431,
+        "width": 941,
+        "height": 1672,
+        "format": "PNG RGB"
+      },
+      "qa": {
+        "accepted": true,
+        "publicSafe": true,
+        "fictionalAdultCount": 4,
+        "completeFootwear": true,
+        "recognizableLocation": true,
+        "strongShorteningVisible": true,
+        "notes": "Bratislava Castle, the Danube and terrace remain clear; four distinct adults, affectionate pose, split-star panels, RAZE bands, sharply shortened opaque silhouettes and all classic pumps remain complete."
+      }
+    },
+    {
+      "scene": 1976,
+      "initialPromptSha256": "611AC0C4DDAD860478C6D546E68E4828D3B31C2478E7554678A7FF2BD36D622E",
+      "initialProviderUrl": "https://www.meta.ai/prompt/8477e594-1ff8-42be-ae8c-379d5e975e6d",
+      "initialProviderOutcome": "hard-failure-no-image",
+      "retryPromptSha256": "B522F5F9DE2B08C2205C43F0EB0523B9DF6C8B90C8543448A9A57915CFEBC54A",
+      "providerUrl": "https://www.meta.ai/prompt/38bb3e58-02cd-46ab-acc2-b7c5fb3216f5",
+      "providerDispatchCount": 2,
+      "providerRetryCount": 1,
+      "providerOutcome": "retry-1-success",
+      "providerDomMediaLabel": "gallery/rainbow_stockings_correction.webp",
+      "visibleDownloadFilename": "rainbow_stockings_correction.jpg",
+      "providerRaw": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1976-slovakia-spis-castle-raze-adjacent-three-quarter-meta-retry-1-occurrence-1-raw.jpg",
+        "sha256": "FE7A7F6FC5E9D73F7AF12E033C57C26588EFFCE85FAA00E639771924CD65EE0F",
+        "bytes": 282218,
+        "width": 1152,
+        "height": 2048,
+        "format": "JPEG/JFIF RGB"
+      },
+      "chatgptStrongShorteningPass": {
+        "promptSha256": "D481FED57C02671F9C13086478244F872CE0E71FC986F4CA49DEAE922852E490",
+        "requestsIssued": 1,
+        "status": "attribution-uncertain-no-bytes-wave-terminated-on-output-moderation",
+        "additionalPasses": 0
+      },
+      "selectedOutput": {
+        "provider": "Meta AI fallback after consumed ChatGPT invocation",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1976-slovakia-spis-castle-raze-adjacent-three-quarter-meta-retry-1-occurrence-1-raw.jpg",
+        "sha256": "FE7A7F6FC5E9D73F7AF12E033C57C26588EFFCE85FAA00E639771924CD65EE0F",
+        "bytes": 282218,
+        "width": 1152,
+        "height": 2048,
+        "format": "JPEG/JFIF RGB"
+      },
+      "qa": {
+        "accepted": true,
+        "publicSafe": true,
+        "fictionalAdultCount": 4,
+        "completeFootwear": true,
+        "recognizableLocation": true,
+        "strongShorteningVisible": false,
+        "notes": "The preserved Meta retry is complete and public-safe with four distinct adults, intact Spis Castle, short opaque silhouettes, rainbow over-the-knee stockings, RAZE waist bands, star marks and all pumps visible. The consumed ChatGPT edit produced no attributable bytes, so the valid Meta source is canonical."
+      }
+    },
+    {
+      "scene": 1977,
+      "promptSha256": "E6C945586BBF6FAC6C0D816772A578990805B86B830637937BD85B8CB9A0AABB",
+      "providerUrl": "https://www.meta.ai/prompt/0daf1876-bea9-464d-9f37-0b51337156db",
+      "providerDispatchCount": 1,
+      "providerOutcome": "success",
+      "providerDomMediaLabel": "gallery/strbske_pleso_fashion.webp",
+      "visibleDownloadFilename": "strbske_pleso_fashion.jpg",
+      "providerRaw": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1977-slovakia-strbske-pleso-high-tatras-raze-tight-hemline-close-meta-occurrence-1-raw.jpg",
+        "sha256": "29C396E2FD777190ED34EB156DF4FBCFF1AB918B75739B33E2A61E5078201F0C",
+        "bytes": 282708,
+        "width": 1152,
+        "height": 2048,
+        "format": "JPEG/JFIF RGB"
+      },
+      "chatgptStrongShorteningPass": {
+        "promptSha256": "700237B22C59D633FBFF1D1216431A67193EC83EDC160069771D14932D2DAAE1",
+        "requestsIssued": 1,
+        "status": "attribution-uncertain-no-bytes-wave-terminated-on-output-moderation",
+        "additionalPasses": 0
+      },
+      "selectedOutput": {
+        "provider": "Meta AI fallback after consumed ChatGPT invocation",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1977-slovakia-strbske-pleso-high-tatras-raze-tight-hemline-close-meta-occurrence-1-raw.jpg",
+        "sha256": "29C396E2FD777190ED34EB156DF4FBCFF1AB918B75739B33E2A61E5078201F0C",
+        "bytes": 282708,
+        "width": 1152,
+        "height": 2048,
+        "format": "JPEG/JFIF RGB"
+      },
+      "qa": {
+        "accepted": true,
+        "publicSafe": true,
+        "fictionalAdultCount": 4,
+        "completeFootwear": true,
+        "recognizableLocation": true,
+        "strongShorteningVisible": false,
+        "notes": "Strbske Pleso and the High Tatras remain unmistakable; four complete adults share a warm hand-linked pose with opaque short fashion, split stars, two over-the-knee hosiery looks and all pumps visible. The consumed ChatGPT edit produced no attributable bytes, so the valid Meta source is canonical."
+      }
+    },
+    {
+      "scene": 1978,
+      "promptSha256": "7D55B0ECFC12B02BC21B05BB718FD31A4765946643ED8469F75F4EAECBB2721D",
+      "providerUrl": "https://www.meta.ai/prompt/f0fb60ce-13c3-4f1e-a81b-a66ba58721bb",
+      "providerDispatchCount": 1,
+      "providerOutcome": "success",
+      "providerDomMediaLabel": "gallery/orava_castle_group.webp",
+      "visibleDownloadFilename": "orava_castle_group.jpg",
+      "providerRaw": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1978-slovakia-orava-castle-raze-tight-full-body-statement-boots-meta-occurrence-1-raw.jpg",
+        "sha256": "0C1AB53D92977FC456CC3D25A52A53335E9ECE4BCDCD12FF8DF3C3E316750E67",
+        "bytes": 336211,
+        "width": 1152,
+        "height": 2048,
+        "format": "JPEG/JFIF RGB"
+      },
+      "chatgptStrongShorteningPass": {
+        "promptSha256": "2C26321E5F1267B255369B7611D839C64D5373D70D254213169BDFA7AE390441",
+        "requestsIssued": 1,
+        "status": "attribution-uncertain-no-bytes-wave-terminated-on-output-moderation",
+        "additionalPasses": 0
+      },
+      "selectedOutput": {
+        "provider": "Meta AI fallback after consumed ChatGPT invocation",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1978-slovakia-orava-castle-raze-tight-full-body-statement-boots-meta-occurrence-1-raw.jpg",
+        "sha256": "0C1AB53D92977FC456CC3D25A52A53335E9ECE4BCDCD12FF8DF3C3E316750E67",
+        "bytes": 336211,
+        "width": 1152,
+        "height": 2048,
+        "format": "JPEG/JFIF RGB"
+      },
+      "qa": {
+        "accepted": true,
+        "publicSafe": true,
+        "fictionalAdultCount": 4,
+        "completeFootwear": true,
+        "recognizableLocation": true,
+        "strongShorteningVisible": false,
+        "notes": "Orava Castle and the river valley remain clear; four complete adults share an affectionate pose with opaque short fashion, rainbow knee-high hosiery and four fully visible tall RAZE star statement boots. The consumed ChatGPT edit produced no attributable bytes, so the valid Meta source is canonical."
+      }
+    }
+  ],
+  "chatgptWave": {
+    "requestsIssued": 4,
+    "successfulOutputs": 1,
+    "attributionUncertainNoBytes": 3,
+    "moderationStage": "output",
+    "moderationCategory": "sexual",
+    "requestId": "386ec773-72ae-4e43-b83d-aaf7695ef329",
+    "noRetryReason": "Current authority treats an output-stage block, cancellation or attribution-uncertain invocation as consuming the one-pass allowance."
+  },
+  "summary": {
+    "initialMetaDispatches": 4,
+    "successfulFinalMetaOccurrences": 4,
+    "metaHardFailures": 1,
+    "metaRetries": 1,
+    "providerRawAssets": 4,
+    "chatgptOnePassAttempts": 4,
+    "chatgptSuccessfulOutputs": 1,
+    "chatgptNoByteFallbacks": 3,
+    "additionalChatgptPasses": 0,
+    "selectedChatgptAssets": 1,
+    "selectedMetaAssets": 3,
+    "selectedAssets": 4,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "repoImagesScanned": 4979,
+    "xPublications": 0
+  }
+}

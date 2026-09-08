@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "batch": 502,
+  "recordedAtUtc": "2026-09-07T03:19:35.376Z",
+  "maximumInvocationsPerScene": 1,
+  "blockedConsumesAllowance": true,
+  "results": [
+    {
+      "scene": 2035,
+      "startedAtUtc": "2026-09-07T03:04:14.078Z",
+      "completedAtUtc": "2026-09-07T03:06:39.486Z",
+      "invocations": 1,
+      "state": "moderation-blocked-terminal-no-retry",
+      "exactToolResult": {
+        "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID c507ac8b-1672-4cf2-bc84-6a0fc5063bcf. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")"
+      },
+      "output": null,
+      "invocationPrompt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-chatgpt-exact-invocation-prompt.txt",
+      "noSecondInvocation": true
+    },
+    {
+      "scene": 2036,
+      "startedAtUtc": "2026-09-07T03:04:14.078Z",
+      "completedAtUtc": "2026-09-07T03:08:57.521Z",
+      "invocations": 1,
+      "state": "moderation-blocked-terminal-no-retry",
+      "exactToolResult": {
+        "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 82ea3720-62bb-4cf6-80cd-fe38c4f1873c. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")"
+      },
+      "output": null,
+      "invocationPrompt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-chatgpt-exact-invocation-prompt.txt",
+      "noSecondInvocation": true
+    },
+    {
+      "scene": 2037,
+      "startedAtUtc": "2026-09-07T03:04:14.078Z",
+      "completedAtUtc": "2026-09-07T03:11:09.642Z",
+      "invocations": 1,
+      "state": "image-returned-terminal-no-retry",
+      "exactToolResult": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-b407d2f5-c8b8-4a32-aac2-8f8d2aa765b7.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+      },
+      "output": {
+        "scene": 2037,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-chatgpt-single-tailoring-pass.png",
+        "sourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-b407d2f5-c8b8-4a32-aac2-8f8d2aa765b7.png",
+        "bytes": 2205107,
+        "sha256": "b417936d99bf3f4ed0ed05a3be0970ceec4ff53e57e99ba7887e3122b6739196",
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        }
+      },
+      "invocationPrompt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-chatgpt-exact-invocation-prompt.txt",
+      "noSecondInvocation": true
+    }
+  ],
+  "review": {
+    "scene2037": {
+      "technicalPass": true,
+      "publicSafe": true,
+      "fourFictionalAdults": true,
+      "opaqueCoverage": true,
+      "selection": "ChatGPT version",
+      "reason": "Clear four-face back-hug composition and coherent opaque clothing tailoring. All source versions remain archived.",
+      "softDrift": [
+        "Camera remains wider than the immutable roll intent.",
+        "Visible navy garment contour and boot placement differ slightly from source."
+      ],
+      "fictionalDisasterRequiresDisclosure": true
+    },
+    "scene2035": {
+      "selection": "Meta source internal1",
+      "reason": "Single ChatGPT output was blocked, source remains technically usable."
+    },
+    "scene2036": {
+      "selection": "Meta gallery original",
+      "reason": "Single ChatGPT output was blocked, source remains technically usable."
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "state": "three-media-staged-exactly-ready-before-single-post",
+  "stagedAtUtc": "2026-09-06T17:30:12.866Z",
+  "reservation": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p01-reservation.json",
+  "account": "@dogramaci",
+  "sceneIds": [
+    2020,
+    2022,
+    2017
+  ],
+  "mediaCount": 3,
+  "captionExact": true,
+  "captionVerification": "The visible composer has three text blocks: caption, empty block, hashtag. Joining their DOM text with LF exactly matches the frozen caption and hash. Generic innerText inserts an extra layout newline, so it was not used as the authoritative text serialization.",
+  "exactAltTextCount": 3,
+  "madeWithAiSwitchVerifiedChecked": true,
+  "visualOrderVerified": true,
+  "sourceHashesExact": true,
+  "sourceManifestFilesVerified": 60,
+  "postClicks": 0,
+  "uploadMethod": "Supported visible Choose File plus pre-armed filechooser. Initial Add photos or video control produced no chooser; no input or media was attached by that attempt.",
+  "evidence": {
+    "dom": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p01-staged-dom.txt",
+    "screenshot": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p01-staged-visible.jpg",
+    "screenshotBytes": 106908,
+    "screenshotSha256": "446A8A6A590A995DA07750E816BC6D615C281B854D5BB9CDA48F5363BFA1B209",
+    "duplicateAudit": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p01-live-duplicate-audit.json"
+  },
+  "nextSafeAction": "Remote-verify this staging and activate the unique enabled Post once, then reconcile the exact live status before any repeat."
+}

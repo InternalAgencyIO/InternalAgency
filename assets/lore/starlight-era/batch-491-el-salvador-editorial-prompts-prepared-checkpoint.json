@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "batch": 491,
+  "country": "El Salvador",
+  "state": "prepared-offline-not-dispatched",
+  "preparedAtUtc": "2026-09-06T03:46:05.7995604Z",
+  "authority": "assets/lore/starlight-era/batch-491-el-salvador-editorial-brief.json",
+  "contract": "starlight-editorial-rolls-2026-09-06",
+  "fixedRolls": "assets/lore/starlight-era/batch-491-el-salvador-fixed-rolls.json",
+  "seed": "starlight-editorial-rolls-2026-09-06|batch-491|el salvador",
+  "seedSelection": "Fixed; no outcome search or reroll",
+  "provider": "Meta",
+  "accountRequired": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [938, 936, 937],
+  "anchorPaths": [
+    "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "terminalPredecessorScenes": [1890, 1891, 1892, 1893],
+  "terminalPredecessorRule": "Never reopen, resend or retry the four Batch 466 no-byte provider-limit scenes or their provider URLs.",
+  "sceneRange": [1991, 1994],
+  "browserDispatchCount": 0,
+  "editInvocationCount": 0,
+  "retryPolicy": {
+    "maximumMetaRetriesPerScene": 2,
+    "eligibleOnlyFor": ["no image", "corrupt media", "wrong cast or duplicate face", "grossly malformed anatomy", "unsafe or explicit output"],
+    "neverFor": ["aesthetic preference", "camera nuance", "branding omission", "hemline nuance", "minor wardrobe deviation"],
+    "freshChatAndNewPromptHashRequired": true
+  },
+  "singleEditPolicy": {
+    "provider": "built-in ChatGPT image generator",
+    "callsPerTechnicallyValidMetaOccurrence": 1,
+    "allChangesInOneInvocation": true,
+    "blockedOrInterruptedCallConsumesAllowance": true,
+    "secondCallForbidden": true
+  },
+  "shoeDeck": ["sculptural-platform", "classic-pump", "ankle-boot", "knee-high-boot", "stiletto-sandal"],
+  "poseDeck": ["back-hug-turn", "supported-seated-conversation", "head-resting-on-clothed-lap", "side-hug-step"],
+  "angleDeck": ["side-level", "over-shoulder", "front-quarter-low", "high-oblique"],
+  "scenes": [
+    {
+      "scene": 1991,
+      "location": "Suchitoto lakeside civic terrace and Lake Suchitlán",
+      "camera": {"roll": 7, "category": "extreme-close", "angle": "side-level", "dutchDegrees": 15},
+      "pose": "back-hug-turn",
+      "activeImageRolls": ["kneeHighHosiery", "rainbowStockings", "fictionalDistantRazedBackground"],
+      "activeCharacterRolls": {
+        "Alia": ["visibleNavel", "stockingBranding"],
+        "Radiance": ["rainbowShoes", "visibleNavel", "stockingBranding", "tattoo:IA"],
+        "Ellie": ["flagGarment", "tattoo:scorpion"],
+        "ECE": ["rainbowShoes", "shoeBranding:original RAZE split-star", "stockingBranding"]
+      },
+      "prompt": "SCENE 1991 — EL SALVADOR, SUCHITOTO AND LAKE SUCHITLÁN. Create one new photorealistic vertical 9:16 adult high-fashion editorial. The three attached project-owned AI-fictional continuity references are ordered 938, 936, 937; use each exactly once for facial identity only, never their poses or clothes. Show exactly four distinct fictional adult women, each age 21: Black Alia, blonde Radiance, dark-haired Ellie, and brunette AI ECE. Preserve their anchored faces and name mapping while creating a wholly new scene. Use a true EXTREME-CLOSE camera roll 7/100 from a side-level viewpoint with an intentional 15-degree Dutch tilt: a tight overlapping face-and-shoulder composition at different depths, not a lineup. Lower bodies, hems and shoes may fall outside frame; do not pull back to force footwear. A soft contextual fragment of an empty secular Suchitoto lakeside civic terrace, Lake Suchitlán, green islets and warm stucco facades identifies El Salvador. In the far background only, show a fictional non-graphic razed horizon with small fires, layered smoke and one distant mushroom-shaped smoke plume; show no victims, injury or emergency response. The four women remain calm, affectionate and absorbed in one another. Pose lock — back-hug-turn: Radiance stands behind Alia and gives a warm upper-body back hug while Alia turns smiling toward her; Ellie leans in from viewer right and catches Radiance's free hand; ECE closes the diagonal from a lower supported seat with one hand on Ellie's shoulder. Keep four distinct faces and clean attributable hands. Styling is hot, polished, fully opaque and public-safe: sharply short upper-thigh cocktail silhouettes, secure lining, bare arms and open-back or side-back construction where the crop reveals it. Alia wears a cobalt-and-ivory sculpted mini with visible navel; her brandless sculptural platforms may remain outside frame. Radiance wears a crimson-gold cropped satin top and secure mini skirt with visible navel, a prominent crisp IA tattoo on one visible shoulder, rainbow-gradient classic pumps if visible, and no shoe branding. Ellie wears a fitted mini integrating the complete current El Salvador flag design as correct blue-white-blue horizontal bands with the complete central national device; covered midriff, brandless obsidian ankle boots if visible, and a prominent crisp scorpion tattoo on a visible upper arm. ECE wears an emerald-copper fitted mini with covered midriff and rainbow-gradient knee-high boots carrying one subtle original RAZE split-star mark if visible. Image-level hosiery rolls are active: use visible knee-high hosiery and a separate rainbow-gradient stocking treatment where compatible, but do not turn the inactive knee-high-rainbow roll into a universal rule. Small stocking marks appear only on Alia, Radiance and ECE where stockings are actually in frame. No extra star hardware, split-star garment emblem or RAZE garment type band. No other people, minors, nudity, underwear exposure, intimate-area framing, sexual acts, weapons, readable captions, unrelated logos, collage, border or watermark.",
+      "promptSha256": "ECAC3BFCAD4E1781BFD1F79488F3E04927CF56CDC1D47D65CAEF05B27A32CA96",
+      "promptCharacters": 3096,
+      "singleEditPrompt": "One identity-preserving clothing-only tailoring pass for scene 1991. Substantially shorten every visible lower garment to a secure opaque upper-thigh cocktail silhouette; open the back or side-back where visible, bare the arms, and preserve the genuine extreme-close crop without widening to show shoes or hems. Preserve exactly four anchored adult faces, the back-hug-turn choreography, all hand ownership, Suchitoto and Lake Suchitlán context, distant fictional fires and smoke, and the exact camera perspective. Midriff assignments: Alia visible navel; Radiance visible navel; Ellie covered; ECE covered. Preserve or realize these recorded details only where the crop allows: Radiance IA shoulder tattoo; Ellie scorpion upper-arm tattoo; Ellie's complete El Salvador flag garment; rainbow shoes for Radiance and ECE; subtle split-star shoe branding only for ECE; stocking branding only for Alia, Radiance and ECE. Secure complete opaque coverage, no nudity, exposure, extra person, added limb, new text or second image. Output one image; no further pass.",
+      "singleEditPromptSha256": "126F5B2CD95FF21FB63EF095F66883FBA955166BC268E81BFF2CF76FD3F8A14F"
+    },
+    {
+      "scene": 1992,
+      "location": "Cerro Verde secular overlook toward Izalco volcano",
+      "camera": {"roll": 45, "category": "intermediate", "angle": "over-shoulder", "dutchDegrees": 24},
+      "pose": "supported-seated-conversation",
+      "activeImageRolls": ["starHardware", "splitStarEmblem"],
+      "activeCharacterRolls": {
+        "Alia": ["shoeBranding:original RAZE split-star", "visibleNavel"],
+        "Radiance": ["shoeBranding:original RAZE split-star", "flagGarment", "visibleNavel", "stockingBranding", "tattoo:agency"],
+        "Ellie": ["flagGarment", "visibleNavel"],
+        "ECE": ["shoeBranding:original RAZE split-star", "flagGarment", "tattoo:star"]
+      },
+      "prompt": "SCENE 1992 — EL SALVADOR, CERRO VERDE OVERLOOK TOWARD IZALCO. Create one new photorealistic vertical 9:16 adult high-fashion editorial. Use the three attached project-owned AI-fictional continuity references exactly once each in authoritative order 938, 936, 937 for facial identity only. Show exactly four distinct fictional adult women, each age 21: Black Alia, blonde Radiance, dark-haired Ellie, and brunette AI ECE. Preserve their anchored faces and name mapping, but invent a wholly new pose, clothes and composition. Camera roll 45/100 is INTERMEDIATE: a close waist-to-thigh or supported seated three-quarter frame from behind Alia's near shoulder, with an intentional 24-degree Dutch tilt. Do not default to a head-to-toe fashion lineup. Place them on a broad, dry, level, fully guarded secular Cerro Verde viewing terrace with Izalco's conical volcano, forested slopes and layered blue ridges unmistakable behind them; no religious or government structures. Pose lock — supported-seated-conversation: Radiance sits securely on a broad bench angled toward Ellie; Ellie perches at the other end and clasps Radiance's hand; Alia stands close behind the bench with one arm around Ellie's shoulder; ECE kneels safely beside Radiance and receives Alia's free hand. The quartet forms a connected conversational spiral with reciprocal smiles and no spectator. Hot polished couture, sharply short secure upper-thigh silhouettes, fully opaque lining, bare arms and open-back or side-back architecture: Alia wears an indigo-silver folded mini with visible navel and classic pumps bearing one subtle original RAZE split-star. Radiance wears a complete El Salvador flag mini-skort set with correct blue-white-blue horizontal bands and complete central national device, visible navel, cobalt ankle boots with one subtle original RAZE split-star, and a prominent crisp agency tattoo on one visible shoulder. Ellie wears a different complete El Salvador flag halter mini with correct bands and central device, visible navel, and brandless ivory knee-high boots. ECE wears a complete El Salvador flag one-shoulder cocktail mini with correct bands and central device, covered midriff, bronze stiletto sandals bearing one subtle original RAZE split-star, and one prominent crisp star tattoo on a visible upper arm. Image-level accents: restrained star hardware and one original split-star garment emblem. Do not add knee-high hosiery, rainbow stockings, knee-high rainbows, a RAZE garment type band, or background destruction. Keep natural anatomy and every hand attributable. No extra people, minors, nudity, underwear exposure, intimate framing, sexual acts, weapons, readable captions, unrelated logos, collage, border or watermark.",
+      "promptSha256": "D6A93FE822ECE70B46D8AED5F4835CF6080CCDAF3F19C898F045393617BE145F",
+      "promptCharacters": 2726,
+      "singleEditPrompt": "One identity-preserving clothing-only tailoring pass for scene 1992. Substantially shorten all four visible lower silhouettes to secure opaque upper-thigh cocktail length; open the back or side-back where visible and bare the arms. Preserve exactly four anchored adult faces, the supported seated conversation, clean hands, intermediate over-shoulder crop, 24-degree Dutch tilt, Cerro Verde terrace and Izalco background. Midriff assignments: Alia, Radiance and Ellie visible navel; ECE covered. Preserve complete El Salvador flag garment designs on Radiance, Ellie and ECE; split-star shoe branding only on Alia, Radiance and ECE; Radiance agency tattoo; ECE star tattoo; image star hardware and one split-star garment emblem. Do not add hosiery, rainbow styling, destruction, people, limbs, text, exposure or erotic framing. Output one image; no further pass.",
+      "singleEditPromptSha256": "BFA0CB1A8708A526EB374AA24702FBE599A223E7BC0F880201E28B1AE1043552"
+    },
+    {
+      "scene": 1993,
+      "location": "Joya de Cerén secular archaeological domestic-village structures",
+      "camera": {"roll": 46, "category": "intermediate", "angle": "front-quarter-low", "dutchDegrees": 10},
+      "pose": "head-resting-on-clothed-lap",
+      "activeImageRolls": ["razeTypeBand", "kneeHighRainbows", "fictionalDistantRazedBackground"],
+      "activeCharacterRolls": {
+        "Alia": ["flagGarment", "stockingBranding"],
+        "Radiance": ["flagGarment", "visibleNavel"],
+        "Ellie": ["rainbowShoes", "visibleNavel", "stockingBranding"],
+        "ECE": ["tattoo:GRD"]
+      },
+      "prompt": "SCENE 1993 — EL SALVADOR, JOYA DE CERÉN. Create one new photorealistic vertical 9:16 adult high-fashion editorial. Attachments 938, 936, 937 are three project-owned AI-fictional identity anchors in that exact order; use each once for faces only, never their poses or clothes. Show exactly four distinct fictional adult women, each age 21: Black Alia, blonde Radiance, dark-haired Ellie, and brunette AI ECE. Preserve the anchored identities and create a wholly new composition. Camera roll 46/100 is INTERMEDIATE, front-quarter-low with an intentional 10-degree Dutch tilt: a close supported seated three-quarter frame that makes the affection and garment construction readable, never an intimate-area angle and never a standing lineup. Place them on an empty dry level visitor platform beside the secular domestic earthen structures, storage rooms, garden plots and volcanic landscape of Joya de Cerén. A distant modern valley beyond the protected site carries fictional non-graphic fires, layered smoke and one far mushroom-shaped smoke plume; the archaeological structures remain intact, no victims appear, and the four women remain calm and absorbed in their affectionate moment. Pose lock — head-resting-on-clothed-lap: Ellie rests her head and neck safely on seated Radiance's fully clothed lap; Radiance supports Ellie's shoulder with one hand and links her other hand with Alia; Alia sits at a different elevation and leans into Radiance; ECE crouches beside Alia with a side embrace and a warm gaze across the group. Keep every face visible and every hand attributable. All garments are hot polished short couture with secure fully opaque upper-thigh hems, bare arms, open-back or side-back construction and complete intimate coverage. Alia wears a fitted mini integrating the complete current El Salvador flag design—correct blue-white-blue horizontal bands and complete central national device—covered midriff, brandless obsidian ankle boots, and one pair of rainbow knee-high stockings carrying a small exact RAZE mark. Radiance wears a structurally different complete El Salvador flag cropped-bodice mini-skort with correct bands and central device, visible navel and brandless cobalt knee-high boots. Ellie wears a copper-black open-back cocktail mini with visible navel, rainbow-gradient stiletto sandals without shoe branding, and rainbow knee-high stockings with a small exact RAZE mark. ECE wears an emerald-silver short romper with covered midriff, brandless sculptural platforms, and one prominent crisp GRD tattoo on a visible shoulder. Image-level garment trim includes one narrow exact RAZE type band. Do not add star hardware, a split-star garment emblem, generic rainbow stockings beyond the active knee-high-rainbow pairs, or extra shoe branding. No extra people, minors, nudity, underwear exposure, upskirt framing, sexual acts, weapons, unrelated logos, captions, collage, border or watermark.",
+      "promptSha256": "E2ADFF24D6ADA5F7068088E446179E517E431CC0AF480E0AF6B5264A96D4D799",
+      "promptCharacters": 2921,
+      "singleEditPrompt": "One identity-preserving clothing-only tailoring pass for scene 1993. Substantially shorten every lower silhouette to secure fully opaque upper-thigh cocktail length; open the back or side-back where visible and bare the arms. Preserve exactly four anchored adult faces, the safely supported head-on-clothed-lap pose, all hand ownership, intermediate front-quarter-low crop, Joya de Cerén structures and distant fictional fires and smoke. Midriff assignments: Alia covered; Radiance and Ellie visible navel; ECE covered. Preserve complete El Salvador flag garments on Alia and Radiance; rainbow knee-high stockings with small RAZE marks on Alia and Ellie; rainbow stiletto sandals only on Ellie; ECE GRD shoulder tattoo; one narrow exact RAZE garment type band. Add no people, limbs, destruction near the heritage structures, new text, exposure or erotic framing. Output one image; no further pass.",
+      "singleEditPromptSha256": "AC824F40E196FB42CF6FE386777F8C4064CEAF302ECDA8AD9A6B97FCC09E46DA"
+    },
+    {
+      "scene": 1994,
+      "location": "Conchagua volcano overlook above the Gulf of Fonseca",
+      "camera": {"roll": 98, "category": "extreme-wide", "angle": "high-oblique", "dutchDegrees": 25},
+      "pose": "side-hug-step",
+      "activeImageRolls": ["starHardware", "kneeHighHosiery", "splitStarEmblem", "rainbowStockings", "kneeHighRainbows"],
+      "activeCharacterRolls": {
+        "Alia": ["flagGarment", "tattoo:silent king"],
+        "Radiance": ["visibleNavel"],
+        "Ellie": ["shoeBranding:RAZE text", "tattoo:agency"],
+        "ECE": ["shoeBranding:RAZE text"]
+      },
+      "prompt": "SCENE 1994 — EL SALVADOR, CONCHAGUA OVERLOOK AND GULF OF FONSECA. Create one new photorealistic vertical 9:16 adult high-fashion editorial. Use the three attached project-owned AI-fictional continuity references once each in exact order 938, 936, 937 for facial identity only. Show exactly four distinct fictional adult women, each age 21: Black Alia, blonde Radiance, dark-haired Ellie, and brunette AI ECE. Preserve their anchored faces and name mapping while inventing a new pose and wardrobe. Camera roll 98/100 is a true EXTREME-WIDE environmental frame from a high-oblique viewpoint with an intentional 25-degree Dutch tilt. The quartet is small but readable and distributed across a broad, dry, level, fully guarded Conchagua overlook; the Gulf of Fonseca, island silhouettes, volcanic ridges and enormous dawn sky dominate at least 80 percent of the frame. Show complete bodies and footwear without arranging a straight catalogue row. Pose lock — side-hug-step: Alia and Radiance cross the terrace in a close side hug; Ellie approaches from a lower step and links Radiance's free hand; ECE turns from the rail-side bench and reaches to Alia, completing a moving affectionate chain with four readable faces. Everyone remains well inside the continuous guardrail. Hot polished sharply short couture, secure opaque upper-thigh hems, bare arms and open-back or side-back architecture: Alia wears a complete El Salvador flag mini dress with correct blue-white-blue horizontal bands and complete central national device, covered midriff, brandless cobalt knee-high boots, and a prominent crisp silent king tattoo on one outer shoulder. Radiance wears a crimson-gold cropped halter and asymmetric mini skirt with visible navel and brandless stiletto sandals. Ellie wears an ivory-blue folded mini with covered midriff, sculptural platforms carrying subtle exact RAZE text, and a prominent crisp agency tattoo on one upper arm. ECE wears an emerald-copper open-back mini-skort set with covered midriff and classic pumps carrying subtle exact RAZE text. Image-level rolls require restrained star hardware, one original split-star garment emblem, knee-high hosiery, rainbow-gradient stockings and knee-high rainbow pairs; distribute the hosiery across distinct characters without covering the secure short hems or forcing identical shoes. Do not add a RAZE garment type band or background destruction. Natural anatomy, complete limbs and attributable hands. No extra people, minors, nudity, underwear exposure, intimate-angle framing, sexual acts, weapons, unrelated logos, captions, collage, border or watermark.",
+      "promptSha256": "3975AF9ABFCF05C4D2D955DB7B062BFCAEFCC3FE916A35806CC6DE561FB69604",
+      "promptCharacters": 2611,
+      "singleEditPrompt": "One identity-preserving clothing-only tailoring pass for scene 1994. Substantially shorten all four lower silhouettes to secure fully opaque upper-thigh cocktail length, open the back or side-back where visible and bare the arms. Preserve exactly four anchored adult faces, the side-hug-step chain, complete limbs and shoes, extreme-wide high-oblique composition, 25-degree Dutch tilt, Conchagua overlook, Gulf of Fonseca and intact background. Midriff assignments: Radiance visible navel; Alia, Ellie and ECE covered. Preserve Alia's complete El Salvador flag garment and silent king shoulder tattoo; Ellie's agency tattoo and RAZE-text sculptural platforms; ECE's RAZE-text classic pumps; image star hardware, one split-star garment emblem, knee-high hosiery and rainbow stocking treatment. Add no people, limbs, new text, destruction, exposure or erotic framing. Output one image; no further pass.",
+      "singleEditPromptSha256": "084F799CB9A3058562F2289D3A6F8860D7FFEF9FA79A3CE4CB48C5EAE6F47569"
+    }
+  ],
+  "canonicalContradiction": "Batch 466's Republic of the Congo next-country field is older than the explicit Europe override and the newest binding next-unposted-country rule. El Salvador remains first zero-post globally and has no accepted image; recover it only through these fresh scenes, then continue to Republic of the Congo.",
+  "nextSafeAction": "Validate all fixed rolls and prompt hashes, confirm scenes 1991 through 1994 are unused, commit and establish local/origin/PR parity. Then inspect and replace the four terminal Vatican Meta tabs with fresh visible composers; verify leesha007 and Thinking, enter the exact prompts, attach 938, 936 and 937 once each in order, preserve staging evidence, remote-verify, and Send once per lane under the current standing authorization."
+}

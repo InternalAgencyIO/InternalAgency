@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "batch": 431,
+  "country": "Benin",
+  "status": "terminal-captured",
+  "checkpointAtUtc": "2026-08-27T09:02:41.206Z",
+  "sceneId": 1744,
+  "sourceSceneId": 1460,
+  "sceneStatus": "terminal-hard-unusable",
+  "acceptedCountForScene": 0,
+  "providerOutputCount": 2,
+  "providerChatUrl": "https://www.meta.ai/prompt/cfcfd28b-a2d2-4a1d-a1ce-30d4b7226669",
+  "rawOutputs": [
+    {
+      "ordinal": 1,
+      "sha256": "44c934fc0ab553b9bb94bce4e96dc5e72aca38fce0913fc027f8d42e18bbf0f1",
+      "bytes": 1997858,
+      "width": 944,
+      "height": 1679,
+      "alt": "gallery/final_9x16_intermediate.png",
+      "disposition": "hard-unusable-multiple-output-camera-beacon-and-partial-body-lock-fail"
+    },
+    {
+      "ordinal": 2,
+      "sha256": "4194dc77a186b4380ac1cf33ff6b4979782e9b7caa702f55996d70b6ea557d4a",
+      "bytes": 576400,
+      "width": 1152,
+      "height": 2048,
+      "alt": "gallery/head_to_mid_shin_group.webp",
+      "disposition": "hard-unusable-multiple-output-camera-beacon-and-raze-lock-fail"
+    }
+  ],
+  "retryAuthorized": false,
+  "duplicateDispatchCount": 0
+}

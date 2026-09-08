@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "status": "cleared-stale-published-reservations-zero-eligible-backlog-no-new-post",
+  "completedAtUtc": "2026-08-27T05:36:28.046Z",
+  "account": "@dogramaci",
+  "instruction": "clear X post backlog",
+  "browserSurface": "signed-in-in-app-browser",
+  "liveProfileVerified": true,
+  "signedInAccountVerified": true,
+  "ownerControlVerified": "Edit profile",
+  "latestVisibleAccountStatus": {
+    "url": "https://x.com/dogramaci/status/2092845948737036424",
+    "classification": "unrelated-account-youtube-link-not-a-World-Series-ledger-item"
+  },
+  "queueBefore": {
+    "pendingPostCount": 1,
+    "preparedPostQueueCount": 1,
+    "deferredPostCheckpoint": null
+  },
+  "reconciledPublishedReservations": [
+    {
+      "source": "pendingPost",
+      "batches": [
+        392,
+        393
+      ],
+      "countries": [
+        "Maldives",
+        "Cabo Verde"
+      ],
+      "imageNumbers": [
+        1588,
+        1589,
+        1592
+      ],
+      "caption": "Maldives ❤️ Cabo Verde: stormlit lagoons, orbital couture, and a close-held island moment. #InternalAgency #RAZE",
+      "postUrl": "https://x.com/dogramaci/status/2091238638478598301",
+      "exactCaptionVerified": true,
+      "publicPhotoEndpointsVerified": [
+        "/photo/1",
+        "/photo/2",
+        "/photo/3"
+      ]
+    },
+    {
+      "source": "preparedPostQueue[0]",
+      "batches": [
+        396,
+        397
+      ],
+      "countries": [
+        "Bahamas",
+        "Iceland"
+      ],
+      "imageNumbers": [
+        1604,
+        1605,
+        1608
+      ],
+      "caption": "Bahamas ❤️ Iceland: stormlit cays, volcanic horizons, and a close-held spark beneath northern light. #InternalAgency #RAZE",
+      "postUrl": "https://x.com/dogramaci/status/2091244152960729223",
+      "exactCaptionVerified": true,
+      "publicPhotoEndpointsVerified": [
+        "/photo/1",
+        "/photo/2",
+        "/photo/3"
+      ]
+    }
+  ],
+  "completedCountryEligibilitySinceLastCadence": [
+    {
+      "batch": 421,
+      "country": "Djibouti",
+      "acceptedCurrentCountryAssets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 422,
+      "country": "South Sudan",
+      "acceptedCurrentCountryAssets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 423,
+      "country": "Somalia",
+      "acceptedCurrentCountryAssets": 0,
+      "required": 4,
+      "eligible": false
+    }
+  ],
+  "currentCountry": {
+    "batch": 424,
+    "country": "Senegal",
+    "status": "prepared-not-uploaded",
+    "acceptedCurrentCountryAssets": 0,
+    "required": 4,
+    "eligible": false
+  },
+  "queueAfter": {
+    "pendingPost": null,
+    "preparedPostQueueCount": 0,
+    "deferredPostCheckpoint": null
+  },
+  "eligibleBacklogRemaining": 0,
+  "newlyPublished": [],
+  "action": "No new X composer upload or Post was submitted. Two stale reservations were cleared only after their existing exact-caption public statuses and photo/1 through photo/3 endpoints were reverified live.",
+  "duplicatePrevention": "Never re-upload the Maldives/Cabo Verde or Bahamas/Iceland media: their exact public URLs are authoritative and were live-reverified before ledger clearance.",
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 3,
+    "publishThreshold": 10,
+    "publishDue": false,
+    "counterReset": false
+  },
+  "nextEligible": {
+    "batch": 424,
+    "country": "Senegal",
+    "scenes": [
+      1716,
+      1717,
+      1718,
+      1719
+    ],
+    "status": "prompts-prepared"
+  }
+}

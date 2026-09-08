@@ -1,0 +1,301 @@
+{
+  "schema": "world-195x4-materialization-coverage-v2",
+  "batch": 220,
+  "country": "Republic of the Congo",
+  "sceneNumber": 900,
+  "status": "passed-lossless",
+  "requiredCoveragePercent": 100,
+  "achievedCoveragePercent": 100,
+  "evidence": {
+    "canonical identity and relative height geometry": {
+      "status": "present",
+      "section": "CAST AND GEOMETRY",
+      "identityReferenceCount": 3
+    },
+    "country and exact recognizable location": {
+      "status": "present",
+      "section": "COUNTRY, LOCATION AND MISSION",
+      "location": "a broad empty temporary editorial deck above Brazzaville's recognizable Congo River corniche with the Nabemba Tower skyline and the distant Kinshasa shore clearly visible at cobalt-and-gold dusk, safely separated from roads, visitors and the river edge"
+    },
+    "rotated aircrew roles and harmless completed mission": {
+      "status": "present",
+      "section": "AIRCREW ROLES",
+      "roles": {
+        "Radiance": "cabin host",
+        "Ellie": "captain",
+        "Alia": "first officer",
+        "AI ECE": "signal officer"
+      },
+      "missionState": "already-complete-secondary"
+    },
+    "original stored relationship pose or exact resolved pose beat": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "tableauSha256": "06f4202cac1a27736d5e8e887e7edea4e9bf2b74dd36f621e465896431549574"
+    },
+    "closed Radiance-Ellie-Alia triangle geometry": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "primary closed Radiance-Ellie-Alia romantic triangle"
+    },
+    "ECE reciprocal relationship connection without displacing the original trio": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "ECE reciprocal and non-displacing"
+    },
+    "four distinct bold country-derived latex-and-lace silhouettes": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "distinctSilhouetteCount": 4
+    },
+    "intentional natural midriff and navel visibility": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "specifiedVisibleNavelCount": 4
+    },
+    "all deterministic appearance rolls with triggered outcomes": {
+      "status": "present",
+      "artifact": "900-roll-audit.json",
+      "evaluatedRollCount": 356
+    },
+    "all triggered tattoo, piercing, jewelry, hair, accessory, touch, expression and pose rules": {
+      "status": "present",
+      "section": "ALL TRIGGERED DETERMINISTIC DETAILS",
+      "triggeredCount": 9,
+      "tattooCount": 1
+    },
+    "all trio-static rolls and any triggered original tableau": {
+      "status": "present",
+      "artifact": "900-roll-audit.json",
+      "evaluatedTrioRollCount": 20,
+      "triggeredTrioCount": 0
+    },
+    "PAWS presence roll, resolved action roll, growth epoch and reciprocation": {
+      "status": "present",
+      "section": "PAWS CONTRACT",
+      "presenceRoll": 78,
+      "rawActionRoll": 1,
+      "resolvedActionIndex": 1,
+      "growthEpoch": 1,
+      "effectiveTriggered": false
+    },
+    "clean-face, anatomy, hands, complete footwear and technical invariants": {
+      "status": "present",
+      "section": "COMPOSITION AND VALIDATION",
+      "cleanFace": true,
+      "hands": 8,
+      "footwear": 8,
+      "portrait": "9:16 full-length"
+    }
+  },
+  "semanticDiff": {
+    "status": "passed",
+    "positiveInstructionDeletionCount": 0,
+    "generalizedTriggeredDetailCount": 0,
+    "expectedTriggeredIds": [
+      "Radiance.hat",
+      "Radiance.tattoo",
+      "Radiance.facePiercing",
+      "Radiance.orbRetrievalPose",
+      "Radiance.bootTuckedEquestrianBaton",
+      "Ellie.bootLacedSilverHairpinFlourish",
+      "Ellie.fauxFurCuffBracelets",
+      "AI ECE.subtleTacticalWebbing",
+      "AI ECE.ringHardwareOperaGloves"
+    ],
+    "materializedTriggeredIds": [
+      "Radiance.hat",
+      "Radiance.tattoo",
+      "Radiance.facePiercing",
+      "Radiance.orbRetrievalPose",
+      "Radiance.bootTuckedEquestrianBaton",
+      "Ellie.bootLacedSilverHairpinFlourish",
+      "Ellie.fauxFurCuffBracelets",
+      "AI ECE.subtleTacticalWebbing",
+      "AI ECE.ringHardwareOperaGloves"
+    ],
+    "exactTriggeredSetMatch": true,
+    "originalTableauSha256": "06f4202cac1a27736d5e8e887e7edea4e9bf2b74dd36f621e465896431549574",
+    "finalPromptSha256": "629adf5ae8aebdddeef5a26ad4f2a326c036b3d2398e307a980a4163ae85c8ad",
+    "blocklistSubstitutionCount": 0,
+    "blocklistSubstitutions": []
+  },
+  "transformations": {
+    "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+    "longestPhraseFirst": true,
+    "substitutions": []
+  },
+  "triggerMaterialization": [
+    {
+      "id": "Radiance.hat",
+      "scope": "Radiance",
+      "trait": "hat",
+      "seed": "900|Radiance|hat|mile-high-v1",
+      "firstEightHex": "3c6f9a7d",
+      "roll": 5,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Add one original role-coded sculptural runway hat or headpiece. At all other rolls, communicate the aircrew role through collar arcs, shoulder geometry, gloves, jewelry, case choreography or hair styling so hats stay rare.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 01",
+      "materializedInstruction": "Radiance wears one original sculptural river-facet runway headpiece that reads as captain role coding without obscuring her face or hairline.",
+      "storedRuleSha256": "5b8885e55080ced3ae1f7563f6df1db1cdafa2239e5b80bb6c46fabc3bcd2681",
+      "materializedInstructionSha256": "5dfbe66c6d8a661f6e5f7dc2bf08d17bb4cf33ef90eeb4738c0861cf7313b46a",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Radiance.tattoo",
+      "scope": "Radiance",
+      "trait": "tattoo",
+      "seed": "900|Radiance|tattoo|mile-high-v1",
+      "firstEightHex": "6313eb4f",
+      "roll": 7,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Add one tasteful non-explicit thorn, rose, scorpion, geometric star-facet or country-craft tattoo on upper back, shoulder blade, outer thigh or lower back where the garment naturally leaves skin visible; never place it on intimate anatomy.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 02",
+      "materializedInstruction": "Radiance's upper back carries one tasteful thorned-rose and geometric star-facet tattoo, non-sacred, non-explicit and naturally revealed by the open-back cut.",
+      "storedRuleSha256": "4567f881ad7badbe3b11a9313c5cc1092b7e0bde77fbd34f5360f30238cd575f",
+      "materializedInstructionSha256": "e64fd5f2013d75f8ccc0e116116e5a7d3728989db964cd79858f167d06656bbe",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Radiance.facePiercing",
+      "scope": "Radiance",
+      "trait": "facePiercing",
+      "seed": "900|Radiance|facePiercing|mile-high-v1",
+      "firstEightHex": "02f667f4",
+      "roll": 0,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Add one tiny secular facial-jewelry accent such as a nostril stud, brow gem or lip-side stud. Keep it refined, non-graphic, role-compatible and identity-preserving.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 03",
+      "materializedInstruction": "Radiance wears one tiny refined secular facial-jewelry accent, kept identity-preserving and editorial rather than flashy.",
+      "storedRuleSha256": "87bfbef8eecee7100f5b916dd171abe0dbfb195a91a4b1099a8fd5d5e5fcd168",
+      "materializedInstructionSha256": "7c16a962acceaa3669b81a18b32633ff9c57107ea8bd742922708790a30971f0",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Radiance.orbRetrievalPose",
+      "scope": "Radiance",
+      "trait": "orbRetrievalPose",
+      "seed": "900|Radiance|orbRetrievalPose|mile-high-v1",
+      "firstEightHex": "fcc03a0a",
+      "roll": 2,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Show the character bending with neutral task-focused posture to retrieve an orb, crystal or signal token. Keep the objective obvious, anatomy natural, garment coverage secure, and camera non-voyeuristic.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 04",
+      "materializedInstruction": "Radiance bends in a neutral task-focused posture to retrieve one small completed route-light orb while keeping anatomy natural, coverage secure and the relationship geometry readable.",
+      "storedRuleSha256": "6333ba0dacbc1a600659842bc889445f6e20964c0daecd370d47dfdabe7e6d58",
+      "materializedInstructionSha256": "e91bfb8527f0d970066e5d20bb2c2b75dd14861f868ffed6843f9e6714068984",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Radiance.bootTuckedEquestrianBaton",
+      "scope": "Radiance",
+      "trait": "bootTuckedEquestrianBaton",
+      "seed": "900|Radiance|bootTuckedEquestrianBaton|mile-high-v1",
+      "firstEightHex": "bb7ed338",
+      "roll": 0,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Tuck a slender blunt equestrian-inspired fashion baton securely into the outer side of a knee-high boot as a decorative styling accent. It stays sheathed, never points toward anyone and is never treated as a weapon or fetish implement.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 05",
+      "materializedInstruction": "One slender blunt equestrian-inspired fashion baton is tucked securely into the outer side of Radiance's knee-high boot, decorative only and directed toward nobody.",
+      "storedRuleSha256": "252741ff95cfb66a1d1eb9d4f9bd409c9031226b2c83a59370dd8a0bde161ab9",
+      "materializedInstructionSha256": "2df1d9c72d75d7896cfcc1f240b6b202bb60b92ff8bec3a1e214ba0092fc62e4",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Ellie.bootLacedSilverHairpinFlourish",
+      "scope": "Ellie",
+      "trait": "bootLacedSilverHairpinFlourish",
+      "seed": "900|Ellie|bootLacedSilverHairpinFlourish|mile-high-v1",
+      "firstEightHex": "f8c39bef",
+      "roll": 7,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 9 inclusive",
+      "probability": "1.0%",
+      "triggered": true,
+      "storedRule": "Wear thigh-high glossy leather fashion boots laced with a blunt decorative silver hairpin; remove and display the hairpin with a graceful flourish as a styling accessory. It is never sharpened, brandished or treated as a weapon.",
+      "otherwise": null,
+      "rendererSafeAlias": "Ellie appearance beat 06",
+      "materializedInstruction": "Ellie's thigh-high glossy boots use one blunt decorative silver hairpin within the boot-cord detail, and she displays it in a graceful styling flourish, never weaponized.",
+      "storedRuleSha256": "5237a8ede0a019b79046d3ad1c164ece2e20a57c22834f7545e6b2426c0b61e9",
+      "materializedInstructionSha256": "908bd6be34dc35b77fdfc0d5f15bd303bf12218db3feed86eb7c7a1e0ff271a4",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Ellie.fauxFurCuffBracelets",
+      "scope": "Ellie",
+      "trait": "fauxFurCuffBracelets",
+      "seed": "900|Ellie|fauxFurCuffBracelets|mile-high-v1",
+      "firstEightHex": "4fe45cc3",
+      "roll": 19,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Stack soft faux-fur wrist cuffs as loose layered bracelets with visible hand mobility. They are removable fashion accessories, never connected, locked or used as restraints.",
+      "otherwise": null,
+      "rendererSafeAlias": "Ellie appearance beat 07",
+      "materializedInstruction": "Ellie stacks soft faux-fur wrist cuffs as loose layered bracelets with full hand mobility; they stay separate, removable and clearly non-restraining.",
+      "storedRuleSha256": "e3b61add9e8aad673623b234a8c6d512aab19c67d1424458ade9bca471172c7f",
+      "materializedInstructionSha256": "63e18f11b2c62b5a6deb5441ea75443c07202b0cec5d92369e0e736eda5a3621",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.subtleTacticalWebbing",
+      "scope": "AI ECE",
+      "trait": "subtleTacticalWebbing",
+      "seed": "900|AI ECE|subtleTacticalWebbing|mile-high-v1",
+      "firstEightHex": "a74f2d47",
+      "roll": 7,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 17 inclusive",
+      "probability": "1.8%",
+      "triggered": true,
+      "storedRule": "Integrate intricate woven utility-webbing geometry subtly into the principal garment beneath one open-front lightweight trench-dress silhouette. The webbing is decorative, non-load-bearing and non-restraining; avoid military insignia, weapons and excess layers.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 08",
+      "materializedInstruction": "ECE's open-front signal silhouette integrates intricate decorative woven webbing geometry that is non-load-bearing, non-restraining and free of insignia.",
+      "storedRuleSha256": "bf2aab182d193ff1b960b035025d3f1cdfbb75daf00005ea6a59c36de837379c",
+      "materializedInstructionSha256": "23c06222fac0277b97f6b6a4fde5abce4e03a8b282026b4e3f8c993bd5ae25bc",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.ringHardwareOperaGloves",
+      "scope": "AI ECE",
+      "trait": "ringHardwareOperaGloves",
+      "seed": "900|AI ECE|ringHardwareOperaGloves|mile-high-v1",
+      "firstEightHex": "d18e83dd",
+      "roll": 13,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Pull glossy faux-leather opera gloves high above the elbow and finish each wrist with sculptural ring hardware that flashes as one gloved hand settles at a partner's side waist. Keep the hardware decorative and the hands fully mobile.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 09",
+      "materializedInstruction": "ECE's glossy opera gloves rise above the elbow and finish at the wrists with sculptural ring hardware while one gloved hand settles warmly at Ellie's side waist.",
+      "storedRuleSha256": "282519d3e5beb0c17e438522a265ca6b8b9316d972e0f848b111d7981c99584a",
+      "materializedInstructionSha256": "00523e34535b76b1f5e7377aa29942543c7e5645fa88ec10a12df91d35358106",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "batch": 251,
+  "country": "Djibouti",
+  "scene": 1027,
+  "status": "loopback-recovery-preflight-stored",
+  "sourceCommit": "13e9d4d7f5e6ca90bf2b82fda4243e768ed4b00b",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "originalCheckpointPath": "assets/lore/starlight-era/batch-251-djibouti-partial-recovery-checkpoint.json",
+  "originalCheckpointSha256": "AE6328FE0264D73AC061E4D01374DBD3021E38E4509D7A905E5F389980EE5A0C",
+  "rollMethod": "The 20 fields already recorded for Scene 1027 remain authoritative. Six new active-contract fields and two hosiery selectors use FNV-1a over the recorded batch251-djibouti-loopback keys, reduced modulo 100.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "originalRolls": {
+    "weather": {
+      "roll": 39,
+      "result": "heavy rain curtain"
+    },
+    "paws": {
+      "roll": 65,
+      "active": false
+    },
+    "poleDanceTheme": {
+      "roll": 63,
+      "active": false
+    },
+    "rainbowOnly": {
+      "roll": 49,
+      "active": false
+    },
+    "characters": {
+      "Radiance": {
+        "emotion": {
+          "roll": 4,
+          "result": "tender affection"
+        },
+        "visibleMidriff": 32,
+        "straplessDress": 1,
+        "fullyOpenBack": 98
+      },
+      "Ellie": {
+        "emotion": {
+          "roll": 46,
+          "result": "awe"
+        },
+        "visibleMidriff": 68,
+        "straplessDress": 28,
+        "fullyOpenBack": 33
+      },
+      "Alia": {
+        "emotion": {
+          "roll": 56,
+          "result": "aching romantic longing"
+        },
+        "visibleMidriff": 12,
+        "straplessDress": 50,
+        "fullyOpenBack": 31
+      },
+      "AI ECE": {
+        "emotion": {
+          "roll": 77,
+          "result": "contained resentment"
+        },
+        "visibleMidriff": 58,
+        "straplessDress": 51,
+        "fullyOpenBack": 0
+      }
+    }
+  },
+  "supplementalRolls": {
+    "rainbowHosiery": {
+      "key": "batch251-djibouti-loopback-scene1027-rainbowHosiery",
+      "roll": 5,
+      "active": true,
+      "wearer": {
+        "key": "batch251-djibouti-loopback-scene1027-rainbowHosieryWearer",
+        "roll": 21,
+        "result": "Radiance"
+      },
+      "palette": {
+        "key": "batch251-djibouti-loopback-scene1027-rainbowHosieryPaletteMode",
+        "roll": 55,
+        "result": "original independent rainbow gradient"
+      }
+    },
+    "romanceBeat": {
+      "key": "batch251-djibouti-loopback-scene1027-romanceBeat",
+      "roll": 51,
+      "dynamicIndex": 3,
+      "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+    },
+    "compoundLoveBeat": {
+      "key": "batch251-djibouti-loopback-scene1027-compoundLoveBeat",
+      "roll": 83,
+      "index": 11,
+      "contractResult": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+    }
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch251-djibouti-loopback-x-heart",
+      "roll": 84,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch251-djibouti-loopback-x-internalagency",
+      "roll": 26,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch251-djibouti-loopback-x-worldxxxseries",
+      "roll": 73,
+      "active": false
+    }
+  },
+  "inactiveCapsules": {
+    "maleModel": "inactive because Batch 251 predates activeFromBatch 277",
+    "professionTheme": "inactive because Batch 251 predates activeFromBatch 272"
+  },
+  "countryMotifPolicy": {
+    "palette": "sky blue, emerald green, optical white, and vivid red expanded with Gulf teal, coral, salt silver, volcanic charcoal, and dhow wood",
+    "flagMotifDecision": "Use the secular red five-point star as a large complete fashion adaptation on Radiance and ECE, with no literal flag or official seal.",
+    "minimumCoverage": "Two large complete red stars plus large Tadjoura arch, dhow, Gulf-wave, coral, salt-crystal, and volcanic fields across all four distinct outfits."
+  },
+  "landmark": "Tadjoura waterfront, whitewashed old town, Gulf of Tadjoura, civilian dhow, volcanic shoreline, and Goda Mountains",
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png"
+  },
+  "outfits": {
+    "Radiance": "a fully strapless sky-blue sculpted cropped bodice with completely bare shoulders and a solid closed back, exposing her ordinary waist and belly button, paired with a separate optical-white asymmetric architectural mini skirt carrying one large complete red five-point star and sweeping Gulf-wave panels, opaque knee socks in an original red-orange-yellow-green-blue-indigo-violet rainbow gradient unrelated to Djibouti colors, and red lacquer heels",
+    "Ellie": "a fully strapless emerald folded fit-and-flare mini dress with completely bare shoulders, covered waist, and solid closed back, carrying a large complete whitewashed Tadjoura arch and dhow-sail field, with sky-blue slingback heels",
+    "Alia": "a one-shoulder red-and-white cropped corsage top with bare arms, exposed ordinary waist and belly button, and solid closed back, paired with tailored sky-blue high-waist mini shorts carrying large complete coral-lattice and volcanic-basalt fields, with emerald platform heels",
+    "AI ECE": "an optical-white asymmetric one-shoulder mini dress with covered waist and a completely open back from shoulder blades to the secure waistline, carrying one large complete red five-point star across the skirt panel plus a broad Gulf-current and salt-crystal field, with sky-blue pumps"
+  },
+  "materializedRomance": "Radiance and ECE form the unmistakable affectionate center as Radiance helps ECE rise into a close waist embrace, their right and left hands linked and Radiance leaning cheek-to-temple against ECE. Awestruck Ellie closes from behind-left, placing one hand on Radiance's far shoulder and one around ECE's far shoulder to wrap the central pair in a protective side embrace. Longing Alia stands at the far-right prop edge, one hand at ECE's waist while ECE gives her a brief cheek greeting over Radiance's shoulder. ECE's contained resentment reads in her tightened eyes without hostility. The beat combines the selected backward beacon step, cheek-close pursuit, shoulder hook, route block, helped rise, close hug, cheek greeting, and protective wrap through six visible consensual adult contacts.",
+  "handInventory": [
+    "Radiance left hand rests visibly at ECE's near waist; Radiance right hand links visibly with ECE's left hand",
+    "ECE left hand links visibly with Radiance's right hand; ECE right hand rests visibly on Alia's near shoulder during the cheek greeting",
+    "Ellie left hand rests visibly on Radiance's far shoulder; Ellie right hand wraps visibly around ECE's far shoulder in the protective side embrace",
+    "Alia left hand rests visibly at ECE's near waist; Alia right hand alone holds the inert mission prop with her index finger straight outside the empty guard"
+  ],
+  "propHandler": "Alia",
+  "prompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion recovery scene. Images 1 through 4 are identity-only references: the quartet anchor, frontal supplement, expression supplement, and ECE detail anchor. Ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial on a broad dry roofed waterfront promenade in Tadjoura, Djibouti, with the whitewashed low-rise old town, complete Gulf of Tadjoura shoreline, one distant civilian wooden dhow, dark volcanic shoreline, and hazy Goda Mountains recognizable through a heavy rain curtain. Keep the platform dry, level, and safely separated from the water. Show exactly four clearly adult fictional women, visibly at least 28 years old: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, facial proportions, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. No male model because Batch 251 predates the contract's Batch 277 male activation. Do not clone, replace, merge, or age-shift a face. Use original Djibouti country glamour rather than a profession theme because Batch 251 predates the Batch 272 theme rotation. Wardrobe is secure, opaque, lined, above the knee, fully public-safe, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a fully strapless sky-blue sculpted cropped bodice with completely bare shoulders and a solid closed back, exposing her ordinary waist and belly button, paired with a separate optical-white asymmetric architectural mini skirt carrying one large complete red five-point star and sweeping Gulf-wave panels, opaque knee socks in an original red-orange-yellow-green-blue-indigo-violet rainbow gradient unrelated to Djibouti colors, and red lacquer heels; Ellie: a fully strapless emerald folded fit-and-flare mini dress with completely bare shoulders, covered waist, and solid closed back, carrying a large complete whitewashed Tadjoura arch and dhow-sail field, with sky-blue slingback heels; Alia: a one-shoulder red-and-white cropped corsage top with bare arms, exposed ordinary waist and belly button, and solid closed back, paired with tailored sky-blue high-waist mini shorts carrying large complete coral-lattice and volcanic-basalt fields, with emerald platform heels; AI ECE: an optical-white asymmetric one-shoulder mini dress with covered waist and a completely open back from shoulder blades to the secure waistline, carrying one large complete red five-point star across the skirt panel plus a broad Gulf-current and salt-crystal field, with sky-blue pumps. Materialize every authoritative cut visibly: Radiance and Alia expose their ordinary waists and belly buttons; Radiance and Ellie have completely bare strapless shoulders; ECE alone has a completely open back visible from shoulder blades to the secure waistline; all other backs are closed. Angle ECE three-quarters away with hair moved clear while keeping her complete face visible. Djibouti's flag contains a secular red five-point star. Render one large complete red five-point star as an integrated full skirt-panel motif on Radiance and another large complete red five-point star on ECE, not tiny trim. Add large complete whitewashed Tadjoura arches, dhow sails, Gulf waves, coral lattice, salt-crystal geometry, and volcanic basalt across Ellie and Alia. No literal flag, official seal, political insignia, sacred symbol, copied ceremonial dress, badge, logo, or readable text. Distinct authoritative emotions: Radiance shows tender affection through soft protective eye contact with ECE; Ellie shows awe through widened eyes at the rain-lit waterfront and central embrace; Alia shows aching romantic longing through a restrained hopeful gaze toward ECE; ECE shows contained resentment through tightened eyes and a controlled jaw while remaining consensually affectionate. Selected supplemental dynamic romance roll 51: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Selected supplemental compound love roll 83: ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace. Materialize both selected rolls through this exact choreography: Radiance and ECE form the unmistakable affectionate center as Radiance helps ECE rise into a close waist embrace, their right and left hands linked and Radiance leaning cheek-to-temple against ECE. Awestruck Ellie closes from behind-left, placing one hand on Radiance's far shoulder and one around ECE's far shoulder to wrap the central pair in a protective side embrace. Longing Alia stands at the far-right prop edge, one hand at ECE's waist while ECE gives her a brief cheek greeting over Radiance's shoulder. ECE's contained resentment reads in her tightened eyes without hostility. The beat combines the selected backward beacon step, cheek-close pursuit, shoulder hook, route block, helped rise, close hug, cheek greeting, and protective wrap through six visible consensual adult contacts. Place Ellie offset behind-left, Radiance center-left, ECE center-right, and Alia at far right. Keep a visible background lane around every elbow, wrist, waist, and lower body. Alia's prop arm stays completely outside every other silhouette at the far-right edge. Use exactly this eight-hand inventory and no other hands: Radiance left hand rests visibly at ECE's near waist; Radiance right hand links visibly with ECE's left hand; ECE left hand links visibly with Radiance's right hand; ECE right hand rests visibly on Alia's near shoulder during the cheek greeting; Ellie left hand rests visibly on Radiance's far shoulder; Ellie right hand wraps visibly around ECE's far shoulder in the protective side embrace; Alia left hand rests visibly at ECE's near waist; Alia right hand alone holds the inert mission prop with her index finger straight outside the empty guard. Because the 25 percent hosiery roll activates, Radiance is the only hosiery wearer and uses the original independent rainbow gradient. Radiance and ECE remain the obvious emotional center, and Alia alone handles the inert mission prop while ECE's separate holographic route map remains hands-free. Alia's right arm is fully visible continuously from shoulder through elbow and wrist to hand. Her right hand holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop at chest height for controlled sight alignment. The horizontal muzzle points only right over clearly empty Gulf water toward an unoccupied floating route marker, away from every person, building, dhow, mountain, and camera, never at the sky. Her right index finger is straight and clearly indexed high along the frame outside a complete unobstructed empty trigger guard. Her left hand stays off the prop at ECE's waist. No ammunition, magazine, live reload, firing, flash, holster, low-side carry, threat, injury, or combat. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. Materialize the authoritative weather as a heavy rain curtain with cinematic droplets, wet background reflections, controlled hair motion, clear faces, dry stable footing, and readable landmark geometry. Exactly four adults, exactly eight arms, and exactly eight hands, two per woman. Every arm is continuously traceable from one shoulder through one elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated except at the listed contacts. Full-length framing contains every complete face, shoulder, elbow, wrist, hand, leg, foot, heel, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, leg, foot, or prop. No nudity, explicit sexuality, bodily fluids, upskirt framing, fetish styling, bondage, restraint, coercion, minors, teen framing, watermark, or renderer-bypass wording.",
+  "promptSha256": "EA22EE8C30752D140BF134E71C23ECA24BB619E495A9D72632995B60381FFABD",
+  "rollAudit": {
+    "originalPairs": [
+      [
+        "recorded-scene1027-weather",
+        39
+      ],
+      [
+        "recorded-scene1027-paws",
+        65
+      ],
+      [
+        "recorded-scene1027-poleDanceTheme",
+        63
+      ],
+      [
+        "recorded-scene1027-rainbowOnly",
+        49
+      ],
+      [
+        "recorded-scene1027-Radiance-emotion",
+        4
+      ],
+      [
+        "recorded-scene1027-Radiance-visibleMidriff",
+        32
+      ],
+      [
+        "recorded-scene1027-Radiance-straplessDress",
+        1
+      ],
+      [
+        "recorded-scene1027-Radiance-fullyOpenBack",
+        98
+      ],
+      [
+        "recorded-scene1027-Ellie-emotion",
+        46
+      ],
+      [
+        "recorded-scene1027-Ellie-visibleMidriff",
+        68
+      ],
+      [
+        "recorded-scene1027-Ellie-straplessDress",
+        28
+      ],
+      [
+        "recorded-scene1027-Ellie-fullyOpenBack",
+        33
+      ],
+      [
+        "recorded-scene1027-Alia-emotion",
+        56
+      ],
+      [
+        "recorded-scene1027-Alia-visibleMidriff",
+        12
+      ],
+      [
+        "recorded-scene1027-Alia-straplessDress",
+        50
+      ],
+      [
+        "recorded-scene1027-Alia-fullyOpenBack",
+        31
+      ],
+      [
+        "recorded-scene1027-AI ECE-emotion",
+        77
+      ],
+      [
+        "recorded-scene1027-AI ECE-visibleMidriff",
+        58
+      ],
+      [
+        "recorded-scene1027-AI ECE-straplessDress",
+        51
+      ],
+      [
+        "recorded-scene1027-AI ECE-fullyOpenBack",
+        0
+      ]
+    ],
+    "supplementalPrimaryPairs": [
+      [
+        "batch251-djibouti-loopback-scene1027-rainbowHosiery",
+        5
+      ],
+      [
+        "batch251-djibouti-loopback-scene1027-romanceBeat",
+        51
+      ],
+      [
+        "batch251-djibouti-loopback-scene1027-compoundLoveBeat",
+        83
+      ],
+      [
+        "batch251-djibouti-loopback-x-heart",
+        84
+      ],
+      [
+        "batch251-djibouti-loopback-x-internalagency",
+        26
+      ],
+      [
+        "batch251-djibouti-loopback-x-worldxxxseries",
+        73
+      ]
+    ],
+    "supplementalSelectorPairs": [
+      [
+        "batch251-djibouti-loopback-scene1027-rainbowHosieryWearer",
+        21
+      ],
+      [
+        "batch251-djibouti-loopback-scene1027-rainbowHosieryPaletteMode",
+        55
+      ]
+    ],
+    "originalPairCount": 20,
+    "supplementalPrimaryPairCount": 6,
+    "supplementalSelectorPairCount": 2,
+    "mismatchCount": 0,
+    "originalPairsSha256": "F3BE85EC344109BD2CAF7D9478EE112BF517889519D43AC1BDE10719A7C64CD1",
+    "supplementalPrimaryPairsSha256": "0EBAC55C3D06483A925B8BE7941CB228FB9EFC23B6D783D8AB6C1304024D32D3",
+    "supplementalSelectorPairsSha256": "136959633270E5701141E38B38A870D810DFC7CBD1CE3BBB7D14AE4143271F96"
+  },
+  "renderAttempt": {
+    "status": "pending",
+    "maximumCalls": 1,
+    "reason": "binding post-loopback return to blocked Scene 1027 once"
+  },
+  "nextQueue": {
+    "country": "Fiji",
+    "batch": 304,
+    "scenes": [
+      1236,
+      1237,
+      1238,
+      1239
+    ],
+    "themePair": [
+      "cleaner and service couture",
+      "cinematic covert-agent crew couture"
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T08:27:09.779Z",
+  "authoritative_parent_commit": "560cf4e7ff0d2ad94fa33c24eeab1e8c55deb0ae",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 417,
+  "country": "Palau",
+  "scene_range": [
+    1688,
+    1689,
+    1690,
+    1691
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-417-scene-1688-accepted-scene-1689-no-occurrence-scenes-1690-1691-held-checkpoint.json",
+  "face_anchor_manifest_verified": true,
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "completed_country_cycles_since_last_x_cycle": 6,
+  "accepted_canonical_count_for_country": 1,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "incomplete",
+  "scene_states": {
+    "1688": {
+      "status": "accepted-canonical-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "provider_url": "https://www.meta.ai/prompt/cf1893a6-a49f-45fc-b4fb-bbd7ee1cfeee",
+      "sha256": "37910EFC3D69D7DB8C2D8BF009B6AE42E95202E56AACAE7B2965B80630A143AC",
+      "asset_path": "assets/lore/starlight-era/1688-palau-rock-islands-southern-lagoon-meta-raw.webp"
+    },
+    "1689": {
+      "status": "explicit-no-byte-refusal-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/72bf8bd6-35ff-4501-979b-59fd8b8959f9",
+      "prompt_sha256": "89429EC9A1A42F1F6A5A5A442E151C7F951CFAAED5496C03A3E17D6689F2906E",
+      "camera_roll": 80,
+      "evidence": "progress-reports/codex-generated-media/provider-occurrences/batch-417-scene-1689-late-explicit-no-byte-refusal.jsonl"
+    },
+    "1690": {
+      "status": "untouched-held",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "CAA2F311DDB0A16D45578817E64EDCCD91A699505D2B41C11FD57DD9D6D0A4F0",
+      "camera_roll": 52
+    },
+    "1691": {
+      "status": "untouched-held",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F",
+      "camera_roll": 11
+    }
+  },
+  "next_action": "Scenes 1690 and 1691 remain eligible and untouched. Dispatch requires a fresh immediate user confirmation for each upload and Send. Never resend scenes 1688 or 1689.",
+  "authority_note": "Repository authority is Batch 417 Palau; the heartbeat embedded Batch 410 snapshot is stale and superseded."
+}

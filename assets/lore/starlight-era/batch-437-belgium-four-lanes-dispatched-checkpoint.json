@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "batchId": 437,
+  "country": "Belgium",
+  "state": "four_lanes_dispatched_monitor_only",
+  "recordedAtUtc": "2026-08-27T16:42:47.822Z",
+  "provider": "Meta AI",
+  "dispatchPolicy": {
+    "initialDispatchOnly": true,
+    "duplicateDispatches": 0,
+    "resendAuthorized": false,
+    "monitorOnly": true
+  },
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "sceneId": 1768,
+      "sourceSceneId": 1484,
+      "location": "Brussels Grand Place",
+      "cameraRoll": 15,
+      "framing": "EXTREME CLOSE",
+      "promptPath": "tmp/world-195x4/batch-437/scene-1768-prompt.txt",
+      "promptSha256": "B37AF445AD28E51A7B4905B0A9E6E1B3F099337BA35B77F7B199301C0F73D0A6",
+      "tabId": "27",
+      "sendClicked": true,
+      "sendClickedAtUtc": "2026-08-27T16:42:21.792Z",
+      "providerUrl": "https://www.meta.ai/prompt/a6c9a1aa-a2de-45a9-b114-f84cceff9d08",
+      "duplicateDispatches": 0
+    },
+    {
+      "sceneId": 1769,
+      "sourceSceneId": 1485,
+      "location": "Bruges Rozenhoedkaai",
+      "cameraRoll": 47,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-437/scene-1769-prompt.txt",
+      "promptSha256": "F73B60E75E03A52E5B74310CC8B33D247009410DC79978A27D7B9290BF93C1D1",
+      "tabId": "28",
+      "sendClicked": true,
+      "sendClickedAtUtc": "2026-08-27T16:42:21.792Z",
+      "providerUrl": "https://www.meta.ai/prompt/d0312a0c-5caa-4824-b268-857581c4d7b7",
+      "duplicateDispatches": 0
+    },
+    {
+      "sceneId": 1770,
+      "sourceSceneId": 1486,
+      "location": "Antwerp Scheldt and MAS",
+      "cameraRoll": 91,
+      "framing": "EXTREME WIDE",
+      "promptPath": "tmp/world-195x4/batch-437/scene-1770-prompt.txt",
+      "promptSha256": "CCEF42C89AB733A4B54CDBA08486DCB78A6471782EC89495C0AA0AF12C99A49D",
+      "tabId": "29",
+      "sendClicked": true,
+      "sendClickedAtUtc": "2026-08-27T16:42:21.792Z",
+      "providerUrl": "https://www.meta.ai/prompt/e92d23a6-df5d-4a17-a23d-4276d7f2799d",
+      "duplicateDispatches": 0
+    },
+    {
+      "sceneId": 1771,
+      "sourceSceneId": 1487,
+      "location": "Dinant Meuse overlook",
+      "cameraRoll": 1,
+      "framing": "EXTREME CLOSE",
+      "promptPath": "tmp/world-195x4/batch-437/scene-1771-prompt.txt",
+      "promptSha256": "F2067404710C97DF562852EDCEE3F3BC3FB910379A97F21DE61AA26DD2DAFBE5",
+      "tabId": "30",
+      "sendClicked": true,
+      "sendClickedAtUtc": "2026-08-27T16:42:21.792Z",
+      "providerUrl": "https://www.meta.ai/prompt/35abd1bc-968d-4836-8fa9-58b675bfa4b9",
+      "duplicateDispatches": 0
+    }
+  ]
+}

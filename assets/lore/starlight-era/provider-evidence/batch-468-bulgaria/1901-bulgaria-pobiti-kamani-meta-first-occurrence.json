@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "batch": 468,
+  "scene": 1901,
+  "country": "Bulgaria",
+  "provider": "Meta AI",
+  "occurrence": 1,
+  "status": "accepted_selected_chatgpt_hemline_refinement_user_relaxed_qa",
+  "submittedAtUtc": "2026-08-31T07:40:11.573Z",
+  "capturedAtUtc": "2026-08-31T07:56:22.0719755Z",
+  "providerChatUrl": "https://www.meta.ai/prompt/fc6bf306-2419-423b-861f-29c1583f8b0b",
+  "promptSource": "assets/lore/starlight-era/batch-468-bulgaria-europe-gap-fill-prompts-prepared-checkpoint.json#scene-1901",
+  "promptSha256": "96336F50BDCA807D37CDD4B999AA5ECCEFDA0B0AE1F2BDA01568E8486DA0FD60",
+  "orderedReferenceAnchors": [938, 936, 937],
+  "orderedReferenceSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+  "providerResponseSummary": "One image-bearing extreme-close Pobiti Kamani result appeared with exactly four adult women and a visible Download control.",
+  "rawAsset": null,
+  "rawBytes": {
+    "available": false,
+    "status": "Visible Meta Download emitted no supported browser download event and produced no local file. No direct fetch was attempted.",
+    "browserRenderedEvidenceOnly": true
+  },
+  "browserRenderedEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-meta-browser-rendered-evidence.png",
+    "sha256": "A27773DD3D59868F579EF2A1371269D45F375C87CEC2BAD76CB9D513638E251D",
+    "byteLength": 327557,
+    "dimensions": "267x475",
+    "contentType": "image/png",
+    "acquisition": "Visible in-app Browser screenshot crop of the rendered media; not provider raw bytes."
+  },
+  "browserPageEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/scene-1901-meta-terminal-image-page.png",
+    "sha256": "0B448794B5D94A99E9BB0687524FE166558A530C38FB3653A60DDC68EA38654C",
+    "byteLength": 57059,
+    "dimensions": "737x950",
+    "contentType": "image/png"
+  },
+  "chatgptHemlineRefinement": {
+    "required": true,
+    "maximumPasses": 1,
+    "passesCompleted": 1,
+    "promptSource": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/chatgpt-hemline-one-pass-prompts.json#scene-1901",
+    "promptSha256": "3BF0EF41C0B97143C00C20AB7779476EBFD9F554008C3567D288CF8BED3EA47C",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-pobiti-kamani-chatgpt-hemline-one-pass.png",
+    "sha256": "8713D8A507CF18802067E96574BC3243F125575D0F3FEA337D29C4F95379043F",
+    "byteLength": 2046565,
+    "dimensions": "941x1672",
+    "contentType": "image/png"
+  },
+  "selection": {
+    "decision": "accept_chatgpt_refinement_under_user_relaxed_qa",
+    "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-pobiti-kamani-chatgpt-hemline-one-pass.png",
+    "unusedPath": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-meta-browser-rendered-evidence.png",
+    "reason": "The required single strong shortening pass is complete. Under the user's newer relaxed acceptance threshold, the four-person scene, recognizable face-led arrangement, unmistakable Pobiti Kamani geology, safe styling, and high-resolution extreme-close image outweigh the logged far-right edge crop.",
+    "strictQaSupersededBy": "assets/lore/starlight-era/batch-468-bulgaria-user-relaxed-acceptance-checkpoint.json"
+  },
+  "retry": {
+    "eligible": false,
+    "remainingMetaRetries": 2,
+    "reason": "Accepted after the mandated one-pass ChatGPT shortening edit under the user's relaxed QA directive."
+  }
+}

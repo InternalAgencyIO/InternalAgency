@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "state": "third-cumulative-post-click-explicit-user-override-confirmed-no-transmission-draft-preserved",
+  "recordedAtUtc": "2026-08-31T12:32:05.1794854Z",
+  "account": "@dogramaci",
+  "authorityBase": {
+    "branch": "agent/starlight-progress-archive",
+    "localHeadBeforeOverride": "b792a309b40edfa51c2a29fc08425bd5b3d34d0e",
+    "remoteHeadBeforeOverride": "b792a309b40edfa51c2a29fc08425bd5b3d34d0e",
+    "draftPrHeadBeforeOverride": "b792a309b40edfa51c2a29fc08425bd5b3d34d0e",
+    "ahead": 0,
+    "behind": 0
+  },
+  "authorization": {
+    "userText": "send authorized go",
+    "context": "The user repeated the authorization after being told the next safe action was manual, thereby explicitly overriding the prior agent-retry stop for one additional attempt.",
+    "scope": "One additional Post click for the unchanged Andorra-Albania composer only.",
+    "consumedByOverrideClick": true,
+    "additionalAgentAttemptPermitted": false
+  },
+  "browserRecovery": {
+    "actualTabCountAtOverrideStart": 0,
+    "oldTabIdsTrusted": false,
+    "newCurrentXTabId": "35",
+    "reopenedTerminalMetaScenes": false,
+    "savedDraftFoundExactlyOnce": true,
+    "exactDraftRestoredThroughVisibleXControls": true
+  },
+  "preClickLiveDuplicateCheck": {
+    "profile": "https://x.com/dogramaci",
+    "visibleAccount": "@dogramaci",
+    "matchingExactCaption": false,
+    "matchingCountryPair": false,
+    "observedStatusIds": ["2094305918104023336", "2094372520635863436", "2094372290192454008"]
+  },
+  "overrideClick": {
+    "clickedAtUtc": "2026-08-31T12:29:16.459Z",
+    "visibleFinalGuards": {
+      "signedInAccount": true,
+      "exactCaption": true,
+      "mediaCount": 3,
+      "altTextCount": 3,
+      "madeWithAiLabel": true,
+      "dialogPostEnabled": true,
+      "matchingPostButtonCount": 1,
+      "liveDuplicateCheckPassed": true
+    },
+    "postClicksThisAuthorization": 1,
+    "cumulativePostClickAttempts": 3,
+    "immediateOutcome": "After 2.5 seconds the complete composer remained visible with no sent alert, View post link, status URL, or composer closure.",
+    "publicTransmissionCount": 0,
+    "transmissionUncertainDuringObservation": false,
+    "finalClassification": "confirmed-no-transmission"
+  },
+  "postClickLiveProfileVerification": {
+    "profile": "https://x.com/dogramaci",
+    "visibleAccount": "@dogramaci",
+    "matchingExactCaption": false,
+    "matchingCountryPair": false,
+    "observedStatusIds": ["2094305918104023336", "2094372520635863436", "2094372290192454008"],
+    "newXPostUrl": null
+  },
+  "draftPreservation": {
+    "savePromptUsed": true,
+    "savedDraftVerified": true,
+    "draftReopened": true,
+    "currentActualTabIds": ["35"],
+    "currentComposerCaption": true,
+    "currentMediaCount": 3,
+    "currentAltTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "currentPostEnabled": true
+  },
+  "evidence": [
+    {
+      "role": "composer-after-explicit-override-no-transmission",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-after-explicit-override-no-transmission.png",
+      "sha256": "48C37B723C4ECFBEDA29EE2B67F3017641DABA83D587CA525A3AD5148D74CF39",
+      "bytes": 113656,
+      "dimensions": "1280x720",
+      "rawFormat": "JPEG/JFIF"
+    }
+  ],
+  "previousRetryCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json",
+  "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json",
+  "remoteVerificationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-git-lfs-remote-verification-checkpoint.json",
+  "laterKeyboardSubmissionCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json",
+  "laterKeyboardSubmissionPostUrl": "https://x.com/dogramaci/status/2094406003852734633",
+  "xPostUrls": [],
+  "nextSafeAction": "Do not click Post again as the agent. Leave the exact composer visible for a manual user click; after the user explicitly reports that manual click, verify the live @dogramaci status and record its X URL without resending media."
+}

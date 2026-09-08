@@ -1,0 +1,1277 @@
+{
+  "batch": 306,
+  "country": "Guyana",
+  "status": "render-preflight-stored",
+  "sourceCommit": "d3f716af4416cec8604537426427e712d41b48c4",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch306-guyana keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextThemePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextQueueCountry": "Solomon Islands",
+  "nextQueueBatch": 307,
+  "nextQueueScenes": [
+    1248,
+    1249,
+    1250,
+    1251
+  ],
+  "researchSources": [
+    {
+      "url": "https://ntg.gov.gy/monument/stabroek-market/",
+      "usedFor": "Stabroek Market, clock tower, Demerara-facing western facade, and Georgetown market history"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/kingston-seawall/",
+      "usedFor": "Georgetown coastal sea defence, waterfront setting, and secular civil infrastructure"
+    },
+    {
+      "url": "https://newdelhihc.mission.gov.gy/index.php/tourism",
+      "usedFor": "Kaieteur Falls, Potaro River, rainforest basin, and single-drop scale"
+    },
+    {
+      "url": "https://iwokrama.org/sustainable-tourism/",
+      "usedFor": "Iwokrama Forest, Canopy Walkway, North Rupununi wetlands and savannahs, jaguar, giant river otter, biodiversity, and conservation"
+    },
+    {
+      "url": "https://guyanatravel.gy/what-to-see-in-georgetown/",
+      "usedFor": "Georgetown, Stabroek Market, Demerara River, and urban tourism context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch306-guyana-male-model-scene",
+    "fullHash": 3802046753,
+    "roll": 53,
+    "selectedScenePosition": 2,
+    "selectedScene": 1245,
+    "maleEmotion": {
+      "key": "batch306-guyana-scene2-male-emotion",
+      "roll": 3,
+      "result": "tender affection"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Guyana's secular Golden Arrowhead is used in full as large five-color chevron geometry on at least two outfits in every image. It is not rendered as a literal rectangular flag, coat of arms, or official seal.",
+    "palette": "rainforest green, pearl white, Demerara gold, black, scarlet, river blue, orchid violet, and sandstone ochre",
+    "minimumCoverage": "Every scene places multiple large complete secular Guyana motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "Scene 1244 visibly includes Guyanese pepperpot, cassava bread, Demerara sugar, sugarcane, pine tarts, Stabroek Market, and Demerara river culture. The other scenes extend Kaieteur, Rupununi, Iwokrama, wildlife, rainforest, river, and canopy-walkway identity.",
+    "prohibitions": "No coat of arms, official seal, sacred symbol, copied ceremonial dress, copied police or medical uniform, badge, weapon threat, alcohol, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch306-guyana-x-heart",
+      "roll": 38,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch306-guyana-x-internalagency",
+      "roll": 40,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch306-guyana-x-worldxxxseries",
+      "roll": 91,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Guyana images plus the accepted Comoros image when at least two Guyana images pass",
+    "captionIfEligible": "Guyana red heart Comoros #Guyana",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1244, 1246, and 1247 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1245 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch306-guyana-male-model-scene",
+        53
+      ],
+      [
+        "batch306-guyana-scene2-male-emotion",
+        3
+      ],
+      [
+        "batch306-guyana-scene1244-weather",
+        97
+      ],
+      [
+        "batch306-guyana-scene1244-paws",
+        90
+      ],
+      [
+        "batch306-guyana-scene1244-poleDanceTheme",
+        9
+      ],
+      [
+        "batch306-guyana-scene1244-rainbowOnly",
+        73
+      ],
+      [
+        "batch306-guyana-scene1244-rainbowHosiery",
+        0
+      ],
+      [
+        "batch306-guyana-scene1244-romanceBeat",
+        44
+      ],
+      [
+        "batch306-guyana-scene1244-compoundLoveBeat",
+        26
+      ],
+      [
+        "batch306-guyana-scene1244-Radiance-emotion",
+        82
+      ],
+      [
+        "batch306-guyana-scene1244-Radiance-visibleMidriff",
+        68
+      ],
+      [
+        "batch306-guyana-scene1244-Radiance-straplessDress",
+        87
+      ],
+      [
+        "batch306-guyana-scene1244-Radiance-fullyOpenBack",
+        68
+      ],
+      [
+        "batch306-guyana-scene1244-Ellie-emotion",
+        80
+      ],
+      [
+        "batch306-guyana-scene1244-Ellie-visibleMidriff",
+        54
+      ],
+      [
+        "batch306-guyana-scene1244-Ellie-straplessDress",
+        53
+      ],
+      [
+        "batch306-guyana-scene1244-Ellie-fullyOpenBack",
+        94
+      ],
+      [
+        "batch306-guyana-scene1244-Alia-emotion",
+        52
+      ],
+      [
+        "batch306-guyana-scene1244-Alia-visibleMidriff",
+        30
+      ],
+      [
+        "batch306-guyana-scene1244-Alia-straplessDress",
+        49
+      ],
+      [
+        "batch306-guyana-scene1244-Alia-fullyOpenBack",
+        10
+      ],
+      [
+        "batch306-guyana-scene1244-AI ECE-emotion",
+        94
+      ],
+      [
+        "batch306-guyana-scene1244-AI ECE-visibleMidriff",
+        0
+      ],
+      [
+        "batch306-guyana-scene1244-AI ECE-straplessDress",
+        51
+      ],
+      [
+        "batch306-guyana-scene1244-AI ECE-fullyOpenBack",
+        64
+      ],
+      [
+        "batch306-guyana-scene1245-weather",
+        66
+      ],
+      [
+        "batch306-guyana-scene1245-paws",
+        27
+      ],
+      [
+        "batch306-guyana-scene1245-poleDanceTheme",
+        8
+      ],
+      [
+        "batch306-guyana-scene1245-rainbowOnly",
+        54
+      ],
+      [
+        "batch306-guyana-scene1245-rainbowHosiery",
+        97
+      ],
+      [
+        "batch306-guyana-scene1245-romanceBeat",
+        27
+      ],
+      [
+        "batch306-guyana-scene1245-compoundLoveBeat",
+        71
+      ],
+      [
+        "batch306-guyana-scene1245-Radiance-emotion",
+        11
+      ],
+      [
+        "batch306-guyana-scene1245-Radiance-visibleMidriff",
+        91
+      ],
+      [
+        "batch306-guyana-scene1245-Radiance-straplessDress",
+        8
+      ],
+      [
+        "batch306-guyana-scene1245-Radiance-fullyOpenBack",
+        45
+      ],
+      [
+        "batch306-guyana-scene1245-Ellie-emotion",
+        75
+      ],
+      [
+        "batch306-guyana-scene1245-Ellie-visibleMidriff",
+        47
+      ],
+      [
+        "batch306-guyana-scene1245-Ellie-straplessDress",
+        20
+      ],
+      [
+        "batch306-guyana-scene1245-Ellie-fullyOpenBack",
+        5
+      ],
+      [
+        "batch306-guyana-scene1245-Alia-emotion",
+        89
+      ],
+      [
+        "batch306-guyana-scene1245-Alia-visibleMidriff",
+        57
+      ],
+      [
+        "batch306-guyana-scene1245-Alia-straplessDress",
+        30
+      ],
+      [
+        "batch306-guyana-scene1245-Alia-fullyOpenBack",
+        15
+      ],
+      [
+        "batch306-guyana-scene1245-AI ECE-emotion",
+        79
+      ],
+      [
+        "batch306-guyana-scene1245-AI ECE-visibleMidriff",
+        11
+      ],
+      [
+        "batch306-guyana-scene1245-AI ECE-straplessDress",
+        32
+      ],
+      [
+        "batch306-guyana-scene1245-AI ECE-fullyOpenBack",
+        41
+      ],
+      [
+        "batch306-guyana-scene1246-weather",
+        99
+      ],
+      [
+        "batch306-guyana-scene1246-paws",
+        96
+      ],
+      [
+        "batch306-guyana-scene1246-poleDanceTheme",
+        11
+      ],
+      [
+        "batch306-guyana-scene1246-rainbowOnly",
+        3
+      ],
+      [
+        "batch306-guyana-scene1246-rainbowHosiery",
+        2
+      ],
+      [
+        "batch306-guyana-scene1246-romanceBeat",
+        26
+      ],
+      [
+        "batch306-guyana-scene1246-compoundLoveBeat",
+        96
+      ],
+      [
+        "batch306-guyana-scene1246-Radiance-emotion",
+        64
+      ],
+      [
+        "batch306-guyana-scene1246-Radiance-visibleMidriff",
+        94
+      ],
+      [
+        "batch306-guyana-scene1246-Radiance-straplessDress",
+        49
+      ],
+      [
+        "batch306-guyana-scene1246-Radiance-fullyOpenBack",
+        34
+      ],
+      [
+        "batch306-guyana-scene1246-Ellie-emotion",
+        86
+      ],
+      [
+        "batch306-guyana-scene1246-Ellie-visibleMidriff",
+        64
+      ],
+      [
+        "batch306-guyana-scene1246-Ellie-straplessDress",
+        75
+      ],
+      [
+        "batch306-guyana-scene1246-Ellie-fullyOpenBack",
+        16
+      ],
+      [
+        "batch306-guyana-scene1246-Alia-emotion",
+        46
+      ],
+      [
+        "batch306-guyana-scene1246-Alia-visibleMidriff",
+        48
+      ],
+      [
+        "batch306-guyana-scene1246-Alia-straplessDress",
+        67
+      ],
+      [
+        "batch306-guyana-scene1246-Alia-fullyOpenBack",
+        60
+      ],
+      [
+        "batch306-guyana-scene1246-AI ECE-emotion",
+        48
+      ],
+      [
+        "batch306-guyana-scene1246-AI ECE-visibleMidriff",
+        86
+      ],
+      [
+        "batch306-guyana-scene1246-AI ECE-straplessDress",
+        37
+      ],
+      [
+        "batch306-guyana-scene1246-AI ECE-fullyOpenBack",
+        18
+      ],
+      [
+        "batch306-guyana-scene1247-weather",
+        80
+      ],
+      [
+        "batch306-guyana-scene1247-paws",
+        65
+      ],
+      [
+        "batch306-guyana-scene1247-poleDanceTheme",
+        22
+      ],
+      [
+        "batch306-guyana-scene1247-rainbowOnly",
+        84
+      ],
+      [
+        "batch306-guyana-scene1247-rainbowHosiery",
+        95
+      ],
+      [
+        "batch306-guyana-scene1247-romanceBeat",
+        81
+      ],
+      [
+        "batch306-guyana-scene1247-compoundLoveBeat",
+        77
+      ],
+      [
+        "batch306-guyana-scene1247-Radiance-emotion",
+        21
+      ],
+      [
+        "batch306-guyana-scene1247-Radiance-visibleMidriff",
+        13
+      ],
+      [
+        "batch306-guyana-scene1247-Radiance-straplessDress",
+        62
+      ],
+      [
+        "batch306-guyana-scene1247-Radiance-fullyOpenBack",
+        7
+      ],
+      [
+        "batch306-guyana-scene1247-Ellie-emotion",
+        49
+      ],
+      [
+        "batch306-guyana-scene1247-Ellie-visibleMidriff",
+        57
+      ],
+      [
+        "batch306-guyana-scene1247-Ellie-straplessDress",
+        74
+      ],
+      [
+        "batch306-guyana-scene1247-Ellie-fullyOpenBack",
+        47
+      ],
+      [
+        "batch306-guyana-scene1247-Alia-emotion",
+        3
+      ],
+      [
+        "batch306-guyana-scene1247-Alia-visibleMidriff",
+        39
+      ],
+      [
+        "batch306-guyana-scene1247-Alia-straplessDress",
+        72
+      ],
+      [
+        "batch306-guyana-scene1247-Alia-fullyOpenBack",
+        45
+      ],
+      [
+        "batch306-guyana-scene1247-AI ECE-emotion",
+        93
+      ],
+      [
+        "batch306-guyana-scene1247-AI ECE-visibleMidriff",
+        89
+      ],
+      [
+        "batch306-guyana-scene1247-AI ECE-straplessDress",
+        86
+      ],
+      [
+        "batch306-guyana-scene1247-AI ECE-fullyOpenBack",
+        7
+      ],
+      [
+        "batch306-guyana-x-heart",
+        38
+      ],
+      [
+        "batch306-guyana-x-internalagency",
+        40
+      ],
+      [
+        "batch306-guyana-x-worldxxxseries",
+        91
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch306-guyana-scene1244-rainbowHosieryWearer",
+        4
+      ],
+      [
+        "batch306-guyana-scene1244-rainbowHosieryPaletteMode",
+        12
+      ],
+      [
+        "batch306-guyana-scene1245-rainbowHosieryWearer",
+        45
+      ],
+      [
+        "batch306-guyana-scene1245-rainbowHosieryPaletteMode",
+        99
+      ],
+      [
+        "batch306-guyana-scene1246-rainbowHosieryWearer",
+        70
+      ],
+      [
+        "batch306-guyana-scene1246-rainbowHosieryPaletteMode",
+        30
+      ],
+      [
+        "batch306-guyana-scene1247-rainbowHosieryWearer",
+        59
+      ],
+      [
+        "batch306-guyana-scene1247-rainbowHosieryPaletteMode",
+        49
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "F3CD0B4E66D9D741B04D253266FC3B8032F33BE6E5BE7A691E5505C53AB36048",
+    "hosierySelectorPairsSha256": "6E3A67D515896D40F3D92BB69DB068D4FAD7E5AFEEEA239296844D295D826538"
+  },
+  "scenePlans": {
+    "1244": {
+      "scene": 1244,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered waterfront market terrace in Georgetown with the complete red iron Stabroek Market clock tower, its long market roof, Demerara River docks, wooden river boats, the low coastal skyline, and a clearly empty river route lane under a dramatic mammatus storm ceiling",
+      "motifs": [
+        "large complete five-color Golden Arrowhead chevron fields in green, white, gold, black, and red across Radiance's coat-dress and ECE's skirt",
+        "large complete Stabroek clock-tower, Demerara wave, pepperpot-pot, cassava-bread, sugarcane, and hoatzin fields across Ellie's dress and Alia's skort"
+      ],
+      "culture": "A dry unattended Georgetown market table far outside the prop lane visibly holds a covered bowl of Guyanese pepperpot, round cassava bread, raw Demerara sugar crystals, sugarcane, pine tarts, and tropical produce. Treat the food as a respectful secular country signal, with no eating performance or copied brand. Use the complete Golden Arrowhead as large secular chevron geometry on at least two outfits, not as a literal rectangular flag. No coat of arms, official seal, sacred symbol, copied police uniform, official badge, police impersonation, arrest, raid, threat, alcohol, brand, or readable text.",
+      "weather": {
+        "key": "batch306-guyana-scene1244-weather",
+        "roll": 97,
+        "result": "mammatus storm ceiling"
+      },
+      "paws": {
+        "key": "batch306-guyana-scene1244-paws",
+        "roll": 90,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch306-guyana-scene1244-poleDanceTheme",
+        "roll": 9,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch306-guyana-scene1244-rainbowOnly",
+        "roll": 73,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch306-guyana-scene1244-rainbowHosiery",
+        "roll": 0,
+        "active": true,
+        "wearer": {
+          "key": "batch306-guyana-scene1244-rainbowHosieryWearer",
+          "roll": 4,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch306-guyana-scene1244-rainbowHosieryPaletteMode",
+          "roll": 12,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch306-guyana-scene1244-romanceBeat",
+        "roll": 44,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch306-guyana-scene1244-compoundLoveBeat",
+        "roll": 26,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch306-guyana-scene1244-Radiance-emotion",
+            "roll": 82,
+            "result": "crying with visible tears",
+            "performance": "crying with distinct visible tear tracks while keeping a tender gaze on ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1244-Radiance-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1244-Radiance-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1244-Radiance-fullyOpenBack",
+            "roll": 68,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch306-guyana-scene1244-Ellie-emotion",
+            "roll": 80,
+            "result": "deep sadness",
+            "performance": "deep sadness shown by lowered eyes and a small brave smile during the linked-hand laugh"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1244-Ellie-visibleMidriff",
+            "roll": 54,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1244-Ellie-straplessDress",
+            "roll": 53,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1244-Ellie-fullyOpenBack",
+            "roll": 94,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch306-guyana-scene1244-Alia-emotion",
+            "roll": 52,
+            "result": "intense curiosity",
+            "performance": "intense curiosity shown by alert widened eyes toward the route marker"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1244-Alia-visibleMidriff",
+            "roll": 30,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1244-Alia-straplessDress",
+            "roll": 49,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1244-Alia-fullyOpenBack",
+            "roll": 10,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch306-guyana-scene1244-AI ECE-emotion",
+            "roll": 94,
+            "result": "shame and social vulnerability",
+            "performance": "shame and social vulnerability shown by lowered tear-bright eyes that lift only toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1244-AI ECE-visibleMidriff",
+            "roll": 0,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1244-AI ECE-straplessDress",
+            "roll": 51,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1244-AI ECE-fullyOpenBack",
+            "roll": 64,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Tearful Radiance and shame-struck ECE form the unmistakable extra-affectionate center at the right through linked hands, ECE's visible waist touch, and close sustained eye contact. Deeply sad Ellie keeps a separate lane and links her other hand with Radiance while sharing a small face-to-face laugh through tears. Curious Alia keeps her prop arm isolated over empty river water, steadies Ellie at the shoulder, and receives Ellie's visible reciprocal waist touch. The chain safely carries the selected laugh, wrist-catch energy, steadying waist beat, forehead-kiss tenderness, linked hands, and ECE's attention-reclaiming beacon without assigning any hand twice.",
+      "composition": "Place Alia at the far left with her prop arm completely isolated against empty Demerara water, Ellie left-center, Radiance right-center, and ECE at the far right as Radiance's nearest body. Use arm's-length lateral gaps and keep every hand in front of or clearly beside its owner's torso. Angle Alia three-quarters away with hair moved clear so her complete rolled open back and complete face are both visible. Separate all elbows, wrists, hands, lower bodies, heels, and knee socks with river, market, or terrace background.",
+      "emotionNuance": {
+        "Radiance": "crying with distinct visible tear tracks while keeping a tender gaze on ECE",
+        "Ellie": "deep sadness shown by lowered eyes and a small brave smile during the linked-hand laugh",
+        "Alia": "intense curiosity shown by alert widened eyes toward the route marker",
+        "AI ECE": "shame and social vulnerability shown by lowered tear-bright eyes that lift only toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "a forest-green cap-sleeve investigator mini coat-dress with covered waist and high closed back, carrying a large complete green-white-gold-black-red Golden Arrowhead chevron field, opaque knee socks in a harmonious Guyana-palette rainbow-like gradient of rainforest green, pearl white, Demerara gold, black, scarlet, river blue, and orchid violet, with gold pumps",
+        "Ellie": "a Demerara-gold asymmetric long-sleeve investigator mini shift dress with covered waist and high closed back, carrying a large complete red Stabroek clock-tower and blue Demerara-wave field, with forest-green slingback heels",
+        "Alia": "a scarlet halter cropped investigator vest exposing her ordinary waist and belly button and a completely open back from shoulder blades to the secure waistline, paired with a separate black architectural mini skort carrying large complete pepperpot-pot, cassava-bread, sugarcane, and hoatzin fields, with gold platform heels",
+        "AI ECE": "a pearl-white square-neck cropped route-command top exposing her ordinary waist and belly button with wide secure straps and a high closed back, paired with a separate forest-green bubble mini skirt carrying a second large complete five-color Golden Arrowhead chevron and Demerara-river field, with scarlet heeled boots"
+      },
+      "propPlan": "Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height and visibly looks down its aligned sights. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty Demerara River water toward one unoccupied floating route marker, away from every person, boat, dock, tower, market table, and camera, never upward or at the sky. Her left hand stays off the prop on Ellie's shoulder. ECE remains route strategist through a separate hands-free holographic map beside her far shoulder.",
+      "handInventory": [
+        "Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand rests visibly on Ellie's near shoulder",
+        "Ellie left hand rests visibly at Alia's near waist; Ellie right hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with Ellie's right hand; Radiance right hand links visibly with ECE's left hand",
+        "ECE left hand links visibly with Radiance's right hand; ECE right hand rests visibly at Radiance's near waist"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered waterfront market terrace in Georgetown with the complete red iron Stabroek Market clock tower, its long market roof, Demerara River docks, wooden river boats, the low coastal skyline, and a clearly empty river route lane under a dramatic mammatus storm ceiling. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, merge, or age-shift faces. Profession theme: undercover investigator couture, treated only as original public-safe fictional fashion with no copied uniform, badge, medical procedure, patient sexualization, police impersonation, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a forest-green cap-sleeve investigator mini coat-dress with covered waist and high closed back, carrying a large complete green-white-gold-black-red Golden Arrowhead chevron field, opaque knee socks in a harmonious Guyana-palette rainbow-like gradient of rainforest green, pearl white, Demerara gold, black, scarlet, river blue, and orchid violet, with gold pumps; Ellie: a Demerara-gold asymmetric long-sleeve investigator mini shift dress with covered waist and high closed back, carrying a large complete red Stabroek clock-tower and blue Demerara-wave field, with forest-green slingback heels; Alia: a scarlet halter cropped investigator vest exposing her ordinary waist and belly button and a completely open back from shoulder blades to the secure waistline, paired with a separate black architectural mini skort carrying large complete pepperpot-pot, cassava-bread, sugarcane, and hoatzin fields, with gold platform heels; AI ECE: a pearl-white square-neck cropped route-command top exposing her ordinary waist and belly button with wide secure straps and a high closed back, paired with a separate forest-green bubble mini skirt carrying a second large complete five-color Golden Arrowhead chevron and Demerara-river field, with scarlet heeled boots. Materialize every rolled waist, ordinary belly button, fully strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Guyana motifs must read clearly on at least two outfits: large complete five-color Golden Arrowhead chevron fields in green, white, gold, black, and red across Radiance's coat-dress and ECE's skirt; large complete Stabroek clock-tower, Demerara wave, pepperpot-pot, cassava-bread, sugarcane, and hoatzin fields across Ellie's dress and Alia's skort. A dry unattended Georgetown market table far outside the prop lane visibly holds a covered bowl of Guyanese pepperpot, round cassava bread, raw Demerara sugar crystals, sugarcane, pine tarts, and tropical produce. Treat the food as a respectful secular country signal, with no eating performance or copied brand. Use the complete Golden Arrowhead as large secular chevron geometry on at least two outfits, not as a literal rectangular flag. No coat of arms, official seal, sacred symbol, copied police uniform, official badge, police impersonation, arrest, raid, threat, alcohol, brand, or readable text. Distinct rolled emotional performances: Radiance: crying with visible tears, performed as crying with distinct visible tear tracks while keeping a tender gaze on ECE; Ellie: deep sadness, performed as deep sadness shown by lowered eyes and a small brave smile during the linked-hand laugh; Alia: intense curiosity, performed as intense curiosity shown by alert widened eyes toward the route marker; AI ECE: shame and social vulnerability, performed as shame and social vulnerability shown by lowered tear-bright eyes that lift only toward Radiance. Where two distribution labels tie, make their facial and body performances visibly different without changing either stored roll. Selected dynamic romance roll 44: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Selected compound love roll 26: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Materialize both selected relationship beats through this exact safe consensual choreography. The exact hand inventory, active hosiery center, and prop-safety rules resolve any conflicting hand placement: Tearful Radiance and shame-struck ECE form the unmistakable extra-affectionate center at the right through linked hands, ECE's visible waist touch, and close sustained eye contact. Deeply sad Ellie keeps a separate lane and links her other hand with Radiance while sharing a small face-to-face laugh through tears. Curious Alia keeps her prop arm isolated over empty river water, steadies Ellie at the shoulder, and receives Ellie's visible reciprocal waist touch. The chain safely carries the selected laugh, wrist-catch energy, steadying waist beat, forehead-kiss tenderness, linked hands, and ECE's attention-reclaiming beacon without assigning any hand twice. Place Alia at the far left with her prop arm completely isolated against empty Demerara water, Ellie left-center, Radiance right-center, and ECE at the far right as Radiance's nearest body. Use arm's-length lateral gaps and keep every hand in front of or clearly beside its owner's torso. Angle Alia three-quarters away with hair moved clear so her complete rolled open back and complete face are both visible. Separate all elbows, wrists, hands, lower bodies, heels, and knee socks with river, market, or terrace background. Use this exact owner-by-owner hand inventory and no other hands: Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand rests visibly on Ellie's near shoulder; Ellie left hand rests visibly at Alia's near waist; Ellie right hand links visibly with Radiance's left hand; Radiance left hand links visibly with Ellie's right hand; Radiance right hand links visibly with ECE's left hand; ECE left hand links visibly with Radiance's right hand; ECE right hand rests visibly at Radiance's near waist. Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height and visibly looks down its aligned sights. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty Demerara River water toward one unoccupied floating route marker, away from every person, boat, dock, tower, market table, and camera, never upward or at the sky. Her left hand stays off the prop on Ellie's shoulder. ECE remains route strategist through a separate hands-free holographic map beside her far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. Exactly one rainbow-hosiery wearer: Radiance, using country-palette rainbow-like gradient. Radiance and ECE are the unmistakable extra-affectionate center, and Alia alone handles the inert prop. Materialize rolled weather exactly as mammatus storm ceiling. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges, hair, props, and other hands except for the listed contacts. Arrange the adults in an asymmetric moving relationship composition with clean silhouette gaps, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, coat of arms, official seal, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1245": {
+      "scene": 1245,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered sandstone observation deck at Kaieteur Falls, with the complete single-drop cascade, Potaro River, sandstone escarpment, vast rainforest basin, rising spray plume, and a clearly empty river-route lane visible through parted dense rolling fog",
+      "motifs": [
+        "large complete five-color Golden Arrowhead chevron and Kaieteur waterfall-plume fields across Radiance's dress and ECE's skirt",
+        "large complete sandstone-cliff, tiny golden-frog, jaguar-rosette, hoatzin, and Potaro-river fields across Ellie's skirt and Alia's romper"
+      ],
+      "culture": "Use secular Kaieteur geology, rainforest wildlife, the Potaro River, and complete Golden Arrowhead geometry. The tiny golden frog appears only as a large illustrated fashion motif, never as a live animal underfoot. No literal rectangular flag, coat of arms, official seal, sacred symbol, copied police uniform, official badge, police impersonation, arrest, raid, threat, brand, alcohol, or readable text.",
+      "weather": {
+        "key": "batch306-guyana-scene1245-weather",
+        "roll": 66,
+        "result": "dense rolling fog"
+      },
+      "paws": {
+        "key": "batch306-guyana-scene1245-paws",
+        "roll": 27,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch306-guyana-scene1245-poleDanceTheme",
+        "roll": 8,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch306-guyana-scene1245-rainbowOnly",
+        "roll": 54,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch306-guyana-scene1245-rainbowHosiery",
+        "roll": 97,
+        "active": false,
+        "wearer": {
+          "key": "batch306-guyana-scene1245-rainbowHosieryWearer",
+          "roll": 45,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch306-guyana-scene1245-rainbowHosieryPaletteMode",
+          "roll": 99,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch306-guyana-scene1245-romanceBeat",
+        "roll": 27,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch306-guyana-scene1245-compoundLoveBeat",
+        "roll": 71,
+        "index": 11,
+        "contractResult": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch306-guyana-scene1245-Radiance-emotion",
+            "roll": 11,
+            "result": "romantic joy",
+            "performance": "romantic joy shown by a bright adult smile toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1245-Radiance-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1245-Radiance-straplessDress",
+            "roll": 8,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1245-Radiance-fullyOpenBack",
+            "roll": 45,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch306-guyana-scene1245-Ellie-emotion",
+            "roll": 75,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a measured sideways look at the male without hostility"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1245-Ellie-visibleMidriff",
+            "roll": 47,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1245-Ellie-straplessDress",
+            "roll": 20,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1245-Ellie-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch306-guyana-scene1245-Alia-emotion",
+            "roll": 89,
+            "result": "anger",
+            "performance": "anger shown by a firm jaw and wet bright eyes without aggression"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1245-Alia-visibleMidriff",
+            "roll": 57,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1245-Alia-straplessDress",
+            "roll": 30,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1245-Alia-fullyOpenBack",
+            "roll": 15,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch306-guyana-scene1245-AI ECE-emotion",
+            "roll": 79,
+            "result": "deep sadness",
+            "performance": "deep sadness shown by a controlled distant gaze that softens toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1245-AI ECE-visibleMidriff",
+            "roll": 11,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1245-AI ECE-straplessDress",
+            "roll": 32,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1245-AI ECE-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Joyful Radiance follows deeply sad ECE cheek-close at the left while their two visible hands form reciprocal shoulder and waist contacts. Radiance links her other hand with resentful Ellie, who links her other hand with the established male. The tender male keeps his other hand at angry Alia's waist, and Alia reciprocates at his waist while raising her free hand near her own lips in a restrained playful blown-kiss gesture. These give the male at least three clear adult relationship contacts with Ellie and Alia while his strongest sustained eye line crosses the clean gaps only to his wife ECE. The spacious chain safely translates the selected backward beacon step, cheek-close pursuit, shoulder hook, playful route block, help-up hug, ECE-to-Alia cheek greeting, and protective side embrace.",
+      "composition": "Place ECE at the far left with her prop arm fully isolated against empty Potaro River water, Radiance left-center, Ellie at center, the established male right-center, and Alia at the far right. Keep all five adults in separate lateral and depth lanes with arm's-length gaps. Angle Ellie and Alia three-quarters away with hair moved clear so both rolled complete open backs and all five complete faces remain visible. Every elbow, wrist, hand, lower body, and shoe must be separated by fog, waterfall, forest, or deck background.",
+      "emotionNuance": {
+        "Radiance": "romantic joy shown by a bright adult smile toward ECE",
+        "Ellie": "contained resentment shown by a measured sideways look at the male without hostility",
+        "Alia": "anger shown by a firm jaw and wet bright eyes without aggression",
+        "AI ECE": "deep sadness shown by a controlled distant gaze that softens toward Radiance",
+        "Male": "tender affection shown by a softened expression with his strongest sustained eye line fixed on ECE"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless forest-green sculpted fit-and-flare investigator mini dress with completely bare shoulders, covered waist, and high closed back, carrying a large complete five-color Golden Arrowhead chevron and gold Kaieteur-plume field, with scarlet pumps",
+        "Ellie": "a fully strapless scarlet cropped investigator bodice with completely bare shoulders, exposed ordinary waist and belly button, and a completely open back from shoulder blades to waist, paired with a separate black-and-gold pleated mini skirt carrying a large complete sandstone-cliff and Potaro-river field, with forest-green slingback heels",
+        "Alia": "a fully strapless Demerara-gold tailored investigator mini romper with completely bare shoulders, covered waist, and a completely open back from shoulder blades to waist, carrying large complete tiny-golden-frog, jaguar-rosette, and hoatzin fields, with black platform heels",
+        "AI ECE": "a fully strapless pearl-white cropped peplum investigator top with completely bare shoulders, exposed ordinary waist and belly button, and a high closed back, paired with a separate deep-green asymmetric mini skirt carrying a second large complete five-color Golden Arrowhead chevron and waterfall-mist field, with gold heeled boots",
+        "Male": "the established adult male face from Scene 1136 with closely trimmed beard and muscular special-operative build, wearing an opaque fitted forest-green short-sleeve polo with a restrained gold Kaieteur contour, fitted black jeans, and practical black boots"
+      },
+      "propPlan": "ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. The magazine is absent and the empty magazine well is clearly visible. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty Potaro River water toward an unoccupied route marker, away from every person, waterfall deck, cliff, forest, and camera, never upward or at the sky. Her left hand stays off the prop on Radiance's shoulder. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly on Radiance's near shoulder",
+        "Radiance left hand rests visibly at ECE's near waist; Radiance right hand links visibly with Ellie's left hand",
+        "Ellie left hand links visibly with Radiance's right hand; Ellie right hand links visibly with the male's left hand",
+        "the male left hand links visibly with Ellie's right hand; the male right hand rests visibly at Alia's near waist",
+        "Alia left hand rests visibly at the male's near waist; Alia right open hand stays visibly near her own lips in a restrained blown-kiss gesture"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch306-guyana-scene2-male-emotion",
+          "roll": 3,
+          "result": "tender affection",
+          "performance": "tender affection shown by a softened expression with his strongest sustained eye line fixed on ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed consensual adult infidelity drama with Alia and Ellie; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, Image 4 ECE's face-detail anchor, and Image 5 the adult male face and build anchor. References control identity only; ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered sandstone observation deck at Kaieteur Falls, with the complete single-drop cascade, Potaro River, sandstone escarpment, vast rainforest basin, rising spray plume, and a clearly empty river-route lane visible through parted dense rolling fog. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male from Image 5. Add him without replacing any woman. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, merge, or age-shift faces. Profession theme: undercover investigator couture, treated only as original public-safe fictional fashion with no copied uniform, badge, medical procedure, patient sexualization, police impersonation, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a fully strapless forest-green sculpted fit-and-flare investigator mini dress with completely bare shoulders, covered waist, and high closed back, carrying a large complete five-color Golden Arrowhead chevron and gold Kaieteur-plume field, with scarlet pumps; Ellie: a fully strapless scarlet cropped investigator bodice with completely bare shoulders, exposed ordinary waist and belly button, and a completely open back from shoulder blades to waist, paired with a separate black-and-gold pleated mini skirt carrying a large complete sandstone-cliff and Potaro-river field, with forest-green slingback heels; Alia: a fully strapless Demerara-gold tailored investigator mini romper with completely bare shoulders, covered waist, and a completely open back from shoulder blades to waist, carrying large complete tiny-golden-frog, jaguar-rosette, and hoatzin fields, with black platform heels; AI ECE: a fully strapless pearl-white cropped peplum investigator top with completely bare shoulders, exposed ordinary waist and belly button, and a high closed back, paired with a separate deep-green asymmetric mini skirt carrying a second large complete five-color Golden Arrowhead chevron and waterfall-mist field, with gold heeled boots; Male: the established adult male face from Scene 1136 with closely trimmed beard and muscular special-operative build, wearing an opaque fitted forest-green short-sleeve polo with a restrained gold Kaieteur contour, fitted black jeans, and practical black boots. Materialize every rolled waist, ordinary belly button, fully strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Guyana motifs must read clearly on at least two outfits: large complete five-color Golden Arrowhead chevron and Kaieteur waterfall-plume fields across Radiance's dress and ECE's skirt; large complete sandstone-cliff, tiny golden-frog, jaguar-rosette, hoatzin, and Potaro-river fields across Ellie's skirt and Alia's romper. Use secular Kaieteur geology, rainforest wildlife, the Potaro River, and complete Golden Arrowhead geometry. The tiny golden frog appears only as a large illustrated fashion motif, never as a live animal underfoot. No literal rectangular flag, coat of arms, official seal, sacred symbol, copied police uniform, official badge, police impersonation, arrest, raid, threat, brand, alcohol, or readable text. Distinct rolled emotional performances: Radiance: romantic joy, performed as romantic joy shown by a bright adult smile toward ECE; Ellie: contained resentment, performed as contained resentment shown by a measured sideways look at the male without hostility; Alia: anger, performed as anger shown by a firm jaw and wet bright eyes without aggression; AI ECE: deep sadness, performed as deep sadness shown by a controlled distant gaze that softens toward Radiance; Male: tender affection, performed as tender affection shown by a softened expression with his strongest sustained eye line fixed on ECE. Where two distribution labels tie, make their facial and body performances visibly different without changing either stored roll. Selected dynamic romance roll 27: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Selected compound love roll 71: ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace. Materialize both selected relationship beats through this exact safe consensual choreography. The exact hand inventory, active hosiery center, and prop-safety rules resolve any conflicting hand placement: Joyful Radiance follows deeply sad ECE cheek-close at the left while their two visible hands form reciprocal shoulder and waist contacts. Radiance links her other hand with resentful Ellie, who links her other hand with the established male. The tender male keeps his other hand at angry Alia's waist, and Alia reciprocates at his waist while raising her free hand near her own lips in a restrained playful blown-kiss gesture. These give the male at least three clear adult relationship contacts with Ellie and Alia while his strongest sustained eye line crosses the clean gaps only to his wife ECE. The spacious chain safely translates the selected backward beacon step, cheek-close pursuit, shoulder hook, playful route block, help-up hug, ECE-to-Alia cheek greeting, and protective side embrace. Place ECE at the far left with her prop arm fully isolated against empty Potaro River water, Radiance left-center, Ellie at center, the established male right-center, and Alia at the far right. Keep all five adults in separate lateral and depth lanes with arm's-length gaps. Angle Ellie and Alia three-quarters away with hair moved clear so both rolled complete open backs and all five complete faces remain visible. Every elbow, wrist, hand, lower body, and shoe must be separated by fog, waterfall, forest, or deck background. Use this exact owner-by-owner hand inventory and no other hands: ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly on Radiance's near shoulder; Radiance left hand rests visibly at ECE's near waist; Radiance right hand links visibly with Ellie's left hand; Ellie left hand links visibly with Radiance's right hand; Ellie right hand links visibly with the male's left hand; the male left hand links visibly with Ellie's right hand; the male right hand rests visibly at Alia's near waist; Alia left hand rests visibly at the male's near waist; Alia right open hand stays visibly near her own lips in a restrained blown-kiss gesture. ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. The magazine is absent and the empty magazine well is clearly visible. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty Potaro River water toward an unoccupied route marker, away from every person, waterfall deck, cliff, forest, and camera, never upward or at the sky. Her left hand stays off the prop on Radiance's shoulder. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as dense rolling fog. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly five adults, exactly ten arms and exactly ten hands, two per person. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges, hair, props, and other hands except for the listed contacts. Arrange the adults in an asymmetric moving relationship composition with clean silhouette gaps, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, coat of arms, official seal, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1246": {
+      "scene": 1246,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry covered community-wellness pavilion above the Rupununi River savannah, with the complete winding river, wide golden grasslands, distant Pakaraima mountain wall, scattered rainforest islands, and an empty water-route lane beneath silent heat lightning on the horizon",
+      "motifs": [
+        "large complete five-color Golden Arrowhead chevron, Rupununi-river meander, and giant-water-lily fields across Radiance's dress and ECE's coat-dress",
+        "large complete giant-anteater, jaguar-rosette, hoatzin, savannah-grass, and Pakaraima fields across Ellie's dress and Alia's skort"
+      ],
+      "culture": "Use only secular Guyanese landscape, wildlife, river, and complete Golden Arrowhead geometry. The pavilion is empty of patients and contains only folded clean blankets, sealed water bottles without labels, and a text-free route board. No literal rectangular flag, coat of arms, official seal, sacred symbol, copied medical uniform, medical procedure, patient, badge, brand, alcohol, or readable text.",
+      "weather": {
+        "key": "batch306-guyana-scene1246-weather",
+        "roll": 99,
+        "result": "silent heat lightning on the horizon"
+      },
+      "paws": {
+        "key": "batch306-guyana-scene1246-paws",
+        "roll": 96,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch306-guyana-scene1246-poleDanceTheme",
+        "roll": 11,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch306-guyana-scene1246-rainbowOnly",
+        "roll": 3,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch306-guyana-scene1246-rainbowHosiery",
+        "roll": 2,
+        "active": true,
+        "wearer": {
+          "key": "batch306-guyana-scene1246-rainbowHosieryWearer",
+          "roll": 70,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch306-guyana-scene1246-rainbowHosieryPaletteMode",
+          "roll": 30,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch306-guyana-scene1246-romanceBeat",
+        "roll": 26,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch306-guyana-scene1246-compoundLoveBeat",
+        "roll": 96,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch306-guyana-scene1246-Radiance-emotion",
+            "roll": 64,
+            "result": "visible jealousy",
+            "performance": "visible jealousy shown by a measured sideways look that softens toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1246-Radiance-visibleMidriff",
+            "roll": 94,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1246-Radiance-straplessDress",
+            "roll": 49,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1246-Radiance-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch306-guyana-scene1246-Ellie-emotion",
+            "roll": 86,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing shown by tear tracks and a shaking but upright adult posture on stable footing"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1246-Ellie-visibleMidriff",
+            "roll": 64,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1246-Ellie-straplessDress",
+            "roll": 75,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1246-Ellie-fullyOpenBack",
+            "roll": 16,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch306-guyana-scene1246-Alia-emotion",
+            "roll": 46,
+            "result": "awe",
+            "performance": "awe shown by widened eyes toward the savannah and heat lightning while maintaining prop discipline"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1246-Alia-visibleMidriff",
+            "roll": 48,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1246-Alia-straplessDress",
+            "roll": 67,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1246-Alia-fullyOpenBack",
+            "roll": 60,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch306-guyana-scene1246-AI ECE-emotion",
+            "roll": 48,
+            "result": "startled surprise",
+            "performance": "startled surprise shown by lifted brows and a protective waist touch toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1246-AI ECE-visibleMidriff",
+            "roll": 86,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1246-AI ECE-straplessDress",
+            "roll": 37,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1246-AI ECE-fullyOpenBack",
+            "roll": 18,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Jealous Radiance and startled ECE form the unmistakable extra-affectionate center at the right through linked hands, ECE's visible waist touch, and cheek-close eye contact. Sobbing Ellie links her other hand with Radiance and keeps her free hand on awestruck Alia's shoulder from a separate lane. Alia alone holds the prop in a disciplined two-hand stance while accepting Ellie's gentle shoulder support. The hand chain and body turn safely translate the selected linked-hand spin, ECE waist steady, beacon reach, full embrace, quick cheek greeting, hand at Radiance's back, and smiling jealousy without crowding any arm.",
+      "composition": "Place Alia at the far left with both prop hands isolated against empty Rupununi water, Ellie left-center, Radiance right-center, and ECE at the far right. Use wide lateral gaps and no arm behind another torso. Angle Ellie and ECE three-quarters away with hair moved clear so both rolled complete open backs and all four complete faces remain visible. Separate all wrists, hands, bodies, heels, and ECE's knee socks with river, grassland, mountain, or pavilion background.",
+      "emotionNuance": {
+        "Radiance": "visible jealousy shown by a measured sideways look that softens toward ECE",
+        "Ellie": "full sobbing shown by tear tracks and a shaking but upright adult posture on stable footing",
+        "Alia": "awe shown by widened eyes toward the savannah and heat lightning while maintaining prop discipline",
+        "AI ECE": "startled surprise shown by lifted brows and a protective waist touch toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "a rainbow-only cap-sleeve nurse-care mini wrap dress with covered waist and high closed back, shifting through scarlet, orange, gold, green, blue, indigo, and violet, carrying a large complete five-color Golden Arrowhead chevron and Rupununi-river field, with violet pumps",
+        "Ellie": "a rainbow-only cobalt long-sleeve nurse-care mini shift dress with covered waist and a completely open back from shoulder blades to the secure waistline, carrying a large complete giant-anteater and golden savannah-grass field, with scarlet heeled boots",
+        "Alia": "a rainbow-only emerald halter cropped nurse-care top exposing her ordinary waist and belly button with a high closed back, paired with a separate violet architectural bubble mini skort carrying large complete jaguar-rosette, hoatzin, and Pakaraima fields, with orange platform heels",
+        "AI ECE": "a rainbow-only indigo one-shoulder nurse-care mini coat-dress with covered waist and a completely open back from shoulder blades to waist, carrying a second large complete five-color Golden Arrowhead chevron and giant-water-lily field, opaque knee socks in a harmonious Guyana-palette rainbow-like gradient of rainforest green, pearl white, Demerara gold, black, scarlet, river blue, and orchid violet, with pearl-white slingback heels"
+      },
+      "propPlan": "Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in a disciplined two-hand stance lesson at shoulder height. Her right hand holds the grip and her left hand supports the right grip without covering the guard. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The prop is shown in clean side profile, and Alia looks down the aligned sights. The horizontal muzzle points only far left across clearly empty Rupununi River water toward one unoccupied floating route target, away from every person, pavilion, mountain, blanket, and camera, never upward or at the sky. ECE remains route strategist through a separate hands-free holographic map beside her far shoulder.",
+      "handInventory": [
+        "Alia right hand holds the inert prop with index finger straight outside the empty guard; Alia left hand supports her right grip while leaving the guard fully visible",
+        "Ellie left hand rests visibly on Alia's far shoulder from a separate lane; Ellie right hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with Ellie's right hand; Radiance right hand links visibly with ECE's left hand",
+        "ECE left hand links visibly with Radiance's right hand; ECE right hand rests visibly at Radiance's near waist"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered community-wellness pavilion above the Rupununi River savannah, with the complete winding river, wide golden grasslands, distant Pakaraima mountain wall, scattered rainforest islands, and an empty water-route lane beneath silent heat lightning on the horizon. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, merge, or age-shift faces. Profession theme: nurse-care couture, treated only as original public-safe fictional fashion with no copied uniform, badge, medical procedure, patient sexualization, police impersonation, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a rainbow-only cap-sleeve nurse-care mini wrap dress with covered waist and high closed back, shifting through scarlet, orange, gold, green, blue, indigo, and violet, carrying a large complete five-color Golden Arrowhead chevron and Rupununi-river field, with violet pumps; Ellie: a rainbow-only cobalt long-sleeve nurse-care mini shift dress with covered waist and a completely open back from shoulder blades to the secure waistline, carrying a large complete giant-anteater and golden savannah-grass field, with scarlet heeled boots; Alia: a rainbow-only emerald halter cropped nurse-care top exposing her ordinary waist and belly button with a high closed back, paired with a separate violet architectural bubble mini skort carrying large complete jaguar-rosette, hoatzin, and Pakaraima fields, with orange platform heels; AI ECE: a rainbow-only indigo one-shoulder nurse-care mini coat-dress with covered waist and a completely open back from shoulder blades to waist, carrying a second large complete five-color Golden Arrowhead chevron and giant-water-lily field, opaque knee socks in a harmonious Guyana-palette rainbow-like gradient of rainforest green, pearl white, Demerara gold, black, scarlet, river blue, and orchid violet, with pearl-white slingback heels. Materialize every rolled waist, ordinary belly button, fully strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Guyana motifs must read clearly on at least two outfits: large complete five-color Golden Arrowhead chevron, Rupununi-river meander, and giant-water-lily fields across Radiance's dress and ECE's coat-dress; large complete giant-anteater, jaguar-rosette, hoatzin, savannah-grass, and Pakaraima fields across Ellie's dress and Alia's skort. Use only secular Guyanese landscape, wildlife, river, and complete Golden Arrowhead geometry. The pavilion is empty of patients and contains only folded clean blankets, sealed water bottles without labels, and a text-free route board. No literal rectangular flag, coat of arms, official seal, sacred symbol, copied medical uniform, medical procedure, patient, badge, brand, alcohol, or readable text. Distinct rolled emotional performances: Radiance: visible jealousy, performed as visible jealousy shown by a measured sideways look that softens toward ECE; Ellie: full sobbing with tear-streaked face and shaking posture, performed as full sobbing shown by tear tracks and a shaking but upright adult posture on stable footing; Alia: awe, performed as awe shown by widened eyes toward the savannah and heat lightning while maintaining prop discipline; AI ECE: startled surprise, performed as startled surprise shown by lifted brows and a protective waist touch toward Radiance. Where two distribution labels tie, make their facial and body performances visibly different without changing either stored roll. Selected dynamic romance roll 26: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Selected compound love roll 96: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Materialize both selected relationship beats through this exact safe consensual choreography. The exact hand inventory, active hosiery center, and prop-safety rules resolve any conflicting hand placement: Jealous Radiance and startled ECE form the unmistakable extra-affectionate center at the right through linked hands, ECE's visible waist touch, and cheek-close eye contact. Sobbing Ellie links her other hand with Radiance and keeps her free hand on awestruck Alia's shoulder from a separate lane. Alia alone holds the prop in a disciplined two-hand stance while accepting Ellie's gentle shoulder support. The hand chain and body turn safely translate the selected linked-hand spin, ECE waist steady, beacon reach, full embrace, quick cheek greeting, hand at Radiance's back, and smiling jealousy without crowding any arm. Place Alia at the far left with both prop hands isolated against empty Rupununi water, Ellie left-center, Radiance right-center, and ECE at the far right. Use wide lateral gaps and no arm behind another torso. Angle Ellie and ECE three-quarters away with hair moved clear so both rolled complete open backs and all four complete faces remain visible. Separate all wrists, hands, bodies, heels, and ECE's knee socks with river, grassland, mountain, or pavilion background. Use this exact owner-by-owner hand inventory and no other hands: Alia right hand holds the inert prop with index finger straight outside the empty guard; Alia left hand supports her right grip while leaving the guard fully visible; Ellie left hand rests visibly on Alia's far shoulder from a separate lane; Ellie right hand links visibly with Radiance's left hand; Radiance left hand links visibly with Ellie's right hand; Radiance right hand links visibly with ECE's left hand; ECE left hand links visibly with Radiance's right hand; ECE right hand rests visibly at Radiance's near waist. Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in a disciplined two-hand stance lesson at shoulder height. Her right hand holds the grip and her left hand supports the right grip without covering the guard. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The prop is shown in clean side profile, and Alia looks down the aligned sights. The horizontal muzzle points only far left across clearly empty Rupununi River water toward one unoccupied floating route target, away from every person, pavilion, mountain, blanket, and camera, never upward or at the sky. ECE remains route strategist through a separate hands-free holographic map beside her far shoulder. No PAWS kitten. No pole. Every adult outfit is visibly rainbow themed while retaining every rolled cut, distinct silhouette, and large Guyana motif. Exactly one rainbow-hosiery wearer: AI ECE, using country-palette rainbow-like gradient. Radiance and ECE are the unmistakable extra-affectionate center, and Alia alone handles the inert prop. Materialize rolled weather exactly as silent heat lightning on the horizon. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges, hair, props, and other hands except for the listed contacts. Arrange the adults in an asymmetric moving relationship composition with clean silhouette gaps, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, coat of arms, official seal, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1247": {
+      "scene": 1247,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry covered eco-care observation deck beside the Iwokrama Canopy Walkway, with its complete suspension spans and high platforms, immense greenheart rainforest canopy, the Essequibo River, distant Turtle Mountain, and a clearly empty river route lane during a powerful windstorm with controlled fabric motion",
+      "motifs": [
+        "large complete five-color Golden Arrowhead chevron, canopy-bridge, and Essequibo-river fields across Radiance's skort and Ellie's dress",
+        "large complete jaguar, giant-river-otter, hoatzin, greenheart-leaf, bromeliad, and Turtle-Mountain fields across Alia's skirt and ECE's coat-dress"
+      ],
+      "culture": "Use secular Iwokrama conservation, rainforest wildlife, river, greenheart tree, canopy walkway, and complete Golden Arrowhead geometry. The deck holds only folded clean blankets, a closed first-aid case without markings, and a text-free ecology route board. No literal rectangular flag, coat of arms, official seal, sacred symbol, copied medical uniform, medical procedure, patient, badge, brand, alcohol, or readable text.",
+      "weather": {
+        "key": "batch306-guyana-scene1247-weather",
+        "roll": 80,
+        "result": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch306-guyana-scene1247-paws",
+        "roll": 65,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch306-guyana-scene1247-poleDanceTheme",
+        "roll": 22,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch306-guyana-scene1247-rainbowOnly",
+        "roll": 84,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch306-guyana-scene1247-rainbowHosiery",
+        "roll": 95,
+        "active": false,
+        "wearer": {
+          "key": "batch306-guyana-scene1247-rainbowHosieryWearer",
+          "roll": 59,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch306-guyana-scene1247-rainbowHosieryPaletteMode",
+          "roll": 49,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch306-guyana-scene1247-romanceBeat",
+        "roll": 81,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch306-guyana-scene1247-compoundLoveBeat",
+        "roll": 77,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch306-guyana-scene1247-Radiance-emotion",
+            "roll": 21,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by a knowing smile toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1247-Radiance-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1247-Radiance-straplessDress",
+            "roll": 62,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1247-Radiance-fullyOpenBack",
+            "roll": 7,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch306-guyana-scene1247-Ellie-emotion",
+            "roll": 49,
+            "result": "startled surprise",
+            "performance": "startled surprise shown by lifted brows at the wind and linked-hand turn"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1247-Ellie-visibleMidriff",
+            "roll": 57,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1247-Ellie-straplessDress",
+            "roll": 74,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1247-Ellie-fullyOpenBack",
+            "roll": 47,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch306-guyana-scene1247-Alia-emotion",
+            "roll": 3,
+            "result": "tender affection",
+            "performance": "tender affection shown by a warm blown-kiss expression toward Ellie"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1247-Alia-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1247-Alia-straplessDress",
+            "roll": 72,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1247-Alia-fullyOpenBack",
+            "roll": 45,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch306-guyana-scene1247-AI ECE-emotion",
+            "roll": 93,
+            "result": "guilt and remorse",
+            "performance": "guilt and remorse shown by lowered tear-bright eyes while preserving disciplined route handling"
+          },
+          "visibleMidriff": {
+            "key": "batch306-guyana-scene1247-AI ECE-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch306-guyana-scene1247-AI ECE-straplessDress",
+            "roll": 86,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch306-guyana-scene1247-AI ECE-fullyOpenBack",
+            "roll": 7,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Remorseful ECE keeps her prop arm isolated over empty Essequibo water and rests her free hand on mischievous Radiance's shoulder. Radiance returns a visible waist touch to ECE and links her other hand with startled Ellie. Ellie links her other hand with tender Alia, who raises her free hand near her own lips for a restrained blown kiss. This spacious chain safely carries the selected overhead-beacon energy, Radiance's waist circle, Ellie's reach toward ECE, Alia's blown kiss, behind-embrace warmth, cheek-to-cheek turn, and gentle wrist-catch energy while every hand remains separately owned.",
+      "composition": "Place ECE at the far left with her prop arm isolated against empty Essequibo water, Radiance left-center, Ellie right-center, and Alia at the far right. Use arm's-length gaps, no crossed torsos, and no hand behind a body. Angle Radiance and ECE three-quarters away with hair moved clear so both rolled complete open backs and all four complete faces remain visible. Keep all elbows, wrists, hands, lower bodies, and heels separated by river, canopy, bridge, or deck background.",
+      "emotionNuance": {
+        "Radiance": "playful mischief shown by a knowing smile toward ECE",
+        "Ellie": "startled surprise shown by lifted brows at the wind and linked-hand turn",
+        "Alia": "tender affection shown by a warm blown-kiss expression toward Ellie",
+        "AI ECE": "guilt and remorse shown by lowered tear-bright eyes while preserving disciplined route handling"
+      },
+      "outfits": {
+        "Radiance": "a forest-green wide-strap cropped nurse-care jacket exposing her ordinary waist and belly button and a completely open back from shoulder blades to the secure waistline, paired with a separate Demerara-gold tailored mini skort carrying a large complete five-color Golden Arrowhead chevron and Essequibo-river field, with scarlet pumps",
+        "Ellie": "a pearl-white cap-sleeve nurse-care mini shift dress with covered waist and high closed back, carrying a second large complete five-color Golden Arrowhead chevron and canopy-bridge field, with forest-green slingback heels",
+        "Alia": "a scarlet halter cropped nurse-care peplum top exposing her ordinary waist and belly button with a high closed back, paired with a separate black-and-gold tulip mini skirt carrying large complete jaguar, giant-river-otter, and hoatzin fields, with gold platform heels",
+        "AI ECE": "a river-blue asymmetric long-sleeve nurse-care mini coat-dress with covered waist and a completely open back from shoulder blades to waist, carrying a large complete greenheart-leaf, bromeliad, and Turtle-Mountain field, with scarlet heeled boots"
+      },
+      "propPlan": "ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. The magazine is absent and the empty magazine well is clearly visible. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty Essequibo River water toward one unoccupied route marker, away from every person, canopy bridge, deck, wildlife, care case, and camera, never upward or at the sky. Her left hand stays off the prop on Radiance's shoulder. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly on Radiance's near shoulder",
+        "Radiance left hand rests visibly at ECE's near waist; Radiance right hand links visibly with Ellie's left hand",
+        "Ellie left hand links visibly with Radiance's right hand; Ellie right hand links visibly with Alia's left hand",
+        "Alia left hand links visibly with Ellie's right hand; Alia right open hand stays visibly near her own lips in a restrained blown-kiss gesture"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered eco-care observation deck beside the Iwokrama Canopy Walkway, with its complete suspension spans and high platforms, immense greenheart rainforest canopy, the Essequibo River, distant Turtle Mountain, and a clearly empty river route lane during a powerful windstorm with controlled fabric motion. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, merge, or age-shift faces. Profession theme: nurse-care couture, treated only as original public-safe fictional fashion with no copied uniform, badge, medical procedure, patient sexualization, police impersonation, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a forest-green wide-strap cropped nurse-care jacket exposing her ordinary waist and belly button and a completely open back from shoulder blades to the secure waistline, paired with a separate Demerara-gold tailored mini skort carrying a large complete five-color Golden Arrowhead chevron and Essequibo-river field, with scarlet pumps; Ellie: a pearl-white cap-sleeve nurse-care mini shift dress with covered waist and high closed back, carrying a second large complete five-color Golden Arrowhead chevron and canopy-bridge field, with forest-green slingback heels; Alia: a scarlet halter cropped nurse-care peplum top exposing her ordinary waist and belly button with a high closed back, paired with a separate black-and-gold tulip mini skirt carrying large complete jaguar, giant-river-otter, and hoatzin fields, with gold platform heels; AI ECE: a river-blue asymmetric long-sleeve nurse-care mini coat-dress with covered waist and a completely open back from shoulder blades to waist, carrying a large complete greenheart-leaf, bromeliad, and Turtle-Mountain field, with scarlet heeled boots. Materialize every rolled waist, ordinary belly button, fully strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Guyana motifs must read clearly on at least two outfits: large complete five-color Golden Arrowhead chevron, canopy-bridge, and Essequibo-river fields across Radiance's skort and Ellie's dress; large complete jaguar, giant-river-otter, hoatzin, greenheart-leaf, bromeliad, and Turtle-Mountain fields across Alia's skirt and ECE's coat-dress. Use secular Iwokrama conservation, rainforest wildlife, river, greenheart tree, canopy walkway, and complete Golden Arrowhead geometry. The deck holds only folded clean blankets, a closed first-aid case without markings, and a text-free ecology route board. No literal rectangular flag, coat of arms, official seal, sacred symbol, copied medical uniform, medical procedure, patient, badge, brand, alcohol, or readable text. Distinct rolled emotional performances: Radiance: playful mischief, performed as playful mischief shown by a knowing smile toward ECE; Ellie: startled surprise, performed as startled surprise shown by lifted brows at the wind and linked-hand turn; Alia: tender affection, performed as tender affection shown by a warm blown-kiss expression toward Ellie; AI ECE: guilt and remorse, performed as guilt and remorse shown by lowered tear-bright eyes while preserving disciplined route handling. Where two distribution labels tie, make their facial and body performances visibly different without changing either stored roll. Selected dynamic romance roll 81: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Selected compound love roll 77: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Materialize both selected relationship beats through this exact safe consensual choreography. The exact hand inventory, active hosiery center, and prop-safety rules resolve any conflicting hand placement: Remorseful ECE keeps her prop arm isolated over empty Essequibo water and rests her free hand on mischievous Radiance's shoulder. Radiance returns a visible waist touch to ECE and links her other hand with startled Ellie. Ellie links her other hand with tender Alia, who raises her free hand near her own lips for a restrained blown kiss. This spacious chain safely carries the selected overhead-beacon energy, Radiance's waist circle, Ellie's reach toward ECE, Alia's blown kiss, behind-embrace warmth, cheek-to-cheek turn, and gentle wrist-catch energy while every hand remains separately owned. Place ECE at the far left with her prop arm isolated against empty Essequibo water, Radiance left-center, Ellie right-center, and Alia at the far right. Use arm's-length gaps, no crossed torsos, and no hand behind a body. Angle Radiance and ECE three-quarters away with hair moved clear so both rolled complete open backs and all four complete faces remain visible. Keep all elbows, wrists, hands, lower bodies, and heels separated by river, canopy, bridge, or deck background. Use this exact owner-by-owner hand inventory and no other hands: ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly on Radiance's near shoulder; Radiance left hand rests visibly at ECE's near waist; Radiance right hand links visibly with Ellie's left hand; Ellie left hand links visibly with Radiance's right hand; Ellie right hand links visibly with Alia's left hand; Alia left hand links visibly with Ellie's right hand; Alia right open hand stays visibly near her own lips in a restrained blown-kiss gesture. ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. The magazine is absent and the empty magazine well is clearly visible. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty Essequibo River water toward one unoccupied route marker, away from every person, canopy bridge, deck, wildlife, care case, and camera, never upward or at the sky. Her left hand stays off the prop on Radiance's shoulder. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as powerful windstorm with controlled fabric motion. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges, hair, props, and other hands except for the listed contacts. Arrange the adults in an asymmetric moving relationship composition with clean silhouette gaps, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, coat of arms, official seal, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls; concurrency attempted when the host supports simultaneous calls"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

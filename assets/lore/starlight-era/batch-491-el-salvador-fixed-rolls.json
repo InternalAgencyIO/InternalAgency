@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "contract": "starlight-editorial-rolls-2026-09-06",
+  "batch": 491,
+  "country": "El Salvador",
+  "seed": "starlight-editorial-rolls-2026-09-06|batch-491|el salvador",
+  "seedSelection": "Fixed before prompt authoring; no outcome search, salt hunting or reroll",
+  "rollAlgorithm": "For each unique key, SHA-256 UTF-8. Scan digest bytes left-to-right for the first byte below 200. Roll=(byte mod 100)+1. If none qualifies, append |block-N and repeat. Active when roll is less than or equal to its probability.",
+  "keyPatterns": {
+    "camera": "{seed}|scene-{scene}|camera",
+    "dutchDegrees": "{seed}|scene-{scene}|dutch-degrees; resolve 10+((roll-1) mod 16)",
+    "image": "{seed}|scene-{scene}|image|{field}",
+    "character": "{seed}|scene-{scene}|character|{character}|{field}",
+    "tattoo": "{seed}|scene-{scene}|character|{character}|tattoo|{motif}"
+  },
+  "thresholds": {
+    "camera": {"extremeClose": [1, 20], "intermediate": [21, 80], "extremeWide": [81, 100]},
+    "imageFieldOrder": ["starHardware", "kneeHighHosiery", "splitStarEmblem", "razeTypeBand", "rainbowStockings", "kneeHighRainbows", "fictionalDistantRazedBackground"],
+    "imagePercents": [25, 25, 25, 25, 33, 22, 32],
+    "characterFieldOrder": ["rainbowShoes", "shoeBranding", "shoeBrandStyle", "flagGarment", "visibleNavel", "stockingBranding"],
+    "characterPercents": [35, 40, 50, 33, 45, 32],
+    "shoeBrandStyle": "roll 1-50 exact RAZE text; 51-100 original RAZE split-star",
+    "tattooPercentEach": 4,
+    "tattooMotifOrder": ["thorny-rose", "country-death-motif", "country-love-motif", "raze-brand", "raze-split-star", "star", "crescent", "scorpion", "IA", "agency", "silent-king", "GRD"]
+  },
+  "deckMethod": "Sort each listed label ascending by SHA-256(seed|deck-name|label). Use scene position directly for pose and angle. Rotate the five-shoe deck by scene position and take four consecutive entries in Alia, Radiance, Ellie, ECE order.",
+  "shoeDeck": ["sculptural-platform", "classic-pump", "ankle-boot", "knee-high-boot", "stiletto-sandal"],
+  "poseDeck": ["back-hug-turn", "supported-seated-conversation", "head-resting-on-clothed-lap", "side-hug-step"],
+  "angleDeck": ["side-level", "over-shoulder", "front-quarter-low", "high-oblique"],
+  "scenes": [
+    {
+      "scene": 1991,
+      "camera": 7,
+      "cameraCategory": "extreme-close",
+      "angle": "side-level",
+      "dutchDegrees": 15,
+      "pose": "back-hug-turn",
+      "imageValues": [63, 6, 63, 82, 27, 90, 21],
+      "characters": {
+        "Alia": {"shoe": "sculptural-platform", "values": [83, 93, 37, 97, 29, 2], "tattooValues": [70, 47, 76, 84, 74, 22, 12, 26, 8, 48, 91, 9]},
+        "Radiance": {"shoe": "classic-pump", "values": [22, 64, 14, 73, 38, 5], "tattooValues": [50, 90, 46, 57, 58, 67, 23, 58, 2, 41, 77, 20]},
+        "Ellie": {"shoe": "ankle-boot", "values": [75, 62, 95, 1, 80, 66], "tattooValues": [17, 25, 98, 27, 26, 18, 91, 3, 41, 51, 62, 77]},
+        "ECE": {"shoe": "knee-high-boot", "values": [22, 2, 58, 93, 92, 30], "tattooValues": [96, 61, 89, 79, 33, 79, 80, 47, 79, 48, 34, 84]}
+      }
+    },
+    {
+      "scene": 1992,
+      "camera": 45,
+      "cameraCategory": "intermediate",
+      "angle": "over-shoulder",
+      "dutchDegrees": 24,
+      "pose": "supported-seated-conversation",
+      "imageValues": [25, 64, 16, 84, 70, 34, 63],
+      "characters": {
+        "Alia": {"shoe": "classic-pump", "values": [98, 40, 54, 61, 40, 58], "tattooValues": [91, 86, 84, 42, 36, 84, 90, 42, 94, 7, 76, 70]},
+        "Radiance": {"shoe": "ankle-boot", "values": [62, 4, 59, 16, 1, 20], "tattooValues": [23, 63, 52, 40, 16, 74, 39, 69, 23, 3, 41, 16]},
+        "Ellie": {"shoe": "knee-high-boot", "values": [56, 60, 57, 28, 25, 38], "tattooValues": [33, 55, 98, 71, 38, 95, 17, 47, 44, 14, 16, 7]},
+        "ECE": {"shoe": "stiletto-sandal", "values": [41, 29, 73, 29, 62, 62], "tattooValues": [49, 81, 31, 7, 65, 2, 45, 100, 94, 90, 91, 69]}
+      }
+    },
+    {
+      "scene": 1993,
+      "camera": 46,
+      "cameraCategory": "intermediate",
+      "angle": "front-quarter-low",
+      "dutchDegrees": 10,
+      "pose": "head-resting-on-clothed-lap",
+      "imageValues": [45, 90, 78, 3, 56, 14, 27],
+      "characters": {
+        "Alia": {"shoe": "ankle-boot", "values": [39, 62, 18, 22, 100, 16], "tattooValues": [7, 75, 33, 57, 5, 58, 20, 13, 6, 26, 56, 80]},
+        "Radiance": {"shoe": "knee-high-boot", "values": [43, 84, 67, 3, 15, 90], "tattooValues": [45, 46, 23, 98, 45, 12, 55, 90, 98, 16, 42, 73]},
+        "Ellie": {"shoe": "stiletto-sandal", "values": [17, 52, 49, 91, 32, 23], "tattooValues": [69, 52, 10, 89, 71, 49, 53, 6, 24, 54, 39, 42]},
+        "ECE": {"shoe": "sculptural-platform", "values": [86, 86, 9, 39, 86, 67], "tattooValues": [81, 32, 25, 100, 73, 70, 94, 61, 57, 88, 13, 4]}
+      }
+    },
+    {
+      "scene": 1994,
+      "camera": 98,
+      "cameraCategory": "extreme-wide",
+      "angle": "high-oblique",
+      "dutchDegrees": 25,
+      "pose": "side-hug-step",
+      "imageValues": [13, 12, 15, 85, 9, 13, 85],
+      "characters": {
+        "Alia": {"shoe": "knee-high-boot", "values": [59, 46, 44, 11, 57, 97], "tattooValues": [58, 66, 27, 60, 57, 91, 59, 8, 76, 91, 2, 79]},
+        "Radiance": {"shoe": "stiletto-sandal", "values": [95, 90, 23, 36, 1, 91], "tattooValues": [36, 96, 32, 71, 10, 86, 78, 78, 24, 28, 27, 62]},
+        "Ellie": {"shoe": "sculptural-platform", "values": [77, 17, 34, 50, 83, 41], "tattooValues": [94, 50, 46, 57, 90, 89, 78, 40, 97, 4, 85, 73]},
+        "ECE": {"shoe": "classic-pump", "values": [66, 31, 25, 56, 98, 71], "tattooValues": [22, 51, 73, 90, 10, 91, 69, 23, 18, 29, 77, 5]}
+      }
+    }
+  ],
+  "expandedRollTableSha256": "F0CEB96700CD241BC2378DCF55123132046EB126E71414420438F8951A680DA6",
+  "expandedRollTableHashBasis": "Compact one-line JSON with named fields generated from these exact values before prompt authoring; values and deterministic key patterns above are sufficient to reproduce every roll."
+}

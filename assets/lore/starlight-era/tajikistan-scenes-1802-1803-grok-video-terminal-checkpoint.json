@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "checkpoint_type": "starlight_grok_video_terminal",
+  "created_at_utc": "2026-08-28T07:46:58.981Z",
+  "country": "Tajikistan",
+  "production_policy": {
+    "story_origin": "DeepSeek kernel followed by a complete Codex action-love-jealousy-protection rewrite",
+    "still_workshop": "four distinct 9:16 still candidates per video; winner selected autonomously",
+    "video": {
+      "duration_seconds": 15,
+      "aspect_ratio": "9:16",
+      "resolution": "720p",
+      "model": "Quality v2.0"
+    },
+    "x_account": "@dogramaci",
+    "accessibility": "English descriptive SRT beside every archived MP4"
+  },
+  "ordered_face_anchors": [
+    {
+      "order": 1,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "scenes": {
+    "1802": {
+      "location": "Pamir Highway and Wakhan Corridor",
+      "camera_roll": 91,
+      "framing": "EXTREME WIDE",
+      "still_prompt": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1802-still-prompt.txt",
+        "sha256": "7D741361D4192243D0246AC85A6141A89B8F4434088C7F154000ABD5F1B310C5"
+      },
+      "still_candidates": [
+        {
+          "id": "0e0ef869-c50f-4a1f-9636-7c50ae9fc025",
+          "qa": "rejected",
+          "reason": "extra fifth person"
+        },
+        {
+          "id": "210a09ad-441c-4dda-9a95-d03e7af5d76d",
+          "qa": "usable",
+          "reason": "less dynamic"
+        },
+        {
+          "id": "ce926842-8828-40f2-b415-a413150159d8",
+          "qa": "selected",
+          "reason": "strongest rescue chain and extreme-wide location read"
+        },
+        {
+          "id": "82f02549-9e6e-4140-93c8-abc26ae65b41",
+          "qa": "usable",
+          "reason": "affection and jealousy readable; action weaker"
+        }
+      ],
+      "selected_still_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/ce926842-8828-40f2-b415-a413150159d8/image.jpg?cache=1",
+      "video_prompt": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1802-video-prompt.txt",
+        "sha256": "A01EC0D150469FBDAB3E09695703D9F6C6D85BBC655080C4A042FDBCEFB4A095"
+      },
+      "provider_url": "https://grok.com/imagine/post/6a83410f-ae94-4454-9c94-1106ee98134f?conversation=cbbb7e19-03db-4556-b290-acfc2ec03e9e",
+      "provider_asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/6a83410f-ae94-4454-9c94-1106ee98134f/generated_video.mp4?cache=1",
+      "raw_video": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1802-pamir-wakhan-grok-video.mp4",
+        "bytes": 23920894,
+        "sha256": "061315207BBA71CA24F56FD5CC08D61B94250BC5F5099AC1E6C420F7375B1BA1",
+        "dimensions": {
+          "width": 720,
+          "height": 1280
+        },
+        "duration_seconds": 15.041667
+      },
+      "visual_qa": "passed: vertical 720x1280, 15.041667 seconds, coherent four-woman cinematic action-love sequence",
+      "subtitles_path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1802-pamir-wakhan-grok-video.en.srt",
+      "x": {
+        "url": "https://x.com/dogramaci/status/2093236757214974252",
+        "caption": "At sunrise above the Wakhan Corridor, a wind-whipped slip becomes a four-woman rescue, a jealous glance, and a protective reconciliation across the Pamir Highway."
+      }
+    },
+    "1803": {
+      "location": "Iskanderkul and the Fann Mountains",
+      "camera_roll": 63,
+      "framing": "INTERMEDIATE",
+      "still_prompt": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1803-still-prompt.txt",
+        "sha256": "602CD4915FC504A6EA56FE1763B534201A24C13B37B1CE0BF87DDF60EBBC7D74"
+      },
+      "still_candidates": [
+        {
+          "id": "6e505be3-376a-40d8-9ec0-96109be4e68d",
+          "qa": "usable",
+          "reason": "blue-hour compass action"
+        },
+        {
+          "id": "389fdfac-0887-4561-a3a5-75d3f3c0d593",
+          "qa": "usable",
+          "reason": "strong action but daylight mismatch"
+        },
+        {
+          "id": "1e6b4430-d963-4435-8a42-107dcbcc5789",
+          "qa": "usable",
+          "reason": "protection readable; hands weaker"
+        },
+        {
+          "id": "9713cb68-6535-4c07-a429-fed3c6498df6",
+          "qa": "selected",
+          "reason": "best blue-hour waterfall, compass, and splash action"
+        }
+      ],
+      "selected_still_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/9713cb68-6535-4c07-a429-fed3c6498df6/image.jpg?cache=1",
+      "video_prompt": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1803-video-prompt.txt",
+        "sha256": "16D189EE9A1C6EFF5D17E4CA5069730448B4B3E7CBD36C6505597E55D65D8741"
+      },
+      "provider_url": "https://grok.com/imagine/post/464bad8e-25b9-4cb9-8068-fa007e55641d?conversation=802f64b3-1ec0-4092-a97c-9274456f0736",
+      "provider_asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/464bad8e-25b9-4cb9-8068-fa007e55641d/generated_video.mp4?cache=1",
+      "raw_video": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1803-iskanderkul-fann-grok-video.mp4",
+        "bytes": 23302415,
+        "sha256": "F7870C51BC3A5AF3D94C1DEE473A46A23A528809FD400A9D27AECE213DFF6FA9",
+        "dimensions": {
+          "width": 720,
+          "height": 1280
+        },
+        "duration_seconds": 15.041667
+      },
+      "visual_qa": "passed: vertical 720x1280, 15.041667 seconds, coherent four-woman cinematic action-love sequence",
+      "subtitles_path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1803-iskanderkul-fann-grok-video.en.srt",
+      "x": {
+        "url": "https://x.com/dogramaci/status/2093236758573985967",
+        "caption": "At blue hour beside Iskanderkul, a falling compass sparks a lakeside catch, a jealous turn, and a four-woman rescue beneath the Fann Mountains."
+      }
+    }
+  },
+  "pending_scenes": {
+    "1804": {
+      "location": "Dushanbe, Rudaki Avenue and Ismoil Somoni monument",
+      "camera_roll": 44,
+      "framing": "INTERMEDIATE",
+      "corrective_still_prompt": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1804-corrective-still-prompt.txt",
+        "sha256": "3A4A485F93A58822B614F0759683969B6027E43CE072DEBEF02DCD414F732351"
+      },
+      "initial_transient_dispatch_utc": "2026-08-28T07:21:28Z",
+      "corrective_dispatch_utc": "2026-08-28T07:31:15.026Z",
+      "provider_url": "https://grok.com/imagine/post/e686577e-e0d8-4d70-b25e-ad3a1915dd78",
+      "terminal_observed_utc": "2026-08-28T07:33:38.831Z",
+      "terminal_state": "usage_limit_reached_no_bytes",
+      "retry_policy": "do not resend; recover this existing provider occurrence only after the account limit is restored"
+    },
+    "1805": {
+      "location": "Marguzor Lake, Haft Kul / Seven Lakes",
+      "camera_roll": 87,
+      "framing": "EXTREME WIDE",
+      "corrective_still_prompt": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/tajikistan-scenes-1802-1803/scene-1805-corrective-still-prompt.txt",
+        "sha256": "7B4BC4CDF3775D2BF9F4DD9701F8ED030E5507A498DCBAF50E78204875FDBD0B"
+      },
+      "initial_transient_dispatch_utc": "2026-08-28T07:21:28Z",
+      "corrective_dispatch_utc": "2026-08-28T07:31:15.336Z",
+      "provider_url": "https://grok.com/imagine/post/1932ba23-8b16-4ae4-be7f-145f01176ca3",
+      "terminal_observed_utc": "2026-08-28T07:33:38.831Z",
+      "terminal_state": "usage_limit_reached_no_bytes",
+      "retry_policy": "do not resend; recover this existing provider occurrence only after the account limit is restored"
+    }
+  },
+  "rejected_attempt_evidence": {
+    "initial_transient_dispatch": "both initial scene 1804/1805 sends disappeared without a saved provider occurrence",
+    "wrong_mode_bounded_retry": "persisted Video mode produced hard-unusable direct-video attempts; no raw bytes or durable provider occurrence was available and nothing was posted",
+    "corrective_image_mode": "user-authorized Image mode, Quality v2.0, x4, 9:16, three ordered anchors; both durable occurrences stopped at the provider usage limit before bytes"
+  }
+}

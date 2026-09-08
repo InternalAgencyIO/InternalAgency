@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "batch": 435,
+  "country": "Tunisia",
+  "status": "initial-send-home-loading-no-confirmed-provider-occurrence",
+  "recordedAtUtc": "2026-08-27T15:46:33.9943071Z",
+  "scenes": [
+    1760,
+    1761,
+    1762,
+    1763
+  ],
+  "promptSha256": {
+    "1760": "F48F3D544CB5EF372ECFF9CF7F7DA73ABA8CED88699A312DEDA96A81644994DB",
+    "1761": "06A191FB32C4C639144DA49A8EB6ABB5562EBB73794BB3779D8360E743A2F8D3",
+    "1762": "FDCAF84F5DAD8327E6FE305CAB3A9729F84319AAC47A78D028674F5C5CEDE863",
+    "1763": "F2B782AFE6A70F9C0F5D39137E96E62975A0F1074B1B9C6E79C5E2C83D0C0160"
+  },
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "sendClickedAtUtc": {
+    "1760": "2026-08-27T15:44:19.292Z",
+    "1761": "2026-08-27T15:44:19.278Z",
+    "1762": "2026-08-27T15:44:19.292Z",
+    "1763": "2026-08-27T15:44:19.247Z"
+  },
+  "providerChatUrls": {},
+  "providerResponses": [],
+  "rawBytes": [],
+  "observation": "Each Send was clicked exactly once. After 32 seconds every lane remained at https://www.meta.ai/ with the exact prompt and ordered anchors, disabled Send status Loading, no Today marker, no response, no refusal, no media, and no provider prompt URL.",
+  "duplicateDispatchCount": 0,
+  "recoveryRequired": true
+}

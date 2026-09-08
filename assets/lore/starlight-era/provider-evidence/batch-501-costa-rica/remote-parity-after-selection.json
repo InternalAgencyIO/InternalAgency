@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "batch": 501,
+  "country": "Costa Rica",
+  "checkedAtUtc": "2026-09-07T02:01:21.965Z",
+  "verifiedDataHead": "e99b8e2eb43a31fcf3c5e4b0478a92ee7efdb2ef",
+  "originBranchHead": "e99b8e2eb43a31fcf3c5e4b0478a92ee7efdb2ef",
+  "pr13Head": "e99b8e2eb43a31fcf3c5e4b0478a92ee7efdb2ef",
+  "branch": "agent/starlight-progress-archive",
+  "pr": {
+    "number": 13,
+    "url": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "state": "OPEN",
+    "isDraft": true
+  },
+  "headOriginPrParity": true,
+  "gitLfsFsck": {
+    "range": "7ecb8685..e99b8e2e",
+    "result": "Git LFS fsck OK",
+    "scope": "Only newly introduced current-batch objects; historical missing local-cache objects are not claimed repaired."
+  },
+  "remoteNativeOriginals": {
+    "at": "2026-09-07T01:37:37.251Z",
+    "exitCode": 0,
+    "scope": "Four native Costa Rica final WebPs fetched from origin into isolated verification storage; all resolved objects match source SHA256 and byte length.",
+    "stderr": "Fetching reference refs/heads/agent/starlight-progress-archive\n",
+    "files": [
+      {
+        "scene": 2033,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-meta-gallery-original.webp",
+        "sha256": "845a195d9ed7ba6e60b1d80e7743cea9e6e96f482bd8d24ec503b5b881688ee6",
+        "remoteBytes": 493930,
+        "remoteHashMatches": true
+      },
+      {
+        "scene": 2034,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-meta-gallery-original.webp",
+        "sha256": "5ca9d482bb1effac6ceabe1e404a7e302aa2f42ecc351689f0bbfd230ef68a61",
+        "remoteBytes": 517224,
+        "remoteHashMatches": true
+      },
+      {
+        "scene": 2032,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-meta-gallery-original.webp",
+        "sha256": "eb57365f74b3d1598ad56a5c24b1d864b0b3f5e439fdfa5b8c68b584c06dbdd9",
+        "remoteBytes": 728862,
+        "remoteHashMatches": true
+      },
+      {
+        "scene": 2031,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-meta-gallery-original.webp",
+        "sha256": "e95c132773caa01664e855eeab86f552434e675dd37e3de3bb635f04b6545436",
+        "remoteBytes": 532102,
+        "remoteHashMatches": true
+      }
+    ],
+    "storagePathResolvedFromGitLfsEnv": "C:\\Users\\A\\Documents\\Codex\\2026-07-27\\hatch-pet-c-users-a-codex\\InternalAgency\\.git\\.git\\lfs-remote-verification-batch501\\objects",
+    "initialLookupCorrection": "Initial read-only lookup assumed lfs.storage was repository-relative. Git resolves it relative to the Git directory; the resolved LocalMediaDir contains all four matching originals. This was a lookup error, not a failed fetch."
+  },
+  "remoteEditOriginals": {
+    "checkedAtUtc": "2026-09-07T02:00:27.907Z",
+    "exitCode": 0,
+    "scope": "All four returned edit PNG LFS objects fetched from origin into a newly created absolute-path verification store.",
+    "storage": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/.git/lfs-remote-verification-batch501-edits",
+    "stdout": "",
+    "stderr": "Fetching reference refs/heads/agent/starlight-progress-archive\n",
+    "files": [
+      {
+        "scene": 2031,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-chatgpt-single-tailoring-pass.png",
+        "sha256": "d91ec10ac87529f2243fcd217d187f3c814432a60fdf9c75419e794b5f60b2ec",
+        "remoteBytes": 2261284,
+        "remoteHashMatches": true
+      },
+      {
+        "scene": 2032,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-chatgpt-single-tailoring-pass.png",
+        "sha256": "8149d5c4aa044d484d2b25408f40cbb58a63878366048c3966a8cdc0e8e95423",
+        "remoteBytes": 2652011,
+        "remoteHashMatches": true
+      },
+      {
+        "scene": 2033,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-chatgpt-single-tailoring-pass.png",
+        "sha256": "12cd19beca1a50c0a4d8612db46ab0d168708101116d8514266709eab334bf20",
+        "remoteBytes": 2256581,
+        "remoteHashMatches": true
+      },
+      {
+        "scene": 2034,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-pass.png",
+        "sha256": "98c2cf7b7cf22d65c8eacba1b272c41db3ecf06b1e212852ecab06fddbbbcf05",
+        "remoteBytes": 2337998,
+        "remoteHashMatches": true
+      }
+    ]
+  },
+  "plainGitDeliveredJpeg": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-meta-delivered.jpg",
+    "bytes": 238089,
+    "sha256": "312455c03b731c41d971e93ee65311d2250bc841a66ba41f9a4f9391cef6d326",
+    "matchesWorkingFile": true
+  },
+  "rollGeneratorTests": {
+    "command": "node --test scripts/starlight/editorial-rolls.test.cjs",
+    "passed": 5,
+    "failed": 0
+  },
+  "gitDiffCheckPassed": true,
+  "availableClosureValidation": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/archive-closure-validation.json",
+  "rawArchiveComplete": false,
+  "missingInternalRawOriginals": 3,
+  "archiveExceptionApplies": false,
+  "publicationEligible": false,
+  "unattended247ExecutionEstablished": false,
+  "nextSafeAction": "Do not send another Costa Rica prompt, retry, edit or X post. Recover the three first internal Meta originals for scenes2031,2032,2034 using a supported visible-browser save/download control and import exact bytes with provenance and hashes. If that cannot be done, obtain a new explicit Costa Rica-only exception for these three originals before normal Mauritania-Costa Rica publication or next-country rendering. Keep both source and edit versions, all signed URLs and the existing Oman evidence tab. Before any later Post, reverify @dogramaci, nonduplicate scene/media hashes, exact ALT, AI disclosure, caption/hashtag rolls and local/origin/PR/LFS parity.",
+  "note": "This proof records the immutable media/QA data commit above. The later evidence-only commit that adds this proof must itself be checked against origin and PR13, without self-referential hash rewriting."
+}

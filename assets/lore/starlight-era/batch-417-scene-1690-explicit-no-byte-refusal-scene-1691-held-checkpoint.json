@@ -1,0 +1,73 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T13:36:54.7787153Z",
+  "authoritative_parent_commit": "427ae1c5312135ea378a8fd92114bf6acc164509",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 417,
+  "country": "Palau",
+  "scene_range": [
+    1688,
+    1689,
+    1690,
+    1691
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-417-scenes-1690-1691-drafts-restaged-tabs-16-17-awaiting-confirmation-checkpoint.json",
+  "completed_country_cycles_since_last_x_cycle": 6,
+  "accepted_canonical_count_for_country": 1,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "incomplete",
+  "scene_states": {
+    "1688": {
+      "status": "accepted-canonical-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "sha256": "37910EFC3D69D7DB8C2D8BF009B6AE42E95202E56AACAE7B2965B80630A143AC"
+    },
+    "1689": {
+      "status": "explicit-no-byte-refusal-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/72bf8bd6-35ff-4501-979b-59fd8b8959f9"
+    },
+    "1690": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "CAA2F311DDB0A16D45578817E64EDCCD91A699505D2B41C11FD57DD9D6D0A4F0",
+      "camera_roll": 52,
+      "submitted_at_utc": "2026-08-26T13:34:03.658Z",
+      "provider_url": "https://www.meta.ai/prompt/2d7f156b-e8c3-44a9-ad59-72925a7b017a",
+      "raw_bytes_captured": false,
+      "no_bytes_reason": "Explicit provider refusal produced no generated image or downloadable bytes.",
+      "provider_proposed_neutral_substitution": true,
+      "neutral_substitution_accepted": false
+    },
+    "1691": {
+      "status": "untouched-draft-awaiting-upload-confirmation",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F",
+      "camera_roll": 11,
+      "attachment_count": 0,
+      "send_clicked": false
+    }
+  },
+  "provider_occurrence": {
+    "scene": 1690,
+    "url": "https://www.meta.ai/prompt/2d7f156b-e8c3-44a9-ad59-72925a7b017a",
+    "state": "explicit-refusal",
+    "occurrence_path": "progress-reports/codex-generated-media/provider-occurrences/batch-417-scene-1690-explicit-no-byte-refusal.jsonl",
+    "resend_forbidden": true
+  },
+  "dispatch_blocker": {
+    "active": true,
+    "reason": "Scene 1691 remains eligible and untouched; immediate user confirmation is mandatory before its face-anchor upload and Send."
+  },
+  "next_action": "On the next explicit user go, verify scene 1691 prompt and anchor hashes, upload the three ordered anchors, and click Send once. Never resend scenes 1688, 1689, or 1690."
+}

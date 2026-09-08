@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "batch": 431,
+  "country": "Benin",
+  "status": "closed-unresolved",
+  "checkpointAtUtc": "2026-08-27T09:05:20.943Z",
+  "acceptedCount": 0,
+  "requiredAcceptedCount": 4,
+  "terminalSceneIds": [
+    1744,
+    1745,
+    1746,
+    1747
+  ],
+  "acceptedSceneIds": [],
+  "sceneDispositions": {
+    "1744": [
+      "hard-unusable-multiple-output-camera-beacon-and-partial-body-lock-fail",
+      "hard-unusable-multiple-output-camera-beacon-and-raze-lock-fail"
+    ],
+    "1745": [
+      "hard-unusable-camera-edge-clipping-and-raze-verifiability-lock-fail"
+    ],
+    "1746": [
+      "hard-unusable-camera-beacon-and-hand-inventory-lock-fail"
+    ],
+    "1747": [
+      "hard-unusable-hidden-face-and-beacon-ring-lock-fail"
+    ]
+  },
+  "providerChatUrls": {},
+  "rawOutputCount": 5,
+  "retryAuthorized": false,
+  "duplicateDispatchCount": 0,
+  "completedCountryCycleCountSinceLastXCadence": 1,
+  "nextCampaignCountry": "Rwanda",
+  "nextBatch": 432,
+  "nextSceneIds": [
+    1748,
+    1749,
+    1750,
+    1751
+  ],
+  "nextDispatchState": "preparation-authorized-browser-upload-and-send-require-fresh-immediate-user-confirmation"
+}

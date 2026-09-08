@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "batch": 478,
+  "countryPair": ["Ireland", "Latvia"],
+  "destinationAccount": "@dogramaci",
+  "captionSha256": "FB6B86633210F955D838AADF6595052B945BF6A464B6AB090CC53691587BF2A1",
+  "sceneOrder": [1935, 1939, 1941],
+  "assetSha256": [
+    "4F6CD6E8E0948CB3B8662D223263D8A03C1DBAA11807714BA62A1FD237684A86",
+    "5B87B7232382246AC85AC55A3ACE84392B03463A2BB5D560DC85FAE385AF195A",
+    "7156DB6FEAF0BA4E86C2DDF9AF19DC7155EBAC31A319665BB1FA5EE0BD86AD4D"
+  ],
+  "attemptHistory": [
+    {
+      "attemptedAtUtc": "2026-09-04T10:07:13.809Z",
+      "surface": "modal composer",
+      "method": "visible Post button click",
+      "outcome": "confirmed-no-transmission"
+    },
+    {
+      "attemptedAtUtc": "2026-09-04T10:07:51.917Z",
+      "surface": "same retained modal composer",
+      "method": "Control+Enter recovery submit",
+      "outcome": "explicit-transient-error-no-transmission",
+      "visibleError": "Something went wrong, but don’t fret — let’s give it another shot."
+    },
+    {
+      "attemptedAtUtc": "2026-09-04T10:12:10.789Z",
+      "surface": "clean X home inline composer",
+      "method": "visible Post button click",
+      "outcome": "public-transmission-confirmed",
+      "sentNotice": "Your post was sent. You have 1 hour to make any edits."
+    }
+  ],
+  "publicTransmissionCount": 1,
+  "duplicateMediaTransmission": false,
+  "postUrl": "https://x.com/dogramaci/status/2095817193875288348",
+  "photoEndpoints": [
+    "https://x.com/dogramaci/status/2095817193875288348/photo/1",
+    "https://x.com/dogramaci/status/2095817193875288348/photo/2",
+    "https://x.com/dogramaci/status/2095817193875288348/photo/3"
+  ],
+  "liveVerification": {
+    "verifiedAtUtc": "2026-09-04T10:13:27.4473446Z",
+    "exactCaption": true,
+    "exactHashtags": true,
+    "orderedPhotoEndpointCount": 3,
+    "exactAltTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "unavailableOrDeadLink": false
+  },
+  "evidence": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-478-latvia/ireland-latvia-x-first-click-and-keyboard-error-visible.png",
+      "sha256": "042408592DC2100F3A095F413B60BED7A3D60641881734B4CED7E118D7D70578",
+      "bytes": 109678,
+      "meaning": "failed modal composer retained exact draft with explicit X error"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-478-latvia/ireland-latvia-x-sent-home-visible.png",
+      "sha256": "39D19E84DAFB38BD2BB4EEF17F8627B801BF1E11D909D0D8B14EA047C1654894",
+      "bytes": 77772,
+      "meaning": "X home sent notice and new exact post"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-478-latvia/ireland-latvia-x-public-status-live-visible.png",
+      "sha256": "8D7B7FFA410FC6D28F70E4058BFC1848045A67EFA1811925976710BF3A6D20E9",
+      "bytes": 146180,
+      "meaning": "direct public status verification with three photos, three alt texts and Made with AI"
+    }
+  ],
+  "nextSafeAction": "Never resend these three media. Close the temporary live-status tab, keep one blank X home composer visible, resolve the next zero-post European country from current remote authority, then prepare four Meta Thinking lanes with anchors 938, 936 and 937 in exact order."
+}

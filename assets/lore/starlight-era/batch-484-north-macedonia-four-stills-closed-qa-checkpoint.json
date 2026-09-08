@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "batch": 484,
+  "country": "North Macedonia",
+  "scenes": [1963, 1964, 1965, 1966],
+  "state": "four-stills-closed-qa-and-archive-complete-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-04T15:14:07Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-484-north-macedonia-four-meta-dispatches-checkpoint.json",
+    "dispatchCheckpointCommit": "f1e91cf7437d1e1b510649b23918d325d22104e5"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulOccurrences": 4,
+    "hardFailures": 0,
+    "retries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "providerUrls": [
+      "https://www.meta.ai/prompt/e6779ae2-edca-4976-a26f-5d47e950e131",
+      "https://www.meta.ai/prompt/9bc8fc2b-dc71-4468-92c2-b529c0e56f95",
+      "https://www.meta.ai/prompt/ffe2c04d-5bb5-4a1f-b31b-28c046c2b805",
+      "https://www.meta.ai/prompt/803380fe-032f-4295-86b8-c086966da47a"
+    ]
+  },
+  "selectedAssets": [
+    {
+      "scene": 1963,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/1963-north-macedonia-skopje-stone-bridge-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "77181042D4AD8BB87DE8D871FC21DAAD992D5025F3B5F553DF57E4DA9D3ABB79",
+      "bytes": 2587904
+    },
+    {
+      "scene": 1964,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/1964-north-macedonia-lake-ohrid-raze-adjacent-three-quarter-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "8FAE4EB7D9966D262FE2D9BBB0CF1291F646536B62A2FF749AE55BC155D3ED6C",
+      "bytes": 2630900
+    },
+    {
+      "scene": 1965,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/1965-north-macedonia-matka-canyon-raze-tight-full-body-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "8D450A13D8166501C063A535063ED891306F68CD03EAC684471DECC82778DD54",
+      "bytes": 2776667
+    },
+    {
+      "scene": 1966,
+      "provider": "Meta AI",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/1966-north-macedonia-bitola-sirok-sokak-raze-tight-full-body-statement-boots-meta-occurrence-1-raw.jpg",
+      "sha256": "3371BF37A580AA48B40662D30EA417E58B42DA2178F30875363A751F4AADD931",
+      "bytes": 280846
+    }
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableNorthMacedoniaSettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "scannedRepoImageCount": 4806
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassAttempts": 4,
+    "successfulOutputs": 3,
+    "blockedOutputs": 1,
+    "blockedScene": 1966,
+    "blockedRequestId": "67722592-4ab6-4aa3-9114-814298aad50c",
+    "additionalPasses": 0,
+    "fallback": "The Scene 1966 Meta original remains selected because it is already strongly shortened and its single ChatGPT pass was consumed by an output moderation block."
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/provider-ledger.json",
+    "metaOutcomeArchive": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/meta-retry-prompts-and-outcomes.md",
+    "chatgptPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/chatgpt-one-pass-prompts-and-outcomes.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/accessibility-sidecars.json",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-484-north-macedonia/closure-evidence-manifest.json",
+    "closureManifestFileCount": 11,
+    "closureManifestTotalBytes": 10697777,
+    "closureManifestInventorySha256": "3E7E1FBD4D70331564990416D66C39030348F67CA11402A92F45957B72842CDB"
+  },
+  "publication": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "northMacedoniaSelectedAssetPublicationCounts": [0, 0, 0, 0],
+    "monacoReserved": true,
+    "xAccount": "@dogramaci",
+    "xComposerState": "blank",
+    "xPostControlActivated": false,
+    "freshActionTimeConfirmationRequired": true
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "canonicalContradictions": [
+    "Historical Batch 289 North Macedonia ended blocked with zero accepted assets; fresh Batch 484 succeeded in all four Meta lanes and is the current authority.",
+    "Meta removed the first ordered anchor trio when prompt text was filled. The loss was caught before Send, and the exact anchors were restored after typing through the visible supported chooser in order 938, 936, 937.",
+    "Meta's terminal DOM labels for Scenes 1963, 1965 and 1966 were WEBP while their visible Download controls delivered JPEG/JFIF bytes; Scene 1964's DOM label and visible download were PNG. The archived visible-control bytes are canonical.",
+    "Scene 1966's single ChatGPT shortening attempt was blocked at output. No second pass was run; the already-short accepted Meta original is canonical for that scene.",
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later remote-verified checkpoints; the existing guardian stays paused and untouched."
+  ],
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "nextSafeAction": "Validate the closure manifest and all prompt and asset hashes, commit and push the complete Batch 484 evidence set, verify Git LFS and Draft PR parity, then stage one duplicate-safe three-media Monaco-North Macedonia post in the blank visible @dogramaci X composer and stop before Post pending fresh action-time confirmation."
+}

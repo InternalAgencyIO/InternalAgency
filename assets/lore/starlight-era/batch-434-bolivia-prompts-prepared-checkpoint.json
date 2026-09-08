@@ -1,0 +1,111 @@
+{
+  "schema": "internalagency.starlight.prompt-preparation-checkpoint.v1",
+  "batchId": 434,
+  "country": "Bolivia",
+  "status": "prepared_awaiting_fresh_immediate_browser_confirmation",
+  "preparedAtUtc": "2026-08-27T09:54:58.544Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "baseCommit": "d15f5145010ce36001bc0dd2236598e97aefb93b",
+    "sourceCheckpoint": "assets/lore/starlight-era/batch-363-bolivia-moon-expedition-checkpoint.json",
+    "sourceBatchId": 363
+  },
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraRollMethod": "FNV-1a 32-bit over stored key; roll=(fullHash mod 100)+1; 1-20 EXTREME CLOSE, 21-80 INTERMEDIATE, 81-100 EXTREME WIDE",
+  "scenes": [
+    {
+      "sceneId": 1756,
+      "sourceSceneId": 1472,
+      "promptPath": "tmp/world-195x4/batch-434/scene-1756-prompt.txt",
+      "promptSha256": "1505A806EB4B621BEF72FFFFBECEF177617A409876825A5CE756CE8018B70321",
+      "chars": 7143,
+      "bytes": 7143,
+      "cameraRoll": {
+        "scene": 1756,
+        "key": "batch434-bolivia-scene1756-camera-roll",
+        "fullHash": 3811499253,
+        "roll": 54,
+        "framing": "INTERMEDIATE"
+      },
+      "attemptAuthorization": "initial_only_after_fresh_immediate_confirmation"
+    },
+    {
+      "sceneId": 1757,
+      "sourceSceneId": 1473,
+      "promptPath": "tmp/world-195x4/batch-434/scene-1757-prompt.txt",
+      "promptSha256": "4B97F8759239C213D01416345BD402B89E5FBA1174EE153566FD5BE805CD369F",
+      "chars": 7161,
+      "bytes": 7161,
+      "cameraRoll": {
+        "scene": 1757,
+        "key": "batch434-bolivia-scene1757-camera-roll",
+        "fullHash": 1869979206,
+        "roll": 7,
+        "framing": "EXTREME CLOSE"
+      },
+      "attemptAuthorization": "initial_only_after_fresh_immediate_confirmation"
+    },
+    {
+      "sceneId": 1758,
+      "sourceSceneId": 1474,
+      "promptPath": "tmp/world-195x4/batch-434/scene-1758-prompt.txt",
+      "promptSha256": "9243D5EC48867C4A5422C1AEB19C5958797988EC761B113409EDBBC2E5D1C40C",
+      "chars": 7108,
+      "bytes": 7108,
+      "cameraRoll": {
+        "scene": 1758,
+        "key": "batch434-bolivia-scene1758-camera-roll",
+        "fullHash": 4130345267,
+        "roll": 68,
+        "framing": "INTERMEDIATE"
+      },
+      "attemptAuthorization": "initial_only_after_fresh_immediate_confirmation"
+    },
+    {
+      "sceneId": 1759,
+      "sourceSceneId": 1475,
+      "promptPath": "tmp/world-195x4/batch-434/scene-1759-prompt.txt",
+      "promptSha256": "E3A7937B4A7073A32E23983E3ACF848B8A9E5437B8825CEB4DD280E9F62ED872",
+      "chars": 7209,
+      "bytes": 7209,
+      "cameraRoll": {
+        "scene": 1759,
+        "key": "batch434-bolivia-scene1759-camera-roll",
+        "fullHash": 1061136772,
+        "roll": 73,
+        "framing": "INTERMEDIATE"
+      },
+      "attemptAuthorization": "initial_only_after_fresh_immediate_confirmation"
+    }
+  ],
+  "browserAuthorization": {
+    "uploadsAuthorized": false,
+    "sendsAuthorized": false,
+    "requireFreshImmediateConfirmation": true
+  },
+  "noRetryAuthorized": true,
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 3,
+    "threshold": 10,
+    "due": false
+  }
+}

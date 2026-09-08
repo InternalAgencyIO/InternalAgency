@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "batch": 469,
+  "scene": 1904,
+  "country": "Albania",
+  "provider": "Meta AI",
+  "occurrence": 1,
+  "status": "accepted_selected_chatgpt_hemline_refinement_user_relaxed_qa",
+  "submittedAtUtc": "2026-08-31T09:29:47.175Z",
+  "capturedAtUtc": "2026-08-31T09:42:43.0451122Z",
+  "providerChatUrl": "https://www.meta.ai/prompt/9a3a4510-92b3-4fa6-88d8-47645cb72ca0",
+  "promptSource": "assets/lore/starlight-era/batch-469-albania-europe-gap-fill-prompts-prepared-checkpoint.json#scene-1904",
+  "promptSha256": "C4B3D2858CE1B8FD7C136B8D907D0437FD8500AFD86D8D52FDE632B9F3F55198",
+  "orderedReferenceAnchors": [938, 936, 937],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+  "providerResponseSummary": "One terminal image-bearing result showed exactly four adult women in short metallic couture at Llogara Pass above the Ionian coast.",
+  "rawAsset": null,
+  "rawBytes": {"available": false, "status": "The provider exposed the same visible Download control whose supported event test returned no raw file; no direct fetch was attempted.", "browserRenderedEvidenceOnly": true},
+  "browserPageEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1904-meta-terminal-image-page.png",
+    "sha256": "28855BEACEC21CA93904828C364AA15EBE00303366A0DC1DDC7715788C17D3F1",
+    "byteLength": 66282,
+    "dimensions": "737x950",
+    "contentType": "image/png"
+  },
+  "chatgptHemlineRefinement": {
+    "required": true,
+    "maximumPasses": 1,
+    "passesCompleted": 1,
+    "promptSha256": "01AFFF8DC24A5110047B6C8058B6FE33BFDE2338EF22C4E3293F51B2B23CFDB0",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/1904-albania-llogara-pass-chatgpt-hemline-one-pass.png",
+    "sha256": "E93F9096D5F395546B09D0BC6EC9E1AC6CAF96B8A6D8B832E2DC13A44C19752B",
+    "byteLength": 2240785,
+    "dimensions": "941x1672",
+    "contentType": "image/png"
+  },
+  "selection": {
+    "decision": "accept_chatgpt_refinement_under_user_relaxed_qa",
+    "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-469-albania/1904-albania-llogara-pass-chatgpt-hemline-one-pass.png",
+    "unusedPath": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1904-meta-terminal-image-page.png",
+    "reason": "The required edit produces a clean high-resolution, strongly shortened, exactly-four-adult result with the Ionian location and cheek-only beat intact."
+  },
+  "retry": {"eligible": false, "remainingMetaRetries": 2, "reason": "Accepted under the hard-unusable-only relaxed gate."}
+}

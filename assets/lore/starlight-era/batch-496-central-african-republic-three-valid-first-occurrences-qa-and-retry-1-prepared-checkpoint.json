@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "batch": 496,
+  "country": "Central African Republic",
+  "state": "three-valid-first-occurrences-qa-complete-scene-2012-retry-one-prepared",
+  "createdAtUtc": "2026-09-06T10:07:43.785Z",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/provider-ledger.json",
+  "chatgptInvocationLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/chatgpt-one-strong-shortening-invocation-ledger.json",
+  "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/accessibility-sidecars.json",
+  "scene2012RetryOne": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-hard-failure-retry-1-prepared-checkpoint.json",
+  "validFirstOccurrenceScenes": [2011, 2013, 2014],
+  "terminalRefusalScenes": [2012],
+  "selectedScenes": [2011, 2013, 2014],
+  "selectedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2011-meta-primary-original.jpg",
+    "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2013-meta-primary-original.jpg",
+    "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2014-chatgpt-single-tailoring-pass.png"
+  ],
+  "rawMetaAssetCount": 3,
+  "chatgptInvocations": 3,
+  "chatgptCompletedOutputs": 2,
+  "chatgptModerationBlockedOutputs": 1,
+  "providerRetriesDispatched": 0,
+  "aestheticRetries": 0,
+  "hardQa": {
+    "allThreeDecodable": true,
+    "allThreeVertical": true,
+    "allThreeExactlyFourClearlyAdultCharacters": true,
+    "allThreeDistinctIdentityClasses": true,
+    "allThreePublicSafeCoverage": true,
+    "allThreeTechnicallyUsableAnatomy": true,
+    "allThreeCountryLocationsReadable": true
+  },
+  "selection": {
+    "scene2011": "Meta selected because it preserves the fixed extreme-close roll better than the valid but wider ChatGPT output.",
+    "scene2013": "Meta selected because the sole ChatGPT tailoring invocation was blocked at output moderation and cannot be retried.",
+    "scene2014": "ChatGPT selected because the sole valid tailoring output preserves the scene and improves the secure shortening and footwear read."
+  },
+  "duplicateGate": "Never resend any first occurrence and never make another ChatGPT edit call for scenes 2011, 2013 or 2014. Scene 2012 retry one must be a new prompt occurrence with a new provider URL.",
+  "canonicalContradiction": "The old Cuba automation instruction remains superseded by Tanzania preparation and every later remote-verified checkpoint. Current browser authority is Batch 496, with three accepted first occurrences and one separately prepared hard-failure retry.",
+  "nextSafeAction": "Commit and remote-verify all raw bytes, terminal evidence, one-pass outputs, QA, ledgers, sidecars and the exact scene 2012 retry-one prompt. Then close only the terminal refused scene 2012 first-occurrence tab, stage retry one in one fresh Meta Thinking composer with anchors 938, 936 and 937 in that order, preserve and remote-verify a no-send receipt, and activate Send once."
+}

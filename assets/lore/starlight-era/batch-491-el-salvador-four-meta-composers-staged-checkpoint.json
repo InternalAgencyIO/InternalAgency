@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "batch": 491,
+  "country": "El Salvador",
+  "state": "four-visible-meta-composers-staged-no-send-awaiting-remote-parity",
+  "stagedAtUtc": "2026-09-06T03:53:06.4025476Z",
+  "sceneIds": [1991, 1992, 1993, 1994],
+  "provider": "Meta AI",
+  "accountVerifiedEveryLane": "leesha007",
+  "modeVerifiedEveryLane": "Thinking",
+  "promptHashesVerified": [
+    "ECAC3BFCAD4E1781BFD1F79488F3E04927CF56CDC1D47D65CAEF05B27A32CA96",
+    "D6A93FE822ECE70B46D8AED5F4835CF6080CCDAF3F19C898F045393617BE145F",
+    "E2ADFF24D6ADA5F7068088E446179E517E431CC0AF480E0AF6B5264A96D4D799",
+    "3975AF9ABFCF05C4D2D955DB7B062BFCAEFCC3FE916A35806CC6DE561FB69604"
+  ],
+  "anchorOrderVerifiedEveryLane": [938, 936, 937],
+  "anchorCountPerLane": 3,
+  "sendControlCountPerLane": 1,
+  "sendControlsEnabled": true,
+  "sendActivations": 0,
+  "providerUrls": [null, null, null, null],
+  "visibleReceipt": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/staging-visible-receipt.json",
+    "sha256": "F116BF5A82F31A6528B6371B153FFF6333C7FB6B689E8A2A53C969B313FD7563",
+    "bytes": 3624
+  },
+  "remoteVerifiedPreparationHead": "5873951216b19573369432132b7a97b4431d8cdd",
+  "stagingRemoteParityPending": true,
+  "terminalProtection": {
+    "batch466ScenesNeverReopened": [1890, 1891, 1892, 1893],
+    "batch490ProviderUrlsNeverResent": [
+      "https://www.meta.ai/prompt/efd38db4-dd50-4401-8bb9-ab4a695bfe53",
+      "https://www.meta.ai/prompt/1721659e-81d9-4f08-b084-138c9a04b3ac",
+      "https://www.meta.ai/prompt/4510b7b5-859c-4f59-84b7-2b18fd958962",
+      "https://www.meta.ai/prompt/619f8453-99de-4548-9005-44ffa7383516"
+    ],
+    "confirmedPromptResends": 0,
+    "terminalSceneReopens": 0
+  },
+  "xState": {
+    "account": "@dogramaci",
+    "url": "https://x.com/compose/post",
+    "blank": true,
+    "mediaCount": 0,
+    "postDisabled": true
+  },
+  "nextSafeAction": "Commit and verify this exact no-send staging record against local, origin and PR #13. Re-inspect all four live composers for exact prompt prefix, leesha007, Thinking, anchors 938, 936, 937 in order and one enabled Send. If unchanged, activate Send exactly once in each lane under current standing authorization; archive every provider URL and occurrence before any retry or tab reuse."
+}

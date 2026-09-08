@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "batch": 458,
+  "country": "Laos",
+  "scene": 1858,
+  "qaAtUtc": "2026-08-28T12:05:54.075Z",
+  "sourcePath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-458-laos\\1858-laos-vientiane-mekong-promenade-01.webp",
+  "sha256": "AFEDE8BB7EA7397F0AC55FE19F6CA644156D3CB3D34206A307A778B45E26138F",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "orientationCheck": "pass-vertical-9:16",
+  "castCheck": "pass-exactly-four-adult-women",
+  "locationCheck": "pass-Mekong-riverside-readable",
+  "cameraCheck": "fail-extreme-wide-lock; complete figure height is approximately 30 percent, exceeding the maximum 15 percent",
+  "choreographyCheck": "not-counted-after-binding-camera-failure",
+  "safetyCheck": "pass-public-safe",
+  "decision": "reject-hard-unusable",
+  "accepted": false,
+  "rejectionReasons": [
+    "binding camera-roll 82 extreme-wide scale violated",
+    "quartet exceeds 15 percent maximum image-height requirement"
+  ]
+}

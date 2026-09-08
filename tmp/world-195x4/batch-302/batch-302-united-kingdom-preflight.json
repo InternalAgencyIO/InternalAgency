@@ -1,0 +1,1259 @@
+{
+  "batch": 302,
+  "country": "United Kingdom",
+  "status": "render-preflight-stored",
+  "sourceCommit": "79f8f7c09f51e987e606d27ca68ba9917f26f8d2",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch302-united-kingdom keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextThemePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextQueueCountry": "Vatican City",
+  "researchSources": [
+    {
+      "url": "https://www.visitlondon.com/things-to-do/place/3901803-tower-bridge",
+      "usedFor": "Tower Bridge twin towers, high walkways, Victorian engineering, and Thames setting"
+    },
+    {
+      "url": "https://www.edinburghcastle.scot/",
+      "usedFor": "Edinburgh Castle rock silhouette and its central place in Edinburgh's Old and New Town setting"
+    },
+    {
+      "url": "https://www.visitwales.com/destinations/south-wales/cardiff/top-things-see-and-do-cardiff-bay",
+      "usedFor": "Cardiff Bay, Wales Millennium Centre, Pierhead, and waterfront context"
+    },
+    {
+      "url": "https://discovernorthernireland.com/listing/giants-causeway/74237101/",
+      "usedFor": "Giant's Causeway basalt columns, Atlantic coastline, and cliff setting"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch302-united-kingdom-male-model-scene",
+    "fullHash": 418313081,
+    "roll": 81,
+    "selectedScenePosition": 2,
+    "selectedScene": 1229,
+    "maleEmotion": {
+      "key": "batch302-united-kingdom-scene2-male-emotion",
+      "roll": 75,
+      "result": "contained resentment"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "The United Kingdom flag has no secular pictorial motif to copy, so large researched architecture, transport, tea, music, craft, geology, flora, and regional design motifs replace it.",
+    "palette": "midnight navy, scarlet, optical white, and black expanded with metallic gold, Thames teal, Cardiff copper, emerald, heather violet, basalt charcoal, and Atlantic blue",
+    "minimumCoverage": "Every scene places large complete secular United Kingdom motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScenes": "London uses Tower Bridge, Thames, clockwork, double-decker, black-cab, tea, vinyl, and tailoring motifs. Edinburgh uses castle rock, Old Town, tartan-grid, thistle, bagpipe, whisky-still, and shortbread geometry. Cardiff uses the Millennium Centre copper arc, Pierhead clock, bay waves, a secular red dragon, red kite, daffodil, slate, and harp strings. Giant's Causeway uses basalt hexagons, Atlantic cliffs, flax, linen, civilian shipbuilding, and coastal craft.",
+    "prohibitions": "No literal Union flag or regional flag, crown, royal crest, official emblem, sacred symbol, political insignia, copied ceremonial dress, copied uniform, military imagery, badge, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch302-united-kingdom-x-heart",
+      "roll": 82,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch302-united-kingdom-x-internalagency",
+      "roll": 80,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch302-united-kingdom-x-worldxxxseries",
+      "roll": 59,
+      "active": false
+    }
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1228, 1230, and 1231 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1229 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch302-united-kingdom-male-model-scene",
+        81
+      ],
+      [
+        "batch302-united-kingdom-scene2-male-emotion",
+        75
+      ],
+      [
+        "batch302-united-kingdom-scene1228-weather",
+        99
+      ],
+      [
+        "batch302-united-kingdom-scene1228-paws",
+        64
+      ],
+      [
+        "batch302-united-kingdom-scene1228-poleDanceTheme",
+        15
+      ],
+      [
+        "batch302-united-kingdom-scene1228-rainbowOnly",
+        27
+      ],
+      [
+        "batch302-united-kingdom-scene1228-rainbowHosiery",
+        38
+      ],
+      [
+        "batch302-united-kingdom-scene1228-romanceBeat",
+        42
+      ],
+      [
+        "batch302-united-kingdom-scene1228-compoundLoveBeat",
+        84
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Radiance-emotion",
+        44
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Radiance-visibleMidriff",
+        58
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Radiance-straplessDress",
+        77
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Radiance-fullyOpenBack",
+        66
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Ellie-emotion",
+        50
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Ellie-visibleMidriff",
+        0
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Ellie-straplessDress",
+        91
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Ellie-fullyOpenBack",
+        0
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Alia-emotion",
+        18
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Alia-visibleMidriff",
+        24
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Alia-straplessDress",
+        15
+      ],
+      [
+        "batch302-united-kingdom-scene1228-Alia-fullyOpenBack",
+        96
+      ],
+      [
+        "batch302-united-kingdom-scene1228-AI ECE-emotion",
+        16
+      ],
+      [
+        "batch302-united-kingdom-scene1228-AI ECE-visibleMidriff",
+        46
+      ],
+      [
+        "batch302-united-kingdom-scene1228-AI ECE-straplessDress",
+        81
+      ],
+      [
+        "batch302-united-kingdom-scene1228-AI ECE-fullyOpenBack",
+        78
+      ],
+      [
+        "batch302-united-kingdom-scene1229-weather",
+        8
+      ],
+      [
+        "batch302-united-kingdom-scene1229-paws",
+        65
+      ],
+      [
+        "batch302-united-kingdom-scene1229-poleDanceTheme",
+        10
+      ],
+      [
+        "batch302-united-kingdom-scene1229-rainbowOnly",
+        80
+      ],
+      [
+        "batch302-united-kingdom-scene1229-rainbowHosiery",
+        95
+      ],
+      [
+        "batch302-united-kingdom-scene1229-romanceBeat",
+        17
+      ],
+      [
+        "batch302-united-kingdom-scene1229-compoundLoveBeat",
+        89
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Radiance-emotion",
+        37
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Radiance-visibleMidriff",
+        25
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Radiance-straplessDress",
+        50
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Radiance-fullyOpenBack",
+        35
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Ellie-emotion",
+        93
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Ellie-visibleMidriff",
+        9
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Ellie-straplessDress",
+        62
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Ellie-fullyOpenBack",
+        87
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Alia-emotion",
+        75
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Alia-visibleMidriff",
+        3
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Alia-straplessDress",
+        16
+      ],
+      [
+        "batch302-united-kingdom-scene1229-Alia-fullyOpenBack",
+        5
+      ],
+      [
+        "batch302-united-kingdom-scene1229-AI ECE-emotion",
+        53
+      ],
+      [
+        "batch302-united-kingdom-scene1229-AI ECE-visibleMidriff",
+        69
+      ],
+      [
+        "batch302-united-kingdom-scene1229-AI ECE-straplessDress",
+        18
+      ],
+      [
+        "batch302-united-kingdom-scene1229-AI ECE-fullyOpenBack",
+        59
+      ],
+      [
+        "batch302-united-kingdom-scene1230-weather",
+        34
+      ],
+      [
+        "batch302-united-kingdom-scene1230-paws",
+        91
+      ],
+      [
+        "batch302-united-kingdom-scene1230-poleDanceTheme",
+        32
+      ],
+      [
+        "batch302-united-kingdom-scene1230-rainbowOnly",
+        22
+      ],
+      [
+        "batch302-united-kingdom-scene1230-rainbowHosiery",
+        33
+      ],
+      [
+        "batch302-united-kingdom-scene1230-romanceBeat",
+        87
+      ],
+      [
+        "batch302-united-kingdom-scene1230-compoundLoveBeat",
+        19
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Radiance-emotion",
+        23
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Radiance-visibleMidriff",
+        7
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Radiance-straplessDress",
+        60
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Radiance-fullyOpenBack",
+        33
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Ellie-emotion",
+        91
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Ellie-visibleMidriff",
+        31
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Ellie-straplessDress",
+        52
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Ellie-fullyOpenBack",
+        89
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Alia-emotion",
+        77
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Alia-visibleMidriff",
+        37
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Alia-straplessDress",
+        26
+      ],
+      [
+        "batch302-united-kingdom-scene1230-Alia-fullyOpenBack",
+        15
+      ],
+      [
+        "batch302-united-kingdom-scene1230-AI ECE-emotion",
+        71
+      ],
+      [
+        "batch302-united-kingdom-scene1230-AI ECE-visibleMidriff",
+        19
+      ],
+      [
+        "batch302-united-kingdom-scene1230-AI ECE-straplessDress",
+        68
+      ],
+      [
+        "batch302-united-kingdom-scene1230-AI ECE-fullyOpenBack",
+        93
+      ],
+      [
+        "batch302-united-kingdom-scene1231-weather",
+        29
+      ],
+      [
+        "batch302-united-kingdom-scene1231-paws",
+        22
+      ],
+      [
+        "batch302-united-kingdom-scene1231-poleDanceTheme",
+        37
+      ],
+      [
+        "batch302-united-kingdom-scene1231-rainbowOnly",
+        25
+      ],
+      [
+        "batch302-united-kingdom-scene1231-rainbowHosiery",
+        40
+      ],
+      [
+        "batch302-united-kingdom-scene1231-romanceBeat",
+        76
+      ],
+      [
+        "batch302-united-kingdom-scene1231-compoundLoveBeat",
+        54
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Radiance-emotion",
+        42
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Radiance-visibleMidriff",
+        72
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Radiance-straplessDress",
+        23
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Radiance-fullyOpenBack",
+        4
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Ellie-emotion",
+        56
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Ellie-visibleMidriff",
+        66
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Ellie-straplessDress",
+        21
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Ellie-fullyOpenBack",
+        70
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Alia-emotion",
+        84
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Alia-visibleMidriff",
+        6
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Alia-straplessDress",
+        57
+      ],
+      [
+        "batch302-united-kingdom-scene1231-Alia-fullyOpenBack",
+        38
+      ],
+      [
+        "batch302-united-kingdom-scene1231-AI ECE-emotion",
+        50
+      ],
+      [
+        "batch302-united-kingdom-scene1231-AI ECE-visibleMidriff",
+        40
+      ],
+      [
+        "batch302-united-kingdom-scene1231-AI ECE-straplessDress",
+        59
+      ],
+      [
+        "batch302-united-kingdom-scene1231-AI ECE-fullyOpenBack",
+        4
+      ],
+      [
+        "batch302-united-kingdom-x-heart",
+        82
+      ],
+      [
+        "batch302-united-kingdom-x-internalagency",
+        80
+      ],
+      [
+        "batch302-united-kingdom-x-worldxxxseries",
+        59
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch302-united-kingdom-scene1228-rainbowHosieryWearer",
+        66
+      ],
+      [
+        "batch302-united-kingdom-scene1228-rainbowHosieryPaletteMode",
+        2
+      ],
+      [
+        "batch302-united-kingdom-scene1229-rainbowHosieryWearer",
+        23
+      ],
+      [
+        "batch302-united-kingdom-scene1229-rainbowHosieryPaletteMode",
+        97
+      ],
+      [
+        "batch302-united-kingdom-scene1230-rainbowHosieryWearer",
+        97
+      ],
+      [
+        "batch302-united-kingdom-scene1230-rainbowHosieryPaletteMode",
+        11
+      ],
+      [
+        "batch302-united-kingdom-scene1231-rainbowHosieryWearer",
+        88
+      ],
+      [
+        "batch302-united-kingdom-scene1231-rainbowHosieryPaletteMode",
+        24
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "FECC8A1F6D4970AAD945FB0F60DC628BC960FC8103B14E4A9E77C6A78AF0E6E4",
+    "hosierySelectorPairsSha256": "770617B4681DF4F7B526D7DC356373990051B48294EE57A9A7391130B8B15E12"
+  },
+  "scenePlans": {
+    "1228": {
+      "scene": 1228,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered fictional public-fashion terrace beside London's River Thames, with the complete twin-towered Tower Bridge, Victorian suspension geometry, the Shard, and the modern City skyline unmistakable beneath silent heat lightning on the horizon",
+      "motifs": [
+        "large complete Tower Bridge, Thames-wave, and Victorian clockwork fields covering Radiance's dress and Ellie's skirt",
+        "large complete double-decker bus, black-cab silhouette, tea-rose, vinyl-groove, and bespoke pinstripe fields covering Alia's shorts and ECE's skirt"
+      ],
+      "culture": "A dry unattended cultural display far outside the prop lane holds an unbranded scarlet double-decker model, a black-cab model, a modern tea service, and vinyl records with no readable labels. Treat the theme only as fully clothed public-safe adult evening stage fashion with no dance action, stripping, or erotic movement. No literal Union flag, crown, royal crest, official emblem, sacred symbol, copied uniform, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch302-united-kingdom-scene1228-weather",
+        "roll": 99,
+        "result": "silent heat lightning on the horizon"
+      },
+      "paws": {
+        "key": "batch302-united-kingdom-scene1228-paws",
+        "roll": 64,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch302-united-kingdom-scene1228-poleDanceTheme",
+        "roll": 15,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch302-united-kingdom-scene1228-rainbowOnly",
+        "roll": 27,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch302-united-kingdom-scene1228-rainbowHosiery",
+        "roll": 38,
+        "active": false,
+        "wearer": {
+          "key": "batch302-united-kingdom-scene1228-rainbowHosieryWearer",
+          "roll": 66,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch302-united-kingdom-scene1228-rainbowHosieryPaletteMode",
+          "roll": 2,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch302-united-kingdom-scene1228-romanceBeat",
+        "roll": 42,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch302-united-kingdom-scene1228-compoundLoveBeat",
+        "roll": 84,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1228-Radiance-emotion",
+            "roll": 44,
+            "result": "awe",
+            "performance": "awe shown by widened luminous eyes toward the Tower Bridge lightning while staying cheek-close to ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1228-Radiance-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1228-Radiance-straplessDress",
+            "roll": 77,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1228-Radiance-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1228-Ellie-emotion",
+            "roll": 50,
+            "result": "startled surprise",
+            "performance": "startled surprise shown by lifted brows and a caught breath while holding Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1228-Ellie-visibleMidriff",
+            "roll": 0,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1228-Ellie-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1228-Ellie-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1228-Alia-emotion",
+            "roll": 18,
+            "result": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness shown as radiant open laughter while linking Ellie"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1228-Alia-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1228-Alia-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1228-Alia-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1228-AI ECE-emotion",
+            "roll": 16,
+            "result": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness shown differently through tear-bright laughing delight and relieved eye contact with Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1228-AI ECE-visibleMidriff",
+            "roll": 46,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1228-AI ECE-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1228-AI ECE-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the stable standing end pose after the selected ECE-rise, behind-embrace, and cheek-peck rolls. Awestruck Radiance has just helped delighted ECE rise from the low route beacon and keeps their left hands linked. Startled Ellie closes at Radiance's waist and shoulder while Radiance steadies Ellie at the shoulder. Laughing Alia links hands with Ellie and touches Ellie's other shoulder, watching Radiance lean cheek-close toward ECE. Every contact is neighboring, visible, consensual, fully clothed adult affection.",
+      "composition": "Place the adults left to right as ECE, Radiance, Ellie, and Alia. Keep ECE's prop arm isolated at the far left against empty Thames water and leave a visible background gap between every lower body.",
+      "emotionNuance": {
+        "Radiance": "awe shown by widened luminous eyes toward the Tower Bridge lightning while staying cheek-close to ECE",
+        "Ellie": "startled surprise shown by lifted brows and a caught breath while holding Radiance",
+        "Alia": "extreme happiness shown as radiant open laughter while linking Ellie",
+        "AI ECE": "extreme happiness shown differently through tear-bright laughing delight and relieved eye contact with Radiance"
+      },
+      "outfits": {
+        "Radiance": "a midnight-navy asymmetric wide-strap evening-stage mini dress with covered waist, secure shoulders, and high closed back, carrying a large complete Tower Bridge and Thames-wave field, with scarlet architectural ankle boots",
+        "Ellie": "a scarlet one-shoulder cropped evening-stage bodice exposing her ordinary waist and belly button, with rigid side support and a completely open back visible from shoulder blades to waist, a separate optical-white asymmetric mini skirt carrying a large complete Victorian clockwork and London skyline field, with navy pumps",
+        "Alia": "a fully strapless optical-white sculpted cropped evening-stage top with completely bare shoulders, exposing her ordinary waist and belly button, with a solid closed back panel, separate midnight-navy tailored mini shorts carrying a large complete double-decker bus, black-cab, and tea-rose field, with scarlet platform heels",
+        "AI ECE": "a scarlet square-neck cropped evening-stage vest exposing her ordinary waist and belly button, with wide navy straps and a high closed back, a separate black peplum mini skirt carrying a large complete vinyl-groove and bespoke pinstripe field, with silver slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for controlled sight alignment. Her right forearm is isolated against empty river background, her right index finger is straight and visibly indexed high along the frame outside the complete empty trigger guard, and the guard remains unobstructed. The horizontal muzzle points only left across clearly empty Thames water toward an unoccupied route marker, away from every person, bridge, skyline, display, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly on Ellie's near shoulder",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand links visibly with Alia's left hand",
+        "Alia left hand links visibly with Ellie's right hand; Alia right hand rests visibly on Ellie's near shoulder",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered fictional public-fashion terrace beside London's River Thames, with the complete twin-towered Tower Bridge, Victorian suspension geometry, the Shard, and the modern City skyline unmistakable beneath silent heat lightning on the horizon. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: adult nightlife dance-performance couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a midnight-navy asymmetric wide-strap evening-stage mini dress with covered waist, secure shoulders, and high closed back, carrying a large complete Tower Bridge and Thames-wave field, with scarlet architectural ankle boots; Ellie: a scarlet one-shoulder cropped evening-stage bodice exposing her ordinary waist and belly button, with rigid side support and a completely open back visible from shoulder blades to waist, a separate optical-white asymmetric mini skirt carrying a large complete Victorian clockwork and London skyline field, with navy pumps; Alia: a fully strapless optical-white sculpted cropped evening-stage top with completely bare shoulders, exposing her ordinary waist and belly button, with a solid closed back panel, separate midnight-navy tailored mini shorts carrying a large complete double-decker bus, black-cab, and tea-rose field, with scarlet platform heels; AI ECE: a scarlet square-neck cropped evening-stage vest exposing her ordinary waist and belly button, with wide navy straps and a high closed back, a separate black peplum mini skirt carrying a large complete vinyl-groove and bespoke pinstripe field, with silver slingback heels. Materialize every rolled cut visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular United Kingdom motifs must read clearly on at least two outfits: large complete Tower Bridge, Thames-wave, and Victorian clockwork fields covering Radiance's dress and Ellie's skirt; large complete double-decker bus, black-cab silhouette, tea-rose, vinyl-groove, and bespoke pinstripe fields covering Alia's shorts and ECE's skirt. A dry unattended cultural display far outside the prop lane holds an unbranded scarlet double-decker model, a black-cab model, a modern tea service, and vinyl records with no readable labels. Treat the theme only as fully clothed public-safe adult evening stage fashion with no dance action, stripping, or erotic movement. No literal Union flag, crown, royal crest, official emblem, sacred symbol, copied uniform, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: awe, performed as awe shown by widened luminous eyes toward the Tower Bridge lightning while staying cheek-close to ECE; Ellie: startled surprise, performed as startled surprise shown by lifted brows and a caught breath while holding Radiance; Alia: extreme happiness, radiant laughing delight, performed as extreme happiness shown as radiant open laughter while linking Ellie; AI ECE: extreme happiness, radiant laughing delight, performed as extreme happiness shown differently through tear-bright laughing delight and relieved eye contact with Radiance. Selected dynamic romance roll 42: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Selected compound love roll 84: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Materialize both selected love rolls through this exact safe consensual choreography: This is the stable standing end pose after the selected ECE-rise, behind-embrace, and cheek-peck rolls. Awestruck Radiance has just helped delighted ECE rise from the low route beacon and keeps their left hands linked. Startled Ellie closes at Radiance's waist and shoulder while Radiance steadies Ellie at the shoulder. Laughing Alia links hands with Ellie and touches Ellie's other shoulder, watching Radiance lean cheek-close toward ECE. Every contact is neighboring, visible, consensual, fully clothed adult affection. Place the adults left to right as ECE, Radiance, Ellie, and Alia. Keep ECE's prop arm isolated at the far left against empty Thames water and leave a visible background gap between every lower body. Use this exact hand inventory and no other hands: Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly on Ellie's near shoulder; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand links visibly with Alia's left hand; Alia left hand links visibly with Ellie's right hand; Alia right hand rests visibly on Ellie's near shoulder; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for controlled sight alignment. Her right forearm is isolated against empty river background, her right index finger is straight and visibly indexed high along the frame outside the complete empty trigger guard, and the guard remains unobstructed. The horizontal muzzle points only left across clearly empty Thames water toward an unoccupied route marker, away from every person, bridge, skyline, display, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as silent heat lightning on the horizon. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1229": {
+      "scene": 1229,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry fictional public-fashion terrace on Edinburgh Castle's secular esplanade, with the complete castle rock silhouette, Old Town roofline, Princes Street axis, and distant Arthur's Seat unmistakable in clear golden-hour radiance",
+      "motifs": [
+        "large complete Edinburgh Castle, castle-rock, Old Town roofline, and tartan-grid fields covering Radiance's skirt and Ellie's shorts",
+        "large complete thistle, bagpipe-curve, whisky-still, shortbread-tin geometry, and Arthur's Seat fields covering Alia's skirt and ECE's dress"
+      ],
+      "culture": "A dry unattended cultural table far outside the prop lane holds an unbranded bagpipe-inspired instrument, thistles, geometric shortbread, and one sealed unlabeled amber-glass whisky decanter. Treat the theme only as fully clothed public-safe adult evening stage fashion with no dance action, stripping, or erotic movement. No literal Union flag, Saltire, crown, royal crest, official emblem, sacred symbol, copied ceremonial dress, military image, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch302-united-kingdom-scene1229-weather",
+        "roll": 8,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "key": "batch302-united-kingdom-scene1229-paws",
+        "roll": 65,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch302-united-kingdom-scene1229-poleDanceTheme",
+        "roll": 10,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch302-united-kingdom-scene1229-rainbowOnly",
+        "roll": 80,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch302-united-kingdom-scene1229-rainbowHosiery",
+        "roll": 95,
+        "active": false,
+        "wearer": {
+          "key": "batch302-united-kingdom-scene1229-rainbowHosieryWearer",
+          "roll": 23,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch302-united-kingdom-scene1229-rainbowHosieryPaletteMode",
+          "roll": 97,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch302-united-kingdom-scene1229-romanceBeat",
+        "roll": 17,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch302-united-kingdom-scene1229-compoundLoveBeat",
+        "roll": 89,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1229-Radiance-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "performance": "magnetic confidence shown by a composed smile while openly seeking the male's attention"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1229-Radiance-visibleMidriff",
+            "roll": 25,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1229-Radiance-straplessDress",
+            "roll": 50,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1229-Radiance-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1229-Ellie-emotion",
+            "roll": 93,
+            "result": "guilt and remorse",
+            "performance": "guilt and remorse shown by lowered tear-bright eyes while accepting the male's waist hold"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1229-Ellie-visibleMidriff",
+            "roll": 9,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1229-Ellie-straplessDress",
+            "roll": 62,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1229-Ellie-fullyOpenBack",
+            "roll": 87,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1229-Alia-emotion",
+            "roll": 75,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by a set jaw while holding the ribbon and leaning into the male"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1229-Alia-visibleMidriff",
+            "roll": 3,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1229-Alia-straplessDress",
+            "roll": 16,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1229-Alia-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1229-AI ECE-emotion",
+            "roll": 53,
+            "result": "intense curiosity",
+            "performance": "intense curiosity shown by a searching stare that reads the male's betrayal without threat"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1229-AI ECE-visibleMidriff",
+            "roll": 69,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1229-AI ECE-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1229-AI ECE-fullyOpenBack",
+            "roll": 59,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is a stable adjacent-contact interpretation of the selected signal-ribbon contest and behind-embrace rolls, expanded for the male scene. Resentful Alia and remorseful Ellie hold opposite ends of one loose scarlet-and-navy signal ribbon that arcs visibly behind the body line. Confident Radiance steadies Alia at the shoulder while openly touching the male's upper arm. The resentful male holds Alia at one waist and Ellie at the other in plain-sight adult infidelity drama, while his strongest sustained eye line returns only to his wife ECE. Curious ECE touches Ellie's shoulder while controlling the empty route. Every interaction is consensual, fully clothed, nonviolent adult relationship drama.",
+      "composition": "Place the adults left to right as Radiance, Alia, Male, Ellie, and ECE. Keep ECE's prop arm isolated at the far right against an empty route and leave a visible background gap between every lower body.",
+      "emotionNuance": {
+        "Radiance": "magnetic confidence shown by a composed smile while openly seeking the male's attention",
+        "Ellie": "guilt and remorse shown by lowered tear-bright eyes while accepting the male's waist hold",
+        "Alia": "contained resentment shown by a set jaw while holding the ribbon and leaning into the male",
+        "AI ECE": "intense curiosity shown by a searching stare that reads the male's betrayal without threat",
+        "Male": "contained resentment shown by a restrained expression while his strongest sustained eye line returns only to ECE"
+      },
+      "outfits": {
+        "Radiance": "a scarlet asymmetric wide-strap cropped evening-stage bodice exposing her ordinary waist and belly button, with secure side support and high closed back, a separate midnight-navy tartan-grid wrap mini skort carrying a large complete Edinburgh Castle and castle-rock field, with optical-white heeled boots",
+        "Ellie": "an optical-white square-neck cropped evening-stage top exposing her ordinary waist and belly button, with wide scarlet straps and high closed back, separate scarlet tailored mini shorts carrying a large complete Old Town roofline and Arthur's Seat field, with navy pumps",
+        "Alia": "a fully strapless midnight-navy sculpted cropped evening-stage bodice with completely bare shoulders, exposing her ordinary waist and belly button, rigid side architecture and a completely open back visible from shoulder blades to waist, a separate metallic-gold asymmetric mini skirt carrying a large complete thistle, bagpipe-curve, and whisky-still field, with scarlet platform heels",
+        "AI ECE": "a fully strapless optical-white folded evening-stage mini dress with completely bare shoulders, covered waist, and solid closed back panel, carrying a large complete tartan-grid and shortbread geometry field, with navy slingback heels",
+        "Male": "the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve black polo with restrained scarlet-and-navy castle-arc seams, black jeans, and black boots"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. Her right forearm is isolated against an empty esplanade extension, her right index finger is straight and visibly indexed high along the frame outside the complete empty trigger guard, the magazine is absent, and the empty magazine well is visible. The horizontal muzzle points only right along a cordoned empty route toward an unoccupied marker, away from every person, castle, ribbon, display, and camera, never at the sky. Her left hand stays off the prop and touches Ellie's near shoulder. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "Radiance left hand rests visibly on Alia's near shoulder; Radiance right hand rests visibly on the male's upper arm",
+        "Alia left hand holds the left end of the loose signal ribbon; Alia right hand remains open and visibly separated beside her own hip",
+        "Male right hand rests visibly at Alia's near waist; Male left hand rests visibly at Ellie's near waist",
+        "Ellie left hand rests visibly on the male's left forearm; Ellie right hand holds the right end of the loose signal ribbon",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly on Ellie's near shoulder"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch302-united-kingdom-scene2-male-emotion",
+          "roll": 75,
+          "result": "contained resentment",
+          "performance": "contained resentment shown by a restrained expression while his strongest sustained eye line returns only to ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed adult infidelity drama with Alia and Ellie; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, Image 4 ECE's face-detail anchor, and Image 5 the adult male face/build anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry fictional public-fashion terrace on Edinburgh Castle's secular esplanade, with the complete castle rock silhouette, Old Town roofline, Princes Street axis, and distant Arthur's Seat unmistakable in clear golden-hour radiance. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male from Image 5. Add him without replacing any woman. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: adult nightlife dance-performance couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a scarlet asymmetric wide-strap cropped evening-stage bodice exposing her ordinary waist and belly button, with secure side support and high closed back, a separate midnight-navy tartan-grid wrap mini skort carrying a large complete Edinburgh Castle and castle-rock field, with optical-white heeled boots; Ellie: an optical-white square-neck cropped evening-stage top exposing her ordinary waist and belly button, with wide scarlet straps and high closed back, separate scarlet tailored mini shorts carrying a large complete Old Town roofline and Arthur's Seat field, with navy pumps; Alia: a fully strapless midnight-navy sculpted cropped evening-stage bodice with completely bare shoulders, exposing her ordinary waist and belly button, rigid side architecture and a completely open back visible from shoulder blades to waist, a separate metallic-gold asymmetric mini skirt carrying a large complete thistle, bagpipe-curve, and whisky-still field, with scarlet platform heels; AI ECE: a fully strapless optical-white folded evening-stage mini dress with completely bare shoulders, covered waist, and solid closed back panel, carrying a large complete tartan-grid and shortbread geometry field, with navy slingback heels; Male: the established adult male face from Scene 1136, closely trimmed beard and muscular special-operative build, a fitted opaque short-sleeve black polo with restrained scarlet-and-navy castle-arc seams, black jeans, and black boots. Materialize every rolled cut visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular United Kingdom motifs must read clearly on at least two outfits: large complete Edinburgh Castle, castle-rock, Old Town roofline, and tartan-grid fields covering Radiance's skirt and Ellie's shorts; large complete thistle, bagpipe-curve, whisky-still, shortbread-tin geometry, and Arthur's Seat fields covering Alia's skirt and ECE's dress. A dry unattended cultural table far outside the prop lane holds an unbranded bagpipe-inspired instrument, thistles, geometric shortbread, and one sealed unlabeled amber-glass whisky decanter. Treat the theme only as fully clothed public-safe adult evening stage fashion with no dance action, stripping, or erotic movement. No literal Union flag, Saltire, crown, royal crest, official emblem, sacred symbol, copied ceremonial dress, military image, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: magnetic confidence, performed as magnetic confidence shown by a composed smile while openly seeking the male's attention; Ellie: guilt and remorse, performed as guilt and remorse shown by lowered tear-bright eyes while accepting the male's waist hold; Alia: contained resentment, performed as contained resentment shown by a set jaw while holding the ribbon and leaning into the male; AI ECE: intense curiosity, performed as intense curiosity shown by a searching stare that reads the male's betrayal without threat; Male: contained resentment, performed as contained resentment shown by a restrained expression while his strongest sustained eye line returns only to ECE. Selected dynamic romance roll 17: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Selected compound love roll 89: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Materialize both selected love rolls through this exact safe consensual choreography: This is a stable adjacent-contact interpretation of the selected signal-ribbon contest and behind-embrace rolls, expanded for the male scene. Resentful Alia and remorseful Ellie hold opposite ends of one loose scarlet-and-navy signal ribbon that arcs visibly behind the body line. Confident Radiance steadies Alia at the shoulder while openly touching the male's upper arm. The resentful male holds Alia at one waist and Ellie at the other in plain-sight adult infidelity drama, while his strongest sustained eye line returns only to his wife ECE. Curious ECE touches Ellie's shoulder while controlling the empty route. Every interaction is consensual, fully clothed, nonviolent adult relationship drama. Place the adults left to right as Radiance, Alia, Male, Ellie, and ECE. Keep ECE's prop arm isolated at the far right against an empty route and leave a visible background gap between every lower body. Use this exact hand inventory and no other hands: Radiance left hand rests visibly on Alia's near shoulder; Radiance right hand rests visibly on the male's upper arm; Alia left hand holds the left end of the loose signal ribbon; Alia right hand remains open and visibly separated beside her own hip; Male right hand rests visibly at Alia's near waist; Male left hand rests visibly at Ellie's near waist; Ellie left hand rests visibly on the male's left forearm; Ellie right hand holds the right end of the loose signal ribbon; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly on Ellie's near shoulder. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for an unloaded magazine-free manipulation demonstration. Her right forearm is isolated against an empty esplanade extension, her right index finger is straight and visibly indexed high along the frame outside the complete empty trigger guard, the magazine is absent, and the empty magazine well is visible. The horizontal muzzle points only right along a cordoned empty route toward an unoccupied marker, away from every person, castle, ribbon, display, and camera, never at the sky. Her left hand stays off the prop and touches Ellie's near shoulder. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as clear golden-hour radiance. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly five adults, exactly ten arms and exactly ten hands, two per person. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1230": {
+      "scene": 1230,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry covered fictional runway terrace at Cardiff Bay, with the complete curved copper Wales Millennium Centre facade without readable lettering, the red-brick Pierhead clock tower, bay water, and sweeping waterfront geometry unmistakable through cinematic light rain with reflections",
+      "motifs": [
+        "large complete Wales Millennium Centre copper-arc, Cardiff Bay wave, and Pierhead clock fields covering Radiance's skirt and Ellie's shorts",
+        "large complete secular red-dragon silhouette, red-kite wing, daffodil, Welsh-slate facet, and harp-string fields covering Alia's skirt and ECE's skirt"
+      ],
+      "culture": "A dry unattended cultural display far outside the prop lane holds Welsh slate facets, daffodils, a modern harp-inspired string sculpture, and unbranded baked cakes. The red dragon appears only as a secular fashion illustration, never as a literal flag or official emblem. No crown, royal crest, sacred symbol, political insignia, copied uniform, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch302-united-kingdom-scene1230-weather",
+        "roll": 34,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch302-united-kingdom-scene1230-paws",
+        "roll": 91,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch302-united-kingdom-scene1230-poleDanceTheme",
+        "roll": 32,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch302-united-kingdom-scene1230-rainbowOnly",
+        "roll": 22,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch302-united-kingdom-scene1230-rainbowHosiery",
+        "roll": 33,
+        "active": false,
+        "wearer": {
+          "key": "batch302-united-kingdom-scene1230-rainbowHosieryWearer",
+          "roll": 97,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch302-united-kingdom-scene1230-rainbowHosieryPaletteMode",
+          "roll": 11,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch302-united-kingdom-scene1230-romanceBeat",
+        "roll": 87,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch302-united-kingdom-scene1230-compoundLoveBeat",
+        "roll": 19,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1230-Radiance-emotion",
+            "roll": 23,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by a bright sideways smile toward suspicious ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1230-Radiance-visibleMidriff",
+            "roll": 7,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1230-Radiance-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1230-Radiance-fullyOpenBack",
+            "roll": 33,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1230-Ellie-emotion",
+            "roll": 91,
+            "result": "anger",
+            "performance": "anger shown by a tight jaw and direct stare while keeping her touch gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1230-Ellie-visibleMidriff",
+            "roll": 31,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1230-Ellie-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1230-Ellie-fullyOpenBack",
+            "roll": 89,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1230-Alia-emotion",
+            "roll": 77,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by guarded eyes while blocking the route without force"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1230-Alia-visibleMidriff",
+            "roll": 37,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1230-Alia-straplessDress",
+            "roll": 26,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1230-Alia-fullyOpenBack",
+            "roll": 15,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1230-AI ECE-emotion",
+            "roll": 71,
+            "result": "suspicion",
+            "performance": "suspicion shown by narrowed searching eyes while maintaining safe route control"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1230-AI ECE-visibleMidriff",
+            "roll": 19,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1230-AI ECE-straplessDress",
+            "roll": 68,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1230-AI ECE-fullyOpenBack",
+            "roll": 93,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "This is the stable standing end pose after the selected backward route step, cheek-to-cheek pursuit, low-plinth hug, and cheek-peck rolls. Suspicious ECE has stepped backward from the route marker and keeps her left hand linked with mischievous Radiance. Radiance stays cheek-close to ECE while resting her other hand on angry Ellie's shoulder. Ellie holds Radiance at the waist and links her other hand with resentful Alia. Alia returns the link and touches Ellie's other shoulder, blocking the route with a controlled rival stare. The contacts are neighboring, visible, consensual, fully clothed adult affection.",
+      "composition": "Place the adults left to right as ECE, Radiance, Ellie, and Alia. Keep ECE's prop arm isolated at the far left against empty Cardiff Bay water and leave a visible background gap between every lower body.",
+      "emotionNuance": {
+        "Radiance": "playful mischief shown by a bright sideways smile toward suspicious ECE",
+        "Ellie": "anger shown by a tight jaw and direct stare while keeping her touch gentle",
+        "Alia": "contained resentment shown by guarded eyes while blocking the route without force",
+        "AI ECE": "suspicion shown by narrowed searching eyes while maintaining safe route control"
+      },
+      "outfits": {
+        "Radiance": "a scarlet one-shoulder cropped Paris-runway bodice exposing her ordinary waist and belly button, with secure side support and high closed back, a separate midnight-navy asymmetric mini skirt carrying a large complete Wales Millennium Centre copper-arc and Cardiff Bay wave field, with optical-white heeled boots",
+        "Ellie": "an optical-white wide-strap cropped waistcoat-inspired Paris-runway top exposing her ordinary waist and belly button, with high closed back, separate scarlet tailored mini shorts carrying a large complete Pierhead clock and red-kite wing field, with navy pumps",
+        "Alia": "a fully strapless midnight-navy sculpted cropped Paris-runway bodice with completely bare shoulders, exposing her ordinary waist and belly button, rigid side support and a completely open back visible from shoulder blades to waist, a separate metallic-gold pleated mini skirt carrying a large complete secular red-dragon and daffodil field, with scarlet platform heels",
+        "AI ECE": "a Cardiff-teal square-neck cropped Paris-runway top exposing her ordinary waist and belly button, with wide optical-white straps and high closed back, a separate optical-white geometric mini skirt carrying a large complete Welsh-slate and harp-string field, with silver slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a controlled one-handed sight-picture demonstration. Her right forearm is isolated against empty bay water, her right index finger is straight and visibly indexed high along the frame outside the complete empty trigger guard, and the guard remains unobstructed. The horizontal muzzle points only left across clearly empty Cardiff Bay water toward an unoccupied route marker, away from every person, building, display, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly on Ellie's near shoulder",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand links visibly with Alia's left hand",
+        "Alia left hand links visibly with Ellie's right hand; Alia right hand rests visibly on Ellie's near shoulder",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered fictional runway terrace at Cardiff Bay, with the complete curved copper Wales Millennium Centre facade without readable lettering, the red-brick Pierhead clock tower, bay water, and sweeping waterfront geometry unmistakable through cinematic light rain with reflections. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: Paris runway model couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a scarlet one-shoulder cropped Paris-runway bodice exposing her ordinary waist and belly button, with secure side support and high closed back, a separate midnight-navy asymmetric mini skirt carrying a large complete Wales Millennium Centre copper-arc and Cardiff Bay wave field, with optical-white heeled boots; Ellie: an optical-white wide-strap cropped waistcoat-inspired Paris-runway top exposing her ordinary waist and belly button, with high closed back, separate scarlet tailored mini shorts carrying a large complete Pierhead clock and red-kite wing field, with navy pumps; Alia: a fully strapless midnight-navy sculpted cropped Paris-runway bodice with completely bare shoulders, exposing her ordinary waist and belly button, rigid side support and a completely open back visible from shoulder blades to waist, a separate metallic-gold pleated mini skirt carrying a large complete secular red-dragon and daffodil field, with scarlet platform heels; AI ECE: a Cardiff-teal square-neck cropped Paris-runway top exposing her ordinary waist and belly button, with wide optical-white straps and high closed back, a separate optical-white geometric mini skirt carrying a large complete Welsh-slate and harp-string field, with silver slingback heels. Materialize every rolled cut visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular United Kingdom motifs must read clearly on at least two outfits: large complete Wales Millennium Centre copper-arc, Cardiff Bay wave, and Pierhead clock fields covering Radiance's skirt and Ellie's shorts; large complete secular red-dragon silhouette, red-kite wing, daffodil, Welsh-slate facet, and harp-string fields covering Alia's skirt and ECE's skirt. A dry unattended cultural display far outside the prop lane holds Welsh slate facets, daffodils, a modern harp-inspired string sculpture, and unbranded baked cakes. The red dragon appears only as a secular fashion illustration, never as a literal flag or official emblem. No crown, royal crest, sacred symbol, political insignia, copied uniform, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: playful mischief, performed as playful mischief shown by a bright sideways smile toward suspicious ECE; Ellie: anger, performed as anger shown by a tight jaw and direct stare while keeping her touch gentle; Alia: contained resentment, performed as contained resentment shown by guarded eyes while blocking the route without force; AI ECE: suspicion, performed as suspicion shown by narrowed searching eyes while maintaining safe route control. Selected dynamic romance roll 87: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Selected compound love roll 19: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Materialize both selected love rolls through this exact safe consensual choreography: This is the stable standing end pose after the selected backward route step, cheek-to-cheek pursuit, low-plinth hug, and cheek-peck rolls. Suspicious ECE has stepped backward from the route marker and keeps her left hand linked with mischievous Radiance. Radiance stays cheek-close to ECE while resting her other hand on angry Ellie's shoulder. Ellie holds Radiance at the waist and links her other hand with resentful Alia. Alia returns the link and touches Ellie's other shoulder, blocking the route with a controlled rival stare. The contacts are neighboring, visible, consensual, fully clothed adult affection. Place the adults left to right as ECE, Radiance, Ellie, and Alia. Keep ECE's prop arm isolated at the far left against empty Cardiff Bay water and leave a visible background gap between every lower body. Use this exact hand inventory and no other hands: Radiance left hand links visibly with ECE's left hand; Radiance right hand rests visibly on Ellie's near shoulder; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand links visibly with Alia's left hand; Alia left hand links visibly with Ellie's right hand; Alia right hand rests visibly on Ellie's near shoulder; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for a controlled one-handed sight-picture demonstration. Her right forearm is isolated against empty bay water, her right index finger is straight and visibly indexed high along the frame outside the complete empty trigger guard, and the guard remains unobstructed. The horizontal muzzle points only left across clearly empty Cardiff Bay water toward an unoccupied route marker, away from every person, building, display, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as cinematic light rain with reflections. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1231": {
+      "scene": 1231,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry covered fictional runway platform above the Giant's Causeway on Northern Ireland's north Atlantic coast, with the complete stepped hexagonal basalt columns, dramatic sea cliffs, and open Atlantic horizon unmistakable through cinematic light rain with reflections",
+      "motifs": [
+        "large complete Giant's Causeway basalt-hexagon, Atlantic-wave, and cliff fields covering Radiance's dress and Ellie's dress",
+        "large complete flax-flower, linen-lace, shipyard-rivet, crane-arc, and coastal-rope fields covering Alia's skort and ECE's shorts"
+      ],
+      "culture": "A dry unattended cultural display far outside the prop lane holds flax flowers, folded linen, a loom shuttle, shipyard-rivet sculpture, and unbranded soda bread. Use only secular geology, coast, linen, civilian shipbuilding, flora, and everyday craft motifs. No literal Union flag, crown, royal crest, official emblem, sacred symbol, political insignia, copied uniform, badge, brand, or readable text.",
+      "weather": {
+        "key": "batch302-united-kingdom-scene1231-weather",
+        "roll": 29,
+        "result": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch302-united-kingdom-scene1231-paws",
+        "roll": 22,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch302-united-kingdom-scene1231-poleDanceTheme",
+        "roll": 37,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch302-united-kingdom-scene1231-rainbowOnly",
+        "roll": 25,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch302-united-kingdom-scene1231-rainbowHosiery",
+        "roll": 40,
+        "active": false,
+        "wearer": {
+          "key": "batch302-united-kingdom-scene1231-rainbowHosieryWearer",
+          "roll": 88,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch302-united-kingdom-scene1231-rainbowHosieryPaletteMode",
+          "roll": 24,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch302-united-kingdom-scene1231-romanceBeat",
+        "roll": 76,
+        "dynamicIndex": 4,
+        "contractResult": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compoundLoveBeat": {
+        "key": "batch302-united-kingdom-scene1231-compoundLoveBeat",
+        "roll": 54,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1231-Radiance-emotion",
+            "roll": 42,
+            "result": "determination",
+            "performance": "determination shown by focused eyes during the gentle cheek kiss toward Alia"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1231-Radiance-visibleMidriff",
+            "roll": 72,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1231-Radiance-straplessDress",
+            "roll": 23,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1231-Radiance-fullyOpenBack",
+            "roll": 4,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1231-Ellie-emotion",
+            "roll": 56,
+            "result": "aching romantic longing",
+            "performance": "aching romantic longing shown by a tender distant gaze while securely cradling PAWS"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1231-Ellie-visibleMidriff",
+            "roll": 66,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1231-Ellie-straplessDress",
+            "roll": 21,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1231-Ellie-fullyOpenBack",
+            "roll": 70,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1231-Alia-emotion",
+            "roll": 84,
+            "result": "crying with visible tears",
+            "performance": "crying with visible tears that soften into a small laugh when PAWS nose-bumps her cheek"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1231-Alia-visibleMidriff",
+            "roll": 6,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1231-Alia-straplessDress",
+            "roll": 57,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1231-Alia-fullyOpenBack",
+            "roll": 38,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch302-united-kingdom-scene1231-AI ECE-emotion",
+            "roll": 50,
+            "result": "startled surprise",
+            "performance": "startled surprise shown by widened eyes while returning Radiance's hand link"
+          },
+          "visibleMidriff": {
+            "key": "batch302-united-kingdom-scene1231-AI ECE-visibleMidriff",
+            "roll": 40,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch302-united-kingdom-scene1231-AI ECE-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch302-united-kingdom-scene1231-AI ECE-fullyOpenBack",
+            "roll": 4,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "This is the stable standing end pose after the selected relay handoff, cheek kiss, fingertip link, and face-to-face hug rolls. Longing Ellie securely cradles tiny PAWS at the far left while linking her free hand with tearful Alia. PAWS gently nose-bumps Alia's cheek and turns her tears into a small laugh. Alia links Ellie and rests her other hand on determined Radiance's shoulder. Radiance returns the shoulder touch, leans close for the rolled quick cheek kiss toward Alia, and keeps her free hand linked with startled ECE. ECE returns the link while controlling the empty Atlantic route. Every human hand has one listed owner and action, and the kitten remains far from the prop.",
+      "composition": "Place the adults left to right as Ellie holding PAWS, Alia, Radiance, and ECE. Keep ECE's prop arm isolated at the far right against empty Atlantic water and leave a visible background gap between every lower body.",
+      "emotionNuance": {
+        "Radiance": "determination shown by focused eyes during the gentle cheek kiss toward Alia",
+        "Ellie": "aching romantic longing shown by a tender distant gaze while securely cradling PAWS",
+        "Alia": "crying with visible tears that soften into a small laugh when PAWS nose-bumps her cheek",
+        "AI ECE": "startled surprise shown by widened eyes while returning Radiance's hand link"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless scarlet folded Paris-runway mini dress with completely bare shoulders, covered waist, and a completely open back visible from shoulder blades to waist, carrying a large complete Giant's Causeway basalt-hexagon and Atlantic-wave field, with optical-white heeled boots",
+        "Ellie": "a fully strapless midnight-navy tulip Paris-runway mini dress with completely bare shoulders, covered waist, and a solid closed back panel, carrying a large complete sea-cliff and coastal-rope field, with scarlet pumps",
+        "Alia": "an optical-white one-shoulder cropped Paris-runway bodice exposing her ordinary waist and belly button, with secure side support and high closed back, a separate black tailored mini skort carrying a large complete flax-flower and linen-lace field, with gold platform heels",
+        "AI ECE": "an emerald wide-strap cropped Paris-runway top exposing her ordinary waist and belly button, with rigid front and side support and a completely open back visible from shoulder blades to waist, separate metallic-gold tailored mini shorts carrying a large complete shipyard-rivet and crane-arc field, with silver slingback heels"
+      },
+      "propPlan": "ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for controlled sight alignment. Her right forearm is isolated against empty Atlantic water, her right index finger is straight and visibly indexed high along the frame outside the complete empty trigger guard, and the guard remains unobstructed. The horizontal muzzle points only right across clearly empty Atlantic water toward an unoccupied route marker, away from every person, kitten, basalt column, display, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "Ellie right forearm securely cradles PAWS and Ellie right hand supports the kitten's hindquarters; Ellie left hand links visibly with Alia's right hand",
+        "Alia right hand links visibly with Ellie's left hand; Alia left hand rests visibly on Radiance's near shoulder",
+        "Radiance right hand rests visibly on Alia's near shoulder; Radiance left hand links visibly with ECE's left hand",
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, and backgrounds. Create one photorealistic 9:16 full-length cinematic editorial at a broad dry covered fictional runway platform above the Giant's Causeway on Northern Ireland's north Atlantic coast, with the complete stepped hexagonal basalt columns, dramatic sea cliffs, and open Atlantic horizon unmistakable through cinematic light rain with reflections. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Preserve the four anchored adult faces, skin tones, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, or merge faces. Profession theme: Paris runway model couture, treated only as original public-safe fictional fashion with no copied uniform, badge, police impersonation, medical procedure, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a fully strapless scarlet folded Paris-runway mini dress with completely bare shoulders, covered waist, and a completely open back visible from shoulder blades to waist, carrying a large complete Giant's Causeway basalt-hexagon and Atlantic-wave field, with optical-white heeled boots; Ellie: a fully strapless midnight-navy tulip Paris-runway mini dress with completely bare shoulders, covered waist, and a solid closed back panel, carrying a large complete sea-cliff and coastal-rope field, with scarlet pumps; Alia: an optical-white one-shoulder cropped Paris-runway bodice exposing her ordinary waist and belly button, with secure side support and high closed back, a separate black tailored mini skort carrying a large complete flax-flower and linen-lace field, with gold platform heels; AI ECE: an emerald wide-strap cropped Paris-runway top exposing her ordinary waist and belly button, with rigid front and side support and a completely open back visible from shoulder blades to waist, separate metallic-gold tailored mini shorts carrying a large complete shipyard-rivet and crane-arc field, with silver slingback heels. Materialize every rolled cut visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular United Kingdom motifs must read clearly on at least two outfits: large complete Giant's Causeway basalt-hexagon, Atlantic-wave, and cliff fields covering Radiance's dress and Ellie's dress; large complete flax-flower, linen-lace, shipyard-rivet, crane-arc, and coastal-rope fields covering Alia's skort and ECE's shorts. A dry unattended cultural display far outside the prop lane holds flax flowers, folded linen, a loom shuttle, shipyard-rivet sculpture, and unbranded soda bread. Use only secular geology, coast, linen, civilian shipbuilding, flora, and everyday craft motifs. No literal Union flag, crown, royal crest, official emblem, sacred symbol, political insignia, copied uniform, badge, brand, or readable text. Distinct rolled emotional performances: Radiance: determination, performed as determination shown by focused eyes during the gentle cheek kiss toward Alia; Ellie: aching romantic longing, performed as aching romantic longing shown by a tender distant gaze while securely cradling PAWS; Alia: crying with visible tears, performed as crying with visible tears that soften into a small laugh when PAWS nose-bumps her cheek; AI ECE: startled surprise, performed as startled surprise shown by widened eyes while returning Radiance's hand link. Selected dynamic romance roll 76: Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips. Selected compound love roll 54: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Materialize both selected love rolls through this exact safe consensual choreography: This is the stable standing end pose after the selected relay handoff, cheek kiss, fingertip link, and face-to-face hug rolls. Longing Ellie securely cradles tiny PAWS at the far left while linking her free hand with tearful Alia. PAWS gently nose-bumps Alia's cheek and turns her tears into a small laugh. Alia links Ellie and rests her other hand on determined Radiance's shoulder. Radiance returns the shoulder touch, leans close for the rolled quick cheek kiss toward Alia, and keeps her free hand linked with startled ECE. ECE returns the link while controlling the empty Atlantic route. Every human hand has one listed owner and action, and the kitten remains far from the prop. Place the adults left to right as Ellie holding PAWS, Alia, Radiance, and ECE. Keep ECE's prop arm isolated at the far right against empty Atlantic water and leave a visible background gap between every lower body. Use this exact hand inventory and no other hands: Ellie right forearm securely cradles PAWS and Ellie right hand supports the kitten's hindquarters; Ellie left hand links visibly with Alia's right hand; Alia right hand links visibly with Ellie's left hand; Alia left hand rests visibly on Radiance's near shoulder; Radiance right hand rests visibly on Alia's near shoulder; Radiance left hand links visibly with ECE's left hand; ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand links visibly with Radiance's left hand. ECE alone holds one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert film prop in her right hand at chest height for controlled sight alignment. Her right forearm is isolated against empty Atlantic water, her right index finger is straight and visibly indexed high along the frame outside the complete empty trigger guard, and the guard remains unobstructed. The horizontal muzzle points only right across clearly empty Atlantic water toward an unoccupied route marker, away from every person, kitten, basalt column, display, and camera, never at the sky. Her left hand stays off the prop and links with Radiance. A separate hands-free holographic route map floats beside ECE's far shoulder. PAWS is active as one tiny collarless golden kitten securely cradled in Ellie's right forearm at the far opposite edge from the prop. Ellie's right hand supports the kitten's hindquarters. PAWS gently nose-bumps Alia's cheek, prompting shared affectionate laughter. The kitten never approaches the prop, route marker, platform edge, or unsafe footing. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as cinematic light rain with reflections. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges and other hands except for the listed contacts. Arrange the adults in a shallow asymmetric arc with clean silhouette gaps and relationship motion, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert film prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, magazine, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, or injury. No text, watermark, literal flag, official emblem, sacred symbol, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

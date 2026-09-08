@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "batch": 505,
+  "auditedAtUtc": "2026-09-07T06:13:59.787Z",
+  "requestedCadenceMinutes": 45,
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/continuation-log-audit-2026-09-07.json",
+  "scope": "Georgia preparation through selected-media closure and first Croatia/Georgia live post; second post staged but not activated.",
+  "metrics": {
+    "metaInitialSends": 4,
+    "metaHardFailureRetries": 0,
+    "metaConfirmedSessions": 4,
+    "rawFilesSaved": 8,
+    "uniqueRawByteVersions": 4,
+    "missingObservedOriginals": 0,
+    "chatgptInvocations": 4,
+    "chatgptReturnedImages": 1,
+    "chatgptOutputBlocks": 3,
+    "returnedEditsSelected": 0,
+    "totalSavedProviderAndEditFiles": 9,
+    "firstPairPostActivations": 1,
+    "firstPairPostVerified": true,
+    "secondPairUploadCount": 1,
+    "secondPairPostActivations": 0,
+    "unpostedVersionDuplicateChecks": 17,
+    "duplicateMatchesAgainst235Posts": 0
+  },
+  "evidence": [
+    "assets/lore/starlight-era/provider-evidence/batch-505-georgia/final-selection-qa.json",
+    "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-results.json",
+    "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p1-x-publication-receipt.json",
+    "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p2-x-staging-proof.json"
+  ],
+  "findings": [
+    {
+      "kind": "camera-and-roll-drift",
+      "severity": "soft",
+      "observation": "Whole-quartet explanation and camera-first ordering did not fully enforce requested crop or Dutch tilt. Georgia2048 returned edit widened the visible framing and repeated extra flag crosses.",
+      "action": "Retain all exact rolls and selected original sources, preserve deviation notes, and keep source crop and face geometry explicit in future unsubmitted prompts. No aesthetic regeneration or probability changes."
+    },
+    {
+      "kind": "single-edit-safety-blocks",
+      "severity": "handled",
+      "observation": "Three of four single editing invocations were output blocked; one returned PNG was archived unused.",
+      "action": "All four allowances remain consumed. Keep independently reviewed non-explicit originals. No retry, provider substitution or safety-control bypass."
+    },
+    {
+      "kind": "x-media-order",
+      "severity": "verified",
+      "observation": "Composer DOM groups are column-major, whereas the visible grid, ALT editor and public photo endpoints use upload order. First post photo1 through photo4 and exact ALT are verified.",
+      "action": "Use frozen uploadIndex plus the visible row-major grid and public endpoints. Do not reorder a correct upload based on DOM group order."
+    },
+    {
+      "kind": "x-ui-recovery",
+      "severity": "bounded",
+      "observation": "Profile click did not navigate during account verification; using the observed profile href in the same tab recovered the profile. Enter activates Add descriptions and Post reliably, while Next image uses click.",
+      "action": "Keep the proven supported-control sequence and reconcile each actual page transition before another action."
+    },
+    {
+      "kind": "guardian-and-authority",
+      "severity": "verified",
+      "observation": "Existing single guardian is ACTIVE on the same task at ten-minute cadence. Its Kuwait/Panama starting hint is historical;505 is current.",
+      "action": "Preserve guardian schedule and protected Oman tab. No new workers and no claim of uninterrupted execution."
+    }
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newWorkersCreated": false,
+  "nextAuditAfterUtc": "2026-09-07T06:58:59.787Z"
+}

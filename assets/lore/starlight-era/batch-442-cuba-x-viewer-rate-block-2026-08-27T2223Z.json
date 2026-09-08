@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "recordType": "x-browser-recovery-blocker",
+  "batch": 442,
+  "country": "Cuba",
+  "accountExpected": "@dogramaci",
+  "authorization": {
+    "freshActionTimeGrantReceived": true,
+    "localDate": "2026-08-28",
+    "scope": "upload and publish all completed videos to X immediately with descriptive captions and English CC",
+    "browserOnly": true
+  },
+  "browserRecovery": {
+    "tabId": "87",
+    "url": "https://x.com/compose/post",
+    "navigationPerformed": true,
+    "singleReloadPerformed": true,
+    "documentTitle": "x.com/compose/post",
+    "composerDialogsFound": 0,
+    "composerTextboxesFound": 0,
+    "bodyText": "",
+    "tabMarkedVisible": true
+  },
+  "providerEvidence": [
+    {
+      "timestampUtc": "2026-08-27T22:23:39.384Z",
+      "level": "error",
+      "request": "https://x.com/i/api/graphql/5XShkXk2oO2J7SYmTu6pvw/Viewer",
+      "result": "HTTP-429 codes:[1003]"
+    },
+    {
+      "timestampUtc": "2026-08-27T22:23:49.738Z",
+      "level": "error",
+      "request": "https://x.com/i/api/graphql/5XShkXk2oO2J7SYmTu6pvw/Viewer",
+      "result": "HTTP-429 codes:[1003]"
+    }
+  ],
+  "outcome": {
+    "xAccountCouldNotBeVerified": true,
+    "uploadControlsUnavailable": true,
+    "uploadsStarted": 0,
+    "postClicks": 0,
+    "statusUrlsCreated": 0,
+    "duplicateUploadsAvoided": true
+  },
+  "pendingVideos": [
+    {
+      "scene": 1788,
+      "video": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1788-havana-malecon-orbital-love-grok-video.mp4",
+      "englishCc": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1788-havana-malecon-orbital-love-grok-video.en.srt",
+      "alreadyArchivedInGitLfs": true
+    },
+    {
+      "scene": 1791,
+      "video": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1791-santiago-de-cuba-bay-orbital-love-grok-video.mp4",
+      "englishCc": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1791-santiago-de-cuba-bay-orbital-love-grok-video.en.srt",
+      "alreadyArchivedInGitLfs": true
+    }
+  ],
+  "nextSafeAction": "Wait for X Viewer rate limiting to clear. Reverify the signed-in account and obtain fresh action-time confirmation before uploading or clicking Post."
+}

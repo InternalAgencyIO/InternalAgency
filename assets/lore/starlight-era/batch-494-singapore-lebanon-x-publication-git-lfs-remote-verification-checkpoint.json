@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUtc": "2026-09-06T08:05:51.3670702Z",
+  "state": "x-publication-content-remote-verified-browser-layout-restored",
+  "contentCommit": "7dad3ab3ba70cd347440eb85230a7c8231954ad3",
+  "branch": "agent/starlight-progress-archive",
+  "remoteUrl": "https://github.com/InternalAgencyIO/InternalAgency.git",
+  "originHead": "7dad3ab3ba70cd347440eb85230a7c8231954ad3",
+  "prHead": "7dad3ab3ba70cd347440eb85230a7c8231954ad3",
+  "pr": {
+    "number": 13,
+    "url": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "state": "open",
+    "draft": true
+  },
+  "localOriginPrEqual": true,
+  "prHeadVerification": "Direct git ls-remote refs/pull/13/head and gh pr view headRefOid both matched the content commit.",
+  "lfs": {
+    "newObjectsUploaded": 0,
+    "newCommitObjectsFsck": "OK",
+    "dryRunPendingObjects": 0
+  },
+  "verification": {
+    "publicationJsonParsed": true,
+    "canonicalPostCount": 200,
+    "postUrlCount": 1,
+    "captionHashExact": true,
+    "selectedAssetLedgerCounts": [1, 1, 1],
+    "selectedScenePostCounts": [1, 1, 1],
+    "selectedAssetBytesAndHashesExact": true,
+    "structuredEvidenceBytesAndHashesExact": true,
+    "publicTransmissionCount": 1,
+    "assistantPostClicks": 0,
+    "manualUserPostControlActivations": 1,
+    "duplicateMediaTransmission": false,
+    "scopedPathsOnly": true
+  },
+  "publication": {
+    "countryPair": ["Singapore", "Lebanon"],
+    "sceneOrder": [1999, 2001, 2004],
+    "account": "@dogramaci",
+    "postUrl": "https://x.com/dogramaci/status/2096506997134791067",
+    "assistantPostClicks": 0,
+    "manualUserPostControlActivations": 1,
+    "publicTransmissionCount": 1,
+    "duplicateMediaTransmission": false,
+    "madeWithAi": true
+  },
+  "browserState": {
+    "verifiedAtUtc": "2026-09-06T08:03:23.372Z",
+    "metaTerminalCount": 4,
+    "xBlankComposerCount": 1,
+    "xComposerPostDisabled": true,
+    "xComposerMediaCount": 0,
+    "xSignedInAccount": "@dogramaci",
+    "otherTabCount": 0,
+    "visibleInAppBrowserOnly": true
+  },
+  "preservedUntrackedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "canonicalContradictions": [
+    "The ledger's legacy top-level account and pendingPost fields remain stale. The 200-entry posts array, visible @dogramaci live receipt and exact publication checkpoint are authoritative.",
+    "The local convenience ref origin/pr/13 remained stale because Git could not update it across a conflicting ref namespace. It is non-authoritative. Direct git ls-remote refs/pull/13/head and the GitHub PR head both equal the content commit.",
+    "A broad historical LFS fsck can report pre-existing sparse historical pointer targets absent locally. The Batch 494 scoped fsck is OK and the branch dry run has zero pending LFS objects.",
+    "No Starlight guardian exists. The active X Assistant and IAT guardians are unrelated and were left unchanged."
+  ],
+  "nextSafeAction": "Commit and remote-verify this verification record. Never resend scenes 1999, 2001 or 2004. Resolve the next globally unposted country from the current campaign authority before preparing exact four-lane Meta Thinking prompts with ordered anchors 938, 936 and 937."
+}

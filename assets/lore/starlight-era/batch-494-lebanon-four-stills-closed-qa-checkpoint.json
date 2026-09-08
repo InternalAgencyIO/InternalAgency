@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "batch": 494,
+  "country": "Lebanon",
+  "scenes": [2003, 2004, 2005, 2006],
+  "state": "four-occurrences-closed-three-x-eligible-stills-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-06T07:37:32.281Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "preparationCheckpoint": "assets/lore/starlight-era/batch-494-lebanon-editorial-prompts-prepared-checkpoint.json",
+    "preflightCheckpoint": "assets/lore/starlight-era/batch-494-lebanon-meta-dispatch-preflight-checkpoint.json",
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-494-lebanon-four-meta-composers-staged-checkpoint.json",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-494-lebanon-four-lanes-dispatched-checkpoint.json",
+    "rawCaptureCheckpoint": "assets/lore/starlight-era/batch-494-lebanon-meta-raw-capture-checkpoint.json",
+    "dispatchCommit": "644a63294aaf3152fdff1ac50bfa1c6880126452",
+    "rawCaptureCommit": "e4065a861411975eb6f3dd9c2e2e6eb7e239527a"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulFinalOccurrences": 4,
+    "providerOriginalAssetCount": 3,
+    "providerVisibleFallbackSceneCount": 1,
+    "hardGenerationFailures": 0,
+    "generationRetries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "orderedAnchors": [938, 936, 937],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/690cda81-a998-471c-95b7-e55b9c036186",
+      "https://www.meta.ai/prompt/03001618-49c4-4a0b-a9d5-17a109665beb",
+      "https://www.meta.ai/prompt/50777bc3-af58-4501-86d7-15892bd6e2b3",
+      "https://www.meta.ai/prompt/542d51c0-a0cc-4c31-aa52-05995a0ed103"
+    ]
+  },
+  "selectedAssets": [
+    {"scene": 2003, "provider": "Meta AI visible viewer evidence only", "path": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/scene-2003-meta-visible-viewer-debug.png", "sha256": "6CF030E20118C4B85219E530FAE3A8259EE93526A5BEAE54C2781B5DF428AB18", "bytes": 94286, "width": 1197, "height": 1040, "xEligible": false},
+    {"scene": 2004, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/2004-lebanon-byblos-editorial-chatgpt-one-strong-shortening-pass.png", "sha256": "534EAF4B32AA7255B94AC73EE1D46AA95A97DDA7231FFC10352288BAF6F0EFAE", "bytes": 2415077, "width": 941, "height": 1672, "xEligible": true},
+    {"scene": 2005, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/2005-lebanon-jeita-grotto-editorial-chatgpt-one-strong-shortening-pass.png", "sha256": "A2893EF307502A7306D7D3FFDC4F32CEB04620D2841E1421315C399860B2D955", "bytes": 2336391, "width": 941, "height": 1672, "xEligible": true},
+    {"scene": 2006, "provider": "Meta AI fallback after consumed ChatGPT invocation", "path": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/scene-2006-meta-raw-a.jpg", "sha256": "249AAC2E76F643D602C73DA61567E820D3E41A0511F1BC3A3414036912AB1987", "bytes": 348923, "width": 1152, "height": 2048, "xEligible": true}
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "xEligibleSelectedAssetCount": 3,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableLebanonSettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "selectedAssetMatchesOutsideBatch": [0, 0, 0, 0],
+    "scannedRepoImageCount": 5107,
+    "selectedAssetCanonicalXLedgerMatches": [0, 0, 0, 0],
+    "editorialRollTestsPassed": 5,
+    "editorialRollTestsFailed": 0
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassRequestsIssued": 4,
+    "successfulOutputs": 2,
+    "outputModerationBlocks": 2,
+    "blockedScenes": [2003, 2006],
+    "blockedStage": "output",
+    "blockedCategory": "sexual",
+    "blockedRequestIds": ["c56b5d37-02c3-414b-977c-a73c4bd12fe6", "184ef18d-53a1-4f4a-9a3c-3b3827052504"],
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 2,
+    "selectedMetaOriginals": 1,
+    "selectedVisibleProviderEvidenceOnly": 1,
+    "submittedPromptWhitespaceNormalized": true,
+    "semanticInstructionsChanged": false
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/provider-ledger.json",
+    "invocationLedger": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/chatgpt-one-strong-shortening-invocation-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/accessibility-sidecars.json",
+    "providerManifest": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/provider-evidence-manifest.json",
+    "providerManifestExact": true,
+    "providerManifestFileCount": 20,
+    "providerManifestTotalBytes": 2194783,
+    "providerManifestInventorySha256": "A59C9DE028B1409B88DACC1352046FABB6A8F8496DB2DD9D28EEF479F8AA1C65",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/closure-evidence-manifest.json",
+    "closureManifestFileCount": 26,
+    "closureManifestTotalBytes": 6972134,
+    "closureManifestInventorySha256": "C057A4FF45457CB397F9184C0CCB08D6F1A6036EA0C47B85F402A7B79BA70E0B"
+  },
+  "publication": {
+    "plannedCountryPair": ["Singapore", "Lebanon"],
+    "singaporePriorPostCount": 0,
+    "lebanonPriorPostCount": 0,
+    "xAccount": "@dogramaci",
+    "canonicalXPostCountBeforePair": 199,
+    "composerBlank": true,
+    "composerMediaCount": 0,
+    "publicTransmissionCount": 0,
+    "scene2003ExcludedFromX": true
+  },
+  "browserState": {
+    "verifiedAtUtc": "2026-09-06T07:37:32.281Z",
+    "metaRelatedTabCount": 4,
+    "metaTerminalPromptUrlCount": 4,
+    "metaTerminalDownloadButtonCounts": [1, 1, 1, 1],
+    "xTabCount": 1,
+    "otherTabCount": 0,
+    "terminalMetaThinkingVisibleEveryLane": true,
+    "terminalMetaAccountVisibleEveryLane": true,
+    "terminalMetaStopVisibleCount": 0,
+    "xComposerUrl": "https://x.com/compose/post",
+    "xSignedInProfile": "@dogramaci",
+    "xComposerText": "",
+    "xPostDisabled": true,
+    "visibleInAppBrowserOnly": true
+  },
+  "canonicalContradictions": [
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later remote-verified checkpoints. No Cuba or Tanzania prompt was dispatched.",
+    "Scene 2003 is a technically valid visible provider result, but Meta's response Download, bounded response recovery Download and full-screen viewer Download all failed to emit a file. Its screenshots are archived, its single ChatGPT allowance was consumed, and it is excluded from X media.",
+    "The four ChatGPT prompts retained every sealed semantic instruction but normalized redundant spaces; the invocation ledger records both sealed and exact submitted hashes.",
+    "Scenes 2003 and 2006 each used their valid Meta result after the single ChatGPT call was output-moderation blocked. No second edit call was made.",
+    "No Starlight guardian exists. The unrelated X Assistant and IAT B3 guardians remain active on their own 45-minute schedules, untouched and outside Starlight authority."
+  ],
+  "automationInventory": [
+    {"id": "guardian-x-assistant-mission", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true},
+    {"id": "iat-b3-devnet-gate-guardian", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true}
+  ],
+  "starlightGuardianPresent": false,
+  "nextSafeAction": "Commit the complete Batch 494 closure with Git LFS, push and verify local, origin and Draft PR parity. Then stage a nonduplicate Singapore and Lebanon X post using exactly three canonical X-eligible images, verify @dogramaci, alt text, Made with AI and media uniqueness, reserve the composer state in Git, and click Post exactly once under standing authorization."
+}

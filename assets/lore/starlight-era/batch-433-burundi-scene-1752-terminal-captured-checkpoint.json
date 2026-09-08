@@ -1,0 +1,62 @@
+{
+  "schema": "internalagency.starlight.scene-terminal-checkpoint.v1",
+  "batchId": 433,
+  "country": "Burundi",
+  "sceneId": 1752,
+  "status": "closed_hard_unusable",
+  "recordedAtUtc": "2026-08-27T09:38:30.780Z",
+  "providerUrl": "https://www.meta.ai/prompt/7d89e414-f7b2-4ed9-a3ce-744ec5f8832e",
+  "providerResponsePath": "progress-reports/codex-generated-media/provider-responses/batch-433-scene-1752-meta-response.txt",
+  "providerOccurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-433-scene-1752-output-hard-unusable.jsonl",
+  "rawBytesAvailable": true,
+  "rawByteLength": 499366,
+  "rawSha256": "f81ff865fac823776f893e88e429ae8ebc106e78be0950374ca700d0b78737d1",
+  "blobPath": "progress-reports/codex-generated-media/blobs/f8/f81ff865fac823776f893e88e429ae8ebc106e78be0950374ca700d0b78737d1.jpg",
+  "mimeType": "image/jpeg",
+  "dimensions": {
+    "width": 898,
+    "height": 1597
+  },
+  "duplicateRelationships": [],
+  "visualQa": {
+    "sceneId": 1752,
+    "status": "hard_unusable",
+    "accepted": false,
+    "cameraRoll": 34,
+    "framing": "intermediate",
+    "summary": "Strong vertical Bujumbura/Lake Tanganyika location and four distinct public-safe adults, but the right-edge AI ECE free hand is cropped out; only seven hands are visibly attributable, violating the exact eight-hand inventory.",
+    "failures": [
+      "AI ECE non-beacon hand is not visible or attributable.",
+      "Exact eight-hand inventory is not satisfied."
+    ],
+    "positives": [
+      "Vertical 9:16 output.",
+      "Strong Bujumbura lakefront, Lake Tanganyika, rain, skyline, mountains, and civilian sci-fi habitat read.",
+      "Exactly four adult women with distinct silhouettes.",
+      "Beacon visibly has four cyan rings."
+    ]
+  },
+  "acceptedCanonical": false,
+  "canonicalAssetPath": null,
+  "retryAuthorized": false,
+  "promptPath": "../../../../ChatGPT/RENDERS/tmp/world-195x4/batch-433/scene-1752-prompt.txt",
+  "preparedPromptSha256": "6B36FCB1B96214DE89550626829F4A72D3355911A7267D50E18936E11E3D9C33",
+  "browserCanonicalPromptSha256": "525822EF41E18E5618493E8730F0A46424D01D6C509666394905C63FCD8CA7B4",
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+    }
+  ]
+}

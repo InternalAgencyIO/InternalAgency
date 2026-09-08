@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "country": "Andorra",
+  "scene": 1910,
+  "state": "thinking-composer-staged-authorized-before-send",
+  "stagedAtUtc": "2026-08-31T10:50:42.7271919Z",
+  "authority": {
+    "freshFiveStillAuthorization": "5 stills go",
+    "thinkingModeDirective": "USE THINKING Enabled ON META ALWAYS NFOR BETTER RESULTS",
+    "promptCheckpoint": "assets/lore/starlight-era/batch-470-andorra-raze-five-stills-prompts-prepared-checkpoint.json",
+    "remoteVerifiedHeadBeforeStaging": "bb2f36397b55ec94c2bcf9c4e7162f68baa4a2da",
+    "variantArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/visible-variant-archive-manifest.json"
+  },
+  "browser": {
+    "provider": "Meta AI through the in-app Browser only",
+    "actualTabIds": ["28", "29", "30", "31", "32"],
+    "metaTabCount": 4,
+    "xComposerTabCount": 1,
+    "reusedMetaTabId": "31",
+    "reusedLanePriorScene": 1909,
+    "priorLaneEvidenceFullyArchived": true,
+    "signedInMetaAccount": "leesha007",
+    "modeMenuOption": "Thinking — Reasons longer for better answers",
+    "visibleModeControl": "Thinking",
+    "instantModeAbsent": true
+  },
+  "composer": {
+    "scene": 1910,
+    "promptSha256": "3EAFACA857F9833110946D950C1DAEAAEB415238D57A92D739B23257930FFD07",
+    "exactPromptPrefixVerified": true,
+    "attachmentPlaceholderSuffix": "three spaces",
+    "orderedIdentityAnchors": [938, 936, 937],
+    "anchorFilenameCount": [1, 1, 1],
+    "anchorOrderVisible": true,
+    "sendEnabled": true,
+    "sendClicksBeforeDispatch": 0,
+    "repeatSendClicksBeforeDispatch": 0
+  },
+  "xComposer": {
+    "tabId": "32",
+    "visibleHandle": "@dogramaci",
+    "handleLinkCount": 2,
+    "blank": true,
+    "postButtonDisabled": true,
+    "mediaPreviewCount": 0,
+    "postAuthorized": false,
+    "mutated": false
+  },
+  "evidence": [
+    {
+      "scene": 1910,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1910-meta-thinking-composer-staged-authorized-before-send.png",
+      "sha256": "E473F25790C87100961881D00D37D1E6BAC3627527EA4C1CE8BDFD018501A8E8",
+      "bytes": 98564,
+      "width": 804,
+      "height": 1039
+    },
+    {
+      "provider": "X",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-blank-composer-preserved-before-scene-1910-send.png",
+      "sha256": "A48B678442E17DFB6FEE6FAE78029B3C783042576312D8DC3E552E062F859E0B",
+      "bytes": 61800,
+      "width": 805,
+      "height": 1040
+    }
+  ],
+  "dispatchGate": {
+    "remoteVariantArchiveVerified": true,
+    "actualTabsInspected": true,
+    "thinkingModeVerified": true,
+    "exactPromptVerified": true,
+    "orderedAnchorsVerified": true,
+    "sendEnabled": true,
+    "freshMetaAuthorizationCurrent": true,
+    "xUntouched": true,
+    "mayClickMetaSend": true,
+    "mayClickXPost": false
+  },
+  "nextSafeAction": "Commit and remote-verify this exact staged state, then click Meta Send exactly once in tab 31 for scene 1910. Do not mutate X."
+}

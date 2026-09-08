@@ -1,0 +1,1623 @@
+{
+  "batch": 388,
+  "country": "Luxembourg",
+  "status": "render-preflight-stored-pass-1-not-launched",
+  "sourceCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-316-bhutan-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/162"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7",
+      "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json",
+    "checkpointSha256": "CC5F392522D363A1CBB32C98C93331864B2D8A340E2DD59B2AB86A82832C9427",
+    "observedStatus": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-bhutan-rendering",
+    "observedHardSafeAcceptedCount": 4,
+    "observedMissingSceneNumbers": [],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "remoteRef": "origin/agent/starlight-progress-archive",
+    "remoteCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+    "remoteCheckpointSha256": "CC5F392522D363A1CBB32C98C93331864B2D8A340E2DD59B2AB86A82832C9427",
+    "predecessorRemoteVerified": true,
+    "requiredRemoteCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+    "requiredRemoteCommitMatches": true,
+    "preparationOnly": true,
+    "batch388RenderAuthorized": true,
+    "note": "This materialization records no render, publication, commit, push, or X-ledger change.",
+    "reason": "Batch 387 is closed at four of four and remote-verified at the required commit; exactly four concurrent Batch 388 pass-1 slots are prepared but not launched."
+  },
+  "rollMethod": "FNV-1a over recorded batch388-luxembourg keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "missionPropPoseTarget": "0-34 paper target/backstop; 35-59 open-water marker; 60-74 wrist-guidance category at paper target/backstop; 75-87 completed-handoff category at open-water marker; 88-99 open-mechanism category at paper target/backstop"
+  },
+  "cinematicTheme": {
+    "active": "deep-sea submersible couture",
+    "batchOrdinalWithinTheme": 2,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "sceneNumbers": [
+    1572,
+    1573,
+    1574,
+    1575
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.luxembourg-city.com/en/place/parc/the-petrusse-valley",
+      "usedFor": "Petrousse Valley, Adolphe Bridge, cliffs, stream, paths, and public recreation"
+    },
+    {
+      "url": "https://www.luxembourg-city.com/en/about-luxembourg-city/meng-stad-my-city/details/the-10-must-see-bridges-in-luxembourg-city",
+      "usedFor": "Adolphe Bridge double stone arch, suspended pedestrian deck, tram, and valley setting"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/place/blast-furnace-belval",
+      "usedFor": "Belval preserved blast furnaces and modern University of Luxembourg district"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/place/schiessentumpel-waterfalls",
+      "usedFor": "Schiessentumpel waterfall, sandstone bridge, and Black Ernz setting"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/fr/attraction/le-lac-de-la-haute-sure",
+      "usedFor": "Upper-Sure Lake, reservoir, drinking water, electricity, solar boat, and recreation"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch388-luxembourg-male-model-scene",
+    "fullHash": 2589491082,
+    "roll": 82,
+    "position": 3,
+    "scene": 1574,
+    "emotion": {
+      "key": "batch388-luxembourg-scene3-male-emotion",
+      "roll": 43,
+      "result": "determination"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Luxembourg flag, red lion, coat of arms, crown, or official emblem is copied onto clothing. Large researched secular bridge, valley, steel, science, lake, dam, waterfall, forest, mobility, and infrastructure fields replace them.",
+    "palette": "Grand-Duchy red, ice blue, steel silver, slate charcoal, vineyard green, Moselle teal, sandstone gold, forest emerald, lake cobalt, and clean white",
+    "minimumCoverage": "Scenes 1572 and 1573 each foreground large Luxembourg motif fields on two or three looks and deep-sea construction on at least two. Scenes 1574 and 1575 use four distinct theme-led looks while the Luxembourg landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Luxembourg City's Adolphe Bridge and Petrousse Valley, Belval industrial heritage, Upper-Sure Lake, and the Schiessentumpel waterfall.",
+    "prohibitions": "No literal flag, red lion, coat of arms, crown, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied runway or service uniform, badge, weapon threat, sexualized service, alcohol, political insignia, or branded product."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch388-luxembourg-male-model-scene",
+        82
+      ],
+      [
+        "batch388-luxembourg-scene3-male-emotion",
+        43
+      ],
+      [
+        "batch388-luxembourg-scene1572-weather",
+        40
+      ],
+      [
+        "batch388-luxembourg-scene1572-mascotState",
+        20
+      ],
+      [
+        "batch388-luxembourg-scene1572-poleDanceTheme",
+        54
+      ],
+      [
+        "batch388-luxembourg-scene1572-rainbowOnly",
+        4
+      ],
+      [
+        "batch388-luxembourg-scene1572-rainbowHosiery",
+        63
+      ],
+      [
+        "batch388-luxembourg-scene1572-romanceBeat",
+        93
+      ],
+      [
+        "batch388-luxembourg-scene1572-compoundLoveBeat",
+        37
+      ],
+      [
+        "batch388-luxembourg-scene1572-hardLoveBeat",
+        1
+      ],
+      [
+        "batch388-luxembourg-scene1572-interestingProp",
+        47
+      ],
+      [
+        "batch388-luxembourg-scene1572-eceMissionProp-poseTargetRoll",
+        10
+      ],
+      [
+        "batch388-luxembourg-scene1572-Radiance-emotion",
+        29
+      ],
+      [
+        "batch388-luxembourg-scene1572-Radiance-visibleMidriff",
+        89
+      ],
+      [
+        "batch388-luxembourg-scene1572-Radiance-straplessDress",
+        22
+      ],
+      [
+        "batch388-luxembourg-scene1572-Radiance-fullyOpenBack",
+        59
+      ],
+      [
+        "batch388-luxembourg-scene1572-Ellie-emotion",
+        13
+      ],
+      [
+        "batch388-luxembourg-scene1572-Ellie-visibleMidriff",
+        9
+      ],
+      [
+        "batch388-luxembourg-scene1572-Ellie-straplessDress",
+        18
+      ],
+      [
+        "batch388-luxembourg-scene1572-Ellie-fullyOpenBack",
+        43
+      ],
+      [
+        "batch388-luxembourg-scene1572-Alia-emotion",
+        19
+      ],
+      [
+        "batch388-luxembourg-scene1572-Alia-visibleMidriff",
+        75
+      ],
+      [
+        "batch388-luxembourg-scene1572-Alia-straplessDress",
+        64
+      ],
+      [
+        "batch388-luxembourg-scene1572-Alia-fullyOpenBack",
+        33
+      ],
+      [
+        "batch388-luxembourg-scene1572-AI ECE-emotion",
+        33
+      ],
+      [
+        "batch388-luxembourg-scene1572-AI ECE-visibleMidriff",
+        69
+      ],
+      [
+        "batch388-luxembourg-scene1572-AI ECE-straplessDress",
+        6
+      ],
+      [
+        "batch388-luxembourg-scene1572-AI ECE-fullyOpenBack",
+        39
+      ],
+      [
+        "batch388-luxembourg-scene1573-weather",
+        51
+      ],
+      [
+        "batch388-luxembourg-scene1573-mascotState",
+        99
+      ],
+      [
+        "batch388-luxembourg-scene1573-poleDanceTheme",
+        7
+      ],
+      [
+        "batch388-luxembourg-scene1573-rainbowOnly",
+        11
+      ],
+      [
+        "batch388-luxembourg-scene1573-rainbowHosiery",
+        78
+      ],
+      [
+        "batch388-luxembourg-scene1573-romanceBeat",
+        38
+      ],
+      [
+        "batch388-luxembourg-scene1573-compoundLoveBeat",
+        68
+      ],
+      [
+        "batch388-luxembourg-scene1573-hardLoveBeat",
+        40
+      ],
+      [
+        "batch388-luxembourg-scene1573-interestingProp",
+        20
+      ],
+      [
+        "batch388-luxembourg-scene1573-eceMissionProp-poseTargetRoll",
+        1
+      ],
+      [
+        "batch388-luxembourg-scene1573-Radiance-emotion",
+        12
+      ],
+      [
+        "batch388-luxembourg-scene1573-Radiance-visibleMidriff",
+        2
+      ],
+      [
+        "batch388-luxembourg-scene1573-Radiance-straplessDress",
+        89
+      ],
+      [
+        "batch388-luxembourg-scene1573-Radiance-fullyOpenBack",
+        74
+      ],
+      [
+        "batch388-luxembourg-scene1573-Ellie-emotion",
+        74
+      ],
+      [
+        "batch388-luxembourg-scene1573-Ellie-visibleMidriff",
+        68
+      ],
+      [
+        "batch388-luxembourg-scene1573-Ellie-straplessDress",
+        7
+      ],
+      [
+        "batch388-luxembourg-scene1573-Ellie-fullyOpenBack",
+        40
+      ],
+      [
+        "batch388-luxembourg-scene1573-Alia-emotion",
+        98
+      ],
+      [
+        "batch388-luxembourg-scene1573-Alia-visibleMidriff",
+        24
+      ],
+      [
+        "batch388-luxembourg-scene1573-Alia-straplessDress",
+        23
+      ],
+      [
+        "batch388-luxembourg-scene1573-Alia-fullyOpenBack",
+        76
+      ],
+      [
+        "batch388-luxembourg-scene1573-AI ECE-emotion",
+        24
+      ],
+      [
+        "batch388-luxembourg-scene1573-AI ECE-visibleMidriff",
+        98
+      ],
+      [
+        "batch388-luxembourg-scene1573-AI ECE-straplessDress",
+        21
+      ],
+      [
+        "batch388-luxembourg-scene1573-AI ECE-fullyOpenBack",
+        42
+      ],
+      [
+        "batch388-luxembourg-scene1574-weather",
+        22
+      ],
+      [
+        "batch388-luxembourg-scene1574-mascotState",
+        30
+      ],
+      [
+        "batch388-luxembourg-scene1574-poleDanceTheme",
+        0
+      ],
+      [
+        "batch388-luxembourg-scene1574-rainbowOnly",
+        74
+      ],
+      [
+        "batch388-luxembourg-scene1574-rainbowHosiery",
+        1
+      ],
+      [
+        "batch388-luxembourg-scene1574-romanceBeat",
+        3
+      ],
+      [
+        "batch388-luxembourg-scene1574-compoundLoveBeat",
+        59
+      ],
+      [
+        "batch388-luxembourg-scene1574-hardLoveBeat",
+        91
+      ],
+      [
+        "batch388-luxembourg-scene1574-interestingProp",
+        41
+      ],
+      [
+        "batch388-luxembourg-scene1574-eceMissionProp-poseTargetRoll",
+        32
+      ],
+      [
+        "batch388-luxembourg-scene1574-Radiance-emotion",
+        59
+      ],
+      [
+        "batch388-luxembourg-scene1574-Radiance-visibleMidriff",
+        59
+      ],
+      [
+        "batch388-luxembourg-scene1574-Radiance-straplessDress",
+        84
+      ],
+      [
+        "batch388-luxembourg-scene1574-Radiance-fullyOpenBack",
+        93
+      ],
+      [
+        "batch388-luxembourg-scene1574-Ellie-emotion",
+        87
+      ],
+      [
+        "batch388-luxembourg-scene1574-Ellie-visibleMidriff",
+        11
+      ],
+      [
+        "batch388-luxembourg-scene1574-Ellie-straplessDress",
+        12
+      ],
+      [
+        "batch388-luxembourg-scene1574-Ellie-fullyOpenBack",
+        61
+      ],
+      [
+        "batch388-luxembourg-scene1574-Alia-emotion",
+        81
+      ],
+      [
+        "batch388-luxembourg-scene1574-Alia-visibleMidriff",
+        85
+      ],
+      [
+        "batch388-luxembourg-scene1574-Alia-straplessDress",
+        46
+      ],
+      [
+        "batch388-luxembourg-scene1574-Alia-fullyOpenBack",
+        87
+      ],
+      [
+        "batch388-luxembourg-scene1574-AI ECE-emotion",
+        31
+      ],
+      [
+        "batch388-luxembourg-scene1574-AI ECE-visibleMidriff",
+        3
+      ],
+      [
+        "batch388-luxembourg-scene1574-AI ECE-straplessDress",
+        52
+      ],
+      [
+        "batch388-luxembourg-scene1574-AI ECE-fullyOpenBack",
+        1
+      ],
+      [
+        "batch388-luxembourg-scene1575-weather",
+        9
+      ],
+      [
+        "batch388-luxembourg-scene1575-mascotState",
+        61
+      ],
+      [
+        "batch388-luxembourg-scene1575-poleDanceTheme",
+        5
+      ],
+      [
+        "batch388-luxembourg-scene1575-rainbowOnly",
+        77
+      ],
+      [
+        "batch388-luxembourg-scene1575-rainbowHosiery",
+        4
+      ],
+      [
+        "batch388-luxembourg-scene1575-romanceBeat",
+        32
+      ],
+      [
+        "batch388-luxembourg-scene1575-compoundLoveBeat",
+        2
+      ],
+      [
+        "batch388-luxembourg-scene1575-hardLoveBeat",
+        66
+      ],
+      [
+        "batch388-luxembourg-scene1575-interestingProp",
+        98
+      ],
+      [
+        "batch388-luxembourg-scene1575-eceMissionProp-poseTargetRoll",
+        7
+      ],
+      [
+        "batch388-luxembourg-scene1575-Radiance-emotion",
+        86
+      ],
+      [
+        "batch388-luxembourg-scene1575-Radiance-visibleMidriff",
+        80
+      ],
+      [
+        "batch388-luxembourg-scene1575-Radiance-straplessDress",
+        35
+      ],
+      [
+        "batch388-luxembourg-scene1575-Radiance-fullyOpenBack",
+        28
+      ],
+      [
+        "batch388-luxembourg-scene1575-Ellie-emotion",
+        12
+      ],
+      [
+        "batch388-luxembourg-scene1575-Ellie-visibleMidriff",
+        82
+      ],
+      [
+        "batch388-luxembourg-scene1575-Ellie-straplessDress",
+        65
+      ],
+      [
+        "batch388-luxembourg-scene1575-Ellie-fullyOpenBack",
+        18
+      ],
+      [
+        "batch388-luxembourg-scene1575-Alia-emotion",
+        40
+      ],
+      [
+        "batch388-luxembourg-scene1575-Alia-visibleMidriff",
+        42
+      ],
+      [
+        "batch388-luxembourg-scene1575-Alia-straplessDress",
+        25
+      ],
+      [
+        "batch388-luxembourg-scene1575-Alia-fullyOpenBack",
+        6
+      ],
+      [
+        "batch388-luxembourg-scene1575-AI ECE-emotion",
+        90
+      ],
+      [
+        "batch388-luxembourg-scene1575-AI ECE-visibleMidriff",
+        28
+      ],
+      [
+        "batch388-luxembourg-scene1575-AI ECE-straplessDress",
+        59
+      ],
+      [
+        "batch388-luxembourg-scene1575-AI ECE-fullyOpenBack",
+        32
+      ],
+      [
+        "batch388-luxembourg-x-heart",
+        95
+      ],
+      [
+        "batch388-luxembourg-x-internalagency",
+        75
+      ],
+      [
+        "batch388-luxembourg-x-worldxxxseries",
+        16
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch388-luxembourg-scene1572-rainbowHosieryWearer",
+        95
+      ],
+      [
+        "batch388-luxembourg-scene1572-rainbowHosieryPaletteMode",
+        25
+      ],
+      [
+        "batch388-luxembourg-scene1572-mascotHolder",
+        29
+      ],
+      [
+        "batch388-luxembourg-scene1572-interestingPropHolder",
+        17
+      ],
+      [
+        "batch388-luxembourg-scene1572-interestingPropFamily",
+        83
+      ],
+      [
+        "batch388-luxembourg-scene1573-rainbowHosieryWearer",
+        2
+      ],
+      [
+        "batch388-luxembourg-scene1573-rainbowHosieryPaletteMode",
+        78
+      ],
+      [
+        "batch388-luxembourg-scene1573-mascotHolder",
+        16
+      ],
+      [
+        "batch388-luxembourg-scene1573-interestingPropHolder",
+        82
+      ],
+      [
+        "batch388-luxembourg-scene1573-interestingPropFamily",
+        48
+      ],
+      [
+        "batch388-luxembourg-scene1574-rainbowHosieryWearer",
+        17
+      ],
+      [
+        "batch388-luxembourg-scene1574-rainbowHosieryPaletteMode",
+        39
+      ],
+      [
+        "batch388-luxembourg-scene1574-mascotHolder",
+        51
+      ],
+      [
+        "batch388-luxembourg-scene1574-interestingPropHolder",
+        75
+      ],
+      [
+        "batch388-luxembourg-scene1574-interestingPropFamily",
+        33
+      ],
+      [
+        "batch388-luxembourg-scene1575-rainbowHosieryWearer",
+        68
+      ],
+      [
+        "batch388-luxembourg-scene1575-rainbowHosieryPaletteMode",
+        0
+      ],
+      [
+        "batch388-luxembourg-scene1575-mascotHolder",
+        54
+      ],
+      [
+        "batch388-luxembourg-scene1575-interestingPropHolder",
+        28
+      ],
+      [
+        "batch388-luxembourg-scene1575-interestingPropFamily",
+        74
+      ]
+    ],
+    "primaryPairCount": 109,
+    "selectorPairCount": 20,
+    "primarySha256": "C52624F18C13D365A69407673E7E3D1EE4E44EA86BA080BA92C7F3539BFF40A5",
+    "selectorSha256": "E626B689EC491178C1747B715391FCCD9245DB3C36247FEC83BE3D4E3F7AA02F",
+    "mismatchCount": 0,
+    "scenes": {
+      "1572": {
+        "weather": 40,
+        "mascotState": 20,
+        "mascotHolder": 29,
+        "oddProp": 47,
+        "oddHolder": 17,
+        "oddFamily": 83,
+        "pole": 54,
+        "rainbowOnly": 4,
+        "hosiery": 63,
+        "hosieryWearer": 95,
+        "hosieryPalette": 25,
+        "romance": 93,
+        "compound": 37,
+        "hardLove": 1,
+        "missionPoseTarget": 10,
+        "emotions": {
+          "Radiance": 29,
+          "Ellie": 13,
+          "Alia": 19,
+          "AI ECE": 33
+        },
+        "cuts": {
+          "Radiance": [
+            89,
+            22,
+            59
+          ],
+          "Ellie": [
+            9,
+            18,
+            43
+          ],
+          "Alia": [
+            75,
+            64,
+            33
+          ],
+          "AI ECE": [
+            69,
+            6,
+            39
+          ]
+        }
+      },
+      "1573": {
+        "weather": 51,
+        "mascotState": 99,
+        "mascotHolder": 16,
+        "oddProp": 20,
+        "oddHolder": 82,
+        "oddFamily": 48,
+        "pole": 7,
+        "rainbowOnly": 11,
+        "hosiery": 78,
+        "hosieryWearer": 2,
+        "hosieryPalette": 78,
+        "romance": 38,
+        "compound": 68,
+        "hardLove": 40,
+        "missionPoseTarget": 1,
+        "emotions": {
+          "Radiance": 12,
+          "Ellie": 74,
+          "Alia": 98,
+          "AI ECE": 24
+        },
+        "cuts": {
+          "Radiance": [
+            2,
+            89,
+            74
+          ],
+          "Ellie": [
+            68,
+            7,
+            40
+          ],
+          "Alia": [
+            24,
+            23,
+            76
+          ],
+          "AI ECE": [
+            98,
+            21,
+            42
+          ]
+        }
+      },
+      "1574": {
+        "weather": 22,
+        "mascotState": 30,
+        "mascotHolder": 51,
+        "oddProp": 41,
+        "oddHolder": 75,
+        "oddFamily": 33,
+        "pole": 0,
+        "rainbowOnly": 74,
+        "hosiery": 1,
+        "hosieryWearer": 17,
+        "hosieryPalette": 39,
+        "romance": 3,
+        "compound": 59,
+        "hardLove": 91,
+        "missionPoseTarget": 32,
+        "emotions": {
+          "Radiance": 59,
+          "Ellie": 87,
+          "Alia": 81,
+          "AI ECE": 31,
+          "Male": 43
+        },
+        "cuts": {
+          "Radiance": [
+            59,
+            84,
+            93
+          ],
+          "Ellie": [
+            11,
+            12,
+            61
+          ],
+          "Alia": [
+            85,
+            46,
+            87
+          ],
+          "AI ECE": [
+            3,
+            52,
+            1
+          ]
+        }
+      },
+      "1575": {
+        "weather": 9,
+        "mascotState": 61,
+        "mascotHolder": 54,
+        "oddProp": 98,
+        "oddHolder": 28,
+        "oddFamily": 74,
+        "pole": 5,
+        "rainbowOnly": 77,
+        "hosiery": 4,
+        "hosieryWearer": 68,
+        "hosieryPalette": 0,
+        "romance": 32,
+        "compound": 2,
+        "hardLove": 66,
+        "missionPoseTarget": 7,
+        "emotions": {
+          "Radiance": 86,
+          "Ellie": 12,
+          "Alia": 40,
+          "AI ECE": 90
+        },
+        "cuts": {
+          "Radiance": [
+            80,
+            35,
+            28
+          ],
+          "Ellie": [
+            82,
+            65,
+            18
+          ],
+          "Alia": [
+            42,
+            25,
+            6
+          ],
+          "AI ECE": [
+            28,
+            59,
+            32
+          ]
+        }
+      }
+    }
+  },
+  "scenePlans": {
+    "1572": {
+      "location": "Adolphe Bridge and Petrousse Valley",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 40,
+        "raw": "heavy rain curtain",
+        "materialized": "a heavy rain curtain beyond a fully dry covered bridge overlook"
+      },
+      "mascot": {
+        "roll": 20,
+        "state": "PAWS and MAX together",
+        "holder": {
+          "key": "batch388-luxembourg-scene1572-mascotHolder",
+          "roll": 29,
+          "result": "Alia"
+        }
+      },
+      "oddProp": {
+        "roll": 47,
+        "active": false,
+        "holder": {
+          "key": "batch388-luxembourg-scene1572-interestingPropHolder",
+          "roll": 17,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch388-luxembourg-scene1572-interestingPropFamily",
+          "roll": 83,
+          "result": "kinetic umbrella with rotating mirrored petals"
+        }
+      },
+      "pole": {
+        "roll": 54,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 4,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch388-luxembourg-scene1572-rainbowHosiery",
+        "roll": 63,
+        "active": false,
+        "wearer": {
+          "key": "batch388-luxembourg-scene1572-rainbowHosieryWearer",
+          "roll": 95,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch388-luxembourg-scene1572-rainbowHosieryPaletteMode",
+          "roll": 25,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch388-luxembourg-scene1572-romanceBeat",
+        "roll": 93,
+        "index": 9,
+        "result": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compound": {
+        "key": "batch388-luxembourg-scene1572-compoundLoveBeat",
+        "roll": 37,
+        "index": 1,
+        "result": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "hardLove": {
+        "key": "batch388-luxembourg-scene1572-hardLoveBeat",
+        "roll": 1,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "mission": {
+        "key": "batch388-luxembourg-scene1572-eceMissionProp-poseTargetRoll",
+        "roll": 10,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch388-luxembourg-scene1572-Radiance-emotion",
+          "roll": 29,
+          "result": "hope",
+          "materialized": "hope"
+        },
+        "Ellie": {
+          "key": "batch388-luxembourg-scene1572-Ellie-emotion",
+          "roll": 13,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        },
+        "Alia": {
+          "key": "batch388-luxembourg-scene1572-Alia-emotion",
+          "roll": 19,
+          "result": "playful mischief",
+          "materialized": "playful mischief"
+        },
+        "AI ECE": {
+          "key": "batch388-luxembourg-scene1572-AI ECE-emotion",
+          "roll": 33,
+          "result": "overwhelming relief",
+          "materialized": "overwhelming relief"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1572-Radiance-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1572-Radiance-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1572-Radiance-fullyOpenBack",
+            "roll": 59,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1572-Ellie-visibleMidriff",
+            "roll": 9,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1572-Ellie-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1572-Ellie-fullyOpenBack",
+            "roll": 43,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1572-Alia-visibleMidriff",
+            "roll": 75,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1572-Alia-straplessDress",
+            "roll": 64,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1572-Alia-fullyOpenBack",
+            "roll": 33,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1572-AI ECE-visibleMidriff",
+            "roll": 69,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1572-AI ECE-straplessDress",
+            "roll": 6,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1572-AI ECE-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-388/scene-1572-initial-prompt.txt",
+        "sha256": "94968B89005654D7F09DE9ECC8A0C92D864569D3B0BF910F9F19B4686B9F3C78",
+        "bytes": 4480
+      }
+    },
+    "1573": {
+      "location": "Belval blast furnaces and university district",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 51,
+        "raw": "active lightning storm with distant bolts",
+        "materialized": "an active lightning storm kept distant beyond the covered Belval terrace"
+      },
+      "mascot": {
+        "roll": 99,
+        "state": "neither mascot",
+        "holder": {
+          "key": "batch388-luxembourg-scene1573-mascotHolder",
+          "roll": 16,
+          "result": "Ellie"
+        }
+      },
+      "oddProp": {
+        "roll": 20,
+        "active": true,
+        "holder": {
+          "key": "batch388-luxembourg-scene1573-interestingPropHolder",
+          "roll": 82,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch388-luxembourg-scene1573-interestingPropFamily",
+          "roll": 48,
+          "result": "deactivated chainless cinema chainsaw sculpture with a locked blade cover"
+        }
+      },
+      "pole": {
+        "roll": 7,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 11,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch388-luxembourg-scene1573-rainbowHosiery",
+        "roll": 78,
+        "active": false,
+        "wearer": {
+          "key": "batch388-luxembourg-scene1573-rainbowHosieryWearer",
+          "roll": 2,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch388-luxembourg-scene1573-rainbowHosieryPaletteMode",
+          "roll": 78,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch388-luxembourg-scene1573-romanceBeat",
+        "roll": 38,
+        "index": 2,
+        "result": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compound": {
+        "key": "batch388-luxembourg-scene1573-compoundLoveBeat",
+        "roll": 68,
+        "index": 8,
+        "result": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "hardLove": {
+        "key": "batch388-luxembourg-scene1573-hardLoveBeat",
+        "roll": 40,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "mission": {
+        "key": "batch388-luxembourg-scene1573-eceMissionProp-poseTargetRoll",
+        "roll": 1,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch388-luxembourg-scene1573-Radiance-emotion",
+          "roll": 12,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        },
+        "Ellie": {
+          "key": "batch388-luxembourg-scene1573-Ellie-emotion",
+          "roll": 74,
+          "result": "betrayal shock",
+          "materialized": "betrayal shock"
+        },
+        "Alia": {
+          "key": "batch388-luxembourg-scene1573-Alia-emotion",
+          "roll": 98,
+          "result": "defiance",
+          "materialized": "defiance"
+        },
+        "AI ECE": {
+          "key": "batch388-luxembourg-scene1573-AI ECE-emotion",
+          "roll": 24,
+          "result": "calm contentment",
+          "materialized": "calm contentment"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1573-Radiance-visibleMidriff",
+            "roll": 2,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1573-Radiance-straplessDress",
+            "roll": 89,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1573-Radiance-fullyOpenBack",
+            "roll": 74,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1573-Ellie-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1573-Ellie-straplessDress",
+            "roll": 7,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1573-Ellie-fullyOpenBack",
+            "roll": 40,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1573-Alia-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1573-Alia-straplessDress",
+            "roll": 23,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1573-Alia-fullyOpenBack",
+            "roll": 76,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1573-AI ECE-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1573-AI ECE-straplessDress",
+            "roll": 21,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1573-AI ECE-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-388/scene-1573-initial-prompt.txt",
+        "sha256": "326B129CFCC381374C7ADC79121F9C9CBBF896CC0E6900B7D21EE39DCA70B4B1",
+        "bytes": 4566
+      }
+    },
+    "1574": {
+      "location": "Upper-Sure Lake and dam solar-boat pavilion",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 22,
+        "raw": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast above a fully dry lake pavilion"
+      },
+      "mascot": {
+        "roll": 30,
+        "state": "PAWS only",
+        "holder": {
+          "key": "batch388-luxembourg-scene1574-mascotHolder",
+          "roll": 51,
+          "result": "Radiance"
+        }
+      },
+      "oddProp": {
+        "roll": 41,
+        "active": false,
+        "holder": {
+          "key": "batch388-luxembourg-scene1574-interestingPropHolder",
+          "roll": 75,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch388-luxembourg-scene1574-interestingPropFamily",
+          "roll": 33,
+          "result": "oversized transparent mechanical typewriter"
+        }
+      },
+      "pole": {
+        "roll": 0,
+        "active": true
+      },
+      "rainbowOnly": {
+        "roll": 74,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch388-luxembourg-scene1574-rainbowHosiery",
+        "roll": 1,
+        "active": true,
+        "wearer": {
+          "key": "batch388-luxembourg-scene1574-rainbowHosieryWearer",
+          "roll": 17,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch388-luxembourg-scene1574-rainbowHosieryPaletteMode",
+          "roll": 39,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch388-luxembourg-scene1574-romanceBeat",
+        "roll": 3,
+        "index": 3,
+        "result": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compound": {
+        "key": "batch388-luxembourg-scene1574-compoundLoveBeat",
+        "roll": 59,
+        "index": 11,
+        "result": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+      },
+      "hardLove": {
+        "key": "batch388-luxembourg-scene1574-hardLoveBeat",
+        "roll": 91,
+        "result": "a playful seated-to-standing lift assist with one adult rising from a stable bench into a full embrace, a second partner stealing a cheek kiss, and the fourth blocking their route with a flirtatious invitation"
+      },
+      "mission": {
+        "key": "batch388-luxembourg-scene1574-eceMissionProp-poseTargetRoll",
+        "roll": 32,
+        "category": "two-hand paper-target stance",
+        "handler": "Alia",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch388-luxembourg-scene1574-Radiance-emotion",
+          "roll": 59,
+          "result": "aching romantic longing",
+          "materialized": "aching romantic longing"
+        },
+        "Ellie": {
+          "key": "batch388-luxembourg-scene1574-Ellie-emotion",
+          "roll": 87,
+          "result": "fear and urgent vulnerability",
+          "materialized": "fear and urgent vulnerability"
+        },
+        "Alia": {
+          "key": "batch388-luxembourg-scene1574-Alia-emotion",
+          "roll": 81,
+          "result": "deep sadness",
+          "materialized": "deep sadness"
+        },
+        "AI ECE": {
+          "key": "batch388-luxembourg-scene1574-AI ECE-emotion",
+          "roll": 31,
+          "result": "overwhelming relief",
+          "materialized": "overwhelming relief"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1574-Radiance-visibleMidriff",
+            "roll": 59,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1574-Radiance-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1574-Radiance-fullyOpenBack",
+            "roll": 93,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1574-Ellie-visibleMidriff",
+            "roll": 11,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1574-Ellie-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1574-Ellie-fullyOpenBack",
+            "roll": 61,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1574-Alia-visibleMidriff",
+            "roll": 85,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1574-Alia-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1574-Alia-fullyOpenBack",
+            "roll": 87,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1574-AI ECE-visibleMidriff",
+            "roll": 3,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1574-AI ECE-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1574-AI ECE-fullyOpenBack",
+            "roll": 1,
+            "active": true
+          }
+        }
+      },
+      "malePresent": true,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-388/scene-1574-initial-prompt.txt",
+        "sha256": "CBE8CFDF3F2738F6867F6F2C27066249FEB33927D34D6BBBE6113DE4BA9BDFE4",
+        "bytes": 5103
+      }
+    },
+    "1575": {
+      "location": "Schiessentumpel waterfall and Black Ernz",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 9,
+        "raw": "clear golden-hour radiance",
+        "materialized": "clear golden-hour radiance at a fully dry protected waterfall overlook"
+      },
+      "mascot": {
+        "roll": 61,
+        "state": "neither mascot",
+        "holder": {
+          "key": "batch388-luxembourg-scene1575-mascotHolder",
+          "roll": 54,
+          "result": "Radiance"
+        }
+      },
+      "oddProp": {
+        "roll": 98,
+        "active": false,
+        "holder": {
+          "key": "batch388-luxembourg-scene1575-interestingPropHolder",
+          "roll": 28,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch388-luxembourg-scene1575-interestingPropFamily",
+          "roll": 74,
+          "result": "antique-style diving helmet display shell"
+        }
+      },
+      "pole": {
+        "roll": 5,
+        "active": true
+      },
+      "rainbowOnly": {
+        "roll": 77,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch388-luxembourg-scene1575-rainbowHosiery",
+        "roll": 4,
+        "active": true,
+        "wearer": {
+          "key": "batch388-luxembourg-scene1575-rainbowHosieryWearer",
+          "roll": 68,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch388-luxembourg-scene1575-rainbowHosieryPaletteMode",
+          "roll": 0,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch388-luxembourg-scene1575-romanceBeat",
+        "roll": 32,
+        "index": 8,
+        "result": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compound": {
+        "key": "batch388-luxembourg-scene1575-compoundLoveBeat",
+        "roll": 2,
+        "index": 2,
+        "result": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "hardLove": {
+        "key": "batch388-luxembourg-scene1575-hardLoveBeat",
+        "roll": 66,
+        "result": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+      },
+      "mission": {
+        "key": "batch388-luxembourg-scene1575-eceMissionProp-poseTargetRoll",
+        "roll": 7,
+        "category": "two-hand paper-target stance",
+        "handler": "Alia",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch388-luxembourg-scene1575-Radiance-emotion",
+          "roll": 86,
+          "result": "full sobbing with tear-streaked face and shaking posture",
+          "materialized": "full sobbing with tear-streaked face and shaking posture"
+        },
+        "Ellie": {
+          "key": "batch388-luxembourg-scene1575-Ellie-emotion",
+          "roll": 12,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        },
+        "Alia": {
+          "key": "batch388-luxembourg-scene1575-Alia-emotion",
+          "roll": 40,
+          "result": "determination",
+          "materialized": "determination"
+        },
+        "AI ECE": {
+          "key": "batch388-luxembourg-scene1575-AI ECE-emotion",
+          "roll": 90,
+          "result": "anger",
+          "materialized": "anger"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1575-Radiance-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1575-Radiance-straplessDress",
+            "roll": 35,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1575-Radiance-fullyOpenBack",
+            "roll": 28,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1575-Ellie-visibleMidriff",
+            "roll": 82,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1575-Ellie-straplessDress",
+            "roll": 65,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1575-Ellie-fullyOpenBack",
+            "roll": 18,
+            "active": true
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1575-Alia-visibleMidriff",
+            "roll": 42,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1575-Alia-straplessDress",
+            "roll": 25,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1575-Alia-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch388-luxembourg-scene1575-AI ECE-visibleMidriff",
+            "roll": 28,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch388-luxembourg-scene1575-AI ECE-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch388-luxembourg-scene1575-AI ECE-fullyOpenBack",
+            "roll": 32,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-388/scene-1575-initial-prompt.txt",
+        "sha256": "DDD3AF4435175F911C44316E467CA702E6D9E1F3BC648CD95E12DC846E05DF32",
+        "bytes": 4774
+      }
+    }
+  },
+  "renderPlan": {
+    "pass1": "Exactly four clean candidates, one per scene, launched concurrently from original identity anchors only.",
+    "pass2": "Only hard-unusable scenes may receive one fresh holistic correction candidate each, launched concurrently; no filler variants.",
+    "archiveBeforeLaterWork": true,
+    "thirdPassAllowed": false
+  },
+  "xPublishing": {
+    "rolls": {
+      "heart": {
+        "key": "batch388-luxembourg-x-heart",
+        "roll": 95,
+        "result": "white heart"
+      },
+      "internalAgency": {
+        "key": "batch388-luxembourg-x-internalagency",
+        "roll": 75,
+        "active": false
+      },
+      "worldXXXSeries": {
+        "key": "batch388-luxembourg-x-worldxxxseries",
+        "roll": 16,
+        "active": true
+      }
+    },
+    "captionIfEligible": "Luxembourg 🤍 Bhutan #Luxembourg #WorldXXXSeries",
+    "eligibility": "ineligible until four of four Luxembourg scenes are hard-safe accepted and the checkpoint is pushed and remote-verified"
+  },
+  "nextQueue": {
+    "nextCountry": "Suriname",
+    "nextBatch": 389,
+    "sceneNumbers": [
+      1576,
+      1577,
+      1578,
+      1579
+    ],
+    "cinematicTheme": "polar airship couture",
+    "themePairPosition": 1,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-317-luxembourg-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/163"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8"
+    ],
+    "lockedUntilBatch388Closed": true
+  }
+}

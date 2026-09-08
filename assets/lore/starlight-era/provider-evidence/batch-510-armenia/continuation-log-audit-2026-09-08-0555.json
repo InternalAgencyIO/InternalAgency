@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "auditedAtUtc": "2026-09-08T05:55:49.170Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
+  "scope": "Current existing-task continuation since the previous 45-minute audit",
+  "findings": [
+    {
+      "kind": "publication-complete",
+      "detail": "Both Uruguay/Bosnia four-still posts are public-verified and remote-closed; all 8 scenes and 37 saved family files consumed.",
+      "urls": [
+        "https://x.com/dogramaci/status/2097189559310156192",
+        "https://x.com/dogramaci/status/2097191849538588895"
+      ]
+    },
+    {
+      "kind": "initial-occurrence-integrity",
+      "detail": "Armenia 2067-2070 each have exactly one confirmed initial Meta Send. The four exact prompts and ordered 938/936/937 anchors were verified in Thinking on leesha007. No Meta hard-failure retry or ChatGPT edit invocation."
+    },
+    {
+      "kind": "raw-download-reconciliation",
+      "detail": "A standalone gallery downloadMedia invocation opened its native image. A visible Download button produced a separate JPEG despite an event timeout. After live reconciliation, the established pre-armed download event plus downloadMedia sequence saved the original WebP. Both returned representations preserved. No API, HTTP, hidden input, pageAssets bundle or other browser-control mechanism was used."
+    },
+    {
+      "kind": "throughput",
+      "detail": "2067, 2068 and 2070 have completed gallery responses; 2069 continues progressing through provider-internal work at its original occurrence. All currently exposed internal versions are being retained. Internal provider steps are not user/agent retries and do not authorize another Send."
+    },
+    {
+      "kind": "roll-integrity",
+      "detail": "Frozen Armenia rolls and prompt SHA256 values unchanged; output camera/pose deviations remain source-QA issues, not aesthetic retry permission."
+    }
+  ],
+  "boundedFixes": [
+    "Always arm the supported download event before downloadMedia, then verify the actual local file bytes; do not rely on event receipt alone.",
+    "Continue bounded per-file archive batches and byte hashing while the remaining original occurrence renders.",
+    "Keep every returned JPEG, WebP and internal variant distinctly recorded, including duplicate-exposure files.",
+    "Preserve source-frame and safer-output exclusions in the one permitted future tailoring pass. A block or interruption consumes it."
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newAutomationsOrWorkers": 0,
+  "guardianConfigSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+  "nextAuditNotBeforeUtc": "2026-09-08T06:40:49.170Z",
+  "nextSafeAction": "Finish raw-byte collection and source QA at the existing occurrence URLs, without resending or replacing any lane."
+}

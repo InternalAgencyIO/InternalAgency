@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "batch": 513,
+  "scene": 2079,
+  "path": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2079-meta-internal-01-original.webp",
+  "sha256": "9dc9ea61da9ec89ddca9695576e8c7fef1ed2b740827af8df25d8b36a11c9bef",
+  "reviewedAtUtc": "2026-09-08T10:48:08.544Z",
+  "decision": "unused-archived-provider-variant",
+  "method": "Main-agent direct local visual review of all5unique originals, with exact-hash duplicate exposures retained.",
+  "hardChecks": {
+    "decodableValidMedia": true,
+    "fourDistinctFictionalAdultWomen": true,
+    "anchoredFaceContinuity": true,
+    "opaquePublicSafeCoverage": true,
+    "noGrossAnatomicalCorruption": true
+  },
+  "softRollDeviations": [
+    "Actual gallery framing is broader and less tilted than the intermediate target.",
+    "Ellie has an unrolled waist gap and extra star tattoo; some RAZE shoe marks and ECE boot rather than platform construction differ.",
+    "Internal01 adds an unrolled ECE RAZE tattoo; internal02 changes the side-hug action to seated and adds extra tattoo motifs. All are archived unused; no aesthetic retry."
+  ],
+  "additionalMetaAestheticRetries": 0,
+  "chatgptEditStatus": "Not yet invoked; exactly one per selected source after remote preflight",
+  "finalSelectionReview": {
+    "reviewedAtUtc": "2026-09-08T11:26:01.424Z",
+    "selected": false,
+    "disposition": "archived-unused",
+    "finalQa": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/final-selection-qa.json",
+    "noFurtherRenderOrEdit": true
+  }
+}

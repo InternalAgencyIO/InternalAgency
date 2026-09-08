@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "batch": 500,
+  "country": "Mauritania",
+  "createdAtUtc": "2026-09-07T01:01:38.282Z",
+  "state": "explicit-archive-exception-approved-four-selections-await-normal-pairing",
+  "baseRemoteVerifiedHead": "17ce0a962f8a2fcfcfeb9fcc7577504dc1e2badd",
+  "supersedesArchiveHoldOnlyIn": "assets/lore/starlight-era/batch-500-mauritania-selection-complete-internal-raw-hold-checkpoint.json",
+  "authorization": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
+  "currentEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/archive-exception-current-manifest.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/provider-ledger.json",
+  "internalOriginalRecovery": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/internal-original-recovery-hold.json",
+  "sceneIds": [
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "acceptedCount": 4,
+  "nativeFinalsSaved": 4,
+  "chatgptEditsInvoked": 4,
+  "chatgptReturnedImages": 3,
+  "chatgptBlockedNoBytes": 1,
+  "metaInitialSends": 4,
+  "metaRetries": 0,
+  "additionalMauritaniaSendsAllowed": 0,
+  "additionalMauritaniaEditsAllowed": 0,
+  "fullRawArchiveComplete": false,
+  "missingInternalOriginals": 8,
+  "archiveGateSatisfiedByExplicitException": true,
+  "eligibleForNormalCountryPairing": true,
+  "xEligible": false,
+  "xPostActivationsThisTurn": 0,
+  "canonicalXPostCount": 230,
+  "companionRequired": true,
+  "nextCountry": {
+    "country": "Costa Rica",
+    "batch": 501,
+    "sceneIds": [
+      2031,
+      2032,
+      2033,
+      2034
+    ],
+    "source": "world-195x4-campaign.json countryPriorityOrder directly after Mauritania; newest completed scene2030 and batch500 determine the prospective numbering.",
+    "archiveExceptionApplies": false
+  },
+  "omanRemainsDeferredUnpublished": true,
+  "switzerland1849StillHeld": true,
+  "starlightGuardianPresent": false,
+  "newAutomationsAllowed": false,
+  "canonicalContradictions": [
+    {
+      "kind": "archive-ordering-exception",
+      "detail": "This receipt is being appended after the already-reserved2030 tailoring invocation began. The append-before-next-render ordering was not met for that one transition. No2029 retry occurred; future rendering remains held until evidence closure."
+    },
+    {
+      "kind": "inherited-historical-mutable-contract-seal-warnings",
+      "detail": "Historical verifier still reports checkpoint contractSha256 and ledger contractPolicySha256 mismatches. No old seals are silently resealed; current batch checks are recorded separately."
+    }
+  ],
+  "nextSafeAction": "Treat the four saved Mauritania selections as accepted under the explicit Mauritania-only internal-original archive exception. Keep all eight missing originals and their URLs logged as unrecovered. Prepare the next authoritative Costa Rica Batch501 scenes2031-2034 as a normal companion country, with unchanged anchors, Thinking, hard-failure retry and single-edit limits. Publish only eligible nonduplicate country-pair media after live @dogramaci, caption, accessibility, Git/LFS and PR checks. Oman remains excluded. No further Mauritania generation or edit is allowed."
+}

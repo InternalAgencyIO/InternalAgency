@@ -1,0 +1,71 @@
+{
+  "schema": "internalagency.starlight.country-cycle-closure.v1",
+  "batchId": 435,
+  "country": "Tunisia",
+  "status": "closed_unresolved",
+  "recordedAtUtc": "2026-08-27T16:14:07.281Z",
+  "dispatchedCheckpoint": "assets/lore/starlight-era/batch-435-tunisia-full-tab-reset-restored-awaiting-send-checkpoint.json",
+  "preparedCheckpoint": "assets/lore/starlight-era/batch-435-tunisia-prompts-prepared-checkpoint.json",
+  "formalCycleCompleted": true,
+  "canonicalRequirementPerCountry": 4,
+  "acceptedCanonicalCount": 0,
+  "acceptedCanonicalScenes": [],
+  "terminalScenes": [
+    {
+      "sceneId": 1760,
+      "result": "hard_unusable",
+      "acceptedCanonical": false,
+      "checkpoint": "assets/lore/starlight-era/batch-435-tunisia-scene-1760-terminal-captured-checkpoint.json",
+      "occurrence": "progress-reports/codex-generated-media/provider-occurrences/batch-435-scene-1760-output-hard-unusable.jsonl",
+      "rawSha256": "f9a423eff4e5e03885521e2b91f75184ea368bd54d75595a56b03263276b603f"
+    },
+    {
+      "sceneId": 1761,
+      "result": "hard_unusable",
+      "acceptedCanonical": false,
+      "checkpoint": "assets/lore/starlight-era/batch-435-tunisia-scene-1761-terminal-captured-checkpoint.json",
+      "occurrence": "progress-reports/codex-generated-media/provider-occurrences/batch-435-scene-1761-output-hard-unusable.jsonl",
+      "rawSha256": "9fed268de09c8fb902c4d387a12693e0ee82d9f93388219d0607c8a4de53d4c0"
+    },
+    {
+      "sceneId": 1762,
+      "result": "hard_unusable",
+      "acceptedCanonical": false,
+      "checkpoint": "assets/lore/starlight-era/batch-435-tunisia-scene-1762-terminal-captured-checkpoint.json",
+      "occurrence": "progress-reports/codex-generated-media/provider-occurrences/batch-435-scene-1762-output-hard-unusable.jsonl",
+      "rawSha256": "7649fc1df88e2678fbb662b1472c1a4f69afe2837089d7116feeb3331715eed1"
+    },
+    {
+      "sceneId": 1763,
+      "result": "hard_unusable",
+      "acceptedCanonical": false,
+      "checkpoint": "assets/lore/starlight-era/batch-435-tunisia-scene-1763-terminal-captured-checkpoint.json",
+      "occurrence": "progress-reports/codex-generated-media/provider-occurrences/batch-435-scene-1763-output-hard-unusable.jsonl",
+      "rawSha256": "753fd01d9c50d55c36a32e169e281b6e658575345de1bdeb63680468bbe482f2"
+    }
+  ],
+  "unresolvedReason": "Country did not produce any contract-compliant accepted canonical image. All four raw outputs are archived as hard-unusable evidence and no scene may be reopened.",
+  "retriesAuthorized": [],
+  "closedSceneIds": [
+    1760,
+    1761,
+    1762,
+    1763
+  ],
+  "browserTabsRemaining": 0,
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 5,
+    "threshold": 10,
+    "due": false,
+    "cyclesRemaining": 5,
+    "outcome": "not_due_no_publish"
+  },
+  "xBacklog": {
+    "unpublishedAcceptedCanonicalCount": 1,
+    "unpublishedAcceptedCanonicalScenes": [
+      1753
+    ],
+    "bindingPostContract": "Exactly two accepted unposted images from one country plus one accepted unposted image from a different country",
+    "eligibilityResult": "No compliant 2+1 country pair exists"
+  }
+}

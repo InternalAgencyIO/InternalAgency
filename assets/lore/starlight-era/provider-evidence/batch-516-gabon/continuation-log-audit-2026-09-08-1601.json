@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "batch": 516,
+  "auditedAtUtc": "2026-09-08T16:01:36.116Z",
+  "since": "2026-09-08T15:05:50.413Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/continuation-log-audit-2026-09-08-1505.json",
+  "nextAuditNotBeforeUtc": "2026-09-08T16:46:36.116Z",
+  "scope": "Gambia final remote closure, Gabon authority reconciliation, frozen preparation, four verified composers, initial send receipts and fresh terminal inventories.",
+  "evidence": [
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
+    "assets/lore/starlight-era/provider-evidence/batch-516-gabon/takeover-authority-reconciliation.json",
+    "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
+    "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-remote-preflight.json",
+    "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-dispatch-guard.json",
+    "assets/lore/starlight-era/provider-evidence/batch-516-gabon/provider-ledger.json"
+  ],
+  "findings": [
+    {
+      "topic": "Current authority",
+      "result": "Gambia515 is fully closed, remotely verified and unpublished. Gabon516 scenes2091-2094 are the new active occurrences. Historical Cuba/Tanzania and Gabon380 terminal scenes remain inactive; Qatar513 is partial and X-ineligible."
+    },
+    {
+      "topic": "Exactly-once dispatch",
+      "result": "Four initial Meta activations have four distinct confirmed provider URLs, all under leesha007 and Thinking. Exact prompt hashes and ordered anchors938,936,937 were verified before each Send. Zero retries and zero ChatGPT invocations for Gabon."
+    },
+    {
+      "topic": "Attachment verification correction",
+      "result": "Six generic img roles represented nested or decorative roles, not six attachment cards. Fresh named-card order and exactly three Remove image controls plus screenshots confirmed three anchors once each. No reupload followed the local verification error."
+    },
+    {
+      "topic": "Current source state",
+      "result": "All four existing provider responses are now terminal. Initial visible inventory has12 exposures. Native downloads, direct visual QA and full source remote proof are next; no terminal scene will be reopened or sent again."
+    },
+    {
+      "topic": "Frozen probabilities",
+      "result": "Camera, poses, shoes, flags, tattoo and branding outcomes remain the deterministic batch516 roll bank. No cosmetic reroll. Provider prose about exact angle or garments is not visual evidence."
+    },
+    {
+      "topic": "Public queue",
+      "result": "X ledger remains244 verified posts. No X activation occurred in this audit window. Gambia waits for Gabon complete closure before pair reservation."
+    }
+  ],
+  "boundedImprovements": [
+    "Validate named attachment cards and removal controls, not generic image-role counts.",
+    "Explicitly assign fresh inventory returned by helpers to avoid stale closure bindings.",
+    "Archive every visible provider original before releasing a terminal tab.",
+    "Compare actual pixels and frozen source crop during a single tailoring pass; no aesthetic retries."
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newWorkersCreated": 0,
+  "guardian": {
+    "id": "starlight-pipeline-guardian",
+    "status": "ACTIVE",
+    "configSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+    "scheduleChanged": false
+  },
+  "dispatchesThisAudit": 4,
+  "chatgptInvocationsThisAudit": 0,
+  "publicPostsThisAudit": 0
+}

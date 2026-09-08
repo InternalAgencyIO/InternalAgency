@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four-lanes-uploaded-awaiting-action-time-send-confirmation",
+  "createdAtUtc": "2026-08-27T04:31:37.7135408Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 422,
+  "country": "South Sudan",
+  "scenes": [
+    1708,
+    1709,
+    1710,
+    1711
+  ],
+  "provider": "Meta AI",
+  "signedInAccount": "leesha007",
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "uploadAuthorization": {
+    "grantedAtUtc": "2026-08-27T04:05:01.0694990Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.0694990Z",
+    "active": true
+  },
+  "lanes": [
+    {
+      "scene": 1708,
+      "tabId": "10",
+      "url": "https://www.meta.ai/",
+      "attachmentCount": 3,
+      "attachmentOrder": [
+        938,
+        936,
+        937
+      ],
+      "promptSha256": "49023104FA7694B299F8A87E4DCB27381208A5A4DB91B3C636005ECBC8F20EA9",
+      "promptTyped": false,
+      "sendClickCount": 0,
+      "providerChat": null,
+      "cameraRoll": 49,
+      "framing": "intermediate"
+    },
+    {
+      "scene": 1709,
+      "tabId": "11",
+      "url": "https://www.meta.ai/",
+      "attachmentCount": 3,
+      "attachmentOrder": [
+        938,
+        936,
+        937
+      ],
+      "promptSha256": "89960C1A17AD37D6C9ABA7F6EB07EA11B3CB8362D82AB87EB09754F3B3CBFB3B",
+      "promptTyped": false,
+      "sendClickCount": 0,
+      "providerChat": null,
+      "cameraRoll": 2,
+      "framing": "extreme-close"
+    },
+    {
+      "scene": 1710,
+      "tabId": "12",
+      "url": "https://www.meta.ai/",
+      "attachmentCount": 3,
+      "attachmentOrder": [
+        938,
+        936,
+        937
+      ],
+      "promptSha256": "97068C0474D346440D3B662AFDF24D98D1BA4E78869E1C21709257DD6E56B99F",
+      "promptTyped": false,
+      "sendClickCount": 0,
+      "providerChat": null,
+      "cameraRoll": 80,
+      "framing": "intermediate",
+      "malePresent": true
+    },
+    {
+      "scene": 1711,
+      "tabId": "13",
+      "url": "https://www.meta.ai/",
+      "attachmentCount": 3,
+      "attachmentOrder": [
+        938,
+        936,
+        937
+      ],
+      "promptSha256": "36E0D634B7AC976D84D089B50ACE2BA257AC16ECE22459D1B2D837C85F051F6D",
+      "promptTyped": false,
+      "sendClickCount": 0,
+      "providerChat": null,
+      "cameraRoll": 47,
+      "framing": "intermediate"
+    }
+  ],
+  "eligibleLaneCount": 4,
+  "confirmedProviderChatCount": 0,
+  "duplicateDispatchCount": 0,
+  "initialDispatchAuthorized": true,
+  "boundedRetryAuthorized": false,
+  "retryCount": 0,
+  "send": {
+    "status": "awaiting-action-time-user-confirmation",
+    "promptBodiesBlank": true,
+    "sendClickCount": 0
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 1,
+    "publishDue": false
+  }
+}

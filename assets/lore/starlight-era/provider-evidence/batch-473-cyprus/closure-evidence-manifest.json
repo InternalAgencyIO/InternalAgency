@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "batch": 473,
+  "country": "Cyprus",
+  "createdAtUtc": "2026-08-31T18:25:48.6385068Z",
+  "root": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus",
+  "fileCount": 11,
+  "totalBytes": 4544174,
+  "inventoryDigestAlgorithm": "SHA-256 over UTF-8 lines filename|sha256|bytes sorted by filename with LF separators and no terminal LF",
+  "inventorySha256": "299865BD73EDE520F571229EC926A2B81BF88FC6FC7157CA7071FACE6E1DDEDC",
+  "files": [
+    {"name": "1919-cyprus-nicosia-eleftheria-square-raze-chatgpt-one-strong-shortening-pass.png", "role": "selected-clean-publication-candidate-chatgpt-one-pass", "sha256": "DDCCEDDD13DCFC1E751328748B18863D799D659C738E60C7EFAFF2B3B7623F63", "bytes": 2218392, "dimensions": "941x1672", "contentType": "image/png"},
+    {"name": "1919-cyprus-nicosia-eleftheria-square-raze-meta-occurrence-1-raw.webp", "role": "provider-raw-original-archived", "sha256": "D140F48D9193ECED8AD96AD9B9804A6B0FE73B32F205CF72BC611A733F4E356B", "bytes": 426582, "dimensions": "1152x2048", "contentType": "image/webp"},
+    {"name": "1919-cyprus-nicosia-eleftheria-square-raze-meta-visible-download.jpg", "role": "unused-visible-download-rendition-archived", "sha256": "F41A0A9E169F9FFE4998325294B4480148979796C74DECBC181329F45D092A55", "bytes": 221871, "dimensions": "1152x2048", "contentType": "image/jpeg"},
+    {"name": "1920-cyprus-limassol-molos-raze-meta-occurrence-1-raw.webp", "role": "provider-raw-original-selected-clean-publication-candidate", "sha256": "86A5738D140839E6EEC775978CFC8E54E07D9AD13E2EE75CEFE5EC7CA355D10E", "bytes": 624124, "dimensions": "1152x2048", "contentType": "image/webp"},
+    {"name": "1921-cyprus-paphos-harbor-raze-meta-occurrence-1-raw.webp", "role": "provider-raw-original-selected-clean-publication-candidate", "sha256": "B5135A70CA368E8A31833EF1E09C11A07F83A72318635B40302DADC4775DA725", "bytes": 542040, "dimensions": "1184x2096", "contentType": "image/webp"},
+    {"name": "1922-cyprus-lefkara-raze-meta-occurrence-1-raw.webp", "role": "provider-raw-original-selected-clean-publication-candidate", "sha256": "32F7B13A6C9BFF334D81C36260DE9D9C881C0E71267A6CF5C1A3543BA3BC424E", "bytes": 494790, "dimensions": "1152x2048", "contentType": "image/webp"},
+    {"name": "accessibility-sidecars.json", "role": "accessibility-alt-text-sidecar", "sha256": "2A9EF0979FA6F2F346D54FCDF44AE428E3495ED284A0138A3421736C0353C008", "bytes": 2096, "contentType": "application/json"},
+    {"name": "chatgpt-one-pass-prompts-and-outcomes.md", "role": "exact-one-pass-and-blocked-prompt-archive", "sha256": "051D7EF02B8D8CBB14504BE536216ADC82C3666E818FEDE9689BB6C58992E997", "bytes": 5914, "contentType": "text/markdown"},
+    {"name": "dispatch-evidence-manifest.json", "role": "provider-dispatch-evidence", "sha256": "27E54195C7F53357CC26EC3CE7D57CC7C377579720527DB1F28C8A51366CB13C", "bytes": 1116, "contentType": "application/json"},
+    {"name": "provider-ledger.json", "role": "provider-occurrence-and-one-pass-ledger", "sha256": "F4EC92D0F53696E2FFD46A41CBD2BD89B1FADE0F98606B17D2E8E90A0420BF59", "bytes": 5632, "contentType": "application/json"},
+    {"name": "staging-evidence-manifest.json", "role": "pre-dispatch-visible-staging-evidence", "sha256": "098A2804A2EBB576D720F25A48E9A91C1A95ACF0553E18584D210CE20CD04077", "bytes": 1617, "contentType": "application/json"}
+  ],
+  "providerRawBytes": {
+    "available": true,
+    "assetCount": 4,
+    "capturePolicy": "The provider pages were used only through the visible in-app Browser. Each visible rendered-media surface was opened and the supported media capture control saved the raw WebP. No provider API, direct HTTP client, provider CLI, Chrome, computer-use or hidden-state workaround was used."
+  },
+  "onePassBoundary": {
+    "requestsIssued": 4,
+    "outputsSaved": 1,
+    "aggregateOutputModerationBlocks": 1,
+    "additionalPassesPermitted": 0,
+    "promptArchive": "chatgpt-one-pass-prompts-and-outcomes.md"
+  },
+  "nextSafeAction": "Commit this exact inventory and every listed artifact, push Git LFS, verify the draft PR head, then stage a duplicate-safe Croatia-Cyprus 2+1 X post only after visible @dogramaci verification."
+}

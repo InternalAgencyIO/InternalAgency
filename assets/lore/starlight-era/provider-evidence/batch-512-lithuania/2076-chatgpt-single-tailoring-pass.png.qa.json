@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "batch": 512,
+  "scene": 2076,
+  "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png",
+  "sha256": "ba690750a2df64f29b25c7dbdcd9688f8710305d81b0da710b86df0107b1239f",
+  "reviewedAtUtc": "2026-09-08T10:23:14.179Z",
+  "reviewMethod": "Main-agent direct local image review alongside previously inspected Meta source and exact anchor plates.",
+  "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-04-original.webp",
+  "decision": "selected",
+  "hardChecks": {
+    "fourDistinctFictionalAdultWomen": true,
+    "faceOrderConsistentWithAnchors": true,
+    "opaquePublicSafeCoverage": true,
+    "plausibleContactAnatomy": true,
+    "sourceFramingAndGeometryPreserved": true,
+    "noOutpaintingOrCameraRestagingObserved": true,
+    "decodableImage": true
+  },
+  "softRollDeviations": [
+    "Head rests against a shoulder, not fully on a clothed lap. The camera is less wide than the extreme-wide target.",
+    "Some flag geometry, tattoo duplication and navel visibility differ from frozen rolls.",
+    "The edit preserves composition and improves garment tailoring; no additional edit is allowed."
+  ],
+  "additionalEditsAllowed": 0
+}

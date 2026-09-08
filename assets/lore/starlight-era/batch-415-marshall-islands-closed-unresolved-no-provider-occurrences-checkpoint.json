@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "batch": 415,
+  "country": "Marshall Islands",
+  "closed_utc": "2026-08-26T07:45:56.504Z",
+  "status": "closed_unresolved_provider_no_occurrences",
+  "formal_country_cycle_completed": true,
+  "completed_cycle_count_since_last_x_cycle": 5,
+  "accepted_canonical_count": 0,
+  "accepted_scenes": [],
+  "closed_unresolved_scenes": [
+    {
+      "scene": 1680,
+      "prompt_sha256": "0E504ACB588436249CB749641625DAC790ECAB60CE49A48C5F6441031BCAA2E1",
+      "camera_roll": 23,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "raw_bytes": false
+    },
+    {
+      "scene": 1681,
+      "prompt_sha256": "18182DAFDD0D9FFE3AE01AF20E4CC341DCE7A036F1F0BA895D41EB266BDEE004",
+      "camera_roll": 62,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "raw_bytes": false
+    },
+    {
+      "scene": 1682,
+      "prompt_sha256": "901AA4B0245700586FA6E68E6BE6D42863EABD50B22780C0A2E002A817F81290",
+      "camera_roll": 76,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "raw_bytes": false
+    },
+    {
+      "scene": 1683,
+      "prompt_sha256": "53F820242E85B6727CC809845F98AAEE6539FD45328A9FDBBFEBCC037618C5CA",
+      "camera_roll": 94,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "raw_bytes": false
+    }
+  ],
+  "provider_failure": {
+    "evidence": "All four fresh Marshall Islands submissions used exact prompts and verified 938 -> 936 -> 937 anchors. Each Send was enabled and cleared the composer, but none produced a provider chat URL, response text, View media control, or bytes.",
+    "interpretation": "Browser submission succeeded; Meta provider occurrence binding failed across the entire country cycle."
+  },
+  "attempt_policy": "All four initial dispatches are consumed. No retries are authorized. Never resend scenes 1680-1683 or reopen Batch 415 without explicit newer checkpoint authority.",
+  "next_action": "Advance queue authority to Batch 416 San Marino, expected scenes 1684-1687. Prepare prompts locally under the provider blocker. Do not run X early; cadence is 5 completed country cycles since the last recorded X cycle."
+}

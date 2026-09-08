@@ -1,0 +1,874 @@
+{
+  "batch": 211,
+  "continent": "Asia",
+  "country": "Philippines",
+  "countrySlug": "philippines",
+  "theme": "THE MILE HIGH THREESOME - Philippines Black-Tie Gala Aircrew Couture",
+  "status": "triggered-detail-partial-with-one-blocked-lane",
+  "bonusExpansion": true,
+  "renderTiming": {
+    "startedAt": "2026-08-05T00:32:53.272Z",
+    "targetMinutes": 45,
+    "firstFoundationAt": "2026-08-05T01:25:37.462Z",
+    "validationCompletedAt": null,
+    "elapsedMinutes": null,
+    "withinTarget": null,
+    "overrunReason": null
+  },
+  "preflight": {
+    "status": "passed",
+    "blockedCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+    "cache": "tmp/world-195x4/batch-211/preflight/blocklist-transform-26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26.json",
+    "compiledAt": "2026-08-05T00:32:53.272Z",
+    "order": "longest-phrase-first"
+  },
+  "scenes": [
+    {
+      "number": 864,
+      "slug": "philippines-manila-bay-gala-route-light-grid",
+      "title": "Philippines Manila Bay Gala Aircrew Route-Light Grid",
+      "location": "Manila Bay's unmistakable waterfront promenade, broad bay horizon and modern skyline at sapphire-gold evening, staged as an empty fictional black-tie flight-deck terrace",
+      "brief": "Vertical full-length HQ cinematic luxury aviation-fashion photograph at Manila Bay's unmistakable waterfront promenade, broad bay horizon and modern skyline at sapphire-gold evening, staged as an empty fictional black-tie flight-deck terrace. Exactly three clearly adult early-twenties fictional women with the same distinct canonical identities as both approved references. Radiance is fictional STAR RAZE cabin host, Ellie is fictional STAR RAZE captain, and Alia is fictional STAR RAZE first officer. Black-tie fashion is the first read: three different concise sculptural black-tie gala aircrew silhouettes in cobalt, warm red, optical white, pearl silver and molten gold, using capiz-shell glow, banig-inspired weave geometry and fluid bay-line seams; distinct complete stilettos, platforms and couture flight boots. Local secular accessories: a capiz-shell collar arc, a fine banig-weave evening clutch and a pearl-and-rattan wrist sculpture, divided across the trio. Together they align three capiz-white, cobalt and warm-red route lights into a compact Manila Bay navigation grid. Relationship event: Ellie is centered in command while Radiance draws close through a visible linked side-waist-and-hand line; Alia notices with an amused affectionate smile and remains connected at Ellie's opposite side. Triggered-detail integration: Radiance wears a sculptural gala headpiece, an original swept luminous hairstyle and fixed decorative back-seam lacing. Ellie shows one small secular shoulder-blade star-facet tattoo, a secure side-waist embrace and a separate satin wrist ribbon whose loose tail meets Alia's only inside their linked hands. PAWS is mandatory under the active promotion override. Show exactly one tiny approximately two-month-old female NY11 golden British Shorthair kitten with an oversized round baby face, large green eyes, short little legs and luminous honey-apricot-gold baby fur. Action beat: Radiance lifts one harmless loose signal-ribbon end in a broad slack curve while tiny PAWS bats at the trailing end on the ground; Radiance looks down and smiles at her. Reject adult size, passive sitting, dull coat color, unsafe motion, duplicated cat or obscured faces, hands, mission, landmark, garments or footwear. Preserve clean natural faces, readable hands, complete anatomy, all six complete shoes, solid opaque secure coverage and the recognizable Philippines setting. Use no literal flag, official or sacred emblem, politics, readable text, logo, real airline, extra person, second animal, weapon or watermark.",
+      "file": "864-philippines-manila-bay-gala-route-light-grid.png",
+      "companionDirective": "PAWS is mandatory under the active promotion override. Show exactly one tiny approximately two-month-old female NY11 golden British Shorthair kitten with an oversized round baby face, large green eyes, short little legs and luminous honey-apricot-gold baby fur. Action beat: Radiance lifts one harmless loose signal-ribbon end in a broad slack curve while tiny PAWS bats at the trailing end on the ground; Radiance looks down and smiles at her. Reject adult size, passive sitting, dull coat color, unsafe motion, duplicated cat or obscured faces, hands, mission, landmark, garments or footwear.",
+      "videoAnchor": false,
+      "companionRolls": {
+        "PAWS": {
+          "seed": "864|companion|PAWS|mile-high-v1",
+          "firstEightHex": "ab7a83a6",
+          "baseRoll": 30,
+          "baseTriggered": true,
+          "promotionOverrideTriggered": true,
+          "effectiveTriggered": true,
+          "growthStage": "two-month-old kitten",
+          "growthEpoch": 1
+        }
+      },
+      "companionActionRoll": {
+        "seed": "864|companion-action|PAWS|mile-high-v2",
+        "firstEightHex": "9d33a325",
+        "rawActionRoll": 3,
+        "resolvedActionIndex": 3,
+        "collisionAdjusted": false,
+        "actionName": "ribbon-chase",
+        "actionContractSha256": "8f3e6524cd5b3d07f8fffce91f8f174513ccfe1527c43de43feaf8a2de8a6fc7"
+      },
+      "appearanceRolls": {
+        "Radiance": {
+          "hairVariation": 25,
+          "hat": 8,
+          "tattoo": 22,
+          "sculpturalCuff": 75,
+          "opaqueContrastEdge": 36,
+          "braidedCraftCord": 88,
+          "pairedWristCuffPose": 52,
+          "garmentRibbonGeometry": 98,
+          "facePiercing": 73,
+          "bodyPiercing": 42,
+          "faceTattoo": 0,
+          "lowerBackTattoo": 69,
+          "orbRetrievalPose": 83,
+          "corsetBackPanelLacing": 14
+        },
+        "Ellie": {
+          "hairVariation": 51,
+          "hat": 44,
+          "tattoo": 5,
+          "sculpturalCuff": 18,
+          "opaqueContrastEdge": 39,
+          "braidedCraftCord": 45,
+          "pairedWristCuffPose": 42,
+          "garmentRibbonGeometry": 10,
+          "facePiercing": 30,
+          "bodyPiercing": 39,
+          "faceTattoo": 8,
+          "lowerBackTattoo": 83,
+          "orbRetrievalPose": 21,
+          "waistEncirclingSideHug": 2,
+          "satinRibbonLinkedHands": 2
+        },
+        "Alia": {
+          "hairVariation": 69,
+          "hat": 94,
+          "tattoo": 82,
+          "sculpturalCuff": 56,
+          "opaqueContrastEdge": 12,
+          "braidedCraftCord": 59,
+          "pairedWristCuffPose": 24,
+          "garmentRibbonGeometry": 51,
+          "facePiercing": 55,
+          "bodyPiercing": 78,
+          "faceTattoo": 95,
+          "lowerBackTattoo": 43,
+          "orbRetrievalPose": 57
+        }
+      },
+      "trioStaticRolls": {},
+      "rollAudit": {
+        "characterTraitCount": 84,
+        "trioTraitCount": 20,
+        "oddsAndScopesSha256": "84f75123c51f255c1a495c9847580cf78a9479955b451381d390a0dd4e5e91a4",
+        "fullRollsSha256": "5a473c293c65ea3c1a1e3def3c94fb0413627268f06df11251d50e74a2af3b0b",
+        "hashEncoding": "SHA-256 of JSON ordered [scope,trait,roll] tuples in canonical character then trait order",
+        "storage": "base rolls plus every triggered roll; all 84 character and 20 trio-static traits evaluated from the current mutable master"
+      },
+      "renderState": {
+        "status": "triggered-detail-complete",
+        "lastValidStage": "triggered-detail",
+        "lastValidAsset": "tmp/world-195x4/batch-211/details/864-philippines-manila-bay-detail-02-compact-ribbon.png",
+        "attempts": 9,
+        "blocker": null,
+        "retryVariantRolls": [],
+        "identityReferences": [
+          "468-france-paris-la-defense-prism-intercept.png",
+          "471-france-nice-promenade-night-relay.png"
+        ],
+        "preflight": {
+          "status": "passed",
+          "blockedCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+          "cache": "tmp/world-195x4/batch-211/preflight/blocklist-transform-26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26.json",
+          "order": "longest-phrase-first"
+        },
+        "foundationPlan": {
+          "country": "Philippines",
+          "location": "Manila Bay's unmistakable waterfront promenade, broad bay horizon and modern skyline at sapphire-gold evening, staged as an empty fictional black-tie flight-deck terrace",
+          "roles": {
+            "Radiance": "cabin host",
+            "Ellie": "captain",
+            "Alia": "first officer"
+          },
+          "mission": "align three capiz-white, cobalt and warm-red route lights into a compact Manila Bay navigation grid",
+          "relationship": "Ellie is centered in command while Radiance draws close through a visible linked side-waist-and-hand line; Alia notices with an amused affectionate smile and remains connected at Ellie's opposite side",
+          "companionAction": {
+            "name": "ribbon-chase",
+            "instruction": "Radiance lifts one harmless loose signal-ribbon end in a broad slack curve while tiny PAWS bats at the trailing end on the ground; Radiance looks down and smiles at her"
+          },
+          "triggeredDetails": [
+            "Radiance.hairVariation",
+            "Radiance.hat",
+            "Radiance.faceTattoo",
+            "Radiance.corsetBackPanelLacing",
+            "Ellie.tattoo",
+            "Ellie.waistEncirclingSideHug",
+            "Ellie.satinRibbonLinkedHands",
+            "companion.PAWS",
+            "companion.PAWS.ribbon-chase"
+          ],
+          "cleanFaceGate": true,
+          "technicalInvariants": [
+            "vertical full-length composition",
+            "exactly three clearly adult fictional women",
+            "one tiny two-month-old richly golden PAWS kitten only",
+            "active reciprocal PAWS interaction",
+            "readable hands",
+            "all six complete shoes",
+            "solid opaque secure couture",
+            "no readable text or logo"
+          ],
+          "suppressedDetails": [
+            {
+              "trait": "Radiance.faceTattoo",
+              "reason": "The newer binding clean-face gate rejects symbol-marked facial skin; preserve the deterministic roll record but suppress visible execution."
+            }
+          ]
+        },
+        "stages": {
+          "foundation": "accepted",
+          "relationship": "accepted",
+          "silhouette": "planned-in-foundation",
+          "refinement": "planned-in-foundation",
+          "triggeredDetails": "complete",
+          "companion": "accepted-in-foundation",
+          "validation": "final-pending"
+        },
+        "blockedPrompts": [],
+        "detailProgress": {
+          "completed": [
+            "Radiance.faceTattoo (suppressed-by-clean-face-gate)",
+            "companion.PAWS",
+            "companion.PAWS.ribbon-chase",
+            "Radiance.hairVariation",
+            "Radiance.hat",
+            "Radiance.corsetBackPanelLacing",
+            "Ellie.tattoo",
+            "Ellie.waistEncirclingSideHug",
+            "Ellie.satinRibbonLinkedHands"
+          ],
+          "remaining": []
+        },
+        "lastValidSha256": "4799bb6b258201d583b1f59f08dd24fd94c995197e6e3d232eeb3a413f526403",
+        "lastValidBytes": 2409689,
+        "dimensions": "941x1672",
+        "nextStage": "final-validation",
+        "visualAudit": {
+          "status": "passed",
+          "checkedAt": "2026-08-05T03:06:46.941Z",
+          "evidence": [
+            "Hair variation, sculptural headpiece, back-panel lacing, small shoulder mark, side-waist connection and linked-hand ribbon are visibly present.",
+            "PAWS remains tiny, richly golden and active in the exact ribbon-chase beat.",
+            "Three clean adult faces, readable hands, secure opaque couture and all six shoes remain intact."
+          ]
+        }
+      },
+      "status": "triggered-detail-complete"
+    },
+    {
+      "number": 865,
+      "slug": "philippines-vigan-calle-crisologo-cabin-signal-cipher",
+      "title": "Philippines Vigan Calle Crisologo Gala Aircrew Cabin-Signal Cipher",
+      "location": "Vigan's unmistakable Calle Crisologo heritage street with stone paving, wooden bahay-na-bato facades and warm secular shop-lantern glow at blue hour, staged as an empty fictional cabin-signal gala lane with no readable signs",
+      "brief": "Vertical full-length HQ cinematic luxury aviation-fashion photograph at Vigan's unmistakable Calle Crisologo heritage street with stone paving, wooden bahay-na-bato facades and warm secular shop-lantern glow at blue hour, staged as an empty fictional cabin-signal gala lane with no readable signs. Exactly three clearly adult early-twenties fictional women with the same distinct canonical identities as both approved references. Radiance is fictional STAR RAZE captain, Ellie is fictional STAR RAZE first officer, and Alia is fictional STAR RAZE cabin host. Black-tie fashion is the first read: three different concise sculptural black-tie gala aircrew silhouettes in deep indigo, warm red, optical white, black, capiz pearl and antique gold, using inabel-inspired linear weave, solihiya lattice and heritage-window geometry; distinct complete heeled sandals, platforms and couture flight boots. Local secular accessories: an inabel evening sash, a capiz fan clutch and a fine solihiya-pattern gold cuff, divided across the trio. Together they decode a completed capiz-and-copper cabin-signal cipher inside a compact inabel-pattern service console. Relationship event: Ellie and Alia share a close private smile and linked shoulder line while Radiance gives a playful jealous look, then all three turn into a coordinated over-shoulder gala glance without breaking the trio. Triggered-detail integration: Radiance wears an original sleek gala hairstyle and one compact captain headpiece. Ellie has one angular wrist sculpture, a sharply cut open-back opaque evening panel and an independently fastened chain anklet aligned playfully with Alia's separate anklet. Alia wears a distinct cabin-host headpiece, reaches toward the cipher token, carries a blunt decorative boot-side fashion wand and has one opera-gloved hand adjusting only a loose shoulder strap detail. The trio also holds one loose gold garland in separate hand segments while both side partners adjust the central cropped cape closure; every chain and closure remains slack and removable. PAWS is mandatory under the active promotion override. Show exactly one tiny approximately two-month-old female NY11 golden British Shorthair kitten with an oversized round baby face, large green eyes, short little legs and luminous honey-apricot-gold baby fur. Action beat: Radiance holds a stable seated captain pose with tiny PAWS securely nestled across her lap, one little paw on her mission card; Radiance steadies the kitten while Ellie and Alia visibly smile toward her. Reject adult size, passive sitting, dull coat color, unsafe motion, duplicated cat or obscured faces, hands, mission, landmark, garments or footwear. Preserve clean natural faces, readable hands, complete anatomy, all six complete shoes, solid opaque secure coverage and the recognizable Philippines setting. Use no literal flag, official or sacred emblem, politics, readable text, logo, real airline, extra person, second animal, weapon or watermark.",
+      "file": "865-philippines-vigan-calle-crisologo-cabin-signal-cipher.png",
+      "companionDirective": "PAWS is mandatory under the active promotion override. Show exactly one tiny approximately two-month-old female NY11 golden British Shorthair kitten with an oversized round baby face, large green eyes, short little legs and luminous honey-apricot-gold baby fur. Action beat: Radiance holds a stable seated captain pose with tiny PAWS securely nestled across her lap, one little paw on her mission card; Radiance steadies the kitten while Ellie and Alia visibly smile toward her. Reject adult size, passive sitting, dull coat color, unsafe motion, duplicated cat or obscured faces, hands, mission, landmark, garments or footwear.",
+      "videoAnchor": false,
+      "companionRolls": {
+        "PAWS": {
+          "seed": "865|companion|PAWS|mile-high-v1",
+          "firstEightHex": "14f8a9d6",
+          "baseRoll": 26,
+          "baseTriggered": true,
+          "promotionOverrideTriggered": true,
+          "effectiveTriggered": true,
+          "growthStage": "two-month-old kitten",
+          "growthEpoch": 1
+        }
+      },
+      "companionActionRoll": {
+        "seed": "865|companion-action|PAWS|mile-high-v2",
+        "firstEightHex": "6bd378a8",
+        "rawActionRoll": 0,
+        "resolvedActionIndex": 0,
+        "collisionAdjusted": false,
+        "actionName": "lap-copilot",
+        "actionContractSha256": "8f3e6524cd5b3d07f8fffce91f8f174513ccfe1527c43de43feaf8a2de8a6fc7"
+      },
+      "appearanceRolls": {
+        "Radiance": {
+          "hairVariation": 1,
+          "hat": 2,
+          "tattoo": 60,
+          "sculpturalCuff": 36,
+          "opaqueContrastEdge": 44,
+          "braidedCraftCord": 26,
+          "pairedWristCuffPose": 82,
+          "garmentRibbonGeometry": 47,
+          "facePiercing": 68,
+          "bodyPiercing": 77,
+          "faceTattoo": 9,
+          "lowerBackTattoo": 95,
+          "orbRetrievalPose": 91
+        },
+        "Ellie": {
+          "hairVariation": 92,
+          "hat": 29,
+          "tattoo": 66,
+          "sculpturalCuff": 2,
+          "opaqueContrastEdge": 28,
+          "braidedCraftCord": 81,
+          "pairedWristCuffPose": 75,
+          "garmentRibbonGeometry": 80,
+          "facePiercing": 96,
+          "bodyPiercing": 92,
+          "faceTattoo": 84,
+          "lowerBackTattoo": 72,
+          "orbRetrievalPose": 64,
+          "lowBackOpenPanelGarment": 0,
+          "chainAnkletPartnerIllusion": 19
+        },
+        "Alia": {
+          "hairVariation": 90,
+          "hat": 5,
+          "tattoo": 91,
+          "sculpturalCuff": 32,
+          "opaqueContrastEdge": 78,
+          "braidedCraftCord": 24,
+          "pairedWristCuffPose": 9,
+          "garmentRibbonGeometry": 47,
+          "facePiercing": 14,
+          "bodyPiercing": 50,
+          "faceTattoo": 41,
+          "lowerBackTattoo": 45,
+          "orbRetrievalPose": 2,
+          "bootTuckedEquestrianBaton": 10,
+          "operaGloveStrapAdjustment": 15
+        }
+      },
+      "trioStaticRolls": {
+        "tripleOverShoulderGlance": 16,
+        "trioHipLevelChainDrape": 13,
+        "dualCapeClosureStyling": 1
+      },
+      "rollAudit": {
+        "characterTraitCount": 84,
+        "trioTraitCount": 20,
+        "oddsAndScopesSha256": "84f75123c51f255c1a495c9847580cf78a9479955b451381d390a0dd4e5e91a4",
+        "fullRollsSha256": "44d30297abbe2a5c8c4cce1cc71e73bba6e5e406babebc7ff3082cf9f53ce276",
+        "hashEncoding": "SHA-256 of JSON ordered [scope,trait,roll] tuples in canonical character then trait order",
+        "storage": "base rolls plus every triggered roll; all 84 character and 20 trio-static traits evaluated from the current mutable master"
+      },
+      "renderState": {
+        "status": "triggered-detail-accepted",
+        "lastValidStage": "triggered-detail",
+        "lastValidAsset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-06-dual-collar-closures.png",
+        "attempts": 14,
+        "blocker": null,
+        "retryVariantRolls": [],
+        "identityReferences": [
+          "468-france-paris-la-defense-prism-intercept.png",
+          "471-france-nice-promenade-night-relay.png"
+        ],
+        "preflight": {
+          "status": "passed",
+          "blockedCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+          "cache": "tmp/world-195x4/batch-211/preflight/blocklist-transform-26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26.json",
+          "order": "longest-phrase-first"
+        },
+        "foundationPlan": {
+          "country": "Philippines",
+          "location": "Vigan's unmistakable Calle Crisologo heritage street with stone paving, wooden bahay-na-bato facades and warm secular shop-lantern glow at blue hour, staged as an empty fictional cabin-signal gala lane with no readable signs",
+          "roles": {
+            "Radiance": "captain",
+            "Ellie": "first officer",
+            "Alia": "cabin host"
+          },
+          "mission": "decode a completed capiz-and-copper cabin-signal cipher inside a compact inabel-pattern service console",
+          "relationship": "Ellie and Alia share a close private smile and linked shoulder line while Radiance gives a playful jealous look, then all three turn into a coordinated over-shoulder gala glance without breaking the trio",
+          "companionAction": {
+            "name": "lap-copilot",
+            "instruction": "Radiance holds a stable seated captain pose with tiny PAWS securely nestled across her lap, one little paw on her mission card; Radiance steadies the kitten while Ellie and Alia visibly smile toward her"
+          },
+          "triggeredDetails": [
+            "Radiance.hairVariation",
+            "Radiance.hat",
+            "Ellie.sculpturalCuff",
+            "Ellie.lowBackOpenPanelGarment",
+            "Ellie.chainAnkletPartnerIllusion",
+            "Alia.hat",
+            "Alia.orbRetrievalPose",
+            "Alia.bootTuckedEquestrianBaton",
+            "Alia.operaGloveStrapAdjustment",
+            "trio.tripleOverShoulderGlance",
+            "trio.trioHipLevelChainDrape",
+            "trio.dualCapeClosureStyling",
+            "companion.PAWS",
+            "companion.PAWS.lap-copilot"
+          ],
+          "cleanFaceGate": true,
+          "technicalInvariants": [
+            "vertical full-length composition",
+            "exactly three clearly adult fictional women",
+            "one tiny two-month-old richly golden PAWS kitten only",
+            "active reciprocal PAWS interaction",
+            "readable hands",
+            "all six complete shoes",
+            "solid opaque secure couture",
+            "no readable text or logo"
+          ]
+        },
+        "stages": {
+          "foundation": "accepted",
+          "relationship": "accepted",
+          "silhouette": "planned-in-foundation",
+          "refinement": "planned-in-foundation",
+          "triggeredDetails": "partial-accepted",
+          "companion": "accepted-in-foundation",
+          "validation": "foundation-passed"
+        },
+        "blockedPrompts": [],
+        "detailProgress": {
+          "completed": [
+            "Ellie.sculpturalCuff",
+            "Alia.hat",
+            "Alia.bootTuckedEquestrianBaton",
+            "Radiance.hairVariation",
+            "Radiance.hat",
+            "Alia.orbRetrievalPose",
+            "companion.PAWS",
+            "companion.PAWS.lap-copilot",
+            "Ellie.chainAnkletPartnerIllusion",
+            "trio.dualCapeClosureStyling"
+          ],
+          "remaining": [
+            "Ellie.lowBackOpenPanelGarment",
+            "Alia.operaGloveStrapAdjustment",
+            "trio.tripleOverShoulderGlance",
+            "trio.trioHipLevelChainDrape"
+          ]
+        },
+        "lastValidSha256": "5ebd71cec7f2f15fdd21e646a189e1b4a7bdbad27fc3cce9c210f74b4caf8de2",
+        "lastValidBytes": 2540185,
+        "dimensions": "941x1672",
+        "nextStage": "next-triggered-detail",
+        "noRegressionValidation": {
+          "status": "passed",
+          "checkedAt": "2026-08-05T04:16:26.262Z",
+          "exactAdultWomen": 3,
+          "cleanFaces": true,
+          "identities": true,
+          "anatomy": true,
+          "readableHands": true,
+          "completeFootwear": 6,
+          "opaqueCouture": true,
+          "locationContinuity": true,
+          "exactPaws": 1,
+          "pawsTwoMonthGoldenActive": true,
+          "pawsContinuity": true
+        }
+      },
+      "status": "triggered-detail-accepted"
+    },
+    {
+      "number": 866,
+      "slug": "philippines-banaue-rice-terraces-star-map-relay",
+      "title": "Philippines Banaue Rice Terraces Gala Aircrew Star-Map Relay",
+      "location": "the unmistakable stepped green Banaue Rice Terraces under luminous misty emerald-gold dawn, staged on an empty broad fictional gala relay platform that never touches the fields",
+      "brief": "Vertical full-length HQ cinematic luxury aviation-fashion photograph at the unmistakable stepped green Banaue Rice Terraces under luminous misty emerald-gold dawn, staged on an empty broad fictional gala relay platform that never touches the fields. Exactly three clearly adult early-twenties fictional women with the same distinct canonical identities as both approved references. Radiance is fictional STAR RAZE first officer, Ellie is fictional STAR RAZE cabin host, and Alia is fictional STAR RAZE captain. Black-tie fashion is the first read: three different concise sculptural black-tie gala aircrew silhouettes in cobalt, warm red, optical white, deep green, black and molten gold, using abstract terrace-step seam geometry and contemporary handwoven cotton accents without copying ceremonial dress; distinct complete stilettos, reflective platforms and couture flight boots. Local secular accessories: a contemporary handwoven terrace-step clutch, a fine rattan-and-gold collar piece and a pearl-inlaid route cuff, divided across the trio. Together they relay three completed pearl-cobalt star-map arcs across a terrace-step navigation display. Relationship event: Radiance and Alia angle toward Ellie from mirrored sides while Ellie links them together; Radiance gives a playful jealous side-eye as Alia shares a soft mission whisper beside Ellie's ear and Ellie visibly reciprocates both connections. Triggered-detail integration: Radiance has one tiny secular outer-shoulder geometric tattoo and holds a stable low styling pose adjusting only Ellie's visible shoe buckle. Ellie wears a loose runway seam overlay and a comfortably fitted ring-choker with a separate hip-level jewelry accent. Alia wears an original curled gala hairstyle, whispers beside Ellie while keeping interlaced fingers visible and wears a layered easy-release collar necklace with one short slack ornamental connector. The trio forms a readable staggered side-profile jewelry line. PAWS is mandatory under the active promotion override. Show exactly one tiny approximately two-month-old female NY11 golden British Shorthair kitten with an oversized round baby face, large green eyes, short little legs and luminous honey-apricot-gold baby fur. Action beat: tiny PAWS walks beside the low stable star-map console with tail raised and one little paw reaching toward a harmless pearl light; Ellie notices and makes space for her. Reject adult size, passive sitting, dull coat color, unsafe motion, duplicated cat or obscured faces, hands, mission, landmark, garments or footwear. Preserve clean natural faces, readable hands, complete anatomy, all six complete shoes, solid opaque secure coverage and the recognizable Philippines setting. Use no literal flag, official or sacred emblem, politics, readable text, logo, real airline, extra person, second animal, weapon or watermark.",
+      "file": "866-philippines-banaue-rice-terraces-star-map-relay.png",
+      "companionDirective": "PAWS is mandatory under the active promotion override. Show exactly one tiny approximately two-month-old female NY11 golden British Shorthair kitten with an oversized round baby face, large green eyes, short little legs and luminous honey-apricot-gold baby fur. Action beat: tiny PAWS walks beside the low stable star-map console with tail raised and one little paw reaching toward a harmless pearl light; Ellie notices and makes space for her. Reject adult size, passive sitting, dull coat color, unsafe motion, duplicated cat or obscured faces, hands, mission, landmark, garments or footwear.",
+      "videoAnchor": false,
+      "companionRolls": {
+        "PAWS": {
+          "seed": "866|companion|PAWS|mile-high-v1",
+          "firstEightHex": "65345969",
+          "baseRoll": 77,
+          "baseTriggered": false,
+          "promotionOverrideTriggered": true,
+          "effectiveTriggered": true,
+          "growthStage": "two-month-old kitten",
+          "growthEpoch": 1
+        }
+      },
+      "companionActionRoll": {
+        "seed": "866|companion-action|PAWS|mile-high-v2",
+        "firstEightHex": "6bec1122",
+        "rawActionRoll": 4,
+        "resolvedActionIndex": 4,
+        "collisionAdjusted": false,
+        "actionName": "console-inspector",
+        "actionContractSha256": "8f3e6524cd5b3d07f8fffce91f8f174513ccfe1527c43de43feaf8a2de8a6fc7"
+      },
+      "appearanceRolls": {
+        "Radiance": {
+          "hairVariation": 43,
+          "hat": 23,
+          "tattoo": 9,
+          "sculpturalCuff": 17,
+          "opaqueContrastEdge": 46,
+          "braidedCraftCord": 85,
+          "pairedWristCuffPose": 93,
+          "garmentRibbonGeometry": 61,
+          "facePiercing": 84,
+          "bodyPiercing": 50,
+          "faceTattoo": 40,
+          "lowerBackTattoo": 81,
+          "orbRetrievalPose": 31,
+          "playfulJealousSideEye": 0,
+          "kneelingHeelBuckleAdjustment": 10
+        },
+        "Ellie": {
+          "hairVariation": 42,
+          "hat": 73,
+          "tattoo": 32,
+          "sculpturalCuff": 85,
+          "opaqueContrastEdge": 43,
+          "braidedCraftCord": 37,
+          "pairedWristCuffPose": 85,
+          "garmentRibbonGeometry": 45,
+          "facePiercing": 34,
+          "bodyPiercing": 68,
+          "faceTattoo": 27,
+          "lowerBackTattoo": 45,
+          "orbRetrievalPose": 13,
+          "editorialHarnessOverlay": 8,
+          "ringChokerHipChainAccent": 11
+        },
+        "Alia": {
+          "hairVariation": 31,
+          "hat": 33,
+          "tattoo": 86,
+          "sculpturalCuff": 21,
+          "opaqueContrastEdge": 72,
+          "braidedCraftCord": 88,
+          "pairedWristCuffPose": 23,
+          "garmentRibbonGeometry": 39,
+          "facePiercing": 39,
+          "bodyPiercing": 64,
+          "faceTattoo": 57,
+          "lowerBackTattoo": 35,
+          "orbRetrievalPose": 5,
+          "whisperAndInterlacedHands": 16,
+          "layeredCollarNecklaceConnector": 12
+        }
+      },
+      "trioStaticRolls": {
+        "trioSideProfileJewelryLine": 9
+      },
+      "rollAudit": {
+        "characterTraitCount": 84,
+        "trioTraitCount": 20,
+        "oddsAndScopesSha256": "84f75123c51f255c1a495c9847580cf78a9479955b451381d390a0dd4e5e91a4",
+        "fullRollsSha256": "cf10f4f5a33bc3904268b577f913317acf8de86a358d7f5b56fc8f720f8cb640",
+        "hashEncoding": "SHA-256 of JSON ordered [scope,trait,roll] tuples in canonical character then trait order",
+        "storage": "base rolls plus every triggered roll; all 84 character and 20 trio-static traits evaluated from the current mutable master"
+      },
+      "renderState": {
+        "status": "triggered-detail-accepted",
+        "lastValidStage": "triggered-detail",
+        "lastValidAsset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-06-whisper-interlaced-hands.png",
+        "attempts": 14,
+        "blocker": null,
+        "retryVariantRolls": [],
+        "identityReferences": [
+          "468-france-paris-la-defense-prism-intercept.png",
+          "471-france-nice-promenade-night-relay.png"
+        ],
+        "preflight": {
+          "status": "passed",
+          "blockedCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+          "cache": "tmp/world-195x4/batch-211/preflight/blocklist-transform-26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26.json",
+          "order": "longest-phrase-first"
+        },
+        "foundationPlan": {
+          "country": "Philippines",
+          "location": "the unmistakable stepped green Banaue Rice Terraces under luminous misty emerald-gold dawn, staged on an empty broad fictional gala relay platform that never touches the fields",
+          "roles": {
+            "Radiance": "first officer",
+            "Ellie": "cabin host",
+            "Alia": "captain"
+          },
+          "mission": "relay three completed pearl-cobalt star-map arcs across a terrace-step navigation display",
+          "relationship": "Radiance and Alia angle toward Ellie from mirrored sides while Ellie links them together; Radiance gives a playful jealous side-eye as Alia shares a soft mission whisper beside Ellie's ear and Ellie visibly reciprocates both connections",
+          "companionAction": {
+            "name": "console-inspector",
+            "instruction": "tiny PAWS walks beside the low stable star-map console with tail raised and one little paw reaching toward a harmless pearl light; Ellie notices and makes space for her"
+          },
+          "triggeredDetails": [
+            "Radiance.tattoo",
+            "Radiance.playfulJealousSideEye",
+            "Radiance.kneelingHeelBuckleAdjustment",
+            "Ellie.editorialHarnessOverlay",
+            "Ellie.ringChokerHipChainAccent",
+            "Alia.hairVariation",
+            "Alia.whisperAndInterlacedHands",
+            "Alia.layeredCollarNecklaceConnector",
+            "trio.trioSideProfileJewelryLine",
+            "companion.PAWS",
+            "companion.PAWS.console-inspector"
+          ],
+          "cleanFaceGate": true,
+          "technicalInvariants": [
+            "vertical full-length composition",
+            "exactly three clearly adult fictional women",
+            "one tiny two-month-old richly golden PAWS kitten only",
+            "active reciprocal PAWS interaction",
+            "readable hands",
+            "all six complete shoes",
+            "solid opaque secure couture",
+            "no readable text or logo"
+          ]
+        },
+        "stages": {
+          "foundation": "accepted",
+          "relationship": "accepted",
+          "silhouette": "planned-in-foundation",
+          "refinement": "planned-in-foundation",
+          "triggeredDetails": "partial-accepted",
+          "companion": "accepted-in-foundation",
+          "validation": "foundation-passed"
+        },
+        "blockedPrompts": [],
+        "detailProgress": {
+          "completed": [
+            "Radiance.tattoo",
+            "Ellie.ringChokerHipChainAccent",
+            "companion.PAWS",
+            "companion.PAWS.console-inspector",
+            "Alia.layeredCollarNecklaceConnector",
+            "Ellie.editorialHarnessOverlay",
+            "Alia.hairVariation",
+            "Alia.whisperAndInterlacedHands",
+            "Radiance.playfulJealousSideEye",
+            "trio.trioSideProfileJewelryLine"
+          ],
+          "remaining": [
+            "Radiance.kneelingHeelBuckleAdjustment"
+          ]
+        },
+        "lastValidSha256": "0b50eeefca34974541807993f3e18e9f6aa8a0966a3a04d04c2bc9c97fab05d8",
+        "lastValidBytes": 2484976,
+        "dimensions": "941x1672",
+        "nextStage": "next-triggered-detail",
+        "noRegressionValidation": {
+          "status": "passed",
+          "checkedAt": "2026-08-05T04:16:26.262Z",
+          "exactAdultWomen": 3,
+          "cleanFaces": true,
+          "identities": true,
+          "anatomy": true,
+          "readableHands": true,
+          "completeFootwear": 6,
+          "opaqueCouture": true,
+          "locationContinuity": true,
+          "exactPaws": 1,
+          "pawsTwoMonthGoldenActive": true,
+          "pawsContinuity": true
+        },
+        "visualAudit": {
+          "status": "passed",
+          "checkedAt": "2026-08-05T04:16:26.262Z",
+          "evidence": [
+            "Radiance keeps the stored playful side-eye toward the linked pair.",
+            "Alia maintains the mission whisper while her free hand now interlaces with Ellie at waist height.",
+            "The three angled clean profiles and their jewelry form the assigned readable side-profile line."
+          ]
+        }
+      },
+      "status": "triggered-detail-accepted"
+    },
+    {
+      "number": 867,
+      "slug": "philippines-el-nido-bacuit-bay-arrival-beacon-finale",
+      "title": "Philippines El Nido Bacuit Bay Gala Aircrew Arrival-Beacon Finale",
+      "location": "El Nido's unmistakable Bacuit Bay limestone karsts and calm lagoon at luminous cobalt-silver moonrise, staged on an empty stationary fictional black-tie arrival deck",
+      "brief": "Vertical full-length HQ cinematic luxury aviation-fashion photograph at El Nido's unmistakable Bacuit Bay limestone karsts and calm lagoon at luminous cobalt-silver moonrise, staged on an empty stationary fictional black-tie arrival deck. Exactly three clearly adult early-twenties fictional women with the same distinct canonical identities as both approved references. Radiance is fictional STAR RAZE cabin host, Ellie is fictional STAR RAZE captain, and Alia is fictional STAR RAZE first officer. Black-tie fashion is the first read: three different concise sculptural black-tie gala aircrew silhouettes in cobalt, warm red, optical white, black, capiz pearl and moonlit gold, using abstract karst, lagoon-wave and mother-of-pearl geometry; distinct complete sculptural stilettos, platforms and heeled sandals. Local secular accessories: a capiz-pearl shoulder ornament, a fine rattan evening cuff and a mother-of-pearl lagoon clutch, divided across the trio. Together they seal a completed pearl-white, cobalt and warm-red arrival beacon around one stable glowing signal orb. Relationship event: a back-hug interruption resolves into a balanced three-way embrace and tight triangular forehead lean with all three distinct faces visible above the completed beacon. Triggered-detail integration: Ellie wears an original glossy gala hairstyle and one tiny secular lower-back star-route mark visible only through the opaque garment's clean open-back architecture. Alia wears a delicate collarbone jewelry line and a comfortable velvet choker with one glowing signal pendant. PAWS is mandatory under the active promotion override. Show exactly one tiny approximately two-month-old female NY11 golden British Shorthair kitten with an oversized round baby face, large green eyes, short little legs and luminous honey-apricot-gold baby fur. Action beat: tiny PAWS makes a short ground-level kitten scamper beside the trio between two clear pearl floor lights; Ellie looks down and beckons her safely into the group finish. Reject adult size, passive sitting, dull coat color, unsafe motion, duplicated cat or obscured faces, hands, mission, landmark, garments or footwear. Preserve clean natural faces, readable hands, complete anatomy, all six complete shoes, solid opaque secure coverage and the recognizable Philippines setting. Use no literal flag, official or sacred emblem, politics, readable text, logo, real airline, extra person, second animal, weapon or watermark.",
+      "file": "867-philippines-el-nido-bacuit-bay-arrival-beacon-finale.png",
+      "companionDirective": "PAWS is mandatory under the active promotion override. Show exactly one tiny approximately two-month-old female NY11 golden British Shorthair kitten with an oversized round baby face, large green eyes, short little legs and luminous honey-apricot-gold baby fur. Action beat: tiny PAWS makes a short ground-level kitten scamper beside the trio between two clear pearl floor lights; Ellie looks down and beckons her safely into the group finish. Reject adult size, passive sitting, dull coat color, unsafe motion, duplicated cat or obscured faces, hands, mission, landmark, garments or footwear.",
+      "videoAnchor": false,
+      "companionRolls": {
+        "PAWS": {
+          "seed": "867|companion|PAWS|mile-high-v1",
+          "firstEightHex": "4c2b8e03",
+          "baseRoll": 19,
+          "baseTriggered": true,
+          "promotionOverrideTriggered": true,
+          "effectiveTriggered": true,
+          "growthStage": "two-month-old kitten",
+          "growthEpoch": 1
+        }
+      },
+      "companionActionRoll": {
+        "seed": "867|companion-action|PAWS|mile-high-v2",
+        "firstEightHex": "3006895d",
+        "rawActionRoll": 5,
+        "resolvedActionIndex": 5,
+        "collisionAdjusted": false,
+        "actionName": "crew-dash",
+        "actionContractSha256": "8f3e6524cd5b3d07f8fffce91f8f174513ccfe1527c43de43feaf8a2de8a6fc7"
+      },
+      "appearanceRolls": {
+        "Radiance": {
+          "hairVariation": 86,
+          "hat": 11,
+          "tattoo": 84,
+          "sculpturalCuff": 63,
+          "opaqueContrastEdge": 76,
+          "braidedCraftCord": 30,
+          "pairedWristCuffPose": 42,
+          "garmentRibbonGeometry": 5,
+          "facePiercing": 48,
+          "bodyPiercing": 84,
+          "faceTattoo": 56,
+          "lowerBackTattoo": 47,
+          "orbRetrievalPose": 92
+        },
+        "Ellie": {
+          "hairVariation": 9,
+          "hat": 15,
+          "tattoo": 39,
+          "sculpturalCuff": 69,
+          "opaqueContrastEdge": 57,
+          "braidedCraftCord": 87,
+          "pairedWristCuffPose": 17,
+          "garmentRibbonGeometry": 40,
+          "facePiercing": 53,
+          "bodyPiercing": 83,
+          "faceTattoo": 35,
+          "lowerBackTattoo": 0,
+          "orbRetrievalPose": 89
+        },
+        "Alia": {
+          "hairVariation": 99,
+          "hat": 95,
+          "tattoo": 73,
+          "sculpturalCuff": 24,
+          "opaqueContrastEdge": 70,
+          "braidedCraftCord": 4,
+          "pairedWristCuffPose": 54,
+          "garmentRibbonGeometry": 65,
+          "facePiercing": 59,
+          "bodyPiercing": 66,
+          "faceTattoo": 82,
+          "lowerBackTattoo": 12,
+          "orbRetrievalPose": 21,
+          "collarboneJewelryChain": 2,
+          "velvetChokerPendantSignal": 10
+        }
+      },
+      "trioStaticRolls": {
+        "threeWayForeheadLean": 7
+      },
+      "rollAudit": {
+        "characterTraitCount": 84,
+        "trioTraitCount": 20,
+        "oddsAndScopesSha256": "84f75123c51f255c1a495c9847580cf78a9479955b451381d390a0dd4e5e91a4",
+        "fullRollsSha256": "3ba912abab1ab2d67b3f36083284893b8b9efb45debc2ea956677b09ec41902e",
+        "hashEncoding": "SHA-256 of JSON ordered [scope,trait,roll] tuples in canonical character then trait order",
+        "storage": "base rolls plus every triggered roll; all 84 character and 20 trio-static traits evaluated from the current mutable master"
+      },
+      "renderState": {
+        "status": "blocked-safe-method-needed",
+        "lastValidStage": "triggered-detail",
+        "lastValidAsset": "tmp/world-195x4/batch-211/details/867-philippines-el-nido-detail-02-collarbone-chain.png",
+        "attempts": 10,
+        "blocker": {
+          "scene": 867,
+          "trait": "Ellie.lowerBackTattoo",
+          "attempts": 10,
+          "status": "blocked-after-three-one-variable-methods",
+          "retainedAsset": "tmp/world-195x4/batch-211/details/867-philippines-el-nido-detail-02-collarbone-chain.png",
+          "evidence": [
+            "The first mark attempt landed on front garment fabric.",
+            "The second mark attempt landed on the front torso instead of the right lower back.",
+            "The pose-only side-back reveal regressed the binding three-way embrace."
+          ],
+          "nextSafeMethod": "Do not retry this trait until a new safe method can preserve the accepted embrace and expose the correct lower-back skin panel in one controlled dependency chain."
+        },
+        "retryVariantRolls": [],
+        "identityReferences": [
+          "468-france-paris-la-defense-prism-intercept.png",
+          "471-france-nice-promenade-night-relay.png"
+        ],
+        "preflight": {
+          "status": "passed",
+          "blockedCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+          "cache": "tmp/world-195x4/batch-211/preflight/blocklist-transform-26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26.json",
+          "order": "longest-phrase-first"
+        },
+        "foundationPlan": {
+          "country": "Philippines",
+          "location": "El Nido's unmistakable Bacuit Bay limestone karsts and calm lagoon at luminous cobalt-silver moonrise, staged on an empty stationary fictional black-tie arrival deck",
+          "roles": {
+            "Radiance": "cabin host",
+            "Ellie": "captain",
+            "Alia": "first officer"
+          },
+          "mission": "seal a completed pearl-white, cobalt and warm-red arrival beacon around one stable glowing signal orb",
+          "relationship": "a back-hug interruption resolves into a balanced three-way embrace and tight triangular forehead lean with all three distinct faces visible above the completed beacon",
+          "companionAction": {
+            "name": "crew-dash",
+            "instruction": "tiny PAWS makes a short ground-level kitten scamper beside the trio between two clear pearl floor lights; Ellie looks down and beckons her safely into the group finish"
+          },
+          "triggeredDetails": [
+            "Ellie.hairVariation",
+            "Ellie.lowerBackTattoo",
+            "Alia.collarboneJewelryChain",
+            "Alia.velvetChokerPendantSignal",
+            "trio.threeWayForeheadLean",
+            "companion.PAWS",
+            "companion.PAWS.crew-dash"
+          ],
+          "cleanFaceGate": true,
+          "technicalInvariants": [
+            "vertical full-length composition",
+            "exactly three clearly adult fictional women",
+            "one tiny two-month-old richly golden PAWS kitten only",
+            "active reciprocal PAWS interaction",
+            "readable hands",
+            "all six complete shoes",
+            "solid opaque secure couture",
+            "no readable text or logo"
+          ]
+        },
+        "stages": {
+          "foundation": "accepted",
+          "relationship": "planned-in-foundation",
+          "silhouette": "planned-in-foundation",
+          "refinement": "planned-in-foundation",
+          "triggeredDetails": "partial-accepted",
+          "companion": "accepted-in-foundation",
+          "validation": "foundation-passed"
+        },
+        "blockedPrompts": [],
+        "detailProgress": {
+          "completed": [
+            "Alia.collarboneJewelryChain",
+            "Alia.velvetChokerPendantSignal"
+          ],
+          "remaining": [
+            "Ellie.hairVariation",
+            "Ellie.lowerBackTattoo",
+            "trio.threeWayForeheadLean",
+            "companion.PAWS",
+            "companion.PAWS.crew-dash"
+          ]
+        },
+        "lastValidSha256": "7d2c0a4c1932d757eb5dbff104b7fc16d693a030ae8b8a92fdfe4f352b84a3a1",
+        "lastValidBytes": 2244850,
+        "dimensions": "941x1672",
+        "nextStage": "await-safe-lower-back-method"
+      },
+      "status": "blocked-safe-method-needed"
+    }
+  ],
+  "videoPause": {
+    "status": "not-scheduled",
+    "reason": "Binding four-PNG-only pause for render Batches 202 through 211."
+  },
+  "updatedAt": "2026-08-05T04:22:54.056Z",
+  "nextAction": "Continue only safe dependency-aware Vigan and Banaue details; Manila is final-validation-ready; keep El Nido frozen until a safe lower-back method preserves the accepted embrace.",
+  "publicBuild": {
+    "detailPass04Commit": "ec232ecb90793efb257c22fe8e423ae2c0d2d7d6",
+    "detailPass04Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/ec232ecb90793efb257c22fe8e423ae2c0d2d7d6",
+    "pendingDetailPass05Release": false,
+    "detailPass05Commit": "8ea1373dce68680f30a4ec514809c2fd4390b527",
+    "detailPass05Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/8ea1373dce68680f30a4ec514809c2fd4390b527",
+    "pendingDetailPass06Release": false,
+    "detailPass06Commit": "eb3606f3a415dbf4f46068fe5650a11cb71d79c6",
+    "detailPass06Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/eb3606f3a415dbf4f46068fe5650a11cb71d79c6",
+    "pendingDetailPass07Release": false,
+    "detailPass07Commit": "fe580376a80f566e81fca20bae2e068fb15e1bea",
+    "detailPass07Url": "https://github.com/InternalAgencyIO/InternalAgency/commit/fe580376a80f566e81fca20bae2e068fb15e1bea"
+  },
+  "acceptedDetailPass05": [
+    {
+      "scene": 865,
+      "action": "task-focused-signal-token-reach",
+      "asset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-04-signal-token-reach.png",
+      "sha256": "dab2e0e4b3146ccc2a5175b02d6d8aac022b46eabea28aa9a4525f0a00ada585"
+    },
+    {
+      "scene": 866,
+      "action": "layered-collar-necklace-connector",
+      "asset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-04-layered-collar-connector.png",
+      "sha256": "de10b2f8b6240cad2417f67af7029190ee1189a7536e14393d4e227864cb29cb"
+    }
+  ],
+  "acceptedDetailPass06": [
+    {
+      "scene": 865,
+      "action": "single-partner-illusion-anklet",
+      "asset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-05-single-partner-anklet.png",
+      "sha256": "58923065f7afe39af618866257f9f8f048a05ff5c758bd726d24482543096b9a"
+    },
+    {
+      "scene": 866,
+      "action": "geometric-tailoring-overlay",
+      "asset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-05-tailoring-overlay.png",
+      "sha256": "a59e846bcf258f35e5a4b0d70bb21d2e539f86f19592106d38792b96a6823466"
+    }
+  ],
+  "acceptedDetailPass07": [
+    {
+      "scene": 865,
+      "action": "dual-collar-closure-styling",
+      "asset": "tmp/world-195x4/batch-211/details/865-philippines-vigan-detail-06-dual-collar-closures.png",
+      "sha256": "5ebd71cec7f2f15fdd21e646a189e1b4a7bdbad27fc3cce9c210f74b4caf8de2"
+    },
+    {
+      "scene": 866,
+      "action": "whisper-and-interlaced-hands",
+      "asset": "tmp/world-195x4/batch-211/details/866-philippines-banaue-detail-06-whisper-interlaced-hands.png",
+      "sha256": "0b50eeefca34974541807993f3e18e9f6aa8a0966a3a04d04c2bc9c97fab05d8"
+    }
+  ]
+}

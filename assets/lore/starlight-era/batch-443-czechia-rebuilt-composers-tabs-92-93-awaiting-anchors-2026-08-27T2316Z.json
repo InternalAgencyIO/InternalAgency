@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "rebuilt-composers-awaiting-anchors",
+  "createdAtUtc": "2026-08-28T04:06:46.3059452Z",
+  "batchId": 443,
+  "country": "Czechia",
+  "provider": "Grok Imagine",
+  "browserSurface": "Codex in-app browser only",
+  "recoveryReason": "Previously preserved tabs 90 and 91 were absent after the user reported adding anchors; the sole in-app browser session exposed zero controlled or user-owned tabs.",
+  "recovery": {
+    "closedOrMissingTabIds": [
+      "90",
+      "91"
+    ],
+    "newTabIds": [
+      "92",
+      "93"
+    ],
+    "duplicateProviderOccurrencesCreated": 0
+  },
+  "lanes": [
+    {
+      "sceneId": 1792,
+      "tabId": "92",
+      "promptPath": "assets/lore/starlight-era/batch-443-czechia-scene-1792-grok-video-prompt.txt",
+      "attachmentCards": 0,
+      "settings": {
+        "mode": "Video",
+        "resolution": "720p",
+        "durationSeconds": 15,
+        "aspectRatio": "9:16"
+      },
+      "dispatchStatus": "not-dispatched"
+    },
+    {
+      "sceneId": 1793,
+      "tabId": "93",
+      "promptPath": "assets/lore/starlight-era/batch-443-czechia-scene-1793-grok-video-prompt.txt",
+      "attachmentCards": 0,
+      "settings": {
+        "mode": "Video",
+        "resolution": "720p",
+        "durationSeconds": 15,
+        "aspectRatio": "9:16"
+      },
+      "dispatchStatus": "not-dispatched"
+    }
+  ],
+  "outputs": {
+    "providerOccurrences": 0,
+    "videos": 0,
+    "xPosts": 0,
+    "srtFiles": 0
+  },
+  "nextSafeAction": "Open the in-app browser panel, attach verified primary quartet plate 938 to tabs 92 and 93, keep both tabs open, and wait until both attachment cards are terminal before reverification.",
+  "priorCheckpointCommit": "bdcf2e47"
+}

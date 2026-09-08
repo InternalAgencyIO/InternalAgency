@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "batch": 487,
+  "country": "Slovakia",
+  "scenes": [1975, 1976, 1977, 1978],
+  "state": "four-meta-thinking-composers-visible-verified-no-send",
+  "stagedAtUtc": "2026-09-04T17:27:07.072Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "promptCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "promptCheckpointCommit": "76b4c6b16b57cf74ea84f69bbe60cf924dd8b41b",
+    "preflightCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-meta-dispatch-preflight-checkpoint.json",
+    "preflightCommit": "b5ca37a01bfd9324357f53a9a9bdee8715949ac9",
+    "localHeadBeforeStagingRecord": "b5ca37a01bfd9324357f53a9a9bdee8715949ac9",
+    "originHeadBeforeStagingRecord": "b5ca37a01bfd9324357f53a9a9bdee8715949ac9"
+  },
+  "browser": {
+    "visibleInAppBrowserOnly": true,
+    "totalTabCount": 5,
+    "xComposerCount": 1,
+    "metaLaneCount": 4,
+    "grokTabCount": 0,
+    "metaTabIdsObservedAtPreflight": ["24", "25", "26", "27"],
+    "metaComposerUrls": [
+      "https://www.meta.ai/",
+      "https://www.meta.ai/",
+      "https://www.meta.ai/",
+      "https://www.meta.ai/"
+    ]
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "accountVisibleInEveryLane": true,
+    "mode": "Thinking",
+    "thinkingVisibleInEveryLane": true,
+    "sendEnabledInEveryLane": true,
+    "sendActivations": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false
+  },
+  "promptVerification": [
+    {"scene": 1975, "characters": 2853, "sha256": "70B0E42E61503F58346CEF58B08D0847E54C81EFD64D01BBE97946AA52C5BAB5", "exactPromptPrefixVisible": true, "composerCharactersAfterAttachments": 2856},
+    {"scene": 1976, "characters": 3149, "sha256": "611AC0C4DDAD860478C6D546E68E4828D3B31C2478E7554678A7FF2BD36D622E", "exactPromptPrefixVisible": true, "composerCharactersAfterAttachments": 3152},
+    {"scene": 1977, "characters": 2929, "sha256": "E6C945586BBF6FAC6C0D816772A578990805B86B830637937BD85B8CB9A0AABB", "exactPromptPrefixVisible": true, "composerCharactersAfterAttachments": 2932},
+    {"scene": 1978, "characters": 3015, "sha256": "7D55B0ECFC12B02BC21B05BB718FD31A4765946643ED8469F75F4EAECBB2721D", "exactPromptPrefixVisible": true, "composerCharactersAfterAttachments": 3018}
+  ],
+  "attachmentVerification": {
+    "visibleSupportedControl": "Add attachment then Click to browse, or drag & drop here",
+    "attachmentCountPerLane": [3, 3, 3, 3],
+    "removeImageControlCountPerLane": [3, 3, 3, 3],
+    "orderedAnchorScenesPerLane": [
+      [938, 936, 937],
+      [938, 936, 937],
+      [938, 936, 937],
+      [938, 936, 937]
+    ],
+    "orderedAnchorFilenamesPerLaneExactAndVisible": true,
+    "hiddenInputUsed": false,
+    "directHttpUsed": false,
+    "providerApiUsed": false,
+    "chromeUsed": false,
+    "providerCliUsed": false
+  },
+  "composerBehaviorEvidence": {
+    "promptEnteredBeforeAttachments": true,
+    "promptExactBeforeAttachmentsInEveryLane": true,
+    "metaTrailingAttachmentPlaceholder": "three-space-characters",
+    "placeholderCodePoints": [32, 32, 32],
+    "placeholderCharacterCount": 3,
+    "placeholderCharactersExcludedFromPromptHash": true,
+    "unsentPromptCorruptionObserved": false
+  },
+  "xHold": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "account": "@dogramaci",
+    "composerRetainedIntact": true,
+    "exactCaptionOccurrences": 1,
+    "mediaCount": 3,
+    "madeWithAiVisible": true,
+    "visiblePostControlActivations": 2,
+    "visibleExplicitFailures": 2,
+    "exactCaptionLiveMatches": 0,
+    "publicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "ACTIVE",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true,
+    "notStarlightAuthority": true
+  },
+  "mayDispatchAfterRemoteParity": true,
+  "nextSafeAction": "Commit and remote-verify this exact no-send staging record. If local, origin and Draft PR heads match and all four composers remain unchanged, click each visible Meta Send control exactly once, record the resulting prompt URLs, and never resend those confirmed prompts."
+}

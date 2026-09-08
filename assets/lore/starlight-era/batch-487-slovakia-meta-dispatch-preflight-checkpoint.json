@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "batch": 487,
+  "country": "Slovakia",
+  "scenes": [1975, 1976, 1977, 1978],
+  "state": "remote-authority-and-live-browser-preflight-passed-no-send",
+  "verifiedAtUtc": "2026-09-04T17:18:33.419Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "promptCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "promptCheckpointCommit": "76b4c6b16b57cf74ea84f69bbe60cf924dd8b41b",
+    "localHead": "76b4c6b16b57cf74ea84f69bbe60cf924dd8b41b",
+    "originHead": "76b4c6b16b57cf74ea84f69bbe60cf924dd8b41b",
+    "draftPrHead": "76b4c6b16b57cf74ea84f69bbe60cf924dd8b41b",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "lfsPushDryRunEmpty": true
+  },
+  "canonicalQueue": {
+    "worldXPosts": 194,
+    "slovakiaLiveMatches": 0,
+    "predecessor": "San Marino Batch 486 closed and remote-verified",
+    "historicalContradiction": "Batch 296 Slovakia is blocked with zero accepted assets and one terminal render attempt; none of its confirmed or terminal scenes, prompts or pages may be resent or reopened. Fresh Batch 487 is the current gap-fill authority."
+  },
+  "browser": {
+    "name": "Codex in-app Browser",
+    "visibleOnly": true,
+    "actualTabInventoryRefreshed": true,
+    "totalTabCount": 5,
+    "xComposerCount": 1,
+    "metaTerminalCount": 4,
+    "grokTabCount": 0,
+    "metaTerminalTabs": [
+      {"tabId": "24", "scene": 1971, "url": "https://www.meta.ai/prompt/7113c61e-f8d7-4b0a-9742-f8e13eee2622", "providerAccountVisible": true, "thinkingVisible": true, "terminalDownloadVisible": true},
+      {"tabId": "25", "scene": 1972, "url": "https://www.meta.ai/prompt/102e0efa-b07a-43ae-9f9e-9bf1950f69a7", "providerAccountVisible": true, "thinkingVisible": true, "terminalDownloadVisible": true},
+      {"tabId": "26", "scene": 1973, "url": "https://www.meta.ai/prompt/c2b693c7-9f7c-40e2-906b-72bea4e0cfb0", "providerAccountVisible": true, "thinkingVisible": true, "terminalDownloadVisible": true},
+      {"tabId": "27", "scene": 1974, "url": "https://www.meta.ai/prompt/a58eb173-e3b9-406e-990b-61ea8ab485ce", "providerAccountVisible": true, "thinkingVisible": true, "terminalDownloadVisible": true}
+    ],
+    "replacementPolicy": "Navigate these four completed San Marino terminal tabs to four fresh Meta composers only after this preflight record is remote-verified. Do not create extra lanes."
+  },
+  "xHold": {
+    "tabId": "17",
+    "url": "https://x.com/compose/post",
+    "account": "@dogramaci",
+    "verifiedAccountVisible": true,
+    "countryPair": ["Monaco", "North Macedonia"],
+    "exactCaptionOccurrencesInComposer": 1,
+    "mediaGroupsInComposer": 3,
+    "exactAccessibilityGroupNamesVisible": true,
+    "madeWithAiVisibleInComposer": true,
+    "visibleError": "Something went wrong, but don’t fret — let’s give it another shot.",
+    "visiblePostControlActivations": 2,
+    "publicTransmissionCount": 0,
+    "composerRetainedIntact": true,
+    "mustNotReplaceComposer": true,
+    "thirdBlindClickForbidden": true
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "promptHashesVerified": [
+      "70B0E42E61503F58346CEF58B08D0847E54C81EFD64D01BBE97946AA52C5BAB5",
+      "611AC0C4DDAD860478C6D546E68E4828D3B31C2478E7554678A7FF2BD36D622E",
+      "E6C945586BBF6FAC6C0D816772A578990805B86B830637937BD85B8CB9A0AABB",
+      "7D55B0ECFC12B02BC21B05BB718FD31A4765946643ED8469F75F4EAECBB2721D"
+    ],
+    "orderedAnchorsVerified": [938, 936, 937],
+    "anchorHashesVerified": true,
+    "faceManifestHashVerified": true,
+    "sendActivations": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "providerRetries": 0
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "ACTIVE",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true,
+    "notStarlightAuthority": true
+  },
+  "mayStageAfterRemoteParity": true,
+  "mayDispatchAfterStagingParity": true,
+  "nextSafeAction": "Commit and remote-verify this preflight. Navigate exactly the four completed San Marino tabs to four fresh Meta composers, enter each exact sealed Slovakia prompt first, attach exact anchors 938, 936 and 937 in that order through the visible supported chooser, and reverify leesha007, Thinking, prompt hash, three filenames and enabled Send. Persist and remote-verify the no-send staging state before clicking each Send exactly once."
+}

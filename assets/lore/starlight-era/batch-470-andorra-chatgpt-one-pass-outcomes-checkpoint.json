@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "country": "Andorra",
+  "state": "single-pass-budget-terminal-two-clean-outputs-three-ambiguous-no-output",
+  "policy": {
+    "requiredPassesPerTechnicallyValidSelectedMetaOccurrence": 1,
+    "additionalPassesPermittedPerOccurrence": 0,
+    "uncertainInvocationHandling": "Treat every issued request as consuming its one allowed pass. Never retry an uncertain, canceled, or output-stage-blocked request because that could create a second pass.",
+    "userRelaxedAcceptance": "After the one strong shortening request, accept public-safe non-corrupt variants and preserve nonblocking deviations."
+  },
+  "outcomes": [
+    {
+      "scene": 1906,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1906-visible-variant-04-gallery-pyrenean-sunset-portrait-webp-viewer.png",
+      "sourceSha256": "BFB0C3E5427A6914778A59AE548B3BA8E8485B909A6E2FF68875A86CFA27517B",
+      "sourceBytes": 85361,
+      "sourceDimensions": "805x1040",
+      "editPromptSha256": "DA9FB849FFE38C7B2A48FB581E97EDA892DF3BDB4C1F91B3B001AC460E8BF5D7",
+      "editPromptCharacters": 1216,
+      "passRequestIssued": true,
+      "outputSaved": true,
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1906-andorra-pyrenean-overlook-raze-chatgpt-hemline-one-pass.png",
+      "outputSha256": "3B9C3BB9F504F4D1A3E038555D0896EBE17F929AF010E6FBAFE56C1ED5FDB987",
+      "outputBytes": 2303973,
+      "outputDimensions": "941x1672",
+      "qaResult": "accepted-user-relaxed-publication-clean",
+      "additionalPassesPermitted": 0
+    },
+    {
+      "scene": 1907,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1907-visible-variant-08-meta-editor.png",
+      "sourceSha256": "6CEC2CC8BF9FC99B4F0CD38399F243679296F5D259582B0CA3DE4673A059D79E",
+      "sourceBytes": 102854,
+      "sourceDimensions": "805x1040",
+      "editPromptSha256": "093E63A4856FD7F7BBFB5EB1D69CE76C661D178FCD8397DE8D9FE60EDEE82A2F",
+      "editPromptCharacters": 1156,
+      "passRequestIssued": true,
+      "outputSaved": false,
+      "terminalAttribution": "ambiguous-output-stage-safety-block-or-batch-cancellation",
+      "qaResult": "archive-accepted-meta-rendered-evidence-not-clean-publication-asset",
+      "additionalPassesPermitted": 0
+    },
+    {
+      "scene": 1908,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1908-current-visible-85-percent-close-variant.png",
+      "sourceSha256": "1014E7EABFA827AB694586CB2E9CEE6BD39451B62FA14C62D306B2AE56C5DACF",
+      "sourceBytes": 68243,
+      "sourceDimensions": "805x1040",
+      "editPromptSha256": "21DAA3F2D5EE37F4808E2E41DEAC9AC4B04A55E3D16830A548D250D206481BB2",
+      "editPromptCharacters": 1153,
+      "passRequestIssued": true,
+      "outputSaved": false,
+      "terminalAttribution": "ambiguous-output-stage-safety-block-or-batch-cancellation",
+      "qaResult": "archive-accepted-meta-rendered-evidence-not-clean-publication-asset",
+      "additionalPassesPermitted": 0
+    },
+    {
+      "scene": 1909,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1909-visible-variant-02-gallery-fashion-editorial-portrait-webp-viewer.png",
+      "sourceSha256": "07DE2B8E17F045712F63477692711654B6D341647DCD804788EC4857B9B23412",
+      "sourceBytes": 96877,
+      "sourceDimensions": "804x1039",
+      "editPromptSha256": "F68C4F5102B92C5777AC9AAC9E6994F64EFF43629D75D6CF38A5A5A9A20E15E4",
+      "editPromptCharacters": 1167,
+      "passRequestIssued": true,
+      "outputSaved": false,
+      "terminalAttribution": "ambiguous-output-stage-safety-block-or-batch-cancellation",
+      "qaResult": "archive-accepted-meta-rendered-evidence-not-clean-publication-asset",
+      "additionalPassesPermitted": 0
+    },
+    {
+      "scene": 1910,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1910-meta-thinking-terminal-media-viewer.png",
+      "sourceSha256": "240E740F8558BF87EE1AE91197C8BB11DD80EB65A24E0BF88310ACABAA89C87D",
+      "sourceBytes": 105403,
+      "sourceDimensions": "804x1039",
+      "editPromptSha256": "7FFCE1088FA137EA4A726DA9EEA09E18AFB7F11356FCD26247E2745A19BF5430",
+      "editPromptCharacters": 1223,
+      "passRequestIssued": true,
+      "outputSaved": true,
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1910-andorra-sorteny-raze-chatgpt-hemline-one-pass.png",
+      "outputSha256": "AEC69E260D57276B1A6D74F74CDA4F5E440B24D2CCB8BB9C378343BCB1C49666",
+      "outputBytes": 2494323,
+      "outputDimensions": "941x1672",
+      "qaResult": "accepted-user-relaxed-publication-clean",
+      "additionalPassesPermitted": 0
+    }
+  ],
+  "parallelInvocationFailure": {
+    "affectedRequestSet": [1906, 1907, 1908, 1909],
+    "savedOutputSceneIds": [1906],
+    "unresolvedNoOutputSceneIds": [1907, 1908, 1909],
+    "httpStatus": 400,
+    "code": "moderation_blocked",
+    "safetyViolations": ["sexual"],
+    "stage": "output",
+    "requestId": "9af3cf4d-2f2a-4737-ab22-7ce81f22c582",
+    "attributionLimitation": "The batch returned one completed output and then rejected. It did not expose which one of scenes 1907-1909 triggered the safety block versus which were canceled or left unresolved.",
+    "retryDecision": "No retry for scenes 1907-1909."
+  },
+  "summary": {
+    "passRequestsIssued": 5,
+    "cleanOutputsSaved": 2,
+    "unresolvedNoOutput": 3,
+    "additionalPassesPermitted": 0,
+    "cleanPublicationCandidateSceneIds": [1906, 1910],
+    "archiveAcceptedSceneIds": [1906, 1907, 1908, 1909, 1910]
+  },
+  "nextSafeAction": "Use only scenes 1906 and 1910 as clean Andorra publication candidates. Preserve scenes 1907-1909 as accepted rendered Meta archive evidence, and never issue another ChatGPT pass for any Batch 470 occurrence."
+}

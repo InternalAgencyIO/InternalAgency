@@ -1,0 +1,56 @@
+{
+  "schema": "world-195x4-meaning-preserving-recovery-transform-v1",
+  "batch": 219,
+  "sceneNumber": 896,
+  "requestId": "83859e72-4415-4240-a85c-2004f19f4bb2",
+  "parentPromptFile": "tmp/world-195x4/batch-219/prompts/896-foundation.txt",
+  "parentPromptSha256": "bfaec241473014c9b340022d26a365005a14725c8562e8178ecbc99a04836967",
+  "recoveryPromptFile": "tmp/world-195x4/batch-219/prompts/896-foundation-recovery-2.txt",
+  "recoveryPromptSha256": "cbcc163bf9ab97da16438c9eb8237a5c651b3e8e756ef2716f30f12a17beb09b",
+  "blockedCorpusSha256": "791db92a7d729752a967ccb970e8a74da336f8b7a09dd24b79fecab31b2d7e44",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-791db92a7d729752a967ccb970e8a74da336f8b7a09dd24b79fecab31b2d7e44.json",
+  "substitutions": [
+    {
+      "riskyPhrase": "Keep breasts, seat and pelvis securely opaque and non-explicit while preserving every specified open back, abbreviated tailored silhouette, natural midriff, visible navel, tattoo window and complete statement shoe.",
+      "safeEquivalent": "Keep every garment's structural core securely opaque while preserving every specified open back, abbreviated tailored silhouette, natural midriff, visible navel, precisely framed tattoo and complete statement shoe.",
+      "count": 1
+    },
+    {
+      "riskyPhrase": "BOLD FOUR-SILHOUETTE WARDROBE: Use only mirror-polished lacquered stretch textile plus opaque guipure over fully solid opaque core coverage. Make each silhouette unmistakably different, daring and country-derived.",
+      "safeEquivalent": "BOLD FOUR-SILHOUETTE WARDROBE: Use only mirror-polished lacquered stretch textile plus opaque guipure over a secure opaque structural base. Make each silhouette unmistakably different, runway-bold and country-derived.",
+      "count": 1
+    },
+    {
+      "riskyPhrase": "PRIMARY RELATIONSHIP AND ORIGINAL POSE: Radiance, Ellie and Alia remain the primary closed adult romantic triangle; AI ECE joins reciprocally without displacing any of their three bonds.",
+      "safeEquivalent": "PRIMARY RELATIONSHIP AND ORIGINAL POSE: Preserve the original three-woman bonded triangle among Radiance, Ellie and Alia through the exact reciprocal touch and gaze choreography below; AI ECE adds a fourth warm reciprocal connection without separating any pair.",
+      "count": 1
+    },
+    {
+      "riskyPhrase": "with relationship chemistry and bold fashion larger in the visual hierarchy than the passive mission object",
+      "safeEquivalent": "with the specified connection choreography and bold fashion larger in the visual hierarchy than the passive mission object",
+      "count": 1
+    },
+    {
+      "riskyPhrase": "reciprocal body-contact beats",
+      "safeEquivalent": "reciprocal touch beats",
+      "count": 1
+    },
+    {
+      "riskyPhrase": "captivated silence",
+      "safeEquivalent": "focused appreciative attention",
+      "count": 2
+    }
+  ],
+  "substitutionCount": 7,
+  "deletionCount": 0,
+  "preservedConcreteRequirements": {
+    "originalTableau": true,
+    "allTriggeredRolls": true,
+    "tattoosAndJewel": true,
+    "fourDistinctWardrobes": true,
+    "specifiedNaturalNavels": true,
+    "PAWSStateAndAction": true,
+    "noPointing": true
+  },
+  "semanticStatus": "passed-meaning-preserved"
+}

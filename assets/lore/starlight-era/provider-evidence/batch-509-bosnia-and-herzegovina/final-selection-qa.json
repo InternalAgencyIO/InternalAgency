@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "batch": 509,
+  "reviewedAtUtc": "2026-09-08T04:44:27.847Z",
+  "policy": "Direct main-agent visual review of original and returned bytes. Technical and public-safety gates are hard; crop, tilt and minor garment-mark drift are recorded without aesthetic retries.",
+  "perScene": [
+    {
+      "scene": 2063,
+      "selected": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-gallery-original.webp",
+      "source": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-gallery-original.webp",
+      "technicalQa": "pass",
+      "adultFictionalCharacterMetadata": "All four original fictional women age21; pixels assessed for adult presentation, not proof of biological age.",
+      "castCount": 4,
+      "publicSafety": "non-explicit-opaque-fashion",
+      "reason": "Usable four-person Meta source retained after unattributed batched edit error.",
+      "softDeviations": [
+        "Actual crop and tilt differ from the original roll; keep source composition.",
+        "Minor styling and mark precision deviations remain; no aesthetic retry."
+      ],
+      "safetyOverrides": []
+    },
+    {
+      "scene": 2064,
+      "selected": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-chatgpt-single-tailoring-pass.png",
+      "source": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-recovery-1-gallery-original.webp",
+      "technicalQa": "pass",
+      "adultFictionalCharacterMetadata": "All four original fictional women age21; pixels assessed for adult presentation, not proof of biological age.",
+      "castCount": 4,
+      "publicSafety": "non-explicit-opaque-fashion",
+      "reason": "Returned edit preserves four-person repair and supportive arrangement, refines visible garment construction and navel assignments without new cast defects.",
+      "softDeviations": [
+        "Head rests at shoulder/chest rather than fully on clothed lap.",
+        "Camera is wider and less tilted than the fixed roll; preserve actual crop.",
+        "Flag-star count and trim vary; no aesthetic recovery."
+      ],
+      "safetyOverrides": []
+    },
+    {
+      "scene": 2065,
+      "selected": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2065-meta-gallery-original.webp",
+      "source": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2065-meta-gallery-original.webp",
+      "technicalQa": "pass",
+      "adultFictionalCharacterMetadata": "All four original fictional women age21; pixels assessed for adult presentation, not proof of biological age.",
+      "castCount": 4,
+      "publicSafety": "non-explicit-opaque-fashion",
+      "reason": "Usable four-person Meta source retained after unattributed batched edit error; imaginary-disaster disclosure mandatory.",
+      "softDeviations": [
+        "Actual crop and tilt differ from the original roll; keep source composition.",
+        "Minor styling and mark precision deviations remain; no aesthetic retry."
+      ],
+      "safetyOverrides": []
+    },
+    {
+      "scene": 2066,
+      "selected": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-chatgpt-single-tailoring-pass.png",
+      "source": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-recovery-1-gallery-original.webp",
+      "technicalQa": "pass",
+      "adultFictionalCharacterMetadata": "All four original fictional women age21; pixels assessed for adult presentation, not proof of biological age.",
+      "castCount": 4,
+      "publicSafety": "non-explicit-opaque-fashion",
+      "reason": "Returned conservative tailoring preserves covered color-block close portrait, all four recognizable faces, visible tattoos and source framing.",
+      "softDeviations": [
+        "Alia and Radiance cheeks touch in a relaxed nonsexual side hug; provider narrative says fully separate. Do not claim exact pose compliance.",
+        "Tilt is weaker than22degrees and sleeves differ; record rather than regenerate."
+      ],
+      "safetyOverrides": [
+        "Fully opaque lined garments and covered midriffs; no cutouts or new exposure.",
+        "Country-palette color blocks, no exact flag print.",
+        "Keep actual close source frame; no lower-body reveals, hems or shoes.",
+        "No new temple greeting or intensified contact."
+      ]
+    }
+  ],
+  "returnedEditQa": [
+    {
+      "scene": 2064,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-chatgpt-single-tailoring-pass.png",
+      "reviewMethod": "Main agent directly inspected the displayed full returned PNG and matched copied local SHA256 and bytes.",
+      "decision": "selected",
+      "fourAdults": true,
+      "opaqueCoverage": true,
+      "sourceFramingRetained": true
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-chatgpt-single-tailoring-pass.png",
+      "reviewMethod": "Main agent directly inspected the displayed full returned PNG and matched copied local SHA256 and bytes.",
+      "decision": "selected",
+      "fourAdults": true,
+      "opaqueCoverage": true,
+      "sourceFramingRetained": true
+    }
+  ],
+  "rawFilesSaved": 22,
+  "returnedEditFiles": 2,
+  "allSavedFiles": 24,
+  "uniqueSavedByteVersions": 20,
+  "generatedSceneFiles": 18,
+  "providerContextReferenceFiles": 6,
+  "missingObservedOriginals": [],
+  "batchLevelEditError": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-edit-group-2052-output-block.json",
+  "archiveException": null,
+  "duplicateCheck": {
+    "checkedAtUtc": "2026-09-08T04:44:27.847Z",
+    "postedCount": 238,
+    "algorithm": "Recursive primitive exact equality, never substring matching.",
+    "checkedScenes": [
+      2063,
+      2064,
+      2065,
+      2066
+    ],
+    "checkedSavedFiles": 24,
+    "conflicts": []
+  },
+  "allFourSceneAllowancesTerminal": true
+}

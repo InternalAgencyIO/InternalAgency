@@ -1,0 +1,51 @@
+{
+  "schema": "world-195x4-structured-runway-recovery-coverage-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-recovery-3.txt",
+  "promptSha256": "bc9d34217b3849ce32eb890a61d3e3eb5d3c03d6c711b69c23f7e22a5a5bd4e8",
+  "blockedCorpusSha256": "32a5994a4827e90f2d99524a2f59b413d14e6d0d4a442f310364ca9cd4524daf",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-32a5994a4827e90f2d99524a2f59b413d14e6d0d4a442f310364ca9cd4524daf.json",
+  "blocklistSubstitutionCount": 0,
+  "deletionCount": 0,
+  "preserved": {
+    "canonicalIdentities": true,
+    "countryLocationRolesAndMission": true,
+    "originalPoseTableau": true,
+    "originalTableauMeaningPreservingTranslations": [
+      {
+        "riskyPhrase": "ECE is intimately connected without replacing it.",
+        "safeEquivalent": "ECE is warmly connected without replacing it.",
+        "count": 1
+      }
+    ],
+    "radianceEllieAliaTriangle": true,
+    "reciprocalECEConnection": true,
+    "allTriggeredRolls": 14,
+    "allTriggeredRollIds": [
+      "Radiance.bodyPiercing",
+      "Radiance.equestrianRhythmProp",
+      "Radiance.operaGloveStrapAdjustment",
+      "Radiance.pearlEyeMaskNeckAccent",
+      "Radiance.blindfoldStyleHairBow",
+      "Ellie.sculpturalCuff",
+      "Ellie.subtleTacticalWebbing",
+      "Ellie.elbowLacedSatinGloveSleeveAdjust",
+      "Ellie.meshHarnessSeamOverlay",
+      "Alia.garmentRibbonGeometry",
+      "AI ECE.foreheadToForeheadLook",
+      "AI ECE.goldLeafShoulderStructure",
+      "trio.openBackStrapStylingFrame",
+      "trio.dualCapeClosureStyling"
+    ],
+    "tattoosAndNavelJewel": [
+      "Radiance.bodyPiercing"
+    ],
+    "distinctBoldWardrobes": 4,
+    "intentionalVisibleNavelCount": 2,
+    "pawsPresenceAndAction": true,
+    "noPointing": true,
+    "cleanFacesHandsFootwear": true
+  }
+}

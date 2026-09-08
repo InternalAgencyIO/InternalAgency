@@ -1,0 +1,137 @@
+{
+  "schema": "internalagency.starlight.meta-four-lane-upload-checkpoint.v1",
+  "batchId": 433,
+  "country": "Burundi",
+  "status": "uploaded_awaiting_send",
+  "recordedAtUtc": "2026-08-27T09:29:17.744Z",
+  "userAuthorization": {
+    "scope": "Burundi Batch 433 scenes 1752-1755, four ordered uploads and four one-time Sends",
+    "confirmation": "good authorized go",
+    "confirmedAtUtc": "2026-08-27T09:29:17.744Z"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "exclusive": true
+  },
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "baseCommit": "e02b981964146d41758bb27d115472b37f6f00f3",
+    "preparedCheckpoint": "assets/lore/starlight-era/batch-433-burundi-prompts-prepared-checkpoint.json"
+  },
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+    }
+  ],
+  "lanes": [
+    {
+      "lane": 1,
+      "sceneId": 1752,
+      "sourceSceneId": 1468,
+      "tabId": "9",
+      "promptPath": "../../../../ChatGPT/RENDERS/tmp/world-195x4/batch-433/scene-1752-prompt.txt",
+      "preparedPromptSha256": "6B36FCB1B96214DE89550626829F4A72D3355911A7267D50E18936E11E3D9C33",
+      "browserCanonicalPromptSha256": "525822EF41E18E5618493E8730F0A46424D01D6C509666394905C63FCD8CA7B4",
+      "promptExactAfterFinalUpload": true,
+      "attachmentNames": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "attachmentCounts": [
+        1,
+        1,
+        1
+      ],
+      "attachmentOrderVerified": true,
+      "attachmentControlCount": 3,
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "lane": 2,
+      "sceneId": 1753,
+      "sourceSceneId": 1469,
+      "tabId": "10",
+      "promptPath": "../../../../ChatGPT/RENDERS/tmp/world-195x4/batch-433/scene-1753-prompt.txt",
+      "preparedPromptSha256": "1A53817CAFB7A1E4626BAE5D4E2B9DAA9B485394FEE7B84AFB9FC5452B46142D",
+      "browserCanonicalPromptSha256": "D7879EE16CC57EEAC0E2D97E0A416A8768AA4CCEB505760667436AD70FEA38AD",
+      "promptExactAfterFinalUpload": true,
+      "attachmentNames": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "attachmentCounts": [
+        1,
+        1,
+        1
+      ],
+      "attachmentOrderVerified": true,
+      "attachmentControlCount": 3,
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "lane": 3,
+      "sceneId": 1754,
+      "sourceSceneId": 1470,
+      "tabId": "11",
+      "promptPath": "../../../../ChatGPT/RENDERS/tmp/world-195x4/batch-433/scene-1754-prompt.txt",
+      "preparedPromptSha256": "13801B8AE7B0B780F1A79B2DFEBD2F44BA391341E6E2295B3FB7396DA2267299",
+      "browserCanonicalPromptSha256": "4A045FB418961B1192953B6CD22278EB12AA007724E891E5F3599E5CDD0D6C0E",
+      "promptExactAfterFinalUpload": true,
+      "attachmentNames": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "attachmentCounts": [
+        1,
+        1,
+        1
+      ],
+      "attachmentOrderVerified": true,
+      "attachmentControlCount": 3,
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "lane": 4,
+      "sceneId": 1755,
+      "sourceSceneId": 1471,
+      "tabId": "12",
+      "promptPath": "../../../../ChatGPT/RENDERS/tmp/world-195x4/batch-433/scene-1755-prompt.txt",
+      "preparedPromptSha256": "AEC918261C87141865F93ABDE7030ED79D8D33E7929CCBE88B968CB6BF7FC60E",
+      "browserCanonicalPromptSha256": "C84774DDD0CF340E52886E49E6727897E5B02553A38025109F825208A7C27083",
+      "promptExactAfterFinalUpload": true,
+      "attachmentNames": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "attachmentCounts": [
+        1,
+        1,
+        1
+      ],
+      "attachmentOrderVerified": true,
+      "attachmentControlCount": 3,
+      "sendEnabled": true,
+      "sendClicked": false
+    }
+  ]
+}

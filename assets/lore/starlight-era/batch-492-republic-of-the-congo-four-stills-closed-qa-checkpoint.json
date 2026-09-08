@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "batch": 492,
+  "country": "Republic of the Congo",
+  "scenes": [1995, 1996, 1997, 1998],
+  "state": "four-stills-closed-qa-and-archive-complete-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-06T05:14:30.3694739Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "preparationCheckpoint": "assets/lore/starlight-era/batch-492-republic-of-the-congo-editorial-prompts-prepared-checkpoint.json",
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-492-republic-of-the-congo-four-meta-composers-staged-checkpoint.json",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-492-republic-of-the-congo-four-lanes-dispatched-checkpoint.json",
+    "rawCaptureCheckpoint": "assets/lore/starlight-era/batch-492-republic-of-the-congo-meta-raw-capture-checkpoint.json",
+    "dispatchCommit": "5ff63fda8e5866c7c09c2cb412bec848d230fa64",
+    "rawCaptureCommit": "debf2f2391cc98298feb35c1a23b7c5754ae24f7"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulFinalOccurrences": 4,
+    "providerRawAssetCount": 5,
+    "dualOutputOccurrences": 1,
+    "hardFailures": 0,
+    "retries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "orderedAnchors": [938, 936, 937],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/36bd3560-0278-45a7-8af5-102e286116cf",
+      "https://www.meta.ai/prompt/c0660e98-0b3c-4acb-9140-20850894ddb2",
+      "https://www.meta.ai/prompt/af311c2b-e7fb-46e2-9b2b-9ae290cd7198",
+      "https://www.meta.ai/prompt/79f3833e-7c86-41b7-8480-a625c570df1e"
+    ]
+  },
+  "selectedAssets": [
+    {"scene": 1995, "provider": "Meta AI", "path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1995-republic-of-the-congo-brazzaville-corniche-editorial-meta-occurrence-1-raw.png", "sha256": "EC7FF7E5EB7BF22D07812B63027F32EE308F2962A71021DAF5C0AF0414AF1A0E", "bytes": 1486001, "width": 768, "height": 1360},
+    {"scene": 1996, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1996-republic-of-the-congo-diosso-gorge-editorial-chatgpt-one-strong-shortening-pass.png", "sha256": "5E4D25F5C114BDD0B43453B1EEBEDF5220620B5A33298CAE6E3D453181230A63", "bytes": 2470926, "width": 941, "height": 1672},
+    {"scene": 1997, "provider": "Meta AI fallback after consumed ChatGPT invocation", "path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1997-republic-of-the-congo-odzala-kokoua-editorial-meta-occurrence-1-output-a-raw.webp", "sha256": "707B96CD655FD12FB3EB0BCFC4E56B92ED9BD82C0EA83B9681FCA2E59536CF5C", "bytes": 460682, "width": 1152, "height": 2048},
+    {"scene": 1998, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1998-republic-of-the-congo-loufoulakari-falls-editorial-chatgpt-one-strong-shortening-pass.png", "sha256": "D0E5E06E787403C5BB248636D1CC850FC592BD3DF9EADEC75C66AEDD8AAAD81C", "bytes": 2437087, "width": 941, "height": 1672}
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableRepublicOfTheCongoSettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "selectedAssetMatchesOutsideBatch": [0, 0, 0, 0],
+    "scannedRepoImageCount": 5061,
+    "editorialRollTestsPassed": 5,
+    "editorialRollTestsFailed": 0
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassRequestsIssued": 4,
+    "successfulOutputs": 3,
+    "outputModerationBlocks": 1,
+    "blockedScenes": [1997],
+    "blockedStage": "output",
+    "blockedCategory": "sexual",
+    "blockedRequestIds": ["10f3e0f4-e605-4542-9191-08d00fdaf014"],
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 2,
+    "selectedMetaOriginalsOrFallbacks": 2,
+    "dualOutputOccurrenceCountedOnce": true
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/provider-ledger.json",
+    "invocationLedger": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/chatgpt-one-strong-shortening-invocation-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/accessibility-sidecars.json",
+    "providerManifest": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/provider-evidence-manifest.json",
+    "providerManifestExact": true,
+    "providerManifestFileCount": 19,
+    "providerManifestTotalBytes": 4758592,
+    "providerManifestInventorySha256": "79120B804430C8AC73BF6E2A91A0DDDE264101D4EB66BB4CB9AB65AB0E18D5FC",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/closure-evidence-manifest.json",
+    "closureManifestFileCount": 26,
+    "closureManifestTotalBytes": 12044555,
+    "closureManifestInventorySha256": "A5861D51A132EF6FF41965E5861BDB61301FA4DCD9CD08B866F5E34E5CBB3BAF"
+  },
+  "publication": {
+    "plannedCountryPair": ["El Salvador", "Republic of the Congo"],
+    "elSalvadorPriorPostCount": 0,
+    "republicOfTheCongoPriorPostCount": 0,
+    "xAccount": "@dogramaci",
+    "canonicalXPostCountBeforePair": 198,
+    "composerBlank": true,
+    "composerMediaCount": 0,
+    "publicTransmissionCount": 0
+  },
+  "browserState": {
+    "verifiedAtUtc": "2026-09-06T05:14:30.3694739Z",
+    "metaRelatedTabCount": 4,
+    "metaTerminalPromptUrlCount": 4,
+    "xTabCount": 1,
+    "otherTabCount": 0,
+    "terminalMetaThinkingVisible": true,
+    "terminalMetaStopVisibleCount": 0,
+    "xComposerUrl": "https://x.com/compose/post",
+    "xSignedInProfileHref": "/dogramaci",
+    "xComposerText": "",
+    "xPostDisabled": true,
+    "visibleInAppBrowserOnly": true
+  },
+  "canonicalContradictions": [
+    "Historical Batch 466 El Salvador scenes 1890-1893 are terminal provider-limit no-byte occurrences and were neither resent nor reopened. Fresh Batch 491 closed with unused scene numbers 1991-1994 and is not a retry.",
+    "Batch 466 named Republic of the Congo as the next country, but Batch 467 explicitly superseded it with the Europe gap-fill. After Vatican City closed every Europe gap, the binding priority order resumed at El Salvador and then Republic of the Congo.",
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later checkpoints. No Cuba or Tanzania prompt was dispatched.",
+    "Scene 1997 returned two valid images in one provider occurrence. Both raw byte streams are archived, but the occurrence consumed exactly one ChatGPT tailoring allowance and received no second call after the output-stage block.",
+    "No Starlight guardian exists. The unrelated X Assistant and IAT B3 guardians remain untouched and are not Starlight authority."
+  ],
+  "automationInventory": [
+    {"id": "guardian-x-assistant-mission", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true},
+    {"id": "iat-b3-devnet-gate-guardian", "status": "ACTIVE", "leftUntouched": true}
+  ],
+  "starlightGuardianPresent": false,
+  "nextSafeAction": "Commit the complete Batch 492 closure with Git LFS, push and verify local, origin and Draft PR parity, then stage the nonduplicate El Salvador and Republic of the Congo pair in the signed-in X composer."
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "world-195x4-scene-897-compact-diamond-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-diamond-15.txt",
+  "promptSha256": "c493eeca8cc38f4d737a5b0f712afe5990202715eab8ee541baf020dd87b26bc",
+  "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No moderation block; visual relationship geometry and location correction only.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "geometryLock": {
+    "formation": "compact diamond within arm's reach",
+    "triangleContacts": [
+      "Ellie to Radiance left cape closure",
+      "Alia to Radiance right cape closure",
+      "Radiance to Alia shoulder brooch"
+    ],
+    "eceConnection": "Ellie-ECE forehead contact plus PAWS lap-copilot",
+    "splitPairs": false,
+    "presenterGesture": false
+  },
+  "locationLock": "white-and-salmon neoclassical Teatro Nacional de Santa Ana facade with paired columns, arched windows and pediment",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-14/897-brooch-14-rejected.png",
+    "bytes": 2419415,
+    "sha256": "3183b60bc7c639ee57953ba8fc39d3ace2f4adf347c8f84409d222c159dcfe5e",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "composition split into an ECE-Ellie pair and a Radiance-Alia pair instead of the stored closed Radiance-Ellie-Alia triangle",
+      "Ellie's required styling hand does not contact Radiance's left cape edge",
+      "Alia's required styling hand does not contact Radiance's right cape edge",
+      "background follows modern reference architecture rather than Santa Ana National Theatre",
+      "pointing is corrected; wand, two visible navels, PAWS, bold silhouettes and Ellie-ECE forehead connection pass"
+    ]
+  },
+  "preserved": {
+    "allFourteenTriggeredRolls": true,
+    "originalTriangle": true,
+    "foreheadContact": true,
+    "navelJewel": true,
+    "exactlyTwoVisibleNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalECEConnection": true,
+    "pawsLapCopilot": true,
+    "visibleLowWand": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

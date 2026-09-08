@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "batch": 456,
+  "country": "Sierra Leone",
+  "scene": 1850,
+  "qaAtUtc": "2026-08-28T11:37:23.121Z",
+  "requiredCameraRoll": 82,
+  "requiredCameraCategory": "EXTREME WIDE",
+  "accepted": false,
+  "canonicalOutput": null,
+  "outputs": [
+    {
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-456-sierra-leone\\1850-sierra-leone-freetown-lumley-beach-01.webp",
+      "sha256": "2226D481190ADA7F78B4F31A0E5D9ABBE5F86828EC23A0DEF82F4063ED380D40",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "decision": "rejected-hard-unusable",
+      "reasons": [
+        "All four figures are materially taller than the required maximum 15% of image height.",
+        "The affection reads as a lip kiss rather than the required brief cheek peck.",
+        "Visible bystanders violate the no-bystanders constraint."
+      ]
+    },
+    {
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-456-sierra-leone\\1850-sierra-leone-freetown-lumley-beach-02.webp",
+      "sha256": "88FF493B3755FA37ED989A1876E4B1C6326C20821ABB237097855BA431048BA9",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "decision": "rejected-hard-unusable",
+      "reasons": [
+        "Intermediate/full-figure composition violates the required extreme-wide framing and 15% figure-height limit.",
+        "The affection reads as a lip kiss rather than the required brief cheek peck.",
+        "Visible background people violate the no-bystanders constraint."
+      ]
+    }
+  ]
+}

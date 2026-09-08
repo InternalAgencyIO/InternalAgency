@@ -1,0 +1,1538 @@
+{
+  "batch": 361,
+  "country": "Rwanda",
+  "status": "render-preflight-stored",
+  "sourceCommit": "00c049a156418da5a6fdab7d0e427f1ce876e3dc",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch361-rwanda keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 359 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "Mars-surface expedition couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Burundi",
+  "nextQueueBatch": 362,
+  "nextQueueScenes": [
+    1468,
+    1469,
+    1470,
+    1471
+  ],
+  "nextCinematicTheme": {
+    "active": "Mars-surface expedition couture",
+    "batchOrdinalWithinTheme": 2
+  },
+  "researchSources": [
+    {
+      "url": "https://www.britannica.com/place/Kigali",
+      "usedFor": "Kigali rolling-hill city setting"
+    },
+    {
+      "url": "https://www.britannica.com/place/Rwanda",
+      "usedFor": "Rwanda rolling hills, lakes and volcanic geography"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/1697/",
+      "usedFor": "Nyungwe forest landscape and biodiversity context"
+    },
+    {
+      "url": "https://www.britannica.com/place/Lake-Kivu",
+      "usedFor": "Lake Kivu shoreline and island landscape"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch361-rwanda-male-model-scene",
+    "fullHash": 1909772786,
+    "roll": 86,
+    "selectedScenePosition": 3,
+    "selectedScene": 1466,
+    "maleEmotion": {
+      "key": "batch361-rwanda-scene3-male-emotion",
+      "roll": 75,
+      "result": "contained resentment"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Rwanda flag, coat of arms, official seal, sacred symbol, copied ceremonial or traditional pattern, political messaging, copied military identity, or official service identity is used. Country-led scenes use large dimensional secular rolling-hill terraces, lake currents, volcanic profiles, canopy layers, tea-field ribbons and city-light arcs instead.",
+    "palette": "Kigali pearl, terraced-hill emerald, Lake Kivu cobalt, volcanic charcoal, Nyungwe canopy green, clay terracotta, Mars rust, habitat white, graphite, solar copper and visor cyan",
+    "minimumCoverage": "Scenes 1464 and 1465 each carry hard large Rwanda motifs on three women and Mars-expedition construction language on at least two. Scenes 1466 and 1467 use four different theme-led Mars expedition outfits without country map prints while Rwanda landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Kigali, Lake Kivu, the Virunga volcano chain, and Nyungwe rainforest.",
+    "prohibitions": "Use respectful secular Rwanda geography through complete rolling-hill terraces, lake currents, volcanic profiles, canopy layers, tea-field ribbons and city-light arcs. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency identity, logo, badge, readable text, combat, threat or weaponized expedition equipment."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch361-rwanda-x-heart",
+      "roll": 79,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch361-rwanda-x-internalagency",
+      "roll": 15,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch361-rwanda-x-worldxxxseries",
+      "roll": 40,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Rwanda images plus one accepted Guinea image",
+    "captionIfEligible": "Rwanda ❤️ Guinea #Rwanda #InternalAgency",
+    "internalAgencyHashtagActive": true,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1466 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1466 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch361-rwanda-male-model-scene",
+        86
+      ],
+      [
+        "batch361-rwanda-scene3-male-emotion",
+        75
+      ],
+      [
+        "batch361-rwanda-scene1464-weather",
+        76
+      ],
+      [
+        "batch361-rwanda-scene1464-mascotState",
+        80
+      ],
+      [
+        "batch361-rwanda-scene1464-poleDanceTheme",
+        82
+      ],
+      [
+        "batch361-rwanda-scene1464-rainbowOnly",
+        88
+      ],
+      [
+        "batch361-rwanda-scene1464-rainbowHosiery",
+        15
+      ],
+      [
+        "batch361-rwanda-scene1464-romanceBeat",
+        41
+      ],
+      [
+        "batch361-rwanda-scene1464-compoundLoveBeat",
+        29
+      ],
+      [
+        "batch361-rwanda-scene1464-hardLoveBeat",
+        53
+      ],
+      [
+        "batch361-rwanda-scene1464-interestingProp",
+        67
+      ],
+      [
+        "batch361-rwanda-scene1464-eceMissionProp-poseTargetRoll",
+        10
+      ],
+      [
+        "batch361-rwanda-scene1464-Radiance-emotion",
+        17
+      ],
+      [
+        "batch361-rwanda-scene1464-Radiance-visibleMidriff",
+        37
+      ],
+      [
+        "batch361-rwanda-scene1464-Radiance-straplessDress",
+        94
+      ],
+      [
+        "batch361-rwanda-scene1464-Radiance-fullyOpenBack",
+        7
+      ],
+      [
+        "batch361-rwanda-scene1464-Ellie-emotion",
+        1
+      ],
+      [
+        "batch361-rwanda-scene1464-Ellie-visibleMidriff",
+        97
+      ],
+      [
+        "batch361-rwanda-scene1464-Ellie-straplessDress",
+        66
+      ],
+      [
+        "batch361-rwanda-scene1464-Ellie-fullyOpenBack",
+        23
+      ],
+      [
+        "batch361-rwanda-scene1464-Alia-emotion",
+        79
+      ],
+      [
+        "batch361-rwanda-scene1464-Alia-visibleMidriff",
+        7
+      ],
+      [
+        "batch361-rwanda-scene1464-Alia-straplessDress",
+        84
+      ],
+      [
+        "batch361-rwanda-scene1464-Alia-fullyOpenBack",
+        57
+      ],
+      [
+        "batch361-rwanda-scene1464-AI ECE-emotion",
+        77
+      ],
+      [
+        "batch361-rwanda-scene1464-AI ECE-visibleMidriff",
+        21
+      ],
+      [
+        "batch361-rwanda-scene1464-AI ECE-straplessDress",
+        14
+      ],
+      [
+        "batch361-rwanda-scene1464-AI ECE-fullyOpenBack",
+        43
+      ],
+      [
+        "batch361-rwanda-scene1465-weather",
+        71
+      ],
+      [
+        "batch361-rwanda-scene1465-mascotState",
+        59
+      ],
+      [
+        "batch361-rwanda-scene1465-poleDanceTheme",
+        35
+      ],
+      [
+        "batch361-rwanda-scene1465-rainbowOnly",
+        79
+      ],
+      [
+        "batch361-rwanda-scene1465-rainbowHosiery",
+        94
+      ],
+      [
+        "batch361-rwanda-scene1465-romanceBeat",
+        66
+      ],
+      [
+        "batch361-rwanda-scene1465-compoundLoveBeat",
+        8
+      ],
+      [
+        "batch361-rwanda-scene1465-hardLoveBeat",
+        64
+      ],
+      [
+        "batch361-rwanda-scene1465-interestingProp",
+        80
+      ],
+      [
+        "batch361-rwanda-scene1465-eceMissionProp-poseTargetRoll",
+        77
+      ],
+      [
+        "batch361-rwanda-scene1465-Radiance-emotion",
+        48
+      ],
+      [
+        "batch361-rwanda-scene1465-Radiance-visibleMidriff",
+        42
+      ],
+      [
+        "batch361-rwanda-scene1465-Radiance-straplessDress",
+        25
+      ],
+      [
+        "batch361-rwanda-scene1465-Radiance-fullyOpenBack",
+        90
+      ],
+      [
+        "batch361-rwanda-scene1465-Ellie-emotion",
+        58
+      ],
+      [
+        "batch361-rwanda-scene1465-Ellie-visibleMidriff",
+        24
+      ],
+      [
+        "batch361-rwanda-scene1465-Ellie-straplessDress",
+        79
+      ],
+      [
+        "batch361-rwanda-scene1465-Ellie-fullyOpenBack",
+        44
+      ],
+      [
+        "batch361-rwanda-scene1465-Alia-emotion",
+        74
+      ],
+      [
+        "batch361-rwanda-scene1465-Alia-visibleMidriff",
+        24
+      ],
+      [
+        "batch361-rwanda-scene1465-Alia-straplessDress",
+        15
+      ],
+      [
+        "batch361-rwanda-scene1465-Alia-fullyOpenBack",
+        80
+      ],
+      [
+        "batch361-rwanda-scene1465-AI ECE-emotion",
+        80
+      ],
+      [
+        "batch361-rwanda-scene1465-AI ECE-visibleMidriff",
+        94
+      ],
+      [
+        "batch361-rwanda-scene1465-AI ECE-straplessDress",
+        73
+      ],
+      [
+        "batch361-rwanda-scene1465-AI ECE-fullyOpenBack",
+        54
+      ],
+      [
+        "batch361-rwanda-scene1466-weather",
+        26
+      ],
+      [
+        "batch361-rwanda-scene1466-mascotState",
+        54
+      ],
+      [
+        "batch361-rwanda-scene1466-poleDanceTheme",
+        96
+      ],
+      [
+        "batch361-rwanda-scene1466-rainbowOnly",
+        38
+      ],
+      [
+        "batch361-rwanda-scene1466-rainbowHosiery",
+        89
+      ],
+      [
+        "batch361-rwanda-scene1466-romanceBeat",
+        19
+      ],
+      [
+        "batch361-rwanda-scene1466-compoundLoveBeat",
+        79
+      ],
+      [
+        "batch361-rwanda-scene1466-hardLoveBeat",
+        11
+      ],
+      [
+        "batch361-rwanda-scene1466-interestingProp",
+        37
+      ],
+      [
+        "batch361-rwanda-scene1466-eceMissionProp-poseTargetRoll",
+        56
+      ],
+      [
+        "batch361-rwanda-scene1466-Radiance-emotion",
+        99
+      ],
+      [
+        "batch361-rwanda-scene1466-Radiance-visibleMidriff",
+        31
+      ],
+      [
+        "batch361-rwanda-scene1466-Radiance-straplessDress",
+        20
+      ],
+      [
+        "batch361-rwanda-scene1466-Radiance-fullyOpenBack",
+        77
+      ],
+      [
+        "batch361-rwanda-scene1466-Ellie-emotion",
+        67
+      ],
+      [
+        "batch361-rwanda-scene1466-Ellie-visibleMidriff",
+        59
+      ],
+      [
+        "batch361-rwanda-scene1466-Ellie-straplessDress",
+        92
+      ],
+      [
+        "batch361-rwanda-scene1466-Ellie-fullyOpenBack",
+        13
+      ],
+      [
+        "batch361-rwanda-scene1466-Alia-emotion",
+        25
+      ],
+      [
+        "batch361-rwanda-scene1466-Alia-visibleMidriff",
+        89
+      ],
+      [
+        "batch361-rwanda-scene1466-Alia-straplessDress",
+        18
+      ],
+      [
+        "batch361-rwanda-scene1466-Alia-fullyOpenBack",
+        47
+      ],
+      [
+        "batch361-rwanda-scene1466-AI ECE-emotion",
+        87
+      ],
+      [
+        "batch361-rwanda-scene1466-AI ECE-visibleMidriff",
+        7
+      ],
+      [
+        "batch361-rwanda-scene1466-AI ECE-straplessDress",
+        40
+      ],
+      [
+        "batch361-rwanda-scene1466-AI ECE-fullyOpenBack",
+        53
+      ],
+      [
+        "batch361-rwanda-scene1467-weather",
+        37
+      ],
+      [
+        "batch361-rwanda-scene1467-mascotState",
+        37
+      ],
+      [
+        "batch361-rwanda-scene1467-poleDanceTheme",
+        49
+      ],
+      [
+        "batch361-rwanda-scene1467-rainbowOnly",
+        9
+      ],
+      [
+        "batch361-rwanda-scene1467-rainbowHosiery",
+        36
+      ],
+      [
+        "batch361-rwanda-scene1467-romanceBeat",
+        68
+      ],
+      [
+        "batch361-rwanda-scene1467-compoundLoveBeat",
+        90
+      ],
+      [
+        "batch361-rwanda-scene1467-hardLoveBeat",
+        10
+      ],
+      [
+        "batch361-rwanda-scene1467-interestingProp",
+        98
+      ],
+      [
+        "batch361-rwanda-scene1467-eceMissionProp-poseTargetRoll",
+        95
+      ],
+      [
+        "batch361-rwanda-scene1467-Radiance-emotion",
+        34
+      ],
+      [
+        "batch361-rwanda-scene1467-Radiance-visibleMidriff",
+        16
+      ],
+      [
+        "batch361-rwanda-scene1467-Radiance-straplessDress",
+        55
+      ],
+      [
+        "batch361-rwanda-scene1467-Radiance-fullyOpenBack",
+        68
+      ],
+      [
+        "batch361-rwanda-scene1467-Ellie-emotion",
+        16
+      ],
+      [
+        "batch361-rwanda-scene1467-Ellie-visibleMidriff",
+        30
+      ],
+      [
+        "batch361-rwanda-scene1467-Ellie-straplessDress",
+        97
+      ],
+      [
+        "batch361-rwanda-scene1467-Ellie-fullyOpenBack",
+        6
+      ],
+      [
+        "batch361-rwanda-scene1467-Alia-emotion",
+        68
+      ],
+      [
+        "batch361-rwanda-scene1467-Alia-visibleMidriff",
+        38
+      ],
+      [
+        "batch361-rwanda-scene1467-Alia-straplessDress",
+        5
+      ],
+      [
+        "batch361-rwanda-scene1467-Alia-fullyOpenBack",
+        70
+      ],
+      [
+        "batch361-rwanda-scene1467-AI ECE-emotion",
+        54
+      ],
+      [
+        "batch361-rwanda-scene1467-AI ECE-visibleMidriff",
+        48
+      ],
+      [
+        "batch361-rwanda-scene1467-AI ECE-straplessDress",
+        75
+      ],
+      [
+        "batch361-rwanda-scene1467-AI ECE-fullyOpenBack",
+        92
+      ],
+      [
+        "batch361-rwanda-x-heart",
+        79
+      ],
+      [
+        "batch361-rwanda-x-internalagency",
+        15
+      ],
+      [
+        "batch361-rwanda-x-worldxxxseries",
+        40
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch361-rwanda-scene1464-rainbowHosieryWearer",
+        91
+      ],
+      [
+        "batch361-rwanda-scene1464-rainbowHosieryPaletteMode",
+        1
+      ],
+      [
+        "batch361-rwanda-scene1464-mascotHolder",
+        89
+      ],
+      [
+        "batch361-rwanda-scene1464-interestingPropHolder",
+        93
+      ],
+      [
+        "batch361-rwanda-scene1464-interestingPropFamily",
+        19
+      ],
+      [
+        "batch361-rwanda-scene1465-rainbowHosieryWearer",
+        46
+      ],
+      [
+        "batch361-rwanda-scene1465-rainbowHosieryPaletteMode",
+        98
+      ],
+      [
+        "batch361-rwanda-scene1465-mascotHolder",
+        0
+      ],
+      [
+        "batch361-rwanda-scene1465-interestingPropHolder",
+        58
+      ],
+      [
+        "batch361-rwanda-scene1465-interestingPropFamily",
+        80
+      ],
+      [
+        "batch361-rwanda-scene1466-rainbowHosieryWearer",
+        89
+      ],
+      [
+        "batch361-rwanda-scene1466-rainbowHosieryPaletteMode",
+        87
+      ],
+      [
+        "batch361-rwanda-scene1466-mascotHolder",
+        59
+      ],
+      [
+        "batch361-rwanda-scene1466-interestingPropHolder",
+        95
+      ],
+      [
+        "batch361-rwanda-scene1466-interestingPropFamily",
+        49
+      ],
+      [
+        "batch361-rwanda-scene1467-rainbowHosieryWearer",
+        16
+      ],
+      [
+        "batch361-rwanda-scene1467-rainbowHosieryPaletteMode",
+        40
+      ],
+      [
+        "batch361-rwanda-scene1467-mascotHolder",
+        30
+      ],
+      [
+        "batch361-rwanda-scene1467-interestingPropHolder",
+        56
+      ],
+      [
+        "batch361-rwanda-scene1467-interestingPropFamily",
+        26
+      ]
+    ],
+    "primaryPairCount": 109,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "D39B1DF07249CF0993E81A6C0C7613D3725F82EA8CCBDDCB9388206917E8A950",
+    "selectorPairsSha256": "7EADDFA7F2887D3B2F7C105A6CA4AC8E7AD3304EEC2F05B6C4896531570822EE"
+  },
+  "scenePlans": {
+    "1464": {
+      "scene": 1464,
+      "mode": "country-led hybrid",
+      "theme": "Mars-surface expedition couture",
+      "landmark": "a broad dry Kigali hilltop terrace with the complete rolling city skyline, Kigali Convention Centre dome, layered green ridges and illuminated avenues, fused in the foreground with a peaceful fictional Mars analog habitat, rover arch and dust-sampling deck",
+      "motifs": "complete rolling-hill terraces, city-light arcs, dome geometry, rover arches and Mars strata",
+      "culture": "Kigali reads through its layered hills, modern skyline, convention dome and curving avenues; every Mars element is peaceful fictional civilian research hardware.",
+      "weather": {
+        "key": "batch361-rwanda-scene1464-weather",
+        "roll": 76,
+        "result": "powerful windstorm with controlled fabric motion",
+        "materialized": "powerful windstorm with controlled fabric motion"
+      },
+      "mascotState": {
+        "key": "batch361-rwanda-scene1464-mascotState",
+        "roll": 80,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch361-rwanda-scene1464-mascotHolder",
+        "roll": 89,
+        "result": "AI ECE"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry habitat lounge far from slopes, target line and expedition machinery.",
+      "interestingProp": {
+        "key": "batch361-rwanda-scene1464-interestingProp",
+        "roll": 67,
+        "active": false,
+        "holder": {
+          "key": "batch361-rwanda-scene1464-interestingPropHolder",
+          "roll": 93,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch361-rwanda-scene1464-interestingPropFamily",
+          "roll": 19,
+          "result": "kinetic umbrella with rotating mirrored petals"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch361-rwanda-scene1464-poleDanceTheme",
+        "roll": 82,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch361-rwanda-scene1464-rainbowOnly",
+        "roll": 88,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch361-rwanda-scene1464-rainbowHosiery",
+        "roll": 15,
+        "active": true,
+        "wearer": {
+          "key": "batch361-rwanda-scene1464-rainbowHosieryWearer",
+          "roll": 91,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch361-rwanda-scene1464-rainbowHosieryPaletteMode",
+          "roll": 1,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch361-rwanda-scene1464-eceMissionProp-poseTargetRoll",
+        "roll": 10
+      },
+      "materializedPropAction": "Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera",
+      "romanceBeat": {
+        "key": "batch361-rwanda-scene1464-romanceBeat",
+        "roll": 41,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch361-rwanda-scene1464-compoundLoveBeat",
+        "roll": 29,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "hardLoveBeat": {
+        "key": "batch361-rwanda-scene1464-hardLoveBeat",
+        "roll": 53,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1464-Radiance-emotion",
+            "roll": 17,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1464-Radiance-visibleMidriff",
+            "roll": 37,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1464-Radiance-straplessDress",
+            "roll": 94,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1464-Radiance-fullyOpenBack",
+            "roll": 7,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1464-Ellie-emotion",
+            "roll": 1,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1464-Ellie-visibleMidriff",
+            "roll": 97,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1464-Ellie-straplessDress",
+            "roll": 66,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1464-Ellie-fullyOpenBack",
+            "roll": 23,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1464-Alia-emotion",
+            "roll": 79,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1464-Alia-visibleMidriff",
+            "roll": 7,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1464-Alia-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1464-Alia-fullyOpenBack",
+            "roll": 57,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1464-AI ECE-emotion",
+            "roll": 77,
+            "result": "contained resentment",
+            "materializedResult": "contained resentment",
+            "performance": "contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1464-AI ECE-visibleMidriff",
+            "roll": 21,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1464-AI ECE-straplessDress",
+            "roll": 14,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1464-AI ECE-fullyOpenBack",
+            "roll": 43,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Kigali-pearl rover-petal dress with dimensional hill terraces, copper pressure hoops and expedition heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "terrace-emerald asymmetric regolith culottes with city-light shoulder arcs, white seal panels and gyroscope platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "clay-terracotta open-back jumpsuit with braided cobalt ridge cords, charcoal sampling cages and visor pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "Mars-rust habitat-shell peplum over opaque cyan shorts with graphite seal rings and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Kigali-pearl rover-petal dress with dimensional hill terraces, copper pressure hoops and expedition heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "terrace-emerald asymmetric regolith culottes with city-light shoulder arcs, white seal panels and gyroscope platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "clay-terracotta open-back jumpsuit with braided cobalt ridge cords, charcoal sampling cages and visor pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "Mars-rust habitat-shell peplum over opaque cyan shorts with graphite seal rings and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Radiance steps away while Ellie and Alia catch separate forearms and ECE closes from behind into a protective embrace, creating a clear three-way choice.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Radiance links Ellie and touches Alia",
+        "Ellie and Alia catch Radiance",
+        "ECE completes a visible protective contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Kigali hilltop terrace with the complete rolling city skyline, Kigali Convention Centre dome, layered green ridges and illuminated avenues, fused in the foreground with a peaceful fictional Mars analog habitat, rover arch and dust-sampling deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: Mars-surface expedition couture. The theme and Rwanda location must both be immediate foreground reads. Kigali reads through its layered hills, modern skyline, convention dome and curving avenues; every Mars element is peaceful fictional civilian research hardware. Stored scene rolls: weather 76=powerful windstorm with controlled fabric motion; mascot state 80=neither mascot; mascot holder selector 89=AI ECE; odd prop 67=inactive; odd holder 93=Radiance; odd family 19=kinetic umbrella with rotating mirrored petals; pole 82=inactive; rainbow-only 88=inactive; rainbow hosiery 15=active; wearer 91=AI ECE; palette 1=country-palette rainbow-like gradient; romance 41; compound 29; hard love 53; mission-prop pose/target 10. Exact wardrobe rolls: Radiance: midriff 37=visible, strapless 94=inactive, open back 7=active; Ellie: midriff 97=covered, strapless 66=inactive, open back 23=active; Alia: midriff 7=visible, strapless 84=inactive, open back 57=inactive; AI ECE: midriff 21=visible, strapless 14=active, open back 43=inactive. Exact outfit fingerprints, no substitutions: Radiance: Kigali-pearl rover-petal dress with dimensional hill terraces, copper pressure hoops and expedition heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: terrace-emerald asymmetric regolith culottes with city-light shoulder arcs, white seal panels and gyroscope platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: clay-terracotta open-back jumpsuit with braided cobalt ridge cords, charcoal sampling cages and visor pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: Mars-rust habitat-shell peplum over opaque cyan shorts with graphite seal rings and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large rolling-hill, city-arc and dome motifs; Radiance and ECE use rover-shell, pressure-seal and regolith-frame construction. Location design vocabulary: complete rolling-hill terraces, city-light arcs, dome geometry, rover arches and Mars strata. Use respectful secular Rwanda geography through complete rolling-hill terraces, lake currents, volcanic profiles, canopy layers, tea-field ribbons and city-light arcs. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency identity, logo, badge, readable text, combat, threat or weaponized expedition equipment. Four visibly distinct coherent emotions: Radiance: roll 17=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 1=tender affection, performed as tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 79=deep sadness, performed as deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 77=contained resentment, performed as contained resentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 41: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Compound roll 29: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Mandatory hard-love roll 53: a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Radiance steps away while Ellie and Alia catch separate forearms and ECE closes from behind into a protective embrace, creating a clear three-way choice. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Radiance links Ellie and touches Alia; Ellie and Alia catch Radiance; ECE completes a visible protective contact. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. Mascot state 80=neither mascot. Mascot holder selector 89=AI ECE. Only rolled mascots appear on a padded dry habitat lounge far from slopes, target line and expedition machinery. Odd-prop roll 67 is inactive. Do not add any bizarre secondary prop; stored inactive holder 93=Radiance and family 19=kinetic umbrella with rotating mirrored petals remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1465": {
+      "scene": 1465,
+      "mode": "country-led hybrid",
+      "theme": "Mars-surface expedition couture",
+      "landmark": "a broad dry Lake Kivu overlook with the complete cobalt lake, island silhouettes, steep terraced hills and distant shoreline towns, fused equally with a peaceful Mars analog lander, pressurized observation deck and solar sampling array",
+      "motifs": "complete lake-current bands, island silhouettes, hill terraces, lander legs and solar-panel geometry",
+      "culture": "Lake Kivu reads through its broad water, island profiles, steep cultivated hills and distant towns, with no boats or residents in the prop line.",
+      "weather": {
+        "key": "batch361-rwanda-scene1465-weather",
+        "roll": 71,
+        "result": "coastal sea mist",
+        "materialized": "coastal sea mist"
+      },
+      "mascotState": {
+        "key": "batch361-rwanda-scene1465-mascotState",
+        "roll": 59,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch361-rwanda-scene1465-mascotHolder",
+        "roll": 0,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded observation platform far from water, props and expedition equipment.",
+      "interestingProp": {
+        "key": "batch361-rwanda-scene1465-interestingProp",
+        "roll": 80,
+        "active": false,
+        "holder": {
+          "key": "batch361-rwanda-scene1465-interestingPropHolder",
+          "roll": 58,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch361-rwanda-scene1465-interestingPropFamily",
+          "roll": 80,
+          "result": "deactivated chainless cinema chainsaw sculpture with a locked blade cover"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch361-rwanda-scene1465-poleDanceTheme",
+        "roll": 35,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch361-rwanda-scene1465-rainbowOnly",
+        "roll": 79,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch361-rwanda-scene1465-rainbowHosiery",
+        "roll": 94,
+        "active": false,
+        "wearer": {
+          "key": "batch361-rwanda-scene1465-rainbowHosieryWearer",
+          "roll": 46,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch361-rwanda-scene1465-rainbowHosieryPaletteMode",
+          "roll": 98,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch361-rwanda-scene1465-eceMissionProp-poseTargetRoll",
+        "roll": 77
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch361-rwanda-scene1465-romanceBeat",
+        "roll": 66,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch361-rwanda-scene1465-compoundLoveBeat",
+        "roll": 8,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "hardLoveBeat": {
+        "key": "batch361-rwanda-scene1465-hardLoveBeat",
+        "roll": 64,
+        "result": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1465-Radiance-emotion",
+            "roll": 48,
+            "result": "startled surprise",
+            "materializedResult": "startled surprise",
+            "performance": "startled surprise expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1465-Radiance-visibleMidriff",
+            "roll": 42,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1465-Radiance-straplessDress",
+            "roll": 25,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1465-Radiance-fullyOpenBack",
+            "roll": 90,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1465-Ellie-emotion",
+            "roll": 58,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1465-Ellie-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1465-Ellie-straplessDress",
+            "roll": 79,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1465-Ellie-fullyOpenBack",
+            "roll": 44,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1465-Alia-emotion",
+            "roll": 74,
+            "result": "betrayal shock",
+            "materializedResult": "betrayal shock",
+            "performance": "betrayal shock expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1465-Alia-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1465-Alia-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1465-Alia-fullyOpenBack",
+            "roll": 80,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1465-AI ECE-emotion",
+            "roll": 80,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1465-AI ECE-visibleMidriff",
+            "roll": 94,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1465-AI ECE-straplessDress",
+            "roll": 73,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1465-AI ECE-fullyOpenBack",
+            "roll": 54,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "startled surprise expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "betrayal shock expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "deep sadness expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Lake-Kivu cobalt island-corsage tulip dress with silver current terraces, copper habitat ribs and shoreline heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "habitat-white oval-visor culotte jumpsuit with graphite pressure panels, emerald hill fans and gyroscope platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "volcanic-charcoal strapless terrace coat-dress with braided cobalt lake currents, dimensional ridge fins and terracotta pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "Mars-copper lander-cradle bodice over opaque emerald shorts with cyan visor cells, white module fins and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Lake-Kivu cobalt island-corsage tulip dress with silver current terraces, copper habitat ribs and shoreline heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "habitat-white oval-visor culotte jumpsuit with graphite pressure panels, emerald hill fans and gyroscope platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "volcanic-charcoal strapless terrace coat-dress with braided cobalt lake currents, dimensional ridge fins and terracotta pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "Mars-copper lander-cradle bodice over opaque emerald shorts with cyan visor cells, white module fins and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Ellie leads Alia through a stable turning dance while Radiance joins at Alia's shoulder and ECE steps through the open side to reclaim attention.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Ellie links Alia and leans toward ECE",
+        "Alia links Ellie",
+        "Radiance and ECE complete clear shoulder and waist contacts"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Lake Kivu overlook with the complete cobalt lake, island silhouettes, steep terraced hills and distant shoreline towns, fused equally with a peaceful Mars analog lander, pressurized observation deck and solar sampling array. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: Mars-surface expedition couture. The theme and Rwanda location must both be immediate foreground reads. Lake Kivu reads through its broad water, island profiles, steep cultivated hills and distant towns, with no boats or residents in the prop line. Stored scene rolls: weather 71=coastal sea mist; mascot state 59=neither mascot; mascot holder selector 0=Radiance; odd prop 80=inactive; odd holder 58=Ellie; odd family 80=deactivated chainless cinema chainsaw sculpture with a locked blade cover; pole 35=inactive; rainbow-only 79=inactive; rainbow hosiery 94=inactive; wearer 46=Radiance; palette 98=original independent rainbow gradient; romance 66; compound 8; hard love 64; mission-prop pose/target 77. Exact wardrobe rolls: Radiance: midriff 42=visible, strapless 25=active, open back 90=inactive; Ellie: midriff 24=visible, strapless 79=inactive, open back 44=inactive; Alia: midriff 24=visible, strapless 15=active, open back 80=inactive; AI ECE: midriff 94=covered, strapless 73=inactive, open back 54=inactive. Exact outfit fingerprints, no substitutions: Radiance: Lake-Kivu cobalt island-corsage tulip dress with silver current terraces, copper habitat ribs and shoreline heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: habitat-white oval-visor culotte jumpsuit with graphite pressure panels, emerald hill fans and gyroscope platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: volcanic-charcoal strapless terrace coat-dress with braided cobalt lake currents, dimensional ridge fins and terracotta pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: Mars-copper lander-cradle bodice over opaque emerald shorts with cyan visor cells, white module fins and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large lake, island and terrace motifs; Ellie and ECE use lander-shell, pressure-joint and solar-array construction. Location design vocabulary: complete lake-current bands, island silhouettes, hill terraces, lander legs and solar-panel geometry. Use respectful secular Rwanda geography through complete rolling-hill terraces, lake currents, volcanic profiles, canopy layers, tea-field ribbons and city-light arcs. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency identity, logo, badge, readable text, combat, threat or weaponized expedition equipment. Four visibly distinct coherent emotions: Radiance: roll 48=startled surprise, performed as startled surprise expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 58=aching romantic longing, performed as aching romantic longing expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 74=betrayal shock, performed as betrayal shock expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 80=deep sadness, performed as deep sadness expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 66: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Compound roll 8: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Mandatory hard-love roll 64: a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Ellie leads Alia through a stable turning dance while Radiance joins at Alia's shoulder and ECE steps through the open side to reclaim attention. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Ellie links Alia and leans toward ECE; Alia links Ellie; Radiance and ECE complete clear shoulder and waist contacts. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 59=neither mascot. Mascot holder selector 0=Radiance. Only rolled mascots appear on a secured padded observation platform far from water, props and expedition equipment. Odd-prop roll 80 is inactive. Do not add any bizarre secondary prop; stored inactive holder 58=Ellie and family 80=deactivated chainless cinema chainsaw sculpture with a locked blade cover remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render coastal sea mist cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1466": {
+      "scene": 1466,
+      "mode": "theme-led original",
+      "theme": "Mars-surface expedition couture",
+      "landmark": "a broad dry overlook facing the complete Virunga volcanic chain in northern Rwanda with layered volcanic cones, bamboo forest, mist bands and terraced foothills, fused equally with a peaceful Mars canyon habitat and geologic research deck",
+      "motifs": "location-only volcanic profiles, bamboo layers, mist bands, habitat irises and regolith rings",
+      "culture": "Northern Rwanda reads through its Virunga volcano silhouettes, forested slopes, mist and terraced foothills; wildlife remains distant and outside every prop line.",
+      "weather": {
+        "key": "batch361-rwanda-scene1466-weather",
+        "roll": 26,
+        "result": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast"
+      },
+      "mascotState": {
+        "key": "batch361-rwanda-scene1466-mascotState",
+        "roll": 54,
+        "result": "neither mascot"
+      },
+      "mascotHolder": {
+        "key": "batch361-rwanda-scene1466-mascotHolder",
+        "roll": 59,
+        "result": "Alia"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded platform far from wildlife, slopes, props and expedition machinery.",
+      "interestingProp": {
+        "key": "batch361-rwanda-scene1466-interestingProp",
+        "roll": 37,
+        "active": false,
+        "holder": {
+          "key": "batch361-rwanda-scene1466-interestingPropHolder",
+          "roll": 95,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch361-rwanda-scene1466-interestingPropFamily",
+          "roll": 49,
+          "result": "oversized transparent mechanical typewriter"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch361-rwanda-scene1466-poleDanceTheme",
+        "roll": 96,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch361-rwanda-scene1466-rainbowOnly",
+        "roll": 38,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch361-rwanda-scene1466-rainbowHosiery",
+        "roll": 89,
+        "active": false,
+        "wearer": {
+          "key": "batch361-rwanda-scene1466-rainbowHosieryWearer",
+          "roll": 89,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch361-rwanda-scene1466-rainbowHosieryPaletteMode",
+          "roll": 87,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch361-rwanda-scene1466-eceMissionProp-poseTargetRoll",
+        "roll": 56
+      },
+      "materializedPropAction": "AI ECE uses a realistic two-hand sight picture toward one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch361-rwanda-scene1466-romanceBeat",
+        "roll": 19,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch361-rwanda-scene1466-compoundLoveBeat",
+        "roll": 79,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLoveBeat": {
+        "key": "batch361-rwanda-scene1466-hardLoveBeat",
+        "roll": 11,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1466-Radiance-emotion",
+            "roll": 99,
+            "result": "emotional exhaustion",
+            "materializedResult": "emotional exhaustion",
+            "performance": "emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1466-Radiance-visibleMidriff",
+            "roll": 31,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1466-Radiance-straplessDress",
+            "roll": 20,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1466-Radiance-fullyOpenBack",
+            "roll": 77,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1466-Ellie-emotion",
+            "roll": 67,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1466-Ellie-visibleMidriff",
+            "roll": 59,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1466-Ellie-straplessDress",
+            "roll": 92,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1466-Ellie-fullyOpenBack",
+            "roll": 13,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1466-Alia-emotion",
+            "roll": 25,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1466-Alia-visibleMidriff",
+            "roll": 89,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1466-Alia-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1466-Alia-fullyOpenBack",
+            "roll": 47,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1466-AI ECE-emotion",
+            "roll": 87,
+            "result": "fear and urgent vulnerability",
+            "materializedResult": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1466-AI ECE-visibleMidriff",
+            "roll": 7,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1466-AI ECE-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1466-AI ECE-fullyOpenBack",
+            "roll": 53,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "fear and urgent vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "solar-copper habitat-iris dress with opaque silver hub rings, cyan aperture ribs and gyroscope heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Mars-graphite rover-truss culotte coat with terracotta conduit channels, rigid shoulder bridge and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "habitat-white solar-sail jumpsuit with braided emerald seams, curved volcanic-charcoal side panels and prism pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "regolith-rust sampling-shield coat-dress with gold field hoops, opaque glass peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Rwanda rolling-hill and lake-current embroidery with subtle Mars-surface expedition seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "solar-copper habitat-iris dress with opaque silver hub rings, cyan aperture ribs and gyroscope heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Mars-graphite rover-truss culotte coat with terracotta conduit channels, rigid shoulder bridge and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "habitat-white solar-sail jumpsuit with braided emerald seams, curved volcanic-charcoal side panels and prism pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "regolith-rust sampling-shield coat-dress with gold field hoops, opaque glass peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Rwanda rolling-hill and lake-current embroidery with subtle Mars-surface expedition seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "ECE rises from a stable habitat bench into Alia's full embrace while Radiance gives ECE a quick cheek kiss and Ellie blocks their route with a linked-hand invitation.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Alia supports ECE",
+        "Radiance touches ECE",
+        "Ellie links one free hand into the group"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch361-rwanda-scene3-male-emotion",
+          "roll": 75,
+          "result": "contained resentment"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry overlook facing the complete Virunga volcanic chain in northern Rwanda with layered volcanic cones, bamboo forest, mist bands and terraced foothills, fused equally with a peaceful Mars canyon habitat and geologic research deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: Mars-surface expedition couture. The theme and Rwanda location must both be immediate foreground reads. Northern Rwanda reads through its Virunga volcano silhouettes, forested slopes, mist and terraced foothills; wildlife remains distant and outside every prop line. Stored scene rolls: weather 26=soft dramatic overcast; mascot state 54=neither mascot; mascot holder selector 59=Alia; odd prop 37=inactive; odd holder 95=Alia; odd family 49=oversized transparent mechanical typewriter; pole 96=inactive; rainbow-only 38=inactive; rainbow hosiery 89=inactive; wearer 89=AI ECE; palette 87=original independent rainbow gradient; romance 19; compound 79; hard love 11; mission-prop pose/target 56. Exact wardrobe rolls: Radiance: midriff 31=visible, strapless 20=active, open back 77=inactive; Ellie: midriff 59=covered, strapless 92=inactive, open back 13=active; Alia: midriff 89=covered, strapless 18=active, open back 47=inactive; AI ECE: midriff 7=visible, strapless 40=inactive, open back 53=inactive. Exact outfit fingerprints, no substitutions: Radiance: solar-copper habitat-iris dress with opaque silver hub rings, cyan aperture ribs and gyroscope heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: Mars-graphite rover-truss culotte coat with terracotta conduit channels, rigid shoulder bridge and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: habitat-white solar-sail jumpsuit with braided emerald seams, curved volcanic-charcoal side panels and prism pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: regolith-rust sampling-shield coat-dress with gold field hoops, opaque glass peplum and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Rwanda rolling-hill and lake-current embroidery with subtle Mars-surface expedition seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Habitat iris, rover truss, solar sail and regolith shield create four unrelated silhouettes while the Virunga chain remains equally large. Location design vocabulary: location-only volcanic profiles, bamboo layers, mist bands, habitat irises and regolith rings. Use respectful secular Rwanda geography through complete rolling-hill terraces, lake currents, volcanic profiles, canopy layers, tea-field ribbons and city-light arcs. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency identity, logo, badge, readable text, combat, threat or weaponized expedition equipment. Four visibly distinct coherent emotions: Radiance: roll 99=emotional exhaustion, performed as emotional exhaustion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 67=possessive tension, performed as possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 25=calm contentment, performed as calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 87=fear and urgent vulnerability, performed as fear and urgent vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 75=contained resentment, performed as contained resentment expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 19: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Compound roll 79: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Mandatory hard-love roll 11: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE rises from a stable habitat bench into Alia's full embrace while Radiance gives ECE a quick cheek kiss and Ellie blocks their route with a linked-hand invitation. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Alia supports ECE; Radiance touches ECE; Ellie links one free hand into the group. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic two-hand sight picture toward one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 54=neither mascot. Mascot holder selector 59=Alia. Only rolled mascots appear on a secured padded platform far from wildlife, slopes, props and expedition machinery. Odd-prop roll 37 is inactive. Do not add any bizarre secondary prop; stored inactive holder 95=Alia and family 49=oversized transparent mechanical typewriter remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render soft dramatic overcast cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1467": {
+      "scene": 1467,
+      "mode": "theme-led original",
+      "theme": "Mars-surface expedition couture",
+      "landmark": "a broad dry Nyungwe overlook with the complete rainforest canopy, suspended canopy walkway, layered ridges, tea-field ribbons and misty valley depth, fused equally with a peaceful Mars analog research station and panoramic geology deck",
+      "motifs": "location-only canopy layers, walkway arcs, tea-field ribbons, habitat modules and solar geometry",
+      "culture": "Nyungwe reads through its dense canopy, suspended walkway, layered ridges, tea fields and misty valleys; wildlife remains distant.",
+      "weather": {
+        "key": "batch361-rwanda-scene1467-weather",
+        "roll": 37,
+        "result": "heavy rain curtain",
+        "materialized": "heavy rain curtain"
+      },
+      "mascotState": {
+        "key": "batch361-rwanda-scene1467-mascotState",
+        "roll": 37,
+        "result": "PAWS only"
+      },
+      "mascotHolder": {
+        "key": "batch361-rwanda-scene1467-mascotHolder",
+        "roll": 30,
+        "result": "Radiance"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry overlook far from canopy edges, wildlife, props and expedition machinery.",
+      "interestingProp": {
+        "key": "batch361-rwanda-scene1467-interestingProp",
+        "roll": 98,
+        "active": false,
+        "holder": {
+          "key": "batch361-rwanda-scene1467-interestingPropHolder",
+          "roll": 56,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch361-rwanda-scene1467-interestingPropFamily",
+          "roll": 26,
+          "result": "antique-style diving helmet display shell"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch361-rwanda-scene1467-poleDanceTheme",
+        "roll": 49,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch361-rwanda-scene1467-rainbowOnly",
+        "roll": 9,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch361-rwanda-scene1467-rainbowHosiery",
+        "roll": 36,
+        "active": false,
+        "wearer": {
+          "key": "batch361-rwanda-scene1467-rainbowHosieryWearer",
+          "roll": 16,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch361-rwanda-scene1467-rainbowHosieryPaletteMode",
+          "roll": 40,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch361-rwanda-scene1467-eceMissionProp-poseTargetRoll",
+        "roll": 95
+      },
+      "materializedPropAction": "AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera",
+      "romanceBeat": {
+        "key": "batch361-rwanda-scene1467-romanceBeat",
+        "roll": 68,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch361-rwanda-scene1467-compoundLoveBeat",
+        "roll": 90,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "hardLoveBeat": {
+        "key": "batch361-rwanda-scene1467-hardLoveBeat",
+        "roll": 10,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1467-Radiance-emotion",
+            "roll": 34,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1467-Radiance-visibleMidriff",
+            "roll": 16,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1467-Radiance-straplessDress",
+            "roll": 55,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1467-Radiance-fullyOpenBack",
+            "roll": 68,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1467-Ellie-emotion",
+            "roll": 16,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1467-Ellie-visibleMidriff",
+            "roll": 30,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1467-Ellie-straplessDress",
+            "roll": 97,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1467-Ellie-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1467-Alia-emotion",
+            "roll": 68,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1467-Alia-visibleMidriff",
+            "roll": 38,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1467-Alia-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1467-Alia-fullyOpenBack",
+            "roll": 70,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch361-rwanda-scene1467-AI ECE-emotion",
+            "roll": 54,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch361-rwanda-scene1467-AI ECE-visibleMidriff",
+            "roll": 48,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch361-rwanda-scene1467-AI ECE-straplessDress",
+            "roll": 75,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch361-rwanda-scene1467-AI ECE-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "overwhelming relief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "solar-copper habitat-dome column dress with silver ribs, cyan light appliques and expedition heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "canopy-emerald reactor-lattice culotte jumpsuit with charcoal hex tiles, tea-field pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "habitat-white navigation-spindle coat-dress with braided cobalt seams, terracotta side frames and optic pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "Mars-graphite radiator bodice over opaque rust-gold shorts with silver conduit lattice and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "solar-copper habitat-dome column dress with silver ribs, cyan light appliques and expedition heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "canopy-emerald reactor-lattice culotte jumpsuit with charcoal hex tiles, tea-field pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "habitat-white navigation-spindle coat-dress with braided cobalt seams, terracotta side frames and optic pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "Mars-graphite radiator bodice over opaque rust-gold shorts with silver conduit lattice and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Alia steps away while Radiance and ECE catch separate forearms and Ellie closes from behind into a protective embrace, creating a clear three-way choice.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Radiance catches Alia",
+        "ECE catches Alia",
+        "Ellie completes a protective behind contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Nyungwe overlook with the complete rainforest canopy, suspended canopy walkway, layered ridges, tea-field ribbons and misty valley depth, fused equally with a peaceful Mars analog research station and panoramic geology deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: Mars-surface expedition couture. The theme and Rwanda location must both be immediate foreground reads. Nyungwe reads through its dense canopy, suspended walkway, layered ridges, tea fields and misty valleys; wildlife remains distant. Stored scene rolls: weather 37=heavy rain curtain; mascot state 37=PAWS only; mascot holder selector 30=Radiance; odd prop 98=inactive; odd holder 56=Alia; odd family 26=antique-style diving helmet display shell; pole 49=inactive; rainbow-only 9=inactive; rainbow hosiery 36=inactive; wearer 16=Radiance; palette 40=country-palette rainbow-like gradient; romance 68; compound 90; hard love 10; mission-prop pose/target 95. Exact wardrobe rolls: Radiance: midriff 16=visible, strapless 55=inactive, open back 68=inactive; Ellie: midriff 30=visible, strapless 97=inactive, open back 6=active; Alia: midriff 38=visible, strapless 5=active, open back 70=inactive; AI ECE: midriff 48=visible, strapless 75=inactive, open back 92=inactive. Exact outfit fingerprints, no substitutions: Radiance: solar-copper habitat-dome column dress with silver ribs, cyan light appliques and expedition heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: canopy-emerald reactor-lattice culotte jumpsuit with charcoal hex tiles, tea-field pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: habitat-white navigation-spindle coat-dress with braided cobalt seams, terracotta side frames and optic pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: Mars-graphite radiator bodice over opaque rust-gold shorts with silver conduit lattice and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Habitat dome, reactor lattice, navigation spindle and radiator shield make four distinct expedition outfits while Nyungwe remains foregrounded. Location design vocabulary: location-only canopy layers, walkway arcs, tea-field ribbons, habitat modules and solar geometry. Use respectful secular Rwanda geography through complete rolling-hill terraces, lake currents, volcanic profiles, canopy layers, tea-field ribbons and city-light arcs. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency identity, logo, badge, readable text, combat, threat or weaponized expedition equipment. Four visibly distinct coherent emotions: Radiance: roll 34=overwhelming relief, performed as overwhelming relief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 16=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 68=possessive tension, performed as possessive tension expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 54=aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 68: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Compound roll 90: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Mandatory hard-love roll 10: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia steps away while Radiance and ECE catch separate forearms and Ellie closes from behind into a protective embrace, creating a clear three-way choice. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Radiance catches Alia; ECE catches Alia; Ellie completes a protective behind contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 37=PAWS only. Mascot holder selector 30=Radiance. Only rolled mascots appear on a padded dry overlook far from canopy edges, wildlife, props and expedition machinery. Odd-prop roll 98 is inactive. Do not add any bizarre secondary prop; stored inactive holder 56=Alia and family 26=antique-style diving helmet display shell remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render heavy rain curtain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

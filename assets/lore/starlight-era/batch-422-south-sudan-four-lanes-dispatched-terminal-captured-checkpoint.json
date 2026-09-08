@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four-lanes-dispatched-terminal-captured",
+  "createdAtUtc": "2026-08-27T04:48:43.517Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 422,
+  "country": "South Sudan",
+  "scenes": [
+    1708,
+    1709,
+    1710,
+    1711
+  ],
+  "orderedReferences": [
+    {
+      "anchor": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "anchor": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "anchor": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "uploadAuthorization": {
+    "standingAuthorizedAtUtc": "2026-08-27T04:05:01.0694990Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.0694990Z"
+  },
+  "sendAuthorization": {
+    "actionTimeUserText": "good authorized go",
+    "granted": true,
+    "successfulClicksAtUtc": "2026-08-27T04:40:27.400Z"
+  },
+  "controllerRecovery": {
+    "priorGroupedActionTimedOut": true,
+    "priorProviderOccurrenceCount": 0,
+    "composersReconfirmedUnchanged": true,
+    "successfulDispatchCount": 4
+  },
+  "lanes": [
+    {
+      "scene": 1708,
+      "promptSha256": "49023104FA7694B299F8A87E4DCB27381208A5A4DB91B3C636005ECBC8F20EA9",
+      "providerUrl": "https://www.meta.ai/prompt/9103319f-0a47-49ef-a0ed-c2200b20fae6",
+      "terminalOutcome": "output-hard-unusable",
+      "sendClickCount": 1,
+      "retrySent": false,
+      "sha256": "788fcf835c12428bbf6427c94084cbd4bb55afde8e75d372c4c62c15711cabea"
+    },
+    {
+      "scene": 1709,
+      "promptSha256": "89960C1A17AD37D6C9ABA7F6EB07EA11B3CB8362D82AB87EB09754F3B3CBFB3B",
+      "providerUrl": "https://www.meta.ai/prompt/fc3e8a89-a6bc-4788-b2aa-d7d81995a30f",
+      "terminalOutcome": "output-hard-unusable",
+      "sendClickCount": 1,
+      "retrySent": false,
+      "sha256": "a8e6e83a2f6b28c494e5b51a7e27151051f6abf18be1b4fb5c41527fbc09b5f6"
+    },
+    {
+      "scene": 1710,
+      "promptSha256": "97068C0474D346440D3B662AFDF24D98D1BA4E78869E1C21709257DD6E56B99F",
+      "providerUrl": "https://www.meta.ai/prompt/ca57b535-cd28-4906-9f11-0cdf52aac163",
+      "terminalOutcome": "explicit-no-bytes-refusal",
+      "sendClickCount": 1,
+      "retrySent": false,
+      "sha256": null
+    },
+    {
+      "scene": 1711,
+      "promptSha256": "36E0D634B7AC976D84D089B50ACE2BA257AC16ECE22459D1B2D837C85F051F6D",
+      "providerUrl": "https://www.meta.ai/prompt/827559a1-4425-4fa1-bfe3-112492a66f91",
+      "terminalOutcome": "explicit-no-bytes-refusal",
+      "sendClickCount": 1,
+      "retrySent": false,
+      "sha256": null
+    }
+  ],
+  "confirmedProviderChatCount": 4,
+  "duplicateDispatchCount": 0,
+  "boundedRetryAuthorized": false,
+  "boundedRetryCount": 0
+}

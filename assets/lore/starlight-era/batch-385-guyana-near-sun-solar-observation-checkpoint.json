@@ -1,0 +1,613 @@
+{
+  "batch": 385,
+  "country": "Guyana",
+  "status": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-guyana-rendering",
+  "sourceCommit": "3e40265b2fd65e99b01313309f78ce107a11cf1e",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 4,
+    "pass2CandidatesConsumed": 2,
+    "automaticThirdPassAllowed": false
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-313-comoros-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/159"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation",
+      "assets/lore/starlight-era/batch-364-tunisia-moon-expedition-checkpoint.json#/nextCinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "rollMethod": "FNV-1a over recorded batch385-guyana keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "cinematicTheme": "near-Sun solar-observation couture",
+  "themePairPosition": 1,
+  "sceneNumbers": [
+    1560,
+    1561,
+    1562,
+    1563
+  ],
+  "researchSources": [
+    {
+      "url": "https://tourismguyana.gy/the-kaieteur-and-orinduik-experience/",
+      "usedFor": "Orinduik Falls, Ireng River jasper terraces, and rolling Pakaraima grass-covered hills"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/kingston-seawall/",
+      "usedFor": "Kingston Seawall civil infrastructure, Round House, and coastal setting"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/seawall-bandstand/",
+      "usedFor": "Seawall Bandstand cast-iron ornament and public music history"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/lighthouse/",
+      "usedFor": "Georgetown Lighthouse octagonal brick form, red-white stripes, iron gallery, and maritime beacon role"
+    },
+    {
+      "url": "https://www.pac.gov.gy/",
+      "usedFor": "Shell Beach and Kanuku Mountains status in Guyana's national protected areas system"
+    },
+    {
+      "url": "https://dpi.gov.gy/shell-beach-protected-area-a-haven-for-marine-life-conservation-efforts/",
+      "usedFor": "Shell Beach coastline, multiple beaches, four marine-turtle species, and conservation monitoring"
+    },
+    {
+      "url": "https://www.pac.gov.gy/kanuku-mountains-protected-area/",
+      "usedFor": "Kanuku eastern and western ranges, rainforest and savannah, biodiversity, flagship species, and community management"
+    },
+    {
+      "url": "https://www.pac.gov.gy/our-work/",
+      "usedFor": "Guyana protected-area biodiversity, Kanuku bat diversity, and Shell Beach coastal-bird importance"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch385-guyana-male-model-scene",
+    "fullHash": 3087420340,
+    "position": 1,
+    "scene": 1560,
+    "emotionRoll": 27,
+    "emotion": "hope"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Guyana flag, Golden Arrowhead, coat of arms, official seal or official emblem is copied onto clothing. Secular waterfall, river, mountain, seawall, lighthouse, shell-beach, mangrove, forest, savannah, wildlife and craft fields replace them in country-led scenes.",
+    "palette": "rainforest green, Demerara gold, pearl white, scarlet red, black, Atlantic blue, jasper rose, shell bronze, orchid violet, and savannah ochre",
+    "minimumCoverage": "Scenes 1560 and 1561 each foreground large Guyana motif fields on two or three looks and near-Sun construction on at least two. Scenes 1562 and 1563 use four distinct theme-led looks while the Guyana landmark remains equally foregrounded.",
+    "cultureScene": "The scenes foreground Orinduik waterfall geology, Georgetown coastal civil heritage, Shell Beach marine conservation and Kanuku mountain biodiversity.",
+    "prohibitions": "No literal flag, Golden Arrowhead, coat of arms, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied medical or command uniform, badge, weapon threat, sexualized care, alcohol, or branded product."
+  },
+  "rollAudit": {
+    "1560": {
+      "weather": 89,
+      "mascotState": 57,
+      "mascotHolder": 58,
+      "oddProp": 82,
+      "oddHolder": 36,
+      "oddFamily": 82,
+      "pole": 29,
+      "rainbowOnly": 61,
+      "hosiery": 92,
+      "hosieryWearer": 84,
+      "hosieryPalette": 52,
+      "romance": 60,
+      "compound": 22,
+      "hardLove": 86,
+      "missionPoseTarget": 3,
+      "emotions": {
+        "Radiance": 98,
+        "Ellie": 48,
+        "Alia": 60,
+        "AI ECE": 98,
+        "AI ECE disambiguation": 53,
+        "Male": 27
+      },
+      "cuts": {
+        "Radiance": [
+          84,
+          59,
+          84
+        ],
+        "Ellie": [
+          70,
+          17,
+          98
+        ],
+        "Alia": [
+          2,
+          29,
+          78
+        ],
+        "AI ECE": [
+          36,
+          27,
+          20
+        ]
+      }
+    },
+    "1561": {
+      "weather": 10,
+      "mascotState": 18,
+      "mascotHolder": 63,
+      "oddProp": 33,
+      "oddHolder": 31,
+      "oddFamily": 37,
+      "pole": 32,
+      "rainbowOnly": 6,
+      "hosiery": 49,
+      "hosieryWearer": 57,
+      "hosieryPalette": 35,
+      "romance": 19,
+      "compound": 99,
+      "hardLove": 43,
+      "missionPoseTarget": 68,
+      "emotions": {
+        "Radiance": 99,
+        "Ellie": 95,
+        "Alia": 33,
+        "AI ECE": 63
+      },
+      "cuts": {
+        "Radiance": [
+          7,
+          32,
+          45
+        ],
+        "Ellie": [
+          79,
+          4,
+          81
+        ],
+        "Alia": [
+          45,
+          70,
+          39
+        ],
+        "AI ECE": [
+          3,
+          88,
+          65
+        ]
+      }
+    },
+    "1562": {
+      "weather": 43,
+      "mascotState": 39,
+      "mascotHolder": 48,
+      "oddProp": 12,
+      "oddHolder": 66,
+      "oddFamily": 80,
+      "pole": 75,
+      "rainbowOnly": 19,
+      "hosiery": 22,
+      "hosieryWearer": 30,
+      "hosieryPalette": 18,
+      "romance": 34,
+      "compound": 52,
+      "hardLove": 72,
+      "missionPoseTarget": 37,
+      "emotions": {
+        "Radiance": 28,
+        "Ellie": 14,
+        "Alia": 18,
+        "AI ECE": 48
+      },
+      "cuts": {
+        "Radiance": [
+          90,
+          85,
+          22
+        ],
+        "Ellie": [
+          88,
+          23,
+          36
+        ],
+        "Alia": [
+          88,
+          23,
+          0
+        ],
+        "AI ECE": [
+          22,
+          65,
+          42
+        ]
+      }
+    },
+    "1563": {
+      "weather": 40,
+      "mascotState": 60,
+      "mascotHolder": 13,
+      "oddProp": 23,
+      "oddHolder": 97,
+      "oddFamily": 23,
+      "pole": 94,
+      "rainbowOnly": 92,
+      "hosiery": 39,
+      "hosieryWearer": 59,
+      "hosieryPalette": 53,
+      "romance": 13,
+      "compound": 97,
+      "hardLove": 9,
+      "missionPoseTarget": 14,
+      "emotions": {
+        "Radiance": 21,
+        "Ellie": 93,
+        "Alia": 15,
+        "AI ECE": 93,
+        "AI ECE disambiguation": 96
+      },
+      "cuts": {
+        "Radiance": [
+          49,
+          42,
+          63
+        ],
+        "Ellie": [
+          17,
+          54,
+          47
+        ],
+        "Alia": [
+          63,
+          92,
+          5
+        ],
+        "AI ECE": [
+          81,
+          46,
+          35
+        ]
+      }
+    }
+  },
+  "rollAuditHashes": {
+    "primaryPairCount": 111,
+    "primarySha256": "D00122150E5BD7BD361951A14BB2D72C0C103F5A9C3AE4659C4FC81522C9AEAB",
+    "selectorPairCount": 20,
+    "selectorSha256": "1B4C85B32900BE0A5C4B1ABF32416959BCF0849E86F7C19BC959727DFB9EECA4"
+  },
+  "scenePlans": {
+    "1560": {
+      "location": "Orinduik Falls, Ireng River and Pakaraima hills",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-385/scene-1560-initial-prompt.txt",
+      "promptSha256": "927CFB0C8441ABDA615DCF6EC0A118E10F302B560AC9C7CF4214705B20B898CC",
+      "promptBytes": 4379
+    },
+    "1561": {
+      "location": "Kingston Seawall, Bandstand and Georgetown Lighthouse",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-385/scene-1561-initial-prompt.txt",
+      "promptSha256": "F898AB34C064F2A0FF5905AD8FD2456744D0041BE9568B0B8A45D57F89B3134D",
+      "promptBytes": 4350
+    },
+    "1562": {
+      "location": "Shell Beach Protected Area",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-385/scene-1562-initial-prompt.txt",
+      "promptSha256": "743AB24E0BEB644A1697CA6A222D86F459B8BC35CBD472085B9A10583CA6C29E",
+      "promptBytes": 4633
+    },
+    "1563": {
+      "location": "Kanuku Mountains Protected Area",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-385/scene-1563-initial-prompt.txt",
+      "promptSha256": "B5965FBBF6A4445F7935E01DE0EA16E3692F68743A0A0A7602E61D8548C1B35C",
+      "promptBytes": 4220
+    }
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "completed-two-hard-safe-accepted-two-output-moderation-no-bytes",
+      "allocation": {
+        "A": 1560,
+        "B": 1561,
+        "C": 1562,
+        "D": 1563
+      },
+      "candidatesAuthorized": 4,
+      "candidatesConsumed": 4,
+      "sourceMode": "original identity anchors only; no prior country render input",
+      "events": [
+        {
+          "scene": 1560,
+          "callId": "exec-c3a3ae40-b3d2-4d8d-95bb-9c214ee19c80",
+          "occurredAt": "2026-08-13T14:23:41.659Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-385/scene-1560-initial-prompt.txt",
+          "promptSha256": "927CFB0C8441ABDA615DCF6EC0A118E10F302B560AC9C7CF4214705B20B898CC",
+          "promptBytes": 4379,
+          "rawPath": "tmp/world-195x4/batch-385/raw/pass-1/scene-1560.png",
+          "rawSha256": "2291BFD0E46B4781EA4719BC2D81740388A3B23AF0BC5B03256C60C979482898",
+          "rawBytes": 2554759,
+          "dimensions": [
+            941,
+            1672
+          ],
+          "hardGateAudit": "five anchored adults, opaque public-safe short fashion, complete gross anatomy and footwear, mascots absent; isolated ECE aims side-on at paper target on complete earth-and-sand backstop behind transparent panel"
+        },
+        {
+          "scene": 1561,
+          "callId": "exec-c274e281-21ff-4685-928c-e9ea09a0d6cc",
+          "occurredAt": "2026-08-13T14:25:18.387Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "f2080b5a-409f-4c6f-8439-357414851e44",
+          "categories": [
+            "sexual"
+          ],
+          "promptPath": "tmp/world-195x4/batch-385/scene-1561-initial-prompt.txt",
+          "promptSha256": "F898AB34C064F2A0FF5905AD8FD2456744D0041BE9568B0B8A45D57F89B3134D",
+          "promptBytes": 4350,
+          "rawState": "no-bytes"
+        },
+        {
+          "scene": 1562,
+          "callId": "exec-03adaca3-e2d6-473f-b2b9-8b069725af5e",
+          "occurredAt": "2026-08-13T14:27:01.396Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-385/scene-1562-initial-prompt.txt",
+          "promptSha256": "743AB24E0BEB644A1697CA6A222D86F459B8BC35CBD472085B9A10583CA6C29E",
+          "promptBytes": 4633,
+          "rawPath": "tmp/world-195x4/batch-385/raw/pass-1/scene-1562.png",
+          "rawSha256": "A76F3A05B5E2C0C3201419699E7586C6B687206AEB4756ADB67B2DA54E91427D",
+          "rawBytes": 2274591,
+          "dimensions": [
+            941,
+            1672
+          ],
+          "hardGateAudit": "four anchored adults, opaque public-safe fashion, complete gross anatomy and footwear; MAX safe on separate lounge, sealed display isolated; Alia aims side-on across empty Atlantic water toward visible orange marker"
+        },
+        {
+          "scene": 1563,
+          "callId": "exec-561561f5-0163-4c2d-9e9a-385269e5c49e",
+          "occurredAt": "2026-08-13T14:28:40.608Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "4fbe9714-8b02-404d-aa42-7a37ef4cf412",
+          "categories": [
+            "sexual"
+          ],
+          "promptPath": "tmp/world-195x4/batch-385/scene-1563-initial-prompt.txt",
+          "promptSha256": "B5965FBBF6A4445F7935E01DE0EA16E3692F68743A0A0A7602E61D8548C1B35C",
+          "promptBytes": 4220,
+          "rawState": "no-bytes"
+        }
+      ]
+    },
+    "pass2": {
+      "status": "completed-two-concurrent-two-hard-safe-accepted",
+      "sceneNumbers": [
+        1561,
+        1563
+      ],
+      "candidatesAuthorized": 2,
+      "candidatesConsumed": 2,
+      "launchMode": "two concurrent clean candidates from original identity anchors only",
+      "thirdPassAllowed": false,
+      "consolidatedCorrections": [
+        "fully covered torso, waist, and back",
+        "no human contact and separated silhouettes",
+        "simple isolated handler lane with complete target and backstop",
+        "all limbs and footwear visible"
+      ],
+      "prompts": {
+        "1561": {
+          "path": "tmp/world-195x4/batch-385/scene-1561-pass-2-holistic-prompt.txt",
+          "sha256": "5774C6301A29677129BCECC8506AFEAF37CDCF8E1461C2EBCF0EF0F9A778938C",
+          "bytes": 2752
+        },
+        "1563": {
+          "path": "tmp/world-195x4/batch-385/scene-1563-pass-2-holistic-prompt.txt",
+          "sha256": "8A0AC5976F8C6E1EB8674DD505CB684CDB398D28A6376A3B91F09E8707A388B7",
+          "bytes": 2771
+        }
+      },
+      "events": [
+        {
+          "scene": 1561,
+          "callId": "exec-89fb3402-d906-4d6f-aa2c-e218fddb06ad",
+          "occurredAt": "2026-08-13T15:07:36.363Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-385/scene-1561-pass-2-holistic-prompt.txt",
+          "promptSha256": "5774C6301A29677129BCECC8506AFEAF37CDCF8E1461C2EBCF0EF0F9A778938C",
+          "promptBytes": 2752,
+          "rawPath": "tmp/world-195x4/batch-385/raw/pass-2/scene-1561.png",
+          "rawSha256": "0B200E4D90F14DA068C70979EBB5B654D19E5A85008847EC8B1639E07924F1AC",
+          "rawBytes": 2538815,
+          "dimensions": [
+            941,
+            1672
+          ],
+          "hardGateAudit": "four anchored adult women, opaque public-safe short looks, complete gross anatomy and footwear, PAWS and MAX safe together on a padded lounge; isolated side-on ECE handles the harmless inert rainbow prop toward one diamond paper target on a complete thick backstop behind a transparent safety panel",
+          "acceptedAsset": "assets/lore/starlight-era/1561-guyana-kingston-seawall-near-sun-solar-observation-bounded-pass-2.png"
+        },
+        {
+          "scene": 1563,
+          "callId": "exec-ae42ab76-7e4a-407b-84ca-a840c5a52f21",
+          "occurredAt": "2026-08-13T15:08:48.429Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-385/scene-1563-pass-2-holistic-prompt.txt",
+          "promptSha256": "8A0AC5976F8C6E1EB8674DD505CB684CDB398D28A6376A3B91F09E8707A388B7",
+          "promptBytes": 2771,
+          "rawPath": "tmp/world-195x4/batch-385/raw/pass-2/scene-1563.png",
+          "rawSha256": "4179ABEDF7D657F3F33F96337E1F084EEA3D10188B603A1B803B6972BCFE5F68",
+          "rawBytes": 2950160,
+          "dimensions": [
+            941,
+            1672
+          ],
+          "hardGateAudit": "four anchored adult women, opaque public-safe short looks, complete gross anatomy and footwear, no mascots present and the locked suitcase remains harmless; isolated side-on ECE handles the inert rainbow prop toward one diamond paper target on a complete thick earth backstop behind a transparent safety panel",
+          "acceptedAsset": "assets/lore/starlight-era/1563-guyana-kanuku-mountains-near-sun-solar-observation-bounded-pass-2.png"
+        }
+      ],
+      "auditStandard": "bounded hard gates only; exact garment microdetails, motifs, eye line, emotion, contact count, choreography, and pixel-perfect marker alignment remain soft quality targets"
+    }
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1560,
+      "file": "1560-guyana-orinduik-falls-near-sun-solar-observation-bounded-pass-1.png",
+      "rawPath": "tmp/world-195x4/batch-385/raw/pass-1/scene-1560.png",
+      "sha256": "2291BFD0E46B4781EA4719BC2D81740388A3B23AF0BC5B03256C60C979482898",
+      "bytes": 2554759,
+      "dimensions": [
+        941,
+        1672
+      ],
+      "acceptance": "accepted-bounded-hard-safe-pass-1"
+    },
+    {
+      "scene": 1562,
+      "file": "1562-guyana-shell-beach-near-sun-solar-observation-bounded-pass-1.png",
+      "rawPath": "tmp/world-195x4/batch-385/raw/pass-1/scene-1562.png",
+      "sha256": "A76F3A05B5E2C0C3201419699E7586C6B687206AEB4756ADB67B2DA54E91427D",
+      "bytes": 2274591,
+      "dimensions": [
+        941,
+        1672
+      ],
+      "acceptance": "accepted-bounded-hard-safe-pass-1"
+    },
+    {
+      "scene": 1561,
+      "file": "assets/lore/starlight-era/1561-guyana-kingston-seawall-near-sun-solar-observation-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-385/raw/pass-2/scene-1561.png",
+      "sha256": "0B200E4D90F14DA068C70979EBB5B654D19E5A85008847EC8B1639E07924F1AC",
+      "bytes": 2538815,
+      "dimensions": [
+        941,
+        1672
+      ],
+      "acceptance": "bounded-hard-safe-pass-2"
+    },
+    {
+      "scene": 1563,
+      "file": "assets/lore/starlight-era/1563-guyana-kanuku-mountains-near-sun-solar-observation-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-385/raw/pass-2/scene-1563.png",
+      "sha256": "4179ABEDF7D657F3F33F96337E1F084EEA3D10188B603A1B803B6972BCFE5F68",
+      "bytes": 2950160,
+      "dimensions": [
+        941,
+        1672
+      ],
+      "acceptance": "bounded-hard-safe-pass-2"
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1561,
+      "status": "failed-output-moderation-no-bytes",
+      "callId": "exec-c274e281-21ff-4685-928c-e9ea09a0d6cc"
+    },
+    {
+      "scene": 1563,
+      "status": "failed-output-moderation-no-bytes",
+      "callId": "exec-561561f5-0163-4c2d-9e9a-385269e5c49e"
+    }
+  ],
+  "rejectedPromptLedger": {
+    "status": "two-no-byte-failures-exact-text-recorded",
+    "entries": [
+      {
+        "entryId": "batch385-scene1561-pass1-exec-c274e281",
+        "scene": 1561,
+        "phase": "pass-1",
+        "status": "failed-output-moderation-no-bytes",
+        "callId": "exec-c274e281-21ff-4685-928c-e9ea09a0d6cc",
+        "requestId": "f2080b5a-409f-4c6f-8439-357414851e44",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered esplanade along Georgetown's Kingston Seawall at clear golden hour, with the complete sea defence, cast-iron Seawall Bandstand, red-and-white octagonal Georgetown Lighthouse, Round House and Atlantic surf recognizable. Near-Sun solar-observation couture is fictional shielded fashion at this real Guyana location: pearl-gold thermal facets, abstract corona arcs, smoked-filter geometry, radiator seams and compact sunshield panels. Nobody is literally on or near the Sun. Country-led hybrid: two or three looks carry large secular seawall, cast-iron-bandstand, octagonal-lighthouse, Atlantic-wave, Demerara-window and woven-basket fields; at least two also carry solar construction. No literal flag, Golden Arrowhead, official or sacred symbol, religious architecture, copied dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a secure strapless pearl architectural top showing a narrow ordinary midriff over an Atlantic-blue upper-thigh skort, closed back, with seawall and solar-shield panels; Ellie wears a secure strapless scarlet upper-thigh mini with covered waist and closed back, carrying complete bandstand ironwork and gold thermal facets; Alia wears a rainforest-green one-shoulder architectural top showing a narrow ordinary midriff over Demerara-gold tailored short shorts, closed back, with lighthouse geometry; ECE wears a black asymmetric architectural top showing a narrow ordinary midriff over shell-bronze upper-thigh shorts, closed back, with pearl radiator seams. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly PAWS the tiny golden kitten and MAX the young golden-retriever pup rest together on one dry padded lounge nearest Radiance, outside every mission lane; no adult hand is reassigned to them. The odd-prop roll is inactive; no odd prop appears. Pole and rainbow-only rolls are inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. The rolled guidance has already finished and is now noncontact. Ellie supports Radiance with one hand flat at her upper back and one hand at her near forearm; Radiance links her free hand with Alia's near hand. Every other relationship hand stays open at its owner's side. These are the only three human contacts. Emotions: Radiance: emotional exhaustion; Ellie: shame and social vulnerability; Alia: overwhelming relief; AI ECE: visible jealousy. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in a side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick sand backstop behind a transparent safety panel on a closed dry lane away from the lighthouse, ocean and public route. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nGolden-hour light keeps the dry esplanade, landmark, faces and downrange assembly clear. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "F898AB34C064F2A0FF5905AD8FD2456744D0041BE9568B0B8A45D57F89B3134D",
+          "encoding": "utf-8",
+          "bytes": 4350
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "immutable": true
+      },
+      {
+        "entryId": "batch385-scene1563-pass1-exec-561561f5",
+        "scene": 1563,
+        "phase": "pass-1",
+        "status": "failed-output-moderation-no-bytes",
+        "callId": "exec-561561f5-0163-4c2d-9e9a-385269e5c49e",
+        "requestId": "4fbe9714-8b02-404d-aa42-7a37ef4cf412",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered biodiversity overlook at the Kanuku Mountains Protected Area, with the complete eastern and western ranges, immense rainforest canopy, open Rupununi savannah and winding tributary recognizable beyond a heavy rain curtain. Near-Sun solar-observation couture is fictional shielded fashion at this real Guyana location: pearl-gold thermal facets, abstract corona arcs, smoked-filter geometry, radiator seams and compact sunshield panels. Nobody is literally on or near the Sun. Theme-led original: the landmark remains the Guyana read while all four looks use distinct near-Sun thermal, corona, solar-filter, radiator and sunshield structures. No literal flag, Golden Arrowhead, official or sacred symbol, religious architecture, copied dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a Demerara-gold asymmetric solar top showing a narrow ordinary midriff over a black upper-thigh skort, closed back, with pearl thermal facets; Ellie wears an Atlantic-blue sleeveless solar top showing a narrow ordinary midriff over shell-bronze tailored short shorts, closed back, with gold radiator seams; Alia wears a rainforest-green one-shoulder upper-thigh solar mini with covered waist and complete open upper back to the secure waist, with scarlet corona arcs; ECE wears a pearl sleeveless upper-thigh solar mini with covered waist and closed back, black sunshield panels and Demerara-gold heels. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nNeither mascot appears. The active odd prop is Ellie's inert gyroscopic hard-shell suitcase with its mechanism locked; it is secured flat as the broad stable low seat and cannot roll, spin or tip. Pole and rainbow-only rolls are inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Ellie's inert locked suitcase is secured as a broad low seat. Radiance sits upright sideways across Ellie's knees; Ellie uses one hand at Radiance's upper back while Alia links one hand with Radiance's free hand. Their other hands stay open and separated. The seated body support and two hand contacts are the only three human contacts. Emotions: Radiance: playful mischief; Ellie: guilt and remorse; Alia: extreme happiness, radiant laughing delight; AI ECE: defiance. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in a side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nThe heavy rain remains outside the covered overlook; footing, faces, target and complete backstop stay dry and readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "B5965FBBF6A4445F7935E01DE0EA16E3692F68743A0A0A7602E61D8548C1B35C",
+          "encoding": "utf-8",
+          "bytes": 4220
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "immutable": true
+      }
+    ],
+    "appendBeforeLaterPassPublicationCommitOrPush": true
+  },
+  "hardSafeAcceptedCount": 4,
+  "missingSceneNumbers": [],
+  "xPost": {
+    "status": "eligible-pending-live-duplicate-reconciliation-and-publication",
+    "caption": "Guyana ❤️ Comoros #Guyana #WorldXXXSeries",
+    "url": null
+  },
+  "nextQueue": {
+    "nextCountry": "Solomon Islands",
+    "nextBatch": 386,
+    "sceneNumbers": [
+      1564,
+      1565,
+      1566,
+      1567
+    ],
+    "cinematicTheme": "near-Sun solar-observation couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-314-guyana-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/160"
+    ],
+    "lockedUntilBatch385Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch385Closure": true
+  },
+  "preflight": {
+    "path": "tmp/world-195x4/batch-385/batch-385-guyana-preflight.json",
+    "sha256": "534091575AD7EBF4E8B3C852032D32165E943D0C9614844B588A603BC068F8CC",
+    "bytes": 46433
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "batch": 515,
+  "state": "all-four-initial-activations-issued-do-not-repeat",
+  "createdAtUtc": "2026-09-08T14:22:57.706Z",
+  "preflight": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-remote-preflight.json",
+  "stagingPayloadCommit": "a369c5b8f9502d50242eb4912385c3edd5671981",
+  "maximumInitialActivationsPerScene": 1,
+  "entries": [
+    {
+      "occurrenceId": "batch-515-scene-2087-meta-initial",
+      "scene": 2087,
+      "state": "confirmed-provider-conversation-created-do-not-resend",
+      "activationCount": 1,
+      "promptSha256": "C64CB7BD06428EBD54936E0F156ECD823A480F585881774848ABE8E93577045D",
+      "tabId": "33",
+      "initiatedAtUtc": "2026-09-08T14:25:09.816Z",
+      "issuedAtUtc": "2026-09-08T14:25:14.374Z",
+      "providerUrl": "https://www.meta.ai/prompt/d224ca06-befd-4dd2-a0e8-5da4bf6aa853",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2087-initial-send-receipt.json"
+    },
+    {
+      "occurrenceId": "batch-515-scene-2088-meta-initial",
+      "scene": 2088,
+      "state": "confirmed-provider-conversation-created-do-not-resend",
+      "activationCount": 1,
+      "promptSha256": "5BF27F6E6E1A76663FC1EF13AEC42485F70C5D3C3AF84F9285462EEBE56815E3",
+      "tabId": "34",
+      "initiatedAtUtc": "2026-09-08T14:26:20.196Z",
+      "issuedAtUtc": "2026-09-08T14:26:25.950Z",
+      "providerUrl": "https://www.meta.ai/prompt/c844906d-3c76-42d7-bd38-79e21e89d0b8",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2088-initial-send-receipt.json"
+    },
+    {
+      "occurrenceId": "batch-515-scene-2089-meta-initial",
+      "scene": 2089,
+      "state": "confirmed-provider-conversation-created-do-not-resend",
+      "activationCount": 1,
+      "promptSha256": "3A9AFDB0CB7A03F4907931FFA017D107B814A7F045CC0756CF8A8B00110329BF",
+      "tabId": "35",
+      "initiatedAtUtc": "2026-09-08T14:26:29.055Z",
+      "issuedAtUtc": "2026-09-08T14:26:35.092Z",
+      "providerUrl": "https://www.meta.ai/prompt/ca2820b9-1373-487f-91bd-32c3b4d1b36c",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2089-initial-send-receipt.json"
+    },
+    {
+      "occurrenceId": "batch-515-scene-2090-meta-initial",
+      "scene": 2090,
+      "state": "confirmed-provider-conversation-created-do-not-resend",
+      "activationCount": 1,
+      "promptSha256": "E7A98EB32F39B93CC7A283491D296BDE776447B695C77E1F48C9393060F4C78D",
+      "tabId": "36",
+      "initiatedAtUtc": "2026-09-08T14:26:38.201Z",
+      "issuedAtUtc": "2026-09-08T14:26:44.581Z",
+      "providerUrl": "https://www.meta.ai/prompt/5365c73a-2fab-41fd-a5b6-a4256833a221",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2090-initial-send-receipt.json"
+    }
+  ],
+  "uncertainRule": "If any activation begins, never repeat it without independent provider reconciliation; confirmed occurrences and terminal scenes are never reopened.",
+  "proofCarrierCommit": "c1de0edc24d4ccf3c558c30affb8318d7005dfd2",
+  "proofCarrierChecks": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-remote-preflight.json",
+      "commitBlob": "7100884288ac60b957ad734645969e47334513cd",
+      "localBlob": "7100884288ac60b957ad734645969e47334513cd",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-dispatch-guard.json",
+      "commitBlob": "36ea1a9ea7400f8174bbc3943dd4a00fdbdcd88f",
+      "localBlob": "36ea1a9ea7400f8174bbc3943dd4a00fdbdcd88f",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/provider-ledger.json",
+      "commitBlob": "2b1f78a121c8abb7b4a6c3a34ca58adc588735db",
+      "localBlob": "2b1f78a121c8abb7b4a6c3a34ca58adc588735db",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-intents.json",
+      "commitBlob": "74aff94256b1680e943d9b2888ea36d1ef0040b5",
+      "localBlob": "74aff94256b1680e943d9b2888ea36d1ef0040b5",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-515-gambia-four-lane-preparation-checkpoint.json",
+      "commitBlob": "20b7e4ebbb1dd7ee97316203bd9b48c546702fa4",
+      "localBlob": "20b7e4ebbb1dd7ee97316203bd9b48c546702fa4",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+      "commitBlob": "4c89235c3cb2bbccdf6449a3ef0d908ac37b64a9",
+      "localBlob": "4c89235c3cb2bbccdf6449a3ef0d908ac37b64a9",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "commitBlob": "a663d6f67e6e1e3ea2e47b49e5c1755609cf3ffb",
+      "localBlob": "a663d6f67e6e1e3ea2e47b49e5c1755609cf3ffb",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2087-anchors-after-typing-visible.jpg",
+      "commitBlob": "d2b39158ef538c307b49b3cee6f3b726db9d52b7",
+      "localBlob": "d2b39158ef538c307b49b3cee6f3b726db9d52b7",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2088-anchors-after-typing-visible.jpg",
+      "commitBlob": "37c7d5983e809edb726cfdc29641249b0361d43c",
+      "localBlob": "37c7d5983e809edb726cfdc29641249b0361d43c",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2089-anchors-after-typing-visible.jpg",
+      "commitBlob": "4b0d1a3de8915fe73166c9e5afee4facb3f5a1fd",
+      "localBlob": "4b0d1a3de8915fe73166c9e5afee4facb3f5a1fd",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2090-anchors-after-typing-visible.jpg",
+      "commitBlob": "80593f82d2b84b9d5ea69927546020f04da25e1f",
+      "localBlob": "80593f82d2b84b9d5ea69927546020f04da25e1f",
+      "pass": true
+    }
+  ],
+  "actionTimeChecks": [
+    {
+      "scene": 2087,
+      "tabId": "33",
+      "atUtc": "2026-09-08T14:23:55.053Z",
+      "promptExact": true,
+      "anchorsExact": true,
+      "thinking": true,
+      "account": true,
+      "sendEnabled": true
+    },
+    {
+      "scene": 2088,
+      "tabId": "34",
+      "atUtc": "2026-09-08T14:23:55.093Z",
+      "promptExact": true,
+      "anchorsExact": true,
+      "thinking": true,
+      "account": true,
+      "sendEnabled": true
+    },
+    {
+      "scene": 2089,
+      "tabId": "35",
+      "atUtc": "2026-09-08T14:23:55.128Z",
+      "promptExact": true,
+      "anchorsExact": true,
+      "thinking": true,
+      "account": true,
+      "sendEnabled": true
+    },
+    {
+      "scene": 2090,
+      "tabId": "36",
+      "atUtc": "2026-09-08T14:23:55.166Z",
+      "promptExact": true,
+      "anchorsExact": true,
+      "thinking": true,
+      "account": true,
+      "sendEnabled": true
+    }
+  ],
+  "phaseEnteredAtUtc": "2026-09-08T14:25:09.816Z"
+}

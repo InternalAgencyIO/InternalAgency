@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "scene": 1897,
+  "qaAtUtc": "2026-08-31T06:39:00.000Z",
+  "candidateCount": 4,
+  "candidatePaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1897-serbia-davolja-varos-meta-final-provider-raw.png",
+    "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1897-serbia-davolja-varos-meta-original-full-unused.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1897-serbia-davolja-varos-final-chatgpt-hemline-one-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1897-serbia-davolja-varos-original-chatgpt-hemline-one-pass.png"
+  ],
+  "orientationCheck": "pass-vertical-9:16",
+  "castCheck": "pass-exactly-four-adult-women",
+  "faceManifestCheck": "hard-fail-all-candidates",
+  "faceManifestFinding": "Visual left-to-right faces are Radiance, ECE, Alia, Ellie, while the wardrobe and provider-declared name mapping require Radiance, Ellie, Alia, ECE. Ellie and ECE are swapped against the binding manifest.",
+  "locationCheck": "pass-Đavolja-Varoš-geology-readable",
+  "cameraCheck": "pass-final-and-final-derived-variants",
+  "stylingCheck": "pass-one-pass-edits-strongly-shorten-secure-opaque-silhouettes",
+  "safetyCheck": "pass-public-safe",
+  "decision": "reject-all-first-retry-eligible",
+  "accepted": false
+}

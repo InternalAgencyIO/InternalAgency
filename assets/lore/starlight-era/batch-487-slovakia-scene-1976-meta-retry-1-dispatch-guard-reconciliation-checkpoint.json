@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "batch": 487,
+  "country": "Slovakia",
+  "scene": 1976,
+  "state": "retry-1-confirmed-once-terminal-success-raw-archived",
+  "reconciledAtUtc": "2026-09-04T17:51:18.3154447Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-scene-1976-meta-retry-1-staged-checkpoint.json",
+    "stagedCheckpointCommit": "7df53ca74fd34d7bbf626544ae7fdc1d03df34df",
+    "stagedCheckpointRemoteAndDraftPrParityVerifiedBeforeDispatch": true
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "browser": "Codex in-app Browser",
+    "supportedVisibleControlsOnly": true,
+    "retryNumber": 1,
+    "retryPromptSha256": "B522F5F9DE2B08C2205C43F0EB0523B9DF6C8B90C8543448A9A57915CFEBC54A",
+    "orderedAnchorScenes": [938, 936, 937],
+    "sendControlActivations": 1,
+    "confirmedProviderUrl": "https://www.meta.ai/prompt/38bb3e58-02cd-46ab-acc2-b7c5fb3216f5",
+    "providerHistoryTitle": "Planning Spis castle shoot",
+    "terminalOutcome": "success",
+    "terminalDomMediaLabel": "gallery/rainbow_stockings_correction.webp",
+    "visibleDownloadFilename": "rainbow_stockings_correction.jpg"
+  },
+  "dispatchGuardReconciliation": {
+    "event": "A visible Discard prompt guard appeared after the single Send activation while the home URL remained visible.",
+    "resolution": "The visible Stay control was used. Provider history then proved that the single activation had created the confirmed provider URL, so no second Send activation occurred.",
+    "duplicatePrevention": "A later supported upload attempt attached only anchor 938 to the residual home composer before provider history exposed the confirmed URL. That residual composer remains unsent and must never be submitted.",
+    "residualComposerUrl": "https://www.meta.ai/",
+    "residualComposerAttachmentCount": 1,
+    "residualComposerAttachedAnchor": 938,
+    "residualComposerMissingAnchors": [936, 937],
+    "confirmedPromptResends": 0,
+    "terminalSceneReopened": false,
+    "hiddenInputUsed": false,
+    "directHttpUsed": false,
+    "providerApiUsed": false,
+    "chromeUsed": false,
+    "providerCliUsed": false
+  },
+  "rawArchive": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1976-slovakia-spis-castle-raze-adjacent-three-quarter-meta-retry-1-occurrence-1-raw.jpg",
+    "bytes": 282218,
+    "sha256": "FE7A7F6FC5E9D73F7AF12E033C57C26588EFFCE85FAA00E639771924CD65EE0F",
+    "width": 1152,
+    "height": 2048,
+    "format": "JPEG/JFIF",
+    "visualQa": "Accepted public-safe complete composition: exactly four clearly adult women in the required broad left-to-right character order, distinct faces, full bodies and shoes, short opaque fashion, rainbow over-the-knee hosiery, readable RAZE waist bands, affectionate non-explicit group pose, and an intact readable Spis Castle background. Minor split-star placement variation is non-blocking under the relaxed acceptance policy."
+  },
+  "xHold": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "account": "@dogramaci",
+    "composerRetainedIntact": true,
+    "visiblePostControlActivations": 2,
+    "visibleExplicitFailures": 2,
+    "publicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "ACTIVE",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true,
+    "notStarlightAuthority": true
+  },
+  "mayRetryAgain": false,
+  "nextSafeAction": "Commit and remote-verify this reconciliation and raw archive, then run the mandatory single ChatGPT shortening pass for every accepted Slovakia Meta occurrence. Do not submit the residual composer and do not resend either Scene 1976 prompt."
+}

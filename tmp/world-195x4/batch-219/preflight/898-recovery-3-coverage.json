@@ -1,0 +1,47 @@
+{
+  "schema": "world-195x4-structured-runway-recovery-coverage-v1",
+  "batch": 219,
+  "sceneNumber": 898,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/898-foundation-recovery-3.txt",
+  "promptSha256": "0f67ef3ebf1986168ea9e92acf8e1fe885905339aa59599d86c60855ce838d4e",
+  "blockedCorpusSha256": "32a5994a4827e90f2d99524a2f59b413d14e6d0d4a442f310364ca9cd4524daf",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-32a5994a4827e90f2d99524a2f59b413d14e6d0d4a442f310364ca9cd4524daf.json",
+  "blocklistSubstitutionCount": 0,
+  "deletionCount": 0,
+  "preserved": {
+    "canonicalIdentities": true,
+    "countryLocationRolesAndMission": true,
+    "originalPoseTableau": true,
+    "originalTableauMeaningPreservingTranslations": [
+      {
+        "riskyPhrase": "charged three-way side glances",
+        "safeEquivalent": "clear three-way side glances",
+        "count": 1
+      }
+    ],
+    "radianceEllieAliaTriangle": true,
+    "reciprocalECEConnection": true,
+    "allTriggeredRolls": 10,
+    "allTriggeredRollIds": [
+      "Radiance.tattoo",
+      "Radiance.opaqueContrastEdge",
+      "Ellie.shoulderBodyChain",
+      "Alia.hairVariation",
+      "AI ECE.sculpturalCuff",
+      "AI ECE.opaqueContrastEdge",
+      "AI ECE.subtleTacticalWebbing",
+      "AI ECE.metallicCorsetBeltReveal",
+      "AI ECE.silkRibbonInterlacedHands",
+      "trio.trioVChainChokerFormation"
+    ],
+    "tattoosAndNavelJewel": [
+      "Radiance.tattoo"
+    ],
+    "distinctBoldWardrobes": 4,
+    "intentionalVisibleNavelCount": 2,
+    "pawsPresenceAndAction": true,
+    "noPointing": true,
+    "cleanFacesHandsFootwear": true
+  }
+}

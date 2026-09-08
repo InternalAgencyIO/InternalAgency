@@ -1,0 +1,37 @@
+{
+  "at": "2026-09-06T21:23:44.507Z",
+  "baselineCommit": "f005ccb053547e21abe38225cda74de1bca2b8f4",
+  "preexistingLedgerRowsPreserved": 226,
+  "canonicalPostCount": 227,
+  "drainPosts": 16,
+  "drainImages": 59,
+  "uniqueSceneIds": 59,
+  "uniqueSourceHashes": 59,
+  "archivalBrowserManifestRowsVerified": 550,
+  "manifestMismatches": 0,
+  "errors": [],
+  "p16Published": true,
+  "p16ConfirmedPublicTransmissions": 1,
+  "p16AggregatePostClickAttempts": 2,
+  "p16PriorUnconfirmedAttempts": 1,
+  "p16FreshlyAuthorizedRecoveryClicks": 1,
+  "pointerParity": true,
+  "legacySourceFilesVerified": 6,
+  "legacySourceBytesVerified": 3505366,
+  "legacyXEligibleNow": 0,
+  "rejectedPromptVerifier": {
+    "exactHashesPassed": 139,
+    "rawEntries": 130,
+    "noByteEntries": 8,
+    "zeroByteEntries": 1,
+    "errors": [
+      "checkpoint contractSha256 mismatch",
+      "ledger contractPolicySha256 mismatch"
+    ],
+    "historicalSealProof": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/historical-contract-seal-resolved-1920.json",
+    "lastVerifiedAt": "2026-09-06T21:25:13.246Z",
+    "resultInheritedUntilRerun": false,
+    "allExactPromptHashesPassed": true,
+    "overallVerifierPassed": false
+  }
+}

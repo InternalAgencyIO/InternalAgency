@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "batch": 499,
+  "country": "Oman",
+  "reviewedAtUtc": "2026-09-06 15:55:14 UTC",
+  "reviewMethod": "Local view_image inspection of four canonical Meta downloads and anchor 938. Preserved source bytes rehashed.",
+  "primaryRaw": [
+    {
+      "scene": 2023,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2023-meta-primary-original.jpg",
+      "bytes": 306506,
+      "sha256": "C42A23F549D954B9D95C35C1BADD2A5F7217765F795A9617DF2DF72C6BDBF2F8",
+      "width": 1152,
+      "height": 2048,
+      "mediaType": "image/jpeg"
+    },
+    {
+      "scene": 2024,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-meta-primary-original.jpg",
+      "bytes": 245955,
+      "sha256": "D21DF83F0D084DDE5BE4F7D84671AB9530CF82861F05ACFCB5AAB13B15C17B2C",
+      "width": 1152,
+      "height": 2048,
+      "mediaType": "image/jpeg"
+    },
+    {
+      "scene": 2025,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2025-meta-primary-original.jpg",
+      "bytes": 314646,
+      "sha256": "5EF07AC6D65D966E5A45092CE433368EF86A4FA8A78D691C76A98BF30A69F81D",
+      "width": 1152,
+      "height": 2048,
+      "mediaType": "image/jpeg"
+    },
+    {
+      "scene": 2026,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2026-meta-primary-original.jpg",
+      "bytes": 212561,
+      "sha256": "BCC1D43D123078C5CF01ED29A75A52D50CFB5597AAD8600B9881080CC361F549",
+      "width": 1152,
+      "height": 2048,
+      "mediaType": "image/jpeg"
+    }
+  ],
+  "scenes": [
+    {
+      "scene": 2023,
+      "occurrence": 1,
+      "technicalResult": "usable",
+      "hardFailure": false,
+      "notes": "Four distinct fictional adult women, coherent anatomy and secure opaque clothing. Side hug and varied shoe families visible. Extreme-wide environmental scale, tilt and tattoo ownership have soft deviations. No aesthetic retry.",
+      "eligibleForSingleTailoringPass": true
+    },
+    {
+      "scene": 2024,
+      "occurrence": 1,
+      "technicalResult": "hard-failure-identity-order-and-clothing-assignment",
+      "hardFailure": true,
+      "notes": "The third face in the green jacket and ivory shorts matches anchor ECE at reference position four; the fourth face in the flag dress matches anchor Ellie at reference position three. Face identity order and wardrobe ownership are swapped. Preserve source and permit first bounded identity-only retry. Other aesthetic differences are not retry grounds.",
+      "eligibleForSingleTailoringPass": false
+    },
+    {
+      "scene": 2025,
+      "occurrence": 1,
+      "technicalResult": "usable",
+      "hardFailure": false,
+      "notes": "Four distinct adults and coherent supported seated contact, opaque clothing. Alia rests at Radiance's shoulder/chest rather than her clothed lap. Pose and crop deviations are soft and do not authorize an aesthetic retry.",
+      "eligibleForSingleTailoringPass": true
+    },
+    {
+      "scene": 2026,
+      "occurrence": 1,
+      "technicalResult": "usable",
+      "hardFailure": false,
+      "notes": "Four distinct adult faces form a tight angled conversation. Alia is partially cropped at left but identifiable. Coherent anatomy and secure opaque outfits. Soft crop and motif visibility deviations, no aesthetic retry.",
+      "eligibleForSingleTailoringPass": true
+    }
+  ],
+  "publicationEligible": false,
+  "publicationHold": "One hard identity failure; mandatory single passes incomplete; secondary internal Meta raw variants were not downloaded before prior tabs disappeared."
+}

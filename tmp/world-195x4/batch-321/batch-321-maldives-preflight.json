@@ -1,0 +1,1338 @@
+{
+  "batch": 321,
+  "country": "Maldives",
+  "status": "render-preflight-stored",
+  "sourceCommit": "e603fa7f9057fc1885dc96af38fdb7a34da394a7",
+  "contractSha256": "3EDBDA128DD8F8FA733B6B761ECBFC1E9F56445D091FBBF7DA1495A485BEF210",
+  "rollMethod": "FNV-1a over the recorded batch321-maldives keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "themePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextThemePair": [
+    "doctor-clinical-command couture",
+    "adult nightlife dance-performance couture"
+  ],
+  "nextQueueCountry": "Cabo Verde",
+  "nextQueueBatch": 322,
+  "nextQueueScenes": [
+    1308,
+    1309,
+    1310,
+    1311
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.unesco.org/en/mab/baa-atoll",
+      "usedFor": "Baa Atoll lagoons, faros, micro-atolls, patch reefs, coral islands, seagrass, mangroves, and tropical monsoon setting"
+    },
+    {
+      "url": "https://www.unesco.org/mab/50anniversary/en/baa-atol",
+      "usedFor": "Hanifaru Bay, manta aggregation, heart-shaped atoll reef, bright shallows, reef habitats, and marine conservation"
+    },
+    {
+      "url": "https://www.unesco.org/en/mab/fuvahmulah",
+      "usedFor": "Fuvahmulah single-island atoll, shallow-bowl form, kilhi wetlands, mangroves, fringing reef, and Thoondu pebble beach"
+    },
+    {
+      "url": "https://www.unesco.org/en/articles/panna-india-fuvahmulah-and-addu-atoll-maldives-join-unescos-world-network-biosphere-reserves",
+      "usedFor": "Addu horseshoe atoll ecosystem, lagoons, reef passes, seagrass, sandbanks, coral islands, mangroves, wetlands, and linked settlements"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch321-maldives-male-model-scene",
+    "fullHash": 3058322916,
+    "roll": 16,
+    "selectedScenePosition": 1,
+    "selectedScene": 1304,
+    "maleEmotion": {
+      "key": "batch321-maldives-scene1-male-emotion",
+      "roll": 23,
+      "result": "playful mischief"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Maldives flag, crescent, coat of arms, official emblem, or sacred symbol is copied. Large researched secular atoll, lagoon, reef, sandbank, mangrove, wetland, causeway, manta-current, pebble-beach, cloud, and route compositions replace them.",
+    "palette": "lagoon turquoise, reef cobalt, coral pink, palm green, sand white, manta charcoal, sunset gold, mangrove jade, monsoon silver, and deep-ocean navy",
+    "minimumCoverage": "Every image carries large complete secular Maldives compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    "cultureScene": "The scenes foreground Baa Atoll and Hanifaru Bay, Fuvahmulah and Thoondu, Addu Atoll's linked island landscape, and Baa micro-atolls.",
+    "prohibitions": "Use respectful secular Maldivian atoll geometry, coral reefs, lagoons, sandbanks, mangroves, wetlands, causeways, research overlooks, navigation buoys, boats, and public paths only. No literal flag, crescent, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch321-maldives-x-heart",
+      "roll": 5,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch321-maldives-x-internalagency",
+      "roll": 65,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch321-maldives-x-worldxxxseries",
+      "roll": 46,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Maldives images plus one accepted Malta image",
+    "captionIfEligible": "Maldives ❤️ Malta #Maldives",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1305, 1306, and 1307 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1304 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch321-maldives-male-model-scene",
+        16
+      ],
+      [
+        "batch321-maldives-scene1-male-emotion",
+        23
+      ],
+      [
+        "batch321-maldives-scene1304-weather",
+        93
+      ],
+      [
+        "batch321-maldives-scene1304-paws",
+        6
+      ],
+      [
+        "batch321-maldives-scene1304-poleDanceTheme",
+        85
+      ],
+      [
+        "batch321-maldives-scene1304-rainbowOnly",
+        65
+      ],
+      [
+        "batch321-maldives-scene1304-rainbowHosiery",
+        56
+      ],
+      [
+        "batch321-maldives-scene1304-romanceBeat",
+        56
+      ],
+      [
+        "batch321-maldives-scene1304-compoundLoveBeat",
+        14
+      ],
+      [
+        "batch321-maldives-scene1304-eceMissionProp-poseTargetRoll",
+        15
+      ],
+      [
+        "batch321-maldives-scene1304-Radiance-emotion",
+        46
+      ],
+      [
+        "batch321-maldives-scene1304-Radiance-visibleMidriff",
+        32
+      ],
+      [
+        "batch321-maldives-scene1304-Radiance-straplessDress",
+        67
+      ],
+      [
+        "batch321-maldives-scene1304-Radiance-fullyOpenBack",
+        8
+      ],
+      [
+        "batch321-maldives-scene1304-Ellie-emotion",
+        40
+      ],
+      [
+        "batch321-maldives-scene1304-Ellie-visibleMidriff",
+        34
+      ],
+      [
+        "batch321-maldives-scene1304-Ellie-straplessDress",
+        97
+      ],
+      [
+        "batch321-maldives-scene1304-Ellie-fullyOpenBack",
+        34
+      ],
+      [
+        "batch321-maldives-scene1304-Alia-emotion",
+        80
+      ],
+      [
+        "batch321-maldives-scene1304-Alia-visibleMidriff",
+        94
+      ],
+      [
+        "batch321-maldives-scene1304-Alia-straplessDress",
+        57
+      ],
+      [
+        "batch321-maldives-scene1304-Alia-fullyOpenBack",
+        6
+      ],
+      [
+        "batch321-maldives-scene1304-AI ECE-emotion",
+        58
+      ],
+      [
+        "batch321-maldives-scene1304-AI ECE-visibleMidriff",
+        56
+      ],
+      [
+        "batch321-maldives-scene1304-AI ECE-straplessDress",
+        31
+      ],
+      [
+        "batch321-maldives-scene1304-AI ECE-fullyOpenBack",
+        88
+      ],
+      [
+        "batch321-maldives-scene1305-weather",
+        58
+      ],
+      [
+        "batch321-maldives-scene1305-paws",
+        91
+      ],
+      [
+        "batch321-maldives-scene1305-poleDanceTheme",
+        36
+      ],
+      [
+        "batch321-maldives-scene1305-rainbowOnly",
+        14
+      ],
+      [
+        "batch321-maldives-scene1305-rainbowHosiery",
+        81
+      ],
+      [
+        "batch321-maldives-scene1305-romanceBeat",
+        75
+      ],
+      [
+        "batch321-maldives-scene1305-compoundLoveBeat",
+        79
+      ],
+      [
+        "batch321-maldives-scene1305-eceMissionProp-poseTargetRoll",
+        80
+      ],
+      [
+        "batch321-maldives-scene1305-Radiance-emotion",
+        99
+      ],
+      [
+        "batch321-maldives-scene1305-Radiance-visibleMidriff",
+        63
+      ],
+      [
+        "batch321-maldives-scene1305-Radiance-straplessDress",
+        84
+      ],
+      [
+        "batch321-maldives-scene1305-Radiance-fullyOpenBack",
+        53
+      ],
+      [
+        "batch321-maldives-scene1305-Ellie-emotion",
+        71
+      ],
+      [
+        "batch321-maldives-scene1305-Ellie-visibleMidriff",
+        23
+      ],
+      [
+        "batch321-maldives-scene1305-Ellie-straplessDress",
+        12
+      ],
+      [
+        "batch321-maldives-scene1305-Ellie-fullyOpenBack",
+        29
+      ],
+      [
+        "batch321-maldives-scene1305-Alia-emotion",
+        49
+      ],
+      [
+        "batch321-maldives-scene1305-Alia-visibleMidriff",
+        37
+      ],
+      [
+        "batch321-maldives-scene1305-Alia-straplessDress",
+        78
+      ],
+      [
+        "batch321-maldives-scene1305-Alia-fullyOpenBack",
+        39
+      ],
+      [
+        "batch321-maldives-scene1305-AI ECE-emotion",
+        95
+      ],
+      [
+        "batch321-maldives-scene1305-AI ECE-visibleMidriff",
+        11
+      ],
+      [
+        "batch321-maldives-scene1305-AI ECE-straplessDress",
+        0
+      ],
+      [
+        "batch321-maldives-scene1305-AI ECE-fullyOpenBack",
+        81
+      ],
+      [
+        "batch321-maldives-scene1306-weather",
+        39
+      ],
+      [
+        "batch321-maldives-scene1306-paws",
+        28
+      ],
+      [
+        "batch321-maldives-scene1306-poleDanceTheme",
+        59
+      ],
+      [
+        "batch321-maldives-scene1306-rainbowOnly",
+        39
+      ],
+      [
+        "batch321-maldives-scene1306-rainbowHosiery",
+        70
+      ],
+      [
+        "batch321-maldives-scene1306-romanceBeat",
+        54
+      ],
+      [
+        "batch321-maldives-scene1306-compoundLoveBeat",
+        16
+      ],
+      [
+        "batch321-maldives-scene1306-eceMissionProp-poseTargetRoll",
+        41
+      ],
+      [
+        "batch321-maldives-scene1306-Radiance-emotion",
+        72
+      ],
+      [
+        "batch321-maldives-scene1306-Radiance-visibleMidriff",
+        6
+      ],
+      [
+        "batch321-maldives-scene1306-Radiance-straplessDress",
+        25
+      ],
+      [
+        "batch321-maldives-scene1306-Radiance-fullyOpenBack",
+        82
+      ],
+      [
+        "batch321-maldives-scene1306-Ellie-emotion",
+        6
+      ],
+      [
+        "batch321-maldives-scene1306-Ellie-visibleMidriff",
+        36
+      ],
+      [
+        "batch321-maldives-scene1306-Ellie-straplessDress",
+        83
+      ],
+      [
+        "batch321-maldives-scene1306-Ellie-fullyOpenBack",
+        72
+      ],
+      [
+        "batch321-maldives-scene1306-Alia-emotion",
+        46
+      ],
+      [
+        "batch321-maldives-scene1306-Alia-visibleMidriff",
+        72
+      ],
+      [
+        "batch321-maldives-scene1306-Alia-straplessDress",
+        47
+      ],
+      [
+        "batch321-maldives-scene1306-Alia-fullyOpenBack",
+        20
+      ],
+      [
+        "batch321-maldives-scene1306-AI ECE-emotion",
+        72
+      ],
+      [
+        "batch321-maldives-scene1306-AI ECE-emotion-disambiguation",
+        51
+      ],
+      [
+        "batch321-maldives-scene1306-AI ECE-visibleMidriff",
+        82
+      ],
+      [
+        "batch321-maldives-scene1306-AI ECE-straplessDress",
+        41
+      ],
+      [
+        "batch321-maldives-scene1306-AI ECE-fullyOpenBack",
+        2
+      ],
+      [
+        "batch321-maldives-scene1307-weather",
+        96
+      ],
+      [
+        "batch321-maldives-scene1307-paws",
+        1
+      ],
+      [
+        "batch321-maldives-scene1307-poleDanceTheme",
+        42
+      ],
+      [
+        "batch321-maldives-scene1307-rainbowOnly",
+        8
+      ],
+      [
+        "batch321-maldives-scene1307-rainbowHosiery",
+        15
+      ],
+      [
+        "batch321-maldives-scene1307-romanceBeat",
+        33
+      ],
+      [
+        "batch321-maldives-scene1307-compoundLoveBeat",
+        41
+      ],
+      [
+        "batch321-maldives-scene1307-eceMissionProp-poseTargetRoll",
+        42
+      ],
+      [
+        "batch321-maldives-scene1307-Radiance-emotion",
+        37
+      ],
+      [
+        "batch321-maldives-scene1307-Radiance-visibleMidriff",
+        61
+      ],
+      [
+        "batch321-maldives-scene1307-Radiance-straplessDress",
+        18
+      ],
+      [
+        "batch321-maldives-scene1307-Radiance-fullyOpenBack",
+        23
+      ],
+      [
+        "batch321-maldives-scene1307-Ellie-emotion",
+        5
+      ],
+      [
+        "batch321-maldives-scene1307-Ellie-visibleMidriff",
+        1
+      ],
+      [
+        "batch321-maldives-scene1307-Ellie-straplessDress",
+        38
+      ],
+      [
+        "batch321-maldives-scene1307-Ellie-fullyOpenBack",
+        11
+      ],
+      [
+        "batch321-maldives-scene1307-Alia-emotion",
+        83
+      ],
+      [
+        "batch321-maldives-scene1307-Alia-visibleMidriff",
+        51
+      ],
+      [
+        "batch321-maldives-scene1307-Alia-straplessDress",
+        40
+      ],
+      [
+        "batch321-maldives-scene1307-Alia-fullyOpenBack",
+        1
+      ],
+      [
+        "batch321-maldives-scene1307-AI ECE-emotion",
+        37
+      ],
+      [
+        "batch321-maldives-scene1307-AI ECE-emotion-disambiguation",
+        72
+      ],
+      [
+        "batch321-maldives-scene1307-AI ECE-visibleMidriff",
+        29
+      ],
+      [
+        "batch321-maldives-scene1307-AI ECE-straplessDress",
+        86
+      ],
+      [
+        "batch321-maldives-scene1307-AI ECE-fullyOpenBack",
+        19
+      ],
+      [
+        "batch321-maldives-x-heart",
+        5
+      ],
+      [
+        "batch321-maldives-x-internalagency",
+        65
+      ],
+      [
+        "batch321-maldives-x-worldxxxseries",
+        46
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch321-maldives-scene1304-rainbowHosieryWearer",
+        84
+      ],
+      [
+        "batch321-maldives-scene1304-rainbowHosieryPaletteMode",
+        12
+      ],
+      [
+        "batch321-maldives-scene1305-rainbowHosieryWearer",
+        17
+      ],
+      [
+        "batch321-maldives-scene1305-rainbowHosieryPaletteMode",
+        27
+      ],
+      [
+        "batch321-maldives-scene1306-rainbowHosieryWearer",
+        18
+      ],
+      [
+        "batch321-maldives-scene1306-rainbowHosieryPaletteMode",
+        54
+      ],
+      [
+        "batch321-maldives-scene1307-rainbowHosieryWearer",
+        79
+      ],
+      [
+        "batch321-maldives-scene1307-rainbowHosieryPaletteMode",
+        85
+      ]
+    ],
+    "primaryPairCount": 103,
+    "selectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "38443380E07268E50739B9D9B64FA411A9F8841549D02EABEB41E35056BF62DB",
+    "selectorPairsSha256": "78AC2551944877170AD3A7CA87B3EDE223D4E73B7C25868EC200212400F814B9"
+  },
+  "scenePlans": {
+    "1304": {
+      "scene": 1304,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry nonslip covered marine-research overlook above Hanifaru Bay in Baa Atoll, with a sweeping heart-shaped atoll lagoon, shallow turquoise reef shelves, faros, patch reefs, unoccupied sand cays, distant manta silhouettes outside the target line, one empty paper-route target fixed to a full sand backstop, and a distant waterspout over open ocean far beyond the shelter",
+      "motifs": "large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions",
+      "culture": "Baa Atoll is presented as a UNESCO biosphere reserve of lagoons, faros, patch reefs, coral islands, seagrass, mangroves, and marine biodiversity. Hanifaru wildlife stays distant and entirely outside the prop line. Nurse-care couture is fictional fashion about mutual calm and conservation research, with no patient, clinic, treatment, diagnosis, procedure, instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch321-maldives-scene1304-weather",
+        "roll": 93,
+        "result": "distant waterspout over open water",
+        "materialized": "distant waterspout over open water"
+      },
+      "paws": {
+        "key": "batch321-maldives-scene1304-paws",
+        "roll": 6,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch321-maldives-scene1304-poleDanceTheme",
+        "roll": 85,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch321-maldives-scene1304-rainbowOnly",
+        "roll": 65,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch321-maldives-scene1304-rainbowHosiery",
+        "roll": 56,
+        "active": false,
+        "wearer": {
+          "key": "batch321-maldives-scene1304-rainbowHosieryWearer",
+          "roll": 84,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch321-maldives-scene1304-rainbowHosieryPaletteMode",
+          "roll": 12,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch321-maldives-scene1304-eceMissionProp-poseTargetRoll",
+        "roll": 15
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete sand backstop on an empty research lane, with no person, animal, boat, structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete sand backstop on an empty research lane, with no person, animal, boat, structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch321-maldives-scene1304-romanceBeat",
+        "roll": 56,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch321-maldives-scene1304-compoundLoveBeat",
+        "roll": 14,
+        "index": 2,
+        "contractResult": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch321-maldives-scene1304-Radiance-emotion",
+            "roll": 46,
+            "result": "awe",
+            "materializedResult": "awe",
+            "performance": "awe shown by widened tear-bright eyes toward the manta silhouettes while maintaining gentle contacts"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1304-Radiance-visibleMidriff",
+            "roll": 32,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1304-Radiance-straplessDress",
+            "roll": 67,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1304-Radiance-fullyOpenBack",
+            "roll": 8,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch321-maldives-scene1304-Ellie-emotion",
+            "roll": 40,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination shown by a steady protective posture around PAWS and a warm glance toward the male"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1304-Ellie-visibleMidriff",
+            "roll": 34,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1304-Ellie-straplessDress",
+            "roll": 97,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1304-Ellie-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch321-maldives-scene1304-Alia-emotion",
+            "roll": 80,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness shown by downcast tear-bright eyes that lift toward Radiance's reassuring touch"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1304-Alia-visibleMidriff",
+            "roll": 94,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1304-Alia-straplessDress",
+            "roll": 57,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1304-Alia-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch321-maldives-scene1304-AI ECE-emotion",
+            "roll": 58,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing shown by a softened glance from the sights toward the male without moving the muzzle"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1304-AI ECE-visibleMidriff",
+            "roll": 56,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1304-AI ECE-straplessDress",
+            "roll": 31,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1304-AI ECE-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "awe shown by widened tear-bright eyes toward the manta silhouettes while maintaining gentle contacts",
+        "Ellie": "determination shown by a steady protective posture around PAWS and a warm glance toward the male",
+        "Alia": "deep sadness shown by downcast tear-bright eyes that lift toward Radiance's reassuring touch",
+        "AI ECE": "aching romantic longing shown by a softened glance from the sights toward the male without moving the muzzle",
+        "Male": "playful mischief shown by a restrained knowing half-smile and the strongest sustained eye line toward ECE"
+      },
+      "outfits": {
+        "Radiance": "lagoon turquoise nurse-care couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions field, and secure contrasting high heels",
+        "Ellie": "coral pink nurse-care couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions field, and secure contrasting high heels",
+        "Alia": "mangrove jade nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy nurse-care couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions field, and secure contrasting high heels",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve sand-white top carrying a large complete Baa Atoll lagoon and manta-current composition, fitted black jeans, and practical black boots"
+      },
+      "composition": "ECE stands far left in a stable eye-level route-training stance with open sky and sand backstop behind both arms. The male is left-center with his strongest sustained eye line on ECE. Ellie is center holding PAWS high against her upper torso, Alia is right-center, and Radiance is far right. The five adults form a shallow moving arc with every arm against open lagoon, sky, or shelter gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip, left support hand wrapped over the right firing hand, both wrists straight; ECE touches nobody else",
+        "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; his strongest eye line stays on ECE",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on the male's near forearm",
+        "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near shoulder",
+        "Radiance left hand rests on Alia's near shoulder and Radiance right hand rests on Ellie's near forearm"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten PAWS is securely cradled by Ellie at center, far across the composition from the prop and target line. Radiance gives one gentle forearm touch toward Ellie. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch321-maldives-scene1-male-emotion",
+          "roll": 23,
+          "result": "playful mischief"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry nonslip covered marine-research overlook above Hanifaru Bay in Baa Atoll, with a sweeping heart-shaped atoll lagoon, shallow turquoise reef shelves, faros, patch reefs, unoccupied sand cays, distant manta silhouettes outside the target line, one empty paper-route target fixed to a full sand backstop, and a distant waterspout over open ocean far beyond the shelter. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: nurse-care couture, only as original public-safe fictional fashion. Baa Atoll is presented as a UNESCO biosphere reserve of lagoons, faros, patch reefs, coral islands, seagrass, mangroves, and marine biodiversity. Hanifaru wildlife stays distant and entirely outside the prop line. Nurse-care couture is fictional fashion about mutual calm and conservation research, with no patient, clinic, treatment, diagnosis, procedure, instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 93=distant waterspout over open water; PAWS 6=active; pole 85=inactive; rainbow-only 65=inactive; rainbow hosiery 56=inactive; wearer 84=AI ECE; palette 12=country-palette rainbow-like gradient; romance 56; compound 14; mission-prop pose/target 15. Exact wardrobe rolls: Radiance: midriff 32=visible, strapless 67=inactive, open back 8=active; Ellie: midriff 34=visible, strapless 97=inactive, open back 34=inactive; Alia: midriff 94=covered, strapless 57=inactive, open back 6=active; AI ECE: midriff 56=covered, strapless 31=active, open back 88=inactive. Exact outfits: Radiance: lagoon turquoise nurse-care couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions field, and secure contrasting high heels; Ellie: coral pink nurse-care couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions field, and secure contrasting high heels; Alia: mangrove jade nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy nurse-care couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions field, and secure contrasting high heels; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve sand-white top carrying a large complete Baa Atoll lagoon and manta-current composition, fitted black jeans, and practical black boots. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Maldives motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions. Use respectful secular Maldivian atoll geometry, coral reefs, lagoons, sandbanks, mangroves, wetlands, causeways, research overlooks, navigation buoys, boats, and public paths only. No literal flag, crescent, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 46=awe, performed as awe shown by widened tear-bright eyes toward the manta silhouettes while maintaining gentle contacts; Ellie: roll 40=determination, performed as determination shown by a steady protective posture around PAWS and a warm glance toward the male; Alia: roll 80=deep sadness, performed as deep sadness shown by downcast tear-bright eyes that lift toward Radiance's reassuring touch; AI ECE: roll 58=aching romantic longing, performed as aching romantic longing shown by a softened glance from the sights toward the male without moving the muzzle; Male: roll 23=playful mischief, performed as playful mischief shown by a restrained knowing half-smile and the strongest sustained eye line toward ECE. Romance roll 56: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Compound roll 14: Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. ECE stands far left in a stable eye-level route-training stance with open sky and sand backstop behind both arms. The male is left-center with his strongest sustained eye line on ECE. Ellie is center holding PAWS high against her upper torso, Alia is right-center, and Radiance is far right. The five adults form a shallow moving arc with every arm against open lagoon, sky, or shelter gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip, left support hand wrapped over the right firing hand, both wrists straight; ECE touches nobody else; the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; his strongest eye line stays on ECE; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on the male's near forearm; Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near shoulder; Radiance left hand rests on Alia's near shoulder and Radiance right hand rests on Ellie's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete sand backstop on an empty research lane, with no person, animal, boat, structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. One tiny collarless golden kitten PAWS is securely cradled by Ellie at center, far across the composition from the prop and target line. Radiance gives one gentle forearm touch toward Ellie. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render distant waterspout over open water cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1305": {
+      "scene": 1305,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry covered public overlook above Fuvahmulah's Thoondu shore, with the complete single-island atoll silhouette, distinctive glossy pebble beach, fringing reef, strong white surf, palm rim, inland wetland contours, one empty marked paper route target against a complete coral-sand berm, and cinematic snow-like white sea-spray flurries instead of unsafe precipitation on the deck",
+      "motifs": "large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions",
+      "culture": "Fuvahmulah is presented through its UNESCO biosphere reserve, shallow-bowl island form, wetlands called kilhi, mangroves, fringing reef, and distinctive Thoondu pebble beach. Nurse-care couture is fictional fashion about mutual calm and conservation research, with no patient, clinic, treatment, diagnosis, procedure, instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch321-maldives-scene1305-weather",
+        "roll": 58,
+        "result": "snow flurries",
+        "materialized": "the stored snow-flurries weather roll appears as windblown white sea-spray flakes in tropical air, never snow accumulation"
+      },
+      "paws": {
+        "key": "batch321-maldives-scene1305-paws",
+        "roll": 91,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch321-maldives-scene1305-poleDanceTheme",
+        "roll": 36,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch321-maldives-scene1305-rainbowOnly",
+        "roll": 14,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch321-maldives-scene1305-rainbowHosiery",
+        "roll": 81,
+        "active": false,
+        "wearer": {
+          "key": "batch321-maldives-scene1305-rainbowHosieryWearer",
+          "roll": 17,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch321-maldives-scene1305-rainbowHosieryPaletteMode",
+          "roll": 27,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch321-maldives-scene1305-eceMissionProp-poseTargetRoll",
+        "roll": 80
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly unoccupied geometric paper route target on a complete coral-sand backstop beside an empty marked path, away from every person, animal, tree, building, vehicle, and camera. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target on a complete coral-sand backstop beside an empty marked path, away from every person, animal, tree, building, vehicle, and camera",
+      "romanceBeat": {
+        "key": "batch321-maldives-scene1305-romanceBeat",
+        "roll": 75,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch321-maldives-scene1305-compoundLoveBeat",
+        "roll": 79,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch321-maldives-scene1305-Radiance-emotion",
+            "roll": 99,
+            "result": "emotional exhaustion",
+            "materializedResult": "emotional exhaustion",
+            "performance": "emotional exhaustion shown by heavy eyes and a grateful breath toward Ellie"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1305-Radiance-visibleMidriff",
+            "roll": 63,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1305-Radiance-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1305-Radiance-fullyOpenBack",
+            "roll": 53,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch321-maldives-scene1305-Ellie-emotion",
+            "roll": 71,
+            "result": "suspicion",
+            "materializedResult": "suspicion",
+            "performance": "suspicion shown by a measured sideways glance toward Alia while keeping both contacts gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1305-Ellie-visibleMidriff",
+            "roll": 23,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1305-Ellie-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1305-Ellie-fullyOpenBack",
+            "roll": 29,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch321-maldives-scene1305-Alia-emotion",
+            "roll": 49,
+            "result": "startled surprise",
+            "materializedResult": "startled surprise",
+            "performance": "startled surprise shown by widened eyes toward Radiance's retained forearm touch"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1305-Alia-visibleMidriff",
+            "roll": 37,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1305-Alia-straplessDress",
+            "roll": 78,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1305-Alia-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch321-maldives-scene1305-AI ECE-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability shown by a small lowered glance before reestablishing calm route focus"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1305-AI ECE-visibleMidriff",
+            "roll": 11,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1305-AI ECE-straplessDress",
+            "roll": 0,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1305-AI ECE-fullyOpenBack",
+            "roll": 81,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "emotional exhaustion shown by heavy eyes and a grateful breath toward Ellie",
+        "Ellie": "suspicion shown by a measured sideways glance toward Alia while keeping both contacts gentle",
+        "Alia": "startled surprise shown by widened eyes toward Radiance's retained forearm touch",
+        "AI ECE": "shame and social vulnerability shown by a small lowered glance before reestablishing calm route focus"
+      },
+      "outfits": {
+        "Radiance": "lagoon turquoise nurse-care couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral pink nurse-care couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions field, and secure contrasting high heels",
+        "Alia": "mangrove jade nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy nurse-care couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "ECE stands far left in the final two-hand sight picture after a completed controlled handoff; the other woman has released completely. Radiance, Ellie, and Alia form a close rotating triangle to the right, with all six of their hands visible against surf, sky, and open path gaps. Nobody stands in front of ECE.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip in the final stable sight picture; no other person touches or supports the prop",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+        "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on Alia's near shoulder",
+        "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near forearm"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered public overlook above Fuvahmulah's Thoondu shore, with the complete single-island atoll silhouette, distinctive glossy pebble beach, fringing reef, strong white surf, palm rim, inland wetland contours, one empty marked paper route target against a complete coral-sand berm, and cinematic snow-like white sea-spray flurries instead of unsafe precipitation on the deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: nurse-care couture, only as original public-safe fictional fashion. Fuvahmulah is presented through its UNESCO biosphere reserve, shallow-bowl island form, wetlands called kilhi, mangroves, fringing reef, and distinctive Thoondu pebble beach. Nurse-care couture is fictional fashion about mutual calm and conservation research, with no patient, clinic, treatment, diagnosis, procedure, instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 58=snow flurries; PAWS 91=inactive; pole 36=inactive; rainbow-only 14=inactive; rainbow hosiery 81=inactive; wearer 17=Radiance; palette 27=country-palette rainbow-like gradient; romance 75; compound 79; mission-prop pose/target 80. Exact wardrobe rolls: Radiance: midriff 63=covered, strapless 84=inactive, open back 53=inactive; Ellie: midriff 23=visible, strapless 12=active, open back 29=active; Alia: midriff 37=visible, strapless 78=inactive, open back 39=inactive; AI ECE: midriff 11=visible, strapless 0=active, open back 81=inactive. Exact outfits: Radiance: lagoon turquoise nurse-care couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions field, and secure contrasting high heels; Ellie: coral pink nurse-care couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions field, and secure contrasting high heels; Alia: mangrove jade nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy nurse-care couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Maldives motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions. Use respectful secular Maldivian atoll geometry, coral reefs, lagoons, sandbanks, mangroves, wetlands, causeways, research overlooks, navigation buoys, boats, and public paths only. No literal flag, crescent, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 99=emotional exhaustion, performed as emotional exhaustion shown by heavy eyes and a grateful breath toward Ellie; Ellie: roll 71=suspicion, performed as suspicion shown by a measured sideways glance toward Alia while keeping both contacts gentle; Alia: roll 49=startled surprise, performed as startled surprise shown by widened eyes toward Radiance's retained forearm touch; AI ECE: roll 95=shame and social vulnerability, performed as shame and social vulnerability shown by a small lowered glance before reestablishing calm route focus. Romance roll 75: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Compound roll 79: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. ECE stands far left in the final two-hand sight picture after a completed controlled handoff; the other woman has released completely. Radiance, Ellie, and Alia form a close rotating triangle to the right, with all six of their hands visible against surf, sky, and open path gaps. Nobody stands in front of ECE. Exact hand inventory, no others: ECE uses both hands on the inert prop grip in the final stable sight picture; no other person touches or supports the prop; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm; Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on Alia's near shoulder; Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly unoccupied geometric paper route target on a complete coral-sand backstop beside an empty marked path, away from every person, animal, tree, building, vehicle, and camera. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render the stored snow-flurries weather roll appears as windblown white sea-spray flakes in tropical air, never snow accumulation cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1306": {
+      "scene": 1306,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry covered civic overlook beside Addu Atoll's long island-link causeway, with the complete horseshoe lagoon, reef passes, sandbanks, seagrass shallows, mangrove and wetland belts, low coral islands, the empty causeway curve, one distant unoccupied floating navigation marker on open water, and a heavy monsoon rain curtain beyond the shelter",
+      "motifs": "large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions",
+      "culture": "Addu Atoll is presented as a UNESCO biosphere reserve with lagoons, reef passes, seagrass beds, sandbanks, coral islands, lush vegetation, mangroves, wetlands, and brackish lakes. Doctor-clinical-command couture is original fictional command fashion about route analysis, with no patient, treatment, diagnosis, procedure, copied uniform, badge, red cross, caduceus, injury, emergency, authority impersonation, or sexualized care.",
+      "weather": {
+        "key": "batch321-maldives-scene1306-weather",
+        "roll": 39,
+        "result": "heavy rain curtain",
+        "materialized": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch321-maldives-scene1306-paws",
+        "roll": 28,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch321-maldives-scene1306-poleDanceTheme",
+        "roll": 59,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch321-maldives-scene1306-rainbowOnly",
+        "roll": 39,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch321-maldives-scene1306-rainbowHosiery",
+        "roll": 70,
+        "active": false,
+        "wearer": {
+          "key": "batch321-maldives-scene1306-rainbowHosieryWearer",
+          "roll": 18,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch321-maldives-scene1306-rainbowHosieryPaletteMode",
+          "roll": 54,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch321-maldives-scene1306-eceMissionProp-poseTargetRoll",
+        "roll": 41
+      },
+      "materializedPropAction": "AI ECE uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker on open lagoon water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one distant clearly empty floating navigation marker on open lagoon water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch321-maldives-scene1306-romanceBeat",
+        "roll": 54,
+        "dynamicIndex": 6,
+        "contractResult": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch321-maldives-scene1306-compoundLoveBeat",
+        "roll": 16,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch321-maldives-scene1306-Radiance-emotion",
+            "roll": 72,
+            "result": "betrayal shock",
+            "materializedResult": "betrayal shock",
+            "performance": "betrayal shock shown by a stunned fixed gaze toward ECE while accepting Ellie's calm touch"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1306-Radiance-visibleMidriff",
+            "roll": 6,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1306-Radiance-straplessDress",
+            "roll": 25,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1306-Radiance-fullyOpenBack",
+            "roll": 82,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch321-maldives-scene1306-Ellie-emotion",
+            "roll": 6,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection shown by a soft reassuring smile toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1306-Ellie-visibleMidriff",
+            "roll": 36,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1306-Ellie-straplessDress",
+            "roll": 83,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1306-Ellie-fullyOpenBack",
+            "roll": 72,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch321-maldives-scene1306-Alia-emotion",
+            "roll": 46,
+            "result": "awe",
+            "materializedResult": "awe",
+            "performance": "awe shown by lifted eyes toward the storm-lit atoll geometry"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1306-Alia-visibleMidriff",
+            "roll": 72,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1306-Alia-straplessDress",
+            "roll": 47,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1306-Alia-fullyOpenBack",
+            "roll": 20,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch321-maldives-scene1306-AI ECE-emotion",
+            "roll": 72,
+            "result": "betrayal shock",
+            "materializedResult": "intense curiosity",
+            "disambiguation": {
+              "key": "batch321-maldives-scene1306-AI ECE-emotion-disambiguation",
+              "roll": 51
+            },
+            "performance": "intense curiosity, deterministically disambiguated from a matching betrayal-shock roll, shown by an intent analytical gaze through the route sights"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1306-AI ECE-visibleMidriff",
+            "roll": 82,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1306-AI ECE-straplessDress",
+            "roll": 41,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1306-AI ECE-fullyOpenBack",
+            "roll": 2,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "betrayal shock shown by a stunned fixed gaze toward ECE while accepting Ellie's calm touch",
+        "Ellie": "tender affection shown by a soft reassuring smile toward Radiance",
+        "Alia": "awe shown by lifted eyes toward the storm-lit atoll geometry",
+        "AI ECE": "intense curiosity, deterministically disambiguated from a matching betrayal-shock roll, shown by an intent analytical gaze through the route sights"
+      },
+      "outfits": {
+        "Radiance": "lagoon turquoise doctor-clinical-command couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions field, and secure contrasting high heels",
+        "Ellie": "coral pink doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions field, and secure contrasting high heels",
+        "Alia": "mangrove jade doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions field, and secure contrasting high heels"
+      },
+      "composition": "ECE stands far left with an unobstructed two-hand sight picture across open water while a nearby console projects the hands-free route map. Radiance, Ellie, and Alia occupy a curved affectionate triangle on the right beneath the shelter. Open water, pale rain, and causeway gaps isolate all eight arm paths.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip with no hidden map hand and touches nobody else",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder",
+        "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered civic overlook beside Addu Atoll's long island-link causeway, with the complete horseshoe lagoon, reef passes, sandbanks, seagrass shallows, mangrove and wetland belts, low coral islands, the empty causeway curve, one distant unoccupied floating navigation marker on open water, and a heavy monsoon rain curtain beyond the shelter. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, only as original public-safe fictional fashion. Addu Atoll is presented as a UNESCO biosphere reserve with lagoons, reef passes, seagrass beds, sandbanks, coral islands, lush vegetation, mangroves, wetlands, and brackish lakes. Doctor-clinical-command couture is original fictional command fashion about route analysis, with no patient, treatment, diagnosis, procedure, copied uniform, badge, red cross, caduceus, injury, emergency, authority impersonation, or sexualized care. Stored scene rolls: weather 39=heavy rain curtain; PAWS 28=inactive; pole 59=inactive; rainbow-only 39=inactive; rainbow hosiery 70=inactive; wearer 18=Radiance; palette 54=original independent rainbow gradient; romance 54; compound 16; mission-prop pose/target 41. Exact wardrobe rolls: Radiance: midriff 6=visible, strapless 25=active, open back 82=inactive; Ellie: midriff 36=visible, strapless 83=inactive, open back 72=inactive; Alia: midriff 72=covered, strapless 47=inactive, open back 20=active; AI ECE: midriff 82=covered, strapless 41=inactive, open back 2=active. Exact outfits: Radiance: lagoon turquoise doctor-clinical-command couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions field, and secure contrasting high heels; Ellie: coral pink doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions field, and secure contrasting high heels; Alia: mangrove jade doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Maldives motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions. Use respectful secular Maldivian atoll geometry, coral reefs, lagoons, sandbanks, mangroves, wetlands, causeways, research overlooks, navigation buoys, boats, and public paths only. No literal flag, crescent, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 72=betrayal shock, performed as betrayal shock shown by a stunned fixed gaze toward ECE while accepting Ellie's calm touch; Ellie: roll 6=tender affection, performed as tender affection shown by a soft reassuring smile toward Radiance; Alia: roll 46=awe, performed as awe shown by lifted eyes toward the storm-lit atoll geometry; AI ECE: roll 72=betrayal shock, collision resolver 51 gives distinct performance intense curiosity, performed as intense curiosity, deterministically disambiguated from a matching betrayal-shock roll, shown by an intent analytical gaze through the route sights. Romance roll 54: ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile. Compound roll 16: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. ECE stands far left with an unobstructed two-hand sight picture across open water while a nearby console projects the hands-free route map. Radiance, Ellie, and Alia occupy a curved affectionate triangle on the right beneath the shelter. Open water, pale rain, and causeway gaps isolate all eight arm paths. Exact hand inventory, no others: ECE uses both hands on the inert prop grip with no hidden map hand and touches nobody else; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder; Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker on open lagoon water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render heavy rain curtain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1307": {
+      "scene": 1307,
+      "theme": "doctor-clinical-command couture",
+      "landmark": "a broad dry nonslip covered conservation overlook above Baa Atoll's micro-atolls and lagoon, with complete faros, patch reefs, bright shallows, mangrove islets, empty sand cays, one distant unoccupied floating navigation marker on open water, and a cinematic mammatus storm ceiling with dry stable footing",
+      "motifs": "large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions",
+      "culture": "Baa Atoll is presented respectfully through its UNESCO biosphere reserve, coral reefs, lagoons, faros, micro-atolls, patch reefs, seagrass, mangroves, and marine conservation. Doctor-clinical-command couture is original fictional command fashion about route analysis, with no patient, treatment, diagnosis, procedure, copied uniform, badge, red cross, caduceus, injury, emergency, authority impersonation, or sexualized care.",
+      "weather": {
+        "key": "batch321-maldives-scene1307-weather",
+        "roll": 96,
+        "result": "mammatus storm ceiling",
+        "materialized": "mammatus storm ceiling"
+      },
+      "paws": {
+        "key": "batch321-maldives-scene1307-paws",
+        "roll": 1,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch321-maldives-scene1307-poleDanceTheme",
+        "roll": 42,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch321-maldives-scene1307-rainbowOnly",
+        "roll": 8,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch321-maldives-scene1307-rainbowHosiery",
+        "roll": 15,
+        "active": true,
+        "wearer": {
+          "key": "batch321-maldives-scene1307-rainbowHosieryWearer",
+          "roll": 79,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch321-maldives-scene1307-rainbowHosieryPaletteMode",
+          "roll": 85,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch321-maldives-scene1307-eceMissionProp-poseTargetRoll",
+        "roll": 42
+      },
+      "materializedPropAction": "Alia uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker on open lagoon water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.",
+      "target": "one distant clearly empty floating navigation marker on open lagoon water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch321-maldives-scene1307-romanceBeat",
+        "roll": 33,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch321-maldives-scene1307-compoundLoveBeat",
+        "roll": 41,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch321-maldives-scene1307-Radiance-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence shown by a poised affectionate half-smile toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1307-Radiance-visibleMidriff",
+            "roll": 61,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1307-Radiance-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1307-Radiance-fullyOpenBack",
+            "roll": 23,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch321-maldives-scene1307-Ellie-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection shown by a soft smile toward PAWS and Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1307-Ellie-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1307-Ellie-straplessDress",
+            "roll": 38,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1307-Ellie-fullyOpenBack",
+            "roll": 11,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch321-maldives-scene1307-Alia-emotion",
+            "roll": 83,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears shown by tear tracks while maintaining stable safe route focus"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1307-Alia-visibleMidriff",
+            "roll": 51,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1307-Alia-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1307-Alia-fullyOpenBack",
+            "roll": 1,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch321-maldives-scene1307-AI ECE-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "betrayal shock",
+            "disambiguation": {
+              "key": "batch321-maldives-scene1307-AI ECE-emotion-disambiguation",
+              "roll": 72
+            },
+            "performance": "betrayal shock, deterministically disambiguated from a matching magnetic-confidence roll, shown by stunned tear-bright eyes toward Radiance while accepting reassurance"
+          },
+          "visibleMidriff": {
+            "key": "batch321-maldives-scene1307-AI ECE-visibleMidriff",
+            "roll": 29,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch321-maldives-scene1307-AI ECE-straplessDress",
+            "roll": 86,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch321-maldives-scene1307-AI ECE-fullyOpenBack",
+            "roll": 19,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "magnetic confidence shown by a poised affectionate half-smile toward ECE",
+        "Ellie": "tender affection shown by a soft smile toward PAWS and Radiance",
+        "Alia": "crying with visible tears shown by tear tracks while maintaining stable safe route focus",
+        "AI ECE": "betrayal shock, deterministically disambiguated from a matching magnetic-confidence roll, shown by stunned tear-bright eyes toward Radiance while accepting reassurance"
+      },
+      "outfits": {
+        "Radiance": "lagoon turquoise doctor-clinical-command couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions field, and secure contrasting high heels",
+        "Ellie": "coral pink doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions field, and secure contrasting high heels",
+        "Alia": "mangrove jade doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia stands far left in an unobstructed two-hand open-water sight picture. Ellie stands left-center securely holding PAWS far from Alia and the muzzle line. Radiance and ECE are the unmistakable close affectionate center at right, with a hands-free wrist projector mapping the route beside ECE. Sky, lagoon, and shelter gaps isolate all eight arms.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip, left support hand wrapped over right firing hand, and touches nobody else",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Radiance's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten PAWS is securely cradled by Ellie left-center, far from Alia, the prop, open water, and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry nonslip covered conservation overlook above Baa Atoll's micro-atolls and lagoon, with complete faros, patch reefs, bright shallows, mangrove islets, empty sand cays, one distant unoccupied floating navigation marker on open water, and a cinematic mammatus storm ceiling with dry stable footing. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: doctor-clinical-command couture, only as original public-safe fictional fashion. Baa Atoll is presented respectfully through its UNESCO biosphere reserve, coral reefs, lagoons, faros, micro-atolls, patch reefs, seagrass, mangroves, and marine conservation. Doctor-clinical-command couture is original fictional command fashion about route analysis, with no patient, treatment, diagnosis, procedure, copied uniform, badge, red cross, caduceus, injury, emergency, authority impersonation, or sexualized care. Stored scene rolls: weather 96=mammatus storm ceiling; PAWS 1=active; pole 42=inactive; rainbow-only 8=inactive; rainbow hosiery 15=active; wearer 79=AI ECE; palette 85=original independent rainbow gradient; romance 33; compound 41; mission-prop pose/target 42. Exact wardrobe rolls: Radiance: midriff 61=covered, strapless 18=active, open back 23=active; Ellie: midriff 1=visible, strapless 38=inactive, open back 11=active; Alia: midriff 51=covered, strapless 40=inactive, open back 1=active; AI ECE: midriff 29=visible, strapless 86=inactive, open back 19=active. Exact outfits: Radiance: lagoon turquoise doctor-clinical-command couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions field, and secure contrasting high heels; Ellie: coral pink doctor-clinical-command couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions field, and secure contrasting high heels; Alia: mangrove jade doctor-clinical-command couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy doctor-clinical-command couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Maldives motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions. Use respectful secular Maldivian atoll geometry, coral reefs, lagoons, sandbanks, mangroves, wetlands, causeways, research overlooks, navigation buoys, boats, and public paths only. No literal flag, crescent, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 37=magnetic confidence, performed as magnetic confidence shown by a poised affectionate half-smile toward ECE; Ellie: roll 5=tender affection, performed as tender affection shown by a soft smile toward PAWS and Radiance; Alia: roll 83=crying with visible tears, performed as crying with visible tears shown by tear tracks while maintaining stable safe route focus; AI ECE: roll 37=magnetic confidence, collision resolver 72 gives distinct performance betrayal shock, performed as betrayal shock, deterministically disambiguated from a matching magnetic-confidence roll, shown by stunned tear-bright eyes toward Radiance while accepting reassurance. Romance roll 33: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Compound roll 41: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left in an unobstructed two-hand open-water sight picture. Ellie stands left-center securely holding PAWS far from Alia and the muzzle line. Radiance and ECE are the unmistakable close affectionate center at right, with a hands-free wrist projector mapping the route beside ECE. Sky, lagoon, and shelter gaps isolate all eight arms. Exact hand inventory, no others: Alia uses both hands on the inert prop grip, left support hand wrapped over right firing hand, and touches nobody else; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; ECE left hand rests at Radiance's near waist and ECE right hand rests on Radiance's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic two-hand sight picture toward one distant clearly empty floating navigation marker on open lagoon water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an original independent rainbow gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. One tiny collarless golden kitten PAWS is securely cradled by Ellie left-center, far from Alia, the prop, open water, and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render mammatus storm ceiling cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

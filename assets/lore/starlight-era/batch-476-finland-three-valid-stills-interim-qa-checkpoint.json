@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "batch": 476,
+  "country": "Finland",
+  "state": "three-selected-stills-qa-complete-scene-1934-and-x-held",
+  "checkedAtUtc": "2026-08-31T23:11:41.1350804Z",
+  "selectedScenes": [
+    {
+      "scene": 1931,
+      "source": "meta-raw-after-chatgpt-output-moderation-block",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/1931-finland-helsinki-oodi-raze-tight-hemline-close-meta-occurrence-1-raw.jpg",
+      "sha256": "B0C533E71531486A30F19873468D664377992664472FBAF9C089DB552225F90F",
+      "visualQa": "PASS: exactly four clearly adult women, distinct ordered cast, opaque public-safe short fashion, four colored knee-high treatments, restrained heels, readable R-A-Z-E tags, valid anatomy and clean image bytes. Framing and choreography drift are nonblocking.",
+      "accessibilitySidecarPresent": true,
+      "priorXTransmission": false
+    },
+    {
+      "scene": 1932,
+      "source": "meta-raw-after-chatgpt-output-moderation-block",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/1932-finland-turku-aura-raze-tight-full-body-statement-boots-meta-occurrence-1-raw.jpg",
+      "sha256": "AD2EAFE44FD1DE23BB031BCAB2AD9D0CCA66BACBC504CFDB84FA4A81A3537BC5",
+      "visualQa": "PASS: exactly four clearly adult women, distinct ordered cast, opaque public-safe short fashion, all four sculptural statement boots, readable R-A-Z-E tags, valid anatomy and clean image bytes. Pose and garment-detail drift are nonblocking.",
+      "accessibilitySidecarPresent": true,
+      "priorXTransmission": false
+    },
+    {
+      "scene": 1933,
+      "source": "chatgpt-one-strong-shortening-pass",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/1933-finland-tampere-finlayson-raze-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "4E6DBE48C30451E2B22695137CB101066ED2A6A5EC4458AB02F5A724B4F7BF49",
+      "visualQa": "PASS: exactly four clearly adult women, distinct ordered cast, visibly shortened opaque public-safe looks, star hardware, readable R-A-Z-E bands, four colorful knee-high footwear treatments, valid anatomy and clean image bytes. The existing kiss remains public-safe and was not intensified.",
+      "accessibilitySidecarPresent": true,
+      "priorXTransmission": false
+    }
+  ],
+  "duplicateGate": {
+    "scanScope": "Every PNG, JPEG and WebP payload recursively under assets/lore/starlight-era",
+    "targetHashes": [
+      "B0C533E71531486A30F19873468D664377992664472FBAF9C089DB552225F90F",
+      "AD2EAFE44FD1DE23BB031BCAB2AD9D0CCA66BACBC504CFDB84FA4A81A3537BC5",
+      "BA53FC72C1BB9BDCEE773BBC67B8294751D68DDA79BE6203A3343E87DC229CEA",
+      "4E6DBE48C30451E2B22695137CB101066ED2A6A5EC4458AB02F5A724B4F7BF49"
+    ],
+    "matchesOutsideEachOwnCanonicalPath": 0,
+    "passed": true
+  },
+  "onePassBoundary": {
+    "requestsIssued": 3,
+    "cleanOutputs": 1,
+    "outputModerationBlocks": 2,
+    "retriesIssued": 0,
+    "additionalPassesPermitted": 0
+  },
+  "heldScene": {
+    "scene": 1934,
+    "validRawAvailable": false,
+    "remainingMetaRetries": 1,
+    "holdReason": "Meta explicitly reports temporary media-credit exhaustion until 6:08 AM.",
+    "safeAction": "Inspect existing tab 24 at or after visible replenishment and consume the final Meta retry only after the credit gate clears and all exact live and remote gates pass."
+  },
+  "x": {
+    "composerTabId": "6",
+    "blank": true,
+    "postDisabled": true,
+    "postClicks": 0,
+    "pairPostHeldUntilFullFinlandClosure": true
+  },
+  "nextSafeAction": "Remote-verify this interim QA and every archived artifact. Keep the existing four Meta lanes and blank X composer visible. Do not post or consume the final Meta retry before the credit gate clears."
+}

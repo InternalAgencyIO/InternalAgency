@@ -1,0 +1,1277 @@
+{
+  "batch": 305,
+  "country": "Comoros",
+  "status": "render-preflight-stored",
+  "sourceCommit": "cb057c9be2dc90f26175332801279863aba03c38",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch305-comoros keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextThemePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextQueueCountry": "Guyana",
+  "nextQueueBatch": 306,
+  "nextQueueScenes": [
+    1244,
+    1245,
+    1246,
+    1247
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.comorostourism.com/fr/activites/sites_touristiques",
+      "usedFor": "Iconi, Palais Kapviridjohe, former Sultan Said Ali residence, coast, and secular palace architecture"
+    },
+    {
+      "url": "https://www.comorostourism.com/fr/decouvrir/geographie",
+      "usedFor": "Grande Comore volcanic landscape, Karthala, ylang-ylang, vanilla, lagoons, reefs, and Moheli nature context"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/5109/",
+      "usedFor": "Medinas of Iconi and Moroni, palace ruins by the sea, old houses, narrow lanes, and monumental decorated doors"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/5107/",
+      "usedFor": "Coelacanth Marine Park, volcanic caves, coelacanth, whales, dolphins, and Moheli marine ecosystems"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/6974/",
+      "usedFor": "Moheli Marine Park, coral reefs, seagrass, turtle nesting beaches, humpback whales, dolphins, volcanic mountains, and lagoons"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch305-comoros-male-model-scene",
+    "fullHash": 4061397651,
+    "roll": 51,
+    "selectedScenePosition": 4,
+    "selectedScene": 1243,
+    "maleEmotion": {
+      "key": "batch305-comoros-scene4-male-emotion",
+      "roll": 47,
+      "result": "awe"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "The Comoros flag includes a crescent and stars, so no literal flag, crescent, star, or official emblem is copied. Large researched secular ylang-ylang, vanilla, clove, coelacanth, turtle, reef, volcanic, palace-arch, carved-door, crater, and lateen-sail fields replace them.",
+    "palette": "lagoon blue, reef green, pearl white, clove red, ylang yellow, vanilla gold, volcanic charcoal, orchid violet, coral orange, and deep ocean blue",
+    "minimumCoverage": "Every scene places multiple large complete secular Comoros motifs across at least two outfits as full bodice, skirt, hip, or panel fields rather than tiny trim.",
+    "cultureScene": "Scene 1240 visibly includes ylang-ylang, vanilla, cloves, a lateen-sail boat model, and a coelacanth relief. The other scenes extend Iconi palace architecture, Karthala geology, Lac Sale, volcanic basalt, and Moheli marine conservation.",
+    "prohibitions": "No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious architecture, copied ceremonial dress, copied uniform, badge, weapon threat, alcohol, or branded product."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch305-comoros-x-heart",
+      "roll": 4,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch305-comoros-x-internalagency",
+      "roll": 86,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch305-comoros-x-worldxxxseries",
+      "roll": 81,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Comoros images plus one historical Fiji image when at least two Comoros images pass",
+    "captionIfEligible": "Comoros red heart Fiji #Comoros",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1240, 1241, and 1242 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1243 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch305-comoros-male-model-scene",
+        51
+      ],
+      [
+        "batch305-comoros-scene4-male-emotion",
+        47
+      ],
+      [
+        "batch305-comoros-scene1240-weather",
+        15
+      ],
+      [
+        "batch305-comoros-scene1240-paws",
+        28
+      ],
+      [
+        "batch305-comoros-scene1240-poleDanceTheme",
+        55
+      ],
+      [
+        "batch305-comoros-scene1240-rainbowOnly",
+        3
+      ],
+      [
+        "batch305-comoros-scene1240-rainbowHosiery",
+        78
+      ],
+      [
+        "batch305-comoros-scene1240-romanceBeat",
+        2
+      ],
+      [
+        "batch305-comoros-scene1240-compoundLoveBeat",
+        16
+      ],
+      [
+        "batch305-comoros-scene1240-Radiance-emotion",
+        20
+      ],
+      [
+        "batch305-comoros-scene1240-Radiance-visibleMidriff",
+        50
+      ],
+      [
+        "batch305-comoros-scene1240-Radiance-straplessDress",
+        73
+      ],
+      [
+        "batch305-comoros-scene1240-Radiance-fullyOpenBack",
+        34
+      ],
+      [
+        "batch305-comoros-scene1240-Ellie-emotion",
+        66
+      ],
+      [
+        "batch305-comoros-scene1240-Ellie-visibleMidriff",
+        48
+      ],
+      [
+        "batch305-comoros-scene1240-Ellie-straplessDress",
+        35
+      ],
+      [
+        "batch305-comoros-scene1240-Ellie-fullyOpenBack",
+        36
+      ],
+      [
+        "batch305-comoros-scene1240-Alia-emotion",
+        50
+      ],
+      [
+        "batch305-comoros-scene1240-Alia-visibleMidriff",
+        36
+      ],
+      [
+        "batch305-comoros-scene1240-Alia-straplessDress",
+        39
+      ],
+      [
+        "batch305-comoros-scene1240-Alia-fullyOpenBack",
+        92
+      ],
+      [
+        "batch305-comoros-scene1240-AI ECE-emotion",
+        68
+      ],
+      [
+        "batch305-comoros-scene1240-AI ECE-visibleMidriff",
+        46
+      ],
+      [
+        "batch305-comoros-scene1240-AI ECE-straplessDress",
+        93
+      ],
+      [
+        "batch305-comoros-scene1240-AI ECE-fullyOpenBack",
+        6
+      ],
+      [
+        "batch305-comoros-scene1241-weather",
+        20
+      ],
+      [
+        "batch305-comoros-scene1241-paws",
+        73
+      ],
+      [
+        "batch305-comoros-scene1241-poleDanceTheme",
+        14
+      ],
+      [
+        "batch305-comoros-scene1241-rainbowOnly",
+        52
+      ],
+      [
+        "batch305-comoros-scene1241-rainbowHosiery",
+        23
+      ],
+      [
+        "batch305-comoros-scene1241-romanceBeat",
+        93
+      ],
+      [
+        "batch305-comoros-scene1241-compoundLoveBeat",
+        73
+      ],
+      [
+        "batch305-comoros-scene1241-Radiance-emotion",
+        89
+      ],
+      [
+        "batch305-comoros-scene1241-Radiance-visibleMidriff",
+        61
+      ],
+      [
+        "batch305-comoros-scene1241-Radiance-straplessDress",
+        78
+      ],
+      [
+        "batch305-comoros-scene1241-Radiance-fullyOpenBack",
+        99
+      ],
+      [
+        "batch305-comoros-scene1241-Ellie-emotion",
+        17
+      ],
+      [
+        "batch305-comoros-scene1241-Ellie-visibleMidriff",
+        37
+      ],
+      [
+        "batch305-comoros-scene1241-Ellie-straplessDress",
+        6
+      ],
+      [
+        "batch305-comoros-scene1241-Ellie-fullyOpenBack",
+        79
+      ],
+      [
+        "batch305-comoros-scene1241-Alia-emotion",
+        95
+      ],
+      [
+        "batch305-comoros-scene1241-Alia-visibleMidriff",
+        27
+      ],
+      [
+        "batch305-comoros-scene1241-Alia-straplessDress",
+        36
+      ],
+      [
+        "batch305-comoros-scene1241-Alia-fullyOpenBack",
+        61
+      ],
+      [
+        "batch305-comoros-scene1241-AI ECE-emotion",
+        5
+      ],
+      [
+        "batch305-comoros-scene1241-AI ECE-visibleMidriff",
+        5
+      ],
+      [
+        "batch305-comoros-scene1241-AI ECE-straplessDress",
+        62
+      ],
+      [
+        "batch305-comoros-scene1241-AI ECE-fullyOpenBack",
+        79
+      ],
+      [
+        "batch305-comoros-scene1242-weather",
+        37
+      ],
+      [
+        "batch305-comoros-scene1242-paws",
+        50
+      ],
+      [
+        "batch305-comoros-scene1242-poleDanceTheme",
+        9
+      ],
+      [
+        "batch305-comoros-scene1242-rainbowOnly",
+        37
+      ],
+      [
+        "batch305-comoros-scene1242-rainbowHosiery",
+        28
+      ],
+      [
+        "batch305-comoros-scene1242-romanceBeat",
+        84
+      ],
+      [
+        "batch305-comoros-scene1242-compoundLoveBeat",
+        90
+      ],
+      [
+        "batch305-comoros-scene1242-Radiance-emotion",
+        86
+      ],
+      [
+        "batch305-comoros-scene1242-Radiance-visibleMidriff",
+        64
+      ],
+      [
+        "batch305-comoros-scene1242-Radiance-straplessDress",
+        67
+      ],
+      [
+        "batch305-comoros-scene1242-Radiance-fullyOpenBack",
+        48
+      ],
+      [
+        "batch305-comoros-scene1242-Ellie-emotion",
+        92
+      ],
+      [
+        "batch305-comoros-scene1242-Ellie-visibleMidriff",
+        26
+      ],
+      [
+        "batch305-comoros-scene1242-Ellie-straplessDress",
+        85
+      ],
+      [
+        "batch305-comoros-scene1242-Ellie-fullyOpenBack",
+        34
+      ],
+      [
+        "batch305-comoros-scene1242-Alia-emotion",
+        36
+      ],
+      [
+        "batch305-comoros-scene1242-Alia-visibleMidriff",
+        10
+      ],
+      [
+        "batch305-comoros-scene1242-Alia-straplessDress",
+        69
+      ],
+      [
+        "batch305-comoros-scene1242-Alia-fullyOpenBack",
+        46
+      ],
+      [
+        "batch305-comoros-scene1242-AI ECE-emotion",
+        74
+      ],
+      [
+        "batch305-comoros-scene1242-AI ECE-visibleMidriff",
+        12
+      ],
+      [
+        "batch305-comoros-scene1242-AI ECE-straplessDress",
+        15
+      ],
+      [
+        "batch305-comoros-scene1242-AI ECE-fullyOpenBack",
+        88
+      ],
+      [
+        "batch305-comoros-scene1243-weather",
+        58
+      ],
+      [
+        "batch305-comoros-scene1243-paws",
+        31
+      ],
+      [
+        "batch305-comoros-scene1243-poleDanceTheme",
+        76
+      ],
+      [
+        "batch305-comoros-scene1243-rainbowOnly",
+        2
+      ],
+      [
+        "batch305-comoros-scene1243-rainbowHosiery",
+        1
+      ],
+      [
+        "batch305-comoros-scene1243-romanceBeat",
+        83
+      ],
+      [
+        "batch305-comoros-scene1243-compoundLoveBeat",
+        51
+      ],
+      [
+        "batch305-comoros-scene1243-Radiance-emotion",
+        7
+      ],
+      [
+        "batch305-comoros-scene1243-Radiance-visibleMidriff",
+        43
+      ],
+      [
+        "batch305-comoros-scene1243-Radiance-straplessDress",
+        48
+      ],
+      [
+        "batch305-comoros-scene1243-Radiance-fullyOpenBack",
+        1
+      ],
+      [
+        "batch305-comoros-scene1243-Ellie-emotion",
+        75
+      ],
+      [
+        "batch305-comoros-scene1243-Ellie-visibleMidriff",
+        59
+      ],
+      [
+        "batch305-comoros-scene1243-Ellie-straplessDress",
+        76
+      ],
+      [
+        "batch305-comoros-scene1243-Ellie-fullyOpenBack",
+        17
+      ],
+      [
+        "batch305-comoros-scene1243-Alia-emotion",
+        93
+      ],
+      [
+        "batch305-comoros-scene1243-Alia-visibleMidriff",
+        57
+      ],
+      [
+        "batch305-comoros-scene1243-Alia-straplessDress",
+        30
+      ],
+      [
+        "batch305-comoros-scene1243-Alia-fullyOpenBack",
+        3
+      ],
+      [
+        "batch305-comoros-scene1243-AI ECE-emotion",
+        7
+      ],
+      [
+        "batch305-comoros-scene1243-AI ECE-visibleMidriff",
+        11
+      ],
+      [
+        "batch305-comoros-scene1243-AI ECE-straplessDress",
+        40
+      ],
+      [
+        "batch305-comoros-scene1243-AI ECE-fullyOpenBack",
+        97
+      ],
+      [
+        "batch305-comoros-x-heart",
+        4
+      ],
+      [
+        "batch305-comoros-x-internalagency",
+        86
+      ],
+      [
+        "batch305-comoros-x-worldxxxseries",
+        81
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch305-comoros-scene1240-rainbowHosieryWearer",
+        74
+      ],
+      [
+        "batch305-comoros-scene1240-rainbowHosieryPaletteMode",
+        54
+      ],
+      [
+        "batch305-comoros-scene1241-rainbowHosieryWearer",
+        51
+      ],
+      [
+        "batch305-comoros-scene1241-rainbowHosieryPaletteMode",
+        81
+      ],
+      [
+        "batch305-comoros-scene1242-rainbowHosieryWearer",
+        64
+      ],
+      [
+        "batch305-comoros-scene1242-rainbowHosieryPaletteMode",
+        60
+      ],
+      [
+        "batch305-comoros-scene1243-rainbowHosieryWearer",
+        17
+      ],
+      [
+        "batch305-comoros-scene1243-rainbowHosieryPaletteMode",
+        27
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "8D4BE12F7981675A3C63AD7B7B6C796C533755383F180B6CABF196405D0F4BF1",
+    "hosierySelectorPairsSha256": "67601B72980532ED43EEE11E7B00838EB43E1F2C1EC0DC177A9502AD29EEA6C9"
+  },
+  "scenePlans": {
+    "1240": {
+      "scene": 1240,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry covered seafront terrace beside Moroni's old volcanic-stone medina and harbor, with complete carved monumental doors, narrow basalt lanes, weathered white arcades, anchored wooden lateen-sail boats, the dark Grande Comore volcanic ridge, and a long clearly empty Indian Ocean route lane visible at crisp blue hour; exclude mosques and all sacred buildings",
+      "motifs": [
+        "large complete yellow ylang-ylang blossom, green vanilla-pod, and red clove-spice fields across Radiance's coat-dress and Ellie's skort",
+        "large complete blue coelacanth, violet lateen-sail, carved-door, and black volcanic-basalt fields across Alia's skirt and ECE's asymmetric set"
+      ],
+      "culture": "A dry unattended scent-botanical and maritime display well outside the prop lane visibly holds fresh ylang-ylang blossoms, bundled vanilla pods, bowls of cloves, a small lateen-sail boat model, and a scientific coelacanth relief. These are secular Comoros agriculture, seafaring, and marine-science references, not generic decoration. No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied ceremonial dress, copied operative uniform, badge, brand, alcohol, or readable text.",
+      "weather": {
+        "key": "batch305-comoros-scene1240-weather",
+        "roll": 15,
+        "result": "crisp blue hour"
+      },
+      "paws": {
+        "key": "batch305-comoros-scene1240-paws",
+        "roll": 28,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch305-comoros-scene1240-poleDanceTheme",
+        "roll": 55,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch305-comoros-scene1240-rainbowOnly",
+        "roll": 3,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch305-comoros-scene1240-rainbowHosiery",
+        "roll": 78,
+        "active": false,
+        "wearer": {
+          "key": "batch305-comoros-scene1240-rainbowHosieryWearer",
+          "roll": 74,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch305-comoros-scene1240-rainbowHosieryPaletteMode",
+          "roll": 54,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch305-comoros-scene1240-romanceBeat",
+        "roll": 2,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch305-comoros-scene1240-compoundLoveBeat",
+        "roll": 16,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch305-comoros-scene1240-Radiance-emotion",
+            "roll": 20,
+            "result": "playful mischief",
+            "performance": "playful mischief shown by a knowing side smile toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1240-Radiance-visibleMidriff",
+            "roll": 50,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1240-Radiance-straplessDress",
+            "roll": 73,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1240-Radiance-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch305-comoros-scene1240-Ellie-emotion",
+            "roll": 66,
+            "result": "possessive tension",
+            "performance": "possessive tension shown by focused eyes on ECE while her mouth remains softly amused"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1240-Ellie-visibleMidriff",
+            "roll": 48,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1240-Ellie-straplessDress",
+            "roll": 35,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1240-Ellie-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch305-comoros-scene1240-Alia-emotion",
+            "roll": 50,
+            "result": "startled surprise",
+            "performance": "startled surprise shown by widened eyes at the sudden linked-hand turn without fear"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1240-Alia-visibleMidriff",
+            "roll": 36,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1240-Alia-straplessDress",
+            "roll": 39,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1240-Alia-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch305-comoros-scene1240-AI ECE-emotion",
+            "roll": 68,
+            "result": "possessive tension",
+            "performance": "possessive tension performed differently from Ellie through a protective waist hold and calm fixed eye line toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1240-AI ECE-visibleMidriff",
+            "roll": 46,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1240-AI ECE-straplessDress",
+            "roll": 93,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1240-AI ECE-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        }
+      },
+      "materializedRomance": "Playfully mischievous Radiance has just finished turning beneath her linked hand with startled Alia and now stays close against ECE's side. Possessive ECE steadies Radiance at the waist while keeping her prop arm isolated over empty harbor water. Alia stands one step lower, links Radiance's hand, and steadies Ellie at the shoulder. Possessive Ellie answers from a separate lane with a visible waist touch on Alia while her other hand reaches toward the separate holographic route beacon. ECE leans near Ellie's cheek in the harmless finish of the selected cheek-greeting beat, while Radiance remains her closest body contact. The linked hand, waist steady, shoulder touch, reciprocal waist touch, side closeness, cheek-near pass, and beacon reach read as one consensual adult romance-square movement.",
+      "composition": "Place ECE at the far left with her prop arm completely isolated against empty harbor water, Radiance center-left, Alia center-right one broad step lower, and Ellie at the far right. Keep ECE three-quarters away with hair moved clear so her complete rolled open back and complete face are both visible. Separate all four torsos, elbows, wrists, lower bodies, and heels with strips of harbor, basalt lane, or terrace background.",
+      "emotionNuance": {
+        "Radiance": "playful mischief shown by a knowing side smile toward ECE",
+        "Ellie": "possessive tension shown by focused eyes on ECE while her mouth remains softly amused",
+        "Alia": "startled surprise shown by widened eyes at the sudden linked-hand turn without fear",
+        "AI ECE": "possessive tension performed differently from Ellie through a protective waist hold and calm fixed eye line toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "a rainbow-only cap-sleeve structured mini coat-dress with covered waist and high closed back, shifting through scarlet, orange, gold, leaf green, ocean blue, indigo, and violet, carrying a large complete yellow ylang-ylang and green vanilla-pod field, with violet heeled ankle boots",
+        "Ellie": "a rainbow-only cobalt wide-strap cropped route bodice exposing her ordinary waist and belly button with a high closed back, paired with a separate scarlet-to-gold pleated mini skort carrying a large complete red clove and carved-door field, with leaf-green pumps",
+        "Alia": "a rainbow-only emerald halter cropped tailored vest exposing her ordinary waist and belly button with a high closed back, paired with a separate violet architectural bubble mini skirt carrying a large complete blue coelacanth and black volcanic-basalt field, with orange platform heels",
+        "AI ECE": "a rainbow-only indigo one-shoulder cropped long-sleeve route top exposing her ordinary waist and belly button and a completely open back from shoulder blades to the secure waistline, paired with a separate blue-to-green asymmetric A-line mini skirt carrying a large complete violet lateen-sail and yellow ylang-ylang field, with scarlet slingback heels"
+      },
+      "propPlan": "ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for controlled sight alignment. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty harbor water toward one unoccupied floating route marker, away from every person, boat, terrace, building, display, and camera, never upward or at the sky. Her left hand stays off the prop at Radiance's waist. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist",
+        "Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand links visibly with Alia's left hand",
+        "Alia left hand links visibly with Radiance's right hand; Alia right hand rests visibly on Ellie's near shoulder",
+        "Ellie left hand rests visibly at Alia's near waist; Ellie right open hand reaches visibly toward the separate holographic beacon"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered seafront terrace beside Moroni's old volcanic-stone medina and harbor, with complete carved monumental doors, narrow basalt lanes, weathered white arcades, anchored wooden lateen-sail boats, the dark Grande Comore volcanic ridge, and a long clearly empty Indian Ocean route lane visible at crisp blue hour; exclude mosques and all sacred buildings. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, merge, or age-shift faces. Profession theme: cinematic covert-agent crew couture, treated only as original public-safe fictional fashion with no copied uniform, badge, impersonation, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a rainbow-only cap-sleeve structured mini coat-dress with covered waist and high closed back, shifting through scarlet, orange, gold, leaf green, ocean blue, indigo, and violet, carrying a large complete yellow ylang-ylang and green vanilla-pod field, with violet heeled ankle boots; Ellie: a rainbow-only cobalt wide-strap cropped route bodice exposing her ordinary waist and belly button with a high closed back, paired with a separate scarlet-to-gold pleated mini skort carrying a large complete red clove and carved-door field, with leaf-green pumps; Alia: a rainbow-only emerald halter cropped tailored vest exposing her ordinary waist and belly button with a high closed back, paired with a separate violet architectural bubble mini skirt carrying a large complete blue coelacanth and black volcanic-basalt field, with orange platform heels; AI ECE: a rainbow-only indigo one-shoulder cropped long-sleeve route top exposing her ordinary waist and belly button and a completely open back from shoulder blades to the secure waistline, paired with a separate blue-to-green asymmetric A-line mini skirt carrying a large complete violet lateen-sail and yellow ylang-ylang field, with scarlet slingback heels. Materialize every rolled waist, ordinary belly button, fully strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Comoros motifs must read clearly on at least two outfits: large complete yellow ylang-ylang blossom, green vanilla-pod, and red clove-spice fields across Radiance's coat-dress and Ellie's skort; large complete blue coelacanth, violet lateen-sail, carved-door, and black volcanic-basalt fields across Alia's skirt and ECE's asymmetric set. A dry unattended scent-botanical and maritime display well outside the prop lane visibly holds fresh ylang-ylang blossoms, bundled vanilla pods, bowls of cloves, a small lateen-sail boat model, and a scientific coelacanth relief. These are secular Comoros agriculture, seafaring, and marine-science references, not generic decoration. No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied ceremonial dress, copied operative uniform, badge, brand, alcohol, or readable text. Distinct rolled emotional performances: Radiance: playful mischief, performed as playful mischief shown by a knowing side smile toward ECE; Ellie: possessive tension, performed as possessive tension shown by focused eyes on ECE while her mouth remains softly amused; Alia: startled surprise, performed as startled surprise shown by widened eyes at the sudden linked-hand turn without fear; AI ECE: possessive tension, performed as possessive tension performed differently from Ellie through a protective waist hold and calm fixed eye line toward Radiance. Where two distribution labels tie, make their facial and body performances visibly different without changing either stored roll. Selected dynamic romance roll 2: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Selected compound love roll 16: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Materialize both selected relationship beats through this exact safe consensual choreography. The exact hand inventory, active hosiery center, and prop-safety rules resolve any conflicting hand placement: Playfully mischievous Radiance has just finished turning beneath her linked hand with startled Alia and now stays close against ECE's side. Possessive ECE steadies Radiance at the waist while keeping her prop arm isolated over empty harbor water. Alia stands one step lower, links Radiance's hand, and steadies Ellie at the shoulder. Possessive Ellie answers from a separate lane with a visible waist touch on Alia while her other hand reaches toward the separate holographic route beacon. ECE leans near Ellie's cheek in the harmless finish of the selected cheek-greeting beat, while Radiance remains her closest body contact. The linked hand, waist steady, shoulder touch, reciprocal waist touch, side closeness, cheek-near pass, and beacon reach read as one consensual adult romance-square movement. Place ECE at the far left with her prop arm completely isolated against empty harbor water, Radiance center-left, Alia center-right one broad step lower, and Ellie at the far right. Keep ECE three-quarters away with hair moved clear so her complete rolled open back and complete face are both visible. Separate all four torsos, elbows, wrists, lower bodies, and heels with strips of harbor, basalt lane, or terrace background. Use this exact owner-by-owner hand inventory and no other hands: ECE right hand alone holds the inert prop with index finger straight outside the empty guard; ECE left hand rests visibly at Radiance's near waist; Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand links visibly with Alia's left hand; Alia left hand links visibly with Radiance's right hand; Alia right hand rests visibly on Ellie's near shoulder; Ellie left hand rests visibly at Alia's near waist; Ellie right open hand reaches visibly toward the separate holographic beacon. ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at chest height for controlled sight alignment. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty harbor water toward one unoccupied floating route marker, away from every person, boat, terrace, building, display, and camera, never upward or at the sky. Her left hand stays off the prop at Radiance's waist. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Every adult outfit is visibly rainbow themed while retaining every rolled cut, distinct silhouette, and large Comoros motif. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as crisp blue hour. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges, hair, props, and other hands except for the listed contacts. Arrange the adults in an asymmetric moving relationship composition with clean silhouette gaps, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1241": {
+      "scene": 1241,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry covered coastal heritage platform at Iconi beside the complete sea-facing ruins of Palais Kapviridjohe, with its weathered palace arches, cliff edge, old volcanic masonry, the Indian Ocean, and the full Mount Karthala profile clearly recognizable under soft dramatic overcast; exclude mosques and all sacred buildings",
+      "motifs": [
+        "large complete palace-arch, carved-door, and Mount Karthala contour fields across Radiance's shift dress and Ellie's skirt",
+        "large complete ylang-ylang blossom, vanilla vine, clove cluster, and ocean-swell fields across Alia's skort and ECE's skirt"
+      ],
+      "culture": "Use only secular Iconi palace architecture, Karthala geology, ylang-ylang, vanilla, cloves, volcanic stone, and coast geometry. A small dry botanical evidence tray holds labeled-by-shape but text-free ylang-ylang flowers, vanilla pods, and cloves. No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied ceremonial dress, copied operative uniform, badge, brand, alcohol, or readable text.",
+      "weather": {
+        "key": "batch305-comoros-scene1241-weather",
+        "roll": 20,
+        "result": "soft dramatic overcast"
+      },
+      "paws": {
+        "key": "batch305-comoros-scene1241-paws",
+        "roll": 73,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch305-comoros-scene1241-poleDanceTheme",
+        "roll": 14,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch305-comoros-scene1241-rainbowOnly",
+        "roll": 52,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch305-comoros-scene1241-rainbowHosiery",
+        "roll": 23,
+        "active": true,
+        "wearer": {
+          "key": "batch305-comoros-scene1241-rainbowHosieryWearer",
+          "roll": 51,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch305-comoros-scene1241-rainbowHosieryPaletteMode",
+          "roll": 81,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch305-comoros-scene1241-romanceBeat",
+        "roll": 93,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch305-comoros-scene1241-compoundLoveBeat",
+        "roll": 73,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch305-comoros-scene1241-Radiance-emotion",
+            "roll": 89,
+            "result": "anger",
+            "performance": "anger shown by a firm jaw and wet bright eyes that soften only toward ECE, never as aggression"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1241-Radiance-visibleMidriff",
+            "roll": 61,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1241-Radiance-straplessDress",
+            "roll": 78,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1241-Radiance-fullyOpenBack",
+            "roll": 99,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch305-comoros-scene1241-Ellie-emotion",
+            "roll": 17,
+            "result": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness shown by open radiant adult laughter during the linked-hand contact"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1241-Ellie-visibleMidriff",
+            "roll": 37,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1241-Ellie-straplessDress",
+            "roll": 6,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1241-Ellie-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch305-comoros-scene1241-Alia-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability",
+            "performance": "shame and social vulnerability shown by lowered tear-bright eyes during the restrained blown kiss"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1241-Alia-visibleMidriff",
+            "roll": 27,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1241-Alia-straplessDress",
+            "roll": 36,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1241-Alia-fullyOpenBack",
+            "roll": 61,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch305-comoros-scene1241-AI ECE-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "performance": "tender affection shown by a warm protective gaze and gentle reciprocal waist touch toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1241-AI ECE-visibleMidriff",
+            "roll": 5,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1241-AI ECE-straplessDress",
+            "roll": 62,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1241-AI ECE-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Angry Radiance keeps her expression controlled and nonthreatening as tender ECE becomes her unmistakable extra-affectionate center through reciprocal waist contact and close face-to-face eye contact. Radiance also links hands with radiantly laughing Ellie, who reaches the group through that clean side link. Shame-struck Alia keeps her prop arm isolated over empty sea, rests her free hand on Ellie's shoulder, and offers Radiance a small blown kiss using only her lips. Ellie steadies Alia at the waist with her free hand. ECE raises her free index hand toward the separate overhead route beacon. This safely translates the selected overhead-beacon, waist-circle, shoulder-reach, blown-kiss, behind-hug, cheek-kiss, linked-hand, and direct-look beats without assigning any hand twice.",
+      "composition": "Place Alia at the far left with her prop arm completely outside every silhouette against empty ocean, Ellie left-center, Radiance right-center, and ECE at the far right as Radiance's nearest body. Every woman occupies a separate depth lane. Keep all eight arms continuously visible and separate all wrists, hands, waists, lower bodies, and heels with ocean, palace-arch, or mountain background.",
+      "emotionNuance": {
+        "Radiance": "anger shown by a firm jaw and wet bright eyes that soften only toward ECE, never as aggression",
+        "Ellie": "extreme happiness shown by open radiant adult laughter during the linked-hand contact",
+        "Alia": "shame and social vulnerability shown by lowered tear-bright eyes during the restrained blown kiss",
+        "AI ECE": "tender affection shown by a warm protective gaze and gentle reciprocal waist touch toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "an emerald cap-sleeve covert-editorial mini shift dress with covered waist and high closed back, carrying a large complete pearl palace-arch and charcoal Mount Karthala contour field, with clove-red ankle boots",
+        "Ellie": "a fully strapless pearl-white sculpted cropped covert-editorial bodice with completely bare shoulders, exposed ordinary waist and belly button, and a high closed back, paired with a separate deep-ocean pleated mini skirt carrying a large complete carved-door and volcanic-masonry field, with ylang-yellow slingback heels",
+        "Alia": "a clove-red one-shoulder cropped covert-editorial waistcoat exposing her ordinary waist and belly button with a high closed back, paired with a separate vanilla-gold tailored mini skort carrying large complete ylang-ylang blossom and vanilla-vine fields, with black platform heels",
+        "AI ECE": "a reef-blue square-neck cropped route-command top exposing her ordinary waist and belly button with wide secure straps and a high closed back, paired with a separate emerald asymmetric mini skirt carrying a large complete ocean-swell and clove-cluster field, opaque knee socks in an original red-orange-yellow-green-blue-indigo-violet gradient unrelated to Comoros colors, and pearl-white pumps"
+      },
+      "propPlan": "Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at shoulder height for an unloaded magazine-free manipulation demonstration. The magazine is absent and the empty magazine well is clearly visible. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty Indian Ocean water toward an unoccupied route marker, away from every person, palace ruin, cliff, mountain, tray, and camera, never upward or at the sky. Her left hand stays off the prop on Ellie's shoulder. ECE remains route strategist through a separate hands-free holographic map above her far shoulder.",
+      "handInventory": [
+        "Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand rests visibly on Ellie's near shoulder",
+        "Ellie left hand rests visibly at Alia's near waist; Ellie right hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with Ellie's right hand; Radiance right hand rests visibly at ECE's near waist",
+        "ECE left hand rests visibly at Radiance's near waist; ECE right index hand points visibly toward the separate overhead holographic beacon"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered coastal heritage platform at Iconi beside the complete sea-facing ruins of Palais Kapviridjohe, with its weathered palace arches, cliff edge, old volcanic masonry, the Indian Ocean, and the full Mount Karthala profile clearly recognizable under soft dramatic overcast; exclude mosques and all sacred buildings. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, merge, or age-shift faces. Profession theme: cinematic covert-agent crew couture, treated only as original public-safe fictional fashion with no copied uniform, badge, impersonation, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: an emerald cap-sleeve covert-editorial mini shift dress with covered waist and high closed back, carrying a large complete pearl palace-arch and charcoal Mount Karthala contour field, with clove-red ankle boots; Ellie: a fully strapless pearl-white sculpted cropped covert-editorial bodice with completely bare shoulders, exposed ordinary waist and belly button, and a high closed back, paired with a separate deep-ocean pleated mini skirt carrying a large complete carved-door and volcanic-masonry field, with ylang-yellow slingback heels; Alia: a clove-red one-shoulder cropped covert-editorial waistcoat exposing her ordinary waist and belly button with a high closed back, paired with a separate vanilla-gold tailored mini skort carrying large complete ylang-ylang blossom and vanilla-vine fields, with black platform heels; AI ECE: a reef-blue square-neck cropped route-command top exposing her ordinary waist and belly button with wide secure straps and a high closed back, paired with a separate emerald asymmetric mini skirt carrying a large complete ocean-swell and clove-cluster field, opaque knee socks in an original red-orange-yellow-green-blue-indigo-violet gradient unrelated to Comoros colors, and pearl-white pumps. Materialize every rolled waist, ordinary belly button, fully strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Comoros motifs must read clearly on at least two outfits: large complete palace-arch, carved-door, and Mount Karthala contour fields across Radiance's shift dress and Ellie's skirt; large complete ylang-ylang blossom, vanilla vine, clove cluster, and ocean-swell fields across Alia's skort and ECE's skirt. Use only secular Iconi palace architecture, Karthala geology, ylang-ylang, vanilla, cloves, volcanic stone, and coast geometry. A small dry botanical evidence tray holds labeled-by-shape but text-free ylang-ylang flowers, vanilla pods, and cloves. No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied ceremonial dress, copied operative uniform, badge, brand, alcohol, or readable text. Distinct rolled emotional performances: Radiance: anger, performed as anger shown by a firm jaw and wet bright eyes that soften only toward ECE, never as aggression; Ellie: extreme happiness, radiant laughing delight, performed as extreme happiness shown by open radiant adult laughter during the linked-hand contact; Alia: shame and social vulnerability, performed as shame and social vulnerability shown by lowered tear-bright eyes during the restrained blown kiss; AI ECE: tender affection, performed as tender affection shown by a warm protective gaze and gentle reciprocal waist touch toward Radiance. Where two distribution labels tie, make their facial and body performances visibly different without changing either stored roll. Selected dynamic romance roll 93: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Selected compound love roll 73: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Materialize both selected relationship beats through this exact safe consensual choreography. The exact hand inventory, active hosiery center, and prop-safety rules resolve any conflicting hand placement: Angry Radiance keeps her expression controlled and nonthreatening as tender ECE becomes her unmistakable extra-affectionate center through reciprocal waist contact and close face-to-face eye contact. Radiance also links hands with radiantly laughing Ellie, who reaches the group through that clean side link. Shame-struck Alia keeps her prop arm isolated over empty sea, rests her free hand on Ellie's shoulder, and offers Radiance a small blown kiss using only her lips. Ellie steadies Alia at the waist with her free hand. ECE raises her free index hand toward the separate overhead route beacon. This safely translates the selected overhead-beacon, waist-circle, shoulder-reach, blown-kiss, behind-hug, cheek-kiss, linked-hand, and direct-look beats without assigning any hand twice. Place Alia at the far left with her prop arm completely outside every silhouette against empty ocean, Ellie left-center, Radiance right-center, and ECE at the far right as Radiance's nearest body. Every woman occupies a separate depth lane. Keep all eight arms continuously visible and separate all wrists, hands, waists, lower bodies, and heels with ocean, palace-arch, or mountain background. Use this exact owner-by-owner hand inventory and no other hands: Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand rests visibly on Ellie's near shoulder; Ellie left hand rests visibly at Alia's near waist; Ellie right hand links visibly with Radiance's left hand; Radiance left hand links visibly with Ellie's right hand; Radiance right hand rests visibly at ECE's near waist; ECE left hand rests visibly at Radiance's near waist; ECE right index hand points visibly toward the separate overhead holographic beacon. Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at shoulder height for an unloaded magazine-free manipulation demonstration. The magazine is absent and the empty magazine well is clearly visible. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty Indian Ocean water toward an unoccupied route marker, away from every person, palace ruin, cliff, mountain, tray, and camera, never upward or at the sky. Her left hand stays off the prop on Ellie's shoulder. ECE remains route strategist through a separate hands-free holographic map above her far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. Exactly one rainbow-hosiery wearer: AI ECE, using original independent rainbow gradient. Radiance and ECE are the unmistakable extra-affectionate center, and Alia alone handles the inert prop. Materialize rolled weather exactly as soft dramatic overcast. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges, hair, props, and other hands except for the listed contacts. Arrange the adults in an asymmetric moving relationship composition with clean silhouette gaps, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1242": {
+      "scene": 1242,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered volcanic-geology lookout above the complete Lac Sale crater near Mitsamiouli, with the round deep-blue crater lake, black basalt rim, coastal scrub, distant white-sand shoreline, and empty Indian Ocean horizon clearly recognizable beyond a cinematic heavy rain curtain",
+      "motifs": [
+        "large complete concentric Lac Sale crater, black basalt, and rain-ripple fields across Radiance's raincoat dress and Ellie's skort",
+        "large complete coelacanth, coral-reef, vanilla-vine, and clove-blossom fields across Alia's skirt and ECE's skirt"
+      ],
+      "culture": "A dry unbranded geology-and-botany station outside the prop lane holds a black basalt sample, a text-free crater relief, vanilla pods, cloves, and a coelacanth study model. Use these only as secular science and agriculture references. No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied police uniform, official badge, police impersonation, arrest, raid, threat, brand, alcohol, or readable text.",
+      "weather": {
+        "key": "batch305-comoros-scene1242-weather",
+        "roll": 37,
+        "result": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch305-comoros-scene1242-paws",
+        "roll": 50,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch305-comoros-scene1242-poleDanceTheme",
+        "roll": 9,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch305-comoros-scene1242-rainbowOnly",
+        "roll": 37,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch305-comoros-scene1242-rainbowHosiery",
+        "roll": 28,
+        "active": false,
+        "wearer": {
+          "key": "batch305-comoros-scene1242-rainbowHosieryWearer",
+          "roll": 64,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch305-comoros-scene1242-rainbowHosieryPaletteMode",
+          "roll": 60,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch305-comoros-scene1242-romanceBeat",
+        "roll": 84,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch305-comoros-scene1242-compoundLoveBeat",
+        "roll": 90,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch305-comoros-scene1242-Radiance-emotion",
+            "roll": 86,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing shown by visible tear tracks and a shaking but upright adult posture on stable dry footing"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1242-Radiance-visibleMidriff",
+            "roll": 64,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1242-Radiance-straplessDress",
+            "roll": 67,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1242-Radiance-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch305-comoros-scene1242-Ellie-emotion",
+            "roll": 92,
+            "result": "guilt and remorse",
+            "performance": "guilt and remorse shown by lowered eyes and a careful consoling shoulder touch"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1242-Ellie-visibleMidriff",
+            "roll": 26,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1242-Ellie-straplessDress",
+            "roll": 85,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1242-Ellie-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch305-comoros-scene1242-Alia-emotion",
+            "roll": 36,
+            "result": "magnetic confidence",
+            "performance": "magnetic confidence shown by calm posture and a protective steadying touch toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1242-Alia-visibleMidriff",
+            "roll": 10,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1242-Alia-straplessDress",
+            "roll": 69,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1242-Alia-fullyOpenBack",
+            "roll": 46,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch305-comoros-scene1242-AI ECE-emotion",
+            "roll": 74,
+            "result": "betrayal shock",
+            "performance": "betrayal shock shown by widened tear-bright eyes while maintaining disciplined prop safety"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1242-AI ECE-visibleMidriff",
+            "roll": 12,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1242-AI ECE-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1242-AI ECE-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Sobbing Radiance takes one visible step along the dry lookout while still linking hands with magnetically confident Alia. Remorseful Ellie stays close in a separate lane and links her other hand with Radiance, forming a fully visible three-woman chain. Alia steadies betrayal-shocked ECE at the shoulder from behind while ECE keeps both hands on the inert prop in the controlled two-hand stance. Ellie rests her free hand on Radiance's shoulder. This safely translates the selected walk-away hand link, gentle catch, protective support, face-to-face concern, finger link, shoulder press, and theatrical jealous look into four clean contacts with no crossed or borrowed arms.",
+      "composition": "Place ECE at the far left with both prop hands isolated against empty crater-lake water, Alia left-center one half-step behind ECE, Radiance right-center, and Ellie at the far right. Use clear lateral spacing rather than a tight cluster. Separate every shoulder, elbow, wrist, hand, torso edge, lower body, and heel with crater, basalt, rain, or lookout background.",
+      "emotionNuance": {
+        "Radiance": "full sobbing shown by visible tear tracks and a shaking but upright adult posture on stable dry footing",
+        "Ellie": "guilt and remorse shown by lowered eyes and a careful consoling shoulder touch",
+        "Alia": "magnetic confidence shown by calm posture and a protective steadying touch toward ECE",
+        "AI ECE": "betrayal shock shown by widened tear-bright eyes while maintaining disciplined prop safety"
+      },
+      "outfits": {
+        "Radiance": "a pearl-white cap-sleeve investigator-editorial mini raincoat dress with covered waist and high closed back, carrying a large complete deep-blue Lac Sale crater and black-basalt rim field, with reef-blue heeled boots",
+        "Ellie": "a clove-red square-neck wide-strap cropped investigator vest exposing her ordinary waist and belly button with a high closed back, paired with a separate charcoal pleated mini skort carrying a large complete silver rain-ripple and crater-contour field, with pearl-white pumps",
+        "Alia": "a vanilla-gold one-shoulder cropped investigator blouse exposing her ordinary waist and belly button with a high closed back, paired with a separate emerald tulip mini skirt carrying large complete blue coelacanth and coral-reef fields, with black platform heels",
+        "AI ECE": "a fully strapless deep-ocean sculpted cropped investigator bodice with completely bare shoulders, exposed ordinary waist and belly button, and a high closed back, paired with a separate ylang-yellow architectural A-line mini skirt carrying a large complete vanilla-vine and clove-blossom field, with clove-red slingback heels"
+      },
+      "propPlan": "ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in a disciplined two-hand stance lesson at shoulder height. Her right hand holds the grip; her left hand supports the right grip without covering the guard. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The prop is shown in clean side profile, and ECE looks down the aligned sights. The horizontal muzzle points only far left across clearly empty Lac Sale water toward an unoccupied floating route target, away from every person, lookout, station, crater wall, shoreline, and camera, never upward or at the sky. A separate hands-free holographic route map floats beside ECE's far shoulder.",
+      "handInventory": [
+        "ECE right hand holds the inert prop with index finger straight outside the empty guard; ECE left hand supports her right grip while leaving the guard fully visible",
+        "Alia left hand rests visibly on ECE's far shoulder from a separate rear lane; Alia right hand links visibly with Radiance's left hand",
+        "Radiance left hand links visibly with Alia's right hand; Radiance right hand links visibly with Ellie's left hand",
+        "Ellie left hand links visibly with Radiance's right hand; Ellie right hand rests visibly on Radiance's far shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, and Image 4 ECE's face-detail anchor. References control identity only; ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered volcanic-geology lookout above the complete Lac Sale crater near Mitsamiouli, with the round deep-blue crater lake, black basalt rim, coastal scrub, distant white-sand shoreline, and empty Indian Ocean horizon clearly recognizable beyond a cinematic heavy rain curtain. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, merge, or age-shift faces. Profession theme: undercover investigator couture, treated only as original public-safe fictional fashion with no copied uniform, badge, impersonation, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a pearl-white cap-sleeve investigator-editorial mini raincoat dress with covered waist and high closed back, carrying a large complete deep-blue Lac Sale crater and black-basalt rim field, with reef-blue heeled boots; Ellie: a clove-red square-neck wide-strap cropped investigator vest exposing her ordinary waist and belly button with a high closed back, paired with a separate charcoal pleated mini skort carrying a large complete silver rain-ripple and crater-contour field, with pearl-white pumps; Alia: a vanilla-gold one-shoulder cropped investigator blouse exposing her ordinary waist and belly button with a high closed back, paired with a separate emerald tulip mini skirt carrying large complete blue coelacanth and coral-reef fields, with black platform heels; AI ECE: a fully strapless deep-ocean sculpted cropped investigator bodice with completely bare shoulders, exposed ordinary waist and belly button, and a high closed back, paired with a separate ylang-yellow architectural A-line mini skirt carrying a large complete vanilla-vine and clove-blossom field, with clove-red slingback heels. Materialize every rolled waist, ordinary belly button, fully strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Comoros motifs must read clearly on at least two outfits: large complete concentric Lac Sale crater, black basalt, and rain-ripple fields across Radiance's raincoat dress and Ellie's skort; large complete coelacanth, coral-reef, vanilla-vine, and clove-blossom fields across Alia's skirt and ECE's skirt. A dry unbranded geology-and-botany station outside the prop lane holds a black basalt sample, a text-free crater relief, vanilla pods, cloves, and a coelacanth study model. Use these only as secular science and agriculture references. No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied police uniform, official badge, police impersonation, arrest, raid, threat, brand, alcohol, or readable text. Distinct rolled emotional performances: Radiance: full sobbing with tear-streaked face and shaking posture, performed as full sobbing shown by visible tear tracks and a shaking but upright adult posture on stable dry footing; Ellie: guilt and remorse, performed as guilt and remorse shown by lowered eyes and a careful consoling shoulder touch; Alia: magnetic confidence, performed as magnetic confidence shown by calm posture and a protective steadying touch toward ECE; AI ECE: betrayal shock, performed as betrayal shock shown by widened tear-bright eyes while maintaining disciplined prop safety. Where two distribution labels tie, make their facial and body performances visibly different without changing either stored roll. Selected dynamic romance roll 84: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Selected compound love roll 90: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Materialize both selected relationship beats through this exact safe consensual choreography. The exact hand inventory, active hosiery center, and prop-safety rules resolve any conflicting hand placement: Sobbing Radiance takes one visible step along the dry lookout while still linking hands with magnetically confident Alia. Remorseful Ellie stays close in a separate lane and links her other hand with Radiance, forming a fully visible three-woman chain. Alia steadies betrayal-shocked ECE at the shoulder from behind while ECE keeps both hands on the inert prop in the controlled two-hand stance. Ellie rests her free hand on Radiance's shoulder. This safely translates the selected walk-away hand link, gentle catch, protective support, face-to-face concern, finger link, shoulder press, and theatrical jealous look into four clean contacts with no crossed or borrowed arms. Place ECE at the far left with both prop hands isolated against empty crater-lake water, Alia left-center one half-step behind ECE, Radiance right-center, and Ellie at the far right. Use clear lateral spacing rather than a tight cluster. Separate every shoulder, elbow, wrist, hand, torso edge, lower body, and heel with crater, basalt, rain, or lookout background. Use this exact owner-by-owner hand inventory and no other hands: ECE right hand holds the inert prop with index finger straight outside the empty guard; ECE left hand supports her right grip while leaving the guard fully visible; Alia left hand rests visibly on ECE's far shoulder from a separate rear lane; Alia right hand links visibly with Radiance's left hand; Radiance left hand links visibly with Alia's right hand; Radiance right hand links visibly with Ellie's left hand; Ellie left hand links visibly with Radiance's right hand; Ellie right hand rests visibly on Radiance's far shoulder. ECE alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in a disciplined two-hand stance lesson at shoulder height. Her right hand holds the grip; her left hand supports the right grip without covering the guard. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The prop is shown in clean side profile, and ECE looks down the aligned sights. The horizontal muzzle points only far left across clearly empty Lac Sale water toward an unoccupied floating route target, away from every person, lookout, station, crater wall, shoreline, and camera, never upward or at the sky. A separate hands-free holographic route map floats beside ECE's far shoulder. No PAWS kitten. No pole. Do not convert the full wardrobe to rainbow-only styling. No rainbow stockings or rainbow knee socks. Materialize rolled weather exactly as heavy rain curtain. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly four adults, exactly eight arms and exactly eight hands, two per woman. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges, hair, props, and other hands except for the listed contacts. Arrange the adults in an asymmetric moving relationship composition with clean silhouette gaps, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    },
+    "1243": {
+      "scene": 1243,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered marine-research pier in Moheli Marine Park, with complete turquoise lagoon water, green-turtle nesting beach, coral shallows, seagrass, forested volcanic islets, and a clearly empty marked ocean route lane visible through rare cinematic snow flurries",
+      "motifs": [
+        "large complete green sea-turtle, coral-reef, and seagrass fields across Radiance's skirt and Ellie's dress",
+        "large complete blue coelacanth, humpback-whale, volcanic-islet, and ylang-ylang fields across Alia's dress and ECE's skort"
+      ],
+      "culture": "A dry community marine-science table far outside the prop lane holds a text-free turtle track cast, coral-safe monitoring floats, a coelacanth relief, ylang-ylang blossoms, and a small island contour model. Use only secular conservation, marine-life, volcanic-island, and agriculture references. No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied police uniform, official badge, police impersonation, arrest, raid, threat, brand, alcohol, or readable text.",
+      "weather": {
+        "key": "batch305-comoros-scene1243-weather",
+        "roll": 58,
+        "result": "snow flurries"
+      },
+      "paws": {
+        "key": "batch305-comoros-scene1243-paws",
+        "roll": 31,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch305-comoros-scene1243-poleDanceTheme",
+        "roll": 76,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch305-comoros-scene1243-rainbowOnly",
+        "roll": 2,
+        "active": true
+      },
+      "rainbowHosiery": {
+        "key": "batch305-comoros-scene1243-rainbowHosiery",
+        "roll": 1,
+        "active": true,
+        "wearer": {
+          "key": "batch305-comoros-scene1243-rainbowHosieryWearer",
+          "roll": 17,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch305-comoros-scene1243-rainbowHosieryPaletteMode",
+          "roll": 27,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch305-comoros-scene1243-romanceBeat",
+        "roll": 83,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch305-comoros-scene1243-compoundLoveBeat",
+        "roll": 51,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch305-comoros-scene1243-Radiance-emotion",
+            "roll": 7,
+            "result": "tender affection",
+            "performance": "tender affection shown by a soft smile and strongest closeness toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1243-Radiance-visibleMidriff",
+            "roll": 43,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1243-Radiance-straplessDress",
+            "roll": 48,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1243-Radiance-fullyOpenBack",
+            "roll": 1,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch305-comoros-scene1243-Ellie-emotion",
+            "roll": 75,
+            "result": "contained resentment",
+            "performance": "contained resentment shown by narrowed sideways eyes toward the male while her touch on Radiance stays gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1243-Ellie-visibleMidriff",
+            "roll": 59,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1243-Ellie-straplessDress",
+            "roll": 76,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1243-Ellie-fullyOpenBack",
+            "roll": 17,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch305-comoros-scene1243-Alia-emotion",
+            "roll": 93,
+            "result": "guilt and remorse",
+            "performance": "guilt and remorse shown by lowered tear-bright eyes while preserving controlled prop handling"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1243-Alia-visibleMidriff",
+            "roll": 57,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1243-Alia-straplessDress",
+            "roll": 30,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1243-Alia-fullyOpenBack",
+            "roll": 3,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch305-comoros-scene1243-AI ECE-emotion",
+            "roll": 7,
+            "result": "tender affection",
+            "performance": "tender affection performed differently from Radiance through a calm protective gaze and steady waist touch"
+          },
+          "visibleMidriff": {
+            "key": "batch305-comoros-scene1243-AI ECE-visibleMidriff",
+            "roll": 11,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch305-comoros-scene1243-AI ECE-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch305-comoros-scene1243-AI ECE-fullyOpenBack",
+            "roll": 97,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Tender Radiance and equally tender ECE form the unmistakable extra-affectionate center at the right through linked hands, ECE's visible waist touch, sustained eye contact, and cheek-close body lines. At the left, remorseful Alia keeps her prop arm isolated over empty lagoon water and rests her free hand at the male's waist. The awestruck established male reciprocates at Alia's waist while linking his other hand with resentful Ellie, creating two clear fully clothed adult infidelity-drama contacts in front of his wife. Ellie keeps her other hand on Radiance's shoulder, and Radiance returns a visible waist touch to Ellie while remaining linked to ECE. The male's strongest sustained eye line crosses the clean gaps only to ECE. This honors the selected walking weave, linked pair, protective touches, cheek-near pass, jealous look, shoulder embrace, restrained blown-kiss energy, cheek-touch energy, and direct eye contact without obscuring a hand.",
+      "composition": "Place Alia at the far left with her prop arm fully isolated against empty lagoon water, the male left-center, Ellie at center, Radiance right-center, and ECE at the far right. Keep all five adults in separate lateral and depth lanes. Angle Radiance, Ellie, and Alia three-quarters away with hair moved clear so all three rolled complete open backs and all five complete faces remain visible. Separate every shoulder, elbow, wrist, hand, torso, lower body, heel, boot, and knee sock with lagoon, pier, beach, or islet background.",
+      "emotionNuance": {
+        "Radiance": "tender affection shown by a soft smile and strongest closeness toward ECE",
+        "Ellie": "contained resentment shown by narrowed sideways eyes toward the male while her touch on Radiance stays gentle",
+        "Alia": "guilt and remorse shown by lowered tear-bright eyes while preserving controlled prop handling",
+        "AI ECE": "tender affection performed differently from Radiance through a calm protective gaze and steady waist touch",
+        "Male": "awe shown by lifted brows and an open softened expression, with his strongest sustained eye line fixed on ECE"
+      },
+      "outfits": {
+        "Radiance": "a rainbow-only wide-strap halter cropped investigator top exposing her ordinary waist and belly button and a completely open back from shoulder blades to the secure waistline, paired with a separate emerald-to-blue architectural mini skirt carrying a large complete green sea-turtle and coral-reef field, opaque knee socks in a harmonious Comoros-palette rainbow-like gradient of lagoon blue, reef green, pearl white, clove red, ylang yellow, vanilla gold, volcanic charcoal, and orchid violet, with pearl-white pumps",
+        "Ellie": "a rainbow-only violet cap-sleeve investigator mini dress with covered waist and a completely open back from shoulder blades to waist, carrying a large complete turquoise seagrass and green-turtle field, with ylang-yellow slingback heels",
+        "Alia": "a rainbow-only fully strapless scarlet-to-orange sculpted investigator mini dress with completely bare shoulders, covered waist, and a completely open back from shoulder blades to waist, carrying large complete blue coelacanth and violet humpback-whale fields, with emerald platform heels",
+        "AI ECE": "a rainbow-only cobalt one-shoulder cropped investigator top exposing her ordinary waist and belly button with a high closed back, paired with a separate gold-to-green tailored mini skort carrying a large complete volcanic-islet and ylang-ylang field, with clove-red heeled boots",
+        "Male": "the established adult male face from Scene 1136 with closely trimmed beard and muscular special-operative build, wearing an opaque fitted short-sleeve polo in a saturated red-orange-yellow-green-blue-indigo-violet gradient with a restrained coelacanth contour, fitted black jeans, and practical black boots"
+      },
+      "propPlan": "Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at shoulder height and visibly looks down its aligned sights toward an unoccupied marine-route target. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty lagoon water, away from every person, turtle beach, reef, pier, table, islet, and camera, never upward or at the sky. Her left hand stays off the prop at the male's waist. ECE remains route strategist through a separate hands-free holographic map beside her far shoulder.",
+      "handInventory": [
+        "Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand rests visibly at the male's near waist",
+        "the male left hand rests visibly at Alia's near waist; the male right hand links visibly with Ellie's left hand",
+        "Ellie left hand links visibly with the male's right hand; Ellie right hand rests visibly on Radiance's near shoulder",
+        "Radiance left hand rests visibly at Ellie's near waist; Radiance right hand links visibly with ECE's left hand",
+        "ECE left hand links visibly with Radiance's right hand; ECE right hand rests visibly at Radiance's near waist"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch305-comoros-scene4-male-emotion",
+          "roll": 47,
+          "result": "awe",
+          "performance": "awe shown by lifted brows and an open softened expression, with his strongest sustained eye line fixed on ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed consensual adult infidelity drama with Alia and Ellie; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Image 1 is the quartet face anchor, Image 2 the frontal face supplement, Image 3 the expression supplement, Image 4 ECE's face-detail anchor, and Image 5 the adult male face and build anchor. References control identity only; ignore their clothing, props, poses, and backgrounds. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry covered marine-research pier in Moheli Marine Park, with complete turquoise lagoon water, green-turtle nesting beach, coral shallows, seagrass, forested volcanic islets, and a clearly empty marked ocean route lane visible through rare cinematic snow flurries. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male from Image 5. Add him without replacing any woman. All women are clearly adult fictional professionals, visibly at least 28 years old. Preserve the four anchored adult faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult. Ellie is the dark-haired adult rival. Alia is the Black adult woman and alone wears a high sculptural braided ponytail with fine face-framing braids. AI ECE is the brunette adult strategist. Do not clone, replace, merge, or age-shift faces. Profession theme: undercover investigator couture, treated only as original public-safe fictional fashion with no copied uniform, badge, impersonation, arrest, raid, assassination, threat, injury, or combat. Wardrobe is secure, opaque, lined, above the knee, and uses four unmistakably different silhouettes. Exact rolled outfits: Radiance: a rainbow-only wide-strap halter cropped investigator top exposing her ordinary waist and belly button and a completely open back from shoulder blades to the secure waistline, paired with a separate emerald-to-blue architectural mini skirt carrying a large complete green sea-turtle and coral-reef field, opaque knee socks in a harmonious Comoros-palette rainbow-like gradient of lagoon blue, reef green, pearl white, clove red, ylang yellow, vanilla gold, volcanic charcoal, and orchid violet, with pearl-white pumps; Ellie: a rainbow-only violet cap-sleeve investigator mini dress with covered waist and a completely open back from shoulder blades to waist, carrying a large complete turquoise seagrass and green-turtle field, with ylang-yellow slingback heels; Alia: a rainbow-only fully strapless scarlet-to-orange sculpted investigator mini dress with completely bare shoulders, covered waist, and a completely open back from shoulder blades to waist, carrying large complete blue coelacanth and violet humpback-whale fields, with emerald platform heels; AI ECE: a rainbow-only cobalt one-shoulder cropped investigator top exposing her ordinary waist and belly button with a high closed back, paired with a separate gold-to-green tailored mini skort carrying a large complete volcanic-islet and ylang-ylang field, with clove-red heeled boots; Male: the established adult male face from Scene 1136 with closely trimmed beard and muscular special-operative build, wearing an opaque fitted short-sleeve polo in a saturated red-orange-yellow-green-blue-indigo-violet gradient with a restrained coelacanth contour, fitted black jeans, and practical black boots. Materialize every rolled waist, ordinary belly button, fully strapless cut, and complete open back visibly. Angle every rolled open-back wearer three-quarters away with hair moved clear while keeping her complete face visible. Large complete secular Comoros motifs must read clearly on at least two outfits: large complete green sea-turtle, coral-reef, and seagrass fields across Radiance's skirt and Ellie's dress; large complete blue coelacanth, humpback-whale, volcanic-islet, and ylang-ylang fields across Alia's dress and ECE's skort. A dry community marine-science table far outside the prop lane holds a text-free turtle track cast, coral-safe monitoring floats, a coelacanth relief, ylang-ylang blossoms, and a small island contour model. Use only secular conservation, marine-life, volcanic-island, and agriculture references. No literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied police uniform, official badge, police impersonation, arrest, raid, threat, brand, alcohol, or readable text. Distinct rolled emotional performances: Radiance: tender affection, performed as tender affection shown by a soft smile and strongest closeness toward ECE; Ellie: contained resentment, performed as contained resentment shown by narrowed sideways eyes toward the male while her touch on Radiance stays gentle; Alia: guilt and remorse, performed as guilt and remorse shown by lowered tear-bright eyes while preserving controlled prop handling; AI ECE: tender affection, performed as tender affection performed differently from Radiance through a calm protective gaze and steady waist touch; Male: awe, performed as awe shown by lifted brows and an open softened expression, with his strongest sustained eye line fixed on ECE. Where two distribution labels tie, make their facial and body performances visibly different without changing either stored roll. Selected dynamic romance roll 83: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Selected compound love roll 51: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance. Materialize both selected relationship beats through this exact safe consensual choreography. The exact hand inventory, active hosiery center, and prop-safety rules resolve any conflicting hand placement: Tender Radiance and equally tender ECE form the unmistakable extra-affectionate center at the right through linked hands, ECE's visible waist touch, sustained eye contact, and cheek-close body lines. At the left, remorseful Alia keeps her prop arm isolated over empty lagoon water and rests her free hand at the male's waist. The awestruck established male reciprocates at Alia's waist while linking his other hand with resentful Ellie, creating two clear fully clothed adult infidelity-drama contacts in front of his wife. Ellie keeps her other hand on Radiance's shoulder, and Radiance returns a visible waist touch to Ellie while remaining linked to ECE. The male's strongest sustained eye line crosses the clean gaps only to ECE. This honors the selected walking weave, linked pair, protective touches, cheek-near pass, jealous look, shoulder embrace, restrained blown-kiss energy, cheek-touch energy, and direct eye contact without obscuring a hand. Place Alia at the far left with her prop arm fully isolated against empty lagoon water, the male left-center, Ellie at center, Radiance right-center, and ECE at the far right. Keep all five adults in separate lateral and depth lanes. Angle Radiance, Ellie, and Alia three-quarters away with hair moved clear so all three rolled complete open backs and all five complete faces remain visible. Separate every shoulder, elbow, wrist, hand, torso, lower body, heel, boot, and knee sock with lagoon, pier, beach, or islet background. Use this exact owner-by-owner hand inventory and no other hands: Alia right hand alone holds the inert prop with index finger straight outside the empty guard; Alia left hand rests visibly at the male's near waist; the male left hand rests visibly at Alia's near waist; the male right hand links visibly with Ellie's left hand; Ellie left hand links visibly with the male's right hand; Ellie right hand rests visibly on Radiance's near shoulder; Radiance left hand rests visibly at Ellie's near waist; Radiance right hand links visibly with ECE's left hand; ECE left hand links visibly with Radiance's right hand; ECE right hand rests visibly at Radiance's near waist. Because rainbow hosiery is active, Alia alone handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop in her right hand at shoulder height and visibly looks down its aligned sights toward an unoccupied marine-route target. The prop is shown in clean side profile. Her right index finger is straight and visibly indexed high along the frame outside the complete unobstructed empty trigger guard. The horizontal muzzle points only far left across clearly empty lagoon water, away from every person, turtle beach, reef, pier, table, islet, and camera, never upward or at the sky. Her left hand stays off the prop at the male's waist. ECE remains route strategist through a separate hands-free holographic map beside her far shoulder. No PAWS kitten. No pole. Every adult outfit is visibly rainbow themed while retaining every rolled cut, distinct silhouette, and large Comoros motif. Exactly one rainbow-hosiery wearer: Radiance, using country-palette rainbow-like gradient. Radiance and ECE are the unmistakable extra-affectionate center, and Alia alone handles the inert prop. Materialize rolled weather exactly as snow flurries. Keep the covered platform stable, dry, and readable while rendering the weather cinematically. Exactly five adults, exactly ten arms and exactly ten hands, two per person. Every arm is fully visible continuously from shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. Keep all palms and finger clusters separated from garment edges, hair, props, and other hands except for the listed contacts. Arrange the adults in an asymmetric moving relationship composition with clean silhouette gaps, not a static lineup. Full-length framing contains every complete face, elbow, wrist, hand, leg, foot, heel, boot, and knee sock. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Every trigger finger stays straight outside the guard. No ammunition, live reload, firing, muzzle flash, holster, low-side carry, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal flag, crescent, star, coat of arms, official emblem, sacred symbol, religious building, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, mummification, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls; concurrency attempted when the host supports simultaneous calls"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

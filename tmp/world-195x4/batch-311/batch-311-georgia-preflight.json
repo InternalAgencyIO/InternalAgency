@@ -1,0 +1,1301 @@
+{
+  "batch": 311,
+  "country": "Georgia",
+  "status": "render-preflight-stored",
+  "sourceCommit": "c04768f07d8c1795d9d8d75b9a3342f5e5b7bd9d",
+  "contractSha256": "52488BF30A9429C3FA37BA509C284C1CC598B91F95098D9689AA9ADF49F6E8C7",
+  "rollMethod": "FNV-1a over the recorded batch311-georgia keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient"
+  },
+  "themePair": [
+    "cleaner and service couture",
+    "cinematic covert-agent crew couture"
+  ],
+  "nextThemePair": [
+    "cinematic covert-agent crew couture",
+    "undercover investigator couture"
+  ],
+  "nextQueueCountry": "Fiji",
+  "nextQueueBatch": 312,
+  "nextQueueScenes": [
+    1268,
+    1269,
+    1270,
+    1271
+  ],
+  "researchSources": [
+    {
+      "url": "https://matsne.gov.ge/en/document/view/13270",
+      "usedFor": "official Georgia national-flag geometry"
+    },
+    {
+      "url": "https://georgia.travel/tbilisi-peace-bridge",
+      "usedFor": "Peace Bridge, Mtkvari River, Rike Park, and Old Tbilisi setting"
+    },
+    {
+      "url": "https://georgia.travel/tbilisi-sulfur-baths",
+      "usedFor": "Abanotubani brick domes and colorful exterior facade"
+    },
+    {
+      "url": "https://georgia.travel/gergeti-trinity-church",
+      "usedFor": "Gergeti high-ridge landmark and Mount Kazbegi context"
+    },
+    {
+      "url": "https://georgia.travel/cities-towns/stepantsminda",
+      "usedFor": "Stepantsminda, Terek valley, village, and Caucasus setting"
+    },
+    {
+      "url": "https://georgia.travel/regions/kakheti",
+      "usedFor": "Alazani Valley, vineyards, qvevri craft, and Kakheti landscape"
+    },
+    {
+      "url": "https://georgia.travel/biking-along-the-kakheti-wine-route",
+      "usedFor": "Sighnaghi cobbles, colorful houses, and Alazani views"
+    },
+    {
+      "url": "https://georgia.travel/family-attractions/batumis-miracle-park",
+      "usedFor": "Batumi Miracle Park, Alphabet Tower, Ferris wheel, lighthouse, and Ali and Nino sculpture"
+    },
+    {
+      "url": "https://georgia.travel/guide-to-batumi-beach",
+      "usedFor": "Black Sea, Batumi Boulevard, and coastal context"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch311-georgia-male-model-scene",
+    "fullHash": 3665183826,
+    "roll": 26,
+    "selectedScenePosition": 3,
+    "selectedScene": 1266,
+    "maleEmotion": {
+      "key": "batch311-georgia-scene3-male-emotion",
+      "roll": 11,
+      "result": "romantic joy"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "Every scene uses large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant on at least two outfits, integrated around the silhouette rather than copied as a rectangular flag.",
+    "palette": "carmine red, pearl white, charcoal, Black Sea teal, Mtkvari blue, Caucasus silver, Kakheti green, qvevri terracotta, and deep wine",
+    "minimumCoverage": "Every scene places complete Georgia civic flag geometry on at least two outfits and complete secular landmark, landscape, craft, architecture, water, or agricultural motifs across at least two outfits.",
+    "cultureScene": "The four scenes collectively foreground Batumi public art and seafront, Stepantsminda highlands, Tbilisi river architecture, and Kakheti-Sighnaghi landscape and qvevri craft.",
+    "prohibitions": "No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred ritual, sacred icon on clothing, readable text, badge, weapon threat, alcohol consumption, branded product, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch311-georgia-x-heart",
+      "roll": 31,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch311-georgia-x-internalagency",
+      "roll": 91,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch311-georgia-x-worldxxxseries",
+      "roll": 12,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Georgia images plus one accepted secondary-country image when at least two Georgia images pass",
+    "captionIfEligible": "Georgia red heart Fiji #Georgia #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Scenes 1264, 1265, and 1267 require exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1266 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch311-georgia-male-model-scene",
+        26
+      ],
+      [
+        "batch311-georgia-scene3-male-emotion",
+        11
+      ],
+      [
+        "batch311-georgia-scene1264-weather",
+        70
+      ],
+      [
+        "batch311-georgia-scene1264-paws",
+        7
+      ],
+      [
+        "batch311-georgia-scene1264-poleDanceTheme",
+        76
+      ],
+      [
+        "batch311-georgia-scene1264-rainbowOnly",
+        10
+      ],
+      [
+        "batch311-georgia-scene1264-rainbowHosiery",
+        37
+      ],
+      [
+        "batch311-georgia-scene1264-romanceBeat",
+        43
+      ],
+      [
+        "batch311-georgia-scene1264-compoundLoveBeat",
+        55
+      ],
+      [
+        "batch311-georgia-scene1264-Radiance-emotion",
+        83
+      ],
+      [
+        "batch311-georgia-scene1264-Radiance-visibleMidriff",
+        31
+      ],
+      [
+        "batch311-georgia-scene1264-Radiance-straplessDress",
+        12
+      ],
+      [
+        "batch311-georgia-scene1264-Radiance-fullyOpenBack",
+        37
+      ],
+      [
+        "batch311-georgia-scene1264-Ellie-emotion",
+        27
+      ],
+      [
+        "batch311-georgia-scene1264-Ellie-visibleMidriff",
+        79
+      ],
+      [
+        "batch311-georgia-scene1264-Ellie-straplessDress",
+        64
+      ],
+      [
+        "batch311-georgia-scene1264-Ellie-fullyOpenBack",
+        69
+      ],
+      [
+        "batch311-georgia-scene1264-Alia-emotion",
+        73
+      ],
+      [
+        "batch311-georgia-scene1264-Alia-visibleMidriff",
+        5
+      ],
+      [
+        "batch311-georgia-scene1264-Alia-straplessDress",
+        54
+      ],
+      [
+        "batch311-georgia-scene1264-Alia-fullyOpenBack",
+        67
+      ],
+      [
+        "batch311-georgia-scene1264-AI ECE-emotion",
+        11
+      ],
+      [
+        "batch311-georgia-scene1264-AI ECE-visibleMidriff",
+        39
+      ],
+      [
+        "batch311-georgia-scene1264-AI ECE-straplessDress",
+        60
+      ],
+      [
+        "batch311-georgia-scene1264-AI ECE-fullyOpenBack",
+        53
+      ],
+      [
+        "batch311-georgia-scene1265-weather",
+        9
+      ],
+      [
+        "batch311-georgia-scene1265-paws",
+        90
+      ],
+      [
+        "batch311-georgia-scene1265-poleDanceTheme",
+        93
+      ],
+      [
+        "batch311-georgia-scene1265-rainbowOnly",
+        93
+      ],
+      [
+        "batch311-georgia-scene1265-rainbowHosiery",
+        92
+      ],
+      [
+        "batch311-georgia-scene1265-romanceBeat",
+        16
+      ],
+      [
+        "batch311-georgia-scene1265-compoundLoveBeat",
+        82
+      ],
+      [
+        "batch311-georgia-scene1265-Radiance-emotion",
+        66
+      ],
+      [
+        "batch311-georgia-scene1265-Radiance-visibleMidriff",
+        4
+      ],
+      [
+        "batch311-georgia-scene1265-Radiance-straplessDress",
+        91
+      ],
+      [
+        "batch311-georgia-scene1265-Radiance-fullyOpenBack",
+        92
+      ],
+      [
+        "batch311-georgia-scene1265-Ellie-emotion",
+        80
+      ],
+      [
+        "batch311-georgia-scene1265-Ellie-visibleMidriff",
+        70
+      ],
+      [
+        "batch311-georgia-scene1265-Ellie-straplessDress",
+        17
+      ],
+      [
+        "batch311-georgia-scene1265-Ellie-fullyOpenBack",
+        86
+      ],
+      [
+        "batch311-georgia-scene1265-Alia-emotion",
+        4
+      ],
+      [
+        "batch311-georgia-scene1265-Alia-visibleMidriff",
+        54
+      ],
+      [
+        "batch311-georgia-scene1265-Alia-straplessDress",
+        1
+      ],
+      [
+        "batch311-georgia-scene1265-Alia-fullyOpenBack",
+        98
+      ],
+      [
+        "batch311-georgia-scene1265-AI ECE-emotion",
+        30
+      ],
+      [
+        "batch311-georgia-scene1265-AI ECE-visibleMidriff",
+        80
+      ],
+      [
+        "batch311-georgia-scene1265-AI ECE-straplessDress",
+        27
+      ],
+      [
+        "batch311-georgia-scene1265-AI ECE-fullyOpenBack",
+        36
+      ],
+      [
+        "batch311-georgia-scene1266-weather",
+        40
+      ],
+      [
+        "batch311-georgia-scene1266-paws",
+        77
+      ],
+      [
+        "batch311-georgia-scene1266-poleDanceTheme",
+        74
+      ],
+      [
+        "batch311-georgia-scene1266-rainbowOnly",
+        24
+      ],
+      [
+        "batch311-georgia-scene1266-rainbowHosiery",
+        83
+      ],
+      [
+        "batch311-georgia-scene1266-romanceBeat",
+        93
+      ],
+      [
+        "batch311-georgia-scene1266-compoundLoveBeat",
+        73
+      ],
+      [
+        "batch311-georgia-scene1266-Radiance-emotion",
+        57
+      ],
+      [
+        "batch311-georgia-scene1266-Radiance-visibleMidriff",
+        1
+      ],
+      [
+        "batch311-georgia-scene1266-Radiance-straplessDress",
+        94
+      ],
+      [
+        "batch311-georgia-scene1266-Radiance-fullyOpenBack",
+        43
+      ],
+      [
+        "batch311-georgia-scene1266-Ellie-emotion",
+        33
+      ],
+      [
+        "batch311-georgia-scene1266-Ellie-visibleMidriff",
+        1
+      ],
+      [
+        "batch311-georgia-scene1266-Ellie-straplessDress",
+        22
+      ],
+      [
+        "batch311-georgia-scene1266-Ellie-fullyOpenBack",
+        3
+      ],
+      [
+        "batch311-georgia-scene1266-Alia-emotion",
+        79
+      ],
+      [
+        "batch311-georgia-scene1266-Alia-visibleMidriff",
+        35
+      ],
+      [
+        "batch311-georgia-scene1266-Alia-straplessDress",
+        20
+      ],
+      [
+        "batch311-georgia-scene1266-Alia-fullyOpenBack",
+        69
+      ],
+      [
+        "batch311-georgia-scene1266-AI ECE-emotion",
+        1
+      ],
+      [
+        "batch311-georgia-scene1266-AI ECE-visibleMidriff",
+        13
+      ],
+      [
+        "batch311-georgia-scene1266-AI ECE-straplessDress",
+        22
+      ],
+      [
+        "batch311-georgia-scene1266-AI ECE-fullyOpenBack",
+        87
+      ],
+      [
+        "batch311-georgia-scene1267-weather",
+        55
+      ],
+      [
+        "batch311-georgia-scene1267-paws",
+        4
+      ],
+      [
+        "batch311-georgia-scene1267-poleDanceTheme",
+        59
+      ],
+      [
+        "batch311-georgia-scene1267-rainbowOnly",
+        35
+      ],
+      [
+        "batch311-georgia-scene1267-rainbowHosiery",
+        50
+      ],
+      [
+        "batch311-georgia-scene1267-romanceBeat",
+        22
+      ],
+      [
+        "batch311-georgia-scene1267-compoundLoveBeat",
+        40
+      ],
+      [
+        "batch311-georgia-scene1267-Radiance-emotion",
+        40
+      ],
+      [
+        "batch311-georgia-scene1267-Radiance-visibleMidriff",
+        38
+      ],
+      [
+        "batch311-georgia-scene1267-Radiance-straplessDress",
+        1
+      ],
+      [
+        "batch311-georgia-scene1267-Radiance-fullyOpenBack",
+        30
+      ],
+      [
+        "batch311-georgia-scene1267-Ellie-emotion",
+        2
+      ],
+      [
+        "batch311-georgia-scene1267-Ellie-visibleMidriff",
+        72
+      ],
+      [
+        "batch311-georgia-scene1267-Ellie-straplessDress",
+        95
+      ],
+      [
+        "batch311-georgia-scene1267-Ellie-fullyOpenBack",
+        24
+      ],
+      [
+        "batch311-georgia-scene1267-Alia-emotion",
+        90
+      ],
+      [
+        "batch311-georgia-scene1267-Alia-visibleMidriff",
+        20
+      ],
+      [
+        "batch311-georgia-scene1267-Alia-straplessDress",
+        67
+      ],
+      [
+        "batch311-georgia-scene1267-Alia-fullyOpenBack",
+        36
+      ],
+      [
+        "batch311-georgia-scene1267-AI ECE-emotion",
+        32
+      ],
+      [
+        "batch311-georgia-scene1267-AI ECE-visibleMidriff",
+        26
+      ],
+      [
+        "batch311-georgia-scene1267-AI ECE-straplessDress",
+        25
+      ],
+      [
+        "batch311-georgia-scene1267-AI ECE-fullyOpenBack",
+        78
+      ],
+      [
+        "batch311-georgia-x-heart",
+        31
+      ],
+      [
+        "batch311-georgia-x-internalagency",
+        91
+      ],
+      [
+        "batch311-georgia-x-worldxxxseries",
+        12
+      ]
+    ],
+    "hosierySelectorPairs": [
+      [
+        "batch311-georgia-scene1264-rainbowHosieryWearer",
+        41
+      ],
+      [
+        "batch311-georgia-scene1264-rainbowHosieryPaletteMode",
+        31
+      ],
+      [
+        "batch311-georgia-scene1265-rainbowHosieryWearer",
+        32
+      ],
+      [
+        "batch311-georgia-scene1265-rainbowHosieryPaletteMode",
+        76
+      ],
+      [
+        "batch311-georgia-scene1266-rainbowHosieryWearer",
+        71
+      ],
+      [
+        "batch311-georgia-scene1266-rainbowHosieryPaletteMode",
+        29
+      ],
+      [
+        "batch311-georgia-scene1267-rainbowHosieryWearer",
+        38
+      ],
+      [
+        "batch311-georgia-scene1267-rainbowHosieryPaletteMode",
+        38
+      ]
+    ],
+    "primaryPairCount": 97,
+    "hosierySelectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "92EC7706C2814D30919D6ECBF2368DE5CB0DB186705F2DBE5C7565FB944DD543",
+    "hosierySelectorPairsSha256": "A62D8D983CEF5AD8AB9C012BA7F79B8F78E8864D9E9499650CBCA614BC5B0915"
+  },
+  "scenePlans": {
+    "1264": {
+      "scene": 1264,
+      "theme": "cleaner and service couture",
+      "landmark": "a broad dry nonslip route-service terrace in Batumi's Miracle Park beside the Black Sea, with the complete Alphabet Tower, Ferris wheel, lighthouse, moving Ali and Nino silhouette sculpture, boulevard palms, and sea horizon visible through dense silver coastal sea mist",
+      "motifs": [
+        "large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant across Radiance's folded mini skirt and ECE's radial mini skort",
+        "large complete secular Batumi Ferris-wheel, Alphabet-Tower helix, lighthouse, paired Ali-and-Nino silhouette, Black-Sea wave, and boulevard-palm compositions across Radiance, Ellie, Alia, and ECE, with at least two complete landmark compositions clearly spanning two separate outfits"
+      ],
+      "culture": "Keep the Ferris wheel, Alphabet Tower, lighthouse, Ali and Nino sculpture, Black Sea, and boulevard recognizable as respectful secular Batumi signals. The sculptures remain distant public art and no letterforms become readable text. Treat the national geometry only as respectful civic fashion art wrapped around the silhouette, never as a literal rectangular flag. No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred icon, ritual, readable text, badge, alcohol consumption, brand, or political insignia.",
+      "weather": {
+        "key": "batch311-georgia-scene1264-weather",
+        "roll": 70,
+        "result": "coastal sea mist"
+      },
+      "paws": {
+        "key": "batch311-georgia-scene1264-paws",
+        "roll": 7,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch311-georgia-scene1264-poleDanceTheme",
+        "roll": 76,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch311-georgia-scene1264-rainbowOnly",
+        "roll": 10,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch311-georgia-scene1264-rainbowHosiery",
+        "roll": 37,
+        "active": false,
+        "wearer": {
+          "key": "batch311-georgia-scene1264-rainbowHosieryWearer",
+          "roll": 41,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch311-georgia-scene1264-rainbowHosieryPaletteMode",
+          "roll": 31,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch311-georgia-scene1264-romanceBeat",
+        "roll": 43,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch311-georgia-scene1264-compoundLoveBeat",
+        "roll": 55,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch311-georgia-scene1264-Radiance-emotion",
+            "roll": 83,
+            "result": "crying with visible tears",
+            "performance": "crying with visible tears shown by two clean tear tracks while leaning toward ECE for reassurance"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1264-Radiance-visibleMidriff",
+            "roll": 31,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1264-Radiance-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1264-Radiance-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch311-georgia-scene1264-Ellie-emotion",
+            "roll": 27,
+            "result": "hope",
+            "performance": "hope shown by lifted brows and a small steady smile toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1264-Ellie-visibleMidriff",
+            "roll": 79,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1264-Ellie-straplessDress",
+            "roll": 64,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1264-Ellie-fullyOpenBack",
+            "roll": 69,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch311-georgia-scene1264-Alia-emotion",
+            "roll": 73,
+            "result": "betrayal shock",
+            "performance": "betrayal shock shown by widened eyes and a caught breath while keeping her contact gentle"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1264-Alia-visibleMidriff",
+            "roll": 5,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1264-Alia-straplessDress",
+            "roll": 54,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1264-Alia-fullyOpenBack",
+            "roll": 67,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch311-georgia-scene1264-AI ECE-emotion",
+            "roll": 11,
+            "result": "romantic joy",
+            "performance": "romantic joy shown by a warm open smile and bright eyes directed toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1264-AI ECE-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1264-AI ECE-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1264-AI ECE-fullyOpenBack",
+            "roll": 53,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Ellie sits on one low mission plinth while Radiance stands close before her in a protective half-embrace. Ellie's left hand steadies Radiance's waist and her right hand cups Radiance's cheek. Alia presses a route card flat against Radiance's upper back with her left hand while leaning near for a quick cheek peck; Radiance's right hand welcomes Alia at the shoulder. Radiance's left hand rests on ECE's shoulder, and Alia's right hand reaches ECE's upper arm. ECE remains inches away and answers Radiance with unmistakable affectionate eye contact while safely managing the inspection prop and route map.",
+      "composition": "Place ECE at far left foreground with the prop isolated over empty Black Sea, Radiance left-center, Ellie seated low at right-center, and Alia at far right in a staggered three-quarter plane. Keep a mist-bright gap behind every arm. All four faces remain complete and all three rolled ordinary navels remain visible.",
+      "emotionNuance": {
+        "Radiance": "crying with visible tears shown by two clean tear tracks while leaning toward ECE for reassurance",
+        "Ellie": "hope shown by lifted brows and a small steady smile toward Radiance",
+        "Alia": "betrayal shock shown by widened eyes and a caught breath while keeping her contact gentle",
+        "AI ECE": "romantic joy shown by a warm open smile and bright eyes directed toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless pearl-white cropped service bodice exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed bandeau back, a carmine folded A-line mini skirt carrying large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Batumi Ferris wheel, and silver pumps",
+        "Ellie": "a short-sleeve Black-Sea-teal tailored service mini dress with covered waist and high closed back, carrying a large complete Alphabet-Tower helix and lighthouse composition, with pearl-white heeled ankle boots",
+        "Alia": "a sleeveless charcoal cropped route-service shell exposing her ordinary waist and belly button with a high closed back, separate carmine tailored bubble mini shorts carrying a large complete paired Ali-and-Nino silhouette, Black-Sea wave, and boulevard-palm composition, with teal block heels",
+        "AI ECE": "a one-shoulder pearl-white cropped strategist shell exposing her ordinary waist and belly button with a high closed back, a Black-Sea-teal radial mini skort carrying a second large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete lighthouse and wave composition, and carmine slingback heels"
+      },
+      "propPlan": "ECE alone performs an unloaded magazine-free inspection demonstration. The full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop lies horizontally in clean side profile across ECE's completely open flat right palm. Her palm supports it only from beneath the solid grip base and rear slide. All five right-hand fingers are straight, separated, fully visible, and entirely below the prop. No finger wraps the grip. The complete trigger guard is centered, unobstructed, and visibly empty, with clear air inside it. The empty magazine well is visibly open. The muzzle points only sideways and downrange toward the named unoccupied route target, away from every person, kitten, landmark, animal, and camera. This is not a firing grip. The muzzle points left across clearly empty Black Sea toward one unoccupied route buoy.",
+      "handInventory": [
+        "ECE right hand is the fully open flat palm supporting the inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map",
+        "Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand rests visibly on Alia's near shoulder",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand cups Radiance's near cheek",
+        "Alia left hand visibly presses one route card flat against Radiance's upper back; Alia right hand rests visibly on ECE's near upper arm"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten, PAWS, perches securely on Alia's far shoulder and harmlessly paws at a loose teal route ribbon clipped high behind her. PAWS stays far from ECE, the prop, terrace edge, plinth, and wet surfaces; no adult hand is reassigned to the kitten.",
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only, not wardrobe, pose, prop, or background. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry nonslip route-service terrace in Batumi's Miracle Park beside the Black Sea, with the complete Alphabet Tower, Ferris wheel, lighthouse, moving Ali and Nino silhouette sculpture, boulevard palms, and sea horizon visible through dense silver coastal sea mist. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly at least 28 years old. Preserve the anchored faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult, Ellie the dark-haired adult rival, Alia the Black adult woman who alone wears a high sculptural braided ponytail with fine face-framing braids, and AI ECE the brunette adult strategist. Preserve the male's Scene 1136 face and trimmed beard when present. No cloning, replacement, merging, or age shift. Profession theme: cleaner and service couture, treated only as original public-safe fictional fashion. No copied uniform, badge, degrading service role, stripping, explicit dance, police impersonation, arrest, raid, assassination, threat, injury, or combat. Stored scene rolls: weather 70=coastal sea mist; PAWS 7=active; pole theme 76=inactive; rainbow-only 10=inactive; rainbow hosiery 37=inactive; hosiery wearer selector 41=Radiance; hosiery palette selector 31=country-palette rainbow-like gradient; romance 43; compound love 55. Exact individual wardrobe rolls: Radiance: midriff 31=visible, strapless 12=active, open back 37=inactive; Ellie: midriff 79=covered, strapless 64=inactive, open back 69=inactive; Alia: midriff 5=visible, strapless 54=inactive, open back 67=inactive; AI ECE: midriff 39=visible, strapless 60=inactive, open back 53=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact rolled outfits: Radiance: a fully strapless pearl-white cropped service bodice exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed bandeau back, a carmine folded A-line mini skirt carrying large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Batumi Ferris wheel, and silver pumps; Ellie: a short-sleeve Black-Sea-teal tailored service mini dress with covered waist and high closed back, carrying a large complete Alphabet-Tower helix and lighthouse composition, with pearl-white heeled ankle boots; Alia: a sleeveless charcoal cropped route-service shell exposing her ordinary waist and belly button with a high closed back, separate carmine tailored bubble mini shorts carrying a large complete paired Ali-and-Nino silhouette, Black-Sea wave, and boulevard-palm composition, with teal block heels; AI ECE: a one-shoulder pearl-white cropped strategist shell exposing her ordinary waist and belly button with a high closed back, a Black-Sea-teal radial mini skort carrying a second large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete lighthouse and wave composition, and carmine slingback heels. Materialize every covered or visible ordinary waist and belly button, every fully strapless cut, and every complete open back exactly as written. Large complete secular Georgia-country motifs must dominate at least two outfits in this image: large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant across Radiance's folded mini skirt and ECE's radial mini skort; large complete secular Batumi Ferris-wheel, Alphabet-Tower helix, lighthouse, paired Ali-and-Nino silhouette, Black-Sea wave, and boulevard-palm compositions across Radiance, Ellie, Alia, and ECE, with at least two complete landmark compositions clearly spanning two separate outfits. Keep the Ferris wheel, Alphabet Tower, lighthouse, Ali and Nino sculpture, Black Sea, and boulevard recognizable as respectful secular Batumi signals. The sculptures remain distant public art and no letterforms become readable text. Treat the national geometry only as respectful civic fashion art wrapped around the silhouette, never as a literal rectangular flag. No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred icon, ritual, readable text, badge, alcohol consumption, brand, or political insignia. Distinct rolled emotional performances: Radiance: roll 83, crying with visible tears, performed as crying with visible tears shown by two clean tear tracks while leaning toward ECE for reassurance; Ellie: roll 27, hope, performed as hope shown by lifted brows and a small steady smile toward Radiance; Alia: roll 73, betrayal shock, performed as betrayal shock shown by widened eyes and a caught breath while keeping her contact gentle; AI ECE: roll 11, romantic joy, performed as romantic joy shown by a warm open smile and bright eyes directed toward Radiance. Selected dynamic romance roll 43: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Selected compound love roll 55: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Translate both selected beats through this exact public-safe consensual choreography: Ellie sits on one low mission plinth while Radiance stands close before her in a protective half-embrace. Ellie's left hand steadies Radiance's waist and her right hand cups Radiance's cheek. Alia presses a route card flat against Radiance's upper back with her left hand while leaning near for a quick cheek peck; Radiance's right hand welcomes Alia at the shoulder. Radiance's left hand rests on ECE's shoulder, and Alia's right hand reaches ECE's upper arm. ECE remains inches away and answers Radiance with unmistakable affectionate eye contact while safely managing the inspection prop and route map. Place ECE at far left foreground with the prop isolated over empty Black Sea, Radiance left-center, Ellie seated low at right-center, and Alia at far right in a staggered three-quarter plane. Keep a mist-bright gap behind every arm. All four faces remain complete and all three rolled ordinary navels remain visible. Use exactly this owner-by-owner hand inventory and no other hands: ECE right hand is the fully open flat palm supporting the inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map; Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand rests visibly on Alia's near shoulder; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand cups Radiance's near cheek; Alia left hand visibly presses one route card flat against Radiance's upper back; Alia right hand rests visibly on ECE's near upper arm. ECE alone performs an unloaded magazine-free inspection demonstration. The full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop lies horizontally in clean side profile across ECE's completely open flat right palm. Her palm supports it only from beneath the solid grip base and rear slide. All five right-hand fingers are straight, separated, fully visible, and entirely below the prop. No finger wraps the grip. The complete trigger guard is centered, unobstructed, and visibly empty, with clear air inside it. The empty magazine well is visibly open. The muzzle points only sideways and downrange toward the named unoccupied route target, away from every person, kitten, landmark, animal, and camera. This is not a firing grip. The muzzle points left across clearly empty Black Sea toward one unoccupied route buoy. Rainbow-hosiery roll 37 is inactive. No rainbow stockings or rainbow knee socks. ECE alone handles the prop and controls the separate holographic map. One tiny collarless golden kitten, PAWS, perches securely on Alia's far shoulder and harmlessly paws at a loose teal route ribbon clipped high behind her. PAWS stays far from ECE, the prop, terrace edge, plinth, and wet surfaces; no adult hand is reassigned to the kitten. Pole-theme roll is inactive. No pole. Rainbow-only roll 10 is inactive. Do not convert the wardrobe to rainbow-only styling. Materialize weather exactly as coastal sea mist, with stable dry nonslip footing and readable anatomy. Exactly four adults, eight arms, and eight hands, two per woman. Every arm remains fully visible continuously from its owner's shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. No arm or hand passes behind a torso. Keep palms and finger clusters separated from garment edges, hair, prop, kitten, and other hands except for listed contacts. Use an asymmetric moving composition with clean silhouette gaps, not a static lineup. Full-length framing contains every face, elbow, wrist, hand, leg, foot, heel, boot, plinth, route mat, and kitten when present. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Its trigger guard must be completely empty. No finger may touch or enter the guard. No ammunition, reload, firing, muzzle flash, holster, display case, transparent enclosure, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal rectangular flag, coat of arms, official seal, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1265": {
+      "scene": 1265,
+      "theme": "cleaner and service couture",
+      "landmark": "a broad dry mountain route terrace above Stepantsminda in clear golden-hour radiance, with Mount Kazbegi, the Terek valley, switchback road, stone village roofs, and the distant complete Gergeti Trinity Church visible respectfully on its high ridge",
+      "motifs": [
+        "large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant across Radiance's mini skirt and ECE's tailored mini dress",
+        "large complete secular Mount-Kazbegi peak, Caucasus contour, Terek-river ribbon, Stepantsminda roofline, switchback-road, and mountain-wildflower compositions across at least two separate outfits"
+      ],
+      "culture": "Use the distant historic stone landmark only as respectful landscape architecture, with no worship, ritual, icon, vestment, or sacred symbol repeated on clothing. Keep Mount Kazbegi, the Terek valley, village roofline, road, and wildflowers dominant as secular Georgian highland signals. Treat the national geometry only as respectful civic fashion art wrapped around the silhouette, never as a literal rectangular flag. No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred icon, ritual, readable text, badge, alcohol consumption, brand, or political insignia.",
+      "weather": {
+        "key": "batch311-georgia-scene1265-weather",
+        "roll": 9,
+        "result": "clear golden-hour radiance"
+      },
+      "paws": {
+        "key": "batch311-georgia-scene1265-paws",
+        "roll": 90,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch311-georgia-scene1265-poleDanceTheme",
+        "roll": 93,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch311-georgia-scene1265-rainbowOnly",
+        "roll": 93,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch311-georgia-scene1265-rainbowHosiery",
+        "roll": 92,
+        "active": false,
+        "wearer": {
+          "key": "batch311-georgia-scene1265-rainbowHosieryWearer",
+          "roll": 32,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch311-georgia-scene1265-rainbowHosieryPaletteMode",
+          "roll": 76,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch311-georgia-scene1265-romanceBeat",
+        "roll": 16,
+        "dynamicIndex": 4,
+        "contractResult": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compoundLoveBeat": {
+        "key": "batch311-georgia-scene1265-compoundLoveBeat",
+        "roll": 82,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch311-georgia-scene1265-Radiance-emotion",
+            "roll": 66,
+            "result": "possessive tension",
+            "performance": "possessive tension shown by a protective jaw and unwavering gaze toward ECE without hostility"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1265-Radiance-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1265-Radiance-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1265-Radiance-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch311-georgia-scene1265-Ellie-emotion",
+            "roll": 80,
+            "result": "deep sadness",
+            "performance": "deep sadness shown by lowered brows and wet eyes while remaining physically supportive"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1265-Ellie-visibleMidriff",
+            "roll": 70,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1265-Ellie-straplessDress",
+            "roll": 17,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1265-Ellie-fullyOpenBack",
+            "roll": 86,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch311-georgia-scene1265-Alia-emotion",
+            "roll": 4,
+            "result": "tender affection",
+            "performance": "tender affection shown by softened eyes during a gentle cheek peck toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1265-Alia-visibleMidriff",
+            "roll": 54,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1265-Alia-straplessDress",
+            "roll": 1,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1265-Alia-fullyOpenBack",
+            "roll": 98,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch311-georgia-scene1265-AI ECE-emotion",
+            "roll": 30,
+            "result": "hope",
+            "performance": "hope shown by lifted eyes and a restrained relieved smile back toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1265-AI ECE-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1265-AI ECE-straplessDress",
+            "roll": 27,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1265-AI ECE-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "The quartet forms a turning embrace chain rather than a lineup. Alia stands just behind Radiance and leans in for a quick cheek peck while her left hand supports Radiance's waist. Radiance turns face-to-face toward Ellie, with Ellie's left hand at Radiance's waist and Radiance's right hand gently at Alia's cheek. Ellie reaches her right hand to ECE's shoulder while Radiance keeps her left hand on ECE's other shoulder. Alia's right hand steadies Ellie's forearm. ECE turns slightly away with the inspection prop and map yet keeps her hopeful gaze and emotional choice fixed on Radiance.",
+      "composition": "Place ECE far left with the prop isolated over an empty valley route, Radiance left-center, Ellie right-center, and Alia far right/rear with her full silhouette separated. Use golden sky gaps behind all arms. Keep all four complete faces, both bare-shoulder dress lines, and Radiance's rolled ordinary navel readable.",
+      "emotionNuance": {
+        "Radiance": "possessive tension shown by a protective jaw and unwavering gaze toward ECE without hostility",
+        "Ellie": "deep sadness shown by lowered brows and wet eyes while remaining physically supportive",
+        "Alia": "tender affection shown by softened eyes during a gentle cheek peck toward Radiance",
+        "AI ECE": "hope shown by lifted eyes and a restrained relieved smile back toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "a sleeveless carmine cropped route-service vest exposing her ordinary waist and belly button with a high closed back, a pearl-white asymmetric mini skirt carrying large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Mount-Kazbegi peak and Terek-river ribbon composition, and charcoal pumps",
+        "Ellie": "a fully strapless charcoal folded-bodice service mini dress with completely bare shoulders, covered waist and an opaque enclosed back, carrying a large complete Caucasus contour and switchback-road composition, with pearl-white heeled boots",
+        "Alia": "a fully strapless deep-wine sculpted service mini romper with completely bare shoulders, covered waist and an opaque enclosed back, carrying a large complete Stepantsminda roofline and mountain-wildflower composition, with silver platform heels",
+        "AI ECE": "a fully strapless pearl-white tailored strategist mini dress with completely bare shoulders, covered waist and an opaque enclosed back, a carmine wrap fan carrying a second large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Terek-valley contour, and black slingback heels"
+      },
+      "propPlan": "ECE alone performs an unloaded magazine-free inspection demonstration. The full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop lies horizontally in clean side profile across ECE's completely open flat right palm. Her palm supports it only from beneath the solid grip base and rear slide. All five right-hand fingers are straight, separated, fully visible, and entirely below the prop. No finger wraps the grip. The complete trigger guard is centered, unobstructed, and visibly empty, with clear air inside it. The empty magazine well is visibly open. The muzzle points only sideways and downrange toward the named unoccupied route target, away from every person, kitten, landmark, animal, and camera. This is not a firing grip. The muzzle points left across one clearly empty descending route toward an unoccupied navigation marker.",
+      "handInventory": [
+        "ECE right hand is the fully open flat palm supporting the inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map",
+        "Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand cups Alia's near cheek",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand rests visibly on ECE's far shoulder",
+        "Alia left hand rests visibly at Radiance's far waist; Alia right hand rests visibly on Ellie's near forearm"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only, not wardrobe, pose, prop, or background. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry mountain route terrace above Stepantsminda in clear golden-hour radiance, with Mount Kazbegi, the Terek valley, switchback road, stone village roofs, and the distant complete Gergeti Trinity Church visible respectfully on its high ridge. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly at least 28 years old. Preserve the anchored faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult, Ellie the dark-haired adult rival, Alia the Black adult woman who alone wears a high sculptural braided ponytail with fine face-framing braids, and AI ECE the brunette adult strategist. Preserve the male's Scene 1136 face and trimmed beard when present. No cloning, replacement, merging, or age shift. Profession theme: cleaner and service couture, treated only as original public-safe fictional fashion. No copied uniform, badge, degrading service role, stripping, explicit dance, police impersonation, arrest, raid, assassination, threat, injury, or combat. Stored scene rolls: weather 9=clear golden-hour radiance; PAWS 90=inactive; pole theme 93=inactive; rainbow-only 93=inactive; rainbow hosiery 92=inactive; hosiery wearer selector 32=Radiance; hosiery palette selector 76=original independent rainbow gradient; romance 16; compound love 82. Exact individual wardrobe rolls: Radiance: midriff 4=visible, strapless 91=inactive, open back 92=inactive; Ellie: midriff 70=covered, strapless 17=active, open back 86=inactive; Alia: midriff 54=covered, strapless 1=active, open back 98=inactive; AI ECE: midriff 80=covered, strapless 27=active, open back 36=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact rolled outfits: Radiance: a sleeveless carmine cropped route-service vest exposing her ordinary waist and belly button with a high closed back, a pearl-white asymmetric mini skirt carrying large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Mount-Kazbegi peak and Terek-river ribbon composition, and charcoal pumps; Ellie: a fully strapless charcoal folded-bodice service mini dress with completely bare shoulders, covered waist and an opaque enclosed back, carrying a large complete Caucasus contour and switchback-road composition, with pearl-white heeled boots; Alia: a fully strapless deep-wine sculpted service mini romper with completely bare shoulders, covered waist and an opaque enclosed back, carrying a large complete Stepantsminda roofline and mountain-wildflower composition, with silver platform heels; AI ECE: a fully strapless pearl-white tailored strategist mini dress with completely bare shoulders, covered waist and an opaque enclosed back, a carmine wrap fan carrying a second large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Terek-valley contour, and black slingback heels. Materialize every covered or visible ordinary waist and belly button, every fully strapless cut, and every complete open back exactly as written. Large complete secular Georgia-country motifs must dominate at least two outfits in this image: large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant across Radiance's mini skirt and ECE's tailored mini dress; large complete secular Mount-Kazbegi peak, Caucasus contour, Terek-river ribbon, Stepantsminda roofline, switchback-road, and mountain-wildflower compositions across at least two separate outfits. Use the distant historic stone landmark only as respectful landscape architecture, with no worship, ritual, icon, vestment, or sacred symbol repeated on clothing. Keep Mount Kazbegi, the Terek valley, village roofline, road, and wildflowers dominant as secular Georgian highland signals. Treat the national geometry only as respectful civic fashion art wrapped around the silhouette, never as a literal rectangular flag. No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred icon, ritual, readable text, badge, alcohol consumption, brand, or political insignia. Distinct rolled emotional performances: Radiance: roll 66, possessive tension, performed as possessive tension shown by a protective jaw and unwavering gaze toward ECE without hostility; Ellie: roll 80, deep sadness, performed as deep sadness shown by lowered brows and wet eyes while remaining physically supportive; Alia: roll 4, tender affection, performed as tender affection shown by softened eyes during a gentle cheek peck toward Radiance; AI ECE: roll 30, hope, performed as hope shown by lifted eyes and a restrained relieved smile back toward Radiance. Selected dynamic romance roll 16: Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips. Selected compound love roll 82: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Translate both selected beats through this exact public-safe consensual choreography: The quartet forms a turning embrace chain rather than a lineup. Alia stands just behind Radiance and leans in for a quick cheek peck while her left hand supports Radiance's waist. Radiance turns face-to-face toward Ellie, with Ellie's left hand at Radiance's waist and Radiance's right hand gently at Alia's cheek. Ellie reaches her right hand to ECE's shoulder while Radiance keeps her left hand on ECE's other shoulder. Alia's right hand steadies Ellie's forearm. ECE turns slightly away with the inspection prop and map yet keeps her hopeful gaze and emotional choice fixed on Radiance. Place ECE far left with the prop isolated over an empty valley route, Radiance left-center, Ellie right-center, and Alia far right/rear with her full silhouette separated. Use golden sky gaps behind all arms. Keep all four complete faces, both bare-shoulder dress lines, and Radiance's rolled ordinary navel readable. Use exactly this owner-by-owner hand inventory and no other hands: ECE right hand is the fully open flat palm supporting the inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map; Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand cups Alia's near cheek; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand rests visibly on ECE's far shoulder; Alia left hand rests visibly at Radiance's far waist; Alia right hand rests visibly on Ellie's near forearm. ECE alone performs an unloaded magazine-free inspection demonstration. The full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop lies horizontally in clean side profile across ECE's completely open flat right palm. Her palm supports it only from beneath the solid grip base and rear slide. All five right-hand fingers are straight, separated, fully visible, and entirely below the prop. No finger wraps the grip. The complete trigger guard is centered, unobstructed, and visibly empty, with clear air inside it. The empty magazine well is visibly open. The muzzle points only sideways and downrange toward the named unoccupied route target, away from every person, kitten, landmark, animal, and camera. This is not a firing grip. The muzzle points left across one clearly empty descending route toward an unoccupied navigation marker. Rainbow-hosiery roll 92 is inactive. No rainbow stockings or rainbow knee socks. ECE alone handles the prop and controls the separate holographic map. PAWS roll is inactive. No kitten. Pole-theme roll is inactive. No pole. Rainbow-only roll 93 is inactive. Do not convert the wardrobe to rainbow-only styling. Materialize weather exactly as clear golden-hour radiance, with stable dry nonslip footing and readable anatomy. Exactly four adults, eight arms, and eight hands, two per woman. Every arm remains fully visible continuously from its owner's shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. No arm or hand passes behind a torso. Keep palms and finger clusters separated from garment edges, hair, prop, kitten, and other hands except for listed contacts. Use an asymmetric moving composition with clean silhouette gaps, not a static lineup. Full-length framing contains every face, elbow, wrist, hand, leg, foot, heel, boot, plinth, route mat, and kitten when present. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Its trigger guard must be completely empty. No finger may touch or enter the guard. No ammunition, reload, firing, muzzle flash, holster, display case, transparent enclosure, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal rectangular flag, coat of arms, official seal, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1266": {
+      "scene": 1266,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad covered dry route platform beside Tbilisi's Mtkvari River in a heavy rain curtain, with the complete blue-glass Peace Bridge, Rike Park, Old Tbilisi balconies, Narikala ridge, and Abanotubani's brick sulfur-bath domes and colorful secular facade visible beyond the rain",
+      "motifs": [
+        "large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant across Ellie's mini skirt and ECE's radial mini skort",
+        "large complete secular Peace-Bridge lattice, Mtkvari wave, Old-Tbilisi balcony, sulfur-bath brick-dome, mosaic-facade, and Narikala-ridge compositions across at least two separate outfits"
+      ],
+      "culture": "Show only the exterior architecture of Abanotubani, with no bathing or undress. Keep the Peace Bridge, Mtkvari, balconies, brick domes, mosaic facade, and ridge recognizable as respectful secular Tbilisi signals. Treat the national geometry only as respectful civic fashion art wrapped around the silhouette, never as a literal rectangular flag. No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred icon, ritual, readable text, badge, alcohol consumption, brand, or political insignia.",
+      "weather": {
+        "key": "batch311-georgia-scene1266-weather",
+        "roll": 40,
+        "result": "heavy rain curtain"
+      },
+      "paws": {
+        "key": "batch311-georgia-scene1266-paws",
+        "roll": 77,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch311-georgia-scene1266-poleDanceTheme",
+        "roll": 74,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch311-georgia-scene1266-rainbowOnly",
+        "roll": 24,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch311-georgia-scene1266-rainbowHosiery",
+        "roll": 83,
+        "active": false,
+        "wearer": {
+          "key": "batch311-georgia-scene1266-rainbowHosieryWearer",
+          "roll": 71,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch311-georgia-scene1266-rainbowHosieryPaletteMode",
+          "roll": 29,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch311-georgia-scene1266-romanceBeat",
+        "roll": 93,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch311-georgia-scene1266-compoundLoveBeat",
+        "roll": 73,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch311-georgia-scene1266-Radiance-emotion",
+            "roll": 57,
+            "result": "aching romantic longing",
+            "performance": "aching romantic longing shown by softened brows and an intent gaze toward the male while seeking his upper arm"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1266-Radiance-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1266-Radiance-straplessDress",
+            "roll": 94,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1266-Radiance-fullyOpenBack",
+            "roll": 43,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch311-georgia-scene1266-Ellie-emotion",
+            "roll": 33,
+            "result": "overwhelming relief",
+            "performance": "overwhelming relief shown by a tear-bright smile as she links hands with Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1266-Ellie-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1266-Ellie-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1266-Ellie-fullyOpenBack",
+            "roll": 3,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch311-georgia-scene1266-Alia-emotion",
+            "roll": 79,
+            "result": "deep sadness",
+            "performance": "deep sadness shown by wet eyes while openly accepting the male's waist contact and giving Radiance a quick cheek peck"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1266-Alia-visibleMidriff",
+            "roll": 35,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1266-Alia-straplessDress",
+            "roll": 20,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1266-Alia-fullyOpenBack",
+            "roll": 69,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch311-georgia-scene1266-AI ECE-emotion",
+            "roll": 1,
+            "result": "tender affection",
+            "performance": "tender affection shown by calm warm eyes directed toward her husband"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1266-AI ECE-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1266-AI ECE-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1266-AI ECE-fullyOpenBack",
+            "roll": 87,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Build a moving five-adult arc around ECE without replacing any woman. The married male openly rests his right hand on ECE's shoulder and his left hand at Alia's waist. Alia accepts this consensual adult infidelity beat with her right hand on his forearm while leaning across for a quick cheek peck toward Radiance; her left hand rests on Radiance's shoulder. Radiance openly seeks the male with her right hand on his upper arm and links her left hand with Ellie's right hand. Ellie reaches her left hand across to ECE's far shoulder and stares directly at ECE. ECE remains the route leader, and the male's strongest sustained eye line returns unmistakably to his wife ECE. This integrates the selected beacon, waist-circle, shoulder-reach, blown-kiss, behind-embrace, cheek-kiss, and linked-hand energies as public-safe fully clothed adult relationship drama.",
+      "composition": "Place ECE far left with the prop isolated over empty Mtkvari water, the male left-center, Alia center, Radiance right-center, and Ellie far right. Use five separated depth planes and rain-bright gaps behind every arm. Turn Ellie three-quarter-back with her hair completely swept forward so the entire rolled open back and her complete face remain visible. Keep all four rolled ordinary navels readable.",
+      "emotionNuance": {
+        "Radiance": "aching romantic longing shown by softened brows and an intent gaze toward the male while seeking his upper arm",
+        "Ellie": "overwhelming relief shown by a tear-bright smile as she links hands with Radiance",
+        "Alia": "deep sadness shown by wet eyes while openly accepting the male's waist contact and giving Radiance a quick cheek peck",
+        "AI ECE": "tender affection shown by calm warm eyes directed toward her husband",
+        "Male": "romantic joy shown by a restrained delighted smile while his head and pupils remain most strongly fixed on his wife ECE"
+      },
+      "outfits": {
+        "Radiance": "a short-sleeve carmine cropped covert-fashion polo exposing her ordinary waist and belly button with a high closed back, a pearl-white folded mini skirt carrying a large complete Peace-Bridge lattice and Mtkvari-wave composition, and black pumps",
+        "Ellie": "a fully strapless pearl-white cropped covert-fashion bodice exposing her ordinary waist and belly button, with completely bare shoulders, secure opaque side structure, and a completely open back from shoulder blades to the separate waistline, a carmine A-line mini skirt carrying large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Old-Tbilisi balcony composition, and silver heeled boots",
+        "Alia": "a fully strapless charcoal cropped covert-fashion shell exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed back, separate wine-red tailored mini shorts carrying a large complete sulfur-bath brick-dome and mosaic-facade composition, and pearl-white platform heels",
+        "AI ECE": "a fully strapless pearl-white cropped strategist bodice exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed back, a Black-Sea-teal radial mini skort carrying a second large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Narikala-ridge and Mtkvari-wave composition, and carmine slingback heels",
+        "Male": "the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted deep-wine short-sleeve polo with a clean pearl-white Peace-Bridge lattice band, fitted black jeans, and practical black boots"
+      },
+      "propPlan": "ECE alone performs an unloaded magazine-free inspection demonstration. The full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop lies horizontally in clean side profile across ECE's completely open flat right palm. Her palm supports it only from beneath the solid grip base and rear slide. All five right-hand fingers are straight, separated, fully visible, and entirely below the prop. No finger wraps the grip. The complete trigger guard is centered, unobstructed, and visibly empty, with clear air inside it. The empty magazine well is visibly open. The muzzle points only sideways and downrange toward the named unoccupied route target, away from every person, kitten, landmark, animal, and camera. This is not a firing grip. The muzzle points left across clearly empty Mtkvari water toward one unoccupied route buoy.",
+      "handInventory": [
+        "ECE right hand is the fully open flat palm supporting the inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map",
+        "the male right hand rests visibly on ECE's near shoulder; the male left hand rests visibly at Alia's near waist",
+        "Alia right hand rests visibly on the male's near forearm; Alia left hand rests visibly on Radiance's near shoulder",
+        "Radiance right hand rests visibly on the male's near upper arm; Radiance left hand is visibly linked with Ellie's right hand",
+        "Ellie right hand is visibly linked with Radiance's left hand; Ellie left hand rests visibly on ECE's far shoulder"
+      ],
+      "pawsPlan": null,
+      "polePlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch311-georgia-scene3-male-emotion",
+          "roll": 11,
+          "result": "romantic joy",
+          "performance": "romantic joy shown by a restrained delighted smile while his head and pupils remain most strongly fixed on his wife ECE"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "married to ECE; fully clothed consensual public adult infidelity drama with Alia and pursuing Radiance; at least two clear male contacts; strongest sustained eye line remains on ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the established adult male. References control identity only, not wardrobe, pose, prop, or background. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad covered dry route platform beside Tbilisi's Mtkvari River in a heavy rain curtain, with the complete blue-glass Peace Bridge, Rike Park, Old Tbilisi balconies, Narikala ridge, and Abanotubani's brick sulfur-bath domes and colorful secular facade visible beyond the rain. Show exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established adult male. Add him without replacing any woman. Every person is a fictional adult visibly at least 28 years old. Preserve the anchored faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult, Ellie the dark-haired adult rival, Alia the Black adult woman who alone wears a high sculptural braided ponytail with fine face-framing braids, and AI ECE the brunette adult strategist. Preserve the male's Scene 1136 face and trimmed beard when present. No cloning, replacement, merging, or age shift. Profession theme: cinematic covert-agent crew couture, treated only as original public-safe fictional fashion. No copied uniform, badge, degrading service role, stripping, explicit dance, police impersonation, arrest, raid, assassination, threat, injury, or combat. Stored scene rolls: weather 40=heavy rain curtain; PAWS 77=inactive; pole theme 74=inactive; rainbow-only 24=inactive; rainbow hosiery 83=inactive; hosiery wearer selector 71=AI ECE; hosiery palette selector 29=country-palette rainbow-like gradient; romance 93; compound love 73. Exact individual wardrobe rolls: Radiance: midriff 1=visible, strapless 94=inactive, open back 43=inactive; Ellie: midriff 1=visible, strapless 22=active, open back 3=active; Alia: midriff 35=visible, strapless 20=active, open back 69=inactive; AI ECE: midriff 13=visible, strapless 22=active, open back 87=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact rolled outfits: Radiance: a short-sleeve carmine cropped covert-fashion polo exposing her ordinary waist and belly button with a high closed back, a pearl-white folded mini skirt carrying a large complete Peace-Bridge lattice and Mtkvari-wave composition, and black pumps; Ellie: a fully strapless pearl-white cropped covert-fashion bodice exposing her ordinary waist and belly button, with completely bare shoulders, secure opaque side structure, and a completely open back from shoulder blades to the separate waistline, a carmine A-line mini skirt carrying large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Old-Tbilisi balcony composition, and silver heeled boots; Alia: a fully strapless charcoal cropped covert-fashion shell exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed back, separate wine-red tailored mini shorts carrying a large complete sulfur-bath brick-dome and mosaic-facade composition, and pearl-white platform heels; AI ECE: a fully strapless pearl-white cropped strategist bodice exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed back, a Black-Sea-teal radial mini skort carrying a second large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete Narikala-ridge and Mtkvari-wave composition, and carmine slingback heels; Male: the established adult male face from Scene 1136 with closely trimmed beard and athletic muscular build, wearing an opaque fitted deep-wine short-sleeve polo with a clean pearl-white Peace-Bridge lattice band, fitted black jeans, and practical black boots. Materialize every covered or visible ordinary waist and belly button, every fully strapless cut, and every complete open back exactly as written. Large complete secular Georgia-country motifs must dominate at least two outfits in this image: large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant across Ellie's mini skirt and ECE's radial mini skort; large complete secular Peace-Bridge lattice, Mtkvari wave, Old-Tbilisi balcony, sulfur-bath brick-dome, mosaic-facade, and Narikala-ridge compositions across at least two separate outfits. Show only the exterior architecture of Abanotubani, with no bathing or undress. Keep the Peace Bridge, Mtkvari, balconies, brick domes, mosaic facade, and ridge recognizable as respectful secular Tbilisi signals. Treat the national geometry only as respectful civic fashion art wrapped around the silhouette, never as a literal rectangular flag. No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred icon, ritual, readable text, badge, alcohol consumption, brand, or political insignia. Distinct rolled emotional performances: Radiance: roll 57, aching romantic longing, performed as aching romantic longing shown by softened brows and an intent gaze toward the male while seeking his upper arm; Ellie: roll 33, overwhelming relief, performed as overwhelming relief shown by a tear-bright smile as she links hands with Radiance; Alia: roll 79, deep sadness, performed as deep sadness shown by wet eyes while openly accepting the male's waist contact and giving Radiance a quick cheek peck; AI ECE: roll 1, tender affection, performed as tender affection shown by calm warm eyes directed toward her husband; Male: roll 11, romantic joy, performed as romantic joy shown by a restrained delighted smile while his head and pupils remain most strongly fixed on his wife ECE. Selected dynamic romance roll 93: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Selected compound love roll 73: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Translate both selected beats through this exact public-safe consensual choreography: Build a moving five-adult arc around ECE without replacing any woman. The married male openly rests his right hand on ECE's shoulder and his left hand at Alia's waist. Alia accepts this consensual adult infidelity beat with her right hand on his forearm while leaning across for a quick cheek peck toward Radiance; her left hand rests on Radiance's shoulder. Radiance openly seeks the male with her right hand on his upper arm and links her left hand with Ellie's right hand. Ellie reaches her left hand across to ECE's far shoulder and stares directly at ECE. ECE remains the route leader, and the male's strongest sustained eye line returns unmistakably to his wife ECE. This integrates the selected beacon, waist-circle, shoulder-reach, blown-kiss, behind-embrace, cheek-kiss, and linked-hand energies as public-safe fully clothed adult relationship drama. Place ECE far left with the prop isolated over empty Mtkvari water, the male left-center, Alia center, Radiance right-center, and Ellie far right. Use five separated depth planes and rain-bright gaps behind every arm. Turn Ellie three-quarter-back with her hair completely swept forward so the entire rolled open back and her complete face remain visible. Keep all four rolled ordinary navels readable. Use exactly this owner-by-owner hand inventory and no other hands: ECE right hand is the fully open flat palm supporting the inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map; the male right hand rests visibly on ECE's near shoulder; the male left hand rests visibly at Alia's near waist; Alia right hand rests visibly on the male's near forearm; Alia left hand rests visibly on Radiance's near shoulder; Radiance right hand rests visibly on the male's near upper arm; Radiance left hand is visibly linked with Ellie's right hand; Ellie right hand is visibly linked with Radiance's left hand; Ellie left hand rests visibly on ECE's far shoulder. ECE alone performs an unloaded magazine-free inspection demonstration. The full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop lies horizontally in clean side profile across ECE's completely open flat right palm. Her palm supports it only from beneath the solid grip base and rear slide. All five right-hand fingers are straight, separated, fully visible, and entirely below the prop. No finger wraps the grip. The complete trigger guard is centered, unobstructed, and visibly empty, with clear air inside it. The empty magazine well is visibly open. The muzzle points only sideways and downrange toward the named unoccupied route target, away from every person, kitten, landmark, animal, and camera. This is not a firing grip. The muzzle points left across clearly empty Mtkvari water toward one unoccupied route buoy. Rainbow-hosiery roll 83 is inactive. No rainbow stockings or rainbow knee socks. ECE alone handles the prop and controls the separate holographic map. PAWS roll is inactive. No kitten. Pole-theme roll is inactive. No pole. Rainbow-only roll 24 is inactive. Do not convert the wardrobe to rainbow-only styling. Materialize weather exactly as heavy rain curtain, with stable dry nonslip footing and readable anatomy. Exactly five adults, ten arms, and ten hands, two per adult. Every arm remains fully visible continuously from its owner's shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. No arm or hand passes behind a torso. Keep palms and finger clusters separated from garment edges, hair, prop, kitten, and other hands except for listed contacts. Use an asymmetric moving composition with clean silhouette gaps, not a static lineup. Full-length framing contains every face, elbow, wrist, hand, leg, foot, heel, boot, plinth, route mat, and kitten when present. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Its trigger guard must be completely empty. No finger may touch or enter the guard. No ammunition, reload, firing, muzzle flash, holster, display case, transparent enclosure, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal rectangular flag, coat of arms, official seal, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    },
+    "1267": {
+      "scene": 1267,
+      "theme": "cinematic covert-agent crew couture",
+      "landmark": "a broad dry glass-roofed route overlook above Sighnaghi and Kakheti's Alazani Valley, with colorful balconies, complete town walls, cobbled lane, vineyard rows, Caucasus foothills, and several large traditional qvevri vessels visible through cinematic snow flurries outside",
+      "motifs": [
+        "large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant across Radiance's folded mini skirt and ECE's radial mini skort",
+        "large complete secular qvevri-vessel, grapevine-leaf-and-bunch, Alazani-terrace, Sighnaghi-wall-and-tower, cobbled-lane, balcony, and Caucasus-foothill compositions across at least two separate outfits"
+      ],
+      "culture": "Keep qvevri as dry craft vessels and the grapevine as agricultural heritage, with no drinking, bottle, glass, intoxication, or alcohol service. Keep Sighnaghi walls, cobbles, balconies, Alazani terraces, and foothills recognizable as respectful secular Kakheti signals. Treat the national geometry only as respectful civic fashion art wrapped around the silhouette, never as a literal rectangular flag. No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred icon, ritual, readable text, badge, alcohol consumption, brand, or political insignia.",
+      "weather": {
+        "key": "batch311-georgia-scene1267-weather",
+        "roll": 55,
+        "result": "snow flurries"
+      },
+      "paws": {
+        "key": "batch311-georgia-scene1267-paws",
+        "roll": 4,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch311-georgia-scene1267-poleDanceTheme",
+        "roll": 59,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch311-georgia-scene1267-rainbowOnly",
+        "roll": 35,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch311-georgia-scene1267-rainbowHosiery",
+        "roll": 50,
+        "active": false,
+        "wearer": {
+          "key": "batch311-georgia-scene1267-rainbowHosieryWearer",
+          "roll": 38,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch311-georgia-scene1267-rainbowHosieryPaletteMode",
+          "roll": 38,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romanceBeat": {
+        "key": "batch311-georgia-scene1267-romanceBeat",
+        "roll": 22,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch311-georgia-scene1267-compoundLoveBeat",
+        "roll": 40,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch311-georgia-scene1267-Radiance-emotion",
+            "roll": 40,
+            "result": "determination",
+            "performance": "determination shown by level brows and a composed protective gaze toward ECE"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1267-Radiance-visibleMidriff",
+            "roll": 38,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1267-Radiance-straplessDress",
+            "roll": 1,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1267-Radiance-fullyOpenBack",
+            "roll": 30,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch311-georgia-scene1267-Ellie-emotion",
+            "roll": 2,
+            "result": "tender affection",
+            "performance": "tender affection shown by a serene smile while leaning close to Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1267-Ellie-visibleMidriff",
+            "roll": 72,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1267-Ellie-straplessDress",
+            "roll": 95,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1267-Ellie-fullyOpenBack",
+            "roll": 24,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch311-georgia-scene1267-Alia-emotion",
+            "roll": 90,
+            "result": "anger",
+            "performance": "anger shown by a controlled jaw and direct hurt gaze without threat"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1267-Alia-visibleMidriff",
+            "roll": 20,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1267-Alia-straplessDress",
+            "roll": 67,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1267-Alia-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch311-georgia-scene1267-AI ECE-emotion",
+            "roll": 32,
+            "result": "overwhelming relief",
+            "performance": "overwhelming relief shown by tear-bright eyes and an open exhale toward Radiance"
+          },
+          "visibleMidriff": {
+            "key": "batch311-georgia-scene1267-AI ECE-visibleMidriff",
+            "roll": 26,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch311-georgia-scene1267-AI ECE-straplessDress",
+            "roll": 25,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch311-georgia-scene1267-AI ECE-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        }
+      },
+      "materializedRomance": "Radiance and Ellie sit close on one low mission plinth in a side embrace: Radiance's right hand rests at Ellie's back and Ellie's left hand rests at Radiance's waist. ECE stands close at their left, visibly choosing Radiance with relieved eye contact while Radiance's left hand reaches ECE's shoulder. Alia kneels safely at their right on a dry padded route mat, her left hand on Ellie's shoulder and her right hand on ECE's upper arm, answering the tension with a controlled look. Ellie's right hand also reaches Alia's shoulder. This translates the selected close plinth pair, behind-hug pressure, between-knees choice, side embrace, cheek-peck warmth, and joined-hand support without hiding or reusing a hand.",
+      "composition": "Place ECE at far left with the prop isolated over an empty terrace route, Radiance and Ellie on the low plinth at center with their knees separated and unobstructed, and Alia at far right on the padded mat with her full arms and hands visible. Keep PAWS high on Alia's far shoulder. Turn Ellie three-quarter-back with hair fully forward to reveal the entire rolled open back and complete face. Show all complete heels and all three rolled ordinary navels.",
+      "emotionNuance": {
+        "Radiance": "determination shown by level brows and a composed protective gaze toward ECE",
+        "Ellie": "tender affection shown by a serene smile while leaning close to Radiance",
+        "Alia": "anger shown by a controlled jaw and direct hurt gaze without threat",
+        "AI ECE": "overwhelming relief shown by tear-bright eyes and an open exhale toward Radiance"
+      },
+      "outfits": {
+        "Radiance": "a fully strapless pearl-white cropped covert-fashion bodice exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed back, a deep-wine folded mini skirt carrying large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete qvevri and grapevine composition, and charcoal pumps",
+        "Ellie": "a long-sleeve charcoal covert-fashion mini dress with covered waist, secure opaque side structure, and a completely open back from shoulder blades to the secure lower-back waistline, carrying a large complete Sighnaghi wall-and-tower and cobbled-lane composition, with pearl-white heeled boots",
+        "Alia": "a sleeveless Kakheti-green cropped covert-fashion vest exposing her ordinary waist and belly button with a high closed back, separate terracotta tailored mini shorts carrying a large complete Alazani-terrace, balcony, and Caucasus-foothill composition, and wine-red platform heels",
+        "AI ECE": "a fully strapless pearl-white cropped strategist bodice exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed back, a carmine radial mini skort carrying a second large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete grapevine and valley composition, and black slingback heels"
+      },
+      "propPlan": "ECE alone performs an unloaded magazine-free inspection demonstration. The full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop lies horizontally in clean side profile across ECE's completely open flat right palm. Her palm supports it only from beneath the solid grip base and rear slide. All five right-hand fingers are straight, separated, fully visible, and entirely below the prop. No finger wraps the grip. The complete trigger guard is centered, unobstructed, and visibly empty, with clear air inside it. The empty magazine well is visibly open. The muzzle points only sideways and downrange toward the named unoccupied route target, away from every person, kitten, landmark, animal, and camera. This is not a firing grip. The muzzle points left across one clearly empty terrace route toward an unoccupied navigation marker.",
+      "handInventory": [
+        "ECE right hand is the fully open flat palm supporting the inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map",
+        "Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand rests visibly across Ellie's near back",
+        "Ellie left hand rests visibly at Radiance's near waist; Ellie right hand rests visibly on Alia's near shoulder",
+        "Alia left hand rests visibly on Ellie's far shoulder; Alia right hand rests visibly on ECE's near upper arm"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten, PAWS, perches securely on Alia's far shoulder and harmlessly bats at a loose Kakheti-green route ribbon clipped high behind her. PAWS stays far from ECE, the prop, plinth, qvevri, glass edge, snow, and every adult foot; no adult hand is reassigned to the kitten.",
+      "polePlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only, not wardrobe, pose, prop, or background. Create one fresh photorealistic 9:16 full-length cinematic editorial at a broad dry glass-roofed route overlook above Sighnaghi and Kakheti's Alazani Valley, with colorful balconies, complete town walls, cobbled lane, vineyard rows, Caucasus foothills, and several large traditional qvevri vessels visible through cinematic snow flurries outside. Show exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE. Every person is a fictional adult visibly at least 28 years old. Preserve the anchored faces, skin tones, facial proportions, and distinct identities. Radiance is the luminous blonde adult, Ellie the dark-haired adult rival, Alia the Black adult woman who alone wears a high sculptural braided ponytail with fine face-framing braids, and AI ECE the brunette adult strategist. Preserve the male's Scene 1136 face and trimmed beard when present. No cloning, replacement, merging, or age shift. Profession theme: cinematic covert-agent crew couture, treated only as original public-safe fictional fashion. No copied uniform, badge, degrading service role, stripping, explicit dance, police impersonation, arrest, raid, assassination, threat, injury, or combat. Stored scene rolls: weather 55=snow flurries; PAWS 4=active; pole theme 59=inactive; rainbow-only 35=inactive; rainbow hosiery 50=inactive; hosiery wearer selector 38=Radiance; hosiery palette selector 38=country-palette rainbow-like gradient; romance 22; compound love 40. Exact individual wardrobe rolls: Radiance: midriff 38=visible, strapless 1=active, open back 30=inactive; Ellie: midriff 72=covered, strapless 95=inactive, open back 24=active; Alia: midriff 20=visible, strapless 67=inactive, open back 36=inactive; AI ECE: midriff 26=visible, strapless 25=active, open back 78=inactive. Use four unmistakably different secure opaque lined above-knee silhouettes. Exact rolled outfits: Radiance: a fully strapless pearl-white cropped covert-fashion bodice exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed back, a deep-wine folded mini skirt carrying large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete qvevri and grapevine composition, and charcoal pumps; Ellie: a long-sleeve charcoal covert-fashion mini dress with covered waist, secure opaque side structure, and a completely open back from shoulder blades to the secure lower-back waistline, carrying a large complete Sighnaghi wall-and-tower and cobbled-lane composition, with pearl-white heeled boots; Alia: a sleeveless Kakheti-green cropped covert-fashion vest exposing her ordinary waist and belly button with a high closed back, separate terracotta tailored mini shorts carrying a large complete Alazani-terrace, balcony, and Caucasus-foothill composition, and wine-red platform heels; AI ECE: a fully strapless pearl-white cropped strategist bodice exposing her ordinary waist and belly button, with completely bare shoulders and an opaque enclosed back, a carmine radial mini skort carrying a second large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant plus a complete grapevine and valley composition, and black slingback heels. Materialize every covered or visible ordinary waist and belly button, every fully strapless cut, and every complete open back exactly as written. Large complete secular Georgia-country motifs must dominate at least two outfits in this image: large complete a complete white civic field divided by one broad red right-angled cross whose arms reach all four garment edges, plus four complete smaller red bolnur-katskhuri crosses, one centered in each white quadrant across Radiance's folded mini skirt and ECE's radial mini skort; large complete secular qvevri-vessel, grapevine-leaf-and-bunch, Alazani-terrace, Sighnaghi-wall-and-tower, cobbled-lane, balcony, and Caucasus-foothill compositions across at least two separate outfits. Keep qvevri as dry craft vessels and the grapevine as agricultural heritage, with no drinking, bottle, glass, intoxication, or alcohol service. Keep Sighnaghi walls, cobbles, balconies, Alazani terraces, and foothills recognizable as respectful secular Kakheti signals. Treat the national geometry only as respectful civic fashion art wrapped around the silhouette, never as a literal rectangular flag. No coat of arms, official seal, copied ceremonial dress, copied uniform, sacred icon, ritual, readable text, badge, alcohol consumption, brand, or political insignia. Distinct rolled emotional performances: Radiance: roll 40, determination, performed as determination shown by level brows and a composed protective gaze toward ECE; Ellie: roll 2, tender affection, performed as tender affection shown by a serene smile while leaning close to Radiance; Alia: roll 90, anger, performed as anger shown by a controlled jaw and direct hurt gaze without threat; AI ECE: roll 32, overwhelming relief, performed as overwhelming relief shown by tear-bright eyes and an open exhale toward Radiance. Selected dynamic romance roll 22: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Selected compound love roll 40: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Translate both selected beats through this exact public-safe consensual choreography: Radiance and Ellie sit close on one low mission plinth in a side embrace: Radiance's right hand rests at Ellie's back and Ellie's left hand rests at Radiance's waist. ECE stands close at their left, visibly choosing Radiance with relieved eye contact while Radiance's left hand reaches ECE's shoulder. Alia kneels safely at their right on a dry padded route mat, her left hand on Ellie's shoulder and her right hand on ECE's upper arm, answering the tension with a controlled look. Ellie's right hand also reaches Alia's shoulder. This translates the selected close plinth pair, behind-hug pressure, between-knees choice, side embrace, cheek-peck warmth, and joined-hand support without hiding or reusing a hand. Place ECE at far left with the prop isolated over an empty terrace route, Radiance and Ellie on the low plinth at center with their knees separated and unobstructed, and Alia at far right on the padded mat with her full arms and hands visible. Keep PAWS high on Alia's far shoulder. Turn Ellie three-quarter-back with hair fully forward to reveal the entire rolled open back and complete face. Show all complete heels and all three rolled ordinary navels. Use exactly this owner-by-owner hand inventory and no other hands: ECE right hand is the fully open flat palm supporting the inert prop from beneath; ECE left hand is open under and clearly controls the separate holographic route map; Radiance left hand rests visibly on ECE's near shoulder; Radiance right hand rests visibly across Ellie's near back; Ellie left hand rests visibly at Radiance's near waist; Ellie right hand rests visibly on Alia's near shoulder; Alia left hand rests visibly on Ellie's far shoulder; Alia right hand rests visibly on ECE's near upper arm. ECE alone performs an unloaded magazine-free inspection demonstration. The full-size polished rainbow-gradient Desert Eagle-style inert cinematic prop lies horizontally in clean side profile across ECE's completely open flat right palm. Her palm supports it only from beneath the solid grip base and rear slide. All five right-hand fingers are straight, separated, fully visible, and entirely below the prop. No finger wraps the grip. The complete trigger guard is centered, unobstructed, and visibly empty, with clear air inside it. The empty magazine well is visibly open. The muzzle points only sideways and downrange toward the named unoccupied route target, away from every person, kitten, landmark, animal, and camera. This is not a firing grip. The muzzle points left across one clearly empty terrace route toward an unoccupied navigation marker. Rainbow-hosiery roll 50 is inactive. No rainbow stockings or rainbow knee socks. ECE alone handles the prop and controls the separate holographic map. One tiny collarless golden kitten, PAWS, perches securely on Alia's far shoulder and harmlessly bats at a loose Kakheti-green route ribbon clipped high behind her. PAWS stays far from ECE, the prop, plinth, qvevri, glass edge, snow, and every adult foot; no adult hand is reassigned to the kitten. Pole-theme roll is inactive. No pole. Rainbow-only roll 35 is inactive. Do not convert the wardrobe to rainbow-only styling. Materialize weather exactly as snow flurries, with stable dry nonslip footing and readable anatomy. Exactly four adults, eight arms, and eight hands, two per woman. Every arm remains fully visible continuously from its owner's shoulder through elbow and wrist to one separated hand. Every hand performs exactly one listed action. No arm or hand passes behind a torso. Keep palms and finger clusters separated from garment edges, hair, prop, kitten, and other hands except for listed contacts. Use an asymmetric moving composition with clean silhouette gaps, not a static lineup. Full-length framing contains every face, elbow, wrist, hand, leg, foot, heel, boot, plinth, route mat, and kitten when present. Strict anatomy gate: no extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, hidden-owner, cropped, or ambiguous limb, hand, finger cluster, face, person, kitten, leg, or foot. The single inert cinematic prop remains harmless. Its trigger guard must be completely empty. No finger may touch or enter the guard. No ammunition, reload, firing, muzzle flash, holster, display case, transparent enclosure, combat, threat, injury, aiming at a person, or aiming at the camera. No text, watermark, literal rectangular flag, coat of arms, official seal, copied costume, brand, minors, teen framing, nudity, explicit sexuality, bodily fluids, upskirt framing, fetish, bondage, restraint, non-consensual framing, or renderer-bypass wording."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together with all-settled result handling"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

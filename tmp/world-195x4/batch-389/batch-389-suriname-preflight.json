@@ -1,0 +1,1634 @@
+{
+  "batch": 389,
+  "country": "Suriname",
+  "status": "render-preflight-stored-pass-1-not-launched",
+  "sourceCommit": "51019e0a68150287ce0b2d0e943eeb5de83551d1",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-317-luxembourg-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/163"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8",
+      "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json",
+    "checkpointSha256": "7C66AFC0F9616332EFEA9E47170FEFD958976584E042BA4DDA3AE7C7EBBE1D7F",
+    "observedStatus": "closed-three-of-four-after-cap-no-more-luxembourg-rendering",
+    "observedHardSafeAcceptedCount": 3,
+    "observedMissingSceneNumbers": [
+      1575
+    ],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "remoteRef": "origin/agent/starlight-progress-archive",
+    "remoteCommit": "51019e0a68150287ce0b2d0e943eeb5de83551d1",
+    "remoteCheckpointSha256": "7C66AFC0F9616332EFEA9E47170FEFD958976584E042BA4DDA3AE7C7EBBE1D7F",
+    "predecessorRemoteVerified": true,
+    "requiredRemoteCommit": "51019e0a68150287ce0b2d0e943eeb5de83551d1",
+    "requiredRemoteCommitMatches": true,
+    "preparationOnly": true,
+    "batch389RenderAuthorized": true,
+    "note": "This materialization records no render, publication, commit, push, or X-ledger change.",
+    "reason": "Batch 388 is closed at three of four after the two-pass cap and remote-verified at the required commit; exactly four concurrent Batch 389 pass-1 slots are prepared but not launched."
+  },
+  "rollMethod": "FNV-1a over recorded batch389-suriname keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "missionPropPoseTarget": "0-34 paper target/backstop; 35-59 open-water marker; 60-74 wrist-guidance category at paper target/backstop; 75-87 completed-handoff category at open-water marker; 88-99 open-mechanism category at paper target/backstop"
+  },
+  "cinematicTheme": {
+    "active": "polar airship couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "sceneNumbers": [
+    1576,
+    1577,
+    1578,
+    1579
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.suriname-tourism.org/en/",
+      "usedFor": "Suriname rivers, rainforest, waterfalls, canoes, biodiversity, Galibi turtles, food, and Paramaribo wooden architecture"
+    },
+    {
+      "url": "https://gov.sr/wp-content/uploads/2025/05/%40-Magazine-Vision-MIN-OW-SIDPS-2025-2050.pdf",
+      "usedFor": "Jules Wijdenbosch Bridge over the Suriname River and national transport infrastructure"
+    },
+    {
+      "url": "https://whc.unesco.org/fr/list/1017",
+      "usedFor": "Central Suriname Nature Reserve, Coppename watershed, granite inselbergs, primary rainforest, and Guiana Shield topography"
+    },
+    {
+      "url": "https://whc.unesco.org/uploads/nominations/1017.pdf",
+      "usedFor": "Raleigh Falls, Voltzberg dome, rainforest species, and conservation landscape"
+    },
+    {
+      "url": "https://suriname.travel/marowijne/",
+      "usedFor": "Galibi protected coast, Marowijne River, mangroves, and sea-turtle nesting habitat"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch389-suriname-male-model-scene",
+    "fullHash": 1887499403,
+    "roll": 3,
+    "position": 4,
+    "scene": 1579,
+    "emotion": {
+      "key": "batch389-suriname-scene4-male-emotion",
+      "roll": 3,
+      "result": "tender affection"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Suriname flag, central star, coat of arms, or official emblem is copied onto clothing. Large researched secular bridge, river, reservoir, rainforest, waterfall, granite, coast, wildlife, agriculture, food, and conservation fields replace them.",
+    "palette": "rainforest emerald, Suriname-river blue, clay red, rice white, bromeliad magenta, golden yellow, mahogany brown, sea-turtle teal, granite silver, and night charcoal",
+    "minimumCoverage": "Scenes 1576 and 1577 each foreground large Suriname motif fields on two or three looks and polar-airship construction on at least two. Scenes 1578 and 1579 use four distinct theme-led looks while the Suriname landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Paramaribo's riverfront and bridge, Brownsberg and Brokopondo Reservoir, Voltzberg and Raleigh Falls, and Galibi's protected coast.",
+    "prohibitions": "No literal flag, central star, coat of arms, official seal, sacred symbol, religious architecture, copied Indigenous or Maroon ceremonial pattern, copied service or covert uniform, badge, weapon threat, sexualized service, assassination, combat, political insignia, or branded product."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch389-suriname-male-model-scene",
+        3
+      ],
+      [
+        "batch389-suriname-scene4-male-emotion",
+        3
+      ],
+      [
+        "batch389-suriname-scene1576-weather",
+        99
+      ],
+      [
+        "batch389-suriname-scene1576-mascotState",
+        3
+      ],
+      [
+        "batch389-suriname-scene1576-poleDanceTheme",
+        99
+      ],
+      [
+        "batch389-suriname-scene1576-rainbowOnly",
+        43
+      ],
+      [
+        "batch389-suriname-scene1576-rainbowHosiery",
+        22
+      ],
+      [
+        "batch389-suriname-scene1576-romanceBeat",
+        42
+      ],
+      [
+        "batch389-suriname-scene1576-compoundLoveBeat",
+        40
+      ],
+      [
+        "batch389-suriname-scene1576-hardLoveBeat",
+        8
+      ],
+      [
+        "batch389-suriname-scene1576-interestingProp",
+        16
+      ],
+      [
+        "batch389-suriname-scene1576-eceMissionProp-poseTargetRoll",
+        97
+      ],
+      [
+        "batch389-suriname-scene1576-Radiance-emotion",
+        44
+      ],
+      [
+        "batch389-suriname-scene1576-Radiance-visibleMidriff",
+        34
+      ],
+      [
+        "batch389-suriname-scene1576-Radiance-straplessDress",
+        57
+      ],
+      [
+        "batch389-suriname-scene1576-Radiance-fullyOpenBack",
+        22
+      ],
+      [
+        "batch389-suriname-scene1576-Ellie-emotion",
+        2
+      ],
+      [
+        "batch389-suriname-scene1576-Ellie-visibleMidriff",
+        52
+      ],
+      [
+        "batch389-suriname-scene1576-Ellie-straplessDress",
+        43
+      ],
+      [
+        "batch389-suriname-scene1576-Ellie-fullyOpenBack",
+        84
+      ],
+      [
+        "batch389-suriname-scene1576-Alia-emotion",
+        38
+      ],
+      [
+        "batch389-suriname-scene1576-Alia-visibleMidriff",
+        84
+      ],
+      [
+        "batch389-suriname-scene1576-Alia-straplessDress",
+        87
+      ],
+      [
+        "batch389-suriname-scene1576-Alia-fullyOpenBack",
+        80
+      ],
+      [
+        "batch389-suriname-scene1576-AI ECE-emotion",
+        8
+      ],
+      [
+        "batch389-suriname-scene1576-AI ECE-visibleMidriff",
+        14
+      ],
+      [
+        "batch389-suriname-scene1576-AI ECE-straplessDress",
+        61
+      ],
+      [
+        "batch389-suriname-scene1576-AI ECE-fullyOpenBack",
+        10
+      ],
+      [
+        "batch389-suriname-scene1577-weather",
+        4
+      ],
+      [
+        "batch389-suriname-scene1577-mascotState",
+        8
+      ],
+      [
+        "batch389-suriname-scene1577-poleDanceTheme",
+        54
+      ],
+      [
+        "batch389-suriname-scene1577-rainbowOnly",
+        92
+      ],
+      [
+        "batch389-suriname-scene1577-rainbowHosiery",
+        67
+      ],
+      [
+        "batch389-suriname-scene1577-romanceBeat",
+        33
+      ],
+      [
+        "batch389-suriname-scene1577-compoundLoveBeat",
+        97
+      ],
+      [
+        "batch389-suriname-scene1577-hardLoveBeat",
+        77
+      ],
+      [
+        "batch389-suriname-scene1577-interestingProp",
+        59
+      ],
+      [
+        "batch389-suriname-scene1577-eceMissionProp-poseTargetRoll",
+        18
+      ],
+      [
+        "batch389-suriname-scene1577-Radiance-emotion",
+        13
+      ],
+      [
+        "batch389-suriname-scene1577-Radiance-visibleMidriff",
+        45
+      ],
+      [
+        "batch389-suriname-scene1577-Radiance-straplessDress",
+        58
+      ],
+      [
+        "batch389-suriname-scene1577-Radiance-fullyOpenBack",
+        87
+      ],
+      [
+        "batch389-suriname-scene1577-Ellie-emotion",
+        53
+      ],
+      [
+        "batch389-suriname-scene1577-Ellie-visibleMidriff",
+        45
+      ],
+      [
+        "batch389-suriname-scene1577-Ellie-straplessDress",
+        10
+      ],
+      [
+        "batch389-suriname-scene1577-Ellie-fullyOpenBack",
+        27
+      ],
+      [
+        "batch389-suriname-scene1577-Alia-emotion",
+        87
+      ],
+      [
+        "batch389-suriname-scene1577-Alia-visibleMidriff",
+        75
+      ],
+      [
+        "batch389-suriname-scene1577-Alia-straplessDress",
+        84
+      ],
+      [
+        "batch389-suriname-scene1577-Alia-fullyOpenBack",
+        45
+      ],
+      [
+        "batch389-suriname-scene1577-AI ECE-emotion",
+        45
+      ],
+      [
+        "batch389-suriname-scene1577-AI ECE-visibleMidriff",
+        73
+      ],
+      [
+        "batch389-suriname-scene1577-AI ECE-straplessDress",
+        30
+      ],
+      [
+        "batch389-suriname-scene1577-AI ECE-fullyOpenBack",
+        83
+      ],
+      [
+        "batch389-suriname-scene1578-weather",
+        69
+      ],
+      [
+        "batch389-suriname-scene1578-mascotState",
+        21
+      ],
+      [
+        "batch389-suriname-scene1578-poleDanceTheme",
+        29
+      ],
+      [
+        "batch389-suriname-scene1578-rainbowOnly",
+        33
+      ],
+      [
+        "batch389-suriname-scene1578-rainbowHosiery",
+        56
+      ],
+      [
+        "batch389-suriname-scene1578-romanceBeat",
+        76
+      ],
+      [
+        "batch389-suriname-scene1578-compoundLoveBeat",
+        38
+      ],
+      [
+        "batch389-suriname-scene1578-hardLoveBeat",
+        22
+      ],
+      [
+        "batch389-suriname-scene1578-interestingProp",
+        10
+      ],
+      [
+        "batch389-suriname-scene1578-eceMissionProp-poseTargetRoll",
+        99
+      ],
+      [
+        "batch389-suriname-scene1578-Radiance-emotion",
+        74
+      ],
+      [
+        "batch389-suriname-scene1578-Radiance-visibleMidriff",
+        52
+      ],
+      [
+        "batch389-suriname-scene1578-Radiance-straplessDress",
+        87
+      ],
+      [
+        "batch389-suriname-scene1578-Radiance-fullyOpenBack",
+        56
+      ],
+      [
+        "batch389-suriname-scene1578-Ellie-emotion",
+        72
+      ],
+      [
+        "batch389-suriname-scene1578-Ellie-emotion-disambiguation",
+        55
+      ],
+      [
+        "batch389-suriname-scene1578-Ellie-visibleMidriff",
+        70
+      ],
+      [
+        "batch389-suriname-scene1578-Ellie-straplessDress",
+        21
+      ],
+      [
+        "batch389-suriname-scene1578-Ellie-fullyOpenBack",
+        34
+      ],
+      [
+        "batch389-suriname-scene1578-Alia-emotion",
+        60
+      ],
+      [
+        "batch389-suriname-scene1578-Alia-visibleMidriff",
+        70
+      ],
+      [
+        "batch389-suriname-scene1578-Alia-straplessDress",
+        17
+      ],
+      [
+        "batch389-suriname-scene1578-Alia-fullyOpenBack",
+        34
+      ],
+      [
+        "batch389-suriname-scene1578-AI ECE-emotion",
+        46
+      ],
+      [
+        "batch389-suriname-scene1578-AI ECE-visibleMidriff",
+        76
+      ],
+      [
+        "batch389-suriname-scene1578-AI ECE-straplessDress",
+        19
+      ],
+      [
+        "batch389-suriname-scene1578-AI ECE-fullyOpenBack",
+        8
+      ],
+      [
+        "batch389-suriname-scene1579-weather",
+        50
+      ],
+      [
+        "batch389-suriname-scene1579-mascotState",
+        38
+      ],
+      [
+        "batch389-suriname-scene1579-poleDanceTheme",
+        52
+      ],
+      [
+        "batch389-suriname-scene1579-rainbowOnly",
+        42
+      ],
+      [
+        "batch389-suriname-scene1579-rainbowHosiery",
+        45
+      ],
+      [
+        "batch389-suriname-scene1579-romanceBeat",
+        11
+      ],
+      [
+        "batch389-suriname-scene1579-compoundLoveBeat",
+        63
+      ],
+      [
+        "batch389-suriname-scene1579-hardLoveBeat",
+        35
+      ],
+      [
+        "batch389-suriname-scene1579-interestingProp",
+        17
+      ],
+      [
+        "batch389-suriname-scene1579-eceMissionProp-poseTargetRoll",
+        28
+      ],
+      [
+        "batch389-suriname-scene1579-Radiance-emotion",
+        47
+      ],
+      [
+        "batch389-suriname-scene1579-Radiance-visibleMidriff",
+        83
+      ],
+      [
+        "batch389-suriname-scene1579-Radiance-straplessDress",
+        60
+      ],
+      [
+        "batch389-suriname-scene1579-Radiance-fullyOpenBack",
+        41
+      ],
+      [
+        "batch389-suriname-scene1579-Ellie-emotion",
+        55
+      ],
+      [
+        "batch389-suriname-scene1579-Ellie-visibleMidriff",
+        51
+      ],
+      [
+        "batch389-suriname-scene1579-Ellie-straplessDress",
+        56
+      ],
+      [
+        "batch389-suriname-scene1579-Ellie-fullyOpenBack",
+        41
+      ],
+      [
+        "batch389-suriname-scene1579-Alia-emotion",
+        89
+      ],
+      [
+        "batch389-suriname-scene1579-Alia-visibleMidriff",
+        13
+      ],
+      [
+        "batch389-suriname-scene1579-Alia-straplessDress",
+        50
+      ],
+      [
+        "batch389-suriname-scene1579-Alia-fullyOpenBack",
+        19
+      ],
+      [
+        "batch389-suriname-scene1579-AI ECE-emotion",
+        7
+      ],
+      [
+        "batch389-suriname-scene1579-AI ECE-visibleMidriff",
+        19
+      ],
+      [
+        "batch389-suriname-scene1579-AI ECE-straplessDress",
+        60
+      ],
+      [
+        "batch389-suriname-scene1579-AI ECE-fullyOpenBack",
+        81
+      ],
+      [
+        "batch389-suriname-x-heart",
+        52
+      ],
+      [
+        "batch389-suriname-x-internalagency",
+        78
+      ],
+      [
+        "batch389-suriname-x-worldxxxseries",
+        49
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch389-suriname-scene1576-rainbowHosieryWearer",
+        78
+      ],
+      [
+        "batch389-suriname-scene1576-rainbowHosieryPaletteMode",
+        98
+      ],
+      [
+        "batch389-suriname-scene1576-mascotHolder",
+        60
+      ],
+      [
+        "batch389-suriname-scene1576-interestingPropHolder",
+        50
+      ],
+      [
+        "batch389-suriname-scene1576-interestingPropFamily",
+        4
+      ],
+      [
+        "batch389-suriname-scene1577-rainbowHosieryWearer",
+        55
+      ],
+      [
+        "batch389-suriname-scene1577-rainbowHosieryPaletteMode",
+        25
+      ],
+      [
+        "batch389-suriname-scene1577-mascotHolder",
+        13
+      ],
+      [
+        "batch389-suriname-scene1577-interestingPropHolder",
+        1
+      ],
+      [
+        "batch389-suriname-scene1577-interestingPropFamily",
+        71
+      ],
+      [
+        "batch389-suriname-scene1578-rainbowHosieryWearer",
+        52
+      ],
+      [
+        "batch389-suriname-scene1578-rainbowHosieryPaletteMode",
+        92
+      ],
+      [
+        "batch389-suriname-scene1578-mascotHolder",
+        86
+      ],
+      [
+        "batch389-suriname-scene1578-interestingPropHolder",
+        32
+      ],
+      [
+        "batch389-suriname-scene1578-interestingPropFamily",
+        66
+      ],
+      [
+        "batch389-suriname-scene1579-rainbowHosieryWearer",
+        73
+      ],
+      [
+        "batch389-suriname-scene1579-rainbowHosieryPaletteMode",
+        71
+      ],
+      [
+        "batch389-suriname-scene1579-mascotHolder",
+        71
+      ],
+      [
+        "batch389-suriname-scene1579-interestingPropHolder",
+        87
+      ],
+      [
+        "batch389-suriname-scene1579-interestingPropFamily",
+        45
+      ]
+    ],
+    "primaryPairCount": 110,
+    "selectorPairCount": 20,
+    "primarySha256": "3F639FEC72774DAB16E26CBEABD3C279C8986396413579CBA31A74F95EE980AE",
+    "selectorSha256": "2C90D1F7A03A4C17CAF6A8437CFD8EC9D2D1BB17B1155E30818446163676FAB3",
+    "mismatchCount": 0,
+    "scenes": {
+      "1576": {
+        "weather": 99,
+        "mascotState": 3,
+        "mascotHolder": 60,
+        "oddProp": 16,
+        "oddHolder": 50,
+        "oddFamily": 4,
+        "pole": 99,
+        "rainbowOnly": 43,
+        "hosiery": 22,
+        "hosieryWearer": 78,
+        "hosieryPalette": 98,
+        "romance": 42,
+        "compound": 40,
+        "hardLove": 8,
+        "missionPoseTarget": 97,
+        "emotions": {
+          "Radiance": 44,
+          "Ellie": 2,
+          "Alia": 38,
+          "AI ECE": 8
+        },
+        "cuts": {
+          "Radiance": [
+            34,
+            57,
+            22
+          ],
+          "Ellie": [
+            52,
+            43,
+            84
+          ],
+          "Alia": [
+            84,
+            87,
+            80
+          ],
+          "AI ECE": [
+            14,
+            61,
+            10
+          ]
+        }
+      },
+      "1577": {
+        "weather": 4,
+        "mascotState": 8,
+        "mascotHolder": 13,
+        "oddProp": 59,
+        "oddHolder": 1,
+        "oddFamily": 71,
+        "pole": 54,
+        "rainbowOnly": 92,
+        "hosiery": 67,
+        "hosieryWearer": 55,
+        "hosieryPalette": 25,
+        "romance": 33,
+        "compound": 97,
+        "hardLove": 77,
+        "missionPoseTarget": 18,
+        "emotions": {
+          "Radiance": 13,
+          "Ellie": 53,
+          "Alia": 87,
+          "AI ECE": 45
+        },
+        "cuts": {
+          "Radiance": [
+            45,
+            58,
+            87
+          ],
+          "Ellie": [
+            45,
+            10,
+            27
+          ],
+          "Alia": [
+            75,
+            84,
+            45
+          ],
+          "AI ECE": [
+            73,
+            30,
+            83
+          ]
+        }
+      },
+      "1578": {
+        "weather": 69,
+        "mascotState": 21,
+        "mascotHolder": 86,
+        "oddProp": 10,
+        "oddHolder": 32,
+        "oddFamily": 66,
+        "pole": 29,
+        "rainbowOnly": 33,
+        "hosiery": 56,
+        "hosieryWearer": 52,
+        "hosieryPalette": 92,
+        "romance": 76,
+        "compound": 38,
+        "hardLove": 22,
+        "missionPoseTarget": 99,
+        "emotions": {
+          "Radiance": 74,
+          "Ellie": 72,
+          "Alia": 60,
+          "AI ECE": 46,
+          "Ellie disambiguation": 55
+        },
+        "cuts": {
+          "Radiance": [
+            52,
+            87,
+            56
+          ],
+          "Ellie": [
+            70,
+            21,
+            34
+          ],
+          "Alia": [
+            70,
+            17,
+            34
+          ],
+          "AI ECE": [
+            76,
+            19,
+            8
+          ]
+        }
+      },
+      "1579": {
+        "weather": 50,
+        "mascotState": 38,
+        "mascotHolder": 71,
+        "oddProp": 17,
+        "oddHolder": 87,
+        "oddFamily": 45,
+        "pole": 52,
+        "rainbowOnly": 42,
+        "hosiery": 45,
+        "hosieryWearer": 73,
+        "hosieryPalette": 71,
+        "romance": 11,
+        "compound": 63,
+        "hardLove": 35,
+        "missionPoseTarget": 28,
+        "emotions": {
+          "Radiance": 47,
+          "Ellie": 55,
+          "Alia": 89,
+          "AI ECE": 7,
+          "Male": 3
+        },
+        "cuts": {
+          "Radiance": [
+            83,
+            60,
+            41
+          ],
+          "Ellie": [
+            51,
+            56,
+            41
+          ],
+          "Alia": [
+            13,
+            50,
+            19
+          ],
+          "AI ECE": [
+            19,
+            60,
+            81
+          ]
+        }
+      }
+    }
+  },
+  "scenePlans": {
+    "1576": {
+      "location": "Paramaribo Waterkant and Jules Wijdenbosch Bridge",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 99,
+        "raw": "silent heat lightning on the horizon",
+        "materialized": "silent heat lightning on the horizon beyond a fully dry covered riverfront pavilion"
+      },
+      "mascot": {
+        "roll": 3,
+        "state": "PAWS and MAX together",
+        "holder": {
+          "key": "batch389-suriname-scene1576-mascotHolder",
+          "roll": 60,
+          "result": "Radiance"
+        }
+      },
+      "oddProp": {
+        "roll": 16,
+        "active": true,
+        "holder": {
+          "key": "batch389-suriname-scene1576-interestingPropHolder",
+          "roll": 50,
+          "result": "AI ECE"
+        },
+        "family": {
+          "key": "batch389-suriname-scene1576-interestingPropFamily",
+          "roll": 4,
+          "result": "giant tuning fork instrument"
+        }
+      },
+      "pole": {
+        "roll": 99,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 43,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch389-suriname-scene1576-rainbowHosiery",
+        "roll": 22,
+        "active": true,
+        "wearer": {
+          "key": "batch389-suriname-scene1576-rainbowHosieryWearer",
+          "roll": 78,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch389-suriname-scene1576-rainbowHosieryPaletteMode",
+          "roll": 98,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch389-suriname-scene1576-romanceBeat",
+        "roll": 42,
+        "index": 6,
+        "result": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compound": {
+        "key": "batch389-suriname-scene1576-compoundLoveBeat",
+        "roll": 40,
+        "index": 4,
+        "result": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "hardLove": {
+        "key": "batch389-suriname-scene1576-hardLoveBeat",
+        "roll": 8,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "mission": {
+        "key": "batch389-suriname-scene1576-eceMissionProp-poseTargetRoll",
+        "roll": 97,
+        "category": "open-mechanism paper-target inspection",
+        "handler": "Alia",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch389-suriname-scene1576-Radiance-emotion",
+          "roll": 44,
+          "result": "awe",
+          "materialized": "awe"
+        },
+        "Ellie": {
+          "key": "batch389-suriname-scene1576-Ellie-emotion",
+          "roll": 2,
+          "result": "tender affection",
+          "materialized": "tender affection"
+        },
+        "Alia": {
+          "key": "batch389-suriname-scene1576-Alia-emotion",
+          "roll": 38,
+          "result": "magnetic confidence",
+          "materialized": "magnetic confidence"
+        },
+        "AI ECE": {
+          "key": "batch389-suriname-scene1576-AI ECE-emotion",
+          "roll": 8,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1576-Radiance-visibleMidriff",
+            "roll": 34,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1576-Radiance-straplessDress",
+            "roll": 57,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1576-Radiance-fullyOpenBack",
+            "roll": 22,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1576-Ellie-visibleMidriff",
+            "roll": 52,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1576-Ellie-straplessDress",
+            "roll": 43,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1576-Ellie-fullyOpenBack",
+            "roll": 84,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1576-Alia-visibleMidriff",
+            "roll": 84,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1576-Alia-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1576-Alia-fullyOpenBack",
+            "roll": 80,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1576-AI ECE-visibleMidriff",
+            "roll": 14,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1576-AI ECE-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1576-AI ECE-fullyOpenBack",
+            "roll": 10,
+            "active": true
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-389/scene-1576-initial-prompt.txt",
+        "sha256": "5CBF25B02E097F269D6F27DEB4D0D6E3F29156518561C5EDC7C632BAD254BF68",
+        "bytes": 5126
+      }
+    },
+    "1577": {
+      "location": "Brownsberg and Brokopondo Reservoir",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 4,
+        "raw": "clear golden-hour radiance",
+        "materialized": "clear golden-hour radiance at a fully dry covered reservoir platform"
+      },
+      "mascot": {
+        "roll": 8,
+        "state": "PAWS and MAX together",
+        "holder": {
+          "key": "batch389-suriname-scene1577-mascotHolder",
+          "roll": 13,
+          "result": "Ellie"
+        }
+      },
+      "oddProp": {
+        "roll": 59,
+        "active": false,
+        "holder": {
+          "key": "batch389-suriname-scene1577-interestingPropHolder",
+          "roll": 1,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch389-suriname-scene1577-interestingPropFamily",
+          "roll": 71,
+          "result": "gyroscopic hard-shell suitcase"
+        }
+      },
+      "pole": {
+        "roll": 54,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 92,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch389-suriname-scene1577-rainbowHosiery",
+        "roll": 67,
+        "active": false,
+        "wearer": {
+          "key": "batch389-suriname-scene1577-rainbowHosieryWearer",
+          "roll": 55,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch389-suriname-scene1577-rainbowHosieryPaletteMode",
+          "roll": 25,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch389-suriname-scene1577-romanceBeat",
+        "roll": 33,
+        "index": 9,
+        "result": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compound": {
+        "key": "batch389-suriname-scene1577-compoundLoveBeat",
+        "roll": 97,
+        "index": 1,
+        "result": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "hardLove": {
+        "key": "batch389-suriname-scene1577-hardLoveBeat",
+        "roll": 77,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "mission": {
+        "key": "batch389-suriname-scene1577-eceMissionProp-poseTargetRoll",
+        "roll": 18,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch389-suriname-scene1577-Radiance-emotion",
+          "roll": 13,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        },
+        "Ellie": {
+          "key": "batch389-suriname-scene1577-Ellie-emotion",
+          "roll": 53,
+          "result": "intense curiosity",
+          "materialized": "intense curiosity"
+        },
+        "Alia": {
+          "key": "batch389-suriname-scene1577-Alia-emotion",
+          "roll": 87,
+          "result": "fear and urgent vulnerability",
+          "materialized": "fear and urgent vulnerability"
+        },
+        "AI ECE": {
+          "key": "batch389-suriname-scene1577-AI ECE-emotion",
+          "roll": 45,
+          "result": "awe",
+          "materialized": "awe"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1577-Radiance-visibleMidriff",
+            "roll": 45,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1577-Radiance-straplessDress",
+            "roll": 58,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1577-Radiance-fullyOpenBack",
+            "roll": 87,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1577-Ellie-visibleMidriff",
+            "roll": 45,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1577-Ellie-straplessDress",
+            "roll": 10,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1577-Ellie-fullyOpenBack",
+            "roll": 27,
+            "active": true
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1577-Alia-visibleMidriff",
+            "roll": 75,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1577-Alia-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1577-Alia-fullyOpenBack",
+            "roll": 45,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1577-AI ECE-visibleMidriff",
+            "roll": 73,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1577-AI ECE-straplessDress",
+            "roll": 30,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1577-AI ECE-fullyOpenBack",
+            "roll": 83,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-389/scene-1577-initial-prompt.txt",
+        "sha256": "19B6501D7CC304E345D6D3E336676010C8DDEB2CECB3157D01DDBA1F87B47096",
+        "bytes": 4624
+      }
+    },
+    "1578": {
+      "location": "Voltzberg and Raleigh Falls",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 69,
+        "raw": "coastal sea mist",
+        "materialized": "coastal sea mist beyond a fully dry covered conservation overlook"
+      },
+      "mascot": {
+        "roll": 21,
+        "state": "PAWS and MAX together",
+        "holder": {
+          "key": "batch389-suriname-scene1578-mascotHolder",
+          "roll": 86,
+          "result": "Alia"
+        }
+      },
+      "oddProp": {
+        "roll": 10,
+        "active": true,
+        "holder": {
+          "key": "batch389-suriname-scene1578-interestingPropHolder",
+          "roll": 32,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch389-suriname-scene1578-interestingPropFamily",
+          "roll": 66,
+          "result": "chromatic brass telescope with folding legs"
+        }
+      },
+      "pole": {
+        "roll": 29,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 33,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch389-suriname-scene1578-rainbowHosiery",
+        "roll": 56,
+        "active": false,
+        "wearer": {
+          "key": "batch389-suriname-scene1578-rainbowHosieryWearer",
+          "roll": 52,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch389-suriname-scene1578-rainbowHosieryPaletteMode",
+          "roll": 92,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch389-suriname-scene1578-romanceBeat",
+        "roll": 76,
+        "index": 4,
+        "result": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compound": {
+        "key": "batch389-suriname-scene1578-compoundLoveBeat",
+        "roll": 38,
+        "index": 2,
+        "result": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "hardLove": {
+        "key": "batch389-suriname-scene1578-hardLoveBeat",
+        "roll": 22,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "mission": {
+        "key": "batch389-suriname-scene1578-eceMissionProp-poseTargetRoll",
+        "roll": 99,
+        "category": "open-mechanism paper-target inspection",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch389-suriname-scene1578-Radiance-emotion",
+          "roll": 74,
+          "result": "betrayal shock",
+          "materialized": "betrayal shock"
+        },
+        "Ellie": {
+          "key": "batch389-suriname-scene1578-Ellie-emotion",
+          "roll": 72,
+          "result": "betrayal shock",
+          "materialized": "aching romantic longing",
+          "disambiguation": {
+            "key": "batch389-suriname-scene1578-Ellie-emotion-disambiguation",
+            "roll": 55
+          }
+        },
+        "Alia": {
+          "key": "batch389-suriname-scene1578-Alia-emotion",
+          "roll": 60,
+          "result": "visible jealousy",
+          "materialized": "visible jealousy"
+        },
+        "AI ECE": {
+          "key": "batch389-suriname-scene1578-AI ECE-emotion",
+          "roll": 46,
+          "result": "awe",
+          "materialized": "awe"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1578-Radiance-visibleMidriff",
+            "roll": 52,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1578-Radiance-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1578-Radiance-fullyOpenBack",
+            "roll": 56,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1578-Ellie-visibleMidriff",
+            "roll": 70,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1578-Ellie-straplessDress",
+            "roll": 21,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1578-Ellie-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1578-Alia-visibleMidriff",
+            "roll": 70,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1578-Alia-straplessDress",
+            "roll": 17,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1578-Alia-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1578-AI ECE-visibleMidriff",
+            "roll": 76,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1578-AI ECE-straplessDress",
+            "roll": 19,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1578-AI ECE-fullyOpenBack",
+            "roll": 8,
+            "active": true
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-389/scene-1578-initial-prompt.txt",
+        "sha256": "23E945DCC01B6E4A8D7C60FE60EBF079A1419702C1D8BFB1BE4AABA6A566BEF3",
+        "bytes": 4856
+      }
+    },
+    "1579": {
+      "location": "Galibi coast and Marowijne River mouth",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 50,
+        "raw": "active lightning storm with distant bolts",
+        "materialized": "active lightning with distant bolts beyond a fully dry covered coastal boardwalk"
+      },
+      "mascot": {
+        "roll": 38,
+        "state": "MAX only",
+        "holder": {
+          "key": "batch389-suriname-scene1579-mascotHolder",
+          "roll": 71,
+          "result": "Alia"
+        }
+      },
+      "oddProp": {
+        "roll": 17,
+        "active": true,
+        "holder": {
+          "key": "batch389-suriname-scene1579-interestingPropHolder",
+          "roll": 87,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch389-suriname-scene1579-interestingPropFamily",
+          "roll": 45,
+          "result": "mirrored megaphone sculpture"
+        }
+      },
+      "pole": {
+        "roll": 52,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 42,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch389-suriname-scene1579-rainbowHosiery",
+        "roll": 45,
+        "active": false,
+        "wearer": {
+          "key": "batch389-suriname-scene1579-rainbowHosieryWearer",
+          "roll": 73,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch389-suriname-scene1579-rainbowHosieryPaletteMode",
+          "roll": 71,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch389-suriname-scene1579-romanceBeat",
+        "roll": 11,
+        "index": 11,
+        "result": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compound": {
+        "key": "batch389-suriname-scene1579-compoundLoveBeat",
+        "roll": 63,
+        "index": 3,
+        "result": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "hardLove": {
+        "key": "batch389-suriname-scene1579-hardLoveBeat",
+        "roll": 35,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "mission": {
+        "key": "batch389-suriname-scene1579-eceMissionProp-poseTargetRoll",
+        "roll": 28,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch389-suriname-scene1579-Radiance-emotion",
+          "roll": 47,
+          "result": "awe",
+          "materialized": "awe"
+        },
+        "Ellie": {
+          "key": "batch389-suriname-scene1579-Ellie-emotion",
+          "roll": 55,
+          "result": "aching romantic longing",
+          "materialized": "aching romantic longing"
+        },
+        "Alia": {
+          "key": "batch389-suriname-scene1579-Alia-emotion",
+          "roll": 89,
+          "result": "anger",
+          "materialized": "anger"
+        },
+        "AI ECE": {
+          "key": "batch389-suriname-scene1579-AI ECE-emotion",
+          "roll": 7,
+          "result": "tender affection",
+          "materialized": "tender affection"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1579-Radiance-visibleMidriff",
+            "roll": 83,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1579-Radiance-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1579-Radiance-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1579-Ellie-visibleMidriff",
+            "roll": 51,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1579-Ellie-straplessDress",
+            "roll": 56,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1579-Ellie-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1579-Alia-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1579-Alia-straplessDress",
+            "roll": 50,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1579-Alia-fullyOpenBack",
+            "roll": 19,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch389-suriname-scene1579-AI ECE-visibleMidriff",
+            "roll": 19,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch389-suriname-scene1579-AI ECE-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch389-suriname-scene1579-AI ECE-fullyOpenBack",
+            "roll": 81,
+            "active": false
+          }
+        }
+      },
+      "malePresent": true,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-389/scene-1579-initial-prompt.txt",
+        "sha256": "F9EE08142B751C1DA268A614D3EE357BB05A80BF1221A20828FF42B024EE8260",
+        "bytes": 5209
+      }
+    }
+  },
+  "renderPlan": {
+    "pass1": "Exactly four clean candidates, one per scene, launched concurrently from original identity anchors only.",
+    "pass2": "Only hard-unusable scenes may receive one fresh holistic correction candidate each, launched concurrently; no filler variants.",
+    "archiveBeforeLaterWork": true,
+    "thirdPassAllowed": false
+  },
+  "xPublishing": {
+    "rolls": {
+      "heart": {
+        "key": "batch389-suriname-x-heart",
+        "roll": 52,
+        "result": "red heart"
+      },
+      "internalAgency": {
+        "key": "batch389-suriname-x-internalagency",
+        "roll": 78,
+        "active": false
+      },
+      "worldXXXSeries": {
+        "key": "batch389-suriname-x-worldxxxseries",
+        "roll": 49,
+        "active": false
+      }
+    },
+    "captionIfEligible": "Suriname ❤️ Luxembourg #Suriname",
+    "eligibility": "ineligible until four of four Suriname scenes are hard-safe accepted and the checkpoint is pushed and remote-verified"
+  },
+  "nextQueue": {
+    "nextCountry": "Montenegro",
+    "nextBatch": 390,
+    "sceneNumbers": [
+      1580,
+      1581,
+      1582,
+      1583
+    ],
+    "cinematicTheme": "polar airship couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-318-suriname-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/164"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8"
+    ],
+    "lockedUntilBatch389Closed": true
+  }
+}

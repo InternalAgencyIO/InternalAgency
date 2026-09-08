@@ -1,0 +1,40 @@
+{
+  "schema": "world-195x4-scene-897-anatomical-right-brooch-edit-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "sourceImage": {
+    "file": "tmp/world-195x4/batch-219/staging/897-alia-brooch-edit-17-stage.png",
+    "bytes": 2281512,
+    "sha256": "192f639197702a4db8818384dba414f1513830266e2355cc310d0cb4589afef3",
+    "width": 941,
+    "height": 1672
+  },
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-alia-anatomical-right-brooch-edit-18.txt",
+  "promptSha256": "7e3b5efc4559f7efa57f1cbf07b2d0e3c2b853ad57dfb81f0fc58c6b2279d901",
+  "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No moderation block; anatomical-direction correction only.",
+  "positiveRequirementDeletionCount": 0,
+  "correction": {
+    "priorAmbiguity": "inner left shoulder",
+    "anatomicalTarget": "Alia anatomical right shoulder, viewer-left side of Alia, approximately x=700 y=500",
+    "wrongCurrentLocation": "Radiance cape approximately x=650 y=500"
+  },
+  "preserved": {
+    "allFourteenTriggeredRolls": true,
+    "originalTriangle": true,
+    "foreheadContact": true,
+    "twoVisibleNavels": true,
+    "boldWardrobes": true,
+    "pawsLapCopilot": true,
+    "visibleWand": true,
+    "SantaAnaTheatre": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

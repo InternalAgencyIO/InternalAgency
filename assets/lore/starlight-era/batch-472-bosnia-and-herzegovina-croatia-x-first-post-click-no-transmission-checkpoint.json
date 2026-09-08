@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "state": "first-authorized-post-click-confirmed-no-transmission-composer-preserved",
+  "account": "@dogramaci",
+  "clickedAtUtc": "2026-08-31T17:08:50.243Z",
+  "clickAudit": {
+    "visibleFinalGuards": {
+      "signedInAccount": true,
+      "exactCaption": true,
+      "mediaCount": 3,
+      "altTextCount": 3,
+      "madeWithAiLabel": true,
+      "postEnabled": true,
+      "matchingPostButtonCount": 1
+    },
+    "postClicks": 1,
+    "repeatPostClicks": 0,
+    "immediateOutcome": "The exact composer remained complete and visible; no sent alert, status URL, composer closure, or other transmission evidence appeared.",
+    "liveProfileOutcome": "A separately opened visible @dogramaci profile showed no matching country pair, exact caption, or new target post.",
+    "publicTransmissionCount": 0,
+    "transmissionUncertainDuringObservation": false,
+    "finalClassification": "confirmed-no-transmission"
+  },
+  "composerPreservation": {
+    "exactCaptionVisible": true,
+    "mediaCount": 3,
+    "altTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "postEnabled": true,
+    "composerTabId": "6",
+    "profileVerificationTabId": "7"
+  },
+  "evidence": [
+    {
+      "role": "composer-after-first-click-no-transmission",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-bosnia-croatia-first-post-click-no-transmission-composer.png",
+      "sha256": "4FE5DEEC0599D8F83463863F1957A2BD1FAF7B0817256228E54E04233D6CE8AD",
+      "bytes": 48007,
+      "dimensions": "353x996",
+      "rawFormat": "JPEG/JFIF"
+    },
+    {
+      "role": "live-profile-confirming-target-absent",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-bosnia-croatia-first-post-click-profile-no-target.png",
+      "sha256": "E7D010626359B3A6CFDF430A5D84D74003B93CBBE3B52D5EB5D6401EC8D3FCB6",
+      "bytes": 114977,
+      "dimensions": "1253x705",
+      "rawFormat": "JPEG/JFIF"
+    }
+  ],
+  "authorization": {
+    "userText": "authorized for all go, authorized for all similar commands",
+    "consumedByFirstClick": true,
+    "authorizedSupportedRecovery": "The same fresh instruction explicitly authorized all similar commands, including one supported visible keyboard-submit recovery after the no-transmission result was confirmed.",
+    "repeatPointerClicksPermitted": 0
+  },
+  "xPostUrls": [],
+  "nextSafeAction": "Use at most one supported visible keyboard-submit recovery under the user's fresh all-similar-commands authorization, then verify the live @dogramaci profile before any further action. Never repeat the pointer click or transmit duplicate media."
+}

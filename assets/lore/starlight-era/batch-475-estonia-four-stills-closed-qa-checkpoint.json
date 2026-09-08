@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "batch": 475,
+  "country": "Estonia",
+  "state": "four-stills-closed-git-lfs-remote-and-draft-pr-parity-verified",
+  "closedAtUtc": "2026-08-31T22:00:11.2823173Z",
+  "acceptedSceneIds": [1927, 1928, 1929, 1930],
+  "selectedAssetSha256": [
+    "11CE24E56D14B3D7952D2DB87C4331049D62D7F724F5EC4EF910EF0011FABEC5",
+    "7A9E76514CCEF095EDC0BE7143E65E97636E853EF98CD3212ABE8BAF3FC03B23",
+    "5AED0728CA07090244A19EC88D0F4D1DB97E1B64F5447EC1CD490D32F09FBEBE",
+    "406026174525B318938F4397876C89E4AA7FEE2D4E725DDBD85D01910B0FE384"
+  ],
+  "selectedSources": ["chatgpt-one-strong-shortening-pass", "chatgpt-one-strong-shortening-pass", "chatgpt-one-strong-shortening-pass", "meta-raw"],
+  "qa": {
+    "publicSafeAllFour": true,
+    "nonCorruptAllFour": true,
+    "exactlyFourClearlyAdultWomenAllFour": true,
+    "materialCastFailureSceneIds": [],
+    "duplicateHashFailureSceneIds": [],
+    "metaRetries": 0,
+    "chatgptRequestsIssued": 4,
+    "chatgptOutputsSaved": 3,
+    "chatgptOutputModerationBlockedSceneIds": [1930],
+    "chatgptModerationRequestId": "7766d8c2-ca14-40ab-ba22-1c187bcb7807",
+    "additionalChatgptPassesPermitted": 0,
+    "acceptanceRuleApplied": "After one strong shortening request, accept nearly every public-safe non-corrupt selected result. Framing, brand microtext, choreography, clothing detail and location drift remain nonblocking."
+  },
+  "publication": {
+    "priorXTransmissionForSelectedHashes": false,
+    "duplicateGatePassed": true,
+    "estoniaFinlandPairEligible": false,
+    "awaitingFinlandCompanionBatch": true,
+    "xPostClicks": 0,
+    "xPostUrl": null
+  },
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/provider-ledger.json",
+  "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/accessibility-sidecars.json",
+  "chatgptOutcomes": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/chatgpt-one-pass-prompts-and-outcomes.md",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/closure-evidence-manifest.json",
+  "closureEvidenceFileCount": 15,
+  "closureEvidenceTotalBytes": 9865367,
+  "closureEvidenceInventorySha256": "8F93073A95988B264BA077DF635FB40050859463025D68F2E6B2AB5C370B4905",
+  "closureRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-git-lfs-remote-verification-checkpoint.json",
+  "closureRemoteVerifiedCommit": "27a008019d6351c82f4103c7363643c1d3c121a1",
+  "closureRemoteVerifiedAtUtc": "2026-08-31T22:11:03.9527835Z",
+  "nextSafeAction": "Commit and remote-verify the closure-parity record, then close the four completed Meta lanes, preserve one blank X composer, and prepare Finland as the next zero-post European country so the Estonia-Finland pair can be published without duplicate media."
+}

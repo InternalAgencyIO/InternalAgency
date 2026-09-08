@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "batch": 502,
+  "country": "Kuwait",
+  "state": "three-usable-sources-fully-archived-one-refusal-safe-retry-prepared",
+  "updatedAtUtc": "2026-09-07T02:58:22.964Z",
+  "baseRemoteVerifiedHead": "718e8867cb27e239611cf7f6d1b37a1eec5161e4",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/provider-ledger.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-source-qa.json",
+  "refusal": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-initial-refusal-evidence.json",
+  "safeRetry": "assets/lore/starlight-era/batch-502-kuwait-2038-safe-retry-1-prepared-checkpoint.json",
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/single-chatgpt-edit-intents.json",
+  "providerSendActivations": 4,
+  "providerRetries": 0,
+  "chatgptEditInvocations": 0,
+  "missingObservedRawOriginals": 0,
+  "xEligible": false,
+  "nextSafeAction": "Remote-verify this archive and all raw LFS objects, then stage the bounded safe fallback in lane27. Run one built-in ChatGPT tailoring edit on each of the three selected provisional sources after source verification. Preserve all outputs and do not silently change source-camera scope."
+}

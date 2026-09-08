@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "batch": 476,
+  "state": "x-dispatch-blocked-signed-out-session-staged-composer-unavailable",
+  "verifiedAtUtc": "2026-09-04T07:18:15.9632532Z",
+  "userDirective": "authorized for all go, authorized for all similar commands",
+  "actualBrowserInventory": {
+    "browserType": "Codex In-app Browser",
+    "tabCount": 1,
+    "tabs": [
+      {
+        "id": "1",
+        "title": "Meta AI",
+        "url": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3",
+        "state": "left untouched"
+      }
+    ]
+  },
+  "ambientContextContradiction": "Ambient context reported x.com/compose/post, but the actual Browser tab inventory contained only the Meta AI scene tab.",
+  "xRecoveryAttempt": {
+    "freshTabId": "2",
+    "requestedUrl": "https://x.com/compose/post",
+    "actualUrl": "https://x.com/i/jf/onboarding/web?redirect_after_login=%2Fcompose%2Fpost&mode=login",
+    "actualTitle": "X - The Everything App / X",
+    "signedIn": false,
+    "accountVerification": "@dogramaci unavailable in the signed-out tab",
+    "action": "Closed the unusable login tab without entering credentials"
+  },
+  "reservedPost": {
+    "countryPair": [
+      "Estonia",
+      "Finland"
+    ],
+    "sceneOrder": [
+      1927,
+      1932,
+      1933
+    ],
+    "reservationCheckpoint": "assets/lore/starlight-era/batch-476-estonia-finland-x-post-reservation-checkpoint.json",
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-476-estonia-finland-x-composer-staged-awaiting-post-confirmation-checkpoint.json",
+    "stagingCommit": "af7fd9e12887676902c91e2702051376c1248fc4",
+    "publicTransmissionCount": 0,
+    "postClicks": 0
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "mustRemainPaused": true
+  },
+  "credentialsEntered": false,
+  "dispatchAllowed": false,
+  "nextSafeAction": "User must manually restore a signed-in @dogramaci session in the in-app Browser and leave the X composer open; then re-run the reserved staging verification and obtain action-time confirmation immediately before one public Post submission."
+}

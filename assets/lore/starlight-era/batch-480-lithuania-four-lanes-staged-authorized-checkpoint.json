@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "batch": 480,
+  "country": "Lithuania",
+  "state": "four-meta-thinking-lanes-staged-authorized-no-send",
+  "stagedAtUtc": "2026-09-04T11:03:53.216Z",
+  "authorization": "authorized for all go, authorized for all similar commands",
+  "account": "leesha007",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "grokState": "paused-until-credits-return",
+  "guardian": {"path": "C:/Users/A/.codex/automations/guardian-x-assistant-mission/automation.toml", "status": "PAUSED", "changed": false},
+  "xComposer": {"tabId": "17", "url": "https://x.com/home", "account": "@dogramaci", "blank": true, "postClicks": 0},
+  "browserInventory": {"tabCount": 5, "metaTabIds": ["19", "20", "21", "22"], "metaTabCount": 4, "xComposerCount": 1, "unexpectedTabs": []},
+  "sceneMapping": [
+    {"scene": 1947, "tabId": "19", "promptSha256": "83CC54DE1FB562F2369C3FF8E1B694013C9509DE5A93EDD1D7DA0B0B26285BAC"},
+    {"scene": 1948, "tabId": "20", "promptSha256": "196FAB4BD444CDDD0B9D7B860128CBB07982103DCB177DD0229524932F414590"},
+    {"scene": 1949, "tabId": "21", "promptSha256": "B42FD63ED075A8C2F038BED62E79982F3D3D67E3A60F3BAAEA4C2A9E3ECC1278"},
+    {"scene": 1950, "tabId": "22", "promptSha256": "C0CE0DCEB793BD8A445375030B9BCF59EC6EED05266EB9AF9CA136327184BFCF"}
+  ],
+  "visibleGateResults": {"signedInAccountVisibleAllFour": true, "thinkingButtonVisibleAllFour": true, "thinkingMenuCheckedAllFour": true, "instantMenuCheckedAny": false, "exactPromptTextAllFour": true, "anchorAttachmentCountEach": 3, "anchorOrderAllFour": [938, 936, 937], "sendButtonsEnabledAllFour": true},
+  "sendClicks": 0,
+  "repeatSendClicks": 0,
+  "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-480-lithuania/staging-evidence-manifest.json",
+  "preparationCheckpoint": "assets/lore/starlight-era/batch-480-lithuania-europe-gap-fill-prompts-prepared-checkpoint.json",
+  "nextSafeAction": "Commit, push and verify Git/LFS and draft PR head parity for this exact staging state. Then inspect the same five visible tabs one final time; only if account, Thinking, prompt hashes, 938-936-937 attachment order, send-enabled state and blank @dogramaci X composer remain exact, click each Meta Send exactly once and record all four provider URLs and timestamps."
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "recordType": "x-browser-recheck-outcome",
+  "batch": 442,
+  "country": "Cuba",
+  "accountExpected": "@dogramaci",
+  "freshActionTimeGrantReceived": true,
+  "browserOnly": true,
+  "checkedAtUtc": "2026-08-27T22:25:05.105Z",
+  "browser": {
+    "tabId": "87",
+    "url": "https://x.com/compose/post",
+    "composerDialogsFound": 0,
+    "composerTextboxesFound": 0,
+    "bodyText": ""
+  },
+  "providerError": {
+    "request": "https://x.com/i/api/graphql/5XShkXk2oO2J7SYmTu6pvw/Viewer",
+    "result": "HTTP-429 codes:[1003]"
+  },
+  "outcome": {
+    "accountVerified": false,
+    "uploadsStarted": 0,
+    "postClicks": 0,
+    "statusUrlsCreated": 0,
+    "duplicateUploadsAvoided": true,
+    "pendingScenes": [1788, 1791]
+  },
+  "accessibility": {
+    "englishSrtFilesAlreadyArchived": true,
+    "captionsRemainPendingForXAttachment": true
+  },
+  "nextSafeAction": "Wait for X Viewer rate limiting to clear, then obtain fresh action-time confirmation before uploading or posting."
+}

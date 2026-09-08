@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "country": "Andorra",
+  "state": "four-initial-occurrences-dispatched-once-one-terminal-refusal-three-rendering",
+  "recordedAtUtc": "2026-08-31T10:20:09.0644062Z",
+  "authority": {
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
+    "remoteVerifiedHeadBeforeDispatch": "2361a982b55fed518143f9b9dfb732aa9e38e092",
+    "freshActionTimeMetaDispatchAuthorization": "5 stills go",
+    "authorizedSceneIds": [1906, 1907, 1908, 1909, 1910]
+  },
+  "provider": "Meta AI through the in-app Browser only",
+  "dispatch": [
+    {
+      "scene": 1906,
+      "occurrence": 0,
+      "tabId": "28",
+      "clickedAtUtc": "2026-08-31T10:18:32.995Z",
+      "url": "https://www.meta.ai/prompt/933aa21d-a65a-48aa-b8ab-c8cc9b315202",
+      "sendClicks": 1,
+      "repeatSendClicks": 0,
+      "status": "terminal-provider-refusal",
+      "refusalClass": "face-anchor-plus-fetish-adjacent-tight-hemline-request",
+      "retryEligibility": "materially-revised-public-safe-retry1-authorized-under-existing-two-retry-cap",
+      "neverResendExactPrompt": true
+    },
+    {
+      "scene": 1907,
+      "occurrence": 0,
+      "tabId": "29",
+      "clickedAtUtc": "2026-08-31T10:18:37.506Z",
+      "url": "https://www.meta.ai/prompt/77d2064e-40d3-4db5-ac40-e6070fa034ee",
+      "sendClicks": 1,
+      "repeatSendClicks": 0,
+      "status": "rendering"
+    },
+    {
+      "scene": 1908,
+      "occurrence": 0,
+      "tabId": "30",
+      "clickedAtUtc": "2026-08-31T10:18:41.972Z",
+      "url": "https://www.meta.ai/prompt/3aac1ad5-cb6f-491d-b7f7-f61bbeedde74",
+      "sendClicks": 1,
+      "repeatSendClicks": 0,
+      "status": "rendering"
+    },
+    {
+      "scene": 1909,
+      "occurrence": 0,
+      "tabId": "31",
+      "clickedAtUtc": "2026-08-31T10:18:46.432Z",
+      "url": "https://www.meta.ai/prompt/456929b6-34a9-4cd8-9c61-bfdd6513015e",
+      "sendClicks": 1,
+      "repeatSendClicks": 0,
+      "status": "rendering"
+    }
+  ],
+  "sendCount": 4,
+  "repeatSendCount": 0,
+  "xComposer": {
+    "tabId": "32",
+    "url": "https://x.com/compose/post",
+    "visibleHandle": "@dogramaci",
+    "blank": true,
+    "postButtonDisabled": true,
+    "mediaPreviewCount": 0,
+    "mutated": false,
+    "postAuthorized": false
+  },
+  "laterVisibleState": {
+    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-visible-thinking-user-state-checkpoint.json",
+    "subsequentMessagesAndVariantsInitiatedByAgent": false,
+    "allFourModeControlsNowVisibleAs": "Thinking",
+    "newUserModeRequirementAppliesToFutureSends": true
+  },
+  "dispatchEvidence": [
+    {
+      "scene": 1906,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1906-occurrence-0-meta-terminal-refusal.png",
+      "sha256": "543BB453B9471D019FB9EB2DAC5752E99BA1460E6709C3B3D560C31329CF7071",
+      "bytes": 78780,
+      "width": 805,
+      "height": 1040
+    },
+    {
+      "scene": 1907,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1907-occurrence-0-meta-rendering-after-dispatch.png",
+      "sha256": "872AA34FB6865BDABAB0237CE44814E5C1B88C08E72B742FC4D5FF150A994BF2",
+      "bytes": 116350,
+      "width": 804,
+      "height": 1039
+    },
+    {
+      "scene": 1908,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1908-occurrence-0-meta-rendering-after-dispatch.png",
+      "sha256": "72C0089832FB1F702A307FEB4A1ACFD6C441F3A12E834527B2E247DDC96A83EF",
+      "bytes": 52912,
+      "width": 805,
+      "height": 1040
+    },
+    {
+      "scene": 1909,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1909-occurrence-0-meta-rendering-after-dispatch.png",
+      "sha256": "652DF8F81EFAC2B52CE24C8EB1B0855F9C2565D394BCC1978535956F239C31BD",
+      "bytes": 48921,
+      "width": 805,
+      "height": 1040
+    }
+  ],
+  "nextSafeAction": "Remote-archive the initial dispatch, refusal, and later visible Thinking state. Preserve every externally initiated Meta variant and the unsent tab-31 draft before reusing any lane. Use Thinking for every future Meta send."
+}

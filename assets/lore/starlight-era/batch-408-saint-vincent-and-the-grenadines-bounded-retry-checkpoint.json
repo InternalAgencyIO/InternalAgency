@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "bounded-retry-authority",
+  "createdAtUtc": "2026-08-26T05:30:00.000Z",
+  "status": "batch-408-three-lane-bounded-retry-authorized",
+  "batch": 408,
+  "country": "Saint Vincent and the Grenadines",
+  "acceptedCanonicalScenes": [1652],
+  "acceptedCanonicalCount": 1,
+  "closedScenes": [1652],
+  "retryEligibleScenes": [1653, 1654, 1655],
+  "retryAttemptCeilingPerScene": 1,
+  "retryReason": "The initial Send clicks returned to empty Meta home composers with no provider URL, matching history entry, provider response, refusal, or media bytes. No confirmed provider occurrence exists for these scenes.",
+  "fourLanePipeline": {
+    "eligibleLaneCount": 3,
+    "fourthLaneStatus": "ineligible-unused-no-filler",
+    "nextCountryInterleaveAuthorized": false,
+    "reason": "Batch 408 remains open and scene 1652 must not be duplicated."
+  },
+  "promptAuthority": [
+    {"scene":1653,"path":"tmp/world-195x4/batch-408/scene-1653-prompt.txt","sha256":"8CDDA4A93A49B664268385A1BAE3784C8E51E6C1E363E149AB2BD8C98899E013"},
+    {"scene":1654,"path":"tmp/world-195x4/batch-408/scene-1654-prompt.txt","sha256":"3B2EE27AC7E6A39ACA3832357B3145FBA3D01688CC4835DD63491AB8E834DFCB"},
+    {"scene":1655,"path":"tmp/world-195x4/batch-408/scene-1655-prompt.txt","sha256":"CAEDD51DDE48A9796E6CF224458FF3C1C1A1E146685756C100AF3982081E0AAF"}
+  ],
+  "faceReferenceAuthority": {
+    "manifestPath": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "orderedScenes": [938, 936, 937],
+    "orderedSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ]
+  },
+  "dispatchRequirements": [
+    "Use three fresh signed-in Meta tabs only.",
+    "Fill each exact saved prompt before restoring the ordered three anchors, because Meta prompt fill clears attachments.",
+    "Verify exact prompt presence, exactly three attachments, and enabled Send immediately before each click.",
+    "Send each retry scene once and never reopen it after a terminal occurrence.",
+    "Capture raw bytes or explicit no-bytes/refusal evidence before QA or queue advance."
+  ],
+  "xCadenceIncrement": 0,
+  "nextCountryAuthorized": false,
+  "immutable": true
+}

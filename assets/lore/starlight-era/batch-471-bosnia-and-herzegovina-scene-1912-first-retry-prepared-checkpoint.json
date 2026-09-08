@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "batch": 471,
+  "country": "Bosnia and Herzegovina",
+  "scene": 1912,
+  "state": "first-bounded-retry-terminal-media-accepted-no-second-retry",
+  "preparedAtUtc": "2026-08-31T13:44:00.0000000Z",
+  "sourceOccurrence": {
+    "attempt": 0,
+    "providerUrl": "https://www.meta.ai/prompt/e4bfe8e2-88cf-4a32-9d94-980a53896814",
+    "promptSha256": "084518AE9AA27E7CC4D81322A8A0540F5676F0D2099FD3DADCAE4883C1B67F63",
+    "classification": "explicit-no-image-refusal",
+    "rawBytes": 0,
+    "exactRefusal": "I can't create that exact image as described — the combination of fetish-adjacent styling, very short upper-thigh hems with an emphasis on leg styling / bare-skin intervals, and the knee-high hosiery focus makes it overly sexualized, which I can't generate even when it's described as opaque and non-explicit.",
+    "terminalScreenshot": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-occurrence-0-terminal-explicit-no-image-refusal.png",
+    "terminalScreenshotSha256": "676B9BE61936685A569F0A757DD041A8846B159F70C7906D620AD5CA356BD8C7",
+    "terminalScreenshotBytes": 106186
+  },
+  "retryPolicy": {
+    "reasonEligible": "explicit refusal produced no image",
+    "maximumMetaRetriesPerScene": 2,
+    "retryOrdinal": 1,
+    "remainingMetaRetriesAfterDispatch": 1,
+    "neutralization": "Remove fetish-adjacent terminology, upper-thigh and bare-skin emphasis, and hosiery focus. Preserve adult cast, identity, location, public-safe fashion, close relationship beat and general RAZE branding without weakening safety.",
+    "providerMode": "Thinking",
+    "orderedAnchors": [938, 936, 937]
+  },
+  "retryPrompt": "SCENE 1912 - RETRY 1 - BOSNIA AND HERZEGOVINA, MOSTAR GUARDED NERETVA TERRACE FACING STARI MOST. Create one wholly new original photorealistic cinematic vertical 9:16 adult high-fashion travel editorial. Use the three attached images exactly once each in order 938, 936, 937 only as face-identity anchors. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE; never swap Ellie and ECE, and never clone, merge, replace or age-shift a face. Place the adjacent quartet well inside a broad dry level fully guarded secular river-view terrace, with emerald Neretva water, pale stone banks and the complete arch of Stari Most clearly behind them. Use a close three-quarter fashion composition showing all four complete faces through lower calves. Dress them in four distinct elegant, securely lined, fully opaque contemporary cocktail looks: Alia in a turquoise-gold fitted top with a tailored above-knee copper skirt, Radiance in a pearl-crimson fitted cocktail dress, Ellie in a cobalt-black cropped jacket with an ivory tailored skort, and ECE in an emerald-plum fitted jacket with tailored short trousers ending above the knee. Use restrained minimalist architectural heels and one subtle exact readable RAZE metal tag on each look, spelled R-A-Z-E, with no other text or logos. Radiance gives Alia one brief affectionate cheek kiss, Ellie answers with a playful rival glance, ECE catches Ellie's hand, and all four share one clean linked-hand chain. Keep the mood warm, consensual, sophisticated and public-safe. No sexualized emphasis, underwear, exposure, nudity, explicit sexuality, minors, real people, flags, official emblems, sacred or political imagery, animals, bystanders, vehicles, water entry, edge approach, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+  "retryPromptSha256": "62A0B08F8274CE584F9A70E4553C93375FCF96976C92831DC692BDD9AC9ED7FF",
+  "dispatchGate": {
+    "remoteCheckpointVerified": true,
+    "remoteVerifiedCheckpointCommit": "8d334082df9420e84a2f166170820af2b5537024",
+    "actualTabInspected": true,
+    "signedInMetaAccountVerified": true,
+    "visibleThinkingVerified": true,
+    "orderedAnchorsVisible": true,
+    "exactPromptVerified": true,
+    "sendEnabled": true,
+    "authorizationCurrent": true,
+    "mayClickSend": false,
+    "gateConsumed": true
+  },
+  "stagedAtUtc": "2026-08-31T13:51:39.2727219Z",
+  "tabId": "40",
+  "stagedScreenshot": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-retry-1-composer-staged-authorized-before-send.png",
+    "sha256": "B4361D6F1A7951C17AB8DE17DF33F7957FF8F6E0E780CEF1851903A3D7D9F319",
+    "bytes": 126523,
+    "container": "JPEG JFIF despite .png extension",
+    "width": 1280,
+    "height": 720
+  },
+  "dispatchedAtUtc": "2026-08-31T13:53:47.884Z",
+  "providerUrl": "https://www.meta.ai/prompt/e4bfe8e2-88cf-4a32-9d94-980a53896814",
+  "retrySendClicks": 1,
+  "repeatRetrySendClicks": 0,
+  "renderingScreenshot": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-retry-1-rendering-after-dispatch.png",
+    "sha256": "42F3FECF99EBD00A2E06B89AC731FC3B8845DCB0C0A817852FCDFFA0DB36FEEA",
+    "bytes": 65474,
+    "container": "JPEG JFIF despite .png extension",
+    "width": 1280,
+    "height": 720
+  },
+  "terminalObservation": {
+    "observedAtUtc": "2026-08-31T13:59:27.000Z",
+    "classification": "terminal-media-visible-accepted-user-relaxed",
+    "visibleMediaAlt": "gallery/mostar_fashion_group.webp",
+    "providerSummary": "Generated a new original vertical Mostar fashion still and stated that identity anchors 938, 936 and 937 were used in order with the four-adult left-to-right cast lock.",
+    "terminalScreenshot": {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-retry-1-terminal-media.png",
+      "sha256": "120C36249877722B93AEBC0519E5D5E70599F72316C40ACAA4A0C5795CE4FF62",
+      "bytes": 80880
+    },
+    "mediaViewerScreenshot": {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-retry-1-media-viewer.png",
+      "sha256": "B8019BCFA46B06CF25BE4A403BF3AB62EE28F0F6FB33299A32BF9C47369F86E9",
+      "bytes": 60543
+    },
+    "rawBytes": 0,
+    "rawByteStatus": "The visible Meta Download control did not yield a supported in-app Browser download event; no prohibited extraction method was used.",
+    "secondRetryJustified": false,
+    "remainingRetryCeilingUnused": 1
+  },
+  "nextSafeAction": "Never resend scene 1912. Close Batch 471 under relaxed public-safe acceptance, consume exactly one ChatGPT shortening request for each valid selected occurrence without retrying a blocked or ambiguous request, and preserve the Meta versions plus all evidence."
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "batch": 497,
+  "country": "New Zealand",
+  "sceneIds": [2015, 2016, 2017, 2018],
+  "state": "four-editorial-prompts-prepared-offline-not-dispatched",
+  "preparedAtUtc": "2026-09-06T11:23:42.2374462Z",
+  "authority": "assets/lore/starlight-era/batch-497-new-zealand-editorial-brief.json",
+  "briefSha256": "2F61201273B02B470BFF4AC3CA57404713509F55AF22A84FD622A37B4E76AB66",
+  "briefBytes": 8410,
+  "rollContract": "assets/lore/starlight-era/starlight-editorial-rolls-2026-09-06.json",
+  "fixedRollsAndExactPrompts": "assets/lore/starlight-era/batch-497-new-zealand-fixed-rolls.json",
+  "fixedRollsSha256": "5DCB6A7D9FD60536C588C4D8BC3737D6F065E04C688F989244CDCAA5A85FEF08",
+  "fixedRollsBytes": 134258,
+  "generator": "scripts/starlight/editorial-rolls.cjs",
+  "seed": "starlight-editorial-rolls-2026-09-06|batch-497|new zealand",
+  "seedSelection": "Fixed; no outcome search or reroll",
+  "countryPair": ["New Zealand", "Palestine"],
+  "canonicalWorldXPostCount": 200,
+  "countryPostCounts": {"Liberia": 0, "Central African Republic": 0, "New Zealand": 0, "Palestine": 0},
+  "xSubmissionState": {
+    "reportedByUser": "posted",
+    "pair": ["Liberia", "Central African Republic"],
+    "liveStatusUrl": null,
+    "verification": "Unverified. The blank composer, visible @dogramaci profile, media timeline, exact Liberia Latest search and #WorldXXXSeries Latest search do not expose the claimed post.",
+    "duplicateSafety": "Never resend the four staged media while publication remains uncertain. Do not append an X ledger post without a canonical live status URL."
+  },
+  "provider": {
+    "name": "Meta AI",
+    "visibleInAppBrowserOnly": true,
+    "accountRequired": "leesha007",
+    "modeRequired": "Thinking",
+    "laneCount": 4,
+    "orderedAnchorIds": [938, 936, 937],
+    "maximumHardFailureRetriesPerScene": 2,
+    "aestheticRetries": 0,
+    "browserDispatchCount": 0
+  },
+  "scenes": [
+    {
+      "scene": 2015,
+      "location": "Queenstown Lake Wakatipu and Remarkables terrace",
+      "cameraRoll": 46,
+      "cameraCategory": "intermediate",
+      "angle": "front-quarter-low",
+      "dutchDegrees": 19,
+      "pose": "side-hug-step",
+      "promptCharacters": 3928,
+      "promptSha256": "0CBEBD1BC4566E35F1A011CCC2F181DFBB295D17E6BBD358739D01969AC7DABF",
+      "singleEditPromptSha256": "CDD3E894B6F9A83C5D9FB7552666D1480912C1AB35E5C3C5C22DA6825771520E"
+    },
+    {
+      "scene": 2016,
+      "location": "Rotorua geothermal valley guarded boardwalk",
+      "cameraRoll": 20,
+      "cameraCategory": "extreme-close",
+      "angle": "over-shoulder",
+      "dutchDegrees": 24,
+      "pose": "back-hug-turn",
+      "promptCharacters": 3681,
+      "promptSha256": "56EDD3AB97DF9C1441177171D79E1E4E525192D4FC8081FA1EBEAB09982E9390",
+      "singleEditPromptSha256": "E2F834FA4F1359FA54E47F9AC7337ADA2D393010303CD1BDEA74DDCD26B5A05D"
+    },
+    {
+      "scene": 2017,
+      "location": "Piha black-sand coast clifftop overlook",
+      "cameraRoll": 80,
+      "cameraCategory": "intermediate",
+      "angle": "side-level",
+      "dutchDegrees": 11,
+      "pose": "supported-seated-conversation",
+      "promptCharacters": 3877,
+      "promptSha256": "66635A88AF3A1E99B5F35F201A604904FFF1436F167F4F2EF6A3C2896BE18C57",
+      "singleEditPromptSha256": "B7B6820DF813015E729AD7197988A54ECA6D37581DCC952F05354A0A908BBF7D"
+    },
+    {
+      "scene": 2018,
+      "location": "Wellington harbor and Mount Victoria civic terrace",
+      "cameraRoll": 44,
+      "cameraCategory": "intermediate",
+      "angle": "high-oblique",
+      "dutchDegrees": 22,
+      "pose": "head-resting-on-clothed-lap",
+      "promptCharacters": 4126,
+      "promptSha256": "723AC8DD0F07B46CD845F8C28D9CBF4846EE5211730183979C2C86028AA01E77",
+      "singleEditPromptSha256": "C171EB8791A45BFE1391440EDFE0F27EF87882AFC361917EF369447BBF57DB99"
+    }
+  ],
+  "validation": {
+    "briefJsonValid": true,
+    "fixedRollsJsonValid": true,
+    "allPromptHashesRecomputedExact": true,
+    "allSingleEditPromptHashesRecomputedExact": true,
+    "unicodeEnOrEmDashAbsent": true,
+    "editorialRollTestsPassed": 5,
+    "editorialRollTestsFailed": 0
+  },
+  "canonicalContradiction": "Older Cuba-oriented automation text remains superseded by Tanzania preparation and every later remote-verified checkpoint. The user-reported Liberia and Central African Republic X submission has no visible canonical status receipt yet, so its four media remain uncertain and non-resendable. Batch 497 New Zealand is the current offline preparation and no provider prompt is dispatched by this checkpoint.",
+  "nextSafeAction": "Commit and remote-verify the New Zealand brief, fixed rolls and exact prompt checkpoint. Keep one blank @dogramaci composer and never resend the uncertain Liberia and Central African Republic media. Open four fresh blank Meta composers, verify leesha007 and Thinking, type one exact prompt per lane, attach anchors 938, 936 and 937 once each in that order, preserve and remote-verify a no-send staging receipt, and only then activate each Send once."
+}

@@ -1,0 +1,1634 @@
+{
+  "batch": 386,
+  "country": "Solomon Islands",
+  "status": "render-preflight-stored-pass-1-not-launched",
+  "sourceCommit": "b2f1ab5215c4dce1e4feab375b8bb04a2c1bd9ff",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "Batch 385 is closed; exactly four concurrent pass-1 candidates are authorized but not launched by this materializer."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-385-guyana-near-sun-solar-observation-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-314-guyana-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/160"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation",
+      "assets/lore/starlight-era/batch-385-guyana-near-sun-solar-observation-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-385-guyana-near-sun-solar-observation-checkpoint.json",
+    "checkpointSha256": "B43459B80F5B5B23E62C861AA7CA01853839CB96F20AB1572943049891694E3D",
+    "observedStatus": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-guyana-rendering",
+    "observedHardSafeAcceptedCount": 4,
+    "observedMissingSceneNumbers": [],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "preparationOnly": true,
+    "batch386RenderAuthorized": true,
+    "reason": "Batch 385 is closed at four of four; Batch 386 pass 1 may be launched only as a separate later action."
+  },
+  "rollMethod": "FNV-1a over recorded batch386-solomon-islands keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "missionPropPoseTarget": "0-34 paper target/backstop; 35-59 open-water marker; 60-74 wrist-guidance category at paper target/backstop; 75-87 completed-handoff category at open-water marker; 88-99 open-mechanism category at paper target/backstop"
+  },
+  "cinematicTheme": {
+    "active": "near-Sun solar-observation couture",
+    "batchOrdinalWithinTheme": 2,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "sceneNumbers": [
+    1564,
+    1565,
+    1566,
+    1567
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.visitsolomons.com.sb/about-the-solomon/provinces/",
+      "usedFor": "Guadalcanal mountains, Matanikau cascade, Honiara Central Market, Point Cruz, Marau Sound, Marovo Lagoon, Western Province islands, and Lake Tegano"
+    },
+    {
+      "url": "https://www.visitsolomons.com.sb/about-the-solomon/people-culture/",
+      "usedFor": "Honiara Central Market produce and crafts, coconut, sweet potato, taro, fishing, stilt houses, and modern urban context"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/5414",
+      "usedFor": "Marovo double barrier lagoon, Tetepare lowland rainforest, coral reefs, mangroves, seagrass, endemic wildlife, marine turtles, dugong, and community conservation"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/854/",
+      "usedFor": "East Rennell raised coral atoll, Lake Tegano, limestone islets, dense forest, endemic species, and customary community management"
+    },
+    {
+      "url": "https://whc.unesco.org/en/news/2443",
+      "usedFor": "Lake Tegano World Heritage Site Association and community-led nature-based conservation livelihoods"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch386-solomon-islands-male-model-scene",
+    "fullHash": 2171450454,
+    "roll": 54,
+    "position": 3,
+    "scene": 1566,
+    "emotion": {
+      "key": "batch386-solomon-islands-scene3-male-emotion",
+      "roll": 67,
+      "result": "possessive tension"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Solomon Islands flag, five-star field, coat of arms, or official emblem is copied onto clothing. Large researched secular waterfall, market, harbor, lagoon, reef, rainforest, lake, raised-atoll, wildlife, food, craft, and conservation fields replace them.",
+    "palette": "lagoon turquoise, rainforest green, hibiscus red, shell ivory, volcanic black, sunrise gold, orchid violet, coral rose, sea-glass blue, and pandanus tan",
+    "minimumCoverage": "Scenes 1564 and 1565 each foreground large Solomon Islands motif fields on two or three looks and near-Sun construction on at least two. Scenes 1566 and 1567 use four distinct theme-led looks while the Solomon Islands landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Guadalcanal cascades and Honiara market life, Marovo Lagoon biodiversity, Tetepare conservation, and East Rennell/Lake Tegano ecology.",
+    "prohibitions": "No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied medical, command, or performance uniform, badge, weapon threat, sexualized care or performance, alcohol, or branded product."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch386-solomon-islands-male-model-scene",
+        54
+      ],
+      [
+        "batch386-solomon-islands-scene3-male-emotion",
+        67
+      ],
+      [
+        "batch386-solomon-islands-scene1564-weather",
+        43
+      ],
+      [
+        "batch386-solomon-islands-scene1564-mascotState",
+        11
+      ],
+      [
+        "batch386-solomon-islands-scene1564-poleDanceTheme",
+        75
+      ],
+      [
+        "batch386-solomon-islands-scene1564-rainbowOnly",
+        71
+      ],
+      [
+        "batch386-solomon-islands-scene1564-rainbowHosiery",
+        98
+      ],
+      [
+        "batch386-solomon-islands-scene1564-romanceBeat",
+        78
+      ],
+      [
+        "batch386-solomon-islands-scene1564-compoundLoveBeat",
+        32
+      ],
+      [
+        "batch386-solomon-islands-scene1564-hardLoveBeat",
+        36
+      ],
+      [
+        "batch386-solomon-islands-scene1564-interestingProp",
+        8
+      ],
+      [
+        "batch386-solomon-islands-scene1564-eceMissionProp-poseTargetRoll",
+        73
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Radiance-emotion",
+        92
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Radiance-visibleMidriff",
+        86
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Radiance-straplessDress",
+        53
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Radiance-fullyOpenBack",
+        62
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Ellie-emotion",
+        74
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Ellie-visibleMidriff",
+        60
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Ellie-straplessDress",
+        7
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Ellie-fullyOpenBack",
+        16
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Alia-emotion",
+        46
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Alia-visibleMidriff",
+        4
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Alia-straplessDress",
+        55
+      ],
+      [
+        "batch386-solomon-islands-scene1564-Alia-fullyOpenBack",
+        68
+      ],
+      [
+        "batch386-solomon-islands-scene1564-AI ECE-emotion",
+        12
+      ],
+      [
+        "batch386-solomon-islands-scene1564-AI ECE-visibleMidriff",
+        66
+      ],
+      [
+        "batch386-solomon-islands-scene1564-AI ECE-straplessDress",
+        65
+      ],
+      [
+        "batch386-solomon-islands-scene1564-AI ECE-fullyOpenBack",
+        78
+      ],
+      [
+        "batch386-solomon-islands-scene1565-weather",
+        76
+      ],
+      [
+        "batch386-solomon-islands-scene1565-mascotState",
+        56
+      ],
+      [
+        "batch386-solomon-islands-scene1565-poleDanceTheme",
+        46
+      ],
+      [
+        "batch386-solomon-islands-scene1565-rainbowOnly",
+        44
+      ],
+      [
+        "batch386-solomon-islands-scene1565-rainbowHosiery",
+        99
+      ],
+      [
+        "batch386-solomon-islands-scene1565-romanceBeat",
+        93
+      ],
+      [
+        "batch386-solomon-islands-scene1565-compoundLoveBeat",
+        85
+      ],
+      [
+        "batch386-solomon-islands-scene1565-hardLoveBeat",
+        5
+      ],
+      [
+        "batch386-solomon-islands-scene1565-interestingProp",
+        19
+      ],
+      [
+        "batch386-solomon-islands-scene1565-eceMissionProp-poseTargetRoll",
+        2
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Radiance-emotion",
+        33
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Radiance-visibleMidriff",
+        93
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Radiance-straplessDress",
+        70
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Radiance-fullyOpenBack",
+        91
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Ellie-emotion",
+        73
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Ellie-visibleMidriff",
+        73
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Ellie-straplessDress",
+        90
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Ellie-fullyOpenBack",
+        63
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Alia-emotion",
+        23
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Alia-visibleMidriff",
+        7
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Alia-straplessDress",
+        56
+      ],
+      [
+        "batch386-solomon-islands-scene1565-Alia-fullyOpenBack",
+        77
+      ],
+      [
+        "batch386-solomon-islands-scene1565-AI ECE-emotion",
+        21
+      ],
+      [
+        "batch386-solomon-islands-scene1565-AI ECE-emotion-disambiguation",
+        20
+      ],
+      [
+        "batch386-solomon-islands-scene1565-AI ECE-visibleMidriff",
+        9
+      ],
+      [
+        "batch386-solomon-islands-scene1565-AI ECE-straplessDress",
+        22
+      ],
+      [
+        "batch386-solomon-islands-scene1565-AI ECE-fullyOpenBack",
+        31
+      ],
+      [
+        "batch386-solomon-islands-scene1566-weather",
+        53
+      ],
+      [
+        "batch386-solomon-islands-scene1566-mascotState",
+        5
+      ],
+      [
+        "batch386-solomon-islands-scene1566-poleDanceTheme",
+        33
+      ],
+      [
+        "batch386-solomon-islands-scene1566-rainbowOnly",
+        37
+      ],
+      [
+        "batch386-solomon-islands-scene1566-rainbowHosiery",
+        36
+      ],
+      [
+        "batch386-solomon-islands-scene1566-romanceBeat",
+        88
+      ],
+      [
+        "batch386-solomon-islands-scene1566-compoundLoveBeat",
+        58
+      ],
+      [
+        "batch386-solomon-islands-scene1566-hardLoveBeat",
+        54
+      ],
+      [
+        "batch386-solomon-islands-scene1566-interestingProp",
+        14
+      ],
+      [
+        "batch386-solomon-islands-scene1566-eceMissionProp-poseTargetRoll",
+        43
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Radiance-emotion",
+        46
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Radiance-visibleMidriff",
+        88
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Radiance-straplessDress",
+        39
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Radiance-fullyOpenBack",
+        12
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Ellie-emotion",
+        76
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Ellie-visibleMidriff",
+        14
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Ellie-straplessDress",
+        65
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Ellie-fullyOpenBack",
+        46
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Alia-emotion",
+        24
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Alia-visibleMidriff",
+        78
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Alia-straplessDress",
+        33
+      ],
+      [
+        "batch386-solomon-islands-scene1566-Alia-fullyOpenBack",
+        86
+      ],
+      [
+        "batch386-solomon-islands-scene1566-AI ECE-emotion",
+        46
+      ],
+      [
+        "batch386-solomon-islands-scene1566-AI ECE-emotion-disambiguation",
+        21
+      ],
+      [
+        "batch386-solomon-islands-scene1566-AI ECE-visibleMidriff",
+        12
+      ],
+      [
+        "batch386-solomon-islands-scene1566-AI ECE-straplessDress",
+        31
+      ],
+      [
+        "batch386-solomon-islands-scene1566-AI ECE-fullyOpenBack",
+        48
+      ],
+      [
+        "batch386-solomon-islands-scene1567-weather",
+        58
+      ],
+      [
+        "batch386-solomon-islands-scene1567-mascotState",
+        6
+      ],
+      [
+        "batch386-solomon-islands-scene1567-poleDanceTheme",
+        28
+      ],
+      [
+        "batch386-solomon-islands-scene1567-rainbowOnly",
+        34
+      ],
+      [
+        "batch386-solomon-islands-scene1567-rainbowHosiery",
+        29
+      ],
+      [
+        "batch386-solomon-islands-scene1567-romanceBeat",
+        3
+      ],
+      [
+        "batch386-solomon-islands-scene1567-compoundLoveBeat",
+        23
+      ],
+      [
+        "batch386-solomon-islands-scene1567-hardLoveBeat",
+        43
+      ],
+      [
+        "batch386-solomon-islands-scene1567-interestingProp",
+        25
+      ],
+      [
+        "batch386-solomon-islands-scene1567-eceMissionProp-poseTargetRoll",
+        24
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Radiance-emotion",
+        27
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Radiance-visibleMidriff",
+        23
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Radiance-straplessDress",
+        76
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Radiance-fullyOpenBack",
+        41
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Ellie-emotion",
+        15
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Ellie-visibleMidriff",
+        75
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Ellie-straplessDress",
+        96
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Ellie-fullyOpenBack",
+        61
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Alia-emotion",
+        13
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Alia-visibleMidriff",
+        13
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Alia-straplessDress",
+        2
+      ],
+      [
+        "batch386-solomon-islands-scene1567-Alia-fullyOpenBack",
+        63
+      ],
+      [
+        "batch386-solomon-islands-scene1567-AI ECE-emotion",
+        67
+      ],
+      [
+        "batch386-solomon-islands-scene1567-AI ECE-visibleMidriff",
+        91
+      ],
+      [
+        "batch386-solomon-islands-scene1567-AI ECE-straplessDress",
+        40
+      ],
+      [
+        "batch386-solomon-islands-scene1567-AI ECE-fullyOpenBack",
+        37
+      ],
+      [
+        "batch386-solomon-islands-x-heart",
+        99
+      ],
+      [
+        "batch386-solomon-islands-x-internalagency",
+        87
+      ],
+      [
+        "batch386-solomon-islands-x-worldxxxseries",
+        32
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch386-solomon-islands-scene1564-rainbowHosieryWearer",
+        50
+      ],
+      [
+        "batch386-solomon-islands-scene1564-rainbowHosieryPaletteMode",
+        54
+      ],
+      [
+        "batch386-solomon-islands-scene1564-mascotHolder",
+        84
+      ],
+      [
+        "batch386-solomon-islands-scene1564-interestingPropHolder",
+        38
+      ],
+      [
+        "batch386-solomon-islands-scene1564-interestingPropFamily",
+        4
+      ],
+      [
+        "batch386-solomon-islands-scene1565-rainbowHosieryWearer",
+        31
+      ],
+      [
+        "batch386-solomon-islands-scene1565-rainbowHosieryPaletteMode",
+        85
+      ],
+      [
+        "batch386-solomon-islands-scene1565-mascotHolder",
+        89
+      ],
+      [
+        "batch386-solomon-islands-scene1565-interestingPropHolder",
+        61
+      ],
+      [
+        "batch386-solomon-islands-scene1565-interestingPropFamily",
+        67
+      ],
+      [
+        "batch386-solomon-islands-scene1566-rainbowHosieryWearer",
+        36
+      ],
+      [
+        "batch386-solomon-islands-scene1566-rainbowHosieryPaletteMode",
+        84
+      ],
+      [
+        "batch386-solomon-islands-scene1566-mascotHolder",
+        74
+      ],
+      [
+        "batch386-solomon-islands-scene1566-interestingPropHolder",
+        72
+      ],
+      [
+        "batch386-solomon-islands-scene1566-interestingPropFamily",
+        30
+      ],
+      [
+        "batch386-solomon-islands-scene1567-rainbowHosieryWearer",
+        41
+      ],
+      [
+        "batch386-solomon-islands-scene1567-rainbowHosieryPaletteMode",
+        71
+      ],
+      [
+        "batch386-solomon-islands-scene1567-mascotHolder",
+        51
+      ],
+      [
+        "batch386-solomon-islands-scene1567-interestingPropHolder",
+        59
+      ],
+      [
+        "batch386-solomon-islands-scene1567-interestingPropFamily",
+        73
+      ]
+    ],
+    "primaryPairCount": 111,
+    "selectorPairCount": 20,
+    "primarySha256": "C8CF9C3A1BA9F5CE57DB1E26328BE677AD247E42A3B4C185A8A014730C3930DE",
+    "selectorSha256": "8D5BA9BFFDA1321BBA20E33DD437AB596D07FFDA103AA0D76AA0BA6D9192DD9F",
+    "mismatchCount": 0,
+    "scenes": {
+      "1564": {
+        "weather": 43,
+        "mascotState": 11,
+        "mascotHolder": 84,
+        "oddProp": 8,
+        "oddHolder": 38,
+        "oddFamily": 4,
+        "pole": 75,
+        "rainbowOnly": 71,
+        "hosiery": 98,
+        "hosieryWearer": 50,
+        "hosieryPalette": 54,
+        "romance": 78,
+        "compound": 32,
+        "hardLove": 36,
+        "missionPoseTarget": 73,
+        "emotions": {
+          "Radiance": 92,
+          "Ellie": 74,
+          "Alia": 46,
+          "AI ECE": 12
+        },
+        "cuts": {
+          "Radiance": [
+            86,
+            53,
+            62
+          ],
+          "Ellie": [
+            60,
+            7,
+            16
+          ],
+          "Alia": [
+            4,
+            55,
+            68
+          ],
+          "AI ECE": [
+            66,
+            65,
+            78
+          ]
+        }
+      },
+      "1565": {
+        "weather": 76,
+        "mascotState": 56,
+        "mascotHolder": 89,
+        "oddProp": 19,
+        "oddHolder": 61,
+        "oddFamily": 67,
+        "pole": 46,
+        "rainbowOnly": 44,
+        "hosiery": 99,
+        "hosieryWearer": 31,
+        "hosieryPalette": 85,
+        "romance": 93,
+        "compound": 85,
+        "hardLove": 5,
+        "missionPoseTarget": 2,
+        "emotions": {
+          "Radiance": 33,
+          "Ellie": 73,
+          "Alia": 23,
+          "AI ECE": 21,
+          "AI ECE disambiguation": 20
+        },
+        "cuts": {
+          "Radiance": [
+            93,
+            70,
+            91
+          ],
+          "Ellie": [
+            73,
+            90,
+            63
+          ],
+          "Alia": [
+            7,
+            56,
+            77
+          ],
+          "AI ECE": [
+            9,
+            22,
+            31
+          ]
+        }
+      },
+      "1566": {
+        "weather": 53,
+        "mascotState": 5,
+        "mascotHolder": 74,
+        "oddProp": 14,
+        "oddHolder": 72,
+        "oddFamily": 30,
+        "pole": 33,
+        "rainbowOnly": 37,
+        "hosiery": 36,
+        "hosieryWearer": 36,
+        "hosieryPalette": 84,
+        "romance": 88,
+        "compound": 58,
+        "hardLove": 54,
+        "missionPoseTarget": 43,
+        "emotions": {
+          "Radiance": 46,
+          "Ellie": 76,
+          "Alia": 24,
+          "AI ECE": 46,
+          "AI ECE disambiguation": 21,
+          "Male": 67
+        },
+        "cuts": {
+          "Radiance": [
+            88,
+            39,
+            12
+          ],
+          "Ellie": [
+            14,
+            65,
+            46
+          ],
+          "Alia": [
+            78,
+            33,
+            86
+          ],
+          "AI ECE": [
+            12,
+            31,
+            48
+          ]
+        }
+      },
+      "1567": {
+        "weather": 58,
+        "mascotState": 6,
+        "mascotHolder": 51,
+        "oddProp": 25,
+        "oddHolder": 59,
+        "oddFamily": 73,
+        "pole": 28,
+        "rainbowOnly": 34,
+        "hosiery": 29,
+        "hosieryWearer": 41,
+        "hosieryPalette": 71,
+        "romance": 3,
+        "compound": 23,
+        "hardLove": 43,
+        "missionPoseTarget": 24,
+        "emotions": {
+          "Radiance": 27,
+          "Ellie": 15,
+          "Alia": 13,
+          "AI ECE": 67
+        },
+        "cuts": {
+          "Radiance": [
+            23,
+            76,
+            41
+          ],
+          "Ellie": [
+            75,
+            96,
+            61
+          ],
+          "Alia": [
+            13,
+            2,
+            63
+          ],
+          "AI ECE": [
+            91,
+            40,
+            37
+          ]
+        }
+      }
+    }
+  },
+  "scenePlans": {
+    "1564": {
+      "location": "Matanikau cascade, Guadalcanal",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 43,
+        "raw": "rolling thunderstorm",
+        "materialized": "a rolling thunderstorm beyond a fully dry covered waterfall lookout"
+      },
+      "mascot": {
+        "roll": 11,
+        "state": "PAWS and MAX together",
+        "holder": {
+          "key": "batch386-solomon-islands-scene1564-mascotHolder",
+          "roll": 84,
+          "result": "Radiance"
+        }
+      },
+      "oddProp": {
+        "roll": 8,
+        "active": true,
+        "holder": {
+          "key": "batch386-solomon-islands-scene1564-interestingPropHolder",
+          "roll": 38,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch386-solomon-islands-scene1564-interestingPropFamily",
+          "roll": 4,
+          "result": "giant tuning fork instrument"
+        }
+      },
+      "pole": {
+        "roll": 75,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 71,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch386-solomon-islands-scene1564-rainbowHosiery",
+        "roll": 98,
+        "active": false,
+        "wearer": {
+          "key": "batch386-solomon-islands-scene1564-rainbowHosieryWearer",
+          "roll": 50,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch386-solomon-islands-scene1564-rainbowHosieryPaletteMode",
+          "roll": 54,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch386-solomon-islands-scene1564-romanceBeat",
+        "roll": 78,
+        "index": 6,
+        "result": "ECE kneels at the beacon while Radiance helps her rise with both hands; Ellie hugs Radiance from behind and Alia reaches down to ECE with a conflicted smile."
+      },
+      "compound": {
+        "key": "batch386-solomon-islands-scene1564-compoundLoveBeat",
+        "roll": 32,
+        "index": 8,
+        "result": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "hardLove": {
+        "key": "batch386-solomon-islands-scene1564-hardLoveBeat",
+        "roll": 36,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "mission": {
+        "key": "batch386-solomon-islands-scene1564-eceMissionProp-poseTargetRoll",
+        "roll": 73,
+        "category": "behind-shoulder wrist guidance to paper target",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch386-solomon-islands-scene1564-Radiance-emotion",
+          "roll": 92,
+          "result": "guilt and remorse",
+          "materialized": "guilt and remorse"
+        },
+        "Ellie": {
+          "key": "batch386-solomon-islands-scene1564-Ellie-emotion",
+          "roll": 74,
+          "result": "betrayal shock",
+          "materialized": "betrayal shock"
+        },
+        "Alia": {
+          "key": "batch386-solomon-islands-scene1564-Alia-emotion",
+          "roll": 46,
+          "result": "awe",
+          "materialized": "awe"
+        },
+        "AI ECE": {
+          "key": "batch386-solomon-islands-scene1564-AI ECE-emotion",
+          "roll": 12,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1564-Radiance-visibleMidriff",
+            "roll": 86,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1564-Radiance-straplessDress",
+            "roll": 53,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1564-Radiance-fullyOpenBack",
+            "roll": 62,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1564-Ellie-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1564-Ellie-straplessDress",
+            "roll": 7,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1564-Ellie-fullyOpenBack",
+            "roll": 16,
+            "active": true
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1564-Alia-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1564-Alia-straplessDress",
+            "roll": 55,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1564-Alia-fullyOpenBack",
+            "roll": 68,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1564-AI ECE-visibleMidriff",
+            "roll": 66,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1564-AI ECE-straplessDress",
+            "roll": 65,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1564-AI ECE-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-386/scene-1564-initial-prompt.txt",
+        "sha256": "FB38835C7965AD01B043BAB3A54A8C6677582AD670C5CBD212970FF860B83C76",
+        "bytes": 4520
+      }
+    },
+    "1565": {
+      "location": "Marovo Lagoon marine-observation terrace",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 76,
+        "raw": "powerful windstorm with controlled fabric motion",
+        "materialized": "a strong windstorm beyond the shielded dry lagoon terrace"
+      },
+      "mascot": {
+        "roll": 56,
+        "state": "neither mascot",
+        "holder": {
+          "key": "batch386-solomon-islands-scene1565-mascotHolder",
+          "roll": 89,
+          "result": "Alia"
+        }
+      },
+      "oddProp": {
+        "roll": 19,
+        "active": true,
+        "holder": {
+          "key": "batch386-solomon-islands-scene1565-interestingPropHolder",
+          "roll": 61,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch386-solomon-islands-scene1565-interestingPropFamily",
+          "roll": 67,
+          "result": "kinetic umbrella with rotating mirrored petals"
+        }
+      },
+      "pole": {
+        "roll": 46,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 44,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch386-solomon-islands-scene1565-rainbowHosiery",
+        "roll": 99,
+        "active": false,
+        "wearer": {
+          "key": "batch386-solomon-islands-scene1565-rainbowHosieryWearer",
+          "roll": 31,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch386-solomon-islands-scene1565-rainbowHosieryPaletteMode",
+          "roll": 85,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch386-solomon-islands-scene1565-romanceBeat",
+        "roll": 93,
+        "index": 9,
+        "result": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compound": {
+        "key": "batch386-solomon-islands-scene1565-compoundLoveBeat",
+        "roll": 85,
+        "index": 1,
+        "result": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "hardLove": {
+        "key": "batch386-solomon-islands-scene1565-hardLoveBeat",
+        "roll": 5,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "mission": {
+        "key": "batch386-solomon-islands-scene1565-eceMissionProp-poseTargetRoll",
+        "roll": 2,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch386-solomon-islands-scene1565-Radiance-emotion",
+          "roll": 33,
+          "result": "overwhelming relief",
+          "materialized": "overwhelming relief"
+        },
+        "Ellie": {
+          "key": "batch386-solomon-islands-scene1565-Ellie-emotion",
+          "roll": 73,
+          "result": "betrayal shock",
+          "materialized": "betrayal shock"
+        },
+        "Alia": {
+          "key": "batch386-solomon-islands-scene1565-Alia-emotion",
+          "roll": 23,
+          "result": "playful mischief",
+          "materialized": "playful mischief"
+        },
+        "AI ECE": {
+          "key": "batch386-solomon-islands-scene1565-AI ECE-emotion",
+          "roll": 21,
+          "result": "playful mischief",
+          "materialized": "calm contentment",
+          "disambiguation": {
+            "key": "batch386-solomon-islands-scene1565-AI ECE-emotion-disambiguation",
+            "roll": 20
+          }
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1565-Radiance-visibleMidriff",
+            "roll": 93,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1565-Radiance-straplessDress",
+            "roll": 70,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1565-Radiance-fullyOpenBack",
+            "roll": 91,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1565-Ellie-visibleMidriff",
+            "roll": 73,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1565-Ellie-straplessDress",
+            "roll": 90,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1565-Ellie-fullyOpenBack",
+            "roll": 63,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1565-Alia-visibleMidriff",
+            "roll": 7,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1565-Alia-straplessDress",
+            "roll": 56,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1565-Alia-fullyOpenBack",
+            "roll": 77,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1565-AI ECE-visibleMidriff",
+            "roll": 9,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1565-AI ECE-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1565-AI ECE-fullyOpenBack",
+            "roll": 31,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-386/scene-1565-initial-prompt.txt",
+        "sha256": "16C26E40D020129C6A5F6F9E70C187DEBDBA38F0B237630CD8791012FFA30D10",
+        "bytes": 4250
+      }
+    },
+    "1566": {
+      "location": "Tetepare Island conservation boardwalk",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 53,
+        "raw": "hailstorm with suspended ice and hard backlight",
+        "materialized": "hail safely outside an impact-rated clear canopy"
+      },
+      "mascot": {
+        "roll": 5,
+        "state": "PAWS and MAX together",
+        "holder": {
+          "key": "batch386-solomon-islands-scene1566-mascotHolder",
+          "roll": 74,
+          "result": "Alia"
+        }
+      },
+      "oddProp": {
+        "roll": 14,
+        "active": true,
+        "holder": {
+          "key": "batch386-solomon-islands-scene1566-interestingPropHolder",
+          "roll": 72,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch386-solomon-islands-scene1566-interestingPropFamily",
+          "roll": 30,
+          "result": "portable miniature planetarium projector"
+        }
+      },
+      "pole": {
+        "roll": 33,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 37,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch386-solomon-islands-scene1566-rainbowHosiery",
+        "roll": 36,
+        "active": false,
+        "wearer": {
+          "key": "batch386-solomon-islands-scene1566-rainbowHosieryWearer",
+          "roll": 36,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch386-solomon-islands-scene1566-rainbowHosieryPaletteMode",
+          "roll": 84,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch386-solomon-islands-scene1566-romanceBeat",
+        "roll": 88,
+        "index": 4,
+        "result": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compound": {
+        "key": "batch386-solomon-islands-scene1566-compoundLoveBeat",
+        "roll": 58,
+        "index": 10,
+        "result": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "hardLove": {
+        "key": "batch386-solomon-islands-scene1566-hardLoveBeat",
+        "roll": 54,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "mission": {
+        "key": "batch386-solomon-islands-scene1566-eceMissionProp-poseTargetRoll",
+        "roll": 43,
+        "category": "two-hand open-water sight picture",
+        "handler": "AI ECE",
+        "target": "unoccupied open-water marker"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch386-solomon-islands-scene1566-Radiance-emotion",
+          "roll": 46,
+          "result": "awe",
+          "materialized": "awe"
+        },
+        "Ellie": {
+          "key": "batch386-solomon-islands-scene1566-Ellie-emotion",
+          "roll": 76,
+          "result": "contained resentment",
+          "materialized": "contained resentment"
+        },
+        "Alia": {
+          "key": "batch386-solomon-islands-scene1566-Alia-emotion",
+          "roll": 24,
+          "result": "calm contentment",
+          "materialized": "calm contentment"
+        },
+        "AI ECE": {
+          "key": "batch386-solomon-islands-scene1566-AI ECE-emotion",
+          "roll": 46,
+          "result": "awe",
+          "materialized": "playful mischief",
+          "disambiguation": {
+            "key": "batch386-solomon-islands-scene1566-AI ECE-emotion-disambiguation",
+            "roll": 21
+          }
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1566-Radiance-visibleMidriff",
+            "roll": 88,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1566-Radiance-straplessDress",
+            "roll": 39,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1566-Radiance-fullyOpenBack",
+            "roll": 12,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1566-Ellie-visibleMidriff",
+            "roll": 14,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1566-Ellie-straplessDress",
+            "roll": 65,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1566-Ellie-fullyOpenBack",
+            "roll": 46,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1566-Alia-visibleMidriff",
+            "roll": 78,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1566-Alia-straplessDress",
+            "roll": 33,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1566-Alia-fullyOpenBack",
+            "roll": 86,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1566-AI ECE-visibleMidriff",
+            "roll": 12,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1566-AI ECE-straplessDress",
+            "roll": 31,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1566-AI ECE-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        }
+      },
+      "malePresent": true,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-386/scene-1566-initial-prompt.txt",
+        "sha256": "05C754548A958F53DDBE51BA11A6E6D648D869F83C33D3228C9DE2669CE88D6F",
+        "bytes": 4678
+      }
+    },
+    "1567": {
+      "location": "Lake Tegano, East Rennell karst observatory",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 58,
+        "raw": "snow flurries",
+        "materialized": "harmless white sea-mist flecks beyond the dry Lake Tegano shelter, with no snow accumulation"
+      },
+      "mascot": {
+        "roll": 6,
+        "state": "PAWS and MAX together",
+        "holder": {
+          "key": "batch386-solomon-islands-scene1567-mascotHolder",
+          "roll": 51,
+          "result": "Radiance"
+        }
+      },
+      "oddProp": {
+        "roll": 25,
+        "active": true,
+        "holder": {
+          "key": "batch386-solomon-islands-scene1567-interestingPropHolder",
+          "roll": 59,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch386-solomon-islands-scene1567-interestingPropFamily",
+          "roll": 73,
+          "result": "clockwork flower bouquet with slow safe petals"
+        }
+      },
+      "pole": {
+        "roll": 28,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 34,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch386-solomon-islands-scene1567-rainbowHosiery",
+        "roll": 29,
+        "active": false,
+        "wearer": {
+          "key": "batch386-solomon-islands-scene1567-rainbowHosieryWearer",
+          "roll": 41,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch386-solomon-islands-scene1567-rainbowHosieryPaletteMode",
+          "roll": 71,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch386-solomon-islands-scene1567-romanceBeat",
+        "roll": 3,
+        "index": 3,
+        "result": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compound": {
+        "key": "batch386-solomon-islands-scene1567-compoundLoveBeat",
+        "roll": 23,
+        "index": 11,
+        "result": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+      },
+      "hardLove": {
+        "key": "batch386-solomon-islands-scene1567-hardLoveBeat",
+        "roll": 43,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "mission": {
+        "key": "batch386-solomon-islands-scene1567-eceMissionProp-poseTargetRoll",
+        "roll": 24,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch386-solomon-islands-scene1567-Radiance-emotion",
+          "roll": 27,
+          "result": "hope",
+          "materialized": "hope"
+        },
+        "Ellie": {
+          "key": "batch386-solomon-islands-scene1567-Ellie-emotion",
+          "roll": 15,
+          "result": "extreme happiness, radiant laughing delight",
+          "materialized": "extreme happiness, radiant laughing delight"
+        },
+        "Alia": {
+          "key": "batch386-solomon-islands-scene1567-Alia-emotion",
+          "roll": 13,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        },
+        "AI ECE": {
+          "key": "batch386-solomon-islands-scene1567-AI ECE-emotion",
+          "roll": 67,
+          "result": "possessive tension",
+          "materialized": "possessive tension"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1567-Radiance-visibleMidriff",
+            "roll": 23,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1567-Radiance-straplessDress",
+            "roll": 76,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1567-Radiance-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1567-Ellie-visibleMidriff",
+            "roll": 75,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1567-Ellie-straplessDress",
+            "roll": 96,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1567-Ellie-fullyOpenBack",
+            "roll": 61,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1567-Alia-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1567-Alia-straplessDress",
+            "roll": 2,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1567-Alia-fullyOpenBack",
+            "roll": 63,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch386-solomon-islands-scene1567-AI ECE-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch386-solomon-islands-scene1567-AI ECE-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch386-solomon-islands-scene1567-AI ECE-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-386/scene-1567-initial-prompt.txt",
+        "sha256": "AEEFBDEAD172BD2FD1C58D8044E9CF75489A54A2FE20289ABA4DBE9A88F55D28",
+        "bytes": 4418
+      }
+    }
+  },
+  "renderPlan": {
+    "pass1": "Exactly four clean candidates, one per scene, launched concurrently from original identity anchors only.",
+    "pass2": "Only hard-unusable scenes may receive one fresh holistic correction candidate each, launched concurrently; no filler variants.",
+    "archiveBeforeLaterWork": true,
+    "thirdPassAllowed": false
+  },
+  "xPublishing": {
+    "rolls": {
+      "heart": {
+        "key": "batch386-solomon-islands-x-heart",
+        "roll": 99,
+        "result": "white heart"
+      },
+      "internalAgency": {
+        "key": "batch386-solomon-islands-x-internalagency",
+        "roll": 87,
+        "active": false
+      },
+      "worldXXXSeries": {
+        "key": "batch386-solomon-islands-x-worldxxxseries",
+        "roll": 32,
+        "active": false
+      }
+    },
+    "captionIfEligible": "Solomon Islands 🤍 Guyana #SolomonIslands",
+    "eligibility": "ineligible until four of four Solomon Islands scenes are hard-safe accepted and the checkpoint is pushed and remote-verified"
+  },
+  "nextQueue": {
+    "nextCountry": "Bhutan",
+    "nextBatch": 387,
+    "sceneNumbers": [
+      1568,
+      1569,
+      1570,
+      1571
+    ],
+    "cinematicTheme": "deep-sea submersible couture",
+    "themePairPosition": 1,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-315-solomon-islands-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/161"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7"
+    ],
+    "lockedUntilBatch386Closed": true
+  }
+}

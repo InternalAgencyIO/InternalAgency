@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 1,
+  "batch": 507,
+  "country": "Mongolia",
+  "sealedAtUtc": "2026-09-08T02:19:35.440Z",
+  "state": "all-immutable-media-and-evidence-sealed",
+  "snapshotSemantics": "Hash snapshot of immutable media, exact prompts, provider receipts, QA, accessibility and evidence. Mutable authority indexes, accepted-state index and this self-manifest excluded; all are checked as Git blobs at remote preflight.",
+  "providerFiles": 22,
+  "returnedEditFiles": 3,
+  "totalSavedMediaFiles": 25,
+  "uniqueSavedByteVersions": 21,
+  "acceptedFiles": 4,
+  "blockedEdits": [
+    2056
+  ],
+  "missingObservedOriginals": 0,
+  "files": [
+    {
+      "path": "assets/lore/starlight-era/batch-507-mongolia-editorial-brief.json",
+      "bytes": 13447,
+      "sha256": "ffc4c1e956130f1560e881d151db4a35c5cb13a6b1ada0b28e607a389c98caac",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-507-mongolia-fixed-rolls.json",
+      "bytes": 138571,
+      "sha256": "0b1efcd97960b04ffa1cb191463ea87208698fec294a1a59056fe87625de5d94",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-accessibility.json",
+      "bytes": 782,
+      "sha256": "9bfc44111beac6668b2183f8865b394b205c23435e415ed8a18c69728823fde0",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-chatgpt-single-edit-result.json",
+      "bytes": 6234,
+      "sha256": "b95ba4293194b98910f1adb0ee1a67f55b75969889374bf7b7cca28c85a6b281",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-chatgpt-single-tailoring-pass.png",
+      "bytes": 2134549,
+      "sha256": "fabd1b6ad03589c4ec95f6982bd853b26cb95842895510966c55e4056c7c93e6",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-initial-terminal-provider-visible.jpg",
+      "bytes": 114017,
+      "sha256": "4bed5cf3a08311ffb6179ae0d59ae9ef66bb2e525e5c552ffd2e5db83228b4fa",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-gallery-original.webp",
+      "bytes": 381594,
+      "sha256": "87e318b16094031e5f0cab8526490674c7908d7ce31e426f1abaf2080449aa0a",
+      "selected": true,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-1-original.webp",
+      "bytes": 418646,
+      "sha256": "3ce5ce89fcd98901a7fc837b7a5d686e3997551aa2922f56458211ee402208ea",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-2-original.webp",
+      "bytes": 400742,
+      "sha256": "f7407e433c73a1046aceb1cc2adcd4090c7c5f25518342aca78047397323a0b6",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-3-original.webp",
+      "bytes": 381594,
+      "sha256": "87e318b16094031e5f0cab8526490674c7908d7ce31e426f1abaf2080449aa0a",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-accessibility.json",
+      "bytes": 864,
+      "sha256": "312b0cbfb2207772be3dabff8272c4fcd07cbdfdc1c3000109256d2aed082c04",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-chatgpt-single-edit-result.json",
+      "bytes": 6099,
+      "sha256": "66d99f449676f4e634e723cd02bb83f7d96af3aa57a50d83cdd113500cbc5857",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-initial-no-image-receipt.json",
+      "bytes": 20228,
+      "sha256": "c3268401c2c743267811b9e697a27d57d00a51f06f3aa537dfded575466f4be8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-initial-terminal-provider-visible.jpg",
+      "bytes": 144423,
+      "sha256": "af0a16f59550a803a773581d41cb0b1ec67984fb450bc1abed2ae45c8cda4216",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-gallery-original.webp",
+      "bytes": 517366,
+      "sha256": "92291c65d7a414b919943637533ba56eaaed838f5d8cbac86a84111b136ef4ef",
+      "selected": true,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-internal-1-original.webp",
+      "bytes": 517366,
+      "sha256": "92291c65d7a414b919943637533ba56eaaed838f5d8cbac86a84111b136ef4ef",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-plan.json",
+      "bytes": 4026,
+      "sha256": "58e45ab27b5855d074cd7cbfff69e5949f71e8b064a2f0cde28a83f08e7656ce",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-remote-preflight.json",
+      "bytes": 11016,
+      "sha256": "27cecd695e11e6094a006a7fdb3f5f8a89cc120d666853de653f02468a608eab",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-intent.json",
+      "bytes": 1766,
+      "sha256": "fc13ee159a542db0ac5982332b30544d16229c7a6702959477f61a272e09a3da",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-receipt.json",
+      "bytes": 25644,
+      "sha256": "0e85a9d9713889b105e4a40b73e5e1b37e4c0bebe5d8400bb139ff4f48563ae5",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-staged-visible.jpg",
+      "bytes": 125658,
+      "sha256": "895fdd627d84c82d95b009f9be36d8dcc6883fd3b1368e472e55cdcfcbdbb1a1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-staging-evidence.json",
+      "bytes": 16832,
+      "sha256": "8e6e3fa7c26af8894d4031afd25db3f7103a602bed2c203e7f9c216e11044a1d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-terminal-evidence.json",
+      "bytes": 24615,
+      "sha256": "f9895eebf9f451106b58baab21b67383e97ebe2cfcc34ac5922296a9f5117088",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-terminal-visible.jpg",
+      "bytes": 112917,
+      "sha256": "fbf7e47dd383128d7665a2793b32856d4af286375221b6f0c6cc6292c34a943b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-accessibility.json",
+      "bytes": 826,
+      "sha256": "b3a0af6d4b0b9a2ba6defaac67d55dc5d8490d4811de2caca1da4ec8e498090a",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-chatgpt-single-edit-result.json",
+      "bytes": 6772,
+      "sha256": "3c9e9f85b9d89fbfda519d13a496975a856d2cd3b4c7bc31e2554d3b35d9a543",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-chatgpt-single-tailoring-pass.png",
+      "bytes": 2443031,
+      "sha256": "b1c66226c7a8b92001ab968e5f8550ea2798d9001a22755e57fa447f849a9af9",
+      "selected": true,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-initial-terminal-provider-visible.jpg",
+      "bytes": 108734,
+      "sha256": "493f34f529b28ecc8920cde534c925663019b6e6765df21370b039b1b9084336",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-gallery-original.webp",
+      "bytes": 617156,
+      "sha256": "e1de365e8e7b6acc43053d1b2ef68443eb00197f223442d2f7c5b37032c88fb5",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-1-original.webp",
+      "bytes": 529146,
+      "sha256": "2b15709a303779420e03d5c7817b741ce5967f4532b31e3c797dd527bca01aff",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-2-original.webp",
+      "bytes": 521912,
+      "sha256": "d3ca331342d30204c7bbb0e95dfc4ed9a5447418c98f7fdec1e9ec072e48dc20",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-3-original.webp",
+      "bytes": 614814,
+      "sha256": "4d6923be2bd3c0e1c5dac44b2290f13b5010d2033de608a77f362019a1d6db83",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-4-original.webp",
+      "bytes": 617156,
+      "sha256": "e1de365e8e7b6acc43053d1b2ef68443eb00197f223442d2f7c5b37032c88fb5",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-accessibility.json",
+      "bytes": 856,
+      "sha256": "6c004a83a35ed1312f32ca6604fd71eb53c9c1963eb97e6f372bfd2504d034a3",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-edit-result.json",
+      "bytes": 6147,
+      "sha256": "72b118de860b9fd32486e5d33425257394959c7308d7da93790c76198cda7de3",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-tailoring-pass.png",
+      "bytes": 2378344,
+      "sha256": "65ea8fc4d466a9f5225f959a83d1ac3a918ae5a6f9b01d7148bb850f641ad83d",
+      "selected": true,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-initial-terminal-provider-visible.jpg",
+      "bytes": 154221,
+      "sha256": "954957d1846ca947f8581f00e4ffbcfea7e47673049ec1b3baff01ef6f637dd8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-gallery-original.webp",
+      "bytes": 625918,
+      "sha256": "43c1c993c99a708501357b0303f1070c2ea8e6b73d7e21a83cb05dc9b540c106",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-1-original.webp",
+      "bytes": 527606,
+      "sha256": "645971b3bfe2016f5fbe1bbf84ab0ae09672e2f23657a8ddf9562a1a6e2fb868",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-10-original.webp",
+      "bytes": 625918,
+      "sha256": "43c1c993c99a708501357b0303f1070c2ea8e6b73d7e21a83cb05dc9b540c106",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-2-original.webp",
+      "bytes": 538652,
+      "sha256": "02044755800df847b5e2c0935261bbaf8f48aeff7db7f6c342d23df1c99e9ed6",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-3-original.webp",
+      "bytes": 551164,
+      "sha256": "cdadbd10907b25f322d49c14508b4def9db64da31d9573d3aa599012c788ee8f",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-4-original.webp",
+      "bytes": 508762,
+      "sha256": "bb1918b5b2bdde5a763d8833303636f6c4a01f17dbf9d14caeb67507a1bce61d",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-5-original.webp",
+      "bytes": 577466,
+      "sha256": "61c1fdac94c56da0a0203c92cbbf459b6146c9078951dd4daad85cb25e383eca",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-6-original.webp",
+      "bytes": 546810,
+      "sha256": "40e11dc887fa3866b6ad4338b4c9b534ce5ff6b97d70092c2e9e37d1720f9a65",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-7-original.webp",
+      "bytes": 558890,
+      "sha256": "028551649a095a6a2bbfd101bc668130c146a20ad05bcfa7eaa6c304d9aa87fd",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-8-original.webp",
+      "bytes": 603102,
+      "sha256": "a1a67de3c45421d297023dd1fafe272c053a559794a6597d0e7203cecf0610cf",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-9-original.webp",
+      "bytes": 609008,
+      "sha256": "c3da6684c657cf47732eb050df8de1e637b3125ab91ff395cfe6010243f9db63",
+      "selected": false,
+      "recordType": "generated_media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/continuation-log-audit-2026-09-08.json",
+      "bytes": 2906,
+      "sha256": "163a6cf9bbb6363787c938a9bf7d6c17d2a5e9fbee855e74150574c59876de6c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/final-selection-qa.json",
+      "bytes": 6776,
+      "sha256": "96a5f651fcab4d2ba5d2ccfaa7176d8ccad0d8ae0fa0ca86ab6a85ebc17ee624",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
+      "bytes": 101590,
+      "sha256": "e7ce074a1c8eeb55f93abd6217ddee115ac05e2304f39f424af22be5bbda74d1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
+      "bytes": 3467,
+      "sha256": "10b7ca02e722b151b709deb136c359584ba4bb2b6606dd823bafebffc3ffee49",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-receipt.json",
+      "bytes": 163311,
+      "sha256": "092b4b9c6979ec7403a52bb7d9a99890d0eed522398ed527fe6a8950b7269ecc",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-remote-preflight.json",
+      "bytes": 8690,
+      "sha256": "8fd64fccbe9b9c0d8b43c890ecc808bc8d7d0feeb33a82964d86e4f65c7318ca",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json",
+      "bytes": 18377,
+      "sha256": "d7cbed740c3cc4e11e84df53624bf87277c893d1f203bdc21170f3e475710ee8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-terminal-provider-evidence.json",
+      "bytes": 98420,
+      "sha256": "f91d98117d39845306d9f419cefa55c28a29019d167d085140ba577680f0a349",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/native-raw-archive-manifest.json",
+      "bytes": 35578,
+      "sha256": "3299adbbdf1a368f61c2fc0297ad32de829acf5a03a933a150087a9ea3087649",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2055-anchors-prompt-staged-visible.jpg",
+      "bytes": 126331,
+      "sha256": "32c47fab936a17327045d71d7b23611394241264bba05ef49a7a66a69dd520b5",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2055-initial-prompt.txt",
+      "bytes": 4561,
+      "sha256": "3be755fc6e10f3375ec45526438b945da0f112bc52b6a21c0f5a12ecee1fcb23",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2055-single-edit-prompt.txt",
+      "bytes": 3031,
+      "sha256": "ad0d4ddb40eff6fa0fa7c0e90683630dbc36085e63c18a3804ef6cdf2ebe8d21",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-anchors-prompt-staged-visible.jpg",
+      "bytes": 124769,
+      "sha256": "14ebb0de86c7c1b8bd722b443f5ede27872668c9c2ba3df74031d81cd0181178",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-initial-prompt.txt",
+      "bytes": 4759,
+      "sha256": "a9108a867d7346a31b43be6e3ff944fac855b60727293fc51d1671e5b830d0f8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-safe-alternative-1-prompt.txt",
+      "bytes": 4608,
+      "sha256": "c59f7082ff45d9296bee56396682d28d7992a45b2768eea27f0be915fa8e6100",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-single-edit-prompt.txt",
+      "bytes": 3142,
+      "sha256": "a7ab2a0db6d6e49a220060343e917c0ec08d15c863db95bfeeb81fa6e2c03545",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2057-anchors-prompt-staged-visible.jpg",
+      "bytes": 123901,
+      "sha256": "c378b21278839d867213d1c7c48ad64f198013ad936a8d200285cac2f5cf5fd5",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2057-initial-prompt.txt",
+      "bytes": 5160,
+      "sha256": "6b424918c2c0cac84c313c47ca9a30dbd521ecae429c222a4dc60423348aff90",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2057-single-edit-prompt.txt",
+      "bytes": 3570,
+      "sha256": "ac9a26df5f4398fa2be57c776278317d33ba98ba4611434d993f34b3fe442af7",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2058-anchors-prompt-staged-visible.jpg",
+      "bytes": 134028,
+      "sha256": "c6fd978d77b404006e424dc6f3d389faff092fb83ed2a9cdd6727f326b35199a",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2058-initial-prompt.txt",
+      "bytes": 4551,
+      "sha256": "23cec482fd4582a11fae1b1971cb51d132aab6e8f55588900594642d677347dd",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2058-single-edit-prompt.txt",
+      "bytes": 2944,
+      "sha256": "dd1f8906255486a59ce557858a0ed59af85646ff0244a340056a3cb0b523dc09",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json",
+      "bytes": 23920,
+      "sha256": "b50bb7837e048cb268911bd0debe82cfe65b404edc4abd535177f8743777200e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-results.json",
+      "bytes": 26135,
+      "sha256": "cd7e0436ccb8ac91b7dbc098f5f283dba4b547a54eff9293667eadd96656448e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-edit-preflight-remote-proof.json",
+      "bytes": 10813,
+      "sha256": "79ed348e93978ade2fa5e54bc6ec4587cc0edebcec1745e684de51209781715c",
+      "selected": false,
+      "recordType": "evidence"
+    }
+  ],
+  "selectedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-chatgpt-single-tailoring-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-tailoring-pass.png"
+  ],
+  "unusedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-1-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-2-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-3-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-1-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-2-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-3-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-4-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-1-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-2-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-3-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-4-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-5-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-6-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-7-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-8-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-9-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-10-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-internal-1-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-chatgpt-single-tailoring-pass.png"
+  ],
+  "allTerminalNoMoreRenders": true
+}

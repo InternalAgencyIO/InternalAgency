@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "batch": 490,
+  "country": "Vatican City",
+  "state": "four-meta-composers-staged-not-dispatched",
+  "createdAtUtc": "2026-09-06T02:21:21.7591229Z",
+  "provider": "Meta",
+  "accountVerifiedAllLanes": "leesha007",
+  "modeVerifiedAllLanes": "Thinking",
+  "visibleInAppBrowserOnly": true,
+  "sceneOrder": [
+    1987,
+    1988,
+    1989,
+    1990
+  ],
+  "tabIdsObserved": [
+    "1",
+    "3",
+    "5",
+    "7"
+  ],
+  "promptSha256": [
+    "443E9E8A9DF7B0079694E55651A11162F684BF62BC66D00073FE34EF0ECDEF08",
+    "1E1CCA21815AAE43DB609D1E860DD7DEF8E0FB5D4DA76D785DFE96ED8144F1E9",
+    "97684BA485FF6E0A9EF6544E69DE8EB45BB73DB864FF8A583AC5B23779303DE2",
+    "C8A1C7E8EE4CC382E8FF8375568BE3B3B5E1F94051C31932A46989A9BC3E39F8"
+  ],
+  "promptEntryOrder": "Prompt first, anchors second. This avoids Meta clearing preliminary attachments when prompt text is entered.",
+  "orderedIdentityAnchors": [
+    {
+      "scene": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "bytes": 2575103
+    },
+    {
+      "scene": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "bytes": 2495143
+    },
+    {
+      "scene": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+      "bytes": 2373808
+    }
+  ],
+  "perLaneVisibleVerification": {
+    "exactPreparedPrompt": true,
+    "exactPromptHashMatched": true,
+    "attachmentCount": 3,
+    "attachmentOrder": [
+      938,
+      936,
+      937
+    ],
+    "sendEnabled": true,
+    "accountVisible": true,
+    "thinkingVisible": true
+  },
+  "browserState": {
+    "metaLaneCount": 4,
+    "xComposerCount": 1,
+    "otherTabCount": 0,
+    "xTabId": "6",
+    "xComposerUrl": "https://x.com/compose/post",
+    "xComposerExpectedBlank": true
+  },
+  "sendClicks": 0,
+  "repeatSendClicks": 0,
+  "providerUrls": [],
+  "historicalNoReopenRule": "Historical Vatican City batches 303 and 420 are terminal and were not reopened. Batch 490 uses fresh scene IDs 1987 through 1990.",
+  "canonicalContradictionResolution": "The newer starlight-editorial-rolls-2026-09-06 contract prospectively supersedes the Batch 303 prohibition on literal Vatican flag devices for fresh Batch 490 only. Historical scenes remain unchanged and terminal.",
+  "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/staging-evidence-manifest.json",
+  "nextSafeAction": "Commit and push this pre-Send evidence, fetch the PR ref, and require exact local-origin-PR parity. Then re-inspect all four live composers and the blank @dogramaci X composer. Only if every visible gate still passes, click each lane's single Send exactly once and preserve the resulting provider URLs."
+}

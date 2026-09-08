@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "batch": 502,
+  "state": "all-four-invocations-terminal",
+  "createdAtUtc": "2026-09-07T02:58:22.964Z",
+  "sourceArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-source-qa.json",
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "maximumInvocationsPerScene": 1,
+  "blockedOrInterruptedConsumesAllowance": true,
+  "intents": [
+    {
+      "scene": 2035,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-meta-internal-1-original.webp",
+      "sourceSha256": "95f7874b2f73ee84687c3fbdf14bde26df59594161560e08da74ba6e48068b4e",
+      "plannedPromptPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-chatgpt-single-tailoring-prompt.txt",
+      "invocationPromptPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-chatgpt-exact-invocation-prompt.txt",
+      "prompt": "Use case: identity-preserve. Image 1 is the only edit target. Images 2, 3 and 4 are project-owned fictional face continuity references 938, 936 and 937 respectively, not clothing, composition or pose targets. All four subjects are fictional adults age21. Preserve the target image except for the explicitly requested garment styling.\nOne identity-preserving clothing-only tailoring pass for scene 2035: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=visible navel, Ellie=visible navel, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a pearl-white sculpted cocktail mini with turquoise sphere-arc panels and silver seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; pearl-white enamel ankle boot without any branding. No tattoos. Radiance: a fitted mini dress integrating the complete Kuwait flag design (three equal horizontal bands, green on top, white in the middle and red on the bottom, plus a black trapezoid at the viewer-left hoist; preserve the complete 2:1 flag design and its trapezoid, not a triangle, without crown, stars, text or extra emblem; place branding outside the flag motif) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; cobalt patent classic pump without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: a fitted mini dress integrating the complete Kuwait flag design (three equal horizontal bands, green on top, white in the middle and red on the bottom, plus a black trapezoid at the viewer-left hoist; preserve the complete 2:1 flag design and its trapezoid, not a triangle, without crown, stars, text or extra emblem; place branding outside the flag motif) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient sculptural platform with one subtle RAZE text mark. No tattoos. ECE: a copper side-back cocktail mini with ivory pearl-grid beading; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient stiletto sandal without any branding. Prominent crisp tattoos: star, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. No general hosiery assignment; only individual stocking marks may call for a neutral stocking.",
+      "promptSha256": "9D9C36AAE785E02627E218309F448EB2CF0F2243CCF093E249BF4765E9C25F79",
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-meta-internal-1-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "invocations": 1,
+      "state": "moderation-blocked-terminal-no-retry",
+      "dispatchLockedAtUtc": "2026-09-07T03:03:37.293Z",
+      "noSecondInvocation": true,
+      "invocationStartedAtUtc": "2026-09-07T03:04:14.078Z",
+      "invocationCompletedAtUtc": "2026-09-07T03:06:39.486Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/first-three-chatgpt-single-edit-results.json",
+      "allowanceConsumed": true,
+      "output": null
+    },
+    {
+      "scene": 2036,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-meta-gallery-original.webp",
+      "sourceSha256": "6aef51299ed6563dd0c9290a4a5b975557da877fb65710fd7f704ec2a255e9c7",
+      "plannedPromptPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-chatgpt-single-tailoring-prompt.txt",
+      "invocationPromptPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-chatgpt-exact-invocation-prompt.txt",
+      "prompt": "Use case: identity-preserve. Image 1 is the only edit target. Images 2, 3 and 4 are project-owned fictional face continuity references 938, 936 and 937 respectively, not clothing, composition or pose targets. All four subjects are fictional adults age21. Preserve the target image except for the explicitly requested garment styling.\nOne identity-preserving clothing-only tailoring pass for scene 2036: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=visible navel, Ellie=visible navel, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: an emerald fitted mini with ivory doorway ribs and fine copper embroidery; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient classic pump without any branding. Prominent crisp tattoos: thorny rose; GRD, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Radiance: an ivory one-shoulder cocktail mini with plum folded panels and silver piping; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient sculptural platform without any branding. Prominent crisp tattoos: scorpion, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Ellie: a plum cropped shell and secure black mini skort with copper lattice seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; plum polished leather stiletto sandal with one subtle original RAZE split-star mark. No tattoos. ECE: a bronze asymmetric fitted mini with turquoise door-arch stitchwork; secure open-back or side-back construction and bare arms, covered midriff; bronze brushed metal knee high boot without any branding. No tattoos. No general hosiery assignment; only individual stocking marks may call for a neutral stocking.",
+      "promptSha256": "E5EDE3F15AD13B5BB2D9DB29A0F97CADDBB0E1D85FD63B446F06257BB422BA73",
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-meta-gallery-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "invocations": 1,
+      "state": "moderation-blocked-terminal-no-retry",
+      "dispatchLockedAtUtc": "2026-09-07T03:03:37.293Z",
+      "noSecondInvocation": true,
+      "invocationStartedAtUtc": "2026-09-07T03:04:14.078Z",
+      "invocationCompletedAtUtc": "2026-09-07T03:08:57.521Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/first-three-chatgpt-single-edit-results.json",
+      "allowanceConsumed": true,
+      "output": null
+    },
+    {
+      "scene": 2037,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-meta-gallery-original.webp",
+      "sourceSha256": "4bcc436d4ec7a8d7f78f58def44b8e61c5d3946bb6061a25ca3c5485305f63fb",
+      "plannedPromptPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-chatgpt-single-tailoring-prompt.txt",
+      "invocationPromptPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-chatgpt-exact-invocation-prompt.txt",
+      "prompt": "Use case: identity-preserve. Image 1 is the only edit target. Images 2, 3 and 4 are project-owned fictional face continuity references 938, 936 and 937 respectively, not clothing, composition or pose targets. All four subjects are fictional adults age21. Preserve the target image except for the explicitly requested garment styling.\nOne identity-preserving clothing-only tailoring pass for scene 2037: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=covered, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a fitted mini dress integrating the complete Kuwait flag design (three equal horizontal bands, green on top, white in the middle and red on the bottom, plus a black trapezoid at the viewer-left hoist; preserve the complete 2:1 flag design and its trapezoid, not a triangle, without crown, stars, text or extra emblem; place branding outside the flag motif) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; sea-blue ceramic sculptural platform without any branding. Prominent crisp tattoos: RAZE, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Radiance: a fitted mini dress integrating the complete Kuwait flag design (three equal horizontal bands, green on top, white in the middle and red on the bottom, plus a black trapezoid at the viewer-left hoist; preserve the complete 2:1 flag design and its trapezoid, not a triangle, without crown, stars, text or extra emblem; place branding outside the flag motif) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; coral satin stiletto sandal without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: an ivory cropped shell and secure midnight-blue mini skort with turquoise maritime piping; secure open-back or side-back construction and bare arms, covered midriff; ivory chrome knee high boot without any branding. Prominent crisp tattoos: scorpion; agency, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. ECE: a black side-back mini with copper geometric shoreline embroidery; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient ankle boot without any branding. No tattoos. No general hosiery assignment; only individual stocking marks may call for a neutral stocking.",
+      "promptSha256": "7612ECC5A695E3EB25BB8719140B2C68720D673DA4159041192B123A378BE9C2",
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-meta-gallery-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "invocations": 1,
+      "state": "image-returned-terminal-no-retry",
+      "dispatchLockedAtUtc": "2026-09-07T03:03:37.293Z",
+      "noSecondInvocation": true,
+      "invocationStartedAtUtc": "2026-09-07T03:04:14.078Z",
+      "invocationCompletedAtUtc": "2026-09-07T03:11:09.642Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/first-three-chatgpt-single-edit-results.json",
+      "allowanceConsumed": true,
+      "output": {
+        "scene": 2037,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-chatgpt-single-tailoring-pass.png",
+        "sourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-b407d2f5-c8b8-4a32-aac2-8f8d2aa765b7.png",
+        "bytes": 2205107,
+        "sha256": "b417936d99bf3f4ed0ed05a3be0970ceec4ff53e57e99ba7887e3122b6739196",
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        }
+      }
+    },
+    {
+      "scene": 2038,
+      "occurrence": 2,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-meta-internal-4-original.webp",
+      "sourceSha256": "ec75849a6eff1e50f9848f7f5e61f68d9a284c05571e55a0665660d8061e576c",
+      "invocationPromptPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-safe-chatgpt-exact-invocation-prompt.txt",
+      "prompt": "Use case: identity-preserve. Image 1 is the only edit target. Images 2, 3 and 4 are the project-owned fictional face continuity references 938, 936 and 937, not clothing or pose targets. All four subjects are fictional adults age 21. Make one restrained, clothing-only editorial tailoring edit to the existing image: shorten the existing skirt and dress hems by about 2 to 3 centimetres, keeping them wearable at mid-thigh with secure opaque coverage in their existing seated and standing poses. Preserve the high necklines, closed backs and fully covered midriffs. Keep all four faces, hairstyles, skin tones, adult proportions, expressions, affectionate side hug and hand contacts exactly as in the source. Preserve the existing camera crop, perspective, natural diagonal composition, wetland setting, light, dress color blocking, pearl details, agency and silent king arm tattoos, and visible footwear. Do not recreate a complete flag, add branding, reveal a back or midriff, add a disaster scene, turn the bodies, change the crop, or add border wedges. This is a nonsexual fashion catalogue edit with no nudity or exposure. Output one image only.",
+      "promptSha256": "CB5314CFC04B5B52650D46302E16124ED794B9872A7E95994E6844DD8E89D020",
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-meta-internal-4-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "invocations": 1,
+      "state": "image-returned-terminal-no-retry",
+      "noSecondInvocation": true,
+      "safetyFallbackRetained": true,
+      "dispatchLockedAtUtc": "2026-09-07T03:21:14.590Z",
+      "allowanceConsumed": true,
+      "invocationStartedAtUtc": "2026-09-07T03:21:29.239Z",
+      "invocationCompletedAtUtc": "2026-09-07T03:22:36.157Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-chatgpt-single-edit-result.json",
+      "output": {
+        "scene": 2038,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-chatgpt-single-tailoring-pass.png",
+        "sourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-c5fd36dc-3465-4509-bff8-57d598e5ecb9.png",
+        "bytes": 2309694,
+        "sha256": "9ca5f24d818cf8d5c2d32ab1c469e6996df6224ea251581d76b0990fe8bcd273",
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        }
+      }
+    }
+  ]
+}

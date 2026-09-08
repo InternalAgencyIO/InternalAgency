@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "scene": 1896,
+  "country": "Serbia",
+  "provider": "Meta AI",
+  "occurrence": 1,
+  "status": "hard_unusable_meta_and_chatgpt_archived_retry_eligible",
+  "submittedAtUtc": "2026-08-31T06:02:48.552Z",
+  "capturedAtUtc": "2026-08-31T06:35:14.5119082Z",
+  "providerChatUrl": "https://www.meta.ai/prompt/5ca1b7d7-b8ff-4014-9cb2-0f42b4115a5d",
+  "promptSource": "assets/lore/starlight-era/batch-467-serbia-europe-gap-fill-prompts-prepared-checkpoint.json#scene-1896",
+  "promptSha256": "F338054F2ABB006DE1B5F06090EF85F4E64AB61EA9198FAF3CF4FA1BA87CAC84",
+  "orderedReferenceAnchors": [938, 936, 937],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+  "providerResponseSummary": "One image was generated with the primary-manifest left-to-right mapping Alia, Radiance, Ellie, ECE and one visible Download control.",
+  "rawAsset": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1896-serbia-kopaonik-high-plateau-meta-provider-raw.png",
+    "sha256": "C8B9C468DE9B399E00B6417FBF801F67C3AB39F21DAD54682FA2BF8853965109",
+    "byteLength": 2266028,
+    "dimensions": "1152x1556",
+    "contentType": "image/png",
+    "acquisition": "Visible Meta Download button through the in-app Browser; no direct fetch."
+  },
+  "browserEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/scene-1896-meta-terminal-image-page.jpg",
+    "sha256": "1E062BF7B3C400725D902AA5CDC53B23E18342E7D90B2AD69206ED244E60EBA7",
+    "dimensions": "1280x720",
+    "contentType": "image/jpeg"
+  },
+  "preRefinementVisualQa": {
+    "decodable": true,
+    "orientation": "vertical_but_not_9_16",
+    "cast": "exactly_four_adult_women",
+    "faceMapping": "visually consistent with Alia, Radiance, Ellie, ECE",
+    "locationRead": "Kopaonik plateau and layered ridges are broad and legible",
+    "hardConcern": "The untouched raw dimensions are 1152x1556, not the required 9:16 portrait aspect ratio.",
+    "otherConcern": "The requested ECE-to-Alia shoulder-clasp beat is not clearly preserved."
+  },
+  "retry": {
+    "eligibleAfterArchive": true,
+    "maximumRemaining": 2,
+    "requiresFreshChatAndMateriallyRevisedPrompt": true
+  },
+  "chatgptHemlineRefinement": {
+    "required": true,
+    "maximumPasses": 1,
+    "passesCompleted": 1,
+    "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1896-serbia-kopaonik-chatgpt-hemline-one-pass.png",
+    "sha256": "DAA04DD16E3F7610D710794F41C76761E40C222A7C84930DF0A1D7E72721B295",
+    "byteLength": 2256738,
+    "dimensions": "1080x1456",
+    "contentType": "image/png"
+  },
+  "selection": {
+    "decision": "reject_both_retry_eligible",
+    "reason": "The ChatGPT edit strengthens the four secure upper-thigh silhouettes and preserves the correct identities, but correctly preserves the source crop; both assets therefore remain materially wider than 9:16, and the ECE-to-Alia clasp beat is still absent."
+  }
+}

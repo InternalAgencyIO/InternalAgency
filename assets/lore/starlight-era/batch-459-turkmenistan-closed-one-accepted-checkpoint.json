@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "batch": 459,
+  "country": "Turkmenistan",
+  "state": "closed-one-accepted-three-terminal-nonaccepted",
+  "closedAtUtc": "2026-08-28T12:44:47.948Z",
+  "sceneRange": [
+    1862,
+    1865
+  ],
+  "acceptedSceneIds": [
+    1865
+  ],
+  "rejectedSceneIds": [
+    1862,
+    1864
+  ],
+  "refusedNoByteSceneIds": [
+    1863
+  ],
+  "acceptedCount": 1,
+  "requiredForCompletedCountry": 4,
+  "countryCompletedFourOfFour": false,
+  "eligibleForCountryCycleXPair": false,
+  "terminalEvidence": [
+    "provider-evidence/batch-459-turkmenistan/1862-turkmenistan-kopet-dag-foothill-promenade-occurrence.json",
+    "provider-evidence/batch-459-turkmenistan/1863-turkmenistan-yangykala-canyon-overlook-no-bytes-occurrence.json",
+    "provider-evidence/batch-459-turkmenistan/1864-turkmenistan-awaza-caspian-promenade-occurrence.json",
+    "provider-evidence/batch-459-turkmenistan/1865-turkmenistan-karakum-dune-observatory-occurrence.json"
+  ],
+  "manifestCountBefore": 880,
+  "manifestCountAfter": 881,
+  "duplicatePrevention": "Never resend scenes 1862-1865. Scene 1865 is canonical; 1862 and both 1864 variants are archived hard-unusable; 1863 is an explicit no-byte refusal.",
+  "nextBatch": 460,
+  "nextCountry": "Libya",
+  "nextScenes": [
+    1866,
+    1867,
+    1868,
+    1869
+  ]
+}

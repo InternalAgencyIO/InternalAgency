@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "country-closed-unresolved-no-accepted",
+  "createdAtUtc": "2026-08-27T05:43:19.262Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 424,
+  "country": "Senegal",
+  "status": "closed-unresolved",
+  "canonicalTarget": 4,
+  "acceptedCount": 0,
+  "acceptedScenes": [],
+  "terminalScenes": [
+    {
+      "scene": 1716,
+      "outcome": "output-hard-unusable",
+      "accepted": false,
+      "reopen": false,
+      "sha256": "a8d1d9905510c03cbb60502ab0d6a21b4ccb692799fa6c69e88ebf3b1c136295"
+    },
+    {
+      "scene": 1717,
+      "outcome": "explicit-no-bytes-refusal",
+      "accepted": false,
+      "reopen": false,
+      "sha256": null
+    },
+    {
+      "scene": 1718,
+      "outcome": "output-hard-unusable",
+      "accepted": false,
+      "reopen": false,
+      "sha256": "901d8ffad261774e1529112ce3ba89ddc6a9e50d61d655e5e10ae2ccf046d532"
+    },
+    {
+      "scene": 1719,
+      "outcome": "output-hard-unusable",
+      "accepted": false,
+      "reopen": false,
+      "sha256": "0e0e957114d46723ffe572326c5c61e54fb93956cd1daf6dcaa22bf14278a694"
+    }
+  ],
+  "identityGate": {
+    "anchorsUploadedInRequiredOrder": true,
+    "providerReportedReferencesUsed": "three-outputs-rendered-after-confirmed-attachments-one-explicit-refusal",
+    "hardUnusableScenes": [
+      1716,
+      1718,
+      1719
+    ],
+    "explicitNoByteRefusalScenes": [
+      1717
+    ]
+  },
+  "retry": {
+    "authorized": false,
+    "sentCount": 0
+  },
+  "noRepetition": {
+    "scenesClosed": [
+      1716,
+      1717,
+      1718,
+      1719
+    ],
+    "reopenAllowed": false
+  },
+  "xEligibility": {
+    "requiredAcceptedCurrentCountryAssets": 4,
+    "acceptedCurrentCountryAssets": 0,
+    "eligible": false,
+    "pairReady": false,
+    "reason": "Senegal produced zero accepted canonical current-country images."
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastResetBefore": 3,
+    "completedCountryCyclesSinceLastResetAfter": 4,
+    "publishDue": false
+  },
+  "nextEligible": {
+    "batch": 425,
+    "country": "Guatemala",
+    "scenes": [
+      1720,
+      1721,
+      1722,
+      1723
+    ],
+    "sourceBatch": 354,
+    "sourceScenes": [
+      1436,
+      1437,
+      1438,
+      1439
+    ],
+    "sourceCheckpoint": "assets/lore/starlight-era/batch-354-guatemala-private-jet-checkpoint.json",
+    "dispatchStatus": "prompts-prepared"
+  }
+}

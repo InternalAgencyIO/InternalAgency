@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "scene_terminal_capture",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 439,
+  "country": "Jordan",
+  "sceneId": 1779,
+  "status": "closed_hard_unusable",
+  "accepted": false,
+  "providerUrl": "https://www.meta.ai/prompt/91faa113-b727-4a7c-8104-26f309f162d4",
+  "promptSha256": "B8F04754FF0240DB194F8CE66F0BCDC2D8A4263A15A97EE1F552686576B5A659",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraRoll": 18,
+  "requiredFraming": "EXTREME CLOSE",
+  "mediaSha256": "11de17f9f814c4826876aa43474543160570e62422acdbc4f4d30f1627b21d53",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-439-scene-1779-output-hard-unusable.jsonl",
+  "rawPath": "assets/lore/starlight-era/1779-jordan-aqaba-meta-raw.webp",
+  "blobPath": "progress-reports/codex-generated-media/blobs/11/11de17f9f814c4826876aa43474543160570e62422acdbc4f4d30f1627b21d53.webp",
+  "responsePath": "progress-reports/codex-generated-media/provider-responses/batch-439-scene-1779-meta-response.txt",
+  "visualQa": {
+    "status": "hard_unusable",
+    "accepted": false,
+    "reason": "Camera-roll failure: roll 18 required a true shoulder-up extreme close cropped at the shoulders or uppermost chest; the render extends through full bodices and substantial torso.",
+    "passes": [
+      "vertical 9:16",
+      "exactly four distinct adult women",
+      "Aqaba Red Sea, desert mountains, and civilian research domes read as background context",
+      "no hands, beacon, waist, legs, or footwear visible",
+      "public-safe opaque couture"
+    ],
+    "fails": [
+      "strict shoulder-up extreme-close framing"
+    ]
+  },
+  "terminalObservedAtUtc": "2026-08-27T17:14:16.123Z",
+  "checkpointedAtUtc": "2026-08-27T17:15:30.095Z",
+  "noRetryAuthorized": true
+}

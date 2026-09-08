@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "scene_terminal_capture",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 438,
+  "country": "Haiti",
+  "sceneId": 1773,
+  "status": "closed_hard_unusable",
+  "accepted": false,
+  "providerUrl": "https://www.meta.ai/prompt/0bc02961-c83b-4090-9598-7fde3b06d491",
+  "promptSha256": "F1EDF76D1341292251CFCF78305169416AEBFCE6CD54240CFE6C959FA3327534",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraRoll": 29,
+  "requiredFraming": "INTERMEDIATE",
+  "mediaSha256": "fb14b0ffbb4b14d96971530c8efe2c50c9ec2b0d8e38ef1bbcbcb6bda6dc44f8",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-438-scene-1773-output-hard-unusable.jsonl",
+  "rawPath": "assets/lore/starlight-era/1773-haiti-citadelle-laferriere-meta-raw.webp",
+  "blobPath": "progress-reports/codex-generated-media/blobs/fb/fb14b0ffbb4b14d96971530c8efe2c50c9ec2b0d8e38ef1bbcbcb6bda6dc44f8.webp",
+  "responsePath": "progress-reports/codex-generated-media/provider-responses/batch-438-scene-1773-meta-response.txt",
+  "visualQa": {
+    "status": "hard_unusable",
+    "accepted": false,
+    "reason": "Anatomy and location failure: the roll-29 crop and four-ring beacon are present, but one of the eight required hands is absent or occluded and the Citadelle Laferriere landmark does not read as the complete fortress architecture required.",
+    "passes": [
+      "vertical 9:16",
+      "exactly four distinct adult women",
+      "head-to-mid-shin crop without footwear",
+      "single beacon with exactly four cyan rings",
+      "public-safe opaque couture"
+    ],
+    "fails": [
+      "all eight assigned hands visibly separated and traceable",
+      "strong Citadelle landmark read"
+    ]
+  },
+  "terminalObservedAtUtc": "2026-08-27T17:03:09.389Z",
+  "checkpointedAtUtc": "2026-08-27T17:05:33.961Z",
+  "noRetryAuthorized": true
+}

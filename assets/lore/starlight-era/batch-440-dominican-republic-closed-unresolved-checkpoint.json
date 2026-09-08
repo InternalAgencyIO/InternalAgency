@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "batch_closed_unresolved",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 440,
+  "country": "Dominican Republic",
+  "sourceBatchId": 369,
+  "sceneIds": [
+    1780,
+    1781,
+    1782,
+    1783
+  ],
+  "acceptedSceneIds": [],
+  "acceptedCount": 0,
+  "requiredAcceptedCount": 4,
+  "status": "closed_unresolved",
+  "outcomes": [
+    {
+      "sceneId": 1780,
+      "status": "closed_missing_bytes_browser_policy",
+      "reason": "Terminal gallery image was visible, but raw-byte and screenshot access were blocked by Browser Use URL policy.",
+      "providerUrl": "https://www.meta.ai/prompt/027b7203-e161-4c55-9ce0-5f1e68a77abc",
+      "rawBytes": 0,
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-440-scene-1780-terminal-image-no-bytes-browser-policy.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-440-dominican-republic-scene-1780-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1781,
+      "status": "closed_no_confirmed_occurrence",
+      "reason": "Single authorized Send entered loading, then returned to the unchanged enabled composer without a provider chat.",
+      "providerUrl": null,
+      "rawBytes": 0,
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-440-scene-1781-no-confirmed-occurrence.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-440-dominican-republic-scene-1781-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1782,
+      "status": "closed_no_confirmed_occurrence",
+      "reason": "Single authorized Send entered loading, then returned to the unchanged enabled composer without a provider chat.",
+      "providerUrl": null,
+      "rawBytes": 0,
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-440-scene-1782-no-confirmed-occurrence.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-440-dominican-republic-scene-1782-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1783,
+      "status": "closed_terminal_response_missing_bytes_browser_policy",
+      "reason": "Terminal response controls were visible, but browser policy blocked media inspection and bytes before canonical QA.",
+      "providerUrl": "https://www.meta.ai/prompt/9639464d-c88a-4984-aee7-00e4bdebcfbf",
+      "rawBytes": 0,
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-440-scene-1783-terminal-response-no-bytes-browser-policy.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-440-dominican-republic-scene-1783-terminal-captured-checkpoint.json"
+    }
+  ],
+  "duplicateRelationships": [],
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 10,
+    "due": true
+  },
+  "xBacklog": {
+    "eligibleUnpublishedSceneIds": [
+      1753
+    ],
+    "newEligibleSceneIds": [],
+    "pairReady": false,
+    "reason": "Dominican Republic produced no accepted byte-backed images; Burundi scene 1753 remains the only eligible unpublished asset, so no valid 2+1 country pair exists."
+  },
+  "nextAction": "Record the due Batch 431-440 X cadence outcome, reset the counter only after that record, then prepare United Arab Emirates Batch 441 without touching the stranded browser error tab.",
+  "closedAtUtc": "2026-08-27T17:41:14.349Z"
+}

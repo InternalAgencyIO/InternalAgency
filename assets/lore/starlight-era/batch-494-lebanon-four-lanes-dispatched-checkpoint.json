@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "batch": 494,
+  "country": "Lebanon",
+  "sceneIds": [2003, 2004, 2005, 2006],
+  "state": "four-visible-meta-occurrences-dispatched-once-in-flight",
+  "verifiedAtUtc": "2026-09-06T07:02:21.000Z",
+  "authority": {
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-494-lebanon-four-meta-composers-staged-checkpoint.json",
+    "stagingCommit": "1d40c1d12e5d156df2552cf6f8b5f73bb555be92",
+    "localOriginPrEqualBeforeDispatch": true,
+    "lfsPushDryRunEmptyBeforeDispatch": true
+  },
+  "dispatches": [
+    {
+      "scene": 2003,
+      "tabId": "19",
+      "clickedAtUtc": "2026-09-06T07:01:59.408Z",
+      "sendClickCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/690cda81-a998-471c-95b7-e55b9c036186",
+      "visibleState": "Thinking with Cancel and Stop controls"
+    },
+    {
+      "scene": 2004,
+      "tabId": "20",
+      "clickedAtUtc": "2026-09-06T07:02:05.520Z",
+      "sendClickCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/03001618-49c4-4a0b-a9d5-17a109665beb",
+      "visibleState": "Thinking with Cancel and Stop controls"
+    },
+    {
+      "scene": 2005,
+      "tabId": "21",
+      "clickedAtUtc": "2026-09-06T07:02:11.660Z",
+      "sendClickCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/50777bc3-af58-4501-86d7-15892bd6e2b3",
+      "visibleState": "Thinking with Cancel and Stop controls"
+    },
+    {
+      "scene": 2006,
+      "tabId": "22",
+      "clickedAtUtc": "2026-09-06T07:02:17.814Z",
+      "sendClickCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/542d51c0-a0cc-4c31-aa52-05995a0ed103",
+      "visibleState": "Thinking with Cancel and Stop controls"
+    }
+  ],
+  "finalPreClickGate": {
+    "actualTabInventoryRefreshed": true,
+    "noReload": true,
+    "accountLeesha007EveryLane": true,
+    "lane2003AccountVerifiedByVisibleSidebarRevealThenComposerRestored": true,
+    "firstGuardAttemptStoppedBeforeEverySendBecauseLane2003SidebarWasCollapsed": true,
+    "firstGuardAttemptSendActivations": 0,
+    "thinkingEveryLane": true,
+    "promptExactAfterTrimmingThreeAttachmentPlaceholderSpacesEveryLane": true,
+    "orderedAnchors938936937EveryLane": true,
+    "oneEnabledSendEveryLane": true,
+    "xComposerBlank": true,
+    "xSignedInAccount": "@dogramaci",
+    "stagingCommitRemoteParity": true
+  },
+  "provider": {
+    "name": "Meta AI",
+    "visibleInAppBrowserOnly": true,
+    "sendActivations": 4,
+    "sendActivationsPerScene": [1, 1, 1, 1],
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "providerRetries": 0,
+    "editInvocationCount": 0
+  },
+  "visibleEvidence": [
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/scene-2003-meta-dispatched-in-flight-visible.png", "bytes": 28182, "sha256": "DF7BC2CC420FF21FE26F66AFD4157D4D8AFEE848F3C8BCC4F3597683879D01A2"},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/scene-2004-meta-dispatched-in-flight-visible.png", "bytes": 70431, "sha256": "028A50C308037D063D1EE12BE00EC2D38AFD9F475D00F8099A7F2DD619AB27BD"},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/scene-2005-meta-dispatched-in-flight-visible.png", "bytes": 68950, "sha256": "1494A4085DC1C980A3CBA0FCF949C9957F5CCD61DD28C8072B1D8B9CB8A1D9A9"},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/scene-2006-meta-dispatched-in-flight-visible.png", "bytes": 70700, "sha256": "4F87DC7ADF15A675CC619F59142437D82BE3EB50384956C4F15A3E7C26EE1C1B"}
+  ],
+  "canonicalContradiction": "The old Cuba automation instruction remains superseded by Tanzania preparation and every later remote-verified checkpoint. The four new occurrences are Lebanon scenes 2003 through 2006 only.",
+  "nextSafeAction": "Commit and remote-verify this four-dispatch checkpoint. Poll these exact four live provider tabs without reload or resend, capture each terminal response and original provider bytes through visible supported controls, then apply exactly one built-in ChatGPT image edit to every technically valid Meta occurrence."
+}

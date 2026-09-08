@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "batch": 512,
+  "scene": 2077,
+  "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png",
+  "sha256": "3659464357f289d81792daaecfb1ae6db48414a49905da78942c3def12b6b9f9",
+  "reviewedAtUtc": "2026-09-08T10:23:14.179Z",
+  "reviewMethod": "Main-agent direct local image review alongside previously inspected Meta source and exact anchor plates.",
+  "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-meta-gallery-original.webp",
+  "decision": "selected",
+  "hardChecks": {
+    "fourDistinctFictionalAdultWomen": true,
+    "faceOrderConsistentWithAnchors": true,
+    "opaquePublicSafeCoverage": true,
+    "plausibleContactAnatomy": true,
+    "sourceFramingAndGeometryPreserved": true,
+    "noOutpaintingOrCameraRestagingObserved": true,
+    "decodableImage": true
+  },
+  "softRollDeviations": [
+    "Actual framing is broader than the intermediate target; low angle is approximate.",
+    "An unrolled Ellie waist gap and star rather than split-star motif persist.",
+    "ECE waist cutout and shorter opaque hems improve the styling. No aesthetics retry."
+  ],
+  "additionalEditsAllowed": 0
+}

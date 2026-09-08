@@ -1,0 +1,140 @@
+{
+  "version": 2,
+  "wakeAt": "2026-08-05T09:34:11.987Z",
+  "batch": 212,
+  "country": "Democratic Republic of the Congo",
+  "hashAlgorithm": "SHA-256 of JSON ordered [parentCorpusSha256, aggregateModerationEvidence]",
+  "parentCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+  "blockedCorpusSha256": "9cc346a09343b2a82c018f4bd78372ba3c12cd7763269b441e66ffa858fdd92c",
+  "order": "longest-phrase-first",
+  "transformations": [
+    {
+      "riskyPhrase": "Ellie and Alia share a shoulder-to-shoulder smile in equal low stable runway poses while Radiance stands behind with one warm hand on each shoulder",
+      "safeEquivalent": "use trouser-led task tailoring, two equal low one-knee poses, and a standing partner with one gloved hand on each outer shoulder while every shoe remains separated"
+    },
+    {
+      "riskyPhrase": "combined joined-wrist linked jewelry, independent ankle ornaments, and side-waist choreography on concise resort-flight branch",
+      "safeEquivalent": "separate gold wrist sculptures with one short loose decorative bead arc, free hands, and a visible side-waist hand over the garment"
+    },
+    {
+      "riskyPhrase": "Radiance and Ellie share a gentle forehead-to-forehead moment; Alia leans close beside Radiance's shoulder",
+      "safeEquivalent": "spatially place Ellie immediately right of Radiance at equal face height and Alia behind Radiance's free shoulder; label each identity at every relationship action"
+    },
+    {
+      "riskyPhrase": "stable affectionate formation to the left of a small waist-high mission table",
+      "safeEquivalent": "use an offset compact mission plinth and a broad task arc with all six shoes fully visible and the cat outside the footwear envelope"
+    },
+    {
+      "riskyPhrase": "shoulderChinThirdPartnerSmile",
+      "safeEquivalent": "light chin-on-shoulder pose with a playful approving smile toward the third partner"
+    },
+    {
+      "riskyPhrase": "triangularKneelStandFormation",
+      "safeEquivalent": "balanced triangular editorial height composition with two low stable runway poses and one standing pose"
+    },
+    {
+      "riskyPhrase": "kneelingHeelBuckleAdjustment",
+      "safeEquivalent": "low practical styling pose with one visible hand adjusting only a partner's stable shoe buckle"
+    },
+    {
+      "riskyPhrase": "threeHandSilkRibbonChallenge",
+      "safeEquivalent": "three adults each hold one separate section of a long silk signal ribbon in a broad loose curve, clear of every body"
+    },
+    {
+      "riskyPhrase": "bootTuckedEquestrianBaton",
+      "safeEquivalent": "slender blunt decorative fashion wand secured to the outer side of one tall boot"
+    },
+    {
+      "riskyPhrase": "theatrically hungry smile",
+      "safeEquivalent": "playful approving smile"
+    },
+    {
+      "riskyPhrase": "chainAccentWideCuffDuo",
+      "safeEquivalent": "two separate angular cuffs with no connector and both hands spaced apart"
+    },
+    {
+      "riskyPhrase": "sideWaistSashKnotTouch",
+      "safeEquivalent": "one visible hand resting on a secure side-waist sash knot over the opaque garment"
+    },
+    {
+      "riskyPhrase": "trioHipLevelChainDrape",
+      "safeEquivalent": "one loose gold garland prop held in three separate free-hand segments at waist height and attached to nobody"
+    },
+    {
+      "riskyPhrase": "lowBackDressBodyChain",
+      "safeEquivalent": "fine metallic route-line seam across the fully opaque rear garment panel"
+    },
+    {
+      "riskyPhrase": "MILE HIGH THREESOME",
+      "safeEquivalent": "STAR RAZE three-woman aircrew editorial"
+    },
+    {
+      "riskyPhrase": "orbRetrievalPose",
+      "safeEquivalent": "task-focused low reach toward a signal token on a raised mission plinth"
+    },
+    {
+      "riskyPhrase": "cabaret glamour",
+      "safeEquivalent": "theatrical fashion polish"
+    },
+    {
+      "riskyPhrase": "bodyPiercing",
+      "safeEquivalent": "one tiny refined upper-ear gold stud"
+    },
+    {
+      "riskyPhrase": "micro-dress",
+      "safeEquivalent": "abbreviated self-lined silhouette"
+    },
+    {
+      "riskyPhrase": "micro-skirt",
+      "safeEquivalent": "compact sculptural skirt"
+    },
+    {
+      "riskyPhrase": "ultra-short",
+      "safeEquivalent": "high-cut above-mid-thigh runway hem"
+    },
+    {
+      "riskyPhrase": "fetishwear",
+      "safeEquivalent": "high-gloss aerodynamic couture"
+    },
+    {
+      "riskyPhrase": "latex-look",
+      "safeEquivalent": "mirror-polished coated performance fabric"
+    },
+    {
+      "riskyPhrase": "strip club",
+      "safeEquivalent": "upscale stage-runway"
+    },
+    {
+      "riskyPhrase": "strip-club",
+      "safeEquivalent": "upscale stage-runway"
+    },
+    {
+      "riskyPhrase": "threesome",
+      "safeEquivalent": "adult love-triangle aircrew cover"
+    },
+    {
+      "riskyPhrase": "latex",
+      "safeEquivalent": "lacquered stretch textile"
+    }
+  ],
+  "foundationRule": "Materialize identity, country, location, role, completed mission, professional relationship geometry, silhouette, every deterministic triggered detail, exact PAWS action, clean-face gate and technical invariants once. Use one integrated clean foundation per lane, remove redundant negative vocabulary, and restart only a failed lane from a fresh foundation rather than stacking dependent edits.",
+  "appendedAggregateBlockCount": 1,
+  "aggregateModerationEvidence": {
+    "batch": 211,
+    "sceneNumber": null,
+    "attempt": 1,
+    "stage": "four-lane clean foundation generation",
+    "outcome": "blocked",
+    "moderationStage": "output",
+    "moderationCategory": "sexual",
+    "requestId": "afbb4219-1b2c-410b-8cd7-5c7528b640b6",
+    "suspectedTermFamilies": [
+      "aggregate rendered-pixel risk across one unidentified lane; no prompt term family inferred"
+    ],
+    "exactPrompt": null,
+    "candidatePromptCount": 4,
+    "laneOwnership": "unresolved",
+    "evidence": "No renderer result or file surfaced; all four aggregate results were rejected as ambiguous."
+  },
+  "outputBlockRule": "The new evidence is aggregate output moderation with unresolved lane ownership. It does not blacklist a phrase or scene by itself. Every Batch 212 lane uses conservative task-focused spacing, fully opaque garments, clean natural faces and no exposed-skin, body-mark or intimate-contact wording."
+}

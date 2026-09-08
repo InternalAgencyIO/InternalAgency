@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "batch": 507,
+  "reviewedAtUtc": "2026-09-08T02:18:24.888Z",
+  "policy": "Review every unique source and returned edit. Accept technically usable non-explicit fictional adults with documented soft styling drift. One edit per scene; no aesthetic retries. Preserve all bytes.",
+  "perScene": [
+    {
+      "scene": 2055,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-gallery-original.webp",
+      "technical": "pass",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selectionReason": "Closer original Meta crop retained. Returned single edit widened the frame to add full feet/shoe geometry; saved unused without retry.",
+      "sourceDeviations": [
+        "Source is wider than requested close angle, with feet outside crop. Exact 18-degree camera and midriff ownership not fully realized.",
+        "No identity, anatomy or public-safety rejection on selected version."
+      ],
+      "remainingSoftDeviations": [
+        "Source is wider than requested close angle, with feet outside crop. Exact 18-degree camera and midriff ownership not fully realized.",
+        "No identity, anatomy or public-safety rejection on selected version."
+      ],
+      "framing": "Original selected because returned edit violated source crop.",
+      "fictionalDisasterDisclosureRequired": false
+    },
+    {
+      "scene": 2056,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-gallery-original.webp",
+      "technical": "pass",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selectionReason": "Provider-offered calm-background safe alternative is independently public-safe and technically usable. One output-blocked edit consumed the allowance, original selected.",
+      "sourceDeviations": [
+        "Head rests beside torso rather than exactly on lap; tattoo, stocking-mark and midriff ownership have soft drift.",
+        "Explicit calmer-source exclusion supersedes effects realization but does not change historical roll."
+      ],
+      "remainingSoftDeviations": [
+        "Head rests beside torso rather than exactly on lap; tattoo, stocking-mark and midriff ownership have soft drift.",
+        "Explicit calmer-source exclusion supersedes effects realization but does not change historical roll."
+      ],
+      "framing": "Selected actual source composition retained or broadly retained; requested camera differences documented.",
+      "fictionalDisasterDisclosureRequired": false
+    },
+    {
+      "scene": 2057,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-chatgpt-single-tailoring-pass.png",
+      "technical": "pass",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selectionReason": "Returned single edit improves clean short tailoring while broadly retaining source pose and composition; selected with documented soft detail drift.",
+      "sourceDeviations": [
+        "Source frame remains wider than requested 21-degree close angle.",
+        "Flag yellow/orange and small emblem detail drift; fine compass-and-heart tattoo appears instead of exact agency lettering. Rainbow boot and hosiery blending and star hardware omissions remain soft."
+      ],
+      "remainingSoftDeviations": [
+        "Source frame remains wider than requested 21-degree close angle.",
+        "Flag yellow/orange and small emblem detail drift; fine compass-and-heart tattoo appears instead of exact agency lettering. Rainbow boot and hosiery blending and star hardware omissions remain soft."
+      ],
+      "framing": "Selected actual source composition retained or broadly retained; requested camera differences documented.",
+      "fictionalDisasterDisclosureRequired": false
+    },
+    {
+      "scene": 2058,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-tailoring-pass.png",
+      "technical": "pass",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selectionReason": "Returned single edit preserves diagonal window and seated relationship composition while improving short tailoring; selected with documented soft detail drift.",
+      "sourceDeviations": [
+        "Source frame remains wider than requested close category.",
+        "Rainbow platform sandals replace rolled boots; green skirt rather than pearl skort and extra crescents remain soft styling drift."
+      ],
+      "remainingSoftDeviations": [
+        "Source frame remains wider than requested close category.",
+        "Rainbow platform sandals replace rolled boots; green skirt rather than pearl skort and extra crescents remain soft styling drift."
+      ],
+      "framing": "Selected actual source composition retained or broadly retained; requested camera differences documented.",
+      "fictionalDisasterDisclosureRequired": false
+    }
+  ],
+  "returnedEditQa": [
+    {
+      "scene": 2055,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-chatgpt-single-tailoring-pass.png",
+      "sha256": "fabd1b6ad03589c4ec95f6982bd853b26cb95842895510966c55e4056c7c93e6",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selected": false,
+      "framing": "reject-for-selection-widened-crop-to-show-feet",
+      "additionalEditAllowed": false
+    },
+    {
+      "scene": 2057,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-chatgpt-single-tailoring-pass.png",
+      "sha256": "b1c66226c7a8b92001ab968e5f8550ea2798d9001a22755e57fa447f849a9af9",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selected": true,
+      "framing": "acceptable-broad-source-composition-retained",
+      "additionalEditAllowed": false
+    },
+    {
+      "scene": 2058,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-tailoring-pass.png",
+      "sha256": "65ea8fc4d466a9f5225f959a83d1ac3a918ae5a6f9b01d7148bb850f641ad83d",
+      "publicSafe": "pass-non-explicit-fictional-adults",
+      "selected": true,
+      "framing": "acceptable-broad-source-composition-retained",
+      "additionalEditAllowed": false
+    }
+  ],
+  "rawFilesSaved": 22,
+  "returnedEditFiles": 3,
+  "allSavedFiles": 25,
+  "uniqueSavedByteVersions": 21,
+  "missingObservedOriginals": 0,
+  "blockedInvocations": [
+    2056
+  ],
+  "archiveException": null,
+  "duplicateCheck": {
+    "checkedAtUtc": "2026-09-08T02:18:24.888Z",
+    "ledgerPostCount": 236,
+    "candidateFiles": 35,
+    "uniqueCandidateHashes": 27,
+    "method": "Exact recursive primitive values in all X post records versus every candidate scene id, hash and repository media path.",
+    "matches": []
+  },
+  "allFourScenesTerminal": true
+}

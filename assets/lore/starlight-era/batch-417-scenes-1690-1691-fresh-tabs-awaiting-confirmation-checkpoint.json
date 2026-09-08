@@ -1,0 +1,89 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T08:39:33.866Z",
+  "authoritative_parent_commit": "03ffcde636714ca1bdb793d3c3446e07689a9811",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 417,
+  "country": "Palau",
+  "scene_range": [
+    1688,
+    1689,
+    1690,
+    1691
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-417-scene-1688-accepted-scene-1689-refused-scenes-1690-1691-held-checkpoint.json",
+  "completed_country_cycles_since_last_x_cycle": 6,
+  "accepted_canonical_count_for_country": 1,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "incomplete",
+  "scene_states": {
+    "1688": {
+      "status": "accepted-canonical-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "provider_url": "https://www.meta.ai/prompt/cf1893a6-a49f-45fc-b4fb-bbd7ee1cfeee",
+      "sha256": "37910EFC3D69D7DB8C2D8BF009B6AE42E95202E56AACAE7B2965B80630A143AC"
+    },
+    "1689": {
+      "status": "explicit-no-byte-refusal-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/72bf8bd6-35ff-4501-979b-59fd8b8959f9"
+    },
+    "1690": {
+      "status": "untouched-held-fresh-tab-ready",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "CAA2F311DDB0A16D45578817E64EDCCD91A699505D2B41C11FD57DD9D6D0A4F0",
+      "camera_roll": 52,
+      "browser_tab_id": "12"
+    },
+    "1691": {
+      "status": "untouched-held-fresh-tab-ready",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F",
+      "camera_roll": 11,
+      "browser_tab_id": "13"
+    }
+  },
+  "browser_recovery": {
+    "observed_at_utc": "2026-08-26T08:39:33.866Z",
+    "prior_controllable_tab_count": 0,
+    "recovery_action": "Created exactly two fresh in-app Meta tabs for the two eligible untouched scenes.",
+    "fresh_tabs": [
+      {
+        "scene": 1690,
+        "tab_id": "12",
+        "url": "https://www.meta.ai/",
+        "signed_in": true,
+        "composer_ready": true
+      },
+      {
+        "scene": 1691,
+        "tab_id": "13",
+        "url": "https://www.meta.ai/",
+        "signed_in": true,
+        "composer_ready": true
+      }
+    ]
+  },
+  "dispatch_blocker": {
+    "active": true,
+    "reason": "Browser-required immediate confirmation is mandatory for each face-anchor upload and Send; an automation heartbeat is not user action-time confirmation.",
+    "safe_work_completed": [
+      "Fetched and verified remote branch and PR 13 parity.",
+      "Verified clean Git/LFS state and all three face-anchor hashes.",
+      "Audited and archived the late scene 1689 explicit no-byte refusal.",
+      "Rebuilt exactly two controllable signed-in Meta lanes for scenes 1690 and 1691."
+    ]
+  },
+  "next_action": "On the next explicit user go, dispatch untouched scene 1690 once in tab 12 with all three ordered face anchors. Scene 1691 remains eligible in tab 13. Never resend scenes 1688 or 1689.",
+  "authority_note": "Repository authority is Batch 417 Palau; stale Batch 410 heartbeat snapshot remains superseded."
+}

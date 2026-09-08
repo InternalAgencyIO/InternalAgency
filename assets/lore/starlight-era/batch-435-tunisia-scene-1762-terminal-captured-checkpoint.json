@@ -1,0 +1,70 @@
+{
+  "schema": "internalagency.starlight.scene-terminal-checkpoint.v1",
+  "batchId": 435,
+  "country": "Tunisia",
+  "sceneId": 1762,
+  "status": "closed_hard_unusable",
+  "recordedAtUtc": "2026-08-27T16:14:07.281Z",
+  "providerUrl": "https://www.meta.ai/prompt/02c2e908-6eb5-4cde-ba90-dfb194b2cffe",
+  "providerResponsePath": "progress-reports/codex-generated-media/provider-responses/batch-435-scene-1762-meta-response.txt",
+  "providerOccurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-435-scene-1762-output-hard-unusable.jsonl",
+  "rawBytesAvailable": true,
+  "rawByteLength": 3442443,
+  "rawSha256": "7649fc1df88e2678fbb662b1472c1a4f69afe2837089d7116feeb3331715eed1",
+  "blobPath": "progress-reports/codex-generated-media/blobs/76/7649fc1df88e2678fbb662b1472c1a4f69afe2837089d7116feeb3331715eed1.png",
+  "mimeType": "image/png",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "duplicateRelationships": [],
+  "visualQa": {
+    "sceneId": 1762,
+    "status": "hard_unusable",
+    "accepted": false,
+    "cameraRoll": 77,
+    "framing": "intermediate",
+    "summary": "Hard-unusable raw evidence: El Jem is highly legible and the quartet is public-safe, but the strict roll-77 crop, exact relationship pose, and hand inventory are materially missed.",
+    "failures": [
+      "Strict intermediate roll 77 missed: the image is a full-figure composition instead of head-to-mid-shin.",
+      "Alia is not seated sideways across Radiance’s lap, and the required embrace/rival-eye-line relationship construction is not realized.",
+      "The exact eight separated, continuously owned hands are not all visible in their assigned positions."
+    ],
+    "softDeviations": [],
+    "positives": [
+      "Vertical 9:16 output at 1152x2048.",
+      "Excellent monumental El Jem amphitheatre read.",
+      "Exactly four distinct public-safe adult women.",
+      "Single visible gold beacon with four countable cyan rings."
+    ]
+  },
+  "acceptedCanonical": false,
+  "canonicalAssetPath": null,
+  "rawArchiveAssetPath": "assets/lore/starlight-era/1762-tunisia-el-jem-meta-raw.png",
+  "retryAuthorized": false,
+  "promptPath": "tmp/world-195x4/batch-435/scene-1762-prompt.txt",
+  "preparedPromptSha256": "FDCAF84F5DAD8327E6FE305CAB3A9729F84319AAC47A78D028674F5C5CEDE863",
+  "browserCanonicalPromptSha256": "FDCAF84F5DAD8327E6FE305CAB3A9729F84319AAC47A78D028674F5C5CEDE863",
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "initialSendAtUtc": "2026-08-27T15:44:19.292Z",
+  "recoverySendAtUtc": "2026-08-27T15:57:20.547Z"
+}

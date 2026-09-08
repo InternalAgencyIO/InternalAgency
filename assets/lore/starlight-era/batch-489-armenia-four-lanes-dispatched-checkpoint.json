@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "batch": 489,
+  "country": "Armenia",
+  "state": "closed-four-selected-stills",
+  "createdAtUtc": "2026-09-06T01:05:43.6145071Z",
+  "provider": "Meta",
+  "accountVerified": "leesha007",
+  "modeVerifiedAllLanes": "Thinking",
+  "sceneOrder": [
+    1983,
+    1984,
+    1985,
+    1986
+  ],
+  "promptSha256": [
+    "8325622EC23F890BCF6DEE05955B1BDC7FED07B2DA309894A6428CCC8065CD09",
+    "65E1474721CB78823091E385AA4DCD408AFDAF51EDF71FF6CBC4DCDD6FCC3A4E",
+    "242F879F5920F0B95FA13107B4DFE8BB6026AE118F9EF26569A52782B4EF8748",
+    "8398243486030DA4F1354F5D5EFEE3DED2CDE3365E4F13A53BF86E42D6C456CF"
+  ],
+  "orderedIdentityAnchors": [
+    {
+      "scene": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "allPreSendGatesPassed": true,
+  "promptEntryAttachmentHazardHandled": "Entering prompt text removed the preliminary attachments. No Send occurred. Each lane was safely reattached once in exact 938, 936, 937 order after text entry, then reverified.",
+  "verifiedMetaUiPadding": "After attachment, Meta exposed the exact prompt followed only by the same visible attachment-card padding sequence LF-space-LF-space-LF-space. Hashes were recomputed over the exact prompt prefix and matched all four prepared hashes.",
+  "sendClicks": 4,
+  "repeatSendClicks": 0,
+  "editInvocationCount": 4,
+  "providerUrls": [
+    "https://www.meta.ai/prompt/785a1516-3d09-4ff2-aec1-68103181dcec",
+    "https://www.meta.ai/prompt/ab72d13b-2e54-4d47-87e4-19a460e6b8c6",
+    "https://www.meta.ai/prompt/39292d76-46ef-4d00-98d9-a01beb9c42a8",
+    "https://www.meta.ai/prompt/916dc180-039f-448c-84c1-eb24f4489db4"
+  ],
+  "providerState": {
+    "promptUrlCount": 4,
+    "downloadVisibleCount": 4,
+    "stopVisibleCount": 0,
+    "promptPrefixVisibleCount": 4,
+    "generatedImageNaturalDimensions": "1152x2048",
+    "renderState": "terminal-completed"
+  },
+  "terminalVerifiedAtUtc": "2026-09-06T01:16:11.002Z",
+  "rawMedia": [
+    {
+      "scene": 1983,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1983-armenia-yerevan-cascade-editorial-meta-occurrence-1-raw.webp",
+      "bytes": 533788,
+      "sha256": "1C2BF7C64D30132B342FC395C75023A6769F33510152DEBC15AFE8500946E4A7",
+      "dimensions": "1152x2048",
+      "qaDisposition": "accept-first-occurrence-for-one-chatgpt-tailoring-pass"
+    },
+    {
+      "scene": 1984,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1984-armenia-garni-gorge-editorial-meta-occurrence-1-raw.webp",
+      "bytes": 551810,
+      "sha256": "BBFF4B0335E97C450E0DA5EA664A9BA70FC64E26188D89801F8EBBD3555A121A",
+      "dimensions": "1152x2048",
+      "qaDisposition": "accept-first-occurrence-for-one-chatgpt-tailoring-pass"
+    },
+    {
+      "scene": 1985,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1985-armenia-lake-sevan-editorial-meta-occurrence-1-raw.webp",
+      "bytes": 595910,
+      "sha256": "2E4BC4BE48B101D10DC208383FC0A9BEBDC2B5E77B53E80F5C9C01035E4CEA25",
+      "dimensions": "1152x2048",
+      "qaDisposition": "accept-first-occurrence-for-one-chatgpt-tailoring-pass"
+    },
+    {
+      "scene": 1986,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1986-armenia-dilijan-courtyard-editorial-meta-occurrence-1-raw.webp",
+      "bytes": 468156,
+      "sha256": "2170AE966F686A724FA44B82EB14C8FE67131536D86ED3A49BCF6A4F29EDB545",
+      "dimensions": "1152x2048",
+      "qaDisposition": "accept-first-occurrence-for-one-chatgpt-tailoring-pass"
+    }
+  ],
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/provider-ledger.json",
+  "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/staging-evidence-manifest.json",
+  "chatgptSingleEditLedger": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/chatgpt-one-strong-shortening-invocation-ledger.json",
+  "chatgptSingleEditOutcome": {
+    "completedOutputs": 3,
+    "moderationBlockedOutputs": 1,
+    "remainingAllowances": 0,
+    "additionalInvocationsAllowed": 0,
+    "scene1984Fallback": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1984-armenia-garni-gorge-editorial-meta-occurrence-1-raw.webp"
+  },
+  "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/accessibility-sidecars.json",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/closure-evidence-manifest.json",
+  "selectedScenes": [
+    {
+      "scene": 1983,
+      "provider": "ChatGPT",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1983-armenia-yerevan-cascade-editorial-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "6924618DCD5CCEA3F8ED6B004C28DBB6FF01E1B7CD98EFDDD65F5D5EE335C161"
+    },
+    {
+      "scene": 1984,
+      "provider": "Meta",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1984-armenia-garni-gorge-editorial-meta-occurrence-1-raw.webp",
+      "sha256": "BBFF4B0335E97C450E0DA5EA664A9BA70FC64E26188D89801F8EBBD3555A121A"
+    },
+    {
+      "scene": 1985,
+      "provider": "ChatGPT",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1985-armenia-lake-sevan-editorial-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "509E98876ED853FBE3FCFCCFE178FACB47617B70846A1300E809F2F12C3D4E8D"
+    },
+    {
+      "scene": 1986,
+      "provider": "ChatGPT",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1986-armenia-dilijan-courtyard-editorial-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "1EBDC6B64052B6813FCC4C88A99C894BB9E1FA0ABA5A358C5F9DD2DCE78FE886"
+    }
+  ],
+  "xState": {
+    "latestPostUrl": "https://x.com/dogramaci/status/2096401582602506746",
+    "latestPostRemoteVerifiedCommit": "2e51cb59123b8cf21bdb0ed7f68c95b18998eb00",
+    "composerBlank": true,
+    "composerCount": 1
+  },
+  "browserState": {
+    "metaLaneCount": 4,
+    "xComposerCount": 1,
+    "otherTabCount": 0,
+    "visibleInAppBrowserOnly": true
+  },
+  "canonicalContradiction": "Historical Batch 374 Armenia scene 1518 is terminal and must never be reopened. Batch 489 is a new four-scene gap-fill batch, not a retry. The old Cuba instruction remains superseded by Tanzania and later checkpoints, and no Starlight guardian exists.",
+  "nextSafeAction": "Create and verify the closure manifest, commit all four selections, three ChatGPT outputs, the scene-1984 moderation fallback and accessibility sidecars, then establish local-origin-PR parity. Never invoke or send any Armenia scene again. After parity, refill the four Meta lanes only from the next unposted country authority while keeping the single X composer blank until a complete duplicate-safe pair is staged."
+}

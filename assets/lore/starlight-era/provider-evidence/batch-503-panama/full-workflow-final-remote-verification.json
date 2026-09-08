@@ -1,0 +1,491 @@
+{
+  "schemaVersion": 1,
+  "batch": 503,
+  "verifiedAtUtc": "2026-09-07T04:45:40.761Z",
+  "evidenceCommit": "f4acb9c8130e900638aa32fcd2a11f0c369978cd",
+  "localHead": "f4acb9c8130e900638aa32fcd2a11f0c369978cd",
+  "originTracking": "f4acb9c8130e900638aa32fcd2a11f0c369978cd",
+  "remoteRefs": [
+    {
+      "sha": "f4acb9c8130e900638aa32fcd2a11f0c369978cd",
+      "ref": "refs/heads/agent/starlight-progress-archive"
+    },
+    {
+      "sha": "f4acb9c8130e900638aa32fcd2a11f0c369978cd",
+      "ref": "refs/pull/13/head"
+    }
+  ],
+  "pullRequest": {
+    "headRefName": "agent/starlight-progress-archive",
+    "headRefOid": "f4acb9c8130e900638aa32fcd2a11f0c369978cd",
+    "isDraft": true,
+    "state": "OPEN",
+    "url": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+  },
+  "canonicalPostCount": 234,
+  "postUrls": [
+    "https://x.com/dogramaci/status/2096817272954274251",
+    "https://x.com/dogramaci/status/2096819256474153115"
+  ],
+  "all40MediaFreshRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json",
+  "closureFilesVerified": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/continuation-log-audit-2026-09-07.json",
+      "localBytes": 3085,
+      "localSha256": "df78067fc1eafafe53a989ece09a5777ab10386f23a314389fd92c22c3402ae8",
+      "remoteBlobBytes": 3085,
+      "remoteBlobSha256": "df78067fc1eafafe53a989ece09a5777ab10386f23a314389fd92c22c3402ae8",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/accepted-selections.json",
+      "localBytes": 7810,
+      "localSha256": "efa71626a1ff08af58b80a4eb5bcb5cee94c34762d5a626f4babd40a3411f89e",
+      "remoteBlobBytes": 7810,
+      "remoteBlobSha256": "efa71626a1ff08af58b80a4eb5bcb5cee94c34762d5a626f4babd40a3411f89e",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/accepted-selections.json",
+      "localBytes": 8262,
+      "localSha256": "9f4577f15542fa74e12a74400e8482350f26432e89584e946951b757552198a7",
+      "remoteBlobBytes": 8262,
+      "remoteBlobSha256": "9f4577f15542fa74e12a74400e8482350f26432e89584e946951b757552198a7",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/provider-ledger.json",
+      "localBytes": 37654,
+      "localSha256": "142747e47c820ea07240fbb04ca84eab47d685353137ccf0f95dbc0be24d49ab",
+      "remoteBlobBytes": 37654,
+      "remoteBlobSha256": "142747e47c820ea07240fbb04ca84eab47d685353137ccf0f95dbc0be24d49ab",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-502-kuwait-four-stills-closure-checkpoint.json",
+      "localBytes": 3303,
+      "localSha256": "2dbd8e2aedcf9adec6767d9f00df3c722408f3ba2059c6797eb45d34023f14de",
+      "remoteBlobBytes": 3303,
+      "remoteBlobSha256": "2dbd8e2aedcf9adec6767d9f00df3c722408f3ba2059c6797eb45d34023f14de",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-503-panama-visible-browser-handoff.json",
+      "localBytes": 50242,
+      "localSha256": "226ab70b17c5d3d2ca039ce3711924a9a1e5f38e4597180b34ec72a2d22082ed",
+      "remoteBlobBytes": 50242,
+      "remoteBlobSha256": "226ab70b17c5d3d2ca039ce3711924a9a1e5f38e4597180b34ec72a2d22082ed",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-503-kuwait-panama-full-workflow-closure-checkpoint.json",
+      "localBytes": 4174,
+      "localSha256": "0285de947acfb865306c7edfe7675eaf879f55c7834cdfb806c4d3bd998108b9",
+      "remoteBlobBytes": 4174,
+      "remoteBlobSha256": "0285de947acfb865306c7edfe7675eaf879f55c7834cdfb806c4d3bd998108b9",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+      "localBytes": 179431,
+      "localSha256": "75a6f6e93eed5ab314099266e667349fd5a345dcbf5e4ed31ccd7fac4a7a7bd3",
+      "remoteBlobBytes": 179431,
+      "remoteBlobSha256": "75a6f6e93eed5ab314099266e667349fd5a345dcbf5e4ed31ccd7fac4a7a7bd3",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "localBytes": 752131,
+      "localSha256": "b2df0cd8192f686aa58f4828964c8992cf9c5fcadab515c9c06ada75adf632f6",
+      "remoteBlobBytes": 752131,
+      "remoteBlobSha256": "b2df0cd8192f686aa58f4828964c8992cf9c5fcadab515c9c06ada75adf632f6",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "progress-reports/codex-generated-media/manifest.jsonl",
+      "localBytes": 4711620,
+      "localSha256": "d706465af7606c81d0b9a8b19d44b4e5bfe668b63490651f77b00a3cec948d90",
+      "remoteBlobBytes": 4711610,
+      "remoteBlobSha256": "30760cf3cd6cc5e1c9da17cbdd2e6e3b2c237d11b410e943874fc1f7d94fce1c",
+      "storage": "Git-blob",
+      "gitTextNormalization": true,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/fresh-meta-lane-24-handoff-visible.jpg",
+      "localBytes": 55491,
+      "localSha256": "7a518eff455faff58dd76d31d7f2b16c6abe43d3bb253b9231ec4997f6a2de41",
+      "remoteBlobBytes": 55491,
+      "remoteBlobSha256": "7a518eff455faff58dd76d31d7f2b16c6abe43d3bb253b9231ec4997f6a2de41",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/fresh-meta-lane-25-handoff-visible.jpg",
+      "localBytes": 54945,
+      "localSha256": "329a2f4220bfef6054031f3df366fa8b96c0566d684a5545bd5178966bc7314f",
+      "remoteBlobBytes": 54945,
+      "remoteBlobSha256": "329a2f4220bfef6054031f3df366fa8b96c0566d684a5545bd5178966bc7314f",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/fresh-meta-lane-26-handoff-visible.jpg",
+      "localBytes": 55423,
+      "localSha256": "c721c5c7b33297b17137146192b5b1866230cbdcf105517162ba8c95f2382db6",
+      "remoteBlobBytes": 55423,
+      "remoteBlobSha256": "c721c5c7b33297b17137146192b5b1866230cbdcf105517162ba8c95f2382db6",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/fresh-meta-lane-27-handoff-visible.jpg",
+      "localBytes": 70223,
+      "localSha256": "1d62a1f51bac4c251e7ba3c9e01ba8cf5f2058499eb4aded6c4ba766939d182c",
+      "remoteBlobBytes": 70223,
+      "remoteBlobSha256": "1d62a1f51bac4c251e7ba3c9e01ba8cf5f2058499eb4aded6c4ba766939d182c",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/empty-x-composer-handoff-visible.jpg",
+      "localBytes": 91835,
+      "localSha256": "3909e4f52eb053428df9577c8cb3cd2bed1a0624b9e8365881dba77955783985",
+      "remoteBlobBytes": 91835,
+      "remoteBlobSha256": "3909e4f52eb053428df9577c8cb3cd2bed1a0624b9e8365881dba77955783985",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p2-x-publication-receipt.json",
+      "localBytes": 38345,
+      "localSha256": "3fee78972e33b0679d0bd04b6e7ed47e3bf6e064602a216b75f2a131bb58468e",
+      "remoteBlobBytes": 38345,
+      "remoteBlobSha256": "3fee78972e33b0679d0bd04b6e7ed47e3bf6e064602a216b75f2a131bb58468e",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-503-kuwait-panama-p2-x-reservation.json",
+      "localBytes": 11695,
+      "localSha256": "30f8b83433adf988112afa08e3985e7373a2ff6ac2fc68168b5478f4cee342bd",
+      "remoteBlobBytes": 11695,
+      "remoteBlobSha256": "30f8b83433adf988112afa08e3985e7373a2ff6ac2fc68168b5478f4cee342bd",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-503-panama-prepared-checkpoint.json",
+      "localBytes": 4792,
+      "localSha256": "9877deb7b1430d64941af65ae493524f131311a19c919e16e8293950d85b9f36",
+      "remoteBlobBytes": 4792,
+      "remoteBlobSha256": "9877deb7b1430d64941af65ae493524f131311a19c919e16e8293950d85b9f36",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/provider-ledger.json",
+      "localBytes": 5474,
+      "localSha256": "7ec745aba91f1785dbc59d3f9e268b090434cf3706807694b999fb6b57cf192f",
+      "remoteBlobBytes": 5474,
+      "remoteBlobSha256": "7ec745aba91f1785dbc59d3f9e268b090434cf3706807694b999fb6b57cf192f",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p2-x-published-visible.jpg",
+      "localBytes": 120073,
+      "localSha256": "a5b524d8363aa966ed9fa9ddfb3f588cd801c1016f975fb5f4d947a9c02640f2",
+      "remoteBlobBytes": 120073,
+      "remoteBlobSha256": "a5b524d8363aa966ed9fa9ddfb3f588cd801c1016f975fb5f4d947a9c02640f2",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-publication-receipt.json",
+      "localBytes": 38079,
+      "localSha256": "b4bd2aa6d68eb5fcfde7966601a7f6388b4fe960e4d056c07d9538583f98469b",
+      "remoteBlobBytes": 38079,
+      "remoteBlobSha256": "b4bd2aa6d68eb5fcfde7966601a7f6388b4fe960e4d056c07d9538583f98469b",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-503-kuwait-panama-p1-x-reservation.json",
+      "localBytes": 11480,
+      "localSha256": "13dee121935da12e3b7f9f359ec0da222c04fcfaf1ac1448e15c012e387990c7",
+      "remoteBlobBytes": 11480,
+      "remoteBlobSha256": "13dee121935da12e3b7f9f359ec0da222c04fcfaf1ac1448e15c012e387990c7",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-published-visible.jpg",
+      "localBytes": 118006,
+      "localSha256": "0916e6159498353229ead59fab7ea68b6992041a296b47de0997adaa33d3116c",
+      "remoteBlobBytes": 118006,
+      "remoteBlobSha256": "0916e6159498353229ead59fab7ea68b6992041a296b47de0997adaa33d3116c",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p2-x-staging-proof.json",
+      "localBytes": 59507,
+      "localSha256": "bdd772bed0d95e5abbb46d151eaceb7e6f4e4f8f5fa2ba8c0a917579cb8b0d82",
+      "remoteBlobBytes": 59507,
+      "remoteBlobSha256": "bdd772bed0d95e5abbb46d151eaceb7e6f4e4f8f5fa2ba8c0a917579cb8b0d82",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p2-x-staged-visible.jpg",
+      "localBytes": 119343,
+      "localSha256": "cb60b24f5c20cb1192654f6f50670309cb2a1e53db2ef6785a531c25df36f53e",
+      "remoteBlobBytes": 119343,
+      "remoteBlobSha256": "cb60b24f5c20cb1192654f6f50670309cb2a1e53db2ef6785a531c25df36f53e",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json",
+      "localBytes": 14085,
+      "localSha256": "77a3969a8ddd47c82a9f85842e30e4dd1fc87005683634ec3481d327bd42999b",
+      "remoteBlobBytes": 14085,
+      "remoteBlobSha256": "77a3969a8ddd47c82a9f85842e30e4dd1fc87005683634ec3481d327bd42999b",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-staged-visible.jpg",
+      "localBytes": 114184,
+      "localSha256": "3083d25f7f0bc9e0d426b36869a58f6859007a740c9e343aa03fa016a2343444",
+      "remoteBlobBytes": 114184,
+      "remoteBlobSha256": "3083d25f7f0bc9e0d426b36869a58f6859007a740c9e343aa03fa016a2343444",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-staging-proof.json",
+      "localBytes": 59380,
+      "localSha256": "c19383928704c59a462f4c417a8534a517e08b35579fd0d5e34ba3ec6dece3cd",
+      "remoteBlobBytes": 59380,
+      "remoteBlobSha256": "c19383928704c59a462f4c417a8534a517e08b35579fd0d5e34ba3ec6dece3cd",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-results.json",
+      "localBytes": 10370,
+      "localSha256": "918e775238208228fca32278b958a2a726050b10df3588f83de604286fff9b54",
+      "remoteBlobBytes": 10370,
+      "remoteBlobSha256": "918e775238208228fca32278b958a2a726050b10df3588f83de604286fff9b54",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-intents.json",
+      "localBytes": 26173,
+      "localSha256": "011cdd7ecb8c77a0e824a813d155016a3593f04ac286f2f73abb99cd8f6aab37",
+      "remoteBlobBytes": 26173,
+      "remoteBlobSha256": "011cdd7ecb8c77a0e824a813d155016a3593f04ac286f2f73abb99cd8f6aab37",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-selection-qa.json",
+      "localBytes": 9262,
+      "localSha256": "2a9d3b9d4a85e53657a04b4197353bc3cdc77da52a09c122d436712ffc2b0b45",
+      "remoteBlobBytes": 9262,
+      "remoteBlobSha256": "2a9d3b9d4a85e53657a04b4197353bc3cdc77da52a09c122d436712ffc2b0b45",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-accessibility.json",
+      "localBytes": 893,
+      "localSha256": "2244ed4807682b6ee4883c2af4d81d0d5ccc449572dcfb2d152e00530644bcf2",
+      "remoteBlobBytes": 893,
+      "remoteBlobSha256": "2244ed4807682b6ee4883c2af4d81d0d5ccc449572dcfb2d152e00530644bcf2",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-accessibility.json",
+      "localBytes": 903,
+      "localSha256": "78486090aec7bcbeb4a10cfab600e08afe162201288ed62ba0909a799ddac6a0",
+      "remoteBlobBytes": 903,
+      "remoteBlobSha256": "78486090aec7bcbeb4a10cfab600e08afe162201288ed62ba0909a799ddac6a0",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2041-accessibility.json",
+      "localBytes": 930,
+      "localSha256": "a0e2e9f0c4e1e80b566d45ca35211cbbef729f30ed83f662475c56d5aa1f630e",
+      "remoteBlobBytes": 930,
+      "remoteBlobSha256": "a0e2e9f0c4e1e80b566d45ca35211cbbef729f30ed83f662475c56d5aa1f630e",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2042-accessibility.json",
+      "localBytes": 966,
+      "localSha256": "eee4402bcdce6cd3448bd33f6d32b2b8dd4167e1da3c32a878fbb5ef39685217",
+      "remoteBlobBytes": 966,
+      "remoteBlobSha256": "eee4402bcdce6cd3448bd33f6d32b2b8dd4167e1da3c32a878fbb5ef39685217",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-prepost-profile-dom.txt",
+      "localBytes": 27814,
+      "localSha256": "e27b928f1f577af49d10fe816f3f9a964f06f5f86906d37430cb8da06517c42a",
+      "remoteBlobBytes": 27814,
+      "remoteBlobSha256": "e27b928f1f577af49d10fe816f3f9a964f06f5f86906d37430cb8da06517c42a",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-chatgpt-single-tailoring-pass.png",
+      "localBytes": 2280701,
+      "localSha256": "a5d0deae83b67dc96637abd9cce05f4c312a7712958eb92eb516919195720644",
+      "remoteBlobBytes": 132,
+      "remoteBlobSha256": "d2aa69c1a803483c4c36bcb695d15101843ff5506c654f94a6c28157db8b2fa5",
+      "storage": "LFS-pointer-and-fresh-remote-object",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-chatgpt-single-tailoring-pass.png",
+      "localBytes": 2300252,
+      "localSha256": "fa3c4a62867d0d93239c93dd4a7bbe19298e7abe1048f8a2ac70129c4603949a",
+      "remoteBlobBytes": 132,
+      "remoteBlobSha256": "4741ef393280325b320f950fe38a0c90f7a4ee218ccfca2f5b1227503b634f97",
+      "storage": "LFS-pointer-and-fresh-remote-object",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2041-chatgpt-single-tailoring-pass.png",
+      "localBytes": 2444329,
+      "localSha256": "af8d301597351aa39c4718ed2a36f9bec0f310b967fcaaccfe9eb1dad4237054",
+      "remoteBlobBytes": 132,
+      "remoteBlobSha256": "fc287626da656c5987668b54e5ad4b92f9d9878dd62f9907f7289759d6644d5c",
+      "storage": "LFS-pointer-and-fresh-remote-object",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2042-chatgpt-single-tailoring-pass.png",
+      "localBytes": 2449628,
+      "localSha256": "d81a4093deff7ebafb6eb3c9737ed6b406da64219671ea3b435eb635371648e6",
+      "remoteBlobBytes": 132,
+      "remoteBlobSha256": "05eec1823058c10af1faad6e074924011df696c9cb7c1e874117968fc050e453",
+      "storage": "LFS-pointer-and-fresh-remote-object",
+      "gitTextNormalization": false,
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/closure-evidence-manifest.json",
+      "localBytes": 12377,
+      "localSha256": "1654589f58e9e202dad783bfc5e8741ff5dc0cf7c2854bd003725fc024c61c32",
+      "remoteBlobBytes": 12377,
+      "remoteBlobSha256": "1654589f58e9e202dad783bfc5e8741ff5dc0cf7c2854bd003725fc024c61c32",
+      "storage": "Git-blob",
+      "gitTextNormalization": false,
+      "pass": true
+    }
+  ],
+  "protectedUntrackedFilesUnchanged": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1806-tanzania-dar-es-salaam-kivukoni-waterfront.webp",
+      "bytes": 652738,
+      "sha256": "a15f4dcfe4b1656ad4f2d164b976c4029e956fba162444b855c15f19f75f3ed7",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1808-tanzania-serengeti-naabi-hill.webp",
+      "bytes": 683466,
+      "sha256": "eefe17d8b95a33f4842425dca47290220b97b8b9a040241db1317e5304da1ed2",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+      "bytes": 75027,
+      "sha256": "5789286c420c51705458e38433ed946c87457e362a6fadb96d0180c838ea9de5",
+      "unchanged": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+      "bytes": 87756,
+      "sha256": "e0571c39a7a6e3a4571207ef322cc2f876e6707dc62ed15083fcf352e834c0d1",
+      "unchanged": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+      "bytes": 59155,
+      "sha256": "2c39906adeaf921042d74b8c49061d224523f3174045905caf4eadbfd2aa3c9e",
+      "unchanged": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+      "bytes": 46854,
+      "sha256": "e1186ba034e81335f9b022aede01531c40d45cc1f9dee23df87f29f7b6e1ebaf",
+      "unchanged": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png",
+      "bytes": 83080,
+      "sha256": "48991915cc10959c752490f68cc603ee7cfb69f325bad6ef62a794dedc296b84",
+      "unchanged": true
+    }
+  ],
+  "trackedWorktreeClean": true,
+  "manifestRows": 7209,
+  "normalizationNote": "For Git-managed text, compare the configured clean-filter blob hash. The manifest has expected local versus committed line-ending normalization; media originals and edited PNG bytes were checked exactly.",
+  "semantics": "This attests the complete closure content at the named evidence commit. A subsequent attestation-only commit adds this proof and is separately checked for live branch/PR parity."
+}

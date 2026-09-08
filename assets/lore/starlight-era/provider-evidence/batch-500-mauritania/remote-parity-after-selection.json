@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "batch": 500,
+  "checkedAtUtc": "2026-09-07T00:44:12.023Z",
+  "verifiedCommit": "1d35285098f48c52c02efb3729c33e5c66412a20",
+  "branch": "agent/starlight-progress-archive",
+  "localHead": "1d35285098f48c52c02efb3729c33e5c66412a20",
+  "originHead": "1d35285098f48c52c02efb3729c33e5c66412a20",
+  "remoteRefs": "1d35285098f48c52c02efb3729c33e5c66412a20\trefs/heads/agent/starlight-progress-archive\n1d35285098f48c52c02efb3729c33e5c66412a20\trefs/pull/13/head\n",
+  "pr": {
+    "headRefName": "agent/starlight-progress-archive",
+    "headRefOid": "1d35285098f48c52c02efb3729c33e5c66412a20",
+    "isDraft": true,
+    "number": 13,
+    "state": "OPEN",
+    "url": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+  },
+  "branchOriginPrParity": true,
+  "lfsPush": {
+    "uploadedObjects": 3,
+    "uploadedBytesDisplay": "6.9 MB",
+    "completed": true
+  },
+  "postCommitPointerFsck": "Git LFS fsck OK",
+  "checkpoint": "assets/lore/starlight-era/batch-500-mauritania-selection-complete-internal-raw-hold-checkpoint.json",
+  "availableEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/available-media-evidence-manifest.json",
+  "validation": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/archive-closure-validation.json",
+  "rawArchiveComplete": false,
+  "missingInternalOriginals": 8,
+  "xPostActivations": 0,
+  "canonicalXPostCount": 230,
+  "selectedImages": [
+    {
+      "scene": 2027,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-chatgpt-single-tailoring-pass.png",
+      "sha256": "f4206c88dff2c26360c2e7e60254cbc500ab34883329227c457dc5c0489f1e00"
+    },
+    {
+      "scene": 2028,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-chatgpt-single-tailoring-pass.png",
+      "sha256": "0b8c646c1cf4d66209518d5e526dbae60db9a7695033d7fe7583ccd0c66b518f"
+    },
+    {
+      "scene": 2029,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-gallery-original.webp",
+      "sha256": "fe3a74d4330cfae106a5519f3863bed826f92669e2b589bcc51ec58efe20fc4c"
+    },
+    {
+      "scene": 2030,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-chatgpt-single-tailoring-pass.png",
+      "sha256": "8c99a1e08595efba27bc13538a7c3e7e15a7efe82e82508b0a0b3afa5ebd768b"
+    }
+  ],
+  "starlightGuardianPresent": false,
+  "otherAutomationFiles": [
+    "C:\\Users\\A\\.codex\\automations\\iat-b3-devnet-gate-guardian\\automation.toml",
+    "C:\\Users\\A\\.codex\\automations\\guardian-x-assistant-mission\\automation.toml"
+  ],
+  "unrelatedAutomationsChanged": false,
+  "unattended247ExecutionEstablished": false,
+  "note": "This receipt verifies the complete selection commit. Its own later evidence-only commit must also receive a fresh remote parity check; no self-referential commit hash is claimed."
+}

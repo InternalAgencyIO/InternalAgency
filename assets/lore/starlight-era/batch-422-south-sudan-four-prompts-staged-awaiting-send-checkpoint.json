@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four-prompts-staged-awaiting-action-time-send-confirmation",
+  "createdAtUtc": "2026-08-27T04:36:47.5497739Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 422,
+  "country": "South Sudan",
+  "provider": "Meta AI",
+  "signedInAccount": "leesha007",
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "scene": 1708,
+      "tabId": "10",
+      "url": "https://www.meta.ai/",
+      "promptSha256": "49023104FA7694B299F8A87E4DCB27381208A5A4DB91B3C636005ECBC8F20EA9",
+      "promptLength": 3985,
+      "promptMatches": true,
+      "attachmentOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendEnabled": true,
+      "sendClickCount": 0,
+      "providerChat": null
+    },
+    {
+      "scene": 1709,
+      "tabId": "11",
+      "url": "https://www.meta.ai/",
+      "promptSha256": "89960C1A17AD37D6C9ABA7F6EB07EA11B3CB8362D82AB87EB09754F3B3CBFB3B",
+      "promptLength": 3911,
+      "promptMatches": true,
+      "attachmentOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendEnabled": true,
+      "sendClickCount": 0,
+      "providerChat": null
+    },
+    {
+      "scene": 1710,
+      "tabId": "12",
+      "url": "https://www.meta.ai/",
+      "promptSha256": "97068C0474D346440D3B662AFDF24D98D1BA4E78869E1C21709257DD6E56B99F",
+      "promptLength": 4050,
+      "promptMatches": true,
+      "attachmentOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendEnabled": true,
+      "sendClickCount": 0,
+      "providerChat": null,
+      "malePresent": true
+    },
+    {
+      "scene": 1711,
+      "tabId": "13",
+      "url": "https://www.meta.ai/",
+      "promptSha256": "36E0D634B7AC976D84D089B50ACE2BA257AC16ECE22459D1B2D837C85F051F6D",
+      "promptLength": 3794,
+      "promptMatches": true,
+      "attachmentOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendEnabled": true,
+      "sendClickCount": 0,
+      "providerChat": null,
+      "malePresent": false
+    }
+  ],
+  "promptCorrection": {
+    "scene": 1711,
+    "oldPromptSha256": "5C0767547CAC0CF650D3BBE7EEF0961D1E9CC1A5704AC4254E735693BE7CFDBE",
+    "correctedPromptSha256": "36E0D634B7AC976D84D089B50ACE2BA257AC16ECE22459D1B2D837C85F051F6D",
+    "reason": "removed contradictory optional-man sentence; deterministic male scene remains 1710",
+    "authorizedByUserText": "good authorized go"
+  },
+  "eligibleLaneCount": 4,
+  "confirmedProviderChatCount": 0,
+  "duplicateDispatchCount": 0,
+  "boundedRetryAuthorized": false,
+  "retryCount": 0,
+  "send": {
+    "status": "awaiting-action-time-user-confirmation",
+    "sendClickCount": 0
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 1,
+    "publishDue": false
+  }
+}

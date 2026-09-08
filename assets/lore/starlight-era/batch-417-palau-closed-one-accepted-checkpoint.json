@@ -1,0 +1,68 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T14:09:18.2158290Z",
+  "authoritative_parent_commit": "ee86c900922e1b937db9bfd052a03661dc641324",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 417,
+  "country": "Palau",
+  "scene_range": [1688, 1689, 1690, 1691],
+  "supersedes": "assets/lore/starlight-era/batch-417-scene-1691-provider-occurrence-progressing-checkpoint.json",
+  "completed_country_cycles_since_last_x_cycle": 7,
+  "accepted_canonical_count_for_country": 1,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "closed-unresolved-one-accepted",
+  "scene_states": {
+    "1688": {
+      "status": "accepted-canonical-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "sha256": "37910EFC3D69D7DB8C2D8BF009B6AE42E95202E56AACAE7B2965B80630A143AC"
+    },
+    "1689": {
+      "status": "explicit-no-byte-refusal-late-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/72bf8bd6-35ff-4501-979b-59fd8b8959f9"
+    },
+    "1690": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/2d7f156b-e8c3-44a9-ad59-72925a7b017a"
+    },
+    "1691": {
+      "status": "raw-output-hard-unusable-camera-roll-framing",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F",
+      "camera_roll": 11,
+      "provider_url": "https://www.meta.ai/prompt/a6741e2a-9a54-43a4-a72f-4ed64640c4af",
+      "raw_asset_path": "assets/lore/starlight-era/1691-palau-ngardmau-waterfall-meta-raw.webp",
+      "sha256": "420835D868F3D5ED353F8C7B3C9ACCE0F4B1A12FD6DAF07DE2582D9B4D93D6BC",
+      "width": 1152,
+      "height": 2048,
+      "qa_result": "rejected-hard-unusable-camera-roll-framing"
+    }
+  },
+  "closure": {
+    "all_scenes_terminal": true,
+    "resend_forbidden_for_all_scenes": true,
+    "accepted_scenes": [1688],
+    "unaccepted_scenes": [1689, 1690, 1691],
+    "country_target_met": false
+  },
+  "next_campaign_position": {
+    "batch": 418,
+    "country": "Nauru",
+    "scene_range": [1692, 1693, 1694, 1695],
+    "source_precedent_batch": 347,
+    "source_precedent_country": "Nauru"
+  },
+  "next_action": "Prepare Batch 418 Nauru scenes 1692-1695 from authoritative Batch 347 Nauru precedent. Browser upload and Send remain gated by fresh immediate user confirmation. Never reopen or resend Palau scenes 1688-1691."
+}

@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-06T23:44:08.314Z",
+  "baselineCommit": "79ff62f673e919d8e71113d69365e22c942ee2b2",
+  "preCommitAuthority": "d35a0bf38ad66e49808a573b4a3f43622380999e",
+  "status": "pass-scoped-publication-and-archive-validation-swiss-oman-holds-retained",
+  "scope": "Validate the exact authorized two partial-country posts, immutable provider sources, preserved history, accessibility, duplicate exclusions and additive browser evidence. This is not an assertion that the inherited rejected-prompt verifier passes or that all countries are complete.",
+  "checks": {
+    "canonicalPostCount": 230,
+    "uniquePostUrls": 230,
+    "postRowsWithoutUrl": 0,
+    "original228RowsUnchanged": true,
+    "p17RowUnchanged": true,
+    "p18RowMatchesVerifiedProof": true,
+    "ledgerOutsidePostsAndPointerUnchanged": true,
+    "contractOutsidePointerUnchanged": true,
+    "pointerParity": true,
+    "fourDistinctSourceHashes": true,
+    "sourceHashesVerified": true,
+    "allHistoricalClosuresAndAuditsUnchanged": true,
+    "browserManifestRows": 773,
+    "manifestErrors": [],
+    "newScreenshotsManifestedExactlyOnce": true,
+    "unrelatedUntrackedPreserved": true,
+    "allClosureDocumentsParseAndEqual": true,
+    "canonicalDrainCountsMatch": true
+  },
+  "publicPosts": [
+    {
+      "postUrl": "https://x.com/dogramaci/status/2096742886423323045",
+      "sceneIds": [
+        1832,
+        1845
+      ],
+      "postedAt": "2026-09-06T23:30:34.000Z",
+      "activationAttempts": 1,
+      "orderedExactAltDescriptions": 2,
+      "madeWithAi": true,
+      "liveEvidence": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p17-live-2096742886423323045-evidence.json"
+    },
+    {
+      "postUrl": "https://x.com/dogramaci/status/2096744477947838578",
+      "sceneIds": [
+        1865,
+        1866
+      ],
+      "postedAt": "2026-09-06T23:36:53.000Z",
+      "activationAttempts": 1,
+      "orderedExactAltDescriptions": 2,
+      "madeWithAi": true,
+      "liveEvidence": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p18-live-2096744477947838578-evidence.json"
+    }
+  ],
+  "newSceneOccurrenceCounts": [
+    {
+      "scene": 1832,
+      "newRowsContainingScene": 1
+    },
+    {
+      "scene": 1845,
+      "newRowsContainingScene": 1
+    },
+    {
+      "scene": 1865,
+      "newRowsContainingScene": 1
+    },
+    {
+      "scene": 1866,
+      "newRowsContainingScene": 1
+    }
+  ],
+  "sourceFiles": [
+    {
+      "scene": 1832,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-451-israel/1832-israel-makhtesh-ramon.webp",
+      "bytes": 570502,
+      "sha256": "d968d9967a1aba399698f79ea33443450d5766d6d4ff24f193b23c5f21f1e191",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesReservation": true
+    },
+    {
+      "scene": 1845,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-454-belarus/1845-belarus-soligorsk-salt-mountains.webp",
+      "bytes": 558866,
+      "sha256": "e0d96f27423e43fe2ef1080aa771696b2944fe2047d360f0eb8c70f3c799e186",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesReservation": true
+    },
+    {
+      "scene": 1865,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-459-turkmenistan/1865-turkmenistan-karakum-dune-observatory.webp",
+      "bytes": 531992,
+      "sha256": "ee5f2f98126057cb878710f3bb3849191534c88a7b5e5586f9e8b4009649d8ca",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesReservation": true
+    },
+    {
+      "scene": 1866,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-460-libya/1866-libya-ghadames-residential-arcade-plaza.webp",
+      "bytes": 1034512,
+      "sha256": "c02243db590b380f33a8a3d0d38e44a6270a737a8a05011a94e7f2ff43162f62",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesReservation": true
+    }
+  ],
+  "historicalFilesUnchanged": [
+    {
+      "path": "assets/lore/starlight-era/batch-451-israel-closed-one-accepted-checkpoint.json",
+      "baselineSha256": "7d686e3c7d1bf7a4d536125f3d38009da543c1a83a29ce702f107e5c264b6d3b",
+      "currentSha256": "7d686e3c7d1bf7a4d536125f3d38009da543c1a83a29ce702f107e5c264b6d3b",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-454-belarus-closed-one-accepted-checkpoint.json",
+      "baselineSha256": "fda2b41d9d18142e8f13df945dbb5f4daf7f8c8e7fd07ae1bbcc113405e19e19",
+      "currentSha256": "fda2b41d9d18142e8f13df945dbb5f4daf7f8c8e7fd07ae1bbcc113405e19e19",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-459-turkmenistan-closed-one-accepted-checkpoint.json",
+      "baselineSha256": "bd338135f1aed955fa8f91b2edcfcdc5f9f811f872493510c10982f69b8ac3bb",
+      "currentSha256": "bd338135f1aed955fa8f91b2edcfcdc5f9f811f872493510c10982f69b8ac3bb",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-460-libya-closed-one-accepted-checkpoint.json",
+      "baselineSha256": "81faec03dd202fb3a7418b75ff84d4df56f8d307b6d014369cd38e8b2b840bd7",
+      "currentSha256": "81faec03dd202fb3a7418b75ff84d4df56f8d307b6d014369cd38e8b2b840bd7",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json",
+      "baselineSha256": "1fcc65acfb3c33fb22259ddc7e049708bd96b2afcdde24beb914036ac801449e",
+      "currentSha256": "1fcc65acfb3c33fb22259ddc7e049708bd96b2afcdde24beb914036ac801449e",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-swiss-source-provenance-round3.json",
+      "baselineSha256": "2ad8762444196b602e3bcf55a07a9742607e249d8333aee8af56ff1a80a695da",
+      "currentSha256": "2ad8762444196b602e3bcf55a07a9742607e249d8333aee8af56ff1a80a695da",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-publication-readiness-round4.json",
+      "baselineSha256": "3e48615ba52ba52647a0f9409e4969ef9192d645c4ca607470dec376d18e6509",
+      "currentSha256": "3e48615ba52ba52647a0f9409e4969ef9192d645c4ca607470dec376d18e6509",
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-legacy-video-audit-complete-partial-country-hold-checkpoint.json",
+      "baselineSha256": "ebb8b85f6cfa17d7d1ee0ef6f9a1491bf0950fae885d593ccec7e8adfb505d0a",
+      "currentSha256": "ebb8b85f6cfa17d7d1ee0ef6f9a1491bf0950fae885d593ccec7e8adfb505d0a",
+      "unchanged": true
+    }
+  ],
+  "unrelatedUntrackedFilesPreserved": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1806-tanzania-dar-es-salaam-kivukoni-waterfront.webp",
+      "bytes": 652738,
+      "sha256": "a15f4dcfe4b1656ad4f2d164b976c4029e956fba162444b855c15f19f75f3ed7",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1808-tanzania-serengeti-naabi-hill.webp",
+      "bytes": 683466,
+      "sha256": "eefe17d8b95a33f4842425dca47290220b97b8b9a040241db1317e5304da1ed2",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+      "bytes": 75027,
+      "sha256": "5789286c420c51705458e38433ed946c87457e362a6fadb96d0180c838ea9de5",
+      "pass": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+      "bytes": 87756,
+      "sha256": "e0571c39a7a6e3a4571207ef322cc2f876e6707dc62ed15083fcf352e834c0d1",
+      "pass": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+      "bytes": 59155,
+      "sha256": "2c39906adeaf921042d74b8c49061d224523f3174045905caf4eadbfd2aa3c9e",
+      "pass": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+      "bytes": 46854,
+      "sha256": "e1186ba034e81335f9b022aede01531c40d45cc1f9dee23df87f29f7b6e1ebaf",
+      "pass": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png",
+      "bytes": 83080,
+      "sha256": "48991915cc10959c752490f68cc603ee7cfb69f325bad6ef62a794dedc296b84",
+      "pass": true
+    }
+  ],
+  "archivalBrowserManifestRowsVerified": 773,
+  "newBrowserScreenshotsThisContinuation": 15,
+  "newScreenshotsInFinalClosure": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-partial-p18-after-post-activation.jpg",
+      "sha256": "c55d792a0f4bcf8a2d0a20d9cdd608ea67d7ff36fba14be1fbdf1dfcc270fbea",
+      "bytes": 129695
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-partial-p18-live-2096744477947838578.jpg",
+      "sha256": "922a66333a07ce7f2f5f9a1910df56d078fdee8180c0ac1e7206dafef5af00da",
+      "bytes": 124392
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-partial-final-empty-composer.jpg",
+      "sha256": "4cd0c7469f06b69ce2caa251daa64aabb0f6c93f1472d1229dfb6c1120c32140",
+      "bytes": 65798
+    }
+  ],
+  "cumulativeDrain": {
+    "newPosts": 18,
+    "newUniqueStillImages": 63,
+    "canonicalPostCount": 230,
+    "latestPostUrl": "https://x.com/dogramaci/status/2096744477947838578"
+  },
+  "selectedBacklog": {
+    "complete": true,
+    "newPosts": 16,
+    "newUniqueStillImages": 59,
+    "canonicalPostCount": 228,
+    "remainingSelectedSceneIds": [],
+    "latestPostUrl": "https://x.com/dogramaci/status/2096708532414398492",
+    "liveReceipt": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p16-live-checkpoint.json",
+    "p16Recovery": "The earlier unconfirmed activation is preserved. One freshly authorized recovery click produced one verified live publication. No attachment was uploaded twice during the recovery."
+  },
+  "partialCountryException": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-partial-explicit-exception-authorization.json",
+  "historicalCountryCompletionUnchanged": true,
+  "remainingHolds": {
+    "switzerland1849": true,
+    "oman499": true,
+    "providerDispatchAuthorized": false,
+    "starlightGuardianPresent": false,
+    "unattended247ExecutionEstablished": false
+  },
+  "automation": {
+    "starlightGuardianPresent": false,
+    "newAutomationCreated": false,
+    "otherAutomationsModifiedByThisTask": false,
+    "unattended247ExecutionEstablished": false,
+    "inspectedAt": "2026-09-06T23:42:33.508Z",
+    "records": [
+      {
+        "id": "iat-b3-devnet-gate-guardian",
+        "path": "C:/Users/A/.codex/automations/iat-b3-devnet-gate-guardian/automation.toml",
+        "bytes": 28161,
+        "sha256": "537b771f89deddaebc2e273009d13ce6a4997313f9862f6d2a37b56b4fd40c5a",
+        "unchangedFromPriorAudit": true,
+        "modifiedByThisTask": false
+      },
+      {
+        "id": "guardian-x-assistant-mission",
+        "path": "C:/Users/A/.codex/automations/guardian-x-assistant-mission/automation.toml",
+        "bytes": 7965,
+        "sha256": "53aabef60c4c732bf6b049f73b4f28d115c413e6d70dc585569c6899888cb79f",
+        "unchangedFromPriorAudit": true,
+        "modifiedByThisTask": false
+      }
+    ],
+    "liveInventory": [
+      "guardian-x-assistant-mission",
+      "iat-b3-devnet-gate-guardian"
+    ]
+  },
+  "inheritedRejectedPromptVerifier": {
+    "exactHashesPassed": 139,
+    "rawEntries": 130,
+    "noByteEntries": 8,
+    "zeroByteEntries": 1,
+    "errors": [
+      "checkpoint contractSha256 mismatch",
+      "ledger contractPolicySha256 mismatch"
+    ],
+    "historicalSealProof": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/historical-contract-seal-resolved-1920.json",
+    "lastVerifiedAt": "2026-09-06T21:25:13.246Z",
+    "resultInheritedUntilRerun": true,
+    "allExactPromptHashesPassed": true,
+    "overallVerifierPassed": false,
+    "rerunThisTurn": false,
+    "sourceValidation": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/archive-validation-2125.json",
+    "note": "Two preexisting mutable-contract seal comparison errors remain documented. This archival check does not assert that the full rejected-prompt verifier passed."
+  },
+  "localGitChecks": {
+    "diffCheck": "",
+    "lfsPointerFsck": "Git LFS fsck OK",
+    "preCommitRemoteBranch": "d35a0bf38ad66e49808a573b4a3f43622380999e",
+    "preCommitPrHead": "d35a0bf38ad66e49808a573b4a3f43622380999e",
+    "prState": "OPEN",
+    "prIsDraft": true,
+    "metadataVerifiedVia": "Authenticated PowerShell GitHub CLI; no credential or configuration was changed."
+  },
+  "artifacts": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p18-live-2096744477947838578-evidence.json",
+      "bytes": 8107,
+      "sha256": "1e3a15ee067422f72f343b764e0d19e8120eba2d4874b73edf502362da014caa"
+    },
+    {
+      "path": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p18-live-checkpoint.json",
+      "bytes": 5828,
+      "sha256": "2b8da63ee0444397da76a6b856ce08ee6a820bb828371f497231a4c66b37c7fe"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-partial-final-browser-handoff.json",
+      "bytes": 39343,
+      "sha256": "979e72c346caf0e19a138ca039c649cdfc0ff2158c3c2047543f1ae2f0ac39b1"
+    },
+    {
+      "path": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-legacy-partial-publication-complete-checkpoint.json",
+      "bytes": 8073,
+      "sha256": "42e3b3e8ac0b44226c06b896f54518a8811dfaa8b17250e2dc1a2942c5bdc16e"
+    },
+    {
+      "path": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p18-reservation.json",
+      "bytes": 6224,
+      "sha256": "5103f1d05ca1dccd1bfb915382340bfd7450449d1d0f908ec8ecafd412c5008a"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p18-post-activation-intent.json",
+      "bytes": 787,
+      "sha256": "2e0471bec0e56dff7572615b5929464f86b31748ecd723c3e99a682c743722f4"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p18-post-activation-receipt.json",
+      "bytes": 27544,
+      "sha256": "f584785d4f17f063dc46d35330ea4645f8117b08c036dc87f0134c47b84d8e36"
+    }
+  ],
+  "errors": []
+}

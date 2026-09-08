@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four-lane-provider-terminal-capture",
+  "createdAtUtc": "2026-08-27T05:59:55.837Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 425,
+  "country": "Guatemala",
+  "status": "terminal-four-hard-unusable-zero-accepted",
+  "sourcePreparationCheckpoint": "assets/lore/starlight-era/batch-425-guatemala-prompts-prepared-checkpoint.json",
+  "scenes": [
+    1720,
+    1721,
+    1722,
+    1723
+  ],
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "dispatch": {
+    "startedAtUtc": "2026-08-27T05:50:25.380Z",
+    "sendClicks": [
+      {
+        "scene": 1720,
+        "tabId": "44",
+        "clickedAtUtc": "2026-08-27T05:50:25.380Z",
+        "returnedAtUtc": "2026-08-27T05:50:28.484Z",
+        "providerChatUrl": "https://www.meta.ai/prompt/3dc57aa3-baaa-494f-bb5a-029f9ab927cf"
+      },
+      {
+        "scene": 1721,
+        "tabId": "45",
+        "clickedAtUtc": "2026-08-27T05:50:25.380Z",
+        "returnedAtUtc": "2026-08-27T05:50:28.501Z",
+        "providerChatUrl": "https://www.meta.ai/prompt/b5f854ad-fb56-4d54-8981-744a6937c9f8"
+      },
+      {
+        "scene": 1722,
+        "tabId": "46",
+        "clickedAtUtc": "2026-08-27T05:50:25.380Z",
+        "returnedAtUtc": "2026-08-27T05:50:28.473Z",
+        "providerChatUrl": "https://www.meta.ai/prompt/d6f0fb46-f6e0-413c-a20e-ccb3ec46f9be"
+      },
+      {
+        "scene": 1723,
+        "tabId": "47",
+        "clickedAtUtc": "2026-08-27T05:50:25.381Z",
+        "returnedAtUtc": "2026-08-27T05:50:28.474Z",
+        "providerChatUrl": "https://www.meta.ai/prompt/2aaa2496-fa0b-4fa4-8f71-f3ef90304de1"
+      }
+    ],
+    "providerChatCount": 4,
+    "duplicateDispatchCount": 0
+  },
+  "terminalOccurrences": [
+    {
+      "scene": 1720,
+      "providerUrl": "https://www.meta.ai/prompt/3dc57aa3-baaa-494f-bb5a-029f9ab927cf",
+      "terminalCapturedAtUtc": "2026-08-27T05:52:02.650Z",
+      "outcome": "output-hard-unusable",
+      "sha256": "f3d0449bab990b92bef5c08aa08a1265b9272136b4010eaee474ff3df12e0549",
+      "bytes": 530888,
+      "width": 1152,
+      "height": 2048,
+      "qaDisposition": "hard-unusable-relationship-and-beacon-hand-lock-fail",
+      "accepted": false
+    },
+    {
+      "scene": 1721,
+      "providerUrl": "https://www.meta.ai/prompt/b5f854ad-fb56-4d54-8981-744a6937c9f8",
+      "terminalCapturedAtUtc": "2026-08-27T05:52:50.546Z",
+      "outcome": "output-hard-unusable",
+      "sha256": "e1b49bba02f62645d8d9973caaa3e939ee589c1577b37dda843da07dd8b3b200",
+      "bytes": 759050,
+      "width": 1152,
+      "height": 2048,
+      "qaDisposition": "hard-unusable-relationship-and-beacon-ring-lock-fail",
+      "accepted": false
+    },
+    {
+      "scene": 1722,
+      "providerUrl": "https://www.meta.ai/prompt/d6f0fb46-f6e0-413c-a20e-ccb3ec46f9be",
+      "terminalCapturedAtUtc": "2026-08-27T05:52:50.546Z",
+      "outcome": "output-hard-unusable",
+      "sha256": "d65940faa9bea64d65b3b0e05a0ba3acb5542a8db62fa6585c53388044cbe5ec",
+      "bytes": 494360,
+      "width": 1152,
+      "height": 2048,
+      "qaDisposition": "hard-unusable-relationship-raze-and-beacon-ring-lock-fail",
+      "accepted": false
+    },
+    {
+      "scene": 1723,
+      "providerUrl": "https://www.meta.ai/prompt/2aaa2496-fa0b-4fa4-8f71-f3ef90304de1",
+      "terminalCapturedAtUtc": "2026-08-27T05:52:50.546Z",
+      "outcome": "output-hard-unusable",
+      "sha256": "c626897e855f2c37d76b763021f9ebb91919a6e84e4f87c1356cb1e0d7b936a4",
+      "bytes": 529708,
+      "width": 1152,
+      "height": 2048,
+      "qaDisposition": "hard-unusable-relationship-beacon-and-hand-inventory-lock-fail",
+      "accepted": false
+    }
+  ],
+  "counts": {
+    "requested": 4,
+    "confirmedProviderOccurrences": 4,
+    "rawImagesArchived": 4,
+    "explicitNoByteRefusals": 0,
+    "hardUnusable": 4,
+    "accepted": 0
+  },
+  "boundedRetryAuthorized": false,
+  "boundedRetryDispatched": false,
+  "xCadenceBeforeCountryClose": {
+    "completedCountryCyclesSinceLastReset": 4,
+    "publishDue": false,
+    "threshold": 10
+  }
+}

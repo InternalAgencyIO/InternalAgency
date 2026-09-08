@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "batch": 495,
+  "country": "Liberia",
+  "state": "prepared-offline-not-dispatched",
+  "preparedAtUtc": "2026-09-06T08:16:13.0432992Z",
+  "authority": "assets/lore/starlight-era/batch-495-liberia-editorial-brief.json",
+  "authorityBytes": 7710,
+  "authoritySha256": "30D4448058AB8ED21667C00B8E07FEC923E4ECC19E2D2B367C9D610A8639451F",
+  "contract": "starlight-editorial-rolls-2026-09-06",
+  "fixedRollsAndExactPrompts": "assets/lore/starlight-era/batch-495-liberia-fixed-rolls.json",
+  "fixedRollsBytes": 132771,
+  "fixedRollsSha256": "249D81C54A6128AB7C51FA7390C7237E844FFB2BF26C80AC5F6F7D4F82D8338C",
+  "deterministicRegenerationExact": true,
+  "seed": "starlight-editorial-rolls-2026-09-06|batch-495|liberia",
+  "seedSelection": "Fixed; no outcome search, salt hunting or reroll",
+  "provider": "Meta",
+  "accountRequired": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [938, 936, 937],
+  "anchorPaths": [
+    "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "anchorSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "anchorBytes": [2575103, 2495143, 2373808],
+  "closedPredecessorScenes": [2003, 2004, 2005, 2006],
+  "closedPredecessorRule": "Never reopen, resend or retry any terminal Batch 494 provider occurrence. Close those tabs only after this prepared state reaches remote parity.",
+  "canonicalQueue": {
+    "worldXPosts": 200,
+    "liberiaPostMatches": 0,
+    "nextCountryAfterLebanon": "Finland",
+    "finlandAlreadyCovered": true,
+    "firstZeroPostCountryAfterLebanon": "Liberia",
+    "nextZeroPostCountryAfterLiberia": "Central African Republic",
+    "freshSceneRange": [2007, 2010]
+  },
+  "sceneRange": [2007, 2010],
+  "browserDispatchCount": 0,
+  "editInvocationCount": 0,
+  "editorialTests": {
+    "passed": 5,
+    "failed": 0,
+    "deterministicRegenerationExact": true,
+    "shapeExact": true,
+    "allActiveFlagsMatchThresholds": true,
+    "cameraMappingAndDistinctShoeFamilies": true,
+    "promptAndEditHashesExact": true
+  },
+  "retryPolicy": {
+    "maximumMetaRetriesPerScene": 2,
+    "eligibleOnlyFor": ["no image", "corrupt media", "wrong cast or duplicate face", "grossly malformed anatomy", "unsafe or explicit output"],
+    "neverFor": ["aesthetic preference", "camera nuance", "branding omission", "hemline nuance", "minor wardrobe deviation"],
+    "freshChatAndNewPromptHashRequired": true
+  },
+  "singleEditPolicy": {
+    "provider": "built-in ChatGPT image generator",
+    "callsPerTechnicallyValidMetaOccurrence": 1,
+    "allChangesInOneInvocation": true,
+    "blockedOrInterruptedCallConsumesAllowance": true,
+    "secondCallForbidden": true
+  },
+  "scenes": [
+    {
+      "scene": 2007,
+      "location": "Monrovia Atlantic waterfront and Mesurado River harbor",
+      "camera": {"roll": 99, "category": "extreme-wide", "angle": "side-level", "dutchDegrees": 14},
+      "pose": "back-hug-turn",
+      "activeImageRolls": ["splitStarEmblem"],
+      "activeCharacterRolls": {
+        "Alia": ["rainbowShoes", "shoeBranding", "flagGarment", "stockingBranding"],
+        "Radiance": ["shoeBranding", "stockingBranding"],
+        "Ellie": ["rainbowShoes", "visibleNavel", "stockingBranding", "tattoo:crescent"],
+        "ECE": ["shoeBranding", "stockingBranding"]
+      },
+      "promptSha256": "5C61FA4EB6D292ECD5CE424B44F0035F27B7087AE9CFC78118609DFB89D560DF",
+      "promptCharacters": 3832,
+      "singleEditPromptSha256": "C28179B2AB2325FB1B574B0EF8A0E5C97AE6C18D2BCF7E17DE37D0DFCBD95A49"
+    },
+    {
+      "scene": 2008,
+      "location": "Robertsport Lake Piso and Atlantic surf coast",
+      "camera": {"roll": 96, "category": "extreme-wide", "angle": "over-shoulder", "dutchDegrees": 25},
+      "pose": "head-resting-on-clothed-lap",
+      "activeImageRolls": ["starHardware", "razeTypeBand", "kneeHighRainbows"],
+      "activeCharacterRolls": {
+        "Alia": ["shoeBranding"],
+        "Radiance": ["visibleNavel", "tattoo:thorny-rose"],
+        "Ellie": ["rainbowShoes", "visibleNavel", "tattoo:country-love-motif"],
+        "ECE": ["shoeBranding", "flagGarment", "visibleNavel"]
+      },
+      "promptSha256": "41659974A16C581A9932371755852B0DA5C5B1923A61911F7CD025C63D546332",
+      "promptCharacters": 3799,
+      "singleEditPromptSha256": "8560FFBC700F30E55AEA92FA529AFCF5F8710D9E38947065B567D94341AD0B37"
+    },
+    {
+      "scene": 2009,
+      "location": "Kpatawee Waterfall forest viewing deck",
+      "camera": {"roll": 12, "category": "extreme-close", "angle": "front-quarter-low", "dutchDegrees": 22},
+      "pose": "side-hug-step",
+      "activeImageRolls": ["kneeHighHosiery"],
+      "activeCharacterRolls": {
+        "Alia": ["rainbowShoes", "visibleNavel", "tattoo:star"],
+        "Radiance": ["shoeBranding", "flagGarment", "visibleNavel", "stockingBranding"],
+        "Ellie": ["rainbowShoes", "flagGarment"],
+        "ECE": ["rainbowShoes", "shoeBranding", "flagGarment"]
+      },
+      "promptSha256": "7BA8A41E0902CDAE18B148ADE00094ABDF64BDA61CB2E4CBCE0598A235C7AC2E",
+      "promptCharacters": 3781,
+      "singleEditPromptSha256": "05B4ED31C1599C5B360C2B911F1ACAA1F60B44DCC987ED4EA66B2CD7F3CA3CF5"
+    },
+    {
+      "scene": 2010,
+      "location": "Sapo National Park rainforest canopy research terrace",
+      "camera": {"roll": 32, "category": "intermediate", "angle": "high-oblique", "dutchDegrees": 10},
+      "pose": "supported-seated-conversation",
+      "activeImageRolls": ["rainbowStockings"],
+      "activeCharacterRolls": {
+        "Alia": ["visibleNavel"],
+        "Radiance": ["flagGarment", "visibleNavel", "tattoo:agency"],
+        "Ellie": ["flagGarment", "visibleNavel"],
+        "ECE": ["visibleNavel", "stockingBranding", "tattoo:raze-brand"]
+      },
+      "promptSha256": "F943EBE15BFAD53A274EAFDF091C1CBAC6FC850A6015FFE71379A7EEF26BD77A",
+      "promptCharacters": 3889,
+      "singleEditPromptSha256": "11914B57AA43E42D364D745E7753D7D3AF78E5DA05F72B22063A1849E055388C"
+    }
+  ],
+  "promptStorageRule": "The exact full Meta and single-edit prompt strings are stored only in fixedRollsAndExactPrompts under each scene. The hashes and character counts above were verified against those exact strings.",
+  "nextSafeAction": "Update the binding current pointers, commit and verify local, origin and PR parity, then replace the four closed Batch 494 Meta tabs with four fresh blank Meta composers while keeping the blank X composer."
+}

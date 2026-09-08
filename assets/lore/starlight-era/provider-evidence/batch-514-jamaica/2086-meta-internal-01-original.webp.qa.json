@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "batch": 514,
+  "scene": 2086,
+  "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-internal-01-original.webp",
+  "sha256": "5034388553cd64822fd961b4e9ad43f3da572b86991d6c1d6942cc1848a5c4e8",
+  "reviewedAtUtc": "2026-09-08T12:14:26.780Z",
+  "decision": "archived-unused-comparison",
+  "method": "Main-agent direct visual inspection of all 8 unique original byte versions, with exact-hash duplicate exposures retained.",
+  "hardChecks": {
+    "decodableValidMedia": true,
+    "fourDistinctFictionalAdultWomen": true,
+    "anchoredFaceContinuity": true,
+    "opaquePublicSafeCoverage": true,
+    "noGrossAnatomicalCorruption": true
+  },
+  "softRollDeviations": [
+    "Head support is against Radiance shoulder and chest rather than her clothed lap. Do not restage the source during tailoring.",
+    "Gallery uses a visibly filled tilted frame; the earlier gallery comparison is straighter. Gallery selected.",
+    "Radiance has repeated gold X shapes, Ellie has an unrolled exposed waist and shell-textured top, and Alia has an extra garment star."
+  ],
+  "additionalMetaAestheticRetries": 0,
+  "chatgptEditStatus": "Not yet invoked; exactly one per selected source after remote preflight",
+  "finalSelectionReview": {
+    "reviewedAtUtc": "2026-09-08T12:31:04.300Z",
+    "selected": false,
+    "disposition": "archived-unused",
+    "finalQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/final-selection-qa.json",
+    "noFurtherRenderOrEdit": true
+  }
+}

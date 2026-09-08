@@ -1,0 +1,53 @@
+{
+  "schema": "world-195x4-scene-897-concise-foundation-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-concise-10.txt",
+  "promptSha256": "32589863967b9228516475b272a380d77d3e87b657ac73997bf350940eb5474b",
+  "blockedCorpusSha256": "a2bb0aa7c1f09d22e4c1aa8cf1a9ba675aad929c19d45e0442a68c923ee980bf",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-a2bb0aa7c1f09d22e4c1aa8cf1a9ba675aad929c19d45e0442a68c923ee980bf.json",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "evaluatedRollCount": 356,
+  "materializedTriggeredIds": [
+    "Radiance.bodyPiercing",
+    "Radiance.equestrianRhythmProp",
+    "Radiance.operaGloveStrapAdjustment",
+    "Radiance.pearlEyeMaskNeckAccent",
+    "Radiance.blindfoldStyleHairBow",
+    "Ellie.sculpturalCuff",
+    "Ellie.subtleTacticalWebbing",
+    "Ellie.elbowLacedSatinGloveSleeveAdjust",
+    "Ellie.meshHarnessSeamOverlay",
+    "Alia.garmentRibbonGeometry",
+    "AI ECE.foreheadToForeheadLook",
+    "AI ECE.goldLeafShoulderStructure",
+    "trio.openBackStrapStylingFrame",
+    "trio.dualCapeClosureStyling"
+  ],
+  "materializedTriggeredCount": 14,
+  "handAllocation": {
+    "ECE": "supports PAWS with one forearm",
+    "Ellie": "right hand adjusts Radiance left combined edge",
+    "Radiance": "right hand Alia clasp; left hand low wand",
+    "Alia": "left hand Radiance right cape edge"
+  },
+  "preserved": {
+    "canonicalIdentities": true,
+    "countryLocationRolesAndMission": true,
+    "originalTriangle": true,
+    "reciprocalECEConnection": true,
+    "allTriggeredRolls": true,
+    "navelJewel": true,
+    "exactlyTwoVisibleNavels": true,
+    "boldDistinctWardrobes": true,
+    "pawsLapCopilot": true,
+    "cleanFacesHandsFootwear": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

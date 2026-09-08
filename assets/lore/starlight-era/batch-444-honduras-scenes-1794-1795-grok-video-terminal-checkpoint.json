@@ -1,0 +1,166 @@
+{
+  "schema": "starlight-grok-video-terminal-checkpoint-v1",
+  "batch": 444,
+  "country": "Honduras",
+  "recorded_at_utc": "2026-08-28T05:08:38.393Z",
+  "workflow": {
+    "story_provider": "DeepSeek DeepThink",
+    "render_provider": "Grok Imagine Quality v2.0",
+    "browser_only": true,
+    "lane_limit": 2,
+    "still_candidates_per_video": 4,
+    "video_settings": {
+      "duration_seconds_requested": 15,
+      "width": 720,
+      "height": 1280,
+      "aspect_ratio": "9:16"
+    }
+  },
+  "deepseek": {
+    "conversation_url": "https://chat.deepseek.com/a/chat/s/c9dda2f9-f306-4dcb-b978-002d81b90eab",
+    "request_sent_at_utc": "2026-08-28T04:39:07.513Z",
+    "provider_mode_visible_after_response": "Instant",
+    "response_tail_sha256": "8AA9A41735A9AC33D51151B141965BADE1D193FFE248E80559A6B6F295C35432",
+    "use": "location and emotional kernels only; every final still and video prompt was rewritten by the guardian to add action, camera movement, affection, jealousy, protection, and reconciliation"
+  },
+  "ordered_face_anchors": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "scenes": [
+    {
+      "scene": 1794,
+      "location": "Tegucigalpa mountain-basin sky-tram",
+      "camera_roll": 61,
+      "framing": "INTERMEDIATE",
+      "still_candidates": [
+        {
+          "candidate": 1,
+          "prompt_sha256": "BE31E58E4B9328FA17B99D737FA4F93426073B681889C83D72602B56DAA35A37",
+          "provider_url": "https://grok.com/imagine/post/7a90e770-4dff-464a-8e17-af44f9d7bba3?conversation=648c1213-6f58-468a-83cf-f0b1ea3e9ca6",
+          "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/7a90e770-4dff-464a-8e17-af44f9d7bba3/image.jpg?cache=1",
+          "qa": "rejected: exactly four and readable location, but a central glass divider split the cast and the pose was static"
+        },
+        {
+          "candidate": 2,
+          "prompt_sha256": "366692D3BC44913F1082D9FDEFC049E47C4DD2DF904832B18904729C2D712A08",
+          "provider_url": "https://grok.com/imagine/post/f29000fa-d99b-46c8-9570-1ff496d15279?conversation=6a5c9d7e-6bd8-4092-b64b-d72f91c56d93",
+          "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/f29000fa-d99b-46c8-9570-1ff496d15279/image.jpg?cache=1",
+          "qa": "backup: exactly four with strong city read and action, but no clear affectionate peck"
+        },
+        {
+          "candidate": 3,
+          "prompt_sha256": "65916C09BD72250097F7FE62B2236FBD70EA1CF920EA29F2C4CA1B345C186EBE",
+          "provider_url": "https://grok.com/imagine/post/6e38bca6-5259-4882-88fa-a640768458d6?conversation=6a5c9d7e-6bd8-4092-b64b-d72f91c56d93",
+          "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/6e38bca6-5259-4882-88fa-a640768458d6/image.jpg?cache=1",
+          "qa": "strong: exactly four, readable Tegucigalpa, visible cheek peck, jealousy and protection"
+        },
+        {
+          "candidate": 4,
+          "prompt_sha256": "EA823AB6AE4A645418A5631F7675D1C6498D2D6BA9E50EA10140437C29FD14B1",
+          "provider_url": "https://grok.com/imagine/post/3d21e352-7e89-4b5f-848a-365d52568530?conversation=6a5c9d7e-6bd8-4092-b64b-d72f91c56d93",
+          "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/3d21e352-7e89-4b5f-848a-365d52568530/image.jpg?cache=1",
+          "qa": "selected: exactly four, strongest city geography, visible affection, coherent moving protection chain"
+        }
+      ],
+      "selected_candidate": 4,
+      "selected_still_prompt": "Create candidate still 4 of 4 from this exact anchored Tegucigalpa quartet. Preserve exactly four distinct women, all age 21, same faces, outfits, 9:16 and camera roll 61. Show the reconciliation in motion, not a pose: ECE and Alia complete a fast safe waist-catch turn, Alia gives ECE a brief forehead peck, then they surge toward camera; Ellie hooks one arm around Radiance's waist and pulls her alongside while Radiance reaches across to clasp Alia's free hand. One moving four-woman chain, joyful relief mixed with Ellie's last jealous backward glance, open mountain-basin city, river and Picacho ridge, airborne hems and all footwear visible. No divider, missing person, overlap, lineup, males, weapons, text, collage or watermark.",
+      "video_prompt_sha256": "A8D89BAA8F07CB9B5E0835FC099D14B9A502A0A39624546A5BD6C6CCAE4E1875",
+      "video_prompt": "Create a 15-second, 9:16, 720p photorealistic cinematic sci-fi travel-editorial video from this exact selected Tegucigalpa still. Preserve the exact four fictional 21-year-old women and their anchored identities: blonde Radiance, dark-haired Ellie, Black Alia, brunette AI ECE. Keep all four visible, coherent and adult throughout. CAMERA ROLL 61: INTERMEDIATE framing throughout, with a stabilized lateral dolly that becomes a gentle clockwise orbit; never switch to close-up or extreme-wide framing. 0-5s: the glass sky-tram glides above Tegucigalpa's river, cathedral towers and Picacho ridge as wind lifts their short secure opaque high-fashion hems; Ellie catches Radiance at the waist and gives her one quick affectionate cheek peck while Alia braces ECE by the forearm. 5-10s: the tram banks softly; ECE flashes one unmistakable jealous backward glance at the kiss, then Alia steps between the open doorway and ECE, shielding her as Radiance reaches across to take Alia's free hand. 10-15s: the four become one moving hand-linked chain, circle two steps with relieved laughter, then ECE accepts Radiance's offered hand and rests her forehead briefly against Alia's in reconciliation while the camera completes its orbit and the city remains readable. Natural cloth and hair motion, believable hands, romantic tension, protection, warmth and momentum. No dialogue, text, captions, morphing, duplicate people, missing person, extra limbs, identity swaps, static lineup, males, weapons, tactical props, nudity, explicit sexuality, collage or watermark.",
+      "dispatch_at_utc": "2026-08-28T05:02:19.396Z",
+      "provider_url": "https://grok.com/imagine/post/11397b45-eea7-46ee-97b8-de84f9602059?conversation=6a5c9d7e-6bd8-4092-b64b-d72f91c56d93",
+      "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/11397b45-eea7-46ee-97b8-de84f9602059/generated_video.mp4?cache=1",
+      "duration_seconds": 15.041667,
+      "dimensions": "720x1280",
+      "terminal": true,
+      "raw_bytes": "unavailable: browser controls exposed the MP4 URL but produced no local download",
+      "temporal_visual_qa": "blocked: the in-app browser exposed readyState 4 and terminal metadata but did not expose capturable moving frames",
+      "counts_toward_accepted": false,
+      "x_caption": "Above Tegucigalpa, jealousy turns into a four-woman rescue chain as the sky-tram banks over the mountain basin.",
+      "x_url": null
+    },
+    {
+      "scene": 1795,
+      "location": "Copan Ruinas stone terraces",
+      "camera_roll": 94,
+      "framing": "EXTREME WIDE",
+      "still_candidates": [
+        {
+          "candidate": 1,
+          "prompt_sha256": "D1A86F609297F1A84394707DF159EE1C2ED9ED80EFE77CFA94DB4056A763BF6C",
+          "provider_url": "https://grok.com/imagine/post/ee8593ef-a175-4042-a1d1-1cc691274068?conversation=1d0b6990-2a9d-4b15-a1e7-70bd212f6eee",
+          "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/ee8593ef-a175-4042-a1d1-1cc691274068/image.jpg?cache=1",
+          "qa": "rejected: only three women were rendered"
+        },
+        {
+          "candidate": 2,
+          "prompt_sha256": "48653C9C61DCA1AC0DF9DCBAEACC9C2AA159DD6F45B256C303C0D78571F1B9DB",
+          "provider_url": "https://grok.com/imagine/post/a16d58a9-e0bd-48f3-959a-8258fe96d86b?conversation=39c9455a-5fd2-404c-833a-bea242ecc97c",
+          "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/a16d58a9-e0bd-48f3-959a-8258fe96d86b/image.jpg?cache=1",
+          "qa": "backup: exactly four with strong Copan read and motion, but no clear affectionate peck"
+        },
+        {
+          "candidate": 3,
+          "prompt_sha256": "DE5175CA94BE0D5DB99706377781C1A391469B1BD78711E5294E4F5D3995BA7F",
+          "provider_url": "https://grok.com/imagine/post/785c324c-76b6-4a10-ae41-cb949f02ee55?conversation=39c9455a-5fd2-404c-833a-bea242ecc97c",
+          "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/785c324c-76b6-4a10-ae41-cb949f02ee55/image.jpg?cache=1",
+          "qa": "selected: exactly four, strong Copan read, visible kiss, protective second pair, dynamic diagonals"
+        },
+        {
+          "candidate": 4,
+          "prompt_sha256": "51841E3BE58F565B4A53380A01AD5782CD5A35E091853D0C93F75595F097DD69",
+          "provider_url": "https://grok.com/imagine/post/5e6083d3-32f4-442e-b8fc-0ea24a91f82e?conversation=39c9455a-5fd2-404c-833a-bea242ecc97c",
+          "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/5e6083d3-32f4-442e-b8fc-0ea24a91f82e/image.jpg?cache=1",
+          "qa": "rejected: duplicated the quartet into eight figures"
+        }
+      ],
+      "selected_candidate": 3,
+      "selected_still_prompt": "Create candidate still 3 of 4 from this exact anchored quartet and Copan continuity. Preserve exactly four distinct women, all age 21, all head to toe, the same faces, outfits, 9:16 framing and camera roll 94 extreme wide. Foreground right: Alia catches Radiance securely around the waist during an upright half-turn and visibly gives her one brief cheek peck, lips touching cheek. Midground left: jealous Ellie moves toward Radiance while ECE draws Ellie safely back with one protective arm around her waist. Keep the complete Copan terraces, forested valley and oval wing pavilion dominant. Clear diagonal action, eye lines and moving hems; no missing person, overlap, static lineup, males, weapons, text, collage or watermark.",
+      "video_prompt_sha256": "59A11149BCC2E712D21F0323788EDAD326C6A53657BE71B080BA87B4925AA9E0",
+      "video_prompt": "Create a 15-second, 9:16, 720p photorealistic cinematic sci-fi travel-editorial video from this exact selected Copan Ruinas still. Preserve the exact four fictional 21-year-old women and their anchored identities: blonde Radiance, dark-haired Ellie, Black Alia, brunette AI ECE. Keep exactly four coherent adult women visible throughout. CAMERA ROLL 94: EXTREME WIDE framing throughout; use a high stabilized crane-and-orbit move over the complete Maya stone plazas, forested valley and oval wing pavilion, never cutting to a close view. 0-5s: both pairs run on intersecting diagonals across the sunlit plaza, dust and short secure opaque runway hems moving; Ellie catches Radiance's hand and Radiance gives Ellie one quick cheek peck without breaking stride. 5-10s: ECE turns a clear jealous look toward them and nearly loses footing on a shallow stone edge; Alia immediately catches ECE at the waist and swings her safely back into the shared path as the camera cranes around all four. 10-15s: Radiance reaches back for ECE, Ellie takes Alia's free hand, and the four form a fast linked circle before resolving into two protective side embraces, ECE smiling and touching her forehead briefly to Alia's in reconciliation while Copan remains dominant in frame. Strong readable action, romance, jealousy, protection, reunion, natural hair and fabric motion, believable hands and feet. No dialogue, text, captions, morphing, duplicated cast, missing person, extra limbs, identity swaps, static lineup, males, weapons, tactical props, nudity, explicit sexuality, collage or watermark.",
+      "dispatch_at_utc": "2026-08-28T05:02:20.186Z",
+      "provider_url": "https://grok.com/imagine/post/72967dcf-8efc-4ecd-8c9f-4c98fe87f732?conversation=39c9455a-5fd2-404c-833a-bea242ecc97c",
+      "asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/72967dcf-8efc-4ecd-8c9f-4c98fe87f732/generated_video.mp4?cache=1",
+      "duration_seconds": 15.041667,
+      "dimensions": "720x1280",
+      "terminal": true,
+      "raw_bytes": "unavailable: browser controls exposed the MP4 URL but produced no local download",
+      "temporal_visual_qa": "blocked: the in-app browser exposed readyState 4 and terminal metadata but did not expose capturable moving frames",
+      "counts_toward_accepted": false,
+      "x_caption": "Across Copan's stone terraces, a jealous stumble becomes a protective catch and a shared reconciliation.",
+      "x_url": null
+    }
+  ],
+  "x_handoff": {
+    "required_handle": "@dogramaci",
+    "scene_1794_native_post_to_x_clicked_at_utc": "2026-08-28T05:06:52.036Z",
+    "scene_1794_result": "no X tab, composer, or post URL appeared",
+    "scene_1794_visible_download_clicked_at_utc": "2026-08-28T05:07:11.091Z",
+    "scene_1795_visible_download_clicked_at_utc": "2026-08-28T05:07:18.819Z",
+    "download_result": "no new local MP4 was created; locator downloadMedia only navigated to the official asset URL; in-app CUA downloadMedia was unavailable",
+    "status": "blocked_at_browser_media_handoff",
+    "x_urls": [],
+    "production_hold": "true: user ordering requires X post before starting two more renders, so scenes 1796-1797 remain undispatched"
+  },
+  "git": {
+    "mp4_lfs_status": "not added because browser-only controls did not yield local bytes",
+    "srt_sidecars": [
+      "assets/lore/starlight-era/scene-1794-honduras-tegucigalpa.en.srt",
+      "assets/lore/starlight-era/scene-1795-honduras-copan-ruinas.en.srt"
+    ],
+    "push_status": "attempt after this checkpoint commit; do not bypass GitHub verification controls"
+  }
+}

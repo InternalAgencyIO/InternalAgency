@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "batch": 499,
+  "atUtc": "2026-09-06 15:55:14 UTC",
+  "state": "primary-bytes-preserved-secondary-archive-gap-identity-retry-prepared",
+  "baseRemoteVerifiedHead": "ff7037f2645639a029eaa0b938e7583499f8b17d",
+  "actualInitialTabs": [
+    {
+      "id": "56",
+      "url": "https://www.meta.ai/",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "empty": true
+    }
+  ],
+  "restoredTabs": [
+    {
+      "id": "56",
+      "url": "https://www.meta.ai/"
+    },
+    {
+      "id": "57",
+      "url": "https://www.meta.ai/"
+    },
+    {
+      "id": "58",
+      "url": "https://www.meta.ai/"
+    },
+    {
+      "id": "59",
+      "url": "https://www.meta.ai/"
+    },
+    {
+      "id": "60",
+      "url": "https://x.com/compose/post"
+    }
+  ],
+  "xAccount": "@dogramaci",
+  "xComposerBlank": true,
+  "oldTabsAbsent": [
+    "51",
+    "52",
+    "53",
+    "54",
+    "55"
+  ],
+  "oldTerminalUrlsReopened": 0,
+  "confirmedPromptsResent": 0,
+  "primaryRawCount": 4,
+  "primaryRawBytes": 1079668,
+  "secondaryRawGap": [
+    {
+      "scene": 2023,
+      "observedInlineImages": 3,
+      "previewScreenshotsPreserved": 1,
+      "secondaryRawDownloads": 0
+    },
+    {
+      "scene": 2026,
+      "observedInlineImages": 4,
+      "previewScreenshotsPreserved": 1,
+      "secondaryRawDownloads": 0
+    }
+  ],
+  "gapExplanation": "Prior tabs disappeared before secondary internal Meta images could be downloaded. Main image bytes and earlier terminal DOM remain preserved. No direct HTTP, API, hidden-state retrieval or terminal URL reopening is authorized. Secondary bytes are missing, not archived.",
+  "guardian": {
+    "starlightPresent": false,
+    "newGuardianCreated": false,
+    "unrelatedAutomationsUnchanged": true
+  },
+  "qaPath": "assets/lore/starlight-era/provider-evidence/batch-499-oman/primary-hard-qa.json",
+  "retryPath": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-1-prepared.json",
+  "singlePassLedger": "assets/lore/starlight-era/provider-evidence/batch-499-oman/chatgpt-one-strong-shortening-invocation-ledger.json",
+  "nextSafeAction": "Use exactly one saved tailoring invocation on each of 2023,2025,2026. Stage and verify the first hard-identity retry for 2024 in the fresh lane. Keep Oman publication on hold and obtain missing secondary bytes without reopening a terminal scene."
+}

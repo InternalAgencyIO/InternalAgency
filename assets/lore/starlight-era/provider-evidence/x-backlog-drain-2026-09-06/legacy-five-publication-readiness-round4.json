@@ -1,0 +1,210 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-06T23:15:07.778Z",
+  "baselineCommit": "5f389087208ad1295557ee5b38e5a04234674f42",
+  "status": "duplicate-audit-complete-partial-country-decision-and-swiss-provenance-hold",
+  "sourcePreflight": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-source-accessibility-preflight-2125.json",
+  "sourceChecks": [
+    {
+      "scene": 1828,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-450-azerbaijan/1828-azerbaijan-gobustan-mud-volcanoes.webp",
+      "bytes": 648640,
+      "sha256": "9d2002ff23560a7b55c9d6c15a7c45180887cdc11e1a7efbff62ae88b683ab53",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1832,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-451-israel/1832-israel-makhtesh-ramon.webp",
+      "bytes": 570502,
+      "sha256": "d968d9967a1aba399698f79ea33443450d5766d6d4ff24f193b23c5f21f1e191",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1845,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-454-belarus/1845-belarus-soligorsk-salt-mountains.webp",
+      "bytes": 558866,
+      "sha256": "e0d96f27423e43fe2ef1080aa771696b2944fe2047d360f0eb8c70f3c799e186",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1849,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-455-switzerland/1849-switzerland-gornergrat-matterhorn.webp",
+      "bytes": 160854,
+      "sha256": "c09989e49521c47ce179661349bb3d5ad37c1aa0444704f58969b534f8679ded",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1865,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-459-turkmenistan/1865-turkmenistan-karakum-dune-observatory.webp",
+      "bytes": 531992,
+      "sha256": "ee5f2f98126057cb878710f3bb3849191534c88a7b5e5586f9e8b4009649d8ca",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1866,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-460-libya/1866-libya-ghadames-residential-arcade-plaza.webp",
+      "bytes": 1034512,
+      "sha256": "c02243db590b380f33a8a3d0d38e44a6270a737a8a05011a94e7f2ff43162f62",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    }
+  ],
+  "legacySceneIds": [
+    1832,
+    1845,
+    1849,
+    1865,
+    1866
+  ],
+  "boundedDuplicateAuditComplete": true,
+  "videoAudit": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-mixed-video-audit-round4.json",
+  "latestChronology": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-latest-chronology-round4.json",
+  "publicationEligibleNow": 0,
+  "reservedSceneIds": [],
+  "uploadedSceneIds": [],
+  "sourceClosures": [
+    {
+      "scene": 1832,
+      "path": "assets/lore/starlight-era/batch-451-israel-closed-one-accepted-checkpoint.json",
+      "sha256": "7d686e3c7d1bf7a4d536125f3d38009da543c1a83a29ce702f107e5c264b6d3b",
+      "batch": 451,
+      "state": "closed-one-accepted-one-hard-unusable-one-explicit-refusal-one-no-confirmed-occurrence",
+      "acceptedSceneIds": [
+        1832
+      ],
+      "countryComplete": false,
+      "eligibleForCountryCycleXPair": null,
+      "terminalRestriction": "No repetition. All four scenes are terminal; no retry unless a future authoritative checkpoint explicitly grants one bounded retry."
+    },
+    {
+      "scene": 1845,
+      "path": "assets/lore/starlight-era/batch-454-belarus-closed-one-accepted-checkpoint.json",
+      "sha256": "fda2b41d9d18142e8f13df945dbb5f4daf7f8c8e7fd07ae1bbcc113405e19e19",
+      "batch": 454,
+      "state": "closed-one-accepted",
+      "acceptedSceneIds": [
+        1845
+      ],
+      "countryComplete": null,
+      "eligibleForCountryCycleXPair": null,
+      "terminalRestriction": "All scenes 1842-1845 are terminal. Never resend or reopen them."
+    },
+    {
+      "scene": 1849,
+      "path": "assets/lore/starlight-era/batch-455-switzerland-closed-one-accepted-checkpoint.json",
+      "sha256": "adae855d290263fc2df4e2d5a1f77c4c75e8e6498498fe6506978c8f15aa8e60",
+      "batch": 455,
+      "state": "closed-one-accepted",
+      "acceptedSceneIds": [
+        1849
+      ],
+      "countryComplete": null,
+      "eligibleForCountryCycleXPair": null,
+      "terminalRestriction": "All scenes 1846-1849 are terminal. Never resend or reopen them."
+    },
+    {
+      "scene": 1865,
+      "path": "assets/lore/starlight-era/batch-459-turkmenistan-closed-one-accepted-checkpoint.json",
+      "sha256": "bd338135f1aed955fa8f91b2edcfcdc5f9f811f872493510c10982f69b8ac3bb",
+      "batch": 459,
+      "state": "closed-one-accepted-three-terminal-nonaccepted",
+      "acceptedSceneIds": [
+        1865
+      ],
+      "countryComplete": false,
+      "eligibleForCountryCycleXPair": false,
+      "terminalRestriction": "Never resend scenes 1862-1865. Scene 1865 is canonical; 1862 and both 1864 variants are archived hard-unusable; 1863 is an explicit no-byte refusal."
+    },
+    {
+      "scene": 1866,
+      "path": "assets/lore/starlight-era/batch-460-libya-closed-one-accepted-checkpoint.json",
+      "sha256": "81faec03dd202fb3a7418b75ff84d4df56f8d307b6d014369cd38e8b2b840bd7",
+      "batch": 460,
+      "state": "closed-one-accepted-three-terminal-nonaccepted",
+      "acceptedSceneIds": [
+        1866
+      ],
+      "countryComplete": false,
+      "eligibleForCountryCycleXPair": false,
+      "terminalRestriction": "Never resend scenes 1866-1869. Scene 1866 is canonical; scenes 1868 and 1869 are archived hard-unusable; scene 1867 is an explicit no-byte refusal."
+    }
+  ],
+  "policyReconciliation": {
+    "newerImageWorkflow": "The Aug 31 image directive and later accepted-source backlog replace obsolete Chrome and mandatory-video directions. They permit legitimate nonduplicate country pairs, but do not expressly revise the terminal false pair-eligibility flags for these old one-accepted countries or authorize a new two-image partial-country format.",
+    "historicalClosure": "Turkmenistan and Libya explicitly remain 1 of 4 and eligibleForCountryCycleXPair=false. Israel records countryComplete=false. Belarus is closed with one accepted scene. Null fields are unavailable, not affirmative eligibility.",
+    "currentBroadAuthorization": "The latest user authorizes posts when ready and tab maintenance. No additional permission is needed for normal eligible posting; this unresolved partial-country exception is a change to readiness, not another request for generic permission.",
+    "historicalPreservation": "Do not rewrite original country-completion or selection QA flags or reopen failed terminal scenes to fill blanks.",
+    "swissOriginalClaim": {
+      "scene": 1849,
+      "evidence": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-swiss-source-provenance-round3.json",
+      "knownSavedSourceVerified": true,
+      "distinctPreCropOriginalVerified": false,
+      "disposition": "Hold this scene from the proposed pair exception. The separate-original provider claim remains unverified; do not fabricate bytes or reopen the terminal provider scene."
+    }
+  },
+  "proposedExceptionsNotReserved": [
+    {
+      "countries": [
+        "Israel",
+        "Belarus"
+      ],
+      "sceneIds": [
+        1832,
+        1845
+      ],
+      "attachmentCount": 2,
+      "status": "requires-explicit-partial-country-exception"
+    },
+    {
+      "countries": [
+        "Turkmenistan",
+        "Libya"
+      ],
+      "sceneIds": [
+        1865,
+        1866
+      ],
+      "attachmentCount": 2,
+      "status": "requires-explicit-partial-country-exception"
+    }
+  ],
+  "futureGuards": [
+    "Fresh @dogramaci ownership and newest-media check",
+    "Fresh branch/origin/PR parity and LFS state",
+    "Exact single reservation, two distinct source images per pair, no duplicate scene versions",
+    "Source SHA256, full public-safe QA, exact alt text, caption and Made with AI disclosure",
+    "Do not change country completion, consumed retries, terminal flags, or existing URLs"
+  ],
+  "nextSafeAction": "Keep the selected backlog closed. The bounded historical photo audit and all six mixed-video playback audits are complete; do not restart those audits. Before reserving legacy media, obtain an explicit decision on publishing two-image partial-country pairs: Israel plus Belarus using scenes 1832 and 1845, and Turkmenistan plus Libya using scenes 1865 and 1866. Those groups are proposals only, not reserved or uploaded. Keep Switzerland scene 1849 held for a disposition of the unverified separate-original claim. Preserve Oman evidence tabs for manual raw-byte recovery; scene 2024 needs an anchor-correct user-supplied candidate or an explicit revised bounded repair workflow. No retry, terminal reopening, new provider dispatch, or replacement guardian is authorized by this checkpoint. If a partial-country exception is granted, preserve historical country-completion flags, verify fresh Git/LFS/PR and account chronology, freeze exact media and accessibility/caption/disclosure, then use only the visible supported in-app composer.",
+  "actionsThisRound": {
+    "providerDispatches": 0,
+    "mediaUploads": 0,
+    "postActivations": 0,
+    "newPublications": 0,
+    "newAutomations": 0,
+    "terminalScenesReopened": 0
+  }
+}

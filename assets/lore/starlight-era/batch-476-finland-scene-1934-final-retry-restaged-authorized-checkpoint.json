@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "batch": 476,
+  "country": "Finland",
+  "scene": 1934,
+  "retry": 2,
+  "state": "meta-thinking-final-retry-restaged-authorized-no-send",
+  "stagedAtUtc": "2026-09-04T08:05:32.7114654Z",
+  "authorization": "authorized for all go, authorized for all similar commands",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "metaAccount": "leesha007",
+  "tabId": "9",
+  "promptSha256": "23A06F951F5D0FDAB79721CC2F3A758DE26DB84264C4314F7E0C125668645E2F",
+  "orderedAnchors": [
+    {
+      "scene": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "liveGate": {
+    "metaTabs": [9, 10, 11, 13],
+    "xComposerTab": 12,
+    "xAccount": "@dogramaci",
+    "xComposerBlank": true,
+    "thinkingVisible": true,
+    "promptHashExact": true,
+    "anchorsVisibleInExactOrder": true,
+    "sendEnabled": true,
+    "sendClicks": 0,
+    "gitAheadBehind": "0 0",
+    "lfsDryRunEmpty": true
+  },
+  "stagingScreenshot": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/scene-1934-meta-final-retry-2-staged-visible.png",
+    "bytes": 74327,
+    "sha256": "51E2A6A7809A8DD9E2623AB689913670EFF395FC49937A143622A627CD6FD9A5"
+  },
+  "nextSafeAction": "Commit and remote-verify this staged checkpoint and screenshot, repeat the live account, Thinking, prompt-hash, ordered-anchor and enabled-Send gates, then click Send exactly once. Do not resend scenes 1931-1933 or any earlier scene-1934 occurrence."
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "batch": 506,
+  "country": "Eritrea",
+  "sceneIds": [
+    2051,
+    2052,
+    2053,
+    2054
+  ],
+  "state": "four-stills-remote-verified-closed-awaiting-Mongolia-companion",
+  "closedAtUtc": "2026-09-07T07:10:25.396Z",
+  "previousCountryClosure": "assets/lore/starlight-era/batch-505-croatia-georgia-full-workflow-closure-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-506-eritrea-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-506-eritrea-fixed-rolls.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/provider-ledger.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/native-raw-archive-manifest.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/accepted-selections.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-source-qa.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-selection-qa.json",
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-chatgpt-edit-results.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
+  "providerSendActivations": 4,
+  "providerHardFailureRetries": 0,
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 8,
+  "uniqueRawByteVersions": 4,
+  "missingObservedOriginals": 0,
+  "chatgptInvocations": 4,
+  "chatgptReturnedFiles": 2,
+  "chatgptBlockedInvocations": 2,
+  "totalSavedProviderAndEditedFiles": 10,
+  "allFourScenesTerminalNoMoreRendersOrEdits": true,
+  "archiveException": null,
+  "xPostCount": 238,
+  "newXPostUrls": [
+    "https://x.com/dogramaci/status/2097150739436933540",
+    "https://x.com/dogramaci/status/2097153131444318437"
+  ],
+  "publicationState": "both-parts-posted-verified-pending-workflow-remote-proof",
+  "nextCountry": "Mongolia",
+  "nextCandidateBatch": 507,
+  "nextCandidateScenes": [
+    2055,
+    2056,
+    2057,
+    2058
+  ],
+  "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/continuation-log-audit-2026-09-07.json",
+  "canonicalContradictionResolution": [
+    "Newest506closure supersedes historical Cuba/Tanzania and Kuwait/Panama hints.",
+    "2052and2054edit blocks consumed their allowances; no retries.",
+    "Oman and Switzerland remain held; protectedOman tab stays open."
+  ],
+  "nextSafeAction": "Both pair posts terminal. Seal full workflow and reconcile next unused country cursor. Never repost any version.",
+  "remotePayloadCommit": "bc0c267b75845f6269937088726ec7d3b69ebfdf",
+  "publicationCheckpoint": "assets/lore/starlight-era/batch-507-eritrea-mongolia-x-publication-checkpoint.json"
+}

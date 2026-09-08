@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "partial-provider-terminal-capture",
+  "createdAtUtc": "2026-08-27T06:39:14.575Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 426,
+  "country": "Ecuador",
+  "status": "two-no-byte-refusals-two-lanes-still-generating",
+  "dispatchCheckpoint": "assets/lore/starlight-era/batch-426-ecuador-four-lanes-dispatched-checkpoint.json",
+  "terminalScenes": [
+    {
+      "scene": 1726,
+      "providerUrl": "https://www.meta.ai/prompt/c46c315a-596c-4e02-81f3-82da68fed7c7",
+      "terminalCapturedAtUtc": "2026-08-27T06:38:21.582Z",
+      "outcome": "explicit-no-bytes-refusal",
+      "mediaStatus": "no-bytes",
+      "accepted": false,
+      "retryAuthorized": false
+    },
+    {
+      "scene": 1727,
+      "providerUrl": "https://www.meta.ai/prompt/6d6b7a89-f590-4d54-ba87-33cb9841f14d",
+      "terminalCapturedAtUtc": "2026-08-27T06:38:22.235Z",
+      "outcome": "explicit-no-bytes-refusal",
+      "mediaStatus": "no-bytes",
+      "accepted": false,
+      "retryAuthorized": false
+    }
+  ],
+  "activeScenes": [
+    1724,
+    1725
+  ],
+  "instruction": "Never reopen or resend scenes 1726 or 1727. Continue monitoring only scenes 1724 and 1725."
+}

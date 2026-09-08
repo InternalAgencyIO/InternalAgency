@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "batch": 468,
+  "country": "Bulgaria",
+  "state": "first_occurrences_archived_single_chatgpt_passes_complete_comparative_qa_complete",
+  "qaAtUtc": "2026-08-31T08:12:16.0468088Z",
+  "chatgptPassContract": {
+    "technicallyValidMetaImageBearingOccurrenceCount": 4,
+    "passesRequired": 4,
+    "passesCompleted": 4,
+    "additionalPassesPermittedForTheseOccurrences": 0
+  },
+  "sourceEvidence": {
+    "providerRawAssetCount": 0,
+    "browserRenderedEvidenceCount": 4,
+    "terminalPageEvidenceCount": 4,
+    "rawBytesStatus": "Visible Meta Download did not emit a supported download event or create a local file; only visibly rendered browser evidence is archived."
+  },
+  "accepted": [
+    {
+      "scene": 1900,
+      "selectedProvider": "ChatGPT image generator one-pass edit",
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1900-bulgaria-melnik-chatgpt-hemline-one-pass.png",
+      "sha256": "06A2F63D48725182307D78A4A61B414230F9D25760F16141C6B52185C294C195"
+    }
+  ],
+  "firstRetryEligible": [
+    {
+      "scene": 1898,
+      "reason": "The only high-resolution candidate widens the strict knee crop and shows lower legs; provider raw bytes were unavailable.",
+      "remainingMetaRetries": 2
+    },
+    {
+      "scene": 1899,
+      "reason": "Both candidates violate the strict knee crop, the edit shows footwear, and the required choreography is missing.",
+      "remainingMetaRetries": 2
+    },
+    {
+      "scene": 1901,
+      "reason": "The one-pass edit substantially crops far-right AI ECE's face; provider raw bytes were unavailable.",
+      "remainingMetaRetries": 2
+    }
+  ],
+  "xPairEligible": false,
+  "xPairReason": "Bulgaria currently has one accepted asset. Combining it with Serbia scene 1895 would provide only two total assets, short of the required two-from-one-country plus one-from-the-paired-country composition.",
+  "canonicalContradiction": {
+    "provisionalAssessment": "Scene 1898 was provisionally treated as accepted before full-size side-by-side inspection.",
+    "resolvedAuthority": "Full-size visual QA shows lower legs below the required knee crop in the ChatGPT edit, so scene 1898 is hard-unusable and retry1-eligible."
+  },
+  "nextSafeAction": "Create fresh chats for materially revised scene-1898, scene-1899, and scene-1901 retry1 prompts, attach anchors 938, 936, 937 exactly once in that order, verify the live Meta account and all composers, preserve one accepted Meta lane plus three retry composers for exactly four visible Meta lanes, and stop before Send for fresh retry authorization. Keep one blank X composer visible because no compliant 2+1 post exists yet."
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "world-195x4-structured-runway-recovery-coverage-v1",
+  "batch": 219,
+  "sceneNumber": 896,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/896-foundation-recovery-3.txt",
+  "promptSha256": "089e82b051a69056ea4fcfe52e6eab96e575f088efd96cbaf544833bd0da91d0",
+  "blockedCorpusSha256": "32a5994a4827e90f2d99524a2f59b413d14e6d0d4a442f310364ca9cd4524daf",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-32a5994a4827e90f2d99524a2f59b413d14e6d0d4a442f310364ca9cd4524daf.json",
+  "blocklistSubstitutionCount": 0,
+  "deletionCount": 0,
+  "preserved": {
+    "canonicalIdentities": true,
+    "countryLocationRolesAndMission": true,
+    "originalPoseTableau": true,
+    "originalTableauMeaningPreservingTranslations": [
+      {
+        "riskyPhrase": "captivated silence",
+        "safeEquivalent": "focused appreciative attention",
+        "count": 1
+      }
+    ],
+    "radianceEllieAliaTriangle": true,
+    "reciprocalECEConnection": true,
+    "allTriggeredRolls": 8,
+    "allTriggeredRollIds": [
+      "Radiance.pairedWristCuffPose",
+      "Radiance.gloveTipRemovalAudience",
+      "Ellie.subtleTacticalWebbing",
+      "Alia.opaqueContrastEdge",
+      "Alia.playfulJealousSideEye",
+      "Alia.interlacedFingersBehindMissionProp",
+      "Alia.subtleTacticalWebbing",
+      "trio.trioHipLineLegPop"
+    ],
+    "tattoosAndNavelJewel": [],
+    "distinctBoldWardrobes": 4,
+    "intentionalVisibleNavelCount": 2,
+    "pawsPresenceAndAction": true,
+    "noPointing": true,
+    "cleanFacesHandsFootwear": true
+  }
+}
