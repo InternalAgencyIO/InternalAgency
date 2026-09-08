@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "batch": 515,
+  "auditedAtUtc": "2026-09-08T14:14:52.500Z",
+  "since": "2026-09-08T13:18:22.179Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json",
+  "nextAuditNotBeforeUtc": "2026-09-08T14:59:52.500Z",
+  "scope": "New P2 staging and publication, final pair archival proof and clean browser continuation since the previous45minute audit.",
+  "evidence": [
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p2-x-upload-receipt.json",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p2-x-staging-evidence.json",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p2-x-publication-receipt.json",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/pair-final-remote-publication-verification.json",
+    "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/after-pair-browser-continuation-handoff.json"
+  ],
+  "findings": [
+    {
+      "topic": "Publication closure",
+      "result": "Lithuania/Jamaica two posts verified. P2oneupload and onePost, all4ordered endpoints and exactALT plus MadeWithAI; ledger244posts and zero activepreparedpairbacklog. All8scenefamilies and31savedfileversions consumed."
+    },
+    {
+      "topic": "Upload controls",
+      "result": "P2initial visible chooser click produced no event and no upload. A fresh zero-media check followed by prearmed chooser plus Enter on the visible upload button succeeded once. Never repeat setFiles after success."
+    },
+    {
+      "topic": "ALT correctness",
+      "result": "Use visible editor Next image clicks, exactfill, text and character-count checks. Enter on navigation can insert an ALT newline. DOM column-major order is not upload/public row-major order."
+    },
+    {
+      "topic": "Remote closure",
+      "result": "Final pair proof validates34LFSpaths/26uniqueobjects,17ordinarypayloadfiles and50immutablemanifestmembers. PRref briefly lagged and converged before dispatch. Currentheartbeat HEAD/origin/branch/PR are b2dc2b4e1442c34645947c3a933544d8ad596fc0."
+    },
+    {
+      "topic": "Browser continuity",
+      "result": "Fresh live Meta33-36 are blank, leesha007,Thinking,Senddisabled. X37empty,Postdisabled,@dogramaci. ProtectedOman1preserved."
+    },
+    {
+      "topic": "Queue contradiction",
+      "result": "OldGambia379terminal-zero-accepted is not a dispatch candidate. FreshGambia515scene2087-2090 search found only next-candidate references. Qatar513partial3accepted remains X-ineligible; no companion ready."
+    }
+  ],
+  "boundedImprovements": [
+    "Retain exact frozen crop emphasis and Alia high braided ponytail override in fresh prompts.",
+    "Reuse supported uploader and click-based ALT editor navigation; no duplicate send or upload.",
+    "Compact evidence summaries avoid flooding logs with historical full checkpoints."
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newWorkersCreated": 0,
+  "guardian": {
+    "id": "starlight-pipeline-guardian",
+    "status": "ACTIVE",
+    "configSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+    "scheduleChanged": false
+  },
+  "dispatchesThisAudit": 0
+}

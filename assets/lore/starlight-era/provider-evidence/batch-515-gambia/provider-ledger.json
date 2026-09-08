@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "batch": 515,
+  "country": "Gambia",
+  "state": "prepared-offline-not-dispatched",
+  "createdAtUtc": "2026-09-08T14:14:52.500Z",
+  "occurrences": [
+    {
+      "occurrenceId": "batch-515-scene-2087-meta-initial",
+      "scene": 2087,
+      "provider": "Meta AI",
+      "state": "prepared-not-sent",
+      "promptSha256": "C64CB7BD06428EBD54936E0F156ECD823A480F585881774848ABE8E93577045D",
+      "providerSendActivations": 0,
+      "retryCount": 0,
+      "providerUrl": null,
+      "neverResendAfterConfirmationOrUncertainty": true
+    },
+    {
+      "occurrenceId": "batch-515-scene-2088-meta-initial",
+      "scene": 2088,
+      "provider": "Meta AI",
+      "state": "prepared-not-sent",
+      "promptSha256": "5BF27F6E6E1A76663FC1EF13AEC42485F70C5D3C3AF84F9285462EEBE56815E3",
+      "providerSendActivations": 0,
+      "retryCount": 0,
+      "providerUrl": null,
+      "neverResendAfterConfirmationOrUncertainty": true
+    },
+    {
+      "occurrenceId": "batch-515-scene-2089-meta-initial",
+      "scene": 2089,
+      "provider": "Meta AI",
+      "state": "prepared-not-sent",
+      "promptSha256": "3A9AFDB0CB7A03F4907931FFA017D107B814A7F045CC0756CF8A8B00110329BF",
+      "providerSendActivations": 0,
+      "retryCount": 0,
+      "providerUrl": null,
+      "neverResendAfterConfirmationOrUncertainty": true
+    },
+    {
+      "occurrenceId": "batch-515-scene-2090-meta-initial",
+      "scene": 2090,
+      "provider": "Meta AI",
+      "state": "prepared-not-sent",
+      "promptSha256": "E7A98EB32F39B93CC7A283491D296BDE776447B695C77E1F48C9393060F4C78D",
+      "providerSendActivations": 0,
+      "retryCount": 0,
+      "providerUrl": null,
+      "neverResendAfterConfirmationOrUncertainty": true
+    }
+  ],
+  "providerSendActivations": 0,
+  "providerRetries": 0,
+  "uncertainActivations": 0,
+  "chatgptEditInvocations": 0,
+  "currentCheckpoint": "assets/lore/starlight-era/batch-515-gambia-four-lane-preparation-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-515-gambia-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-515-gambia-fixed-rolls.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-intents.json",
+  "maximumHardFailureRetriesPerScene": 2,
+  "aestheticRetries": 0,
+  "sourceArchiveComplete": false,
+  "archiveException": null,
+  "previousWorkflowClosure": "assets/lore/starlight-era/batch-514-lithuania-jamaica-pair-publication-closure-checkpoint.json",
+  "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/pair-final-remote-publication-verification.json",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/continuation-log-audit-2026-09-08-1414.json",
+  "nextSafeAction": "Freeze and remotely verify exact prompts and anchors. Attach938,936,937 once each in order through visible controls, verify cards after typing and Thinking/account, archive staging and verify remote parity before one initial Send per lane."
+}

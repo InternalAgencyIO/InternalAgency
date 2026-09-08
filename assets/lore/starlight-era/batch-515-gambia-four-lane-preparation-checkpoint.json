@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "batch": 515,
+  "country": "Gambia",
+  "state": "prepared-offline-no-dispatch",
+  "createdAtUtc": "2026-09-08T14:14:52.500Z",
+  "sceneRange": [
+    2087,
+    2088,
+    2089,
+    2090
+  ],
+  "priorityIndex": 138,
+  "checkpoint": "assets/lore/starlight-era/batch-515-gambia-four-lane-preparation-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-515-gambia-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-515-gambia-fixed-rolls.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/provider-ledger.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-intents.json",
+  "previousClosure": "assets/lore/starlight-era/batch-514-lithuania-jamaica-pair-publication-closure-checkpoint.json",
+  "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/pair-final-remote-publication-verification.json",
+  "baseRemoteVerifiedHead": "b2dc2b4e1442c34645947c3a933544d8ad596fc0",
+  "providerSendActivations": 0,
+  "chatgptEditInvocations": 0,
+  "publicationState": "not-ready-no-eligible-companion",
+  "xPostCount": 244,
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/continuation-log-audit-2026-09-08-1414.json",
+  "guardianNextAuditNotBeforeUtc": "2026-09-08T14:59:52.500Z",
+  "allPreviousConsumedVersionsRemainTerminal": true,
+  "heldCountries": [
+    "Qatar513",
+    "Oman499",
+    "Switzerland455"
+  ],
+  "nextSafeAction": "Freeze and remotely verify exact prompts and anchors. Attach938,936,937 once each in order through visible controls, verify cards after typing and Thinking/account, archive staging and verify remote parity before one initial Send per lane.",
+  "anchorChecks": [
+    {
+      "slot": 1,
+      "role": "primary quartet face plate",
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "anchor": 938,
+      "actualSha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "bytes": 2575103,
+      "pass": true
+    },
+    {
+      "slot": 2,
+      "role": "expression and three-quarter supplement",
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "anchor": 936,
+      "actualSha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "bytes": 2495143,
+      "pass": true
+    },
+    {
+      "slot": 3,
+      "role": "pose-angle and relationship supplement",
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+      "anchor": 937,
+      "actualSha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+      "bytes": 2373808,
+      "pass": true
+    }
+  ],
+  "liveBrowserChecks": [
+    {
+      "tabId": "33",
+      "account": true,
+      "thinking": true,
+      "blank": true,
+      "sendDisabled": true
+    },
+    {
+      "tabId": "34",
+      "account": true,
+      "thinking": true,
+      "blank": true,
+      "sendDisabled": true
+    },
+    {
+      "tabId": "35",
+      "account": true,
+      "thinking": true,
+      "blank": true,
+      "sendDisabled": true
+    },
+    {
+      "tabId": "36",
+      "account": true,
+      "thinking": true,
+      "blank": true,
+      "sendDisabled": true
+    }
+  ],
+  "x": {
+    "tabId": "37",
+    "empty": true,
+    "account": "@dogramaci",
+    "postDisabled": true
+  },
+  "guardian": {
+    "id": "starlight-pipeline-guardian",
+    "status": "ACTIVE",
+    "configSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+    "scheduleChanged": false
+  },
+  "occurrenceSearch": {
+    "method": "rg exact whole scene ids and batch-515 across current Starlight JSON/MD/TXT plus matching filenames",
+    "candidateOnly": true,
+    "existingAllocatedOccurrences": 0,
+    "historicalGambia379": "terminal-zero-accepted-no-reopen"
+  },
+  "oldAuthorityReconciliation": "Newest remote verified pair publication and country cursor supersede historical handoff, Cuba/Tanzania dispatch, old campaign counters and Gambia379. No current dispatch contradiction."
+}
