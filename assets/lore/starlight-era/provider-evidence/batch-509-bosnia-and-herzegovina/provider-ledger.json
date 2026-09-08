@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 509,
   "country": "Bosnia and Herzegovina",
-  "state": "four-composers-remote-verified-ready-for-one-initial-send-each",
+  "state": "four-meta-sessions-confirmed-rendering",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,7 +11,7 @@
     936,
     937
   ],
-  "providerSendActivations": 0,
+  "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
@@ -19,8 +19,8 @@
     {
       "scene": 2063,
       "kind": "initial",
-      "state": "prepared-not-activated",
-      "activationCount": 0,
+      "state": "confirmed-rendering",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2063-initial-prompt.txt",
       "promptSha256": "67A891958705FC7E59911381ED8AE20DE73529863B0E993F49ED4F0F798BB1EE",
@@ -33,14 +33,16 @@
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/four-composers-staging-evidence.json",
       "rule": "One initial Send only after fresh authority parity. Never resend confirmed or uncertain occurrence.",
       "occurrenceId": "batch-509-scene-2063-meta-initial",
-      "providerUrl": null,
-      "additionalInitialSendsAllowed": 1
+      "providerUrl": "https://www.meta.ai/prompt/447a6e8c-5538-4a23-be8f-8f6e438318a8",
+      "additionalInitialSendsAllowed": 0,
+      "submittedAtUtc": "2026-09-08T03:38:40.752Z",
+      "confirmedAtUtc": "2026-09-08T03:39:14.608Z"
     },
     {
       "scene": 2064,
       "kind": "initial",
-      "state": "prepared-not-activated",
-      "activationCount": 0,
+      "state": "confirmed-rendering",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2064-initial-prompt.txt",
       "promptSha256": "DFDFEE7BFC9ADC711874757AF0061DB25DAC795430A5A18BA11D1F278D536870",
@@ -53,14 +55,16 @@
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/four-composers-staging-evidence.json",
       "rule": "One initial Send only after fresh authority parity. Never resend confirmed or uncertain occurrence.",
       "occurrenceId": "batch-509-scene-2064-meta-initial",
-      "providerUrl": null,
-      "additionalInitialSendsAllowed": 1
+      "providerUrl": "https://www.meta.ai/prompt/47266126-b2b8-48ad-a560-11c7e8ec080e",
+      "additionalInitialSendsAllowed": 0,
+      "submittedAtUtc": "2026-09-08T03:38:40.893Z",
+      "confirmedAtUtc": "2026-09-08T03:39:14.662Z"
     },
     {
       "scene": 2065,
       "kind": "initial",
-      "state": "prepared-not-activated",
-      "activationCount": 0,
+      "state": "confirmed-rendering",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2065-initial-prompt.txt",
       "promptSha256": "CA8FCD66C24E886547A320BA16B4FB70E23F631E6A81314949EEC74BDBFF5A7C",
@@ -73,14 +77,16 @@
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/four-composers-staging-evidence.json",
       "rule": "One initial Send only after fresh authority parity. Never resend confirmed or uncertain occurrence.",
       "occurrenceId": "batch-509-scene-2065-meta-initial",
-      "providerUrl": null,
-      "additionalInitialSendsAllowed": 1
+      "providerUrl": "https://www.meta.ai/prompt/bf50b110-b4c6-467d-b0ce-b41308198d63",
+      "additionalInitialSendsAllowed": 0,
+      "submittedAtUtc": "2026-09-08T03:38:41.053Z",
+      "confirmedAtUtc": "2026-09-08T03:39:14.711Z"
     },
     {
       "scene": 2066,
       "kind": "initial",
-      "state": "prepared-not-activated",
-      "activationCount": 0,
+      "state": "confirmed-rendering",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2066-initial-prompt.txt",
       "promptSha256": "E47F59F5D9E146D0D4BCE25CFE6107A1833B6838EDD8676F2B15C83910985686",
@@ -93,8 +99,10 @@
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/four-composers-staging-evidence.json",
       "rule": "One initial Send only after fresh authority parity. Never resend confirmed or uncertain occurrence.",
       "occurrenceId": "batch-509-scene-2066-meta-initial",
-      "providerUrl": null,
-      "additionalInitialSendsAllowed": 1
+      "providerUrl": "https://www.meta.ai/prompt/975e2869-0423-4e3b-bbc8-6833a1f7bde3",
+      "additionalInitialSendsAllowed": 0,
+      "submittedAtUtc": "2026-09-08T03:38:41.192Z",
+      "confirmedAtUtc": "2026-09-08T03:39:14.767Z"
     }
   ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-prepared-checkpoint.json",
@@ -106,9 +114,21 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": null,
-  "nextSafeAction": "After proof-carrier HEAD/origin/PR parity and live unchanged prompt/anchor/Thinking/account checks, activate Send once per2063-2066 and immediately persist distinct provider receipts.",
+  "nextSafeAction": "Observe the four already-confirmed provider sessions without resending. At terminal output, archive every exposed gallery/internal original through visible downloads, run direct source QA, then one already-prepared built-in tailoring call per usable source, preserving every output or block. Close Bosnia remotely before the two Uruguay/Bosnia2+2 X reservations; verify @dogramaci, fourALT and AI disclosure at posting.",
   "baseRemoteVerifiedHead": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json",
   "previousCountryClosure": "assets/lore/starlight-era/batch-508-uruguay-four-stills-closure-checkpoint.json",
-  "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json"
+  "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
+  "confirmedSubmissions": 4,
+  "providerUrls": [
+    "https://www.meta.ai/prompt/447a6e8c-5538-4a23-be8f-8f6e438318a8",
+    "https://www.meta.ai/prompt/47266126-b2b8-48ad-a560-11c7e8ec080e",
+    "https://www.meta.ai/prompt/bf50b110-b4c6-467d-b0ce-b41308198d63",
+    "https://www.meta.ai/prompt/975e2869-0423-4e3b-bbc8-6833a1f7bde3"
+  ],
+  "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-activation-receipt.json",
+  "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-receipt.json",
+  "rawFilesSaved": 0,
+  "terminalOutputInventoryPending": true,
+  "missingObservedOriginals": 0
 }
