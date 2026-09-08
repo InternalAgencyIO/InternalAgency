@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batch": 509,
+  "execCell": "2052",
+  "invokedScenes": [
+    2063,
+    2065
+  ],
+  "issuedAtUtc": "2026-09-08T04:27:34.578Z",
+  "observedAtUtc": "2026-09-08T04:44:27.847Z",
+  "toolResult": "The execution cell failed while awaiting Promise.all after an imagegen call threw an output moderation error.",
+  "providerError": {
+    "httpStatus": 400,
+    "type": "image_generation_user_error",
+    "code": "moderation_blocked",
+    "requestId": "e5b7f380-56d9-4709-91ba-86b0c4fb93f9",
+    "moderationStage": "output",
+    "categories": [
+      "sexual"
+    ],
+    "message": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID e5b7f380-56d9-4709-91ba-86b0c4fb93f9. safety_violations=[sexual]."
+  },
+  "sceneAttribution": null,
+  "attributionReason": "No per-scene completion or error wrapper was returned before the execution cell ended. Do not guess which call blocked and which was interrupted.",
+  "returnedImagesForTheseScenes": [],
+  "functionStoreChecks": {
+    "bEditResult2063": null,
+    "bEditResult2065": null
+  },
+  "localOutputFolderCheck": {
+    "checkedAtUtc": "2026-09-08T04:41:16.547Z",
+    "files": [
+      {
+        "path": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-ca21032d-aa61-4760-9723-aa4ff57d8263.png",
+        "bytes": 2215067,
+        "modifiedAtUtc": "2026-09-08T04:37:35.554Z"
+      },
+      {
+        "path": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-a32a7f2e-22d7-4c54-acfd-e376ec1d858e.png",
+        "bytes": 2239774,
+        "modifiedAtUtc": "2026-09-08T04:38:37.473Z"
+      }
+    ],
+    "unclaimedFiles": []
+  },
+  "allowancesConsumed": [
+    2063,
+    2065
+  ],
+  "additionalInvocationsAllowed": 0,
+  "selectionDecision": "Retain the directly reviewed public-safe Meta original for each scene. No blocked image is selected or reposted.",
+  "forwardOrchestrationFix": "Wrap every future imagegen call in its own try/catch and await all settled outcomes. A rejected call must not discard another call result. This is orchestration only, not permission to repeat either call.",
+  "exactErrorRecord": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-edit-group-2052-error.txt"
+}

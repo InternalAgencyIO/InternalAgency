@@ -8,8 +8,8 @@
       2065,
       2066
     ],
-    "state": "all-four-single-edits-in-flight-no-additional-allowances",
-    "checkpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-source-qa-recovery-checkpoint.json",
+    "state": "four-stills-accepted-awaiting-final-remote-proof",
+    "checkpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-fixed-rolls.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/provider-ledger.json",
@@ -29,7 +29,7 @@
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/accepted-selections.json",
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0418.json",
-    "nextSafeAction": "Wait for cells2052 and2060, no further edits. Complete final selections, QA, ALT and remote proof before Uruguay/Bosnia X pair.",
+    "nextSafeAction": "Remote-close this four-scene batch and reserve exactly two Uruguay/Bosnia2+2 X posts. No new render or edit for2063-2066.",
     "baseRemoteVerifiedHead": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json",
     "confirmedSubmissions": 6,
@@ -80,7 +80,16 @@
     "remainingEditsRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/remaining-two-edits-remote-preflight.json",
     "remainingEditsPreflightPayload": "ae9ffdf8a582ed7895c5e3aea535ebcf68d3b3d5",
     "remainingEditsRemoteVerifiedAtUtc": "2026-09-08T04:33:50.497Z",
-    "additionalChatgptInvocationsAllowed": 0
+    "additionalChatgptInvocationsAllowed": 0,
+    "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/accepted-selections.json",
+    "finalQa": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-selection-qa.json",
+    "editResults": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-chatgpt-edit-results.json",
+    "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/closure-evidence-manifest.json",
+    "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json",
+    "allFourAccepted": true,
+    "returnedPngFiles": 2,
+    "allArchivedImageFiles": 24,
+    "additionalMetaSendsAllowed": 0
   },
   "currentAuthorityBatch508": {
     "batch": 508,

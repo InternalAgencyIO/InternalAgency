@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "batch": 509,
+  "country": "Bosnia and Herzegovina",
+  "sceneIds": [
+    2063,
+    2064,
+    2065,
+    2066
+  ],
+  "state": "four-stills-accepted-awaiting-final-remote-proof",
+  "recordedAtUtc": "2026-09-08T04:44:27.847Z",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-selection-qa.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/native-raw-archive-manifest.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/provider-ledger.json",
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-chatgpt-edit-results.json",
+  "providerSendActivations": 6,
+  "initialSends": 4,
+  "hardFailureRecoveries": 2,
+  "recoveryCountByScene": {
+    "2064": 1,
+    "2066": 1
+  },
+  "chatgptInvocations": 4,
+  "additionalMetaSendsAllowed": 0,
+  "additionalChatgptInvocationsAllowed": 0,
+  "rawImageFiles": 22,
+  "returnedPngFiles": 2,
+  "allArchivedImageFiles": 24,
+  "uniqueArchivedImageVersions": 20,
+  "generatedSceneFiles": 18,
+  "contextReferenceFiles": 6,
+  "allFourAccepted": true,
+  "allRawBytesSaved": true,
+  "allKnownReturnedPngsSaved": true,
+  "batchLevelUnattributedEditError": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-edit-group-2052-output-block.json",
+  "archiveException": null,
+  "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/accepted-selections.json",
+  "companionRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0418.json",
+  "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+  "providerUrls": [
+    "https://www.meta.ai/prompt/447a6e8c-5538-4a23-be8f-8f6e438318a8",
+    "https://www.meta.ai/prompt/47266126-b2b8-48ad-a560-11c7e8ec080e",
+    "https://www.meta.ai/prompt/bf50b110-b4c6-467d-b0ce-b41308198d63",
+    "https://www.meta.ai/prompt/975e2869-0423-4e3b-bbc8-6833a1f7bde3",
+    "https://www.meta.ai/prompt/c353df84-a487-421c-899e-9d14f45358cc",
+    "https://www.meta.ai/prompt/25252d65-d70d-460c-b517-2809a763c819"
+  ],
+  "newXPostUrls": [],
+  "xPostCount": 238,
+  "canonicalContradictions": [
+    "Initial2064gallery five-person defect was repaired in the first bounded recovery. Initial output remains unused.",
+    "Initial2066had no final gallery; six of its12internal images were provider context references. The first safer recovery supplies the selected source.",
+    "Cell2052reported one output block without scene attribution; both invoked allowances are spent and only reviewed original sources are selected for2063/2065.",
+    "Current browser tabs33-36 plusX37 and protectedOman1 supersede vanished historical tabs."
+  ],
+  "nextSafeAction": "Remote-close this four-scene batch and reserve exactly two Uruguay/Bosnia2+2 X posts. No new render or edit for2063-2066."
+}

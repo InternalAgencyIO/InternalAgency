@@ -7,7 +7,7 @@
   "intents": [
     {
       "scene": 2063,
-      "state": "invoked-awaiting-tool-result",
+      "state": "terminal-or-interrupted-no-further-invocations",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -44,11 +44,13 @@
       "issuedAtUtc": "2026-09-08T04:27:34.578Z",
       "execCell": "2052",
       "tool": "built-in image_gen",
-      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-two-single-edit-activation-receipt.json"
+      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-two-single-edit-activation-receipt.json",
+      "outcome": "batched-output-block-or-interruption-unattributed-original-selected",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-chatgpt-edit-results.json"
     },
     {
       "scene": 2065,
-      "state": "invoked-awaiting-tool-result",
+      "state": "terminal-or-interrupted-no-further-invocations",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -85,11 +87,13 @@
       "issuedAtUtc": "2026-09-08T04:27:34.578Z",
       "execCell": "2052",
       "tool": "built-in image_gen",
-      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-two-single-edit-activation-receipt.json"
+      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-two-single-edit-activation-receipt.json",
+      "outcome": "batched-output-block-or-interruption-unattributed-original-selected",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-chatgpt-edit-results.json"
     },
     {
       "scene": 2064,
-      "state": "invoked-awaiting-tool-result",
+      "state": "terminal-or-interrupted-no-further-invocations",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -129,11 +133,13 @@
       "issuedAtUtc": "2026-09-08T04:35:17.497Z",
       "execCell": "2060",
       "tool": "built-in image_gen",
-      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/all-four-single-edit-activation-receipt.json"
+      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/all-four-single-edit-activation-receipt.json",
+      "outcome": "image-returned-selected",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-chatgpt-edit-results.json"
     },
     {
       "scene": 2066,
-      "state": "invoked-awaiting-tool-result",
+      "state": "terminal-or-interrupted-no-further-invocations",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -178,7 +184,9 @@
       "issuedAtUtc": "2026-09-08T04:35:17.498Z",
       "execCell": "2060",
       "tool": "built-in image_gen",
-      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/all-four-single-edit-activation-receipt.json"
+      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/all-four-single-edit-activation-receipt.json",
+      "outcome": "image-returned-selected",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-chatgpt-edit-results.json"
     }
   ],
   "deferredScenes": []
