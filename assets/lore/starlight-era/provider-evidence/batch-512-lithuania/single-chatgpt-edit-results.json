@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "batch": 512,
+  "country": "Lithuania",
+  "executionCell": "2464",
+  "executionCellComplete": true,
+  "invocations": 4,
+  "returnedPngs": [
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-0c8ccd4b-7d2a-445a-946a-5e3284ddbaba.png",
+      "sha256": "ba690750a2df64f29b25c7dbdcd9688f8710305d81b0da710b86df0107b1239f",
+      "bytes": 2229522,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-04-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "selected-after-source-invariant-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png.receipt.json",
+      "qaPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png.qa.json",
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png.alt.txt",
+      "reviewedAtUtc": "2026-09-08T10:23:14.179Z"
+    },
+    {
+      "scene": 2077,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-27677173-b6ec-4b4b-b055-b14e125714b9.png",
+      "sha256": "3659464357f289d81792daaecfb1ae6db48414a49905da78942c3def12b6b9f9",
+      "bytes": 2066421,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-meta-gallery-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "selected-after-source-invariant-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png.receipt.json",
+      "qaPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png.qa.json",
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png.alt.txt",
+      "reviewedAtUtc": "2026-09-08T10:23:14.179Z"
+    },
+    {
+      "scene": 2078,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-22cbeb38-098d-4d71-aae4-0605a1d5e222.png",
+      "sha256": "95a0d9ce31dce0c545cfff76021fa2607e2174004a41bd3c1e1a26af034c47ba",
+      "bytes": 2126204,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-meta-internal-01-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "selected-after-source-invariant-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png.receipt.json",
+      "qaPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png.qa.json",
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png.alt.txt",
+      "reviewedAtUtc": "2026-09-08T10:23:14.179Z"
+    }
+  ],
+  "outputBlockedScenes": [
+    2075
+  ],
+  "state": "all-four-single-edit-allowances-terminal",
+  "additionalInvocationsAllowed": 0,
+  "results": [
+    {
+      "scene": 2075,
+      "startedAtUtc": "2026-09-08T10:06:35.340Z",
+      "completedAtUtc": "2026-09-08T10:08:37.956Z",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "additionalInvocationsAllowed": 0,
+      "promptSha256": "3678747CF68D4EBE22B5D8244811FDF617A2B0AE72EB2918B3A9919631D2422E",
+      "sourceSha256": "405c6e78a2c08c9b9333be6d511d624daab031e7af9aee26a39e2e9174c3e4ee",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 5d7d4a6c-686e-4102-b429-d13184f0ab22. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-chatgpt-single-tailoring-blocked.json"
+    },
+    {
+      "scene": 2076,
+      "startedAtUtc": "2026-09-08T10:06:35.340Z",
+      "completedAtUtc": "2026-09-08T10:09:50.191Z",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "additionalInvocationsAllowed": 0,
+      "promptSha256": "D2747781ACB12FF07AFDF6E2198B70A1BE949DF41F9E8122E333CEB1DD2DCE48",
+      "sourceSha256": "5481bc97ac4ff53a83b0383eb4d5a7d538d9bc0dae11130f4be0955afe99a0d9",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-0c8ccd4b-7d2a-445a-946a-5e3284ddbaba.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "imageReturned": true,
+        "imageDataOmittedFromTextReceipt": "Image bytes preserved separately in the native returned PNG; no image data string repeated in text evidence."
+      },
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "scene": 2077,
+      "startedAtUtc": "2026-09-08T10:06:35.340Z",
+      "completedAtUtc": "2026-09-08T10:10:51.800Z",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "additionalInvocationsAllowed": 0,
+      "promptSha256": "98C9AAF16C50D97A63D43B3DB589B1D876A86A5B18BE9C53186202F42C813F6D",
+      "sourceSha256": "5060c5c155d2058fc78a4413b57bf9df4e5ad6d28bc9a3698d071787e670e9f1",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-27677173-b6ec-4b4b-b055-b14e125714b9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "imageReturned": true,
+        "imageDataOmittedFromTextReceipt": "Image bytes preserved separately in the native returned PNG; no image data string repeated in text evidence."
+      },
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "scene": 2078,
+      "startedAtUtc": "2026-09-08T10:06:35.340Z",
+      "completedAtUtc": "2026-09-08T10:11:53.234Z",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "additionalInvocationsAllowed": 0,
+      "promptSha256": "2C5C789B3B63D271DBFE9782BB24B2250D7A29FB8027FF01FB30627AC07B2197",
+      "sourceSha256": "674232f436161b6d24f8b65aece50f40bed34a5106be27e12790c8805a0c82c0",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-22cbeb38-098d-4d71-aae4-0605a1d5e222.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "imageReturned": true,
+        "imageDataOmittedFromTextReceipt": "Image bytes preserved separately in the native returned PNG; no image data string repeated in text evidence."
+      },
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png.receipt.json"
+    }
+  ],
+  "images": [
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-0c8ccd4b-7d2a-445a-946a-5e3284ddbaba.png",
+      "sha256": "ba690750a2df64f29b25c7dbdcd9688f8710305d81b0da710b86df0107b1239f",
+      "bytes": 2229522,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-04-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "returned-pending-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "scene": 2077,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-27677173-b6ec-4b4b-b055-b14e125714b9.png",
+      "sha256": "3659464357f289d81792daaecfb1ae6db48414a49905da78942c3def12b6b9f9",
+      "bytes": 2066421,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-meta-gallery-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "returned-pending-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "scene": 2078,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-22cbeb38-098d-4d71-aae4-0605a1d5e222.png",
+      "sha256": "95a0d9ce31dce0c545cfff76021fa2607e2174004a41bd3c1e1a26af034c47ba",
+      "bytes": 2126204,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-meta-internal-01-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "returned-pending-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png.receipt.json"
+    }
+  ],
+  "visualQaComplete": true,
+  "finalSelectionQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/final-selection-qa.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/accepted-selections.json",
+  "updatedAtUtc": "2026-09-08T10:23:14.179Z",
+  "nextSafeAction": "No additional imagegen invocation. Close and remotely verify all evidence."
+}

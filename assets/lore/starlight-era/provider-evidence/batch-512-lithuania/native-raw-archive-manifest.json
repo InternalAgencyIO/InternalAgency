@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "batch": 512,
   "country": "Lithuania",
-  "updatedAtUtc": "2026-09-08T10:01:14.498Z",
-  "state": "complete-meta-originals-pending-single-edits",
+  "updatedAtUtc": "2026-09-08T10:23:14.179Z",
+  "state": "complete-all-originals-and-single-edits",
   "allOriginalsArchived": true,
   "allCurrentlyExposedImagesArchived": true,
   "sourceCompleteScenes": [
@@ -14,8 +14,8 @@
   ],
   "inFlightScenes": [],
   "noImageScenes": [],
-  "savedFiles": 13,
-  "uniqueSavedImageVersions": 9,
+  "savedFiles": 16,
+  "uniqueSavedImageVersions": 12,
   "providerContextReferenceFiles": 0,
   "archiveException": null,
   "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/all-four-terminal-source-observations.json",
@@ -547,6 +547,69 @@
     }
   ],
   "noBytesEvidence": [],
-  "returnedChatgptPngs": [],
-  "allSceneRenderAndEditAllowancesTerminal": false
+  "returnedChatgptPngs": [
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-0c8ccd4b-7d2a-445a-946a-5e3284ddbaba.png",
+      "sha256": "ba690750a2df64f29b25c7dbdcd9688f8710305d81b0da710b86df0107b1239f",
+      "bytes": 2229522,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-04-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "selected-after-source-invariant-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png.receipt.json",
+      "qaPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png.qa.json",
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png.alt.txt",
+      "reviewedAtUtc": "2026-09-08T10:23:14.179Z"
+    },
+    {
+      "scene": 2077,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-27677173-b6ec-4b4b-b055-b14e125714b9.png",
+      "sha256": "3659464357f289d81792daaecfb1ae6db48414a49905da78942c3def12b6b9f9",
+      "bytes": 2066421,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-meta-gallery-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "selected-after-source-invariant-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png.receipt.json",
+      "qaPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png.qa.json",
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png.alt.txt",
+      "reviewedAtUtc": "2026-09-08T10:23:14.179Z"
+    },
+    {
+      "scene": 2078,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png",
+      "originalGeneratedPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-22cbeb38-098d-4d71-aae4-0605a1d5e222.png",
+      "sha256": "95a0d9ce31dce0c545cfff76021fa2607e2174004a41bd3c1e1a26af034c47ba",
+      "bytes": 2126204,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT imagegen",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-meta-internal-01-original.webp",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "state": "selected-after-source-invariant-visual-qa",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png.receipt.json",
+      "qaPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png.qa.json",
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png.alt.txt",
+      "reviewedAtUtc": "2026-09-08T10:23:14.179Z"
+    }
+  ],
+  "allSceneRenderAndEditAllowancesTerminal": true,
+  "finalSelectionQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/final-selection-qa.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/accepted-selections.json"
 }

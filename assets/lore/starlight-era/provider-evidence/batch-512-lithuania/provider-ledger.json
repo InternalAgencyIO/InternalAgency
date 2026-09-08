@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 512,
   "country": "Lithuania",
-  "state": "all-originals-archived-source-qa-complete-single-edits-pending",
+  "state": "four-scenes-selected-complete-local-archive-pending-remote-closure",
   "preparedAtUtc": "2026-09-08T09:43:44.482Z",
   "provider": "Meta AI",
   "accountRequired": "leesha007",
@@ -18,7 +18,7 @@
       "scene": 2075,
       "occurrenceId": "batch-512-scene-2075-meta-initial",
       "kind": "initial",
-      "state": "terminal-with-archived-originals",
+      "state": "terminal-originals-archived-final-selection-complete",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2075-initial-prompt.txt",
@@ -41,13 +41,15 @@
         "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-meta-gallery-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-meta-internal-01-original.webp"
       ],
-      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json"
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json",
+      "additionalActivationsAllowed": 0,
+      "finalSelection": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-meta-gallery-original.webp"
     },
     {
       "scene": 2076,
       "occurrenceId": "batch-512-scene-2076-meta-initial",
       "kind": "initial",
-      "state": "terminal-with-archived-originals",
+      "state": "terminal-originals-archived-final-selection-complete",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2076-initial-prompt.txt",
@@ -74,13 +76,15 @@
         "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-05-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-gallery-original.webp"
       ],
-      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json"
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json",
+      "additionalActivationsAllowed": 0,
+      "finalSelection": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png"
     },
     {
       "scene": 2077,
       "occurrenceId": "batch-512-scene-2077-meta-initial",
       "kind": "initial",
-      "state": "terminal-with-archived-originals",
+      "state": "terminal-originals-archived-final-selection-complete",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2077-initial-prompt.txt",
@@ -103,13 +107,15 @@
         "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-meta-internal-01-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-meta-gallery-original.webp"
       ],
-      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json"
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json",
+      "additionalActivationsAllowed": 0,
+      "finalSelection": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-chatgpt-single-tailoring-pass.png"
     },
     {
       "scene": 2078,
       "occurrenceId": "batch-512-scene-2078-meta-initial",
       "kind": "initial",
-      "state": "terminal-with-archived-originals",
+      "state": "terminal-originals-archived-final-selection-complete",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2078-initial-prompt.txt",
@@ -133,14 +139,16 @@
         "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-meta-internal-02-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-meta-gallery-original.webp"
       ],
-      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json"
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json",
+      "additionalActivationsAllowed": 0,
+      "finalSelection": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-chatgpt-single-tailoring-pass.png"
     }
   ],
   "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
-  "currentCheckpoint": "assets/lore/starlight-era/batch-512-lithuania-prepared-checkpoint.json",
+  "chatgptEditInvocations": 4,
+  "currentCheckpoint": "assets/lore/starlight-era/batch-512-lithuania-four-stills-closure-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-512-lithuania-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-512-lithuania-fixed-rolls.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-intents.json",
@@ -150,14 +158,14 @@
   "archiveException": null,
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-511-armenia-namibia-full-workflow-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-final-workflow-remote-verification.json",
-  "nextSafeAction": "Verify proof carrier HEAD/origin/PR and actual composer state, reserve each initial activation durably, then click Send once and immediately preserve each receipt. No additional activation for an uncertain result.",
+  "nextSafeAction": "Push the complete Lithuania512 closure payload, fetch all image LFS objects into fresh verification storage, compare ordinary evidence bytes, and push the proof carrier with HEAD/origin/PR parity. Then reconcile archived terminal tabs and prepare fresh Qatar513 scenes2079-2082 with unchanged frozen-roll policy. Keep Lithuania4 selected families unpublished until an eligible companion passes exact2+2 X gates. Never reopen Lithuania renders or edits.",
   "stagedAtUtc": "2026-09-08T09:48:27.306Z",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/four-composers-staging-evidence.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "12e1aab3b166194048654c34c140575ad44aed2d",
   "preflightVerifiedAtUtc": "2026-09-08T09:49:53.598Z",
   "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-dispatch-guard.json",
-  "updatedAtUtc": "2026-09-08T09:53:00.309Z",
+  "updatedAtUtc": "2026-09-08T10:23:14.179Z",
   "allFourSourceImagesAvailable": true,
   "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/native-raw-archive-manifest.json",
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json",
@@ -167,5 +175,12 @@
   "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/source-and-edit-preflight-remote-verification.json",
   "sourcePayloadCommit": "ce415101e633eadcd4ac702e22b09351fdb3d662",
   "sourceVerifiedAtUtc": "2026-09-08T10:04:16.485Z",
-  "singleEditDispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/single-edit-dispatch-guard.json"
+  "singleEditDispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/single-edit-dispatch-guard.json",
+  "singleEditResults": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/single-chatgpt-edit-results.json",
+  "chatgptOutputBlocks": [
+    2075
+  ],
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/accepted-selections.json",
+  "finalSelectionQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/final-selection-qa.json",
+  "allSceneRenderAndEditAllowancesTerminal": true
 }
