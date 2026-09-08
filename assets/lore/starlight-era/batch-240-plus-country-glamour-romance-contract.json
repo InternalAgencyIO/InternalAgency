@@ -9,7 +9,7 @@
       2073,
       2074
     ],
-    "state": "three-scenes-remote-closed-recovery1-ready-once",
+    "state": "all-four-sources-archived-three-edits-terminal-2071-edit-prepared",
     "preparedAtUtc": "2026-09-08T07:03:47.722Z",
     "brief": "assets/lore/starlight-era/batch-511-namibia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-511-namibia-fixed-rolls.json",
@@ -19,7 +19,7 @@
     "previousWorkflowClosure": "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json",
     "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
     "baseRemoteVerifiedHead": "d973d3d7f31648b8ce2376737d462881bca1ba6c",
-    "providerSendActivations": 4,
+    "providerSendActivations": 5,
     "chatgptEditInvocations": 3,
     "account": "leesha007",
     "mode": "Thinking",
@@ -47,13 +47,13 @@
     ],
     "eligibleCompanionCountry": "Armenia",
     "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
-    "nextSafeAction": "After this proof carrier is pushed and branch/origin/PR match, recheck the live account, Thinking mode, exact recovery prompt, three ordered anchors and that2071 still has no generated output or active initial job. Then activate the separately numbered recovery1 Send once, record its result immediately and never repeat it if confirmed or uncertain. Never reopen2072-2074 or repeat their edits.",
+    "nextSafeAction": "Commit, push and remote-verify all14 current saved images, recovery evidence and the exact2071 edit intent. Then invoke only2071 built-in tailoring once, with its selected source and exact face plates938,936,937. Do not repeat any Meta occurrence or2072-2074 edit. No X post before complete Namibia country closure and pair gates.",
     "stagedAtUtc": "2026-09-08T07:11:31.898Z",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-remote-preflight.json",
     "preflightPayloadCommit": "cb54f5e100e748dcbe328c51601443567fb85b91",
     "preflightVerifiedAtUtc": "2026-09-08T07:14:22.191Z",
     "updatedAtUtc": "2026-09-08T07:49:53.755Z",
-    "providerRetries": 0,
+    "providerRetries": 1,
     "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/native-raw-archive-manifest.json",
     "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json",
     "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/all-four-terminal-source-observations.json",
@@ -62,13 +62,12 @@
     ],
     "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-chatgpt-edit-intents.json",
     "sourceReadyScenes": [
+      2071,
       2072,
       2073,
       2074
     ],
-    "noImageScenes": [
-      2071
-    ],
+    "noImageScenes": [],
     "verifiedAutomaticJobs": 0,
     "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/source-and-edit-preflight-remote-verification.json",
     "sourcePayloadCommit": "e69013b2a04bc17d1937ecb058841a007e1b8b66",
@@ -83,17 +82,18 @@
       2073,
       2074
     ],
-    "missingScenes": [
-      2071
-    ],
+    "missingScenes": [],
     "allCountryScenesAccepted": false,
-    "savedImageFiles": 11,
-    "uniqueImageVersions": 8,
+    "savedImageFiles": 14,
+    "uniqueImageVersions": 10,
     "recoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-hard-failure-recovery-1-intent.json",
     "recoveryStaging": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-staging-evidence.json",
     "recoveryRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-remote-preflight.json",
     "recoveryPayloadCommit": "b1b904f1d38d046364289e06808e3973629e83fe",
     "recoveryPreflightVerifiedAtUtc": "2026-09-08T07:59:45.589Z",
+    "recoveryReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-send-receipt.json",
+    "recoveryTerminalObservation": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-terminal-observation.json",
+    "recoverySourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-source-qa.json",
     "checkpoint": "assets/lore/starlight-era/batch-511-namibia-three-stills-partial-checkpoint.json"
   },
   "currentAuthorityBatch510": {

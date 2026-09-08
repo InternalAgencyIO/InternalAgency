@@ -7,8 +7,8 @@
   "kind": "hard-failure-recovery",
   "recoveryNumber": 1,
   "maximumRecoveriesPerScene": 2,
-  "state": "remote-verified-ready-for-one-numbered-recovery-send",
-  "activationCount": 0,
+  "state": "terminal-recovery-image-returned-source-archived",
+  "activationCount": 1,
   "maximumActivationsThisOccurrence": 1,
   "initialOccurrenceId": "batch-511-scene-2071-meta-initial",
   "initialProviderUrl": "https://www.meta.ai/prompt/64682848-7d28-411a-9ef7-3d066abf7591",
@@ -34,11 +34,25 @@
   "providerUrlBeforeSend": "https://www.meta.ai/prompt/64682848-7d28-411a-9ef7-3d066abf7591",
   "neverResendConfirmedOrUncertain": true,
   "automaticJobVerified": false,
-  "nextSafeAction": "After this proof carrier is pushed and branch/origin/PR match, recheck the live account, Thinking mode, exact recovery prompt, three ordered anchors and that2071 still has no generated output or active initial job. Then activate the separately numbered recovery1 Send once, record its result immediately and never repeat it if confirmed or uncertain. Never reopen2072-2074 or repeat their edits.",
+  "nextSafeAction": "Do not send this occurrence again. Archive and verify the source before the sole2071 tailoring invocation.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-staging-evidence.json",
   "stagedAtUtc": "2026-09-08T07:54:17.936Z",
   "uiPaddingNormalization": "Trim outer UI-only whitespace contributed by image attachment cards; preserve all internal prompt text and newlines exactly.",
   "recoveryRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-remote-preflight.json",
   "recoveryPayloadCommit": "b1b904f1d38d046364289e06808e3973629e83fe",
-  "recoveryPreflightVerifiedAtUtc": "2026-09-08T07:59:45.589Z"
+  "recoveryPreflightVerifiedAtUtc": "2026-09-08T07:59:45.589Z",
+  "reservedAtUtc": "2026-09-08T08:02:15.606Z",
+  "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-dispatch-guard.json",
+  "callIssued": true,
+  "initiatedAtUtc": "2026-09-08T08:02:45.023Z",
+  "providerUrl": "https://www.meta.ai/prompt/64682848-7d28-411a-9ef7-3d066abf7591",
+  "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-send-receipt.json",
+  "neverResend": true,
+  "terminalObservation": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-terminal-observation.json",
+  "rawFiles": [
+    "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-internal-01-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-internal-02-original.webp"
+  ],
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-source-qa.json"
 }
