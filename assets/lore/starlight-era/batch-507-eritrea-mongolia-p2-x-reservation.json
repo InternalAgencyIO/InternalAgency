@@ -10,7 +10,7 @@
     "Mongolia"
   ],
   "part": 2,
-  "state": "reserved-exact-assets-caption-alt-awaiting-visible-staging",
+  "state": "staged-visible-ready-pending-action-time-remote-gate",
   "preparedAtUtc": "2026-09-08T02:23:09.853Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -211,7 +211,7 @@
   "madeWithAiRequired": true,
   "postClicks": 0,
   "publicTransmissionCount": 0,
-  "uploadCount": 0,
+  "uploadCount": 1,
   "archiveExceptions": [],
   "rawArchiveComplete": true,
   "missingInternalOriginalsByCountry": {
@@ -219,11 +219,9 @@
     "Mongolia": 0
   },
   "duplicateCheck": {
-    "checkedAtUtc": "2026-09-08T02:18:24.888Z",
-    "ledgerPostCount": 236,
-    "candidateFiles": 35,
-    "uniqueCandidateHashes": 27,
-    "method": "Exact recursive primitive values in all X post records versus every candidate scene id, hash and repository media path.",
+    "checkedAtUtc": "2026-09-08T02:35:34.812Z",
+    "postCount": 237,
+    "allVersionsChecked": 23,
     "matches": []
   },
   "currentAuthorization": "Latest user expressly authorizes ready posts, rendering and visible tab recovery. Existing guardian only. Reconcile all gates before one final activation.",
@@ -239,5 +237,14 @@
   ],
   "nextSafeAction": "Complete and remote-close part1 first; then fresh account and family duplicate check before staging these four assets once and exactly one Post activation.",
   "noRepostAnyVersion": true,
-  "additionalActivationsAllowed": 1
+  "additionalActivationsAllowed": 1,
+  "staging": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/eritrea-mongolia-p2-x-staging-evidence.json",
+  "liveAccount": {
+    "account": "@dogramaci",
+    "verified": true,
+    "verifiedAtUtc": "2026-09-08T02:35:34.803Z",
+    "evidence": "Live Account menu exposes Log out @dogramaci",
+    "tabId": "32"
+  },
+  "activationIntent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/eritrea-mongolia-p2-x-activation-intent.json"
 }
