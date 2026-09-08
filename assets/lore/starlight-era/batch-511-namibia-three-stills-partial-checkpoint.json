@@ -8,7 +8,7 @@
     2073,
     2074
   ],
-  "state": "superseded-by-three-scene-partial-checkpoint",
+  "state": "three-scenes-selected-2071-recovery1-staged-not-submitted",
   "preparedAtUtc": "2026-09-08T07:03:47.722Z",
   "brief": "assets/lore/starlight-era/batch-511-namibia-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-511-namibia-fixed-rolls.json",
@@ -46,12 +46,12 @@
   ],
   "eligibleCompanionCountry": "Armenia",
   "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
-  "nextSafeAction": "Read the newer partial checkpoint before acting. All three previously prepared ChatGPT edit invocations are terminal.",
+  "nextSafeAction": "Stage exact prompt and three ordered anchor cards in the existing scene2071 composer; do not Submit until all11 saved images and this recovery staging are committed, pushed and remote-verified with matching HEAD/origin/PR. Recheck account, Thinking, attachments and absence of new initial output immediately before one recovery Send. Never repeat the terminal single edits or reopen selected scenes2072-2074. Namibia remains incomplete and no Armenia/Namibia X post is eligible.",
   "stagedAtUtc": "2026-09-08T07:11:31.898Z",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "cb54f5e100e748dcbe328c51601443567fb85b91",
   "preflightVerifiedAtUtc": "2026-09-08T07:14:22.191Z",
-  "updatedAtUtc": "2026-09-08T07:33:34.445Z",
+  "updatedAtUtc": "2026-09-08T07:49:53.755Z",
   "providerRetries": 0,
   "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/native-raw-archive-manifest.json",
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json",
@@ -73,5 +73,21 @@
   "sourcePayloadCommit": "e69013b2a04bc17d1937ecb058841a007e1b8b66",
   "sourceVerifiedAtUtc": "2026-09-08T07:40:08.992Z",
   "singleEditDispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-edit-dispatch-guard.json",
-  "supersededBy": "assets/lore/starlight-era/batch-511-namibia-three-stills-partial-checkpoint.json"
+  "preparedCheckpoint": "assets/lore/starlight-era/batch-511-namibia-prepared-checkpoint.json",
+  "provisionalSelections": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/three-scene-provisional-selections.json",
+  "selectionQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/three-scene-final-selection-qa.json",
+  "singleEditResults": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-chatgpt-edit-results.json",
+  "selectedScenes": [
+    2072,
+    2073,
+    2074
+  ],
+  "missingScenes": [
+    2071
+  ],
+  "allCountryScenesAccepted": false,
+  "savedImageFiles": 11,
+  "uniqueImageVersions": 8,
+  "recoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-hard-failure-recovery-1-intent.json",
+  "recoveryStaging": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-recovery1-staging-evidence.json"
 }

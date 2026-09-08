@@ -4,8 +4,8 @@
   "country": "Namibia",
   "createdAtUtc": "2026-09-08T07:33:34.445Z",
   "policy": "Exactly one built-in image_gen invocation per selected usable scene. A block, failure or interruption consumes it. No retry, API or CLI fallback. Preserve raw source and every result with independent attribution.",
-  "state": "three-single-edits-remote-verified-ready",
-  "invocations": 0,
+  "state": "all-three-issued-single-edit-allowances-terminal",
+  "invocations": 3,
   "deferredScenes": [
     {
       "scene": 2071,
@@ -17,8 +17,8 @@
     {
       "scene": 2072,
       "occurrenceId": "batch-511-scene-2072-chatgpt-single-tailoring",
-      "state": "prepared-not-invoked",
-      "invocationCount": 0,
+      "state": "tool-returned",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2072,
@@ -64,18 +64,23 @@
       "sourceSpecificLimits": "Source-specific invariant: Image1 is the sole editing target. Keep its actual 1152x2048 close portrait rectangle, exact camera position, all four faces, expressions, hand ownership, embrace, background and existing edges. Do not outpaint or widen to expose shoes, hidden legs, backs or offscreen navels. Refine only clothing already visible; shorten a visible mini hem only within secure opaque wearable construction. Do not move any face or crop the image to chase the original extreme-close roll. Images2-4 are quartet face plates only, in order938,936,937, and each contains all four identities.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false,
+      "allowanceConsumed": true,
       "historicalLexiconSnapshot": {
         "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
         "sha256": "3d4ec36c57c8da6434bda58cab21387ee2628340d1b96ad156473cac7c8d8f17",
         "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
-      }
+      },
+      "reservedAtUtc": "2026-09-08T07:42:07.563Z",
+      "additionalInvocationsAllowed": 0,
+      "startedAtUtc": "2026-09-08T07:42:30.320Z",
+      "completedAtUtc": "2026-09-08T07:43:30.852Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-chatgpt-single-tailoring-pass.png.receipt.json"
     },
     {
       "scene": 2073,
       "occurrenceId": "batch-511-scene-2073-chatgpt-single-tailoring",
-      "state": "prepared-not-invoked",
-      "invocationCount": 0,
+      "state": "tool-returned",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2073,
@@ -121,18 +126,23 @@
       "sourceSpecificLimits": "Source-specific invariant: Image1 is the sole editing target. Preserve the actual 1152x2048 full rectangle, exact quartet faces, sculptural braids, body proportions, supported back hug, handclasp, foot positions, daybed, windows and dune scene. Do not rotate, restage or widen the image. Substantially tailor visible mini hems into shorter secure opaque wearable silhouettes with lined coverage. All four midriffs stay covered; close the unrolled waist gap on dark-haired Ellie in the foreground ochre skort. Preserve the existing distant imaginary smoke, not a real disaster. Images2-4 are quartet face plates only, in order938,936,937.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false,
+      "allowanceConsumed": true,
       "historicalLexiconSnapshot": {
         "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
         "sha256": "3d4ec36c57c8da6434bda58cab21387ee2628340d1b96ad156473cac7c8d8f17",
         "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
-      }
+      },
+      "reservedAtUtc": "2026-09-08T07:42:07.563Z",
+      "additionalInvocationsAllowed": 0,
+      "startedAtUtc": "2026-09-08T07:42:30.320Z",
+      "completedAtUtc": "2026-09-08T07:44:33.004Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-chatgpt-single-tailoring-pass.png.receipt.json"
     },
     {
       "scene": 2074,
       "occurrenceId": "batch-511-scene-2074-chatgpt-single-tailoring",
-      "state": "prepared-not-invoked",
-      "invocationCount": 0,
+      "state": "tool-returned",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2074,
@@ -178,16 +188,100 @@
       "sourceSpecificLimits": "Source-specific invariant: Image1 is the sole editing target. Preserve the actual 1152x2048 couch composition, all four faces, head and hand positions, shoulder-rest interaction, seated legs, footwear, furniture and lagoon window. Do not manufacture a lap pose, change camera angle, rotate, widen or outpaint. Shorten visible mini hems only with fully opaque lined wearable coverage. Alia, blonde Radiance and foreground Ellie keep covered midriffs; close Ellie unrolled waist gap. ECE alone retains her rolled tasteful waist-cutout. Keep her agency upper-arm tattoo and the two flag garments. Images2-4 are quartet face plates only, in order938,936,937.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false,
+      "allowanceConsumed": true,
       "historicalLexiconSnapshot": {
         "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
         "sha256": "3d4ec36c57c8da6434bda58cab21387ee2628340d1b96ad156473cac7c8d8f17",
         "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
-      }
+      },
+      "reservedAtUtc": "2026-09-08T07:42:07.563Z",
+      "additionalInvocationsAllowed": 0,
+      "startedAtUtc": "2026-09-08T07:42:30.320Z",
+      "completedAtUtc": "2026-09-08T07:46:33.394Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-chatgpt-single-tailoring-pass.png.receipt.json"
     }
   ],
   "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/source-and-edit-preflight-remote-verification.json",
   "sourcePayloadCommit": "e69013b2a04bc17d1937ecb058841a007e1b8b66",
   "sourceVerifiedAtUtc": "2026-09-08T07:40:08.992Z",
-  "nextSafeAction": "After this proof carrier is pushed and HEAD/origin/PR match, issue each of the three frozen built-in tailoring edits once. Record allowance reservation before calls and each result independently. Never retry a blocked, failed or interrupted edit. Do not resend Meta2071 or publish the incomplete country."
+  "nextSafeAction": "Stage exact prompt and three ordered anchor cards in the existing scene2071 composer; do not Submit until all11 saved images and this recovery staging are committed, pushed and remote-verified with matching HEAD/origin/PR. Recheck account, Thinking, attachments and absence of new initial output immediately before one recovery Send. Never repeat the terminal single edits or reopen selected scenes2072-2074. Namibia remains incomplete and no Armenia/Namibia X post is eligible.",
+  "reservedAtUtc": "2026-09-08T07:42:07.563Z",
+  "actionTimeCheck": {
+    "observedAtUtc": "2026-09-08T07:41:22.210Z",
+    "head": "194137b85ea2474bfaa774be3946cc2210665c3c",
+    "origin": "194137b85ea2474bfaa774be3946cc2210665c3c",
+    "refs": "194137b85ea2474bfaa774be3946cc2210665c3c\trefs/heads/agent/starlight-progress-archive\n194137b85ea2474bfaa774be3946cc2210665c3c\trefs/pull/13/head",
+    "trackedChanges": "",
+    "carrierFiles": [
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/source-and-edit-preflight-remote-verification.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-chatgpt-edit-intents.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/provider-ledger.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/batch-511-namibia-prepared-checkpoint.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+        "pass": true
+      },
+      {
+        "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+        "pass": true
+      }
+    ],
+    "intents": [
+      {
+        "scene": 2072,
+        "invocations": 0,
+        "allowanceConsumed": false,
+        "promptPass": true,
+        "sourcePass": true,
+        "anchorOrder": [
+          938,
+          936,
+          937
+        ],
+        "referenceCount": 4
+      },
+      {
+        "scene": 2073,
+        "invocations": 0,
+        "allowanceConsumed": false,
+        "promptPass": true,
+        "sourcePass": true,
+        "anchorOrder": [
+          938,
+          936,
+          937
+        ],
+        "referenceCount": 4
+      },
+      {
+        "scene": 2074,
+        "invocations": 0,
+        "allowanceConsumed": false,
+        "promptPass": true,
+        "sourcePass": true,
+        "anchorOrder": [
+          938,
+          936,
+          937
+        ],
+        "referenceCount": 4
+      }
+    ]
+  },
+  "executionCell": "2283",
+  "executionCellComplete": true,
+  "results": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-chatgpt-edit-results.json",
+  "recoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-hard-failure-recovery-1-intent.json"
 }
